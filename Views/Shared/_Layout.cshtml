@@ -1,0 +1,346 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>LIMS</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Component/Images/img.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Component/Images/img.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Component/Images/img.jpg">
+
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Google Font -->
+    @*<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">*@
+    <!-- CSS -->
+    @System.Web.Optimization.Styles.Render("~/Site/css")
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    @*<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>*@
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+
+    <!-- For Full Calendar -->
+    <link href="~/Component/plugins/fullcalendar/fullcalendar.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="pre-loader">
+        <div class="pre-loader-box">
+            <div class="loader-logo">
+                <img src="~/Component/Images/logo_lims.png" />
+            </div>
+            <div class='loader-progress' id="progress_div">
+                <div class='bar' id='bar1'></div>
+            </div>
+            <div class='percent' id='percent1'>0%</div>
+            <div class="loading-text">
+                Loading...
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="header-left">
+            <div class="menu-icon dw dw-menu"></div>
+            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+            @*<div class="header-search">
+                <form>
+                    <div class="form-group mb-0">
+                        <i class="dw dw-search2 search-icon"></i>
+                        <input type="text" class="form-control search-input" placeholder="Search Here">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                                <i class="ion-arrow-down-c"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">From</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm form-control-line" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">To</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm form-control-line" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm form-control-line" type="text">
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>*@
+        </div>
+        <div class="header-right">
+            <div class="dashboard-setting user-notification">
+                <div class="dropdown">
+                    <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+                        <i class="dw dw-settings2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="user-notification">
+                <div class="dropdown">
+                    <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
+                        @if (LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Admin")
+                        {
+                            <li class="sub-menu">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="PassRes" href="#">
+                                    <b class="fa fa-envelope-open-o"></b>
+                                    <span class="" style="color:red;font-size:14px;">@LIMS_DEMO.LIMS.User.ForgotpassCount</span>
+                                </a>
+                                <ul style="margin-top:14px;width:300px;height:200px;overflow:auto" role="menu" id="menu" class="dropdown-setting dropdown-menu">
+                                </ul>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <div class="user-notification">
+                <div class="dropdown">
+                    <ul style="margin-right:0;" class="nav navbar-nav navbar-right">
+                        @if (@LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Admin" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "BDM" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "HOD" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Sampling Incharge"
+                         || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Sampler" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Sampler Customer" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Sample Receipt and Report Incharge"
+                         || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Sample Receiver" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Planner" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Reviewer" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Tester"
+                         || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Approver" || @LIMS_DEMO.LIMS.User.RoleName.ToString().Trim() == "Purchase Incharge")
+                        {
+                            <li class="sub-menu">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="NotifyMe" href="#">
+                                    <b class="fa fa-flag"></b>
+                                    <span class="" style="color:red;font-size:14px;">@LIMS_DEMO.LIMS.User.NotifCount</span>
+                                </a>
+                                <ul role="menu" class="dropdown-setting dropdown-menu" id="myNotifyList">
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class="user-info-dropdown">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                        <span class="user-icon">
+                            <img src="~/Component/Images/img.jpg" />
+                        </span>
+                        <span class="user-name">@LIMS_DEMO.LIMS.User.UserName</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                        <a class="dropdown-item" href="#"><i class="dw dw-user1"></i>@LIMS_DEMO.LIMS.User.UserName</a>
+                        <a class="dropdown-item" href="~/Home/Logout"><i class="dw dw-logout"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="right-sidebar">
+        <div class="sidebar-title">
+            <h3 class="weight-600 font-16 text-blue">
+                Layout Settings
+                <span class="btn-block font-weight-400 font-12">User Interface Settings</span>
+            </h3>
+            <div class="close-sidebar" data-toggle="right-sidebar-close">
+                <i class="icon-copy ion-close-round"></i>
+            </div>
+        </div>
+        <div class="right-sidebar-body customscroll">
+            <div class="right-sidebar-body-content">
+                <h4 class="weight-600 font-18 pb-10">Header Background</h4>
+                <div class="sidebar-btn-group pb-30 mb-10">
+                    <a href="javascript:void(0);" class="btn btn-outline-primary header-white active">White</a>
+                    <a href="javascript:void(0);" class="btn btn-outline-primary header-dark">Dark</a>
+                </div>
+
+                <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+                <div class="sidebar-btn-group pb-30 mb-10">
+                    <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
+                    <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark active">Dark</a>
+                </div>
+
+                <h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+                <div class="sidebar-radio-group pb-10 mb-10">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-1" checked="">
+                        <label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-2">
+                        <label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-3">
+                        <label class="custom-control-label" for="sidebaricon-3"><i class="fa fa-angle-double-right"></i></label>
+                    </div>
+                </div>
+
+                <h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+                <div class="sidebar-radio-group pb-30 mb-10">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input" value="icon-list-style-1" checked="">
+                        <label class="custom-control-label" for="sidebariconlist-1"><i class="ion-minus-round"></i></label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input" value="icon-list-style-2">
+                        <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o" aria-hidden="true"></i></label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input" value="icon-list-style-3">
+                        <label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input" value="icon-list-style-4" checked="">
+                        <label class="custom-control-label" for="sidebariconlist-4"><i class="icon-copy dw dw-next-2"></i></label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input" value="icon-list-style-5">
+                        <label class="custom-control-label" for="sidebariconlist-5"><i class="dw dw-fast-forward-1"></i></label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input" value="icon-list-style-6">
+                        <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
+                    </div>
+                </div>
+
+                <div class="reset-options pt-30 text-center">
+                    <button class="btn btn-danger" id="reset-settings">Reset Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @{
+
+            Html.RenderAction("_Menu", "Home", new { area = "", controller = "Home" });
+        }
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" style="width:585px; height: 600px;overflow:auto;">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <img src="~/Component/Images/nty2.png" style="height: 50px; width: 50px">
+                        Notifications
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        ×
+                    </button>
+                </div>
+                <div class="modal-body" id="myAllNotifications" style="width:585px; height: 400px;overflow:auto;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @*<script src="~/Component/scripts/core.js"></script>
+        <script src="~/Component/scripts/script.min.js"></script>*@
+
+    @RenderBody()
+
+    @System.Web.Optimization.Scripts.Render("~/Site/js")
+
+    <!-- js -->
+    @*<script src="~/Component/scripts/core.js"></script>
+        <script src="~/Component/scripts/script.min.js"></script>
+        <script src="~/Component/scripts/process.js"></script>
+        <script src="~/Component/scripts/layout-settings.js"></script>*@
+    <script src="~/Component/scripts/dashboard3.js"></script>
+    <script src="~/Component/plugins/apexcharts/apexcharts.min.js"></script>
+    @*<script src="~/Scripts/chartjs/Chart.min.js"></script>*@
+    <script src="~/Component/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="~/Component/plugins/fullcalendar/calendar-setting.js"></script>
+    <!-- add sweet alert js & css in footer -->
+    <script src="~/Component/plugins/sweetalert2/sweetalert2.all.js"></script>
+    <script src="~/Component/plugins/sweetalert2/sweet-alert.init.js"></script>
+
+</body>
+</html>
+<script>
+
+    $('#PassRes').click(function () {
+       
+        ChangePass();
+    });
+
+    $('#NotifyMe').click(function () {
+       
+        ShowNotification();
+    });
+</script>
+<script>
+
+    function ChangePass() {
+        $.ajax({
+            url: '/Home/passchange',
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#menu").empty()
+                $.each(data, function (index, value) {
+                    $("#menu").append("<li><a href=/Configuration/UserMaster/AddUser?UserMasterId=" + value.UserMasterID + "><span class=entypo-user></span>&#160;&#160;" + value.UserName + "</a></li>");
+                });
+            }
+        });
+    };
+
+      function ShowNotification() {
+
+              debugger
+              var RoleName = "@LIMS_DEMO.LIMS.User.RoleName.ToString()";
+              $.ajax({
+                url: '/Home/GetNotificationDetails?RoleName=' + RoleName,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#menu1").empty()
+                         var j = ""; var p = 0; var Q = "";
+                        $.each(data, function (index, value) {
+                            debugger
+                            //$("#menu1").append("<li>" + "<span class=entypo-vcard></br></span>" + value.DisplayDate + "</br>" + value.NotificationName + ":" + value.Message + "</li></br>");
+                        p++;
+                        if (p < 6) {
+                            j += "<li><a><img src='/../Component/Images/nty.png' style='height:20px;width:20px'/> <strong> <br /> " + value.DisplayDate +":&nbsp;"+ " </strong><a><style='height:20px;width:20px'/> <strong>  " + value.NotificationName + " </strong> &nbsp; <a><style='height:20px;width:20px'/> <strong>  " + value.Message + " </strong> <br /><div style='text-align:right;font-size:smaller;font-style:italic'> <i style='font-size:small'> updated : " + value.LastUpdated + "</i></div></a></li>";
+                        }
+                            Q += "<a><img src='/../Component/Images/nty.png' style='height:20px;width:20px'/> <strong> <br /> " + value.DisplayDate + ": &nbsp;"+" </strong><a><style='height:20px;width:20px'/> <strong>  " + value.NotificationName + " </strong> &nbsp; <a><style='height:20px;width:20px'/> <strong>  " + value.Message + " </strong> <br /><div style='text-align:right;font-size:smaller;font-style:italic'> <i style='font-size:small'> updated : " + value.LastUpdated+ "</i></div></a>";
+                        });
+
+                    $('#myNotifyList').html("");
+                    j += "<li><a data-toggle='modal' data-target='#myModal'><div style='text-align:center'><strong> Show more </strong></div></li>";
+                    $('#myNotifyList').append(j);
+                    $('#myAllNotifications').html("");
+                    $('#myAllNotifications').append(Q);
+                }
+              });
+        };
+</script>

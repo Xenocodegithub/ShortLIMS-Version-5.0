@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LIMS_DEMO.Models.MenuModel>
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="index.html">
+            <img src="~/Component/Images/logo_lims.png" alt="" class="dark-logo">
+            <img src="~/Component/Images/logo_lims.png" class="light-logo" />
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                @foreach (var item in Model)
+                {
+                    if (item.SubMenu.Count == 0)
+                    {
+                        <li class="dropdown">
+                            <a href="@item.TargetUrl" class="dropdown-toggle" title="@item.Menu">
+                                <i class="micon dw @item.IconValues"></i>
+                                <span class="mtext">@item.Menu</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" title="@item.Menu">
+                                <i class="micon @item.IconValues"></i>
+                                <span class="mtext">@item.Menu</span>
+                            </a>
+                            <ul class="submenu">
+                                @foreach (var submenu in item.SubMenu)
+                                {
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" href="@submenu.TargetUrl" title="@submenu.Menu">
+                                            @*<i class="micon dw dw-left-arrow-4"></i>*@
+                                            <i class="micon ion-minus" style="margin-left:15px"></i>
+                                            <span class="mtext">@submenu.Menu</span>
+                                        </a>
+                                    </li> 
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+ 
