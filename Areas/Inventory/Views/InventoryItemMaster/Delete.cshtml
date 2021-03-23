@@ -1,0 +1,226 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryItemMasterModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory Item</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Item</li>
+                                <li class="breadcrumb-item active" aria-current="page">Delete Item</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                January 2018
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Export List</a>
+                                <a class="dropdown-item" href="#">Policies</a>
+                                <a class="dropdown-item" href="#">View Assets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <h4 class="text-blue h4">Delete Item Form</h4>
+                    <p class="mb-30"></p>
+                </div>
+                <div class="wizard-content">
+                    @using (Ajax.BeginForm("Delete", "InventoryItemMaster", new AjaxOptions() { HttpMethod = "Post" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.ItemMasterID)
+                        @Html.HiddenFor(model => model.ItemID)
+
+                        <h5></h5>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Inventory Type :</label>
+                                        @Html.DropDownListFor(model => model.InventoryTypeID, new SelectList(ViewBag.InvTyp, "InventoryTypeID", "InventoryTypeName"), "---Select---", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.InventoryTypeID, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.InventoryTypeName)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Category Type:</label>
+                                        @Html.DropDownListFor(model => model.CatagoryMasterID, new SelectList(ViewBag.CategoryType, "CatagoryMasterID", "CategoryName"), "------Select------", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.CatagoryMasterID, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.CatagoryMasterID)
+                                        @Html.HiddenFor(model => model.CategoryName)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Name of Stock:</label>
+                                        @Html.TextBoxFor(model => model.NameOfStock, new { @class = "form-control", @style = "width:530px;" })
+                                        @Html.ValidationMessageFor(model => model.NameOfStock, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Code:</label>
+                                        @Html.TextBoxFor(model => model.Code, new { @class = "form-control", @style = "width:530px;" })
+                                        @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Inventory Unit:</label>
+                                        @Html.DropDownListFor(model => model.UnitID, new SelectList(ViewBag.GetUnitType, "UnitId", "Unit"), "-------Select-------", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.UnitID, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.Unit)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Capacity:</label>
+                                        @Html.DropDownListFor(model => model.InventoryCapacityMasterId, new SelectList(ViewBag.GetCapacityType, "InventoryCapacityMasterId", "Capacity"), "-------Select-------", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.InventoryCapacityMasterId, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.Capacity)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Minimum Stock:</label>
+                                        @Html.TextBoxFor(model => model.MinimumStock, new { @class = "form-control", @style = "width:530px;" })
+                                        @Html.ValidationMessageFor(model => model.MinimumStock, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="margin-left:450px;">
+                                    <div class="form-group">
+                                        <input type="submit" value="Delete" class="btn btn-primary" id="buttonSave1" name="buttonSave" style="background-color:mediumblue;color:white;" onclick="return validateData();" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    }
+                </div>
+            </div>
+            <!-- success Popup html Start -->
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20">Form Submitted!</h3>
+                            <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- success Popup html End -->
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/InventoryItemMaster")
+<script type="text/javascript">
+    function ItemSuccess(result) {
+        if (result.ID != "0") {
+            location.href = '/Inventory/Create?ID=' + result.ID;
+        } else {
+            alert('Error!!!');
+        }
+    }
+    $('#InventoryTypeID').change(function () {
+        debugger
+        if ($('#InventoryTypeID').val() == '') {
+            $('#CatagoryMasterID').html('');
+            $('#CatagoryMasterID').append('<option value="">---Select---</option>');
+
+        }
+        else {
+
+            CatagoryMaster();
+
+        }
+    });
+    function CatagoryMaster() {
+        var InventoryTypeId = $("#InventoryTypeID :selected").val();
+        debugger
+        $('#CatagoryMasterID').html('');
+        $('#CatagoryMasterID').append('<option value="">---Select---</option>');
+        $.ajax({
+            url: '/InventoryItemMaster/GetInvCategory?InventoryTypeId=' + InventoryTypeId,
+            type: 'Get',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'json',
+            success: function (result) {
+                $.each(result.result, function (i, item) {
+                    debugger
+                    $('#CatagoryMasterID').append('<option value="' + item.CatagoryMasterID + '">' + item.CategoryName + '</option>');
+
+                })
+
+            },
+            error: function (data) {
+            }
+        });
+    }
+</script>
+
+<script>
+    function validateData() {
+        debugger
+        if ($("#InventoryTypeID").val() == "") {
+            swal("Please Select Inventory Type !");
+            return false;
+        } else if ($("#CatagoryMasterID").val() == "") {
+            swal("Please Select Category Name !");
+            return false;
+        }
+        else if ($("#NameOfStock").val() == "") {
+            swal("Please Enter Name of Stock !");
+            return false;
+        }
+        else if ($("#Code").val() == "") {
+            swal("Please Enter Item Code !");
+            return false;
+        } else if ($("#UnitID").val() == "") {
+            swal("Please Enter Item Unit !");
+            return false;
+        }
+        else if ($("#InventoryCapacityMasterId").val() == "") {
+            swal("Please Enter Item Capacity !");
+            return false;
+        }
+        else if ($("#MinimumStock").val() == "") {
+            swal("Please Enter Item Minimum Stock !");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+

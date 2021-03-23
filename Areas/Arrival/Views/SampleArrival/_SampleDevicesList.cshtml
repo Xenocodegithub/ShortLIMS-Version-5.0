@@ -1,0 +1,35 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel>
+
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pb-20">
+        <table class="data-table table nowrap">
+            <thead>
+                <tr class="thead-dark">
+                    <th class="table-plus datatable-nosort">
+                        SrNo
+                    </th>
+                    <th>
+                        Sampling Media
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="width-5">
+                            @Html.DisplayFor(modelItem => item.SerialNo)
+                        </td>
+
+                        <td class="width-20">
+                            @Html.DisplayFor(modelItem => item.SampleDevice)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Simple Datatable End -->

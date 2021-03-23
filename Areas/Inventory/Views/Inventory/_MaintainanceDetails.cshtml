@@ -1,0 +1,118 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryMaintainanceAndCalibrationModel
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 text-right">
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30" style="margin-left:-250px;margin-top:-150px;width:900px;">
+                <div class="clearfix">
+                    <h4 class="text-blue h4">Add Maintaince  Details Form</h4>
+                    <p class="mb-30"></p>
+                </div>
+                <div class="wizard-content">
+                    @using (Html.BeginForm("InventoryMaintainanceAndCalibrationDetails", "Inventory", FormMethod.Post, new { id = "_Maintainance" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.Hidden("MaintainanceID", (object)ViewBag.MaintainanceDetailsIdViewBag)
+                        <h5></h5>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Basic Item Details Code: </label>
+                                        @Html.DropDownListFor(model => model.InventoryBasicItemDetailsID, new SelectList(ViewBag.InventoryItemListViewBag, "InventoryBasicItemDetailsID", "InventoryBasicItemDetailsNumber"), "---Select---", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.InventoryBasicItemDetailsID, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.InventoryBasicItemDetailsNumber)
+                                        @Html.HiddenFor(model => model.InventoryBasicItemDetailsID)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Vendor Name:</label>
+                                        @Html.TextBoxFor(model => model.AMCVendorName, new { @class = "form-control",@style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.AMCVendorName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>AMC Number:</label>
+                                        @Html.TextBoxFor(model => model.AMCNumber, new { @class = "form-control", @style = "width:400px;"})
+                                        @Html.ValidationMessageFor(model => model.AMCNumber, "", new { @class = "text-danger", @style = "width:400px;" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>AMC Date:</label>
+                                        <input type="date" id="AMCDate" name="AMCDate" value="" class="form-control" style="width:400px;" />
+                                        <input type="text" id="AMCDateval" name="AMCDateval" value="" class="form-control" style="width:400px;" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>AMC Period(in months):</label>
+                                        @Html.TextBoxFor(model => model.AMCPeriod, new { @class = "form-control",@style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.AMCPeriod, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Frequency:</label>
+                                        @Html.DropDownListFor(model => model.Frequency, (SelectList)ViewBag.FrequencyTypeListViewBag, "Select Frequency...", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.Frequency)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>AMC Start Date:</label>
+                                        <input type="date" id="AMCStartDate" name="AMCStartDate" value="" class="form-control" style="width:400px;" />
+                                        <input type="text" id="AMCStartDateval" name="AMCStartDateval" value="" class="form-control" style="width:400px;" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="margin-left:400px;">
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="btn btn-primary" id="buttonSaveInventoryMaintainanceDetails" name="buttonSaveInventoryMaintainanceDetails" style="background-color:mediumblue;color:white;" />
+                                        <input type="submit" value="Next" class="btn btn-primary" id="buttonNextToCalibration" name="buttonNextToCalibration" style="background-color:mediumblue;color:white;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    }
+                </div>
+            </div>
+            <!-- success Popup html Start -->
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20">Form Submitted!</h3>
+                            <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- success Popup html End -->
+        </div>
+    </div>
+</div>
+
+
+
+

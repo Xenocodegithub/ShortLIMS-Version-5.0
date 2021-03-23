@@ -1,0 +1,177 @@
+﻿@model LIMS_DEMO.Areas.Enquiry.Models.CostingListModel
+
+@{
+    ViewBag.Title = "Add Costing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Costing</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Enquiry</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Enquiry</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Costing</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Costing</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                <div class="body-content">
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            @Html.LabelFor(model => model.EnquiryId, "EnquiryId", htmlAttributes: new { @class = "col-form-label" })
+                                <div class="col-sm-4"style="padding-left:10px">
+                                    @Model.EnquiryId
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                @Html.LabelFor(model => model.CustomerTypeName, htmlAttributes: new { @class = "col-form-label" })
+                                <div class="col-sm-4" style="padding-left:15px">
+                                    @Model.CustomerTypeName
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                @Html.LabelFor(model => model.EnquiryOn, htmlAttributes: new { @class = "col-form-label" })
+                                <div class="col-sm-5" style="padding-left:15px">
+                                    @Model.EnquiryOn.ToString("dd/MM/yyyy")
+                                </div>
+                            </div>
+                        </div>
+                    <hr />
+
+                    <div id="divSampleList">
+                        <!--This call to Partial View should be removed and the _SampleList in SampleAndParameters should be used .Please make necessary changes.Remove Partial View also from Costing Folder-->
+                        @{
+                            Html.RenderAction("_SampleList", "Costing", new { EnquiryId = ViewBag.EnquiryId });
+                        }
+                    </div>
+                    <hr />
+                      <div id="divCosting">
+                        <!--This call to Partial View should be removed and the _SampleList in SampleAndParameters should be used .Please make necessary changes.Remove Partial View also from Costing Folder-->
+                        @{
+                            Html.RenderAction("_Costing", "Costing");
+                         }
+                      </div>
+                    <hr />
+                    <div class="class-md-6">
+                        @using (Ajax.BeginForm("AddCosting", "Costing", new AjaxOptions() { HttpMethod = "Post", OnBegin = "NextPage", OnSuccess = "CostingSuccess" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.EnquiryId)
+
+                            <div class="ln_solid"></div>
+                            for (int i = 0; i < Model.TermsList.Count; i++)
+                            {
+                                <div>
+                                    @Html.CheckBoxFor(model => model.TermsList[i].IsSelected)
+                                    @Html.HiddenFor(model => model.TermsList[i].TermAndCondtId)
+                                    @Model.TermsList[i].TermAndCondt
+                                </div>
+                            }
+                       
+                        <hr/>
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.Remarks , htmlAttributes: new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control col-md-3" })
+                            </div>
+                          
+                            <hr />
+                            <div class="align-items-end item form-group" style="margin-top:20px">
+                                <div class="col-md-12 col-sm-12">
+                                    <a href="~/Enquiry/SampleAndParameter/SampleAndParameter?EnquiryId=@ViewBag.EnquiryId" class="btn btn-danger alignleft" data-toggle="tooltip" data-placement="top" title="">Back</a>
+                                    <button type="submit" class="btn btn-success alignright" id="btnSave"  value="Save">Save</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div id="divCostingList">
+                        <!--This call to Partial View should be removed and the _SampleList in SampleAndParameters should be used .Please make necessary changes.Remove Partial View also from Costing Folder-->
+                        @{
+                            Html.RenderAction("_CostingList", "Costing");
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    function NextPage() {
+
+        $('#btnNext').prop('disabled', true);
+        $('#btnNext').html('Please Wait..')
+        $('#btnSave').prop('disabled', true);
+        $('#btnSave').html('Please Wait..')
+    }
+
+    function CostingSuccess(result) {
+        if (result.status == "success") {
+            debugger
+            alert('Costs Added !')
+            //location.href = '/Enquiry/Quotation?EnquiryId=' + $('#EnquiryId').val();
+            $('#btnNext').prop('disabled', false);
+            $('#btnSave').prop('disabled', false);
+            $('#btnSave').html('Save')
+        }
+        else {
+
+            alert('Please Click on each SampleNo with Required Charges fields!')
+            $('#btnSave').prop('disabled', false);
+            $('#btnSave').html('Save')
+        }
+
+    }
+
+    function funSampleSelected(EnquirySampleId) {
+        debugger
+        $('#divCosting').load('/Enquiry/Costing/_Costing?EnquirySampleId=' + EnquirySampleId + '&CostingId=0');
+    }
+
+    function funCostEdit(EnquirySampleId, CostingId) {
+        $('#divCosting').load('/Enquiry/Costing/_Costing?EnquirySampleId=' + EnquirySampleId + '&CostingId=' + CostingId);
+    }
+
+    function funCostDelete(CostingId) {
+        if (confirm('are you sure to delete this record?')) {
+            $.ajax({
+                url: '/Enquiry/Costing/DeleteCosting?CostingId=' + CostingId,
+                type: 'Get',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    $('#divCostingList').load('/Enquiry/Costing/_CostingList?EnquiryId=' + $('#EnquiryId').val());
+                },
+                error: function (data) {
+                    alert('failed!');
+                }
+            })
+        }
+    }
+
+</script>
+

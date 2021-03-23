@@ -1,0 +1,444 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.PurchaseModel
+@{
+    ViewBag.Title = "PurchaseForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Ajax.BeginForm("PurchaseRequestForm", "Purchase", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "PurchaseRequestSuccess" }))
+{
+    @Html.AntiForgeryToken()
+    @*@Html.HiddenFor(model => model.CatagoryMasterId)*@
+    @Html.HiddenFor(model => model.PurchaseRequestID)
+    @Html.HiddenFor(model => model.PurchaseMasterID)
+    @Html.HiddenFor(model => model.InventoryTypeID)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="title">
+                                <h4>Inventory</h4>
+                            </div>
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Purchase Request Form</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- Default Basic Forms Start -->
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Purchase Request Form</h4>
+                        </div>
+
+                    </div>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-form-label col-md-2 col-sm-2 label-align mr-btm-15">Item</label>
+                            <div class="col-md-6 mr-btm-15">
+                                @Html.DropDownListFor(model => model.ItemMasterId, new SelectList(ViewBag.Item, "ItemMasterId", "Item"), "Please Select", new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.ItemMasterId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PackSize, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control  " } })
+                                        @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control  " } })
+                                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Purpose, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.COA, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        <label> @Html.RadioButtonFor(model => model.COA, true, new { id = "COA-COA", @checked = "checked" }) COA </label>&emsp;
+                                        <label> @Html.RadioButtonFor(model => model.COA, false, new { id = "COA-COC" }) COC </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-form-label col-md-6 col-sm-6 label-align mr-btm-15">Supplier Name  <span class="required" style="color:red">*</span></label>
+                                    <div class="col-md-12 mr-btm-15">
+                                        @Html.DropDownListFor(model => model.PurchaseSupplierID, new SelectList(ViewBag.Supplier, "PurchaseSupplierID", "SupplierName"), "Please Select", new { @class = "form-control " })
+                                        @Html.ValidationMessageFor(model => model.PurchaseSupplierID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.EstimatedLagTime, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15 ">
+                                        @Html.EditorFor(model => model.EstimatedLagTime, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.EstimatedLagTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.TickIf, htmlAttributes: new { @class = "col-form-label col-md-4 col-sm-4 label-align mr-btm-15" })
+                                    <div class="col-md-3 mr-btm-15">
+
+                                        @*@Html.CheckBoxFor(model => model.TickIf.Value)*@
+
+                                        @if (Model.TickIf == true)
+                                        {
+                                            <input id="TickIfId" name="TickIfname" type="checkbox" value="true" checked="checked" />
+                                            @Html.HiddenFor(model => model.TickIf)
+                                        }
+                                        else
+                                        {
+                                            <input id="TickIfId" name="TickIfname" type="checkbox" value="false"/>
+                                            @Html.HiddenFor(model => model.TickIf)
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-6 label-align mr-btm-15" })
+                                    <div class="col-md-12  mr-btm-15 ">
+                                        @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", @onkeyup = "funCalNetAmount(false,false);" } })
+                                        @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })
+                                    <div class="col-md-12 mr-btm-15">
+                                        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DiscAmount, htmlAttributes: new { @class = "control-label col-md-12 mr-btm-15" })
+                                    <div class="col-sm-12 mr-btm-15">
+                                        @Html.TextBoxFor(model => model.DiscPercent, new { @class = "form-control", onkeyup = "funCalNetAmount(true,false);" })
+                                        @*<input type="text" onkeyup="funCalNetAmount(true);" id="DiscPercent" class="form-control" />*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" style="margin-top:7px;">
+                               <label class="control-label col-md-12 mr-btm-15"></label>
+                                <div class="form-group">
+                                    <div class="col-sm-12 mr-btm-15">
+                                        @Html.TextBoxFor(model => model.DiscAmount, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.DiscAmount, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                @Html.LabelFor(model => model.AmountAfterDisc, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })
+                                <div class="col-md-12 mr-btm-15">
+                                    @Html.TextBoxFor(model => model.AmountAfterDisc, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.AmountAfterDisc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="col-lg-6 col-sm-4 control-label  mr-btm-15" for="inputEmail1">GST Type</label>
+                                    <div class="col-md-12 mr-btm-15">
+                                        <select id="GSTType" class="form-control" name="GSTType">
+                                            <option id="0">Select GST Type</option>
+                                            <option id="1">IGST</option>
+                                            <option id="2">CGST+SGST</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                        @Html.LabelFor(model => model.GSTAmount, htmlAttributes: new { @class = "control-label col-md-12 mr-btm-15" })
+                                        <div class="col-sm-12 mr-btm-15">
+                                            @Html.TextBoxFor(model => model.GSTPercent, new { @class = "form-control", onkeyup = "funCalNetAmount(false,true);" })
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="col-sm-2" style="margin-top:30px;">
+                                    <div class="col-md-12 mr-btm-15">
+                                        @Html.TextBoxFor(model => model.GSTAmount, new { @class = "form-control", @readonly = "readonly" })
+
+                                        @Html.ValidationMessageFor(model => model.GSTAmount, "", new { @class = "text-danger" })
+                                    </div>
+                            </div>
+                        </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NetAmount, htmlAttributes: new { @class = "control-label col-md-2 mr-btm-15" })
+                                <div class="col-md-6 mr-btm-15">
+                                    @Html.TextBoxFor(model => model.NetAmount, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.NetAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary" id="SubmitBtnPI">Submit</button>
+
+                            </div>
+                        </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    function PurchaseRequestSuccess(result) {
+        if (result.Status == "success") {
+                swal(
+                    {
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 15000
+                    }
+                )
+            alert(result.message);
+            location.href = '/Inventory/PurchaseRequestList';
+        }
+    }
+
+    function SubmitPI() {
+        debugger
+        if ($('#GSTType').val() == "Select GST Type" || $('#PurchaseSupplierID').val()=="") {
+
+            alert("Please Select Mandatory Fields")
+
+        }
+        else {
+               debugger
+             var PurchaseRequestID = $('#PurchaseRequestID').val();
+             var PurchaseMasterID = $('#PurchaseMasterID').val();
+        var InventoryTypeID = $('#InventoryTypeID').val();
+        var PurchaseSupplierID = $('#PurchaseSupplierID').find(":selected").val();
+             var TickIf = $("#TickIf").val();
+        var Rate = $("#Rate").val();
+        var Amount = $("#Amount").val();
+        var DiscPercent = $("#DiscPercent").val();
+        var GSTPercent = $("#GSTPercent").val();
+            var DiscAmount = $("#AmountAfterDisc").val();
+        var GSTAmount = $("#GSTAmount").val();
+            var NetAmount = $("#NetAmount").val();
+            if ($('#GSTType').find(":selected").val() == "IGST") {
+                var IsIGST = 1;
+            }
+            else {
+                var IsIGST = 0;
+            }
+
+           var EstimatedLagTime = $("#EstimatedLagTime").val();
+            var obj = {
+                PurchaseRequestID: PurchaseRequestID,
+                PurchaseMasterID: PurchaseMasterID,
+                InventoryTypeID: InventoryTypeID,
+                Rate: Rate,
+                TickIf: TickIf,
+                Amount: Amount,
+                DiscPercent: DiscPercent,
+                GSTPercent: GSTPercent,
+                DiscAmount: DiscAmount,
+                GSTAmount: GSTAmount,
+                NetAmount: NetAmount,
+                IsIGST: IsIGST,
+                EstimatedLagTime: EstimatedLagTime,
+                PurchaseSupplierID: PurchaseSupplierID
+
+        };
+            var parameter = JSON.stringify(obj);
+        $.ajax({
+                    type: "POST",
+            url: "/Purchase/UpdatePRD",
+                    dataType: 'text',
+                    cache: false,
+                    data: "model=" + parameter,
+                    success: function (response) {
+                        var x = response;
+                      
+                        window.location.href = "@Url.Action("PurchaseInchargeFillList", "Purchase", new { Area="Inventory"})";
+                    },
+                    error: function (xhr) {
+                        console.log('error');
+                    }
+         });
+        }
+
+
+
+
+    }
+  
+    $(function () {
+
+        $('#SubmitBtnPI').click(function () {
+            SubmitPI();
+        });
+
+    });
+    $(function () {
+
+        $('#TickIfId').click(function () {
+            //If the checkbox is checked.
+            if ($(this).is(':checked')) {
+                $("#TickIf").val(true);
+            } else {
+                //If it is not checked, disable .
+                $("#TickIf").val(false);
+                $(this).attr("value", "false");
+            }
+        });
+
+    });
+
+    function funCalNetAmount(IsDisc, IsGST) {
+        var Rate = $('#Rate').val() == '' ? parseFloat(0.0).toFixed(2) : $('#Rate').val();
+        var Qty = $('#Quantity').val() == '' ? 0 : $('#Quantity').val();
+        debugger
+
+        var Amount = Number(Rate) * Number(Qty);
+        $('#Amount').val((Amount).toFixed(1));
+
+        $('#NetAmount').val((Amount).toFixed(1))
+        $('#AmountAfterDisc').val((Amount).toFixed(1))
+
+        if (IsDisc) {
+            var DiscPer = $('#DiscPercent').val() == '' ? 0 : $('#DiscPercent').val();
+            var DiscAmount = (Number(Amount) * Number(DiscPer) / 100);
+            $('#DiscAmount').val((DiscAmount).toFixed(1));
+            var AmountAfterDisc = Number(Amount) - Number(DiscAmount);
+            $('#AmountAfterDisc').val((AmountAfterDisc).toFixed(1));
+            $('#NetAmount').val((AmountAfterDisc).toFixed(1));
+
+
+
+        }
+
+        if (IsGST) {
+            var GSTPercent = $('#GSTPercent').val() == '' ? 0 : $('#GSTPercent').val();
+
+
+            var GSTAmount = (Number(AmountAfterDisc) * Number(GSTPercent) / 100);
+            $('#GSTAmount').val((GSTAmount).toFixed(1));
+            var NetAmount = Number(GSTAmount) + Number(AmountAfterDisc);
+            $('#NetAmount').val((NetAmount).toFixed(1));
+        }
+
+        if (IsDisc, IsGST) {
+            var DiscPer = $('#DiscPercent').val() == '' ? 0 : $('#DiscPercent').val();
+            var DiscAmount = (Number(Amount) * Number(DiscPer) / 100);
+            $('#DiscAmount').val((DiscAmount).toFixed(1));
+            var AmountAfterDisc = Number(Amount) - Number(DiscAmount);
+            $('#AmountAfterDisc').val((AmountAfterDisc).toFixed(1));
+            $('#NetAmount').val((AmountAfterDisc).toFixed(1));
+            var GSTPercent = $('#GSTPercent').val() == '' ? 0 : $('#GSTPercent').val();
+
+
+            var GSTAmount = (Number(AmountAfterDisc) * Number(GSTPercent) / 100);
+            $('#GSTAmount').val((GSTAmount).toFixed(1));
+            var NetAmount = Number(GSTAmount) + Number(AmountAfterDisc);
+            $('#NetAmount').val((NetAmount).toFixed(1));
+        }
+
+
+    }
+
+</script>

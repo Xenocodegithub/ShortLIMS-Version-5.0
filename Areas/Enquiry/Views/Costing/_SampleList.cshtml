@@ -1,0 +1,71 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Enquiry.Models.SampleAndParametersModel>
+
+<!--This Partial View should be removed and the _SampleList in SampleAndParameters should be used .Please make necessary changes-->
+ <div class="form-horizontal">
+    <table class="data-table table nowrap">
+        @if (Model.Count() > 0)
+         {
+             <thead>
+               <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            Sr. No.
+                        </th>
+                        <th>
+                            Sample No.
+                        </th>
+                        @*<th class="width-10">
+                        Product Group
+                    </th>
+                    <th class="width-10">
+                        Sub Group
+                    </th>
+                    <th class="width-10">
+                        Matrix
+                    </th>
+                    <th class="width-5">
+                        Parameters
+                    </th>*@
+                        <th>
+                            Sample Type
+                        </th>
+                    </tr>
+             </thead>
+             <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.HiddenFor(model => item.EnquiryId)
+                                @Html.HiddenFor(model => item.EnquirySampleID)
+                                @Html.HiddenFor(model => item.EnquiryMasterSampleTypeId)
+                                @Html.HiddenFor(model => item.EnquiryDetailId)
+                                @Html.DisplayFor(modelItem => item.SrNo)
+                            </td>
+                            <td>
+                                <a href="#" onclick="funSampleSelected(@item.EnquirySampleID);" class="sampleName" style="color:blue;">@Html.DisplayFor(modelItem => item.DisplaySampleName)</a>
+                                @*<button  onclick="funSampleSelected(@item.EnquirySampleID);" class="btn btn-sm btn-primary text-nowrap">@Html.DisplayFor(modelItem => item.SampleName)</button>*@
+                            </td>
+                            @*<td>
+                            @Html.DisplayFor(modelItem => item.ProductGroupName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubGroupName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MatrixName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Parameters)
+                        </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SampleTypeProductName)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+         }
+    </table>
+ </div>
+
+
+

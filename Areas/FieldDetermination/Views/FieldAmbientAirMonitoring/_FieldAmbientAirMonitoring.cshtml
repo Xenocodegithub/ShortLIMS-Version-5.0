@@ -1,0 +1,183 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDAmbientAirMonitoringModel
+
+<div class="row" style="margin-top:20px;">
+    <div class="col-md-12">
+        <div class="title-alt d-flex justify-content-center" style="text-align:center">
+            <h5>Enter Values </h5>
+        </div>
+        <br /><br />
+        <div style="margin-left:20px;">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="form-label col-md-3">Instrument ID HVS/RDS</label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(Model => Model.InstrumentId, new { @class = "form-control", @placeholder = "InstrumentId" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="form-label col-md-3  mr-btm-15">Duration Of Sampling</label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(Model => Model.SamplingDuration, new { @class = "form-control", @placeholder = "Hrs" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <hr />
+   <div class="col-md-12">
+       <div class="title-alt">
+           <h6 class="m-0 font-weight-bold text-primary text-xl-center">Meteorological Data/Environmental conditions </h6>
+       </div>
+       <br /><br />
+       <div>
+         <div style="margin-left:20px;">
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3 mr-btm-15">Wind Velocity</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.WindVelocity, new { @class = "form-control  mr-btm-15", @placeholder = "Km/h" })
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Wind Direction</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.WindDirection_, new { @class = "form-control mr-btm-15", @placeholder = "Wind Direction" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Relative Humidity</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.RelativeHumidity, new { @class = "form-control  mr-btm-15", @placeholder = "(Max/Min) %" })
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Temperature</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.Temperature, new { @class = "form-control mr-btm-15", @placeholder = "(Max/Min) oC" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div>
+                   <h6 style="padding: 15px 15px; font-size: 18px;" class="d-flex justify-content-center">For 24 Hours Sampling  </h6>
+               </div>
+               <br /><br />
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Average Wind Velocity</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.AverageWindVelocity, new { @class = "form-control mr-btm-15", @placeholder = "Km/h" })
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Relative Humidity</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.RelativeHumidity24Hr, new { @class = "form-control mr-btm-15", @placeholder = "(Max/Min) %" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Temperature</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.Temperature24Hr, new { @class = "form-control mr-btm-15", @placeholder = "(Max/Min) oC" })
+                           </div>
+                       </div>
+                   </div>
+                   </div>
+         </div>
+       </div>
+   </div>
+   <div class="col-md-12">
+       <div class="title-alt">
+           <h6 class="m-0 font-weight-bold text-primary text-xl-center">Particulate Matter Size less than 2.5 microns (PM2.5) Sampling </h6>
+       </div>
+       <br /><br />
+       <div>
+           <div style="margin-left:20px;">
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Filter Paper No.</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.FilterPaperNo2, new { @class = "form-control mr-btm-15", @placeholder = "Filter Paper No." })
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Start Time</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.StartTime, new { @class = "form-control mr-btm-15", @placeholder = "Start Time" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">End Time</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.EndTime, new { @class = "form-control mr-btm-15", @placeholder = "End Time" })
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Sampling Duration</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.MatterSamplingDuration, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Avg Flow Rate</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.AvgFlowRate, new { @class = "form-control mr-btm-15", @placeholder = "(LPM)" })
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Total Vol. Air Passed (V) in L</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.TotalVolAirPassed_L, new { @class = "form-control mr-btm-15", @placeholder = "Flow rate (LPM) x Sampling Duration (min)" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="form-group row">
+                   <div class="col-md-6">
+                       <div class="form-group row">
+                           <label class="form-label col-md-3  mr-btm-15">Total Volume Air Passed in m3</label>
+                           <div class="col-md-8">
+                               @Html.TextBoxFor(Model => Model.TotalVolumeAirPassed_m3, new { @class = "form-control  mr-btm-15", @placeholder = "V(Liter)/1000" })
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>

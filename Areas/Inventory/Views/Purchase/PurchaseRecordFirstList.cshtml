@@ -1,0 +1,112 @@
+﻿@model IEnumerable<LIMS_DEMO.Core.Inventory.PurchaseEntity>
+@{
+    ViewBag.Title = "PurchaseRecordFirstList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Record First List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="card-box mb-30">
+                <div class="card-box mb-30 card text-white bg-info card-box">
+                    <div class="pd-20" style="border-bottom:solid">
+                        <h4 class="text-blue h4">PURCHASE RECORD LIST</h4>
+                    </div>
+                    <br />
+                    <div class="pb-20">
+                        <table class="data-table table multiple-select-row nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="table-plus datatable-nosort">PO Number</th>
+                                    <th>SUPPLIER NAME</th>
+                                    <th>DATE</th>
+                                </tr>
+                            </thead>
+                            <tbody style="color:white">
+                                @{ long PrevPurchaseRequestID = 0; int InventoryTypeId = 0; string PONumber = "";}
+                                @foreach (var item in Model)
+                                {
+
+
+                                    if (item.CurrentStatus > 0)
+                                    {
+
+                                        if (PrevPurchaseRequestID != item.PurchaseMasterID)
+                                        {
+
+                                            <tr>
+
+                                                <td>
+                                                    @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                                    @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                                    @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                                    @Html.HiddenFor(modelItem => item.InventoryTypeID)
+                                                    @Html.HiddenFor(modelItem => item.Item)
+                                                    @Html.ActionLink(item.PurchaseOrderNo, "PurchaseRecordSecondList", "Purchase", new { @PurchaseMasterID = item.PurchaseMasterID, @ItemMasterId = item.ItemMasterId, @InventoryTypeID = item.InventoryTypeID, @PurchaseOrderNo = item.PurchaseOrderNo }, new { Style = "color:Chartreuse" })
+
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SupplierName)
+                                                </td>
+                                                <td>
+                                                    @*@Convert.ToDateTime(item.EnteredDate).ToString("dd/MM/yyyy")*@
+                                                    @Convert.ToDateTime(item.EnteredDate).ToShortDateString()
+                                                    @Html.HiddenFor(modelItem => item.EnteredDate)
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                        else if (PONumber != item.PurchaseOrderNo)
+                                        {
+                                            <tr>
+
+                                                <td>
+                                                    @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                                    @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                                    @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                                    @Html.HiddenFor(modelItem => item.InventoryTypeID)
+                                                    @Html.HiddenFor(modelItem => item.Item)
+                                                    @Html.ActionLink(item.PurchaseOrderNo, "PurchaseRecordSecondList", "Purchase", new { @PurchaseMasterID = item.PurchaseMasterID, @ItemMasterId = item.ItemMasterId, @InventoryTypeID = item.InventoryTypeID, @PurchaseOrderNo = item.PurchaseOrderNo }, new { Style = "color:Chartreuse" })
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SupplierName)
+                                                </td>
+                                                <td>
+                                                    @*@Html.DisplayFor(modelItem => item.EnteredDate)*@
+                                                    @Convert.ToDateTime(item.EnteredDate).ToShortDateString()
+                                                    @Html.HiddenFor(modelItem => item.EnteredDate)
+                                                </td>
+                                            </tr>
+                                        }
+
+                                        PrevPurchaseRequestID = item.PurchaseMasterID;
+                                        InventoryTypeId = item.InventoryTypeID;
+                                        PONumber = item.PurchaseOrderNo;
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

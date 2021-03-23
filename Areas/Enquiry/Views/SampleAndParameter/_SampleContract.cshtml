@@ -1,0 +1,44 @@
+﻿
+@model IList<LIMS_DEMO.Areas.Enquiry.Models.ContractModel>
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pb-20">
+        <table class="data-table table nowrap">
+            <thead>
+                <tr class="thead-dark">
+                    <th class="table-plus datatable-nosort">SrNo.</th>
+                    <th> Sample Type</th>
+                    @*<th>Product Group</th>
+                     <th>Sub Group</th>*@
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model[i].SerialNo
+                        </td>
+                        <td>
+                            @Model[i].SampleTypeProductName
+                        </td>
+                        @*<td>
+                              @Model[i].ProductGroupName
+                             </td>
+                             <td>
+                              @Model[i].SubGroupName
+                             </td>
+                             <td>
+                             @Model[i].MatrixName
+                            </td>*@
+                        <td>
+                            <button onclick="funContractSelected(@Model[i].EnquiryId,@Model[i].EnquiryDetailId,@Model[i].SampleTypeProductId, '@Model[i].SampleTypeProductCode','@Model[i].SubGroupCode')" class="btn btn-sm btn-info text-nowrap btnChoose" style="width:auto">Choose Parameters</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Simple Datatable End -->

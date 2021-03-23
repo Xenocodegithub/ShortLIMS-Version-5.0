@@ -1,0 +1,189 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Inventory.Models.InventoryItemMasterModel>
+@{
+    ViewBag.Title = "StockIssueToUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Item List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Item List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                January 2018
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Export List</a>
+                                <a class="dropdown-item" href="#">Policies</a>
+                                <a class="dropdown-item" href="#">View Assets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h4 class="text-blue h4">Item List</h4>
+                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">Sr No</th>
+                                <th>Type</th>
+                                <th>Category Type</th>
+                                <th>Item Name</th>
+                                <th>Code</th>
+                                <th>Available Quantity</th>
+                                <th>Minimum Quantity</th>
+                                <th class="datatable-nosort">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null)
+                            {
+                                int SerialNumber = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr id="@item.ItemMasterID" minstock="@item.MinimumStock" availablestock="@item.AvailableStock">
+                                        <td>@SerialNumber</td>
+                                        <td>@item.InventoryTypeName</td>
+                                        <td>@item.CategoryName</td>
+                                        <td>@item.NameOfStock</td>
+                                        <td>@item.Code</td>
+                                        <td>@item.AvailableStock</td>
+                                        <td>@item.MinimumStock</td>
+                                        <td>
+                                                    @if (@item.InventoryTypeID == 1 && @item.IsActive == true)
+                                                    {
+                                                        <a href="@Url.Action("AddStockIssueToUser","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="IssueTo" id="rowedit_@SerialNumber" operation="Issueto" class="btn btn-primary">
+                                                            IssueTo
+                                                            </a>
+                                                     }
+                                                       else
+                                                         {
+                                                          <a href="#" id="rowIssueto_@SerialNumber" operation="IssueTo"></a>
+                                                         }
+                                                            @*<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+        <a class="dropdown-item" href="@Url.Action("Edit","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Edit" id="rowedit_@SerialNumber" operation="edit"><i class="dw dw-edit2"></i> Edit</a>
+        <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>*@
+
+                                      
+                                        </td>
+                                    </tr>
+                                    ++SerialNumber;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Simple Datatable End -->
+        </div>
+    </div>
+</div>
+<div class="modal" role="dialog" id="IssueToModal">
+    <div class="modal-dialog" style="width:600px">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #357ca5;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="CrossClose">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" style="color:white;">Items Issue Log</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>One fine body&hellip;</p>*@
+                <p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Item Name", "Item Name")
+                                    <select class="form-control" id="modelItemNameID" name="modelItemNameID"></select>
+                                    @*@Html.Label("*", new { id = "modelCustomerNameError", style = "color:red" })*@
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("A", "Min. Quantity")
+                                    @Html.TextBox("modelMinQty", null, new { @class = "form-control", disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Available Quantity")
+                                    @Html.TextBox("modelAvailableQty", null, new { @class = "form-control", disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Issue To", "Issue To") @Html.Label("*", new { style = "color:red" })
+                                    <select class="form-control" id="modelIssueToID" name="modelIssueToID"></select>
+                                    @*@Html.Label("*", new { id = "modelCustomerNameError", style = "color:red" })*@
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("A", "Issue Quantity") @Html.Label("*", new { style = "color:red" })
+                                    @Html.TextBox("modelIssueQty", null, new { @class = "form-control allowNumbersOnly", placeholder = "Issue Quantity", maxlength = "10" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                @*<div class="form-group">
+                                        @Html.Label("Issue Date") @Html.Label("*", new { style = "color:red" })
+                                        @Html.TextBox("modelIssueDate", null, new { @class = "form-control OnlyDate", placeholder = "Issue Date" })
+                                    </div>*@
+                                <div class="form-group">
+                                    @Html.Label("Issue Date") @Html.Label("*", new { style = "color:red" })
+                                    <div id="" class="">
+                                        <input type="date" id="modelIssueDate" name="modelIssueDate" value="" class="form-control" />
+                                        @*@Html.TextBox("modelIssueDate", null, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy" })
+                                            <span class="input-group-addon add-on">
+                                                <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                            </span>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Label("*", new { id = "modelIssueQtyError", style = "color:red; display:none;" })
+                        </div>
+                    </div>
+
+                </p>
+            </div>
+            <div class="modal-footer" style="background-color: #357ca5;">
+                @*<button type="button" class="btn btn-outline pull-primary" id="buttoncloseModelIssue" name="buttoncloseModelIssue" data-dismiss="modal">Close</button>*@
+                <input type="button" value="Close" class="btn btn-primary" style="float:left" id="buttoncloseModelIssue" name="buttonSaveIssue" />
+                <input type="button" value="Issue" class="btn btn-primary" id="buttonSaveIssue" name="buttonSaveIssue" />
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

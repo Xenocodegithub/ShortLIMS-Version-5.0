@@ -1,0 +1,134 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDMicrobiologicalMonitoringOfAirModel
+@{
+    ViewBag.Title = "FieldBuildingMaterial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Field Determination</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                @*<li class="breadcrumb-item"><a href="index.html">Field Determination</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Field Determination</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Building Field Values</li>*@
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Microbiological Monitoring Field Values</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                </div>
+                @using (Ajax.BeginForm("FieldMicrobiologicalMonitoringOfAir", "FieldMicrobiologicalMonitoringOfAir", new AjaxOptions() { HttpMethod = "Post", OnBegin = "VlidateClick()", OnSuccess = "MicrobiologicalSuccess" }))
+                {
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.EnquiryId)
+                    @Html.HiddenFor(model => model.SampleCollectionId)
+                    @Html.HiddenFor(model => model.MicrobiologicalID)
+                    @Html.HiddenFor(model => model.EnquirySampleID)
+                    <div class="form-horizontal align align-content-lg-center">
+                        <div class="card shadow mb-4">
+                            <div class="card-body align-content-center">
+                                <div class="row" id="p">
+                                    <div class="col-sm-6 form-group">
+                                        @Html.LabelFor(model => model.FlowRate, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8" id="Parameter">
+                                            @Html.EditorFor(model => model.FlowRate, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    @if (ViewBag.MatrixName == "Surface SWAB")
+                                    {
+                                        <div class="col-sm-6 form-group">
+                                            @Html.LabelFor(model => model.AreaSwabbed, htmlAttributes: new { @class = "control-label col-sm-4 " })
+                                            <div class="col-sm-8" id="TestMethod">
+                                                @Html.EditorFor(model => model.AreaSwabbed, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                    }
+                                    <div class="col-sm-6 form-group">
+                                        @Html.LabelFor(model => model.MediaUsed, htmlAttributes: new { @class = "control-label col-sm-4 " })
+                                        <div class="col-sm-8" id="TestResult">
+                                            @Html.EditorFor(model => model.MediaUsed, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="p">
+                                    <div class="col-sm-6 form-group">
+                                        @Html.LabelFor(model => model.RelativeHumidity, htmlAttributes: new { @class = "control-label col-sm-4 " })
+                                        <div class="col-sm-8" id="Parameter">
+                                            @Html.EditorFor(model => model.RelativeHumidity, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        @Html.LabelFor(model => model.EquipmentId, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8" id="Parameter">
+                                            @Html.EditorFor(model => model.EquipmentId, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        @Html.LabelFor(model => model.AnyOtherObservation, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8" id="Parameter">
+                                            @Html.EditorFor(model => model.AnyOtherObservation, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row align-items-end item form-group">
+                                    <div class="col-md-12 col-sm-12">
+                                        @if (ViewBag.CurrentStatus == "SampleColl")
+                                        {
+                                            @*<button type="submit" id="btnSave" class="btn btn-round btn-secondary" name="Save" value="FieldSave" style="background-color:darkgrey" disabled="disabled">Save </button>*@
+                                            <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="FieldSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                                        }
+                                        else
+                                        {
+                                            @*<button type="submit" id="btnSave" class="btn btn-success" name="Save" value="FieldSave">Save </button>*@
+                                            <button type="submit" id="btnSubmit" class="btn btn-primary" name="Save" value="FieldSubmit">Submit</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                }
+         </div>
+     </div>    
+</div>
+    
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    function VlidateClick() {
+        debugger
+        $('#btnSubmit').val('Please Wait..');
+        $('#btnSubmit').prop('disabled', true);
+    }
+
+    function MicrobiologicalSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            // window.location.href = '/Collection/CollectorList';
+        }
+    }
+</script>

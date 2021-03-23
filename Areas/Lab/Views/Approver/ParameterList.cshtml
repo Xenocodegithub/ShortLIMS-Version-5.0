@@ -1,0 +1,267 @@
+﻿@model LIMS_DEMO.Core.Lab.SampleParameterInfoapprover
+@using LIMS_DEMO.Common
+@{
+    ViewBag.Title = "ParameterList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var recordCount = Model.ParameterInfosApprove.Count();
+    CurrentStatusEnum currentStatus;
+}
+@{ long SampleCollectionId = Model.SampleDetails.SampleCollectionId;}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Approver</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active" aria-current="page">Approver</li>
+                                <li class="breadcrumb-item active" aria-current="page">Parameter List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Parameter List</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                <!-- Simple Datatable start -->
+                <div class="card-box mb-30">
+                    <div class="pb-20">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">Sample ID</th>
+                                    <th>Sample Type</th>
+                                    <th>
+                                        Product Group Name
+                                    </th>
+                                    <th>
+                                        Sub Group Name
+                                    </th>
+                                    <th>
+                                        Matrix
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Model.SampleDetails.SampleName</td>
+                                    <td>@Model.SampleDetails.SampleTypeProductName</td>
+                                    <td>@Model.SampleDetails.ProductGroupName</td>
+                                    <td>@Model.SampleDetails.SubGroupName</td>
+                                    <td>@Model.SampleDetails.MatrixName</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+
+                                        <div class="dataTables_paginate paging_simple_numbers" id=""></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card-box mb-30">
+                    <div class="pb-20">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">Sr No.</th>
+                                    <th>Parameter</th>
+                                    <th>Test Method</th>
+                                    <th>Unit</th>
+                                    <th class="width-15">
+                                        Avg Result
+                                    </th>
+                                    <th class="width-15">
+                                        All Test Result
+                                    </th>
+                                    <th>
+                                        Current Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowNo = 0; }
+                                @foreach (var item in Model.ParameterInfosApprove)
+                                {
+                                    currentStatus = (CurrentStatusEnum)Enum.ToObject(typeof(CurrentStatusEnum), item.CurrentStatus);
+                                    <tr>
+                                        <td>
+                                            @{ rowNo++; }
+                                            @rowNo
+                                        </td>
+                                        @if (item.CurrentStatus == 3)
+                                        {
+                                            <td>
+                                                @Html.ActionLink(item.ParameterName, "Approver", "Approver", new { @ParameterMasterId = item.ParameterMasterId, @SampleId = SampleCollectionId }, null)
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                @item.ParameterName
+                                            </td>
+                                        }
+
+                                        <td>
+                                            <input type="hidden" id="@string.Concat("PMGID", rowNo )" value="@item.ParameterGroupId" />
+                                            <input type="hidden" id="@string.Concat("PMID", rowNo )" value="@item.ParameterMasterId" />
+                                            <input type="hidden" id="@string.Concat("SCID", rowNo )" value="@SampleCollectionId" />
+                                            <input type="hidden" id="@string.Concat("TMID", rowNo )" value="@item.TestMethodId" />
+                                            <input type="hidden" id="@string.Concat("UID", rowNo )" value="@item.UnitId" />
+                                            @item.TestMethod
+                                        </td>
+                                        <td>
+                                            @item.Unit
+                                        </td>
+                                        <td>
+                                            @item.FinalResult)
+                                        </td>
+                                        <td>
+                                            @if (item.CurrentStatus == 3)
+                                            {
+                                                <input type="button" id="btnallResult" value="View Result" class="btn btn-primary" onclick="PopulateResultRows(@rowNo)" />
+                                            }
+                                            else
+                                            {
+                                                <input type="button" id="btnallResult" value="View Result" class="btn btn-primary" disabled onclick="PopulateResultRows(@rowNo)" />
+
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @currentStatus
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+
+                                        <div class="dataTables_paginate paging_simple_numbers" id=""></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Simple Datatable End -->
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+<div class="modal" id="AllResultPopupView" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="Closeup" href="/Lab/Approver/ParameterList?SampleId=@SampleCollectionId"><span class="close CPopup">&times;</span></a>
+                <h4 style="text-align:center;">Result Window</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="divChemicals" style="border:none" class="row">
+
+                    <div class="col-md-12">
+                        <table style="border-collapse:collapse" border="1" align="center" class="table" id="tblAllResultData">
+                            <tr class="thead-dark">
+                                <th class="width-15">
+                                    Sr No
+                                </th>
+                                <th class="width-15">
+                                    Name Of Test
+                                </th>
+                                <th class="width-15">
+                                    Test Result
+                                </th>
+                            </tr>
+                            <tbody id="inputresult">
+                                <tr id="inputAllResultRowData">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function PopulateResultRows(s) {
+        debugger
+        var parameterMasterId = $('#PMID' + s).val();
+        var testMethodId = $('#TMID' + s).val();
+        var parameterGroupId = $('#PMGID' + s).val();
+        var sampleCollectionId = $('#SCID' + s).val();
+        var unitId = $('#UID' + s).val();
+        var objParam = {
+            ParameterMasterId: parameterMasterId,
+            TestMethodId: testMethodId,
+            ParameterGroupId: parameterGroupId,
+            SampleCollectionId: sampleCollectionId,
+            UnitId: unitId
+        };
+        $.ajax({
+            url: "/Approver/GetFinalResRow",
+            type: 'GET',
+            data: objParam,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                formulaList2 = data.FormulaList;
+                var tableHtml = '';
+                var rowHtml = '';
+                $('#inputresult').html('');
+                //$("#tblAllResultData tbody").find(".solutionRow").remove();
+                var sr = 0;
+                //rowHtml += '<tr class="solutionRow"><td>' + 'SrNo' + '</td><td>' + 'Name Of Test' + '</td><td>' + 'Result' + '</td></tr>'
+                $.each(formulaList2, function (key, value) {
+                    sr = sr + 1;
+                    var NameOfTest = "Test_" + sr;
+                    rowHtml += '<tr class="solutionRow"><td class="col-md-2">' + sr + '</td><td class="col-md-4">' + NameOfTest + '</td><td class="col-md-4">' + value.NotationValue + '</td></tr>'
+                });
+                // $('#tblAllResultData tr#inputAllResultRowData').before(rowHtml);
+                $('#inputresult').html(rowHtml);
+
+                $('#AllResultPopupView').modal('show');
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+</script>
+

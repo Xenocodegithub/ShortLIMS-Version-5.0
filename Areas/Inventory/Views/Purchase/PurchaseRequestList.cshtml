@@ -1,0 +1,282 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Inventory.Models.PurchaseModel>
+@{
+    ViewBag.Title = "PurchaseRequestList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Request First List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="card-box mb-30">
+                <div class="card-box mb-30 card text-white bg-info card-box">
+                    <div class="pd-20" style="border-bottom:solid">
+                        <h4 class="text-blue h4">PURCHASE REQUEST LIST</h4>
+                    </div>
+                    <br />
+                    <div class="pb-20">
+                        <table class="data-table table multiple-select-row nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="table-plus datatable-nosort">ITEM</th>
+                                    <th>BRAMD</th>
+                                    <th>GRAD</th>
+                                    <th>PACK SIZE/CAPACITY</th>
+                                    <th>QUANTITY</th>
+                                    @*<th>COA/COC REQUIRED</th>
+                                        <th>PRIORITY</th>
+                                        <th>PURPOSE</th>
+                                        <th>SPECIFICATION</th>
+                                        <th>REMARK</th>*@
+                                    <th>SUPPLIER NAME</th>
+                                    @*<th>ESTIMATED LAG TIME</th>*@
+                                    <th>NET AMOUNT</th>
+                                    <th>REMARK TM</th>
+                                    <th>REMARK HO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.RemarkIfRejectedByTM == "Rejected" || item.RemarkIfRejectedByHO == "Rejected")
+                                    {
+                                        <tr class="table-plus" style="background-color: red; color: antiquewhite;">
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.All)
+                                                </td>*@
+                                            <td>
+                                                @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                                @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                                @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                                @Html.DisplayFor(modelItem => item.Item)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Brand)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Grade)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PackSize)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.COA)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Priority)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Purpose)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Specification)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Remark)
+                                                </td>*@
+                                            <td>
+                                                @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
+                                                @Html.DisplayFor(modelItem => item.SupplierName)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.EstimatedLagTime)
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => item.TickIf, new { @class = "form-control" })
+                                                </td>*@
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NetAmount)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
+                                                @if (item.RemarkIfRejectedByTM == "Rejected")
+                                                {
+                                                    @*@Html.ActionLink("Edit", "PurchaseRequestForm", "Inventory", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID })*@
+
+                                                    <a href="@Url.Action("PurchaseRequestForm", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID })">
+                                                        <i class="fa fa-pencil"></i>&nbsp;Edit
+                                                    </a>
+                                                    @*<button type="button" class="btn btn-info" id="@item.PurchaseRequestID" onclick="purchaseedit(@item.PurchaseRequestID,@item.PurchaseMasterID);">Edit</button>*@
+
+                                                    @*<button class="btn fa-edit" type="button" id="@item.PurchaseRequestID" onclick="editpurchase();" name="Edit" value="Edit"> Edit</button>*@
+                                                    @*<a target="_blank" href="&PurchaseRequestID=@item.PurchaseRequestID" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Edit</a>*@
+
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByHO)
+                                            </td>
+                                            @*<td>
+                                                    @{ string Active = "Yes"; if (item.IsActive) { Active = "Yes"; } else { Active = "No"; }
+                                                    }
+                                                    @Active
+                                                </td>*@
+                                            @*<td>
+                                                    @Html.ActionLink("Edit", "PurchaseRequestForm", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID }) |
+
+                                                    <a href="/Inventory/DeletePurchaseRequest?PurchaseRequestID=@item.PurchaseRequestID" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                                                </td>*@
+                                        </tr>
+                                    }
+                                    else if (item.RemarkIfRejectedByTM == "Accepted" || item.RemarkIfRejectedByHO == "Accepted")
+                                    {
+                                        <tr class="table-plus" style="background-color: darkblue; color:wheat">
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.All)
+                                                </td>*@
+                                            <td>
+                                                @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                                @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                                @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                                @Html.DisplayFor(modelItem => item.Item)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Brand)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Grade)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PackSize)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.COA)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Priority)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Purpose)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Specification)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Remark)
+                                                </td>*@
+                                            <td>
+                                                @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
+                                                @Html.DisplayFor(modelItem => item.SupplierName)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.EstimatedLagTime)
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => item.TickIf, new { @class = "form-control" })
+                                                </td>*@
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NetAmount)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByHO)
+                                            </td>
+                                            @*<td>
+                                                    @{ string Active = "Yes"; if (item.IsActive) { Active = "Yes"; } else { Active = "No"; }
+                                                    }
+                                                    @Active
+                                                </td>*@
+                                            @*<td>
+                                                    @Html.ActionLink("Edit", "PurchaseRequestForm", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID }) |
+
+                                                    <a href="/Inventory/DeletePurchaseRequest?PurchaseRequestID=@item.PurchaseRequestID" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                                                </td>*@
+                                        </tr>
+
+
+
+                                    }
+                                    else
+                                    {
+                                        <tr class="table-plus">
+                                            @*<td>
+                                                @Html.DisplayFor(modelItem => item.All)
+                                                 </td>*@
+                                            <td>
+                                                @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                                @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                                @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                                @Html.DisplayFor(modelItem => item.Item)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Brand)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Grade)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PackSize)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.COA)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Priority)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Purpose)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Specification)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Remark)
+                                                </td>*@
+                                            <td>
+                                                @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
+                                                @Html.DisplayFor(modelItem => item.SupplierName)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.EstimatedLagTime)
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => item.TickIf, new { @class = "form-control" })
+                                                </td>*@
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NetAmount)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByHO)
+                                            </td>
+                                        </tr>
+                                    }
+
+                                 }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

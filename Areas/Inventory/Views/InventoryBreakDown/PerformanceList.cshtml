@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "PerformanceList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Incharge List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="page-header card text-white bg-dark card-box">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <input class="form-control" id="StartDate" placeholder="StartDate..." type="date" />
+                        </div>
+                        <div class="col-sm-1">
+                            <label> TO </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="EndDate" placeholder="EndDate..." type="date" />
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="button" value="Print" class="btn btn-primary" id="buttonPrint" name="buttonPrint" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-box mb-30">
+                <div class="card-box mb-30 card text-white bg-info card-box">
+                    <div class="pd-20" style="border-bottom:solid">
+                        <h4 class="text-blue h4">PURCHASE INCHARGE LIST</h4>
+                    </div>
+                    <br />
+                    <div class="pb-20">
+                        <table class="data-table table nowrap">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category Name</th>
+                                    <th>Item Name</th>
+                                    <th>Serial Number</th>
+                                    <th>Completion Date</th>
+                                    <th>Next Date</th>
+                                </tr>
+                            </thead>
+                            <tbody style="color:transparent">
+                                @{
+                                    int SerialNumber = 1;
+                                    foreach (var item in Model)
+                                    {
+
+                                        if (item.NextDate < DateTime.Now)
+                                        {
+                                            <tr style="background-color:purple; color: antiquewhite;">
+                                                <td>@SerialNumber</td>
+                                                <td>@item.CategoryName</td>
+                                                <td>@item.ItemName</td>
+                                                <td>@item.InventoryBasicItemDetailsNumber</td>
+                                                @if (item.CompletionDate == null)
+                                                {
+                                                    <td></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><a style="color: greenyellow; font-weight: bold;" href="@Url.Action("PerformanceCheak", new { InventoryBasicItemDetailsNumber = item.InventoryBasicItemDetailsNumber, ItemName = item.ItemName, ItemID = item.ItemID, BasicItemDetailsID = item.InventoryBasicItemDetailsID, DateID = item.CompletionDateID, BasicDetailsID = item.InventoryBasicDetailsID })">@Convert.ToDateTime(item.CompletionDate).ToString("dd/MM/yyyy")</a></td>
+
+                                                    @*<td>@item.CompletionDate</td>*@
+                                                }
+                                                @if (item.NextDate != null)
+                                                {
+                                                    <td><a style="color: greenyellow; font-weight: bold;" href="@Url.Action("PerformanceCheak", new { InventoryBasicItemDetailsNumber = item.InventoryBasicItemDetailsNumber, ItemName = item.ItemName, ItemID = item.ItemID, BasicItemDetailsID = item.InventoryBasicItemDetailsID, DateID = item.NextDateID, BasicDetailsID = item.InventoryBasicDetailsID })">@Convert.ToDateTime(item.NextDate).ToString("dd/MM/yyyy")</a></td>
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                }
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr style="background-color: ; color: antiquewhite;">
+                                                <td>@SerialNumber</td>
+                                                <td>@item.CategoryName</td>
+                                                <td>@item.ItemName</td>
+                                                <td>@item.InventoryBasicItemDetailsNumber</td>
+                                                @if (item.CompletionDate == null)
+                                                {
+                                                    <td></td>
+                                                }
+                                                else
+                                                {
+                                                    @*<td>@item.CompletionDate</td>*@
+                                                    <td><a style="color: antiquewhite; font-weight: bold;" href="@Url.Action("PerformanceCheak", new { ItemID = item.ItemID, BasicItemDetailsID = item.InventoryBasicItemDetailsID, DateID = item.CompletionDateID, BasicDetailsID = item.InventoryBasicDetailsID })">@Convert.ToDateTime(item.CompletionDate).ToString("dd/MM/yyyy")</a></td>
+                                                }
+
+                                                @*<td>@item.NextDate</td>*@
+                                                @if (item.NextDate != null)
+                                                {
+                                                    <td><a style="color: antiquewhite; font-weight: bold;" href="@Url.Action("PerformanceCheak", new { ItemID = item.ItemID, BasicItemDetailsID = item.InventoryBasicItemDetailsID, DateID = item.NextDateID, BasicDetailsID = item.InventoryBasicDetailsID })">@Convert.ToDateTime(item.NextDate).ToString("dd/MM/yyyy")</a></td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Inventory to be renewed</td>
+                                                }
+
+                                            </tr>
+                                        }
+                                        ++SerialNumber;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>$("#buttonPrint").click(function () {
+        debugger;
+        if ($("#StartDate").val() == "" || $("#EndDate").val() == "") {
+            alert('Please enter Date');
+        } else {
+
+            var x = "/Reporting/frmShowReport.aspx?path=PerformanceCheckReport.rdl&FromDate=" + $("#StartDate").val() + " &ToDate=" + $("#EndDate").val() + "";
+            window.location = x;
+        }
+    });</script>
+

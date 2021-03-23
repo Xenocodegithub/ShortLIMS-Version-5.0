@@ -1,0 +1,544 @@
+﻿@model LIMS_DEMO.Areas.Collection.Models.CollectionListModel
+
+@{
+    ViewBag.Title = "AddSampleCollection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #Collection_Remark {
+        width: 250px !important;
+        height: 90px !important;
+    }
+</style>
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Collection</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Collection</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Collection</li>
+                                <li class="breadcrumb-item active" aria-current="page">AddSample Collection</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">AddSample Collection</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                @Html.Hidden("ListResult", (object)ViewBag.ListViewBag)
+                <div class="row">
+                        <input type="hidden" id="SampleCollectionIdHidden" value="@ViewBag.SampleCollectionId" />
+                        <div class="col-sm-3 form-group">
+                            @Html.LabelFor(model => model.Collection.CustomerName, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.Collection.CustomerName, "Customer Name", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            @Html.LabelFor(model => model.Collection.Address, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.Collection.Address, "Address", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            @Html.LabelFor(model => model.Collection.ContactNO, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.Collection.ContactNO, "ContactNO", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            @Html.LabelFor(model => model.Collection.WorkOrderNo, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.Collection.WorkOrderNo, "WorkOrderNo", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                    </div>
+                    </div>
+                @using (Ajax.BeginForm("AddSampleCollection", "SampleCollection", new AjaxOptions() { HttpMethod = "Post", OnBegin = "VlidateClick()", OnSuccess = "SampleCollectionSuccess" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Collection.SampleCollectionId)
+                        @Html.HiddenFor(model => model.Collection.EnquirySampleID)
+                        @Html.HiddenFor(model => model.Collection.EnquiryDetailId)
+                        @Html.HiddenFor(model => model.Collection.EnquiryId)
+                        @Html.HiddenFor(model => model.Collection.WorkOrderID)
+                        @Html.HiddenFor(model => model.Collection.IsWitness)
+                        @Html.HiddenFor(model => model.Collection.Iteration)
+                        @Html.HiddenFor(model => model.Collection.CollectedBy)
+                        @Html.HiddenFor(model => model.Collection.WorkOrderSampleCollectionDateId)
+                        @Html.HiddenFor(model => model.Collection.SampleNo)
+                        @Html.HiddenFor(model => model.CollDate)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <hr />
+                         <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label class="control-label col-sm-6"> Sample Description <span class="required" style="color:red">*</span></label>
+                                <div class="input col-sm-6">
+                                    @Html.EditorFor(model => model.Collection.SampleDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Collection.SampleDescription, "", new { @class = "text-danger" })
+                                    @*@Html.DropDownListFor(model => model.Collection.SampleDescriptionId, new SelectList(ViewBag.SampleDescriptionList, "SampleDescriptionId", "SampleDescription"), "---Select---", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Collection.SampleDescriptionId, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label class="control-label col-sm-6">
+                                    Sampling Media/Devices
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {<span class="required" style="color:red">*</span>}
+                                </label>
+                                <div class="input col-sm-6">
+                                    @Html.DropDownListFor(model => model.Collection.SampleDeviceId, new MultiSelectList(ViewBag.SampleDeviceList, "SampleDeviceId", "SampleDevice"), new { multiple = "multiple", @class = "form-control ", @id = "example-getting-started" })
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {@Html.ValidationMessageFor(model => model.Collection.SampleDeviceId, "", new { @class = "text-danger" })}
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-4 form-group">
+                                <label class="control-label col-sm-6">
+                                    Sample Type
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {<span class="required" style="color:red">*</span>}
+                                </label>
+                                <div class="input col-sm-6">
+                                    @Html.DropDownListFor(model => model.Collection.SampleTypeId, new SelectList(ViewBag.SampleTypeList, "SampleTypeId", "SampleType"), "---Select---", new { @class = "form-control" })
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {@Html.ValidationMessageFor(model => model.Collection.SampleTypeId, "", new { @class = "text-danger" })}
+                                </div>
+                            </div>
+                            </div>
+                         <div class="row">
+                         <div class="col-sm-4 form-group">
+                                <label class="control-label col-sm-6">
+                                    Environmental Condition
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {<span class="required" style="color:red">*</span>}
+                                </label>
+                                <div class="input col-sm-6">
+                                    @Html.DropDownListFor(model => model.Collection.EnvCondtId, new SelectList(ViewBag.EnvCondtsList, "EnvCondtId", "EnvCondts"), "---Select---", new { @class = "form-control" })
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {@Html.ValidationMessageFor(model => model.Collection.EnvCondtId, "", new { @class = "text-danger" })}
+                                </div>
+                            </div>
+                         <div class="clearfix"></div>
+                         <div class="col-sm-4 form-group">
+                                @if (Model.Collection.CollectedBy == "Customer")
+                                {
+                                    <label class="control-label col-sm-6"> Procedure</label>
+                                    <span class="" style="color:Black">Sample Tested As Received</span>
+                                }
+                                else
+                                {
+                                    <label class="control-label col-sm-6">
+                                        Procedure
+                                        <span class="required" style="color:red">*</span>
+                                    </label>
+                                    <div class="input col-sm-6">
+                                        @Html.DropDownListFor(model => model.Collection.ProcedureId, new MultiSelectList(ViewBag.ProcedureList, "ProcedureId", "ProcedureName"), new { multiple = "multiple", @class = "form-control", @id = "example-getting-started1" })
+                                        @Html.ValidationMessageFor(model => model.Collection.ProcedureId, "", new { @class = "text-danger" })
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12" style="overflow: auto;">
+                            <label class="form-label"> Parameters:</label>
+                            <div Id="divParameterList" class="col-md-12">
+                                @{
+                                    Html.RenderAction("_ParametersUnitList", "SampleCollection", Model.Collection.EnquirySampleID);
+                                }
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label class="form-label col-sm-12 ">Quantity<span class="required" style="color:red">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <!-- Simple Datatable start -->
+                            <table id="tblQuantity" class="data-table table nowrap">
+                                <thead>
+                                   <tr class="thead-dark">
+                                      <th class="width-5">
+                                        <input type="checkbox" id="chkAllParameter" />
+                                      </th>
+                                      <th class="table-plus datatable-nosort">
+                                          SrNo.
+                                      </th>
+                                      <th>
+                                         Sample Quantity
+                                      </th>
+                                      <th>
+                                          No.
+                                      </th>
+                                      <th>
+                                          Preservation
+                                      </th>
+                                      <th>
+                                          Choose for Preservation
+                                      </th>
+                                   </tr>
+                                </thead>
+                                <tbody style="text-align:center;" id="tblQuantityBody">
+                                   @for (int i = 0; i < Model.CollectionList.Count; i++)
+                                    {
+                                       <tr id="@Model.CollectionList[i].SampleQtyId" rowCount="@i" SampleQty="@Model.CollectionList[i].SampleQtyId">
+                                          <td>
+                                                    @Html.CheckBoxFor(model => model.CollectionList[i].IsSelected, new { onchange = "SelectQuantity()" })
+                                                    @Html.HiddenFor(model => model.CollectionList[i].QtyPreservativeId)
+                                                    @Html.ValidationMessageFor(model => model.CollectionList[i].IsSelected)
+                                          </td>
+                                          <td>
+                                                    @Html.HiddenFor(item => Model.CollectionList[i].SampleCollectionId)
+                                                    @Html.DisplayFor(item => Model.CollectionList[i].SerialNo)
+                                          </td>
+                                          <td>
+                                                    @Html.HiddenFor(item => Model.CollectionList[i].SampleQtyId)
+                                                    @Html.DisplayFor(item => Model.CollectionList[i].SampleQty)
+                                          </td>
+                                          <td>
+                                                    @Html.TextBoxFor(item => Model.CollectionList[i].No)
+                                          </td>
+                                          <td>
+                                                    @Html.DisplayFor(item => Model.CollectionList[i].Preservation)
+                                          </td>
+                                          <td>
+                                                   <label> @Html.RadioButtonFor(item => Model.CollectionList[i].ISGivenPreservative, true, new { id = "ISGivenPreservative-true", @checked = "checked" })Yes </label>
+                                                   <label> @Html.RadioButtonFor(item => Model.CollectionList[i].ISGivenPreservative, false, new { id = "ISGivenPreservative-false" }) No</label>
+                                          </td>
+                                       </tr>
+                                    }
+                                </tbody>
+                             </table>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label class="form-label col-sm-4">Location <span class="required" style="color:red">*</span></label>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.Collection.Location, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                    <br />
+                                    @Html.EditorFor(model => model.Collection.SampleLocation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Add Confirm Location" } })
+                                    @Html.ValidationMessageFor(model => model.Collection.SampleLocation, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label class="form-label col-sm-4">
+                                    Sampling Date
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {<span class="required" style="color:red">*</span>}
+                                </label>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.Collection.CollectedOn, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                    @{
+                                        var x = Model.CollectionDate.ToString();
+                                        var y = x.Split(new char[] { ' ' });
+                                        y[0] = y[0].Replace("/", "-").ToString();
+                                        <br />
+                                        if (@Model.CollectionDate == null)
+                                        {
+                                            <div>
+                                                <input type="date" id="CollectionDate" name="CollectionDate" class="input-group col-sm-12" required />
+                                                <br />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <input type="text" value="@Convert.ToDateTime(y[0]).ToString("dd/MM/yyyy")" disabled class="input-group col-sm-12" />
+                                            </div>
+                                        }
+                                        if (Model.Collection.CollectedBy == "LAB")
+                                        {@Html.ValidationMessageFor(model => model.Collection.CollectionDate, "", new { @class = "text-danger" })}
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                @if (Model.Collection.SampleTypeProductName == "Stack Emission" || Model.Collection.SampleTypeProductName == "Ambient Air")
+                                {
+                                    <label class="form-label col-sm-4">
+                                        Duration
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {<span class="required" style="color:red">*</span>}
+                                    </label>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.Collection.Duration, new { @class = "form-control time ", @autocomplete = "false", @placeholder = "Hrs" })
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {@Html.ValidationMessageFor(model => model.Collection.Duration, "", new { @class = "text-danger" })}
+                                    </div>
+                                }
+                                else if (Model.Collection.SampleTypeProductName == "Workplace Air/Indoor Air Quality")
+                                {
+                                    <label class="form-label col-sm-4">
+                                        Start Time
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {<span class="required" style="color:red">*</span>}
+                                    </label>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.Collection.StartTime, new { @type = "time", @class = "form-control time", @autocomplete = "false", @placeholder = "HH:mm" })
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {@Html.ValidationMessageFor(model => model.Collection.StartTime, "", new { @class = "text-danger" })}
+                                        <br />
+                                    </div>
+                                    <label class="form-label col-sm-4">
+                                        End Time
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {<span class="required" style="color:red">*</span>}
+                                    </label>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.Collection.EndTime, new { @type = "time", @class = "form-control time", @autocomplete = "false", @placeholder = "HH:mm" })
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {@Html.ValidationMessageFor(model => model.Collection.EndTime, "", new { @class = "text-danger" })}
+                                    </div>
+                                }
+                                else
+                                {
+                                    <label class="form-label col-sm-4">
+                                        Sampling Time
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {<span class="required" style="color:red">*</span>}
+                                    </label>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.Collection.SampleCollectionTime, new { @type = "time", @class = "form-control time", @autocomplete = "false", @placeholder = "HH:mm" })
+                                        @if (Model.Collection.CollectedBy == "LAB")
+                                        {
+                                            @Html.ValidationMessageFor(model => model.Collection.SampleCollectionTime, "", new { @class = "text-danger" })
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label class="form-label col-sm-4">
+                                    Source
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {<span class="required" style="color:red">*</span>}
+                                </label>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.Collection.Source, new { htmlAttributes = new { @class = "form-control" } })
+                                    @if (Model.Collection.CollectedBy == "LAB")
+                                    {
+                                        @Html.ValidationMessageFor(model => model.Collection.Source, "", new { @class = "text-danger" })
+                                    }
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-4 form-group">
+                                <label class="form-label col-sm-4">Industry Type</label>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.Collection.IndustryType, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Collection.IndustryType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                @Html.LabelFor(model => model.Collection.Remark, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                <div class="col-sm-6">
+                                    @Html.TextAreaFor(model => model.Collection.Remark, new { htmlAttributes = new { @class = "form-control", Type = "Text-" } })
+                                    @Html.ValidationMessageFor(model => model.Collection.Remark, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            </div>
+                        <hr />
+                        <div class="row">
+                            <div class="form-actions" style="margin:20px 0 0 0; text-align: center;">
+                                @if (ViewBag.StatusCodeLab == "SampleColl" || ViewBag.StatusCodeLab == "SampleSub")
+                                {
+                                    <button type="submit" id="btnSave" class="btn btn-round btn-secondary" name="Save" value="SampleSave" style="background-color:darkgrey" disabled="disabled">Save </button>
+                                    <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="SampleSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" id="btnSave" class="btn btn-success" name="Save" value="SampleSave">Save </button>
+                                    <button type="submit" id="btnSubmit" class="btn btn-info" name="Save" value="SampleSubmit">Submit</button>
+                                }
+                            </div>
+                        </div>
+                    }
+            </div>
+        </div>
+            <!-- Default Basic Forms End -->
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var model = @Html.Raw(Json.Encode(Model.DeviceList));
+        if (model != null) {
+            for (var i = 0; i < model.length; i++) {
+                $("#Collection_SampleDeviceId").find("option[value=" + model[i].SampleDeviceId2 + "]").prop("selected", "selected");
+                //$("#Collection_SampleDeviceId").find("option[value=" + model[i].SampleDeviceId2 + "]").css("background-color", "blue");
+            }
+        }
+
+        var model = @Html.Raw(Json.Encode(Model.ProcedureList));
+        if (model != null) {
+            for (var i = 0; i < model.length; i++) {
+                $("#Collection_ProcedureId").find("option[value=" + model[i].ProcedureId2 + "]").prop("selected", "selected");
+                //$("#Collection_SampleDeviceId").find("option[value=" + model[i].SampleDeviceId2 + "]").css("background-color", "blue");
+            }
+        }
+
+        if ($('#ListResult').val() != null && $('#ListResult').val()!="") {
+            var data = JSON.parse($('#ListResult').val());
+            console.log(JSON.parse($('#ListResult').val()))
+            $('#tblQuantityBody tr').each(function(){
+                id = $(this).attr('SampleQty');
+
+                rowCount = $(this).attr('rowcount')
+                for (var i = 0; i < data.length; i++) {
+                    if (id == data[i].SampleQtyId) {
+                        $('#CollectionList_' + rowCount + '__IsSelected').prop('checked', true);
+                        $('#CollectionList_' + rowCount + '__No').val(data[i].No);
+                        debugger
+                        if (data[i].ISGivenPreservative == false) {
+
+                            $('input:radio[name="CollectionList[' + rowCount + '].ISGivenPreservative"][value="True"]').prop('checked', false);
+                        }
+                        else {
+                            $('input:radio[name="CollectionList[' + rowCount + '].ISGivenPreservative"][value="True"]').prop('checked', true);
+                        }
+                    }
+                }
+            })
+        }
+    });
+
+    $(function () {
+
+        $("#btnSubmit").click(function () {
+
+            var checked_checkboxes = $("#tblQuantity input[type=checkbox]:checked");
+            if (checked_checkboxes.length == 0) {
+                alert('Please Select All Manadatory fields.');
+                return false;
+            }
+            return true;
+        });
+
+        $("#btnSave").click(function () {
+
+            var checked_checkboxes = $("#tblQuantity input[type=checkbox]:checked");
+            if (checked_checkboxes.length == 0) {
+                alert('Please Select All Manadatory fields.');
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+
+<script>
+
+    function VlidateClick() {
+        $('#btnSubmit').html('Please Wait..');
+        $('#btnSubmit').prop('disabled', true);
+        $('#btnSave').html('Please Wait..');
+        $('#btnSave').prop('disabled', true);
+    }
+
+    function onLoad() {
+        $('#SaveQuantity').prop('disabled', true);
+        $('#SaveQuantity').val('Please Wait..')
+    }
+
+    function SampleCollectionSuccess(result) {
+
+        if (result.status == "success") {
+            alert(result.message);
+            $('#btnSubmit').html('Submit');
+            $('#btnSubmit').prop('disabled', false);
+
+            $('#btnSave').html('Submit');
+            $('#btnSave').prop('disabled', false);
+
+            location.href = '/Collection/SampleCollection/AddSampleCollection?SampleCollectionId=' + $('#SampleCollectionIdHidden').val() + "&EnquirySampleID=" + $("#Collection_EnquirySampleID").val();
+        } else {
+            $('#btnSubmit').html('Submit');
+            $('#btnSubmit').prop('disabled', false);
+
+            $('#btnSave').html('Submit');
+            $('#btnSave').prop('disabled', false);
+            alert('Please Select All Manadatory fields.');
+            location.href = '/Collection/SampleCollection/AddSampleCollection?SampleCollectionId=' + $('#SampleCollectionIdHidden').val() + "&EnquirySampleID=" + $("#Collection_EnquirySampleID").val();
+        }
+
+        //$('#SaveQuantity').prop('disabled', false);
+        // $('#SaveQuantity').val('Save Quantity')
+    }
+
+    $('#chkAllParameter').change(function () {
+        $('#tblQuantity tbody input[type=checkbox]').prop('checked', $(this).prop('checked'));
+    })
+
+    // function SelectQuantity(i) {
+    //    //Quantity
+    //    tableQuantity = document.getElementById("tblQuantity");
+    //     trQuantity = tableQuantity.getElementsByTagName('tr');
+    //     debugger
+    //     if ($('#CollectionList_' + i + '__QtyPreservativeId').is(':checked') == false) {
+    //         var id = $('#CollectionList_' + i + '__QtyPreservativeId').val();
+    //        alert(id);
+    //     }
+    //    //for (i = 0; i < trQuantity.length - 2; i++) {
+    //    //    if ($('#CollectionList_' + i + '__IsSelected').prop("checked") == true) {
+    //    //        if (document.getElementById('CollectionList_' + i + '_ISGivenPreservative').value != "")
+    //    //            vQuantity = parseFloat(document.getElementById('CollectionList_' + i + '_ISGivenPreservative').value);
+    //    //    }
+    //    //}
+    //}
+
+    $(function () {
+
+        $('#Collection_WitnessName').prop("disabled", true);
+        $('#IsWitness').click(function () {
+            //If the checkbox is checked.
+            if ($(this).is(':checked')) {
+                //Enable the WitnessName.
+                $('#Collection_WitnessName').prop("disabled", false);
+                $("#Collection_IsWitness").val(true);
+            } else {
+                //If it is not checked, disable WitnessName.
+                $('#Collection_WitnessName').prop("disabled", true);
+                $(this).attr("value", "false");
+            }
+        });
+
+    });
+
+    $(document).ready(function () {
+        $('#example-getting-started').multiselect();
+    });
+
+    $(document).ready(function () {
+        $('#example-getting-started1').multiselect();
+    });
+</script>
+
+
+
+

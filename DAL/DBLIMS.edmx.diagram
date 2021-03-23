@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dc1436d830f3458f9a182c4ca9843bb8" Name="Diagram1">
+        <EntityTypeShape EntityType="LIMSModel.ErrorLog" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryAssignedSerialNumberDetail" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryAssignmentDetail" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryAssignmentMaster" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryBasicDetail" Width="1.5" PointX="7.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryBasicItemDetail" Width="1.5" PointX="13.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryCapacityMaster" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryCategoryMaster" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryCommercialDetail" Width="1.5" PointX="15.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryCommercialFileDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryCurrentStock" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryItemIssueRequest" Width="1.5" PointX="9.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryItemIssueRequestDetail" Width="1.5" PointX="11.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryItemMaster" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryItemOutward" Width="1.5" PointX="15.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryMaintainanceAndCalibration" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryMaintainanceAndCalibrationSchedule" Width="1.5" PointX="17.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryMaintainanceAndCalibrationScheduleDate" Width="1.5" PointX="17.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryMaintainanceAndCalibrationScheduleFile" Width="1.5" PointX="17.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryMaintAndCalibBreakDown" Width="1.5" PointX="13.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryPurchase" Width="1.5" PointX="15.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryPurchaseItem" Width="1.5" PointX="17.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryPurchaseItemDetail" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryStockDatewise" Width="1.5" PointX="19.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryTypeMaster" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryVendorMaster" Width="1.5" PointX="19.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.Lims_DisposalCollection" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.Lims_IsFieldCombineResult" Width="1.5" PointX="19.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.Master_PurchaseUnitMaster" Width="1.5" PointX="19.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.PurchaseMasterDetail" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.PurchaseRecord" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.PurchaseRequestDetail" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.PurchaseSupplierDetail" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SerialNumberMaster" Width="1.5" PointX="9.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SpareStock" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.StockLogData" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.UnitMasterInventory" Width="1.5" PointX="2.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.AnalysisProcessScheduleDetail" Width="1.5" PointX="4.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ARC" Width="1.5" PointX="13.5" PointY="94.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.Costing" Width="1.5" PointX="16.5" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnquiryDetail" Width="1.5" PointX="12" PointY="45.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnquiryLog" Width="1.5" PointX="13" PointY="54.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnquiryMasterSampleType" Width="1.5" PointX="9.75" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnquiryParameterDetail" Width="1.5" PointX="13.5" PointY="81.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnquirySampleDetail" Width="1.5" PointX="14.25" PointY="47.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnquiryStatu" Width="1.5" PointX="12" PointY="59.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FDStack_ParameterData" Width="1.5" PointX="24" PointY="83" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FDStackEmission" Width="1.5" PointX="21.75" PointY="89.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FDStackEmission_Details" Width="1.5" PointX="24" PointY="78.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FDStackEmission_GaseousData" Width="1.5" PointX="24" PointY="107.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FDStackEmission_IsoKinetic" Width="1.5" PointX="24" PointY="113.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldAmbientAirGasesSampling" Width="1.5" PointX="16.5" PointY="81.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldAmbientAirMatterSize" Width="1.5" PointX="27" PointY="79.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldAmbientAirMonitoring" Width="1.5" PointX="24.75" PointY="92.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldBuildingMaterial" Width="1.5" PointX="18.75" PointY="96.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldCoalCokeSolidFuel" Width="1.5" PointX="24.75" PointY="87.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldFoodAndAgriCulture" Width="1.5" PointX="24.75" PointY="101.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldMicrobiologicalMonitoringOfAir" Width="1.5" PointX="18.75" PointY="102.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldNoiseLevelMonitoring" Width="1.5" PointX="27.75" PointY="92.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldNoiseLevelMonitoringParameter" Width="1.5" PointX="30" PointY="90.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldNoiseSourceParameter" Width="1.5" PointX="30" PointY="97.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldSolidHazardousWasteSoilOil" Width="1.5" PointX="27.75" PointY="86.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldWasteWater" Width="1.5" PointX="18.75" PointY="89.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldWorkplaceEnvironmentAndFugitiveEmission" Width="1.5" PointX="27.75" PointY="102.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FieldWorkplaceGasSampling" Width="1.5" PointX="30" PointY="104.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.LabDisciplineMapping" Width="1.5" PointX="21.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.LocationSampleCollection" Width="1.5" PointX="18.75" PointY="51.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.MenuRoleBranchMapping" Width="1.5" PointX="10" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.MonthTotalDays1" Width="1.5" PointX="6.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.NotificationDetail" Width="1.5" PointX="21.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ParameterFormula" Width="1.5" PointX="3" PointY="81" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ParameterGroupMaster" Width="1.5" PointX="6" PointY="81.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ParameterMapping" Width="1.5" PointX="8.25" PointY="80" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.PlannerByDiscipline" Width="1.5" PointX="18.75" PointY="168.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.PONumberCount" Width="1.5" PointX="21.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.PurchaseTNC" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.QuantityPreservative" Width="1.5" PointX="21.75" PointY="85.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.Quotation" Width="1.5" PointX="9" PointY="99.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.QuotationLog" Width="1.5" PointX="21.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.QuotationNumber" Width="1.5" PointX="23.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.QuotationTNC" Width="1.5" PointX="8.25" PointY="70.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ReportNumber" Width="1.5" PointX="23.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleCollection" Width="1.5" PointX="16.5" PointY="88.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleCollectionDevice" Width="1.5" PointX="18.75" PointY="86" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleCollectionProcedure" Width="1.5" PointX="21.75" PointY="104" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleLocation" Width="1.5" PointX="16.5" PointY="56" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleNumber" Width="1.5" PointX="23.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleParameterFile" Width="1.5" PointX="8.25" PointY="89.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleParameterFormulaValue" Width="1.5" PointX="8.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleParameterFormulaValuesTemp" Width="1.5" PointX="10.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleParameterPlanning" Width="1.5" PointX="11.25" PointY="86.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SolutionPreparationData" Width="1.5" PointX="11.25" PointY="80.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ULRNumber" Width="1.5" PointX="23.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.UserDetail" Width="1.5" PointX="5.25" PointY="94" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.UserLab" Width="1.5" PointX="5.25" PointY="90.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.UserRole" Width="1.5" PointX="8.25" PointY="94.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.WOMasterSampleCollectionDate" Width="1.5" PointX="11.25" PointY="101.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.WorkOrder" Width="1.5" PointX="11.25" PointY="93.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.WorkOrderSampleCollectionDate" Width="1.5" PointX="13.5" PointY="89.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.BranchCategoryMaster" Width="1.5" PointX="5.25" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.CatagoryMaster" Width="1.5" PointX="12.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.CityMaster" Width="1.5" PointX="12.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.CompanyTypeMaster" Width="1.5" PointX="5.25" PointY="36.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.CountryMaster" Width="1.5" PointX="7.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.CustomerGroupMaster" Width="1.5" PointX="5.25" PointY="40" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.CustomerMaster" Width="1.5" PointX="7.5" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.CustomerTypeMaster" Width="1.5" PointX="5.25" PointY="43.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.DisciplineMaster" Width="1.5" PointX="0.75" PointY="77.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnquiryMaster" Width="1.5" PointX="9.75" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.EnvironmentalCondition" Width="1.5" PointX="14.25" PointY="101.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.FrequencyMaster" Width="1.5" PointX="12" PointY="65.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ItemMaster" Width="1.5" PointX="3" PointY="104.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.LabFieldAndDiscipline" Width="1.5" PointX="14.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.LabMaster" Width="1.5" PointX="7.5" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.LabTypeMaster" Width="1.5" PointX="5.25" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.MatrixMaster" Width="1.5" PointX="3.75" PointY="69.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.MenuMaster" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ModeOfCommunication" Width="1.5" PointX="7.5" PointY="55.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ParameterMaster" Width="1.5" PointX="0.75" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ProcedureMaster" Width="1.5" PointX="14.25" PointY="104.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.ProductGroupMaster" Width="1.5" PointX="1.5" PointY="67" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.RoleMaster" Width="1.5" PointX="6" PointY="104.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleDescriptionMaster" Width="1.5" PointX="14.25" PointY="108.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleDeviceMaster" Width="1.5" PointX="14.25" PointY="113" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleQtyMaster" Width="1.5" PointX="14.25" PointY="117.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleTypeMaster" Width="1.5" PointX="14.25" PointY="121.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SampleTypeProductMaster" Width="1.5" PointX="1.5" PointY="61.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.StateMaster" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.StatusMaster" Width="1.5" PointX="7.5" PointY="59.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.SubGroupMaster" Width="1.5" PointX="1.5" PointY="72.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.TermsAndCondition" Width="1.5" PointX="6" PointY="70.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.TermsAndConditionsPurchase" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.TestMethod" Width="1.5" PointX="0.75" PointY="91.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.UnitMaster" Width="1.5" PointX="0.75" PointY="95.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.UserMaster" Width="1.5" PointX="3" PointY="89.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LIMSModel.InventoryPurchaseFileUpload" Width="1.5" PointX="23.75" PointY="16.75" IsExpanded="true" />
+        <AssociationConnector Association="LIMSModel.FK_InventoryItemMaster_PurchaseRequestDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_InventoryTypeMaster_PurchaseRequestDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_InventoryTypeMaster_PurchaseTNC" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_InventoryTypeMaster_TermsAndConditionsPurchase" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.SampleTypeProductMaster1" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_PurchaseMaster_PurchaseTNC" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_PurchaseMasterDetails_PurchaseRequestDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_PurchaseRequestDetail_PurchaseRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_PurchaseRequest_PurchaseTNC" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_PurchaseSupplierDetails_PurchaseRequestDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ARC_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ARC_UserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_Costing_EnquirySampleDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryDetail_EnquiryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryDetail_MatrixMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryDetail_ProductGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryDetail_SubGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryMasterSampleType_EnquiryDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquirySampleDetail_EnquiryDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_MatrixMaster_EnquiryDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ProductGroupMaster_EnquiryDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SubGroupMaster_EnquiryDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryLog_EnquiryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryLog_ModeOfCommunication" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryMaster_EnquiryMasterSampleType" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleTypeProductMaster_EnquiryMasterSampleType" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryParameterDetail_EnquirySampleDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryParameterDetail_LabMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryParameterDetail_ParameterMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryParameterDetail_TestMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryParameterDetail_UnitMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquirySampleDetail_FrequencyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquirySampleDetail_LocationSampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquirySampleDetail_SampleLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnqurySampleID_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_EnquirySampleDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryStatus_EnquiryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryStatus_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FDStackEmissionId" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FDStackEmission_IsoKinetic_FDStackEmission" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FDStackEmissionGaseousData_FDStackEmission" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FDStackEmission_Details_FDStackEmission" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FDStackEmission_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FDStackEmission_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldAmbientAirGasesSampling_FieldAmbientAirMonitoring" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldAmbientAirGasesSampling_ParameterMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldAmbientAirMatterSize_FieldAmbientAirMonitoring" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldAmbientAirMonitoring_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldAmbientAirMonitoring_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldBuildingMaterial_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldBuildingMaterial_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldCoalCokeSolidFuel_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldCoalCokeSolidFuel_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldFoodAndAgriCulture_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldFoodAndAgriCulture_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldMicrobiologicalMonitoringOfAir_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldMicrobiologicalMonitoringOfAir_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldNoiseLevelMonitoring" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldNoiseLevelMonitoringParameters_FieldNoiseLevelMonitoring" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldSolidHazardousWasteSoilOil_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldSolidHazardousWasteSoilOil_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldWasteWater_ParameterMapping" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldWasteWater_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldWasteWater_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldWorkplaceEnvironmentAndFugitiveEmission_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldWorkplaceEnvironmentAndFugitiveEmission_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_FieldWorkplaceGasSampling_FieldWorkplaceEnvironmentAndFugitiveEmission" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleLocation_LocationSampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_MenuRoleBranchMapping_MenuMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_MenuRoleBranchMapping_RoleMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterFormula_DisciplineMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterFormula_ParameterGroupIdMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterFormula_ParameterMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterFormula_TestMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterFormula_UnitMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterGroupMaster_DisciplineMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterGroupMaster_MatrixMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterGroupMaster_ProductGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterGroupMaster_SubGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterMapping_ParameterGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterFiles_ParameterGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterPlanning_ParameterGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleTypeProductMaster_ParameterGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SolutionPreparationData_ParameterGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterMapping_ParameterMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterMapping_TestMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_ParameterMapping_UnitMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_PlannerByDiscipline_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_PurchaseTerms_PurchaseTNC" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_QuantityPreservative_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_QuantityPreservative_SampleQtyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_Quotation_EnquiryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_WorkOrder_Quotation" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_QuotationTNC_TermsAndConditions" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_EnvironmentalCondition" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_ProcedureMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_SampleDescriptionMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_SampleDeviceMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_SampleQtyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_SampleTypeMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollection_WorkOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollectionDevices_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollectionProcedure_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterFiles_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterPlanning_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SolutionPreparationData_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_StatusMaster_SampleCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollectionDevices_SampleDeviceMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleCollectionProcedure_ProcedureMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterFiles_AnalystUserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterFiles_ParameterMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterPlanning_AnalystUserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterPlanning_ApproverUserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterPlanning_ParameterMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterPlanning_ReviewerUserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleParameterPlanning_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SolutionPreparationData_ParameterMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_UserDetail_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_UserLab_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_UserRoles_RoleMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_UserRoles_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_WOMasterSampleCollectionDate_WorkOrderSampleCollectionDate" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_WorkOrder_UserMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_WorkOrder_WorkOrderSampleCollectionDate" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_LabMaster_BranchCategoryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_CityMaster_StateMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_CustomerMaster_CompanyTypeMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_StateMaster_CountryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_CustomerMaster_CustomerGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_CustomerMaster_CustomerTypeMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryMaster_CustomerMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__4C0144E4" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__4CF5691D" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__4DE98D56" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__4EDDB18F" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__4FD1D5C8" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__50C5FA01" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__51BA1E3A" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__52AE4273" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__53A266AC" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__54968AE5" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__558AAF1E" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__567ED357" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__5772F790" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__58671BC9" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__595B4002" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__5A4F643B" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__5B438874" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__5C37ACAD" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__5D2BD0E6" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__5E1FF51F" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__5F141958" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__60083D91" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__60FC61CA" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__61F08603" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__62E4AA3C" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__63D8CE75" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__64CCF2AE" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__65C116E7" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__66B53B20" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__67A95F59" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__689D8392" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__6991A7CB" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__6A85CC04" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__6B79F03D" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__6C6E1476" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__6D6238AF" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__6E565CE8" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__6F4A8121" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__703EA55A" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__7132C993" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__7226EDCC" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__731B1205" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__740F363E" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__75035A77" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__75F77EB0" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__76EBA2E9" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__77DFC722" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__UserMaste__Disci__78D3EB5B" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryMaster_LabMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryMaster_ModeOfCommunication" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_EnquiryMaster_StatusMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK__ItemMaster_UnitMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_LabMaster_LabMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_LabMaster_LabTypeMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_MatrixMaster_ProductGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_MatrixMaster_SubGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleTypeProductMaster_MatrixMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_TermsAndConditions_MatrixMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_MenuMaster_MenuMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleTypeProductMaster_ProcedureMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleDescriptionMaster_ProductGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SubGroupMaster_ProductGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_TermsAndConditions_ProductGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleTypeProductMaster_SampleDeviceMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleTypeProductMaster_SampleQtyMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_SampleTypeProductMaster_SubGroupMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="LIMSModel.FK_TermsAndConditions_SubGroupMaster" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

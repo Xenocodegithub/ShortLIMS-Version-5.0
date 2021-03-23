@@ -1,0 +1,109 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDStackEmissionModel
+
+@using (Ajax.BeginForm("_FDStackParameter", "FieldStackEmissionMonitoring", new { area = "FieldDetermination" }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FDAddPara" }, new { id = "frmAddStackPara" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SrNo)
+    @Html.HiddenFor(model => model.FDStackEmissionId)
+    @Html.HiddenFor(model => model.FDStack_ParameterDataId)
+    @Html.HiddenFor(model => model.EnquirySampleID)
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th rowspan="2">Parameter</th>
+                <th rowspan="2">TestMethod</th>
+                <th rowspan="2">Test Results</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.ParameterName)
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.TestMethodName)
+                </td>
+                <td> @Html.EditorFor(model => model.TestResults, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        @{ string btnText = "Add";
+            if (Model.SrNo != 0)
+            {
+                btnText = "Update";
+                <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" />
+            }
+        }
+        <input class="btn btn-success btn-sm alignright" onclick="SetNameValuesPara();" type="submit" id="btnAddPara" value="@btnText" />
+    </div>
+}
+
+<script>
+
+    $(function () {
+        $("#frmAddStackPara").removeData("validator");
+        $("#frmAddStackPara").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmAddStack");
+    })
+
+    function FDAddPara(result) {
+        debugger
+        $('#divListPara').load('/FieldDetermination/FieldStackEmissionMonitoring/_FDStackParameterList');
+        $('#divAddStackPara').load('/FieldDetermination/FieldStackEmissionMonitoring/_FDStackParameter');
+        $('#btnAdd').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#ParameterMasterId').val(-1);
+        $('#TestMethodId').val(-1);
+        $('#TestResults').val("");
+    }
+
+    function CancelNameValues() {
+        $('#ParameterMasterId').val(-1);
+        $('#TestMethodId').val(-1);
+        $('#TestResults').val("");
+        $('#btnAdd').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#SrNo').val(0)
+    }
+
+    function SetNameValuesPara() {
+        $('#ParameterName').val($('#ParameterMasterId option:selected').text());
+        $('#TestMethodName').val($('#TestMethodId option:selected').text());
+    }
+
+    $('#ParameterMasterId').change(function () {
+        debugger
+        if ($('#ParameterMasterId').val() == '') {
+            $('#TestMethodId').html('');
+            $('#TestMethodId').append('<option value="">---Select---</option>');
+        }
+        else {
+
+            $('#TestMethodId').html('');
+            $('#TestMethodId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val() + "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    debugger
+                    $.each(result.result, function (i, item) {
+                        $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
+                    })
+
+                    $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+
+</script>

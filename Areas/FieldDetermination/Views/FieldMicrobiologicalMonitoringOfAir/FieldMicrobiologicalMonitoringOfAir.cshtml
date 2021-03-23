@@ -1,0 +1,50 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDMicrobiologicalMonitoringOfAirModel
+@{
+    ViewBag.Title = "FieldMicrobiologicalMonitoringOfAir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Field Determination</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Field Determination</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Field Determination</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Surface Swabs/Air Monitoring/Microbiological Monitoring Of Air Values</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Surface Swabs/Air Monitoring/Microbiological Monitoring Of Air Values</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                <div>
+                @Html.HiddenFor(model => model.EnquirySampleID)
+                <div Id="divParameterList">
+                    @{
+                        Html.RenderAction("_FieldParameterUnit", "FieldWasteWater", Model.EnquirySampleID);
+                    }
+                </div>
+                </div>
+                <div>
+                    @Html.Partial("_FDMicrobiologicalMonitoringOfAir")
+                </div>
+                <!-- Default Basic Forms End -->
+            </div>
+        </div>
+    </div>
+</div>
+

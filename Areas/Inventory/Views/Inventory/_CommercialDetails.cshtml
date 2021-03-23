@@ -1,0 +1,143 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryCommercialDetailModel
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 text-right">
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30" style="margin-left:-250px;margin-top:-150px;width:900px;">
+                <div class="clearfix">
+                    <h4 class="text-blue h4">Add Commercial Details Form</h4>
+                    <p class="mb-30"></p>
+                </div>
+                <div class="wizard-content">
+                    @using (Html.BeginForm("InventoryCommercialDetails", "Inventory", FormMethod.Post, new { id = "_CommercialDetails" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.Hidden("CommercialDetailsID", (object)ViewBag.CommercialDetailsIdViewBag)
+                        @Html.Hidden("PurchaseRequestID", (object)ViewBag.PurchaseRequestId)
+                        @Html.HiddenFor(model => model.PurchaseRequestID)
+
+                        <h5></h5>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Supplier Name:</label>
+                                        @Html.TextBoxFor(model => model.VendorName, null, new { @class = "form-control", @style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.VendorName)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Purchase Order Number:</label>
+                                        @Html.TextBoxFor(model => model.PurchaseOrderNumber, new { @class = "form-control",@style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.PurchaseOrderNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Purchase Order Date:</label>
+                                        @Html.TextBoxFor(model => model.PurchaseOrderDate, new { @class = "form-control", @style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.PurchaseOrderDate, "", new { @class = "text-danger"})
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Purchase Order Value:</label>
+                                        @Html.TextBoxFor(model => model.PurchaseOrderValue, new { @class = "form-control", @style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.PurchaseOrderValue, "", new { @class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Date Of Receiving:</label>
+                                        <input type="date" id="PurchaseDate" name="PurchaseDate" value="" class="form-control" style="width:400px;" />
+                                        <input type="text" id="PurchaseDateval" name="PurchaseDateval" value="" class="form-control"  style="width:400px;" disabled/>
+                  
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Delivery Time(Days):</label>
+                                        @Html.TextBoxFor(model => model.DeliveryTime, new { @class = "form-control",@style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.DeliveryTime, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Delivery Challan No:</label>
+                                        @Html.TextBoxFor(model => model.DeliveryChallanNo, new { @class = "form-control",@style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.DeliveryChallanNo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Delivery Challan Date:</label>
+                                        <input type="date" id="DeliveryChallanDate" name="DeliveryChallanDate" value="" class="form-control" style="width:400px;" />
+                                        <input type="text" id="DeliveryChallanDateval" name="DeliveryChallanDateval" value="" class="form-control"  style="width:400px;" disabled/>
+                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Bill No:</label>
+                                        @Html.TextBoxFor(model => model.InvoiceNumber, new { @class = "form-control",@style = "width:400px;" })
+                                        @Html.ValidationMessageFor(model => model.InvoiceNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Bill Date:</label>
+                                        <input type="date" id="BillDate" name="BillDate" value="" class="form-control" style="width:400px;" />
+                                        <input type="text" id="BillDateval" name="BillDateval" value="" class="form-control" style="width:400px;" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="margin-left:450px;">
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="btn btn-primary" id="buttonSaveInventoryCommercialDetails" name="buttonSaveInventoryCommercialDetails" style="background-color:mediumblue;color:white;" />
+                                        <input type="submit" value="Finish" class="btn btn-primary" id="buttonFinishInventoryCalibrationDetails" name="buttonFinishInventoryCalibrationDetails" style="background-color:mediumblue;color:white;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    }
+                </div>
+            </div>
+            <!-- success Popup html Start -->
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20">Form Submitted!</h3>
+                            <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- success Popup html End -->
+        </div>
+    </div>
+</div>
+
+
+

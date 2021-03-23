@@ -1,0 +1,122 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryCapacityMasterModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Capacity</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Capacity</li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Capacity</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                January 2018
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Export List</a>
+                                <a class="dropdown-item" href="#">Policies</a>
+                                <a class="dropdown-item" href="#">View Assets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <h4 class="text-blue h4">Edit Capacity Form</h4>
+                    <p class="mb-30"></p>
+                </div>
+                <div class="wizard-content">
+                    @using (Ajax.BeginForm("Edit", "InventoryCapacityMaster", new AjaxOptions() { HttpMethod = "Post" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.InventoryCapacityMasterId)
+
+                        <h5></h5>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Name of Capacity:</label>
+                                        @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control",@style = "width:470px;" })
+                                        @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Description:</label>
+                                        @Html.TextBoxFor(model => model.Description, new { @class = "form-control",@style = "width:470px;" })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="margin-left:450px;">
+                                    <div class="form-group">
+                                        <input type="submit" value="Update" class="btn btn-primary" id="buttonSave1" name="buttonSave" style="background-color:mediumblue;color:white;" onclick="return validateData();" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    }
+                </div>
+            </div>
+            <!-- success Popup html Start -->
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20">Form Submitted!</h3>
+                            <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- success Popup html End -->
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<script src="~/Scripts/sweet-alert.init.js"></script>
+<script src="~/Scripts/sweetalert2.all.js"></script>
+<script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
+<script>
+    function validateData() {
+        debugger
+        if ($("#Capacity").val() == "") {
+            swal("Please Enter Capacity !");
+            return false;
+        } else if ($("#Description").val() == "") {
+            swal("Please Ener Capacity Description !");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>

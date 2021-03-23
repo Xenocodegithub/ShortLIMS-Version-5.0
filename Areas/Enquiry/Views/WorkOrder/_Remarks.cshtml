@@ -1,0 +1,46 @@
+﻿@model LIMS_DEMO.Areas.Enquiry.Models.WorkOrderListModel
+
+@using (Ajax.BeginForm("_Remarks", "WorkOrder", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "RemarkSuccess" }, new { id = "frmRemark" }))
+{
+    @Html.AntiForgeryToken()
+ <div class="col-md-12">
+    @*@Html.AntiForgeryToken()*@
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.EnquiryId)
+    <div class="form-group">
+            <label class="form-label"> Remark <span style="color:red;"> *</span></label>
+            <div>
+                @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control text-area-height" })
+                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    <div class="form-group col-md-12">
+            <div class="text-right">
+                <input type="submit" value="Submit" class="btn btn-success btn-sm" />
+            </div>
+        </div>
+ </div>
+}
+
+<script>
+
+    function RemarkSuccess(result) {
+
+        if (result.status == "success") {
+            debugger;
+            alert(result.message);
+            window.location.href = '/Enquiry/AddContract?EnquiryId=' + result.EnquiryId;
+        } else {
+            alert('Remarks field is Manadatory!!!');
+        }
+    }
+
+    $(function () {
+        $("#frmRemark").removeData("validator");
+        $("#frmRemark").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmRemark");
+    }
+
+</script>
+
+

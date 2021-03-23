@@ -1,0 +1,182 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Inventory.Models.InventoryItemMasterModel>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Item List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Item</li>
+                                <li class="breadcrumb-item active" aria-current="page">Item List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="page-header card text-white bg-dark card-box">
+                <div class="card-header">Laboratory Instrument Report</div>
+                <div class="card-body">
+                    <div class="row" style="margin-bottom:10px;">
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                @Html.Label("Inventory Type")
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DropDownList("InventoryTypeID1", new SelectList(ViewBag.InvInventoryTypeList, "ID", "InventoryName"), "Select Invetory Type...", new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                @Html.Label("Catagory Name")
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DropDownList("CatagoryId1", new SelectList(ViewBag.InvCategoryList, "CatagoryMasterID", "CategoryName"), "Select Item..", new { @class = "form-control " })
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <input type="button" value="Print" class="btn btn-primary" style="float:left" id="buttonPrint" name="buttonSearch" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Item List</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                    <div class="pull-right">
+                        <a href="@Url.Action("Create","InventoryItemMaster")" class="btn btn-primary btn-sm scroll-click" role="button"> Add New Item</a>
+                    </div>
+                </div>
+
+                <!-- Simple Datatable start -->
+                <div class="card-box mb-30">
+                    <div class="pd-20">
+                        <h4 class="text-blue h4"> </h4>
+                        <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+                    </div>
+
+                    <div class="pb-20">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="table-plus datatable-nosort">Sr No</th>
+                                    <th>Type</th>
+                                    <th>Category Type</th>
+                                    <th>Item Name</th>
+                                    <th>Code</th>
+                                    <th>Available Qty</th>
+                                    <th>Minimum Qty</th>
+                                    <th class="datatable-nosort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model != null)
+                                {
+                                    int SerialNumber = 1;
+                                    foreach (var item in Model)
+                                    {
+                                        <tr id="@item.ItemMasterID" minstock="@item.MinimumStock" availablestock="@item.AvailableStock">
+                                            <td>@SerialNumber</td>
+                                            <td>@item.InventoryTypeName</td>
+                                            <td>@item.CategoryName</td>
+                                            <td>@item.NameOfStock</td>
+                                            <td>@item.Code</td>
+                                            <td>@item.AvailableStock</td>
+                                            <td>@item.MinimumStock</td>
+                                            <td>
+                                                @*<div class="dropdown">
+                                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                            <i class="dw dw-more"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+
+                                                            <a class="dropdown-item" href="@Url.Action("View","InventoryItemMaster",new {ItemMasterId=item.ItemID })"><i class="dw dw-eye"></i> View</a>
+                                                            <a class="dropdown-item" href="@Url.Action("Edit","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Edit" id="rowedit_@SerialNumber" operation="edit"><i class="dw dw-edit2"></i> Edit</a>
+                                                            <a class="dropdown-item" href="@Url.Action("Delete","InventoryItemMaster",new {ItemMasterId=item.ItemID })"><i class="dw dw-delete-3"></i> Delete</a>
+                                                        </div>
+                                                    </div>*@
+                                                <div class="btn-list">
+                                                    <a href="@Url.Action("Edit","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Edit" id="rowedit_@SerialNumber" operation="Edit" class="btn btn-primary">
+                                                        Edit
+
+                                                    </a>
+                                                    <a href="@Url.Action("Delete","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Delete" id="rowedit_@SerialNumber" operation="Delete" class="btn btn-primary">
+                                                        Delete
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        ++SerialNumber;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Simple Datatable End -->
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+    $('#InventoryTypeID1').change(function () {
+        debugger;
+        $('#CatagoryId1').html('');
+        $('#CatagoryId').empty();
+        $('#CatagoryId1').append('<option value="">---Select---</option>');
+        $.ajax({
+            url: '/InventoryItemMaster/GetInvCategory?InventoryTypeId=' + $('#InventoryTypeID1 option:selected').val(),
+            type: 'Get',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'json',
+            success: function (result) {
+
+                $.each(result.result, function (i, item) {
+                    debugger
+                    $('#CatagoryId1').append('<option value="' + item.CatagoryMasterID + '">' + item.CategoryName + '</option>');
+
+                })
+
+            },
+            error: function (data) {
+            }
+        });
+    });
+    $("#buttonPrint").click(function () {
+        debugger;
+        if ($("#InventoryTypeID1 option:selected").val() == "" || $("#CatagoryId1 option:selected").val() == "") {
+            alert('Please Select Catagory');
+        } else {
+            alert('Reporit is open Please Wait');
+            var x = "/Reporting/frmShowReport.aspx?path=LaboratoryInstrumentReport.rdl&CategoryName=" + $("#CatagoryId1 option:selected").text() + "";
+            window.location = x;
+        }
+    });
+</script>

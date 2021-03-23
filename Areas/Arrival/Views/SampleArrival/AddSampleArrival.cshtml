@@ -1,0 +1,375 @@
+﻿
+@model LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel
+@{
+    ViewBag.Title = "AddSampleArrival";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Arrival</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Sample Arrival</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sample Arrival</li>
+                                <li class="breadcrumb-item active" aria-current="page">AddSample Arrival</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">AddSample Arrival</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.SampleName, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.SampleName, "SampleName:", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.SampleTypeProductName, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.SampleTypeProductName, "ProductGroup:", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    @*<div class="col-sm-4 form-group">
+             @Html.LabelFor(model => model.ProductGroupName, htmlAttributes: new { @class = "control-label col-sm-5" })
+            <div class="col-sm-7">
+             @Html.DisplayFor(model => model.ProductGroupName, "ProductGroup", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            </div>
+            <div class="col-sm-4 form-group">
+             @Html.LabelFor(model => model.SubGroupName, htmlAttributes: new { @class = "control-label col-sm-5" })
+            <div class="col-sm-7">
+              @Html.DisplayFor(model => model.SubGroupName, "SubGroup", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            </div>
+            <div class="col-sm-4 form-group">
+              @Html.LabelFor(model => model.MatrixName, htmlAttributes: new { @class = "control-label col-sm-4" })
+            <div class="col-sm-8">
+               @Html.DisplayFor(model => model.MatrixName, "Matrix", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            </div>*@
+                   
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.CollectionDate, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.Date, "DateofSampling:", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            @if (Model.Url == "Stack Emission" || Model.Url == "Ambient Air")
+                            {
+                                @Html.LabelFor(model => model.Duration, "Duration(hrs): ", htmlAttributes: new { @class = "control-label col-md-7" })
+                                <div class="col-sm-7">
+                                    @Html.DisplayFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.SampleCollectionTime, htmlAttributes: new { @class = "control-label " })
+                                <div class="col-sm-7">
+                                    @Html.DisplayFor(model => model.SampleCollectionTime, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            }
+                        </div>
+                   </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.SampleLocation, htmlAttributes: new { @class = "control-label " })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.SampleLocation, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.SampleType, htmlAttributes: new { @class = "control-label " })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.SampleType, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.EnvCondts, htmlAttributes: new { @class = "control-label " })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.EnvCondts, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.CollectedBy, htmlAttributes: new { @class = "control-label " })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.CollectedBy, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            @Html.LabelFor(model => model.WitnessName, htmlAttributes: new { @class = "control-label " })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.WitnessName, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                       </div> 
+                        <!--<div class="col-sm-6">-->
+                        @*<button type="button" class="btn btn-link" href="/Collection/FieldDetermination">Field Determination</button>*@
+                        <!--<div class="col-md-7">-->
+                        @*@Html.RouteLink("Field Determination", new { action = "FieldDeterminationArrival", controller = "SampleArrival", area = "Arrival", @class = "btn btn-link ", SampleCollectionId = @Model.SampleCollectionId, Url = @Model.Url, EnquiryId = @Model.EnquiryId, EnquirySampleID = @Model.EnquirySampleID })*@
+                        <!--</div>
+                        </div>-->
+                    </div>
+                    <hr />
+                        <div class="col-md-12">
+                            <div class="col-sm-6">
+                                @Html.LabelFor(model => model.SampleDevice, "Sampling Media:", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-12">
+                                <div Id="divParameterList" class="row">
+                                    @{
+                                        Html.RenderAction("_ParametersUnitList", "SampleArrival", Model);
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    <hr/>
+                        <div class="col-md-12">
+                            <div class="col-sm-6">
+                                @Html.LabelFor(model => model.Parameters, "Parameters:", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-12">
+                                <div Id="divDevicesList" class="row">
+                                    @{
+                                        Html.RenderAction("_SampleDevicesList", "SampleArrival", Model);
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    <hr/>
+                        <div class="col-md-12">
+                            <div class="col-sm-4">
+                                @Html.LabelFor(model => model.SampleQty, "Quantity:", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-12">
+                                <div Id="divQuantityList" class="row">
+                                    @{
+                                        Html.RenderAction("_QuantityPreservativeList", "SampleArrival", Model);
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        
+                    <hr />
+                    @using (Ajax.BeginForm("AddSampleArrival", "SampleArrival", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "SampleArrivalSuccess" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ARCId)
+                        @Html.HiddenFor(model => model.LocationSampleCollectionID)
+                        @Html.HiddenFor(model => model.SampleCollectionId)
+                        @Html.HiddenFor(model => model.EnquirySampleID)
+                        @Html.HiddenFor(model => model.EnquiryDetailId)
+                        @Html.HiddenFor(model => model.EnquiryId)
+                        @Html.HiddenFor(model => model.WorkOrderID)
+                        @Html.HiddenFor(model => model.SampleNo)
+                        @Html.HiddenFor(model => model.SampleName)
+                        @Html.HiddenFor(model => model.SampleNameOriginal)
+                        @Html.HiddenFor(model => model.CollectedBy)
+                        @Html.HiddenFor(model => model.CityName)
+                        @Html.HiddenFor(model => model.CustomerName)
+                        @Html.HiddenFor(model => model.ULRNo)
+                        @Html.HiddenFor(model => model.RequestNo)
+                        @Html.HiddenFor(model => model.SampleTypeProductId)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label>
+                                    Sample Received Person:
+                                </label>
+                                <span class="required" style="color:red">*</span>
+                                @Html.DropDownListFor(model => Model.UserRoleId, new SelectList(ViewBag.SampleReceviedLabBy, "UserRoleId", "UserName", Model.UserRoleId), "Select Receiver", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.UserRoleId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>
+                                    Sub contracted parameters:
+                                </label>
+                                <span class="required" style="color:red">*</span>
+                                @if (Model.SubContractedParameters == "" || Model.SubContractedParameters == null)
+                                {
+                                    @Html.TextBoxFor(model => model.SubContractedParameters, new { @class = "form-control", @autocomplete = "false" })
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.SubContractedParameters, new { @class = "form-control", @autocomplete = "false", @readonly = true })
+                                }
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>
+                                    Whether statutory limits to be inserted in report?:
+                                    <span class="required" style="color:red">*</span>
+                                </label><br/>
+                                <label> @Html.RadioButtonFor(model => model.StatutoryLimits, true, new { id = "ISStatutoryLimits-true", @checked = "checked" })Yes </label>
+                                <label> @Html.RadioButtonFor(model => model.StatutoryLimits, false, new { id = "ISStatutoryLimits-false" }) No</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @if (@Model.Url == "Ambient Noise Level" || @Model.Url == "Source Noise Level" || @Model.Url == "Workplace Noise Level")
+                            {
+
+                            }
+                            else
+                            {
+                                <div class="col-sm-4 form-group">
+                                    <label>
+                                        Samples to be:
+                                    </label>
+                                    <span class="required" style="color:red">*</span>
+                                    @if (Model.IsReturnedOrIsRetained == null || Model.IsReturnedOrIsRetained == "")
+                                    {
+                                        <select id="IsReturnedOrIsRetained" name="IsReturnedOrIsRetained" class="form-control" required>
+                                            <option value="Retained">Retained</option>
+                                            <option value="Returned">Returned</option>
+                                        </select>
+                                        <br />
+                                        <span>Remarks: </span>
+                                        @Html.TextAreaFor(model => model.ReturnedRemarks, new { htmlAttributes = new { @class = "form-control", Type = "Text-" } })
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBoxFor(model => model.IsReturnedOrIsRetained, new { @class = "form-control", @autocomplete = "false", @readonly = "readonly" })
+                                    }
+                                </div>
+                            }
+                            <div class="col-sm-4 form-group">
+                                <label>
+                                    Order Acknowledgement Remarks: <span class="required" style="color:red">*</span>
+                                </label>
+                                @if (Model.AckRemarks == "" || Model.AckRemarks == null)
+                                {
+                                    @Html.TextBoxFor(model => model.AckRemarks, new { @class = "form-control", @autocomplete = "false" })
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.AckRemarks, new { @class = "form-control", @autocomplete = "false", @readonly = true })
+                                }
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="row">
+                            <div class="form-actions" style="margin:auto; text-align: center;">
+                                @if (ViewBag.StatusCode == "SampleRecv")
+                                {
+                                    <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="ArrivalSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" id="btnSubmit" class="btn btn-info" name="Save" value="ArrivalSubmit">Submit</button>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Default Basic Forms End -->
+            </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        $('#ReturnedRemarks').prop("disabled", true);
+        $('#IsReturnedOrIsRetained').change(function () {
+            if ($(this).val() == "Returned") {
+                $('#ReturnedRemarks').prop("disabled", false);
+            }
+            else {
+                $('#ReturnedRemarks').prop("disabled", true);
+            }
+        });
+
+    });
+
+    function ValidateDate() {
+        debugger
+        if ($('#ProbableDateOfReport').val() != "" && $('#Date2').val() != "") {
+            var ProbableDate = $('#ProbableDateOfReport').val();
+            var SampleReceiveDate = $('#Date2').val();
+            if (Date.parse(ProbableDate) < Date.parse(SampleReceiveDate)) {
+                //if ($('#WorkOrderEndDate').val() < $('#SampleCollectionDate').val()) {
+                alert('Sample Received Date can not be Greater than Probable Date Of Report');
+                return false;
+            }
+        }
+        return true
+    }
+
+    //$(document).ready(function () {
+    //   //if ($('#WorkOrderId').val() == "") {
+    //   //    $('#Remark').css('display', 'none')
+    //   //}
+    //   //else {
+    //   //    $('#Remark').css('display', 'block')
+    //   //}
+    //    $("#frmAddSampleArrival").ajaxForm({
+    //       target: "#frmAddSampleArrival",
+    //       iframe: true,
+    //       dataType: "json",
+    //       beforeSubmit: function (data, $form, options) {
+    //           if (ValidateDate() == false) {
+    //               return false;
+    //           }
+    //           $('#btnsubmit').prop('disabled', true);
+    //           $('#btnsubmit').html('Please Wait...')
+    //       },
+    //       success: function (result) {
+    //           if (result.status == 'success') {
+    //               debugger
+    //               $('#btnsubmit').prop('disabled', false);
+    //               $('#btnsubmit').html('Please Wait..')
+    //               alert('Sample Updated successfully.');
+    //               window.location.href = "/Arrival/SampleArrivalList";
+    //           }
+    //           else {
+    //               alert(result.message);
+    //           }
+    //       },
+    //       error: function (xhr, textStatus, errorThrown) {
+    //           $('#btnsubmit').prop('disabled', false);
+    //           $('#btnsubmit').html('Submit')
+    //       }
+    //   });
+    //});
+
+
+    function SampleArrivalSuccess(result) {
+
+        if (result.Status == "success") {
+            alert(result.message);
+            $('#btnsubmit').prop('disabled', false);
+            $('#btnsubmit').html('Please Wait..')
+            location.href = '/Arrival/SampleArrival/SampleArrivalList';
+        } else {
+            alert(result.message);
+            $('#btnsubmit').prop('disabled', false);
+            $('#btnsubmit').html('Submit')
+            location.href = '/Arrival/SampleArrival/SampleArrivalList';
+        }
+    }
+</script>
+

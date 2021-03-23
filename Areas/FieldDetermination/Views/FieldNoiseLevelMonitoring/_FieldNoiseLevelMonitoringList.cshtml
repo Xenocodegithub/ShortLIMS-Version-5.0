@@ -1,0 +1,206 @@
+﻿
+@model LIMS_DEMO.Areas.FieldDetermination.Models.FDNoiseLevelMonitoringModel
+
+@using (Ajax.BeginForm("_FieldNoiseLevelMonitoringList", "FieldNoiseLevelMonitoring", new { area = "FieldDetermination" }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FDAdd" }, new { id = "frmAddNoiseLevel" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SrNo)
+    @Html.HiddenFor(model => model.FieldNoiseId)
+    @Html.HiddenFor(model => model.ParameterId)
+  
+     <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h4 class="m-0 font-weight-bold text-primary text-xl-center"> Enter Values for Ambient Noise Level / Workplace Noise Level :</h4>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-bordered" id="datatable" data-filter="#filter" data-filter-text-only="true" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    @*<th>
+                                            Parameters
+                                        </th>*@
+                                    <th>
+                                        Shift
+                                    </th>
+                                    <th>
+                                        TestMethod
+                                    </th>
+                                    <th>
+                                        Location
+                                    </th>
+                                    <th>
+                                        Day/Night
+                                    </th>
+                                    <th>
+                                        Time Duration
+                                    </th>
+                                    <th>
+                                        File Name
+                                    </th>
+                                    <th>
+                                        Leq Fast Response/Leq Slow Response
+                                    </th>
+                                    <th>
+                                        L10 Fast Response/Leq Slow Response
+                                    </th>
+                                    <th>
+                                        L50 Fast Response/Leq Slow Response
+                                    </th>
+                                    <th>
+                                        L90 Fast Response/Leq Slow Response
+                                    </th>
+                                    <th>
+                                        Lmin Fast Response/Leq Slow Response
+                                    </th>
+                                    <th>
+                                        Lmax Fast Response/Leq Slow Response
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @*<td>
+                                            @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control" })
+                                            @Html.HiddenFor(model => model.ParameterName)
+                                        </td>*@
+                                    <td>
+                                        <select class="form-control" id="ShiftName" name="ShiftName">
+                                            <option value="Select Shift" disabled>Select Shift</option>
+                                            <option value="1 Hour">1 Hour</option>
+                                            <option value="24 Hour">24 Hour</option>
+                                            <option value="Spot Noise">Spot Noise</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
+                                        @Html.HiddenFor(model => model.TestMethodName)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.LocationGrid, new { @class = "form-control ", @placeholder = "Location" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.DayNight, new { @class = "form-control ", @placeholder = "DayOrNight" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.TimeDuration, new { @class = "form-control ", @placeholder = "TimeDuration" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.FileName, new { @class = "form-control ", @placeholder = "FileName" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.LeqFastResponse, new { @class = "form-control ", @placeholder = "Leq FastResponse" }) &nbsp;
+                                        @Html.TextBoxFor(model => model.LeqSlowResponse, new { @class = "form-control ", @placeholder = "Leq SlowResponse" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.L10FastResponse, new { @class = "form-control ", @placeholder = "L10 FastResponse" }) &nbsp;
+                                        @Html.TextBoxFor(model => model.L10SlowResponse, new { @class = "form-control ", @placeholder = "L10 SlowResponse" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.L50FastResponse, new { @class = "form-control ", @placeholder = "L50 FastResponse" }) &nbsp;
+                                        @Html.TextBoxFor(model => model.L50SlowResponse, new { @class = "form-control ", @placeholder = "L50 SlowResponse" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.L90FastResponse, new { @class = "form-control ", @placeholder = "L90 FastResponse" }) &nbsp;
+                                        @Html.TextBoxFor(model => model.L90SlowResponse, new { @class = "form-control ", @placeholder = "L90 SlowResponse" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.LminFastResponse, new { @class = "form-control ", @placeholder = "Lmin FastResponse" }) &nbsp;
+                                        @Html.TextBoxFor(model => model.LminSlowResponse, new { @class = "form-control ", @placeholder = "Lmin SlowResponse" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.LmaxFastResponse, new { @class = "form-control ", @placeholder = "Lmax FastResponse" }) &nbsp;
+                                        @Html.TextBoxFor(model => model.LmaxSlowResponse, new { @class = "form-control ", @placeholder = "Lmax SlowResponse" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        @{ string btnText = "Add";
+                            if (Model.SrNo != 0)
+                            {
+                                btnText = "Update";
+                                <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" />
+                            }
+                        }
+                        <input class="btn btn-success btn-sm alignright" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" />
+                        @*<input class="btn btn-success" type="submit" id="btnAdd" value="@btnText" />*@
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+}
+
+<script>
+    $(function () {
+        $("#frmAddNoiseLevel").removeData("validator");
+        $("#frmAddNoiseLevel").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmAddNoiseLevel");
+    })
+
+    function FDAdd(result) {
+        $('#divList').load('/FieldDetermination/FieldNoiseLevelMonitoring/_FDNoiseLevelGridList');
+        $('#divAddNoiseLevel').load('/FieldDetermination/FieldNoiseLevelMonitoring/_FieldNoiseLevelMonitoringList');
+        $('#ShiftName').val("");
+    }
+
+    function CancelNameValues() {
+       // $('#ParameterMasterId').val(-1);
+        $('#ShiftName').val("");
+        $('#TestMethodId').val(-1);
+        $('#TimeDuration').val("");
+        $('#FileName').val("");
+        $('#LocationGrid').val("");
+        $('#DayNight').val("");
+        $('#LeqFastResponse').val("");
+        $('#LeqSlowResponse').val("");
+        $('#NoisePara_L10').val("");
+        $('#NoisePara_L50').val("");
+        $('#NoisePara_L90').val("");
+        $('#NoisePara_Lmin').val("");
+        $('#NoisePara_Lmax').val("");
+        $('#btnAdd').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#SrNo').val(0)
+    }
+    function SetNameValues() {
+        debugger;
+       // $('#ParameterName').val($('#ParameterMasterId option:selected').text());
+        $('#TestMethodName').val($('#TestMethodId option:selected').text());
+    }
+
+    //$('#ParameterMasterId').change(function () {
+    //    debugger
+    //    if ($('#ParameterMasterId').val() == '') {
+    //        $('#TestMethodId').html('');
+    //        $('#TestMethodId').append('<option value="">---Select---</option>');
+    //    }
+    //    else {
+
+    //        $('#TestMethodId').html('');
+    //        $('#TestMethodId').append('<option value="">---Select---</option>');
+    //        $.ajax({
+    //            url: '/FieldDetermination/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val() + "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+    //            type: 'Get',
+    //            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    //            dataType: 'json',
+    //            success: function (result) {
+    //                debugger
+    //                $.each(result.result, function (i, item) {
+    //                    $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
+    //                })
+
+    //                $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+    //            },
+    //            error: function (data) {
+    //            }
+    //        });
+    //    }
+    //});
+</script>
+
+

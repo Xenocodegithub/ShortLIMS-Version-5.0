@@ -1,0 +1,418 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.PurchaseModel
+@{
+    ViewBag.Title = "PurchaseForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12" >
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Request Form</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Purchase Request Form</h4>
+                    </div>
+
+                </div>
+                @using (Ajax.BeginForm("PurchaseRequestForm", "Purchase", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "PurchaseRequestSuccess" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @*@Html.HiddenFor(model => model.CatagoryMasterId)*@
+                    @Html.HiddenFor(model => model.PurchaseRequestID)
+                    @Html.HiddenFor(model => model.PurchaseMasterID)
+                    @Html.HiddenFor(model => model.InventoryTypeID)
+                    @Html.HiddenFor(model => model.CatagoryName)
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-form-label col-md-2 col-sm-2 label-align mr-btm-15">Item  <span class="required">*</span></label>
+                    <div class="col-md-6 mr-btm-15">
+                        @Html.DropDownListFor(model => model.ItemMasterId, new SelectList(ViewBag.Item, "ItemMasterId", "Item"), "Please Select", new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.ItemMasterId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12 mr-btm-15 ">
+                                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PackSize, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12  mr-btm-15 ">
+                                @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control  " } })
+                                @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12 mr-btm-15 ">
+                                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control  " } })
+                                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Purpose, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                                <div class="col-md-12  mr-btm-15 ">
+                                    @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-form-label col-md-6 col-sm-2 label-align mr-btm-15">Supplier Name  <span class="required">*</span></label>
+                            <div class="col-md-12 mr-btm-15">
+                                @Html.DropDownListFor(model => model.PurchaseSupplierID, new SelectList(ViewBag.Supplier, "PurchaseSupplierID", "SupplierName"), "Please Select", new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.PurchaseSupplierID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EstimatedLagTime, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12  mr-btm-15 ">
+                                @Html.EditorFor(model => model.EstimatedLagTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EstimatedLagTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.COA, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+
+                            <div class="col-md-6  mr-btm-15 ">
+                                <label> @Html.RadioButtonFor(model => model.COA, true, new { id = "COA-COA", @checked = "checked" }) COA </label>&emsp;
+                                <label> @Html.RadioButtonFor(model => model.COA, false, new { id = "COA-COC" }) COC </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TickIf, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-6  mr-btm-15 ">
+
+                                @*@Html.CheckBoxFor(model => model.TickIf.Value)*@
+
+                                @if (Model.TickIf == true)
+                                {
+                                    <input id="TickIfId" name="TickIfname" type="checkbox" value="true" checked="checked" />
+                                    @Html.HiddenFor(model => model.TickIf)
+                                }
+                                else
+                                {
+                                    <input id="TickIfId" name="TickIfname" type="checkbox" value="false" />
+                                    @Html.HiddenFor(model => model.TickIf)
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-12  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" } })
+                                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15 " })
+                        <div class="col-md-12 mr-btm-15">
+                            @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DiscAmount, htmlAttributes: new { @class = "control-label col-md-12 mr-btm-15" })
+                            
+                            <div class="col-md-12 mr-btm-15">
+                                @Html.TextBoxFor(model => model.DiscAmount, new { @class = "form-control", @readonly = "readonly", onfocus = "this.value=''" })
+                                @Html.ValidationMessageFor(model => model.DiscAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-md-12 mr-btm-15">
+
+                            <table class="table" id="FilesList" style="visibility:hidden">
+                                <tr style="background-color:aqua">
+                                    <th>
+                                        Attachment(s)
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.GSTAmount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })
+                            <div class="col-md-6 mr-btm-15">
+                                @Html.TextBoxFor(model => model.GSTAmount, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.GSTAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NetAmount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })
+                            <div class="col-md-6 mr-btm-15">
+                                @Html.TextBoxFor(model => model.NetAmount, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.NetAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="checkbox checkbox-success col-md-12">
+
+                                <label class="redioBtn"><input type="radio" id="accept" name="action" value="Accept" checked="checked">Accept</label>&ensp;&ensp;&ensp;&ensp;&ensp;
+
+                                <label class="redioBtn"><input type="radio" id="reject" name="action" value="Reject">Reject</label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="comment" class="control-label">Your Comment</label>
+                            <textarea id="txtComment" name="comment" class="form-control" rows="2"></textarea>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary" id="approveBtn"> &ensp;Accept</button>
+                            <button type="button" class="btn btn-info" id="rejectBtn" style="display:none">&ensp;Reject</button>
+                        </div>
+
+                 </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    function PurchaseRequestSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Inventory/Purchase/PurchaseRequestList';
+        }
+    }
+
+       function acceptRejectReviewer(status) {
+        debugger
+             var PurchaseRequestID = $('#PurchaseRequestID').val();
+             var PurchaseMasterID = $('#PurchaseMasterID').val();
+             var InventoryTypeID = $('#InventoryTypeID').val();
+             var CategoryName = $('#CatagoryName').val();
+        var Rejectreviewstatus = $('#Rejectreviewstatus').find(":selected").val();
+
+
+             var Approvests = status;
+        var Comment = $('#txtComment').val();
+
+            var obj = {
+                PurchaseRequestID: PurchaseRequestID,
+                PurchaseMasterID: PurchaseMasterID,
+                InventoryTypeID: InventoryTypeID,
+                CategoryName: CategoryName,
+                Comment: Comment,
+                Approvests: Approvests
+
+        };
+            var parameter = JSON.stringify(obj);
+        $.ajax({
+                    type: "POST",
+            url: "/Inventory/Purchase/UpdateComment",
+                    dataType: 'text',
+                    cache: false,
+                    data: "model=" + parameter,
+                    success: function (response) {
+                        var x = response;
+                        alert(response);
+                        window.location.href = "@Url.Action("TechnicalManagerList", "Purchase", new { Area="Inventory"})";
+                    },
+                    error: function (xhr) {
+                        console.log('error');
+                    }
+                });
+
+
+
+    }
+
+    $(function () {
+
+        BindFileTable();
+
+        $('.redioBtn').change(function () {
+            if (this.innerText == 'Accept') {
+                $('#approveBtn').show();
+                $('#rejectBtn').hide();
+                $('.reviewerReject').hide();
+            }
+            else if (this.innerText == 'Reject') {
+                $('#rejectBtn').show();
+                $('#approveBtn').hide();
+                $('.reviewerReject').show();
+            }
+        });
+
+        $('#approveBtn').click(function () {
+            acceptRejectReviewer(1);
+        });
+        $('#rejectBtn').click(function () {
+            debugger
+            acceptRejectReviewer(0);
+        });
+
+
+    });
+    $(function () {
+
+        $('#TickIfId').click(function () {
+            //If the checkbox is checked.
+            if ($(this).is(':checked')) {
+                $("#TickIf").val(true);
+            } else {
+                //If it is not checked, disable .
+                $("#TickIf").val(false);
+                $(this).attr("value", "false");
+            }
+        });
+
+    });
+
+    function BindFileTable() {
+        debugger
+        var PurchaseRequestID = $('#PurchaseRequestID').val();
+
+        var obj = {
+            PurchaseRequestID: PurchaseRequestID,
+
+        };
+        $.ajax({
+            type: 'GET',
+            url: "/Inventory/Purchase/GetParameterFileInfo",
+            data: obj,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var rowHtml = '';
+                $.each(data, function (index, value) {
+                    let srandomid = Math.random().toString(36).substring(7);
+                    var FileName = value.FileName.split('\\').pop();
+                    var filepath = "../../Content/uploads/" + FileName;
+                    var markup = "<tr id='" + srandomid + "' class='bg-danger'><td>" + FileName + "</td><td><a target='_blank' href='" + filepath + "' ><span class='glyphicon glyphicon-download-alt'></span></a></td></tr>"; // Binding the file name
+                    $("#FilesList tbody").append(markup);
+
+                });
+                chkatchtbl();
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+
+    }
+    function chkatchtbl() {
+        debugger
+        if ($('#FilesList tr').length > 1) {
+            $("#FilesList").css("visibility", "visible");
+        } else {
+            $("#FilesList").css("visibility", "hidden");
+        }
+    }
+</script>

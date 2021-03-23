@@ -1,0 +1,153 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.PurchaseModel
+@{
+    ViewBag.Title = "PurchasSupplierForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Ajax.BeginForm("PurchasSupplierForm", "Purchase", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "PurchaseSupplierSuccess" }))
+{
+    @Html.HiddenFor(model => model.PurchaseSupplierID)
+
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="title">
+                                <h4>Inventory</h4>
+                            </div>
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Purchas Supplier Form</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-box mb-30">
+                    <div class="card-box mb-30 text-black bg-warning card-box">
+                        <div class="pd-20" style="border-bottom:solid">
+                            <h4 class="text-blue h4">Purchas Supplier Form</h4>
+                        </div>
+                        <fieldset class="">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11 mr-btm-15 ">
+                                            @Html.EditorFor(model => model.SupplierName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SupplierName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SupplierContactPerson, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11 mr-btm-15 ">
+                                            @Html.EditorFor(model => model.SupplierContactPerson, new { htmlAttributes = new { @class = "form-control  " } })
+                                            @Html.ValidationMessageFor(model => model.SupplierContactPerson, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SupplierAddress, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.EditorFor(model => model.SupplierAddress, new { htmlAttributes = new { @class = "form-control  " } })
+                                            @Html.ValidationMessageFor(model => model.SupplierAddress, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SupplierContactNo, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.EditorFor(model => model.SupplierContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SupplierContactNo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Product, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.EditorFor(model => model.Product, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Product, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group" style="margin-top:35px">
+                                        <label class="input col-sm-11">
+                                            <label> @Html.RadioButtonFor(model => model.Approved, true, new { id = "Approved-true", @checked = "checked" }) Approved </label>&emsp;
+                                            <label> @Html.RadioButtonFor(model => model.Approved, false, new { id = "Approved-false" }) Non Approved</label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ApprovedBy, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.EditorFor(model => model.ApprovedBy, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ApprovedBy, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.DateOfApproval, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div id="datetimepicker1" class="col-md-11  mr-btm-15">
+                                            @Html.TextBoxFor(model => model.DateOfApproval, new { @class = "form-control", @autocomplete = "false", data_format = "dd/MM//yyyy", @placeholder = "dd/MM/yyyy", @type = "date" })
+                                            @*<input class="datepicker" data-val="true" data-val-required="Date is required" id="DateOfApproval1" name="ReleaseDate" type="text" value="model.DateOfApproval" />*@
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.DateOfApproval, "", new { @class = "text-danger col-md-10" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row" style="margin-top:-30px">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 d-flex justify-content-center" style="margin-bottom:30px;margin-top:20px">
+                                <button type="submit" id="btnSubmit" class="btn btn-success" name="Save">Create</button>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                    <!-- Default Basic Forms End -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+    function PurchaseSupplierSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Inventory/Purchase/PurchaseSupplierList';
+        }
+    }
+</script>

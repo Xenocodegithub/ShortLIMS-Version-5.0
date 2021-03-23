@@ -1,0 +1,536 @@
+﻿
+@model LIMS_DEMO.Areas.Enquiry.Models.WorkOrderListModel
+@{
+    ViewBag.Title = "Add WorkOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>WorkOrder</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Enquiry</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Quotation</li>
+                                <li class="breadcrumb-item active" aria-current="page">Quotation List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            @*@using (Html.BeginForm("AddWorkOrder", "WorkOrder", FormMethod.Post, new { enctype = "multipart/form-data", Id = "frmAddWorkOrder" }))*@
+            @using (Ajax.BeginForm("AddWorkOrder", "WorkOrder", new AjaxOptions { HttpMethod = "POST" , OnSuccess = "WorkOrderSuccess"}, new { enctype = "multipart/form-data", id = "frmAddWorkOrder" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.CustomerMasterId)
+                @Html.HiddenFor(model => model.EnquiryId)
+                @Html.HiddenFor(model => model.QuotationId)
+                @Html.HiddenFor(model => model.WorkOrderId)
+                @Html.HiddenFor(model => model.WorkOrderSampleCollectionDateId)
+                @Html.HiddenFor(model => model.WorkOrderUpload)
+                @Html.HiddenFor(model => model.CustomerMasterId)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <!-- Default Basic Forms Start -->
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Quotation List</h4>
+                            <p class="mb-30">@*All bootstrap element classies*@</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label">Customer Name </label>
+                            <div class="col-md-4">
+                             @Html.DisplayFor(model => model.RegistrationName, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Quotation Amount</label>
+                                <div class="col-md-4">
+                                    @Html.DisplayFor(model => model.QuotationAmount, new { htmlAttributes = new { @class = "form-control col-md-4" } })
+                                 </div>
+                             </div>
+                             <div class="col-md-3">
+                                    <label class="form-label">Workorder No <span style="color:red">*</span></label>
+                                    @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control col-md-7", @autocomplete = "false" })
+                                    @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
+                             </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Upload Work Order</label>
+                                    <div class="col-sm-7">
+                                        <input id="fileInput" name="file" type="file" />
+                                        @Html.DisplayFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">
+                                <label class="form-label"> Duration(in months)  <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(model => model.Duration, new { @class = "form-control col-md-7", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label"> WorkOrder Received On<span style="color:red">*</span></label>
+                                <input type="date" id="WorkOrderReceivedDate" name="WorkOrderReceivedDate" class="input-group col-sm-7" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
+                                @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", @onblur = "ValidateDate();", onfocus = "this.value=''" })*@
+                                @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @onchange = "ValidateDate();" })*@
+                                @*<span class="input-group-addon add-on">
+                            <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                            </span>*@
+                                @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label"> WorkOrder End Date  <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control col-md-7", @placeholder = "dd/MM/yyyy", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.WorkOrderEndDate)
+                                @*<input type="date" id="WorkOrderEndDate" name="WorkOrderEndDate" class="input-group col-sm-12" placeholder="dd/MM/yyyy" onblur="ValidateDate();" />*@
+                                @*<div class="">
+                            @Html.TextBoxFor(model => model.WorkOrderEndDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly"})
+                            <span class="input-group-addon add-on">
+                            <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                            </span>
+                            </div>*@
+                                @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label"> Expected Sample Collection Date <span style="color:red">*</span></label>
+                                <input type="date" id="SampleCollectionDate" name="SampleCollectionDate" class="input-group date col-md-7" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
+                                @*@Html.TextBoxFor(model => model.SampleCollectionDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy" })*@
+                                @*<span class="input-group-addon add-on">
+                            <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                            </span>*@
+                                @Html.ValidationMessageFor(model => model.SampleCollectionDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Number of Days(Only for Hourly And Six times a Day Frequency)</label>
+                             @Html.TextBoxFor(model => model.NoOfDays, new { @class = "form-control col-md-4", @autocomplete = "false", disabled = "disabled" })
+                        </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <input type="button" id="btnAddNoOfDays" value="AddNoOfDays" class="btn btn-sm btn-info text-nowrap" />
+                            </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                Any amendment to contract:
+                            </label>
+                            <span class="required" style="color:red">*</span>
+                                @Html.TextAreaFor(model => model.ContractAmendment, new { @class = "form-control col-md-4", @autocomplete = "false" })
+                        </div>
+                        <div class="col-sm-6 form-group">
+                                <label>@Html.RadioButtonFor(item => Model.IsIGST, false, new { id = "IsIGST-false", @checked = "checked" }) CGST(9 %) + SGST(9 %) </label>
+                                <label> @Html.RadioButtonFor(item => Model.IsIGST, true, new { id = "IsIGST-true" }) IGST(18%)</label>
+                        </div>
+                    </div>
+                   <hr/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<a target="_blank" href="/Enquiry/QuotationReport?Format=PDF&EnquiryId=@Model.EnquiryId" class="btn btn-primary btn-sm">More Details</a>*@
+                            @*<a href="/Enquiry/AddContract?EnquiryId=@Model.EnquiryId" class="btn btn-App btn-sm">Edit Contract</a>*@
+                            <a href="#" onclick="funUpdateRemark(@Model.EnquiryId)" id="Remark" class="btn btn-warning btn-sm">Edit Contract</a>
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <!-- Simple Datatable start -->
+                        <table class="data-table table nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">
+                                        SrNo.
+                                    </th>
+                                    <th>
+                                        SampleType
+                                    </th>
+                                    <th>
+                                        ParameterName
+                                    </th>
+                                    @*<th>
+                                  Product Group
+                                </th>
+                                <th>
+                                 Sub Group
+                                </th>
+                                <th>
+                                 Matrix
+                                </th>*@
+                                    <th>
+                                        Limit
+                                    </th>
+                                    @*<th>
+                                 PCB Limit Values
+                                </th>*@
+                                    <th>
+                                        No Of Sample And Location<span class="required" style="color:red">*</span>
+                                    </th>
+                                    <th>
+                                        View Location <span class="required" style="color:red">*</span>
+                                    </th>
+                                    <th>
+                                        Frequency @*<span class="required" style="color:red">*</span>*@
+                                    </th>
+                                    <th>
+                                        Unit Price
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.workorderList.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Model.workorderList[i].SrNo
+                                            @Html.HiddenFor(x => Model.workorderList[i].EnquirySampleID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(x => Model.workorderList[i].SampleTypeProductName, new { @class = "form-control" })
+                                            @Html.HiddenFor(x => Model.workorderList[i].DisplaySampleName, new { @class = "form-control" })
+                                            @Html.HiddenFor(x => Model.workorderList[i].SampleName, new { @class = "form-control" })
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
+                                            @*@Html.EditorFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })*@
+                                            @*@Html.ValidationMessageFor(x => Model.workorderList[i].ParameterName)*@
+                                        </td>
+                                        @*<td>
+                                        @Html.DisplayFor(x => Model.workorderList[i].ProductGroupName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => Model.workorderList[i].ProductGroupName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model.workorderList[i].SubGroupName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => Model.workorderList[i].SubGroupName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model.workorderList[i].MatrixName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => Model.workorderList[i].MatrixName)
+                                    </td>*@
+                                        <td>
+                                            @if (Model.workorderList[i].IsSetPCBLimit)
+                                            {
+                                                <a href="#" onclick="funLoadPCBParam(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId)"> Limit</a>
+                                            }
+                                            else
+                                            {
+                                                <a class=" btn-disabled">NA</a>
+                                            }
+                                        </td>
+                                        @*<td>
+                                        @if (Model.workorderList[i].PCBLimit != " " && Model.workorderList[i].IsSetPCBLimit)
+                                        {
+                                            @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
+                                            @Html.DisplayFor(x => Model.workorderList[i].PCBLimit, new { @class = "form-control" })
+                                        }
+                                        else
+                                        {
+                                           <a class=" btn-disabled">NA</a>
+                                        }
+                                    </td>*@
+                                        <td>
+                                            @Html.TextBoxFor(x => Model.workorderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.workorderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control col-md-7", @onchange = "ValidateDate();" })
+                                            @Html.ValidationMessageFor(x => Model.workorderList[i].Quantity)
+                                        </td>
+                                        <td>
+                                            <a href="#" onclick="funAddLocation(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId);" class="btn btn-warning btn-sm">View Location</a>
+                                            @*@Html.TextBoxFor(x => Model.workorderList[i].Location, new { @class = "form-control", @style = "color:black" })
+                                        @Html.ValidationMessageFor(x => Model.workorderList[i].Location)*@
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(x => Model.workorderList[i].FrequencyMasterId, new SelectList(ViewBag.Frequency, "FrequencyMasterId", "Frequency"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
+                                            @*@Html.ValidationMessageFor(x => Model.workorderList[i].FrequencyMasterId)*@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(x => Model.workorderList[i].UnitPrice, new { @class = "form-control" })
+                                            @Html.HiddenFor(x => Model.workorderList[i].UnitPrice)
+                                            @Html.ValidationMessageFor(x => Model.workorderList[i].UnitPrice)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(x => Model.workorderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
+                                            @Html.ValidationMessageFor(x => Model.workorderList[i].Total)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- Simple Datatable End -->
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center;">
+                            @*<button type="submit" class="btn btn-success">Back</button>*@
+                            <button type="submit" class="btn btn-info" id="btnsubmit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Default Basic Forms End -->
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="PCBLimitPopup" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="text-align:center;"> Limit </h4>
+                <button type="button" onclick="$('#PCBLimitPopup').hide();" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="divPCBLimit" style="border:none"> </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="divRemark" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" onclick="$('#divRemark').hide();" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="text-align:center;">Add Remark </h4>
+            </div>
+            <div class="modal-body">
+                <div id="divRemarkPopUp" style="border:none">
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="LocationPopup" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="text-align:center;">Add Location </h4>
+                <button type="button" onclick="$('#LocationPopup').hide();" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div id="divLocation" style="border:none"> </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<script src="~/Scripts/jquery.form.min.js"></script>*@
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    function ValidateDate() {
+        debugger
+        if ($('#WorkOrderReceivedDate').val() != "" && $('#Duration').val() != "") {
+            var recieveDate = new Date($('#WorkOrderReceivedDate').val());
+            var date = add_months(recieveDate, parseInt($('#Duration').val()))
+            var x = ConvertDateFormat(date.toString());
+           //var y = ConvertDateFormatMonthWise(date.toString());
+            $("#WorkOrderEndDate").val(x);
+            $("#WOEDate").val(x);
+        }
+        return true
+    }
+
+    function add_months(dt, n) {
+
+        return new Date(dt.setMonth(dt.getMonth() + n));
+    }
+
+    function ConvertDateFormat(dt) {
+        debugger
+        var today = new Date(dt);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var date = dd + '/' + mm + '/' + yyyy;
+        return date;
+    }
+
+    function ConvertDateFormatMonthWise(dt) {
+        debugger
+        var today = new Date(dt);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var date = mm + '/' + dd + '/' + yyyy;
+        return date;
+    }
+
+    $(document).ready(function () {
+
+        $("#btnSubmitPopUp").click(function () {
+            debugger;
+            var data = {
+                "Location": $('#location_Location').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Enquiry/WorkOrder/_AddLocation",
+                data: data,
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    alert("success");
+                }
+            });
+
+        });
+
+        //$("#frmAddWorkOrder").ajaxForm({
+        //    target: "#frmAddWorkOrder",
+        //    iframe: true,
+        //    dataType: "json",
+        //    beforeSubmit: function (data, $form, options) {
+        //        if (ValidateDate() == false) {
+        //            return false;
+        //        }
+        //    },
+        //    success: function (result) {
+        //        debugger
+        //        if (result.status == 'success') {
+        //            $('#btnsubmit').prop('disabled', false);
+        //            $('#btnsubmit').html('Please Wait..')
+        //            alert('Work order generated successfully.');
+        //            window.location.href = "/Enquiry/WorkOrder/WorkOrderList";
+        //        }
+        //        else {
+        //            if (result.status == "Fail Date") {
+        //                alert('Expected Sample Collection Date should be Between WorkOrderReceivedDate & WorkOrderEndDate !!!');
+        //            }
+        //            else if (result.status == "Fail NoOfLocation")
+        //            {
+        //                alert('Number of Location should not be Less than No. of Samples !!!');
+        //            }
+        //            else{
+        //                debugger
+        //                alert('Please Select All Mandatory fields!');
+        //            }
+        //            $('#btnSubmit').prop('disabled', false);
+        //            $('#btnSubmit').html('Submit')
+        //        }
+        //    },
+        //    error: function (xhr, textStatus, errorThrown) {
+        //        $('#btnsubmit').prop('disabled', false);
+        //        $('#btnsubmit').html('Submit')
+        //    }
+        //});
+    });
+
+    function RemarkSuccess(result) {
+
+        if (result.status == "success") {
+            debugger;
+            alert(result.message);
+            window.location.href = '/Enquiry/Contract/AddContract?EnquiryId=' + result.EnquiryId;
+        } else {
+            alert('Remarks field is Manadatory!!!');
+        }
+    }
+
+    function WorkOrderSuccess(result) {
+
+        if (result.status == 'success') {
+                    $('#btnsubmit').prop('disabled', false);
+                    $('#btnsubmit').html('Please Wait..')
+                    alert('Work order generated successfully.');
+                    window.location.href = "/Enquiry/WorkOrder/WorkOrderList";
+        }
+         else {
+                    //alert(result.message);
+                    if (result.status == "Fail Date") {
+                        alert('Expected Sample Collection Date should be Between WorkOrderReceivedDate & WorkOrderEndDate !!!');
+                    }
+                    else if (result.status == "Fail NoOfLocation")
+                    {
+                        alert('Number of Location should not be Less than No. of Samples !!!');
+                    }
+                    else{
+                        debugger
+                        alert('Please Select All Mandatory fields!');
+                    }
+                    $('#btnSubmit').prop('disabled', false);
+                    $('#btnSubmit').html('Submit')
+             }
+    }
+
+    function funCalTotal(e,eid) {
+        debugger
+        var NoOfSample = $(e).val();
+        var UnitPriceId = e.id.replace('Quantity', 'UnitPrice');
+        var UnitPrice = $('#' + UnitPriceId).val();
+        var TotalId = e.id.replace('Quantity', 'Total');
+        if (NoOfSample.trim() == '') {
+            $('#' + TotalId).val('0');
+        } else {
+            var Total = Number(NoOfSample) * Number(UnitPrice);
+            $('#' + TotalId).val(Total);
+        }
+
+        var EnquiryId = @Model.EnquiryId;
+       $('#divLocation').load('/Enquiry/WorkOrder/_AddLocation?EnquirySampleID=' + eid + '&EnquiryId=' + EnquiryId + '&count=' + NoOfSample);
+       $('#LocationPopup').show();
+    }
+
+    function funLoadPCBParam(EnquirySampleID, EnquiryId) {
+        $('#divPCBLimit').load('/Enquiry/SampleAndParameter/_ParameterPCBLimit?EnquirySampleID=' + EnquirySampleID + '&EnquiryId=' + EnquiryId);
+        $('#PCBLimitPopup').show();
+    }
+
+    function funUpdateRemark(EnquiryId) {
+        //By Nivedita for Remarks
+        $('#divRemarkPopUp').load('/Enquiry/WorkOrder/_Remarks?EnquiryId=' + EnquiryId);
+        $('#divRemark').show();
+    }
+
+    function funAddLocation(EnquirySampleID, EnquiryId) {
+        debugger
+        $('#divLocation').load('/Enquiry/WorkOrder/_AddLocation?EnquirySampleID=' + EnquirySampleID + '&EnquiryId=' + EnquiryId + '&count=' + 0);
+        $('#LocationPopup').show();
+    }
+
+    $('#btnAddNoOfDays').click(function () {
+        debugger
+        $('#NoOfDays').prop("disabled", false);
+    });
+
+</script>
+
+

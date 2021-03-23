@@ -1,0 +1,168 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Enquiry.Models.EnquiryModel>
+@{
+    ViewBag.Title = "EnquiryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Enquiry</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Enquiry</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Enquiry</li>
+                                <li class="breadcrumb-item active" aria-current="page">Enquiry List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Enquiry List</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                    @*<div class="pull-right">
+                          <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                <!-- Simple Datatable start -->
+                <div class="card-box mb-30">
+                    <div class="pd-20">
+                    </div>
+                    <div class="pb-20">
+                        <table class="data-table table nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">Customer Name</th>
+                                    <th>Current Status</th>
+                                    <th>Communication Mode</th>
+                                    <th>Enquiry On</th>
+                                    <th>Remarks</th>
+                                    <th> Communication Log</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CustomerName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CurrentStatus)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CommunicationMode)
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.EnquiryOn)
+                                            @Html.DisplayFor(modelItem => item.EnquiryDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Remarks)
+                                        </td>
+                                        <td style="text-align:center">
+                                            <a href="#" class="" onclick="funCommLog(@item.EnquiryId, '@item.CustomerName')" id="Log">
+                                                <i class="fa fa-list"></i>&nbsp;Log
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", "Enquiry", new { EnquiryId = item.EnquiryId })">
+                                                <i class="fa fa-pencil"></i>&nbsp;Edit
+                                            </a>|
+                                            <a href="#" onclick="funDeleteEnquiry(@item.EnquiryId)" title="delete"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Simple Datatable End -->
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+<div class="modal dtr-modal-display" id="LogModal" tabindex="50" role="dialog">
+    <div class="modal-dialog-scrollable modal-dialog-centered" style="width:650px;height:300px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Communication Log</h4>
+                <button type="button" onclick="$('#LogModal').hide();" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="divAddLog" style="border:none"> </div>
+                <div id="divLogList" style="border:none"> </div>
+            </div>
+            <div class="modal-footer" style="border:none;margin:auto;">
+                <button type="button" onclick="$('#LogModal').hide();" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function funDeleteEnquiry(Id) {
+        var isSuccess = -1;
+        if (confirm('Are you sure you want to delete this record?')) {
+            $.ajax({
+                url: '/Enquiry/Enquiry/Delete?EnquiryId=' + Id,
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == "success") {
+                        isSuccess = 1;
+                    }
+                },
+                error: function (data) {
+                }
+            }).done(function () {
+                if (isSuccess == 1) {
+                    alert("Enquiry Deleted");
+                    location.reload();
+                }
+                else {
+                    alert("Error occurred.Please check.");
+                }
+            });
+        }
+    }
+
+    function funCommLog(EnquiryId, CustomerName) {
+        debugger;
+        $('#divAddLog').load('/Enquiry/Enquiry/_CommunicationLog?EnquiryId=' + EnquiryId + '&CustomerName=' + CustomerName);
+        $('#divLogList').load('/Enquiry/Enquiry/_CommunicationLogList?EnquiryId=' + EnquiryId);
+        $('#LogModal').show();
+    }
+    //function funCommLog() {
+    //    debugger;
+    //    $('#divAddLog').load('/Enquiry/Enquiry/_CommunicationLog');
+    //    $('#divLogList').load('/Enquiry/Enquiry/_CommunicationLogList');
+    //    $('#LogModal').show();
+    //}
+</script>

@@ -1,0 +1,158 @@
+﻿
+@model IEnumerable<LIMS_DEMO.Areas.Enquiry.Models.QuotationModel>
+
+@{
+    ViewBag.Title = "Quotation List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Quotation</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Enquiry</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Quotation</li>
+                                <li class="breadcrumb-item active" aria-current="page">Quotation List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Quotation List</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label> From Date:</label>
+                       <input type="date" id="FromDate" name="FromDate" class="input-group date  col-md-8" placeholder="dd/MM/yyyy" />
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>To Date:</label>
+                        <input type="date" id="ToDate" name="ToDate" class="input-group date col-md-8" placeholder="dd/MM/yyyy" />
+                    </div>
+                    <div class="col-sm-4 form-group">
+                         <button onclick="SearchQuotation();" class="btn btn-success" type="button" style="margin-top:18pt">Search</button>
+                    </div>
+
+                </div>
+                <hr />
+                <div>
+                    <!-- Simple Datatable start -->
+                    <table class="data-table table nowrap">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">
+                                    Sr. No.
+                                </th>
+                                <th>
+                                    Quotation No
+                                </th>
+                                <th>
+                                    Enquiry No
+                                </th>
+                                <th>
+                                    Customer Name
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    View
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int i = 0;}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @{ int SrNo = i + 1; i++;}
+                                        @SrNo
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.QuotationNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EnquiryNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        <a id="btnApprove" target="_blank" href="/Enquiry/QuotationReport?Format=PDF&EnquiryId=@item.EnquiryId" class="btn btn-success btn-sm">View</a>
+                                    </td>
+                                    @{ string tdLinkId = "tdLink" + SrNo.ToString();}
+                                    <td id="@tdLinkId">
+                                        @if (item.StatusCode.ToLower() == "quotapprov")
+                                        {
+                                            <a href="/Enquiry/WorkOrder/AddWorkOrder?EnquiryId=@item.EnquiryId" class="btn btn-info btn-sm">Add Work Order</a>
+                                        }
+                                        else if (item.StatusCode.ToLower() == "quotsent")
+                                        {
+                                            <a href="#" onclick="funQuotationApprove(@item.EnquiryId, '@tdLinkId');" class="btn btn-warning btn-sm" >Approve/Reject</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- Simple Datatable End -->
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+<div class="modal" id="divQuotationApprove" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="text-align:center;"> Approve Reject Quotation </h4>
+                <button type="button" onclick="$('#divQuotationApprove').hide();" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div id="divQuotApproveForm" style="border:none">
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    function SearchQuotation() {
+        location.href = '/Enquiry/Quotation/QuotationList?FromDate=' + $('#FromDate').val() + '&ToDate=' + $('#ToDate').val();
+    }
+
+    function funQuotationApprove(EnquiryId, tdLinkId) {
+        $('#divQuotApproveForm').load('/Enquiry/Quotation/_QuotationActions?EnquiryId=' + EnquiryId + "&tdLinkId=" + tdLinkId);
+        $('#divQuotationApprove').show();
+    }
+</script>
+

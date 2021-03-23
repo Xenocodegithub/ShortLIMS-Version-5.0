@@ -1,0 +1,199 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryTypeMasterModel
+@{
+    ViewBag.Title = "CreateNew";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .swal-title {
+        margin: 0px;
+        font-size: 25px;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.21);
+        margin-bottom: 28px;
+    }
+</style>
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Category</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Category</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                January 2018
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Export List</a>
+                                <a class="dropdown-item" href="#">Policies</a>
+                                <a class="dropdown-item" href="#">View Assets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <h4 class="text-blue h4">Add Category Form</h4>
+                    <p class="mb-30"></p>
+                </div>
+                <div class="wizard-content">
+                    @using (Ajax.BeginForm("Create", "CategoryMaster", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CategorySuccess()" }, new { Id = "categoryForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.CatagoryMasterID)
+                        <h5></h5>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Inventory Type :</label>
+                                        @Html.DropDownListFor(model => model.InventoryTypeID, new SelectList(ViewBag.InvTyp, "InventoryTypeID", "InventoryTypeName"), "---Select---", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.InventoryTypeID, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.InventoryTypeName)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Category Name:</label>
+                                        @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control",@style = "width:490px;" })
+                                        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6" style="margin-left:450px;">
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="btn btn-primary" id="buttonSave1" name="buttonSave" style="background-color:mediumblue;color:white;"   onclick = "return validateData();" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    }
+                </div>
+            </div>
+            <!-- success Popup html Start -->
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20">Form Submitted!</h3>
+                            <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- success Popup html End -->
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/sweet-alert.init.js"></script>
+<script src="~/Scripts/sweetalert2.all.js"></script>*@
+@*<script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>*@
+@*<script>
+    function PurchaseSupplierSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Inventory/PurchaseSupplierList';
+        }
+    }
+</script>*@
+@*<script type="text/javascript">
+    function CategorySuccess(status) {
+        debugger
+        if (status == 'success') {
+            sweetAlert("Saved!", "Your record has been saved.", "success");
+        }
+        else {
+            alert('Error!!!');
+        }
+    }
+</script>*@
+
+@*<script type="text/javascript">
+    $(function () {
+        $("#buttonSave1").click(function (e) {
+            e.preventDefault();
+            swal({
+                title: "Save Changes?",
+                text: "",
+                type: "info",
+                showCancelButton: true,
+                cancelButtonClass: 'btn-secondary waves-effect',
+                confirmButtonClass: 'btn-success waves-effect waves-light',
+                confirmButtonText: "Yes",
+                closeOnConfirm: false
+            }, function () {
+                $("#categoryForm").submit();
+                swal("Saved!", "Your record has been saved.", "success");
+            });
+        });
+    });
+</script>*@
+<script>
+    function validateData() {
+        debugger
+        if ($("#InventoryTypeID").val() == "") {
+            swal("Please enter Inventory Type !");
+            return false;
+        } else if ($("#CategoryName").val() == "") {
+            swal("Please enter Category Name !");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+
+@*<script type="text/javascript">    
+    function Validate(ctl, event) {
+        debugger;
+        if ($("#InventoryTypeID").val() == "") {
+            Swal.fire("Please enter Inventory Type !");
+            return false;
+        } else if ($("#CategoryName").val() == "") {
+            Swal.fire("Please enter Category Name !");
+            return false;
+        }      
+            event.preventDefault();
+            swal.fire({
+                title: "Do you want to save it?",
+                text: "Please check Information before Submiting!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Save",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+                        $("#categoryForm").submit();
+
+                    } else {
+                        swal("Cancelled", "You have Cancelled Form Submission!", "error");
+                    }
+                });
+        }
+    }
+</script>*@
+

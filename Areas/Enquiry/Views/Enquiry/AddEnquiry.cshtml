@@ -1,0 +1,157 @@
+﻿@model LIMS_DEMO.Areas.Enquiry.Models.EnquiryModel
+@using LIMS_DEMO.Core.DropDowns;
+@{
+    ViewBag.Title = "AddEnquiry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Enquiry</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Enquiry</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Enquiry</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Enquiry</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+
+            <div class="pd-20 card-box mb-30">
+
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Enquiry</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                    @*<div class="pull-right">
+                          <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                @using (Ajax.BeginForm("AddEnquiry", "Enquiry", new AjaxOptions() { HttpMethod = "Post", OnBegin = "EnquiryStart", OnSuccess = "EnquirySuccess" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.EnquiryId)
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Mode Of Communication: </label>
+                            @Html.HiddenFor(model => model.ModeOfCommunicationId)
+                            <div class="col-sm-12 col-md-10">
+
+                                @foreach (var item in (List<CommunicationEntity>)ViewBag.CommunicationMode)
+                                {
+                                    if (Model.ModeOfCommunicationId == item.ModeOfCommunicationId)
+                                    {
+                                        <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @checked = "checked", @class = "modeofcomm" }) @item.CommunicationMode </label>
+                                    }
+                                    else
+                                    {
+                                        <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @class = "modeofcomm" }) @item.CommunicationMode </label>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Customer Name:</label>
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(model => model.CustomerMasterId, new SelectList(ViewBag.Customers, "CustomerMasterId", "RegistrationName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
+                                @Html.ValidationMessageFor(model => model.CustomerMasterId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Enquiry On:</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.EnquiryOn, new { @class = "form-control date-picker", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.EnquiryOn, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Remark:</label>
+                            <div class="col-sm-8">
+                                @Html.TextAreaFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-10" style="margin:auto;text-align:center">
+                                <input type="submit" value="Create" class="btn btn-info" id="buttonSave1" name="buttonSave" />
+                                @*<a href="~/Enquiry/Contract/AddContract" class="btn btn-primary" style="background-color:mediumblue;color:white;" data-toggle="tooltip" data-placement="top" title="">Next</a>*@
+                            </div>
+                        </div>
+                    </form>
+                }
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+<script>
+
+    function EnquiryStart() {
+        debugger
+        $('#btnSubmit').html('Please Wait..')
+        $('#btnSubmit').prop('disabled', true);
+    }
+
+    function EnquirySuccess(result) {
+        debugger
+        if (result.EnquiryId != "0") {
+
+            location.href = '/Enquiry/Contract/AddContract?EnquiryId=' + result.EnquiryId;
+        }
+        else {
+
+            swal(
+                {
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                }
+            );
+        }
+    }
+
+    function funModeOfCommunication(ComId) {
+        alert(ComId);
+    }
+
+    $(function () {
+        $('.modeofcomm').click(function () {
+            $('#ModeOfCommunicationId').val($(this).val());
+        });
+
+        if ($('#ModeOfCommunicationId').val() == '0') {
+            $('.modeofcomm')[0].checked = "checked";
+            $('#ModeOfCommunicationId').val($('.modeofcomm')[0].value);
+        }
+    });
+
+</script>

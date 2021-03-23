@@ -1,0 +1,225 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryMaintainanceAndCalibrationModel
+@{
+    ViewBag.Title = "PerformanceCheak";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PerformanceCheak</h2>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Performance-Cheak</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="card-box mb-30">
+                <div class="card-box mb-30 text-black bg-info card-box">
+                    <div class="pd-20" style="border-bottom:solid">
+                        <h4 class="text-blue h4">Break-Down Form</h4>
+                    </div>
+
+
+                    <fieldset class="card text-black bg-info card-box">
+                        @using (Ajax.BeginForm("PerformanceCheak", "InventoryBreakDown", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "PerformanceSuccess" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.InventoryBasicItemDetailsNumber)
+                            @Html.HiddenFor(model => model.ItemName)
+                            @Html.HiddenFor(model => model.ID)
+                            @Html.HiddenFor(model => model.InventoryBasicDetailsID)
+                            @Html.HiddenFor(model => model.CalibrationInventoryBasicItemDetailsID)
+                            @Html.Hidden("HiddenItemID", (object)ViewBag.ItemIDViewBag)
+
+                            @Html.Hidden("HiddenInventoryBasicItemsDetailsID", (object)ViewBag.BasicItemDetailsIDViewBag)
+                            @Html.Hidden("HiddenDateID", (object)ViewBag.DateIDViewBag)
+                            <div class="col-md-12">
+                                <div class="col-md-12" style="margin-top:20px">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ItemID, "Item ")@Html.Label("*", new { @style = "Color:red" })
+                                                @Html.DropDownListFor(model => model.ItemID, new SelectList(ViewBag.InventoryItemList, "ItemMasterId", "Item"), "Select Instrument/Equipment", new { @class = "form-control " })
+                                                @*@Html.TextBoxFor(model => model.ItemName, new { @class = "form-control", placeholder = "Item Name" })*@
+                                                @Html.ValidationMessageFor(model => model.ItemID)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.InventoryBasicItemDetailsID, "Serial Number")@Html.Label("*", new { @style = "Color:red" })
+                                                @Html.DropDownListFor(model => model.InventoryBasicItemDetailsID, new SelectList(ViewBag.ItemNumberList, "ID", "InventoryBasicItemDetailsNumber"), "Select Instrument/Equipment", new { @class = "form-control " })
+                                                @*@Html.DropDownListFor(model => model.InventoryBasicItemDetailsID, (SelectList)ViewBag.InventorySerialNumberList, "Select Serial Number...", new { @class = "form-control" })*@
+                                                @Html.ValidationMessageFor(model => model.InventoryBasicItemDetailsID)
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID, "Performance-Check Date")@Html.Label("*", new { @style = "Color:red" })
+                                                @Html.DropDownListFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID, new SelectList(ViewBag.ItemScheduleDateList, "DateID", "ScheduleDate"), "Select Performance-Check Date", new { @class = "form-control " })
+                                                @Html.ValidationMessageFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.NextCalibrationDate, "Next Date Of Performance-Check ")
+                                                <input type="text" id="NextCalibrationDate" name="NextCalibrationDate" value="" placeholder="Next Date Of Performance-Check" class="form-control" disabled />
+                                                @Html.HiddenFor(model => model.NextDate)
+                                                @Html.ValidationMessageFor(model => model.NextCalibrationDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.Auditor, "Auditor Name")@Html.Label("*", new { @style = "Color:red" })
+                                                @Html.TextBoxFor(model => model.Auditor, new { @class = "form-control", placeholder = "Auditor Name" })
+                                                @Html.ValidationMessageFor(model => model.Auditor)
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group p-t-9" id="divDiscipline">
+                                                @Html.Label("Audit date")
+                                                <div id="" class="form-group">
+                                                    @Html.TextBoxFor(model => model.AuditDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @autocomplete = "false", data_format = "dd/MM//yyyy", @placeholder = "dd/MM/yyyy", @type = "date" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.AuditDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.AuditObservations, "Performance-Check  Details")
+                                                @Html.TextAreaFor(model => model.AuditObservations, new { @class = "form-control", placeholder = "Maintainance Details" })
+                                                @Html.ValidationMessageFor(model => model.AuditObservations)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ActionTaken, "Action Taken")
+                                                @Html.TextAreaFor(model => model.ActionTaken, new { @class = "form-control", placeholder = "Action Taken" })
+                                                @Html.ValidationMessageFor(model => model.ActionTaken)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.CompletionStatus, "Completion Status")@Html.Label("*", new { @style = "Color:red" })
+                                                @Html.DropDownListFor(model => model.CompletionStatus, (SelectList)ViewBag.MaintainanceListViewBag, "Select Status...", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.CompletionStatus)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                           <input type="submit" value="submit" style="float:right;" class="btn btn-primary" id="buttonSave" name="buttonSave" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding table-responsive table-bordered">
+                                    <table class="table table-striped table-bordered" id="myTable" data-filter="#filter" data-filter-text-only="true" style="background-color:honeydew">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 6%">#</th>
+                                                <th style="width: 15%">SERIAL NUMBER</th>
+                                                <th style="width: 20%">AuditDate</th>
+                                                <th style="width: 19%">Auditor</th>
+                                                <th style="width: 10%">Status</th>
+                                                <th style="width: 10%">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="mytableBody"></tbody>
+                                        <tr>
+                                            <td colspan="7">
+                                                <div class="pagination pagination-centered"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    $(document).ready(function () {
+        getrecord();
+    });
+    $('#InventoryMaintainanceAndCalibrationScheduleDatesID').change(function () {
+        var InventorybasicdetailsID = $('#InventoryMaintainanceAndCalibrationScheduleDatesID option:selected').val();
+        $("#NextCalibrationDate").val($('#InventoryMaintainanceAndCalibrationScheduleDatesID option:selected').next().text());
+    });
+    $("#buttonSave").click(function () {
+        $("NextDate").val($("NextCalibrationDate").val());
+    });
+    function getrecord() {
+        debugger
+        var InventoryBasicDetailsID = $('#InventoryBasicDetailsID').val()
+        var dataPost = { Type: "PerFormance-Check", InventoryBasicDetailsID: InventoryBasicDetailsID, ItemID: $('#ItemID').val(), InventoryBasicItemDetailsID: $('#InventoryBasicItemDetailsID').val()};
+        InventoryBasicDetailsID = $("InventoryBasicDetailsID").val();
+        $.ajax({
+            url: '/Inventory/InventoryBreakDown/FatchListByBasicItemsDetailsAndItemsID',
+            type: 'Get',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'json',
+            data: dataPost,
+            success: function (result) {
+                //alert("ok")
+                debugger
+                var $cloneRow = "";
+                for (i = 0; i < result.length; ++i) {
+                    //var a.toLocaleDateString()
+                    $cloneRow = $cloneRow + '<tr id="sample_' + i + '" datatableID = "' + result[i].NameOfInstrument + '" isdelete = "0" style="width:100%;">';
+                    $cloneRow = $cloneRow + '<td>' + (i + 1) + '</td>';
+                    //$cloneRow = $cloneRow + '<td>INV/' + MaintainanceAndCalibrationItems[i].InventoryBasicDetailsID + '</td>';
+                    $cloneRow = $cloneRow + '<td>' + result[i].InventoryBasicItemDetailsNumber + '</td>';
+                    $cloneRow = $cloneRow + '<td>' + result[i].AuditDate + '</td>';
+                    $cloneRow = $cloneRow + '<td>' + result[i].Auditor + '</td>';
+                    $cloneRow = $cloneRow + '<td>' + result[i].CompletionStatus + '</td>';
+                    $cloneRow = $cloneRow + '<td> <a href="#" title="Edit" style="color:red" class="icon-copy dw dw-edit" id="rowEdit_' + i + '" name="rowEdit_' + i + '" operation="Edit"></a></td>';
+                }
+                $("#mytableBody").html($cloneRow);
+                //$.each(result.result, function (i, item) {
+                //    $('#InventoryBasicItemDetailsID').append('<option value="' + item.ID + ' InventoryBasicDetailsID = ' + item.InventoryBasicDetailsID + '>' + item.InventoryBasicItemDetailsNumber + '</option>');
+                //})
+            },
+            error: function (data) {
+                //alert("not ok")
+            }
+        });
+    }
+    function PerformanceSuccess() {
+        alert("Success");
+        location.href = '/Inventory/InventoryBreakDown/PerformanceList';
+    }
+</script>

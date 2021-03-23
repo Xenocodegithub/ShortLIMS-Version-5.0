@@ -1,0 +1,92 @@
+﻿@model LIMS_DEMO.Areas.Collection.Models.SurveyingTeamLeadModel
+
+@using (Ajax.BeginForm("_AssignSampler", "SurveyingTeam", new { area = "" }, new AjaxOptions() { HttpMethod = "Post", OnBegin = "ValidateClick", OnSuccess = "AssignSamplerSuccess" }, new { id = "frmAssignSampler" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EnquiryId)
+        @Html.HiddenFor(model => model.SampleCollectionId)
+        @Html.HiddenFor(model => model.EnquirySampleID)
+        @Html.HiddenFor(model => model.LocationSampleCollectionID)
+
+        <div class="row">
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SampleCollectionId, htmlAttributes: new { @class = "form-label col-md-6" })
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.SampleCollectionId)
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SampleName, htmlAttributes: new { @class = "form-label col-md-6" })
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.DisplaySampleName)
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SampleCollectedBy, htmlAttributes: new { @class = "form-label col-md-6" })
+                @*<select id="SampleCollectedBy" name="SampleCollectedBy" class="control-label col-md-2" onchange="DisplayCollectedBy()">
+                        <option value="1">Lab</option>
+                        <option value="2">Customer</option>
+                    </select>*@
+                <div class="col-md-6">
+                    <label><input type="radio" name="SampleCollectedBy" value="1" checked> Lab</label>
+                    <label><input type="radio" name="SampleCollectedBy" value="2"> Customer</label>
+                </div>
+            </div>
+            <div id="divSampleCollectedBy" class="form-group row">
+                <label class="form-label col-md-6"> Collected By <span class="required" style="color:red">*</span></label>
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.EmployeeId, new SelectList(ViewBag.CollectorName, "UserMasterId", "UserName", Model.EmployeeId), "Select Collector", new { @id = Model.EmployeeId, @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class=" col-md-12">
+                    <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary pull-right" style="text-align:center;" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function ValidateClick() {
+        $('#btnSubmit').prop('disabled', true);
+        $('#btnSubmit').val('Please Wait..')
+    }
+    function AssignSamplerSuccess(result) {
+        alert('Assigned');
+        $('#divAssignSampler').hide();
+        $('#btnSubmit').prop('disabled', false);
+        $('#btnSubmit').val('Submit')
+        location.href = '/Collection/SurveyingTeam/SurveyingTeamLeadList';
+     }
+
+    $(document).ready(function () {
+        $('input[type="radio"]').click(function () {
+            var inputValue = $(this).attr("value");
+            if (inputValue==1)
+                $('#divSampleCollectedBy').show();
+            else
+                $('#divSampleCollectedBy').hide();
+        });
+    });
+
+       $(function () {
+        $("#frmAssignSampler").removeData("validator");
+        $("#frmAssignSampler").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmAssignSampler");
+
+        $(".form-date").flatpickr({
+            dateFormat: "d/m/Y",
+            disableMobile: "true"
+            //minDate: "today"
+        });
+       });
+
+
+</script>
+
+

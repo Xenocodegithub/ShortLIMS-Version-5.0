@@ -1,0 +1,538 @@
+﻿@model LIMS_DEMO.Areas.WorkOrderCustomer.Models.WorkOrderCustomerListModel
+
+@{
+    ViewBag.Title = "_AddSampleDetails";
+}
+
+<div>
+    <input type="hidden" id="WorkOrderId" value="@ViewBag.WorkOrderId" />
+    <br/>
+    <fieldset>
+        @*For ProductGroup,SubGroup,Matrix*@
+        <div class="row">
+            <table border="0" cellpadding="2" cellspacing="4">
+                <tr>
+                    <td align="center">
+                        <div class="form-check-inline">
+                            <label class="col-md-7 mr-btm-15"> Sample Type <span style="color:red;text-align:left">*</span></label>
+                            <div class="col-md-8 mr-btm-15">
+                                @Html.DropDownListFor(model => model.WorkOrderCustomer.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = " form-control" })
+                                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleTypeProductId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.WorkOrderCustomer.SampleTypeProductName)
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    @*<td style="width: 350px" align="center">
+                            @Html.LabelFor(model => model.WorkOrderCustomer.ProductGroupName, htmlAttributes: new { @class = "control-label col-sm-6 text-nowrap" })
+                            <span class="required" style="color:red">*</span><br />
+                            @Html.DropDownListFor(model => model.WorkOrderCustomer.ProductGroupId, new SelectList(ViewBag.ProductGroupList, "ProductGroupId", "ProductGroupName"), "---Select---", new { @class = " form-control btn-sm dropdown-toggle border" })
+                            @Html.ValidationMessageFor(model => model.WorkOrderCustomer.ProductGroupId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.WorkOrderCustomer.ProductGroupName)
+                        </td>
+                        <td style="width: 350px" align="center">
+                            @Html.LabelFor(model => model.WorkOrderCustomer.SubGroupName, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <span class="required" style="color:red">*</span><br />
+                            @Html.DropDownListFor(model => model.WorkOrderCustomer.SubGroupId, new SelectList(ViewBag.SubGroupList, "SubGroupId", "SubGroupName"), "---Select---", new { @class = "form-control  btn-sm dropdown-toggle border" })
+                            @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SubGroupId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.WorkOrderCustomer.SubGroupName)
+                        </td>
+                        <td style="width: 350px" align="center">
+                            @Html.LabelFor(model => model.WorkOrderCustomer.MatrixName, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <span class="required" style="color:red">*</span><br />
+                            @Html.DropDownListFor(model => model.WorkOrderCustomer.MatrixId, new SelectList(ViewBag.MatrixList, "MatrixId", "MatrixName"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
+                            @Html.ValidationMessageFor(model => model.WorkOrderCustomer.MatrixId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.WorkOrderCustomer.MatrixName)
+                        </td>*@
+                    <td style="width: 200px" align="right">
+                       
+                        <input type="button" id="btnAdd" value="Add" class="btn btn-sm btn-info text-nowrap" style="margin-right:-40%;margin-top:-11%"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr />
+        <table id="tblContract" class="data-table table nowrap">
+            <tr class="thead-dark">
+                <th class="table-plus datatable-nosort">SerialNo.</th>
+                <th>Sample Type</th>
+                @*<th style="width:150px">Product Group</th>
+                    <th style="width:150px">Sub Group</th>
+                    <th style="width:150px">Matrix</th>*@
+                <th>Choose Parameters</th>
+                <th>Action</th>
+            </tr>
+            <tbody>
+                @for (int i = 0; i < Model.WorkOrderCustomerList.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <span>@Model.WorkOrderCustomerList[i].SerialNo</span>
+                        </td>
+                        <td>
+                            <span>@Model.WorkOrderCustomerList[i].SampleTypeProductName</span>
+                            @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].SampleTypeProductId)
+                        </td>
+                        @*<td>
+                                <span>@Model.WorkOrderCustomerList[i].ProductGroupName</span>
+                                @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].ProductGroupId)
+                            </td>
+                            <td>
+                                <span>@Model.WorkOrderCustomerList[i].SubGroupName</span>
+                                @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].SubGroupId)
+                            </td>
+                            <td>
+                                <span>@Model.WorkOrderCustomerList[i].MatrixName</span>
+                                @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].MatrixId)
+                            </td>*@
+                        <td>
+                            <button onclick="funContractSelected(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@Model.WorkOrderCustomerList[i].SampleTypeProductId,'@Model.WorkOrderCustomerList[i].SampleTypeProductCode', '@Model.WorkOrderCustomerList[i].SubGroupCode')" class="btn btn-sm btn-primary text-nowrap btnChoose">Choose Parameters</button>
+                        </td>
+                        <td>
+                            <a href="#" onclick="funDeleteContract(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@ViewBag.WorkOrderId);">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
+        <div id="divParameters" class="row " style="display: none;">
+            @{
+                Html.RenderAction("_Parameters", "WorkOrderCustomer", new { EnquiryDetailId = 0 });
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <table id="tblPara" class="data-table table nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            Sr.No.
+                        </th>
+                        <th>
+                            Sample No.
+                        </th>
+                        <th>
+                            Sample Type
+                        </th>
+                        @*<th class="width-12">
+                                Product Group
+                            </th>
+                            <th class="width-10">
+                                Sub Group
+                            </th>
+                            <th class="width-5">
+                                Matrix
+                            </th>*@
+                        <th class="table-plus datatable-nosort">
+                            Parameters
+                        </th>
+                        @*<th class="width-5">
+                                Cost
+                            </th>*@
+                        <th>
+                            Remarks
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.ParaList.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].SerialNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].DisplaySampleName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].SampleTypeProductName)
+                            </td>
+                            @*<td>
+                                       @Html.DisplayFor(model => model.ParaList[i].ProductGroupName)
+                                 </td>
+                                 <td>
+                                       @Html.DisplayFor(model => model.ParaList[i].SubGroupName)
+                                 </td>
+                                <td>
+                                       @Html.DisplayFor(model => model.ParaList[i].MatrixName)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].Parameters)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(model => model.ParaList[i].Cost)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].Remarks)
+                            </td>
+                            <td>
+                                <a href="#divParameters" onclick="funEditSampleDetail(@Model.ParaList[i].EnquiryDetailId,@Model.ParaList[i].EnquirySampleID,@Model.ParaList[i].SampleTypeProductId);">Edit</a>
+                            </td>
+                            <td>
+                                <a href="#divSampleDetails" onclick="funDeleteSampleDetail(@Model.ParaList[i].EnquirySampleID,@Model.ParaList[i].EnquiryDetailId,@ViewBag.WorkOrderId);">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (Model.ParaList.Count >= 1)
+            {
+                <div class="row">
+                    <div class="form-actions" style="margin:20px 0 0 0; text-align: center;">
+                        <input type="button" id="btnSave" value="Save" class="btn btn-primary alignright" style="float:right" />
+                    </div>
+                </div>
+            }
+        </div>
+        <hr />
+    </fieldset>
+</div>
+
+
+<script>
+
+    //Choose Parameters
+    function funContractSelected(EnquiryDetailId, SampleTypeProductId, SampleTypeProductCode, SubGroupCode) {
+        debugger
+        $('.btnChoose').prop('disabled', true);
+        $('.btnChoose').html('Please Wait..')
+
+        var data = { "EnquiryDetailId": EnquiryDetailId }
+        data.SampleTypeProductId = SampleTypeProductId;
+        data.SampleTypeProductCode = SampleTypeProductCode;
+        data.SubGroupCode = SubGroupCode;
+          $.ajax({
+            type: "POST",
+              url: "/WorkOrderCustomer/WorkOrderCustomer/InsertSampleNumber",
+            data: data,
+            dataType: "json",
+              success: function (data) {
+                 debugger;
+                 alert("Select Parameters for SampleName: " + data.data.WorkOrderCustomer.DisplaySampleName);
+                  $("#WorkOrderCustomer_EnquirySampleID").val(data.data.WorkOrderCustomer.EnquirySampleID);
+                  $("#WorkOrderCustomer_EnquiryDetailId").val(EnquiryDetailId);
+
+                  //$('#divParameters').show();
+                  $("#divParameters").css("display", "block");
+                  // $('#ParameterPopup').show();
+                  $('#divParameters').load('/WorkOrderCustomer/WorkOrderCustomer/_Parameters?EnquiryDetailId=' + EnquiryDetailId + "&SampleTypeProductId=" + SampleTypeProductId + "&EnquirySampleID=" + data.data.WorkOrderCustomer.EnquirySampleID);
+            }
+          });
+    }
+
+    function funDeleteContract(EnquiryDetailId, WorkOrderId) {
+
+            if (confirm('Are you sure you want to delete this record?')) {
+                $.ajax({
+                    url: '/WorkOrderCustomer/WorkOrderCustomer/_DeleteContract?EnquiryDetailId=' + EnquiryDetailId,
+                    type: 'Get',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.status == "success") {
+                            $('#second').load('/WorkOrderCustomer/WorkOrderCustomer/_AddSampleDetails?WorkOrderId=' + WorkOrderId + "&EnquiryDetailId=" + EnquiryDetailId);
+                        }
+                    },
+                    error: function (data) {
+                    }
+                });
+            }
+    }
+
+    function funEditSampleDetail(EnquiryDetailId,EnquirySampleID,SampleTypeProductId) {
+        debugger
+        $("#divParameters").css("display", "block");
+        $('#divParameters').load('/WorkOrderCustomer/WorkOrderCustomer/_Parameters?EnquiryDetailId=' + EnquiryDetailId + "&SampleTypeProductId=" + SampleTypeProductId + "&EnquirySampleID=" + EnquirySampleID);
+    }
+
+    function funDeleteSampleDetail(EnquirySampleId,EnquiryDetailId,WorkOrderId) {
+        debugger
+        if (confirm('Are you sure you want to delete this record?')) {
+            $.ajax({
+                url: '/WorkOrderCustomer/WorkOrderCustomer/_DeleteSample?EnquirySampleId=' + EnquirySampleId ,
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == "success") {
+
+                        $('#second').load('/WorkOrderCustomer/WorkOrderCustomer/_AddSampleDetails?WorkOrderId=' + WorkOrderId + "&EnquiryDetailId=" + EnquiryDetailId);
+                    }
+                },
+                error: function (data) {
+                }
+            });
+        }
+    }
+
+   /* $('#WorkOrderCustomer_ProductGroupId').change(function () {
+        if ($('#WorkOrderCustomer_ProductGroupId').val() == '') {
+            $('#WorkOrderCustomer_SubGroupId').html('');
+            $('#WorkOrderCustomer_SubGroupId').append('<option value="">---Select---</option>');
+            $('#WorkOrderCustomer_MatrixId').html('');
+            $('#WorkOrderCustomer_MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+            $('#WorkOrderCustomer_SubGroupId').html('');
+            $('#WorkOrderCustomer_SubGroupId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/WorkOrderCustomer/SubGroups?ProductGroupId=' + $('#WorkOrderCustomer_ProductGroupId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#WorkOrderCustomer_SubGroupId').append('<option value="' + item.SubGroupId + '">' + item.SubGroupName + '</option>');
+                    })
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+
+    $('#WorkOrderCustomer_SubGroupId').change(function () {
+        if ($('#WorkOrderCustomer_SubGroupId').val() == '') {
+            $('#WorkOrderCustomer_MatrixId').html('');
+            $('#WorkOrderCustomer_MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+            $('#WorkOrderCustomer_MatrixId').html('');
+            $('#WorkOrderCustomer_MatrixId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/WorkOrderCustomer/Matrix?ProductGroupId=' + $('#WorkOrderCustomer_ProductGroupId').val() + '&SubGroupId=' + $('#WorkOrderCustomer_SubGroupId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#WorkOrderCustomer_MatrixId').append('<option value="' + item.MatrixId + '">' + item.MatrixName + '</option>');
+                    })
+                },
+                error: function (data) {
+
+                }
+            });
+        }
+    }); */
+
+     $('#WorkOrderCustomer_SampleTypeProductId').change(function () {
+                if ($('#WorkOrderCustomer_SampleTypeProductId').val() == '') {
+                    $('#WorkOrderCustomer_ProductGroupId').html('');
+                    $('#WorkOrderCustomer_ProductGroupId').append('<option value="">---Select---</option>');
+                    $('#WorkOrderCustomer_SubGroupId').html('');
+                    $('#WorkOrderCustomer_SubGroupId').append('<option value="">---Select---</option>');
+                    $('#WorkOrderCustomer_MatrixId').html('');
+                    $('#WorkOrderCustomer_MatrixId').append('<option value="">---Select---</option>');
+                }
+                else {
+
+                    $('#WorkOrderCustomer_ProductGroupId').html('');
+                    $('#WorkOrderCustomer_ProductGroupId').append('<option value="">---Select---</option>');
+                    $.ajax({
+                        url: '/WorkOrderCustomer/WorkOrderCustomer/ProductGroups?SampleTypeProductId=' + $('#WorkOrderCustomer_SampleTypeProductId').val(),
+                        type: 'Get',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        dataType: 'json',
+                        success: function (result) {
+                            $.each(result.result, function (i, item) {
+                                $('#WorkOrderCustomer_ProductGroupId').append('<option value="' + item.ProductGroupId + '">' + item.ProductGroupName + '</option>');
+                            })
+                        },
+                        error: function (data) {
+                        }
+                    });
+                }
+            });
+
+     $('#WorkOrderCustomer_ProductGroupId').change(function () {
+                if ($('#WorkOrderCustomer_ProductGroupId').val() == '') {
+                    $('#WorkOrderCustomer_SubGroupId').html('');
+                    $('#WorkOrderCustomer_SubGroupId').append('<option value="">---Select---</option>');
+                    $('#WorkOrderCustomer_MatrixId').html('');
+                    $('#WorkOrderCustomer_MatrixId').append('<option value="">---Select---</option>');
+                }
+                else {
+
+                    $('#WorkOrderCustomer_SubGroupId').html('');
+                    $('#WorkOrderCustomer_SubGroupId').append('<option value="">---Select---</option>');
+                    $.ajax({
+                        url: '/WorkOrderCustomer/WorkOrderCustomer/SubGroups?SampleTypeProductId=' + $('#WorkOrderCustomer_SampleTypeProductId').val() + '&ProductGroupId=' + $('#WorkOrderCustomer_ProductGroupId').val(),
+                        type: 'Get',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        dataType: 'json',
+                        success: function (result) {
+                            $.each(result.result, function (i, item) {
+                                $('#WorkOrderCustomer_SubGroupId').append('<option value="' + item.SubGroupId + '">' + item.SubGroupName + '</option>');
+                            })
+                        },
+                        error: function (data) {
+                        }
+                    });
+                }
+            });
+
+     $('#WorkOrderCustomer_SubGroupId').change(function () {
+                if ($('#WorkOrderCustomer_SubGroupId').val() == '') {
+                    $('#WorkOrderCustomer_MatrixId').html('');
+                    $('#WorkOrderCustomer_MatrixId').append('<option value="">---Select---</option>');
+                }
+                else {
+                    $('#WorkOrderCustomer_MatrixId').html('');
+                    $('#WorkOrderCustomer_MatrixId').append('<option value="">---Select---</option>');
+                    $.ajax({
+                        url: '/WorkOrderCustomer/WorkOrderCustomer/Matrix?SampleTypeProductId=' + $('#WorkOrderCustomer_SampleTypeProductId').val() + '&ProductGroupId=' + $('#WorkOrderCustomer_ProductGroupId').val() + '&SubGroupId=' + $('#WorkOrderCustomer_SubGroupId').val(),
+                        type: 'Get',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        dataType: 'json',
+                        success: function (result) {
+                            $.each(result.result, function (i, item) {
+                                $('#WorkOrderCustomer_MatrixId').append('<option value="' + item.MatrixId + '">' + item.MatrixName + '</option>');
+                            })
+                        },
+                        error: function (data) {
+                        }
+                    });
+                }
+     });
+
+     //Add event handler.
+     $('#btnAdd').click( function () {
+        debugger
+        var data = { "SampleTypeProductName": $('#WorkOrderCustomer_SampleTypeProductId option:selected').text() }
+        //data.SubGroupName = $('#WorkOrderCustomer_SubGroupId option:selected').text();
+        //data.MatrixName = $('#WorkOrderCustomer_MatrixId option:selected').text();
+        //data.SubGroupId = $('#WorkOrderCustomer_SubGroupId').val();
+        //data.MatrixId = $('#WorkOrderCustomer_MatrixId').val();
+        if ($('#WorkOrderCustomer_SampleTypeProductId option:selected').text() == "---Select---") {
+            alert('Please Add Sample Type');
+        }
+        else
+        {
+        data.WorkOrderId =  @(ViewBag.WorkOrderId); //for int
+        data.SampleTypeProductId = $('#WorkOrderCustomer_SampleTypeProductId').val();
+        $.ajax({
+            type: "POST",
+            url: "/WorkOrderCustomer/WorkOrderCustomer/InsertSampleDetail",
+            data: data,
+            dataType: "json",
+            success: function (r) {
+                $('#second').load('/WorkOrderCustomer/WorkOrderCustomer/_AddSampleDetails?WorkOrderId=' + @ViewBag.WorkOrderId + "&EnquiryDetailId=" + r.EnquiryDetailId);
+            }
+        });
+        }
+    });
+
+     $("#btnSave").click(function () {
+             if ($(this).val() == "Save")
+             {
+                $(this).val("Next");
+                alert('Save & Next!');
+             }
+            else
+             {
+                var WorkOrderId = parseInt(@ViewBag.WorkOrderId);
+                alert('Click on Costing Detail Page!')
+                $('.nav-tabs > .active').next('li').find('a').trigger('click');
+                $('#third').load('/WorkOrderCustomer/WorkOrderCustomer/_AddCostingDetails?WorkOrderId=' + WorkOrderId + "&EnquirySampleID=" + $('#WorkOrderCustomer_EnquirySampleID').val() );
+             }
+         });
+
+</script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#SaveParameters").click(function () {
+            debugger
+            var checked_checkboxes = $("#tblParameters input[type=checkbox]:checked");
+            if (checked_checkboxes.length == 0) {
+                alert('Please Select Parameters.');
+                return false;
+            }
+            return true;
+        });
+
+    });
+
+</script>
+
+<script>
+
+    function onLoad() {
+        $('#SaveParameters').prop('disabled', true);
+        $('#SaveParameters').val('Please Wait..')
+    }
+
+    function ParameterSuccess(result) {
+        debugger
+        if (result.status == "success") {
+
+            $('#second').load('/WorkOrderCustomer/WorkOrderCustomer/_AddSampleDetails?WorkOrderId=' + @ViewBag.WorkOrderId + "&EnquiryDetailId=" + $('#WorkOrderCustomer_EnquiryDetailId').val()+ "&EnquirySampleID=" +$('#WorkOrderCustomer_EnquirySampleID').val());
+
+            $('#SaveParameters').prop('disabled', false);
+            $('#SaveParameters').val('Save Parameters')
+
+            $("#divParameters").css("display", "none");
+            $('#divSampleAndParameters').hide();
+
+            $('.btnChoose').prop('disabled', false);
+            $('.btnChoose').html('Choose Parameters')
+
+        }
+        else {
+            debugger
+           // alert('Please Select Charges fields!')
+            $('#SaveParameters').prop('disabled', false);
+            $('#SaveParameters').val('Save Parameters')
+        }
+
+    }
+
+    $('#chkAllParameter').change(function () {
+        $('#tblParameters tbody input[type=checkbox]').prop('checked', $(this).prop('checked'));
+    })
+
+    function isDecimalNumberKey(evt, thisObj, pres) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+
+        if (!(charCode == 46 || (charCode >= 48 && charCode <= 57))) return false;
+        if (charCode == 8 || charCode == 08 || charCode == 9 || charCode == 09) return true;
+        var parts = thisObj.split('.');
+        if (charCode == 8 || charCode == 08 || charCode == 9 || charCode == 09) return true;
+        if (parts.length > 2) return false;
+        if (charCode == 46) return (parts.length == 1);
+        if (parts[0].length >= 14) return false;
+        if (parts.length == 2 && parts[1].length >= pres) return false;
+    }
+
+</script>
+
+<script type="text/javascript">
+
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tblParameters");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+

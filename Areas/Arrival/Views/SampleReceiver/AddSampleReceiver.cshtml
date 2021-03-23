@@ -1,0 +1,454 @@
+﻿@model LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel
+@{
+    ViewBag.Title = "AddSampleReceiver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Arrival</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Sample Receiver</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sample Receiver</li>
+                                <li class="breadcrumb-item active" aria-current="page">AddSample Receiver</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">AddSample Receiver</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-4">
+                            @Html.LabelFor(model => model.SampleName, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.SampleName, "SampleNo", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                   <div class="col-sm-4">
+                            @Html.LabelFor(model => model.SampleTypeProductName, htmlAttributes: new { @class = "control-label col-sm-11" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.SampleTypeProductName, "ProductGroup", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                   @*
+                     <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.ProductGroupName, htmlAttributes: new { @class = "control-label col-sm-5" })
+                         <div class="col-sm-7">
+                           @Html.DisplayFor(model => model.ProductGroupName, "ProductGroup", new { htmlAttributes = new { @class = "form-control" } })
+                          </div>
+                     </div>
+                            <div class="col-sm-4 form-group">
+                                @Html.LabelFor(model => model.SubGroupName, htmlAttributes: new { @class = "control-label col-sm-5" })
+                                <div class="col-sm-7">
+                                    @Html.DisplayFor(model => model.SubGroupName, "SubGroup", new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                @Html.LabelFor(model => model.MatrixName, htmlAttributes: new { @class = "control-label col-sm-4" })
+                                <div class="col-sm-8">
+                                    @Html.DisplayFor(model => model.MatrixName, "Matrix", new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>*@
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.CollectionDate, htmlAttributes: new { @class = "control-label col-sm-7" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.Date, "DateofSampling", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div><br/>
+                <div class="row">
+                        <div class="col-sm-4">
+                            @if (Model.MatrixName == "Stack Emission" || Model.MatrixName == "Ambient Air")
+                            {
+                                @Html.LabelFor(model => model.Duration, "Duration(hrs): ", htmlAttributes: new { @class = "control-label col-sm-6" })
+                                <div class="col-sm-7">
+                                    @Html.DisplayFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.SampleCollectionTime, htmlAttributes: new { @class = "control-label col-sm-11" })
+                                <div class="col-sm-7">
+                                    @Html.DisplayFor(model => model.SampleCollectionTime, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            }
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            @Html.LabelFor(model => model.SampleLocation, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.SampleLocation, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.SampleType, htmlAttributes: new { @class = "control-label col-sm-7" })
+                            <div class="col-sm-6">
+                                @Html.DisplayFor(model => model.SampleType, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div><br/>
+                <div class="row">
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.EnvCondts, htmlAttributes: new { @class = "control-label col-sm-11" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.EnvCondts, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.CollectedBy, htmlAttributes: new { @class = "control-label col-sm-6" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.CollectedBy, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            @Html.LabelFor(model => model.WitnessName, htmlAttributes: new { @class = "control-label col-sm-8" })
+                            <div class="col-sm-7">
+                                @Html.DisplayFor(model => model.WitnessName, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.SampleDevice, "Sampling Media:", htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-6">
+                            <div Id="divDevicesList" class="row">
+                                @{
+                                    Html.RenderAction("_SampleDevicesList", "SampleArrival", Model);
+                                }
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.SampleQty, "Quantity:", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                <div Id="divQuantityList" class="row">
+                                    @{
+                                        Html.RenderAction("_QuantityPreservativeList", "SampleArrival", Model);
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                <hr />
+                @using (Ajax.BeginForm("AddSampleReceiver", "SampleReceiver", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "SampleReceiverSuccess" }))
+                 {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ARCId)
+                        @Html.HiddenFor(model => model.SampleCollectionId)
+                        @Html.HiddenFor(model => model.EnquirySampleID)
+                        @Html.HiddenFor(model => model.EnquiryDetailId)
+                        @Html.HiddenFor(model => model.EnquiryId)
+                        @Html.HiddenFor(model => model.WorkOrderID)
+                        @Html.HiddenFor(model => model.SampleNo)
+                        @Html.HiddenFor(model => model.CollectedBy)
+                        @Html.HiddenFor(model => model.CityName)
+                        @Html.HiddenFor(model => model.CustomerName)
+                        @Html.HiddenFor(model => model.ULRNo)
+                        @Html.HiddenFor(model => model.RequestNo)
+                        @Html.HiddenFor(model => model.SampleName)
+                        @Html.HiddenFor(model => model.flag)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            @if (@Model.flag == false)
+                            {
+                                <div class="col-sm-6 form-group">
+                                    <label class="control-label col-sm-6"> Date: <span class="required" style="color:red">*</span></label>
+                                    <div class="col-sm-6">
+                                        <div class="">
+                                            <input class="form-control" type="date" id="Date2" name="Date2" placeholder="dd/mm/yyyy" vale="@Model.Date2" onchange="ValidateDate();" required />
+                                            <br />
+                                            <input class="form-control" type="text" value="@Model.dt2.ToString().Replace("00:00:00", " ")" disabled />
+                                            @*@Html.TextBoxFor(model => model.Date2, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @onchange = "ValidateDate();" })*@
+                                            @*<span class="input-group-addon add-on">
+                                                <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                                </span>*@
+                                        </div>
+                                        @*@Html.TextBoxFor(model => model.Date2, new { @class = "form-control form-date", @autocomplete = "false", @placeholder = "DD/MM/YYYY" })*@
+                                        @*@Html.ValidationMessageFor(model => model.Date2, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="control-label col-sm-6"> Time: <span class="required" style="color:red">*</span></label>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.Time2, new { @type = "time", @class = "form-control time", @autocomplete = "false", @placeholder = "HH:mm" })
+                                        @Html.ValidationMessageFor(model => model.Time2, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-sm-6 form-group">
+                                    <label class="control-label col-sm-6"> Condition: <span class="required" style="color:red">*</span></label>
+                                    <label class="input col-sm-6">
+                                        <label> @Html.RadioButtonFor(model => model.IsSampleIntact, true, new { id = "IsSampleIntact-true", @checked = "checked" }) Intact </label><br />
+                                        <label> @Html.RadioButtonFor(model => model.IsSampleIntact, false, new { id = "IsSampleIntact-false" }) No Intact</label>
+                                    </label>
+                                </div>
+                            }
+
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-6 control-label"> Probable Date of Report: <span class="required" style="color:red">*</span></label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="date" id="ProbableDateOfReport" name="ProbableDateOfReport" placeholder="dd/mm/yyyy" vale="@Model.ProbableDateOfReport" onchange="ValidateDate();" required />
+                                    <br />
+                                    <input class="form-control" type="text" value="@Model.podr.ToString().Replace("00:00:00"," ")" disabled />
+                                    @*input-group date datetimepicker1*@
+                                    @*@Html.TextBoxFor(model => model.ProbableDateOfReport, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @onchange = "ValidateDate();" })*@
+                                    @*<span class="input-group-addon add-on">
+                                        <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                        </span>*@
+                                </div>
+                                @*@Html.TextBoxFor(model => model.ProbableDateOfReport, new { @class = "form-control form-date", @autocomplete = "false", @placeholder = "DD/MM/YYYY" })*@
+                                @*@Html.ValidationMessageFor(model => model.ProbableDateOfReport, "", new { @class = "text-danger" })*@
+
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            @if (@Model.flag == false)
+                            {
+                                <div class="col-sm-12 form-group">
+                                    <label class="control-label">
+                                        Sample Planner : <span class="required" style="color:red">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <table id="tblParaDiscipline" class="data-table table nowrap">
+                                        <thead>
+                                            <tr class="thead-dark">
+
+                                                <th class="table-plus datatable-nosort">
+                                                    SrNo.
+                                                </th>
+                                                <th>
+                                                    Parameters
+                                                </th>
+                                                @*<th class="width-5">
+                                                     Units
+                                                    </th>*@
+                                                <th>
+                                                    Discipline
+                                                </th>
+                                                <th>
+                                                    Select Sample Planner Name:
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align:center;">
+                                            @for (int i = 0; i < Model.ParaDisciplineList.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(item => Model.ParaDisciplineList[i].SerialNo)
+                                                    </td>
+                                                    <td>
+                                                        @Html.TextBoxFor(item => Model.ParaDisciplineList[i].Parameters, new { @class = "form-control", @readonly = "readonly", @autocomplete = "false" })
+                                                    </td>
+                                                    @*<td>
+                                                         @Html.HiddenFor(item => Model.ParaDisciplineList[i].ParameterMasterId)
+                                                         @Html.HiddenFor(item => Model.ParaDisciplineList[i].ParameterGroupId)
+                                                         @Html.HiddenFor(item => Model.ParaDisciplineList[i].ParameterName)
+                                                        @Html.DisplayFor(item => Model.ParaDisciplineList[i].ParameterName)
+                                                        </td>*@
+                                                    @*<td>
+                                                           @Html.HiddenFor(item => Model.ParaDisciplineList[i].UnitId)
+                                                           @Html.DisplayFor(item => Model.ParaDisciplineList[i].Unit)
+                                                        </td>*@
+                                                    <td>
+                                                        @Html.HiddenFor(item => Model.ParaDisciplineList[i].DisciplineId)
+                                                        @Html.DisplayFor(item => Model.ParaDisciplineList[i].Discipline)
+                                                    </td>
+                                                    <td>
+                                                        @if (Model.ParaDisciplineList[i].Parameters == null || Model.ParaDisciplineList[i].Parameters == "")
+                                                        {
+                                                            <a href="#" class=" btn-disabled">NA</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.DropDownListFor(item => Model.ParaDisciplineList[i].PlannerId, new SelectList(Model.ParaDisciplineList[i].Planner, "UserMasterID", "UserName", Model.ParaDisciplineList[i].PlannerId), "Select Planner", new { @class = "form-control" })
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-sm-12 form-group">
+                                    <label class="control-label">
+                                        Sample Approver : <span class="required" style="color:red">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-12">
+                                    <table id="tblParaDiscipline" class="data-table table nowrap">
+                                        <thead>
+                                            <tr class="thead-dark">
+                                                <th class="table-plus datatable-nosort">
+                                                    SrNo.
+                                                </th>
+                                                <th>
+                                                    Parameters
+                                                </th>
+                                                @*<th class="width-5">
+                                                     Units
+                                                    </th>*@
+                                                <th>
+                                                    Discipline
+                                                </th>
+                                                <th>
+                                                    Select Sample Approver Name:
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align:center;">
+                                            @for (int i = 0; i < Model.ParaDisciplineList.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(item => Model.ParaDisciplineList[i].SerialNo)
+                                                    </td>
+                                                    <td>
+                                                        @Html.TextBoxFor(item => Model.ParaDisciplineList[i].Parameters, new { @class = "form-control", @readonly = "readonly", @autocomplete = "false" })
+                                                    </td>
+                                                    <td>
+                                                        @Html.HiddenFor(item => Model.ParaDisciplineList[i].DisciplineId)
+                                                        @Html.DisplayFor(item => Model.ParaDisciplineList[i].Discipline)
+                                                    </td>
+                                                    <td>
+                                                        @if (Model.ParaDisciplineList[i].Parameters == null || Model.ParaDisciplineList[i].Parameters == "")
+                                                        {
+                                                            <a href="#" class=" btn-disabled">NA</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.DropDownListFor(item => Model.ParaDisciplineList[i].ApproverId, new SelectList(Model.ParaDisciplineList[i].Approver, "UserMasterID", "UserName", Model.ParaDisciplineList[i].ApproverId), "Select Approver", new { @class = "form-control" })
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="row">
+                            <div class="form-actions" style="margin:20px 0 0 0; text-align: center;">
+
+                                @if (ViewBag.StatusCode == "ReqCreated")
+                                {
+                                    <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="ReceiverSubmit"  disabled="disabled">Submit</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" id="btnSubmit" class="btn btn-info" name="Save" value="ReceiverSubmit">Submit</button>
+                                }
+                            </div>
+                        </div>
+                    }
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    function ValidateDate() {
+        debugger
+
+        if ($('#ProbableDateOfReport').val() != "" && $('#Date2').val() != "") {
+
+            var ProbableDate = $('#ProbableDateOfReport').val();
+            var SampleReceiveDate = $('#Date2').val();
+            if (Date.parse(ProbableDate) < Date.parse(SampleReceiveDate)) {
+                //if ($('#WorkOrderEndDate').val() < $('#SampleCollectionDate').val()) {
+                alert('Sample Received Date can not be Greater than Probable Date Of Report');
+                //  window.location.href = "/Arrival/SampleReceiverList";
+                $('#ProbableDateOfReport').val('');
+                return false;
+            }
+        }
+        return true
+    }
+
+    // $(document).ready(function () {
+
+    //    //if ($('#WorkOrderId').val() == "") {
+    //    //    $('#Remark').css('display', 'none')
+    //    //}
+    //    //else {
+    //    //    $('#Remark').css('display', 'block')
+    //    //}
+
+    //    $("#frmAddSampleReceiver").ajaxForm({
+    //        target: "#frmAddSampleReceiver",
+    //        iframe: true,
+    //        dataType: "json",
+    //        beforeSubmit: function (data, $form, options) {
+    //            if (ValidateDate() == false) {
+    //                return false;
+    //            }
+
+    //            $('#btnsubmit').prop('disabled', true);
+    //            $('#btnsubmit').html('Please Wait...')
+    //        },
+    //        success: function (result) {
+    //            if (result.status == 'success') {
+    //                $('#btnsubmit').prop('disabled', false);
+    //                $('#btnsubmit').html('Please Wait..')
+    //                alert('Sample Received successfully.');
+    //                window.location.href = "/Arrival/SampleReceiverList";
+    //            }
+    //            else {
+    //                alert(result.message);
+    //            }
+    //        },
+    //        error: function (xhr, textStatus, errorThrown) {
+    //            $('#btnsubmit').prop('disabled', false);
+    //            $('#btnsubmit').html('Submit')
+    //        }
+    //    });
+    //});
+
+    function SampleReceiverSuccess(result) {
+        debugger
+        if (result.status == "success") {
+            alert(result.message);
+            location.href = '/Arrival/SampleReceiver/SampleReceiverList';
+        } else {
+
+            alert('Please Select Planner!');
+            location.href = '/Arrival/SampleReceiver/SampleReceiverList';
+        }
+    }
+</script>
+
+
+

@@ -1,0 +1,166 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Configuration.Models.EmployeeMasterModel>
+@{
+    ViewBag.Title = "EmployeeMasterList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Employee Master List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Employee Master List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-primary" href="#" role="button">
+                                Add Employee
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h4 class="text-blue h4">Employee Master List</h4>
+                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+                </div>
+                <div class="pb-20">
+
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">All</th>
+                                <th class="table-plus datatable-nosort">Sr.No.</th>
+                                <th class="table-plus datatable-nosort">First Name</th>
+                                <th class="table-plus datatable-nosort">Middle Name</th>
+                                <th class="table-plus datatable-nosort">Last Name</th>
+                                <th class="table-plus datatable-nosort">Gender</th>
+                                <th class="table-plus datatable-nosort">Date Of Birth</th>
+                                <th class="table-plus datatable-nosort">Email</th>
+                                <th class="table-plus datatable-nosort">Mobile</th>
+                                <th class="table-plus datatable-nosort">EmployeeCode</th>
+                                <th class="table-plus datatable-nosort">Area Of Expertise</th>
+                                <th class="table-plus datatable-nosort">Experience In Year</th>
+                                <th class="table-plus datatable-nosort">Qualification</th>
+                                <th class="table-plus datatable-nosort">Address1</th>
+                                <th class="table-plus datatable-nosort">Address2</th>
+                                <th class="table-plus datatable-nosort">Area</th>
+                                <th class="table-plus datatable-nosort">CityName</th>
+                                <th class="table-plus datatable-nosort">StateName</th>
+                                <th class="table-plus datatable-nosort">CountryName</th>
+                                <th class="table-plus datatable-nosort">Pincode</th>
+                                <th class="table-plus datatable-nosort">AlternateNumber</th>
+                                <th class="table-plus datatable-nosort">PAN NO</th>
+                                <th class="table-plus datatable-nosort">Adhar No</th>
+                                <th class="table-plus datatable-nosort">IsActive</th>
+                                <th class="table-plus datatable-nosort">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                int SerialNumber = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr UserDetailId="@item.UserDetailId" UserName="@item.UserName">
+                                        <td>@SerialNumber</td>
+                                        <td>@item.All</td>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.MiddleName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.Gender</td>
+                                        <td>@item.DateOfBirth</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Mobile</td>
+                                        <td>@item.EmployeeCode</td>
+                                        <td>@item.AreaOfExpertise</td>
+                                        <td>@item.ExperienceInYear</td>
+                                        <td>@item.Qualification</td>
+                                        <td>@item.Address1</td>
+                                        <td>@item.Address2</td>
+                                        <td>@item.Area</td>
+                                        <td>@item.CityName</td>
+                                        <td>@item.StateName</td>
+                                        <td>@item.CountryName</td>
+                                        <td>@item.Pincode</td>
+                                        <td>@item.AlternateNumber</td>
+                                        <td>@item.PANNo</td>
+                                        <td>@item.AdharNo</td>
+                                        <td>@item.IsActive</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                    <i class="dw dw-more"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                    @*<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>*@
+                                                    <a class="dropdown-item" href="@Url.Action("AddEmployee","EmployeeMaster",new {UserDetailId=item.UserDetailId })" title="Update" id="rowedit_@SerialNumber" operation="Update"><i class="dw dw-edit2"></i> Update</a>
+                                                    <a class="dropdown-item" href="#" onclick="Delete(@item.UserMasterId);" ><i class="dw dw-delete-3"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    ++SerialNumber;
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <div class="pagination pagination-centered"></div>
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <!-- Simple Datatable End -->
+        </div>
+    </div>
+</div>
+<script>
+function Delete(id) {
+
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success margin-5',
+                cancelButtonClass: 'btn btn-danger margin-5',
+                buttonsStyling: false
+            }).then(function () {
+                swal(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }, function (dismiss) {
+                // dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+                if (dismiss === 'cancel') {
+                    swal(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    )
+                }
+            })
+    }
+</script>
+
+

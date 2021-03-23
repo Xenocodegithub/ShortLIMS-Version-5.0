@@ -1,0 +1,186 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryMaintainanceAndCalibrationModel
+@{
+    ViewBag.Title = "PlanePerformance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PlanePerformance</h2>
+@using (Ajax.BeginForm("PlanePerformance", "InventoryBreakDown", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "OnSuccessAdd" }))
+{
+    @Html.HiddenFor(model => model.InventoryBasicDetailsID)
+    @Html.Hidden("ID")
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="title">
+                                <h4>Inventory</h4>
+                            </div>
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Performance</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Plane Performance-Check</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-box mb-30">
+                    <div class="card-box mb-30 card text-black bg-warning card-box">
+                        <div class="pd-20" style="border-bottom:solid">
+                            <h4 class="text-blue h4"> PLANE PERFORMANCE CHECK</h4>
+                        </div>
+                        <fieldset class="card text-black bg-warning card-box">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ItemID, "Name of Instrument/Equipment", new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11 mr-btm-15 ">
+                                            @Html.DropDownListFor(model => model.ItemID, new SelectList(ViewBag.InventoryItemList, "ItemMasterId", "Item"), "Select Instrument/Equipment", new { @class = "form-control " })
+                                            @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.InventoryBasicItemDetailsID, "Serial Number", new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11 mr-btm-15 ">
+                                            @Html.DropDownListFor(model => model.InventoryBasicItemDetailsID, new SelectList(ViewBag.ItemNumberList, "InventoryBasicItemDetailsID", "InventoryBasicItemDetailsNumber"), "Select Serial Number...", new { @class = "form-control " })
+                                            @Html.ValidationMessageFor(model => model.InventoryBasicItemDetailsID, "", new { @class = "text-danger", type = "hidden" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.Label("Performance Check Period(in months)", new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.TextBoxFor(model => model.AMCPeriod, new { @class = "form-control", placeholder = "AMC Period", onkeypress = "return isNumberKey(event)" })
+                                            @Html.ValidationMessageFor(model => model.AMCPeriod)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.Label("Frequency", new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.DropDownListFor(model => model.Frequency, new SelectList(ViewBag.FrequencyTypeListViewBag, "Value", "Text"), "Select Frequency...", new { @class = "form-control " })
+                                            @Html.ValidationMessageFor(model => model.Frequency, "", new { @class = "text-danger", type = "hidden" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.Label("Performance Check Start Date", new { @class = "col-form-label col-md-12 col-sm-12 label-align mr-btm-15" })
+                                        <div class="col-md-11  mr-btm-15 ">
+                                            @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control ", type = "date" })
+                                            @Html.ValidationMessageFor(model => model.StartDate)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 d-flex justify-content-center" style="margin-bottom:30px;margin-top:20px">
+                                <button type="submit" id="btnSubmit" class="btn btn-success" name="Save" onclick="myFunction();">SUBMIT</button>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                    <!-- Default Basic Forms End -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    function OnSuccessAdd(result) {
+        if (result != null) {
+            swal({
+                title: "Thank You!",
+                text: "You performance-Check Was Planed!",
+                icon: "success",
+                button: "Conform!",
+            });
+        }
+        location.href = '/Inventory/InventoryBreakDown/PerformanceList';
+    }
+
+    function myFunction() {
+        debugger;
+        var abc = $('#InventoryBasicItemDetailsID option:selected').attr("InventoryBasicDetailsID");
+        var checkBox = document.getElementById("myCheck");
+        var text = document.getElementById("text");
+        $("#InventoryBasicDetailsID").val(abc);
+    }
+    function isNumberKey(evt) {
+        debugger;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    $('#ItemID').change(function () {
+        debugger
+        if ($('#NameOfInstrumentId').val() == '') {
+            $('#InventoryBasicItemDetailsID').html('');
+            $('#InventoryBasicItemDetailsID').append('<option value="">---Select---</option>');
+        }
+        else {
+            $('#InventoryBasicItemDetailsID').html('');
+            $('#InventoryBasicItemDetailsID').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/Inventory/InventoryBreakDown/GetSerialNumbers?ItemId=' + $('#ItemID').val() + '&InventoryBasicDetailsId=' + $('#InventoryBasicDetailsId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    debugger
+                    var $cloneRow = "";
+                    $cloneRow = $cloneRow + "<option value=''>Select Serial Number...</option>";
+                    for (i = 0; i < result.length; ++i) {
+                        $cloneRow = $cloneRow + "<option value='" + result[i].ID + "'  InventoryBasicDetailsID = '" + result[i].InventoryBasicDetailsID + "'>" + result[i].InventoryBasicItemDetailsNumber + "</option>";
+                    }
+                    $("#InventoryBasicItemDetailsID").html($cloneRow);
+                    //$.each(result.result, function (i, item) {
+                    //    $('#InventoryBasicItemDetailsID').append('<option value="' + item.ID + ' InventoryBasicDetailsID = ' + item.InventoryBasicDetailsID + '>' + item.InventoryBasicItemDetailsNumber + '</option>');
+                    //})
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+    $('#InventoryBasicItemDetailsID').change(function () {
+        debugger
+        var InventoryBasicItemDetailsID = $('#InventoryBasicItemDetailsID option:selected').val();
+        $.ajax({
+            url: '/Inventory/InventoryBreakDown/FindPerformanceCheck?InventoryBasicItemDetailsID=' + InventoryBasicItemDetailsID,
+            type: 'Get',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'json',
+            success: function (result) {
+                if (result != 0) {
+                    alert("Performance-Check is alredy Scheduled you Cant Update")
+                }
+                alert(result)
+            },
+            error: function (data) {
+
+            }
+        });
+    });
+</script>

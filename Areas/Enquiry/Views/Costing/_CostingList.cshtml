@@ -1,0 +1,115 @@
+﻿
+@model IEnumerable<LIMS_DEMO.Areas.Enquiry.Models.CostingModel>
+<div class="form-horizontal">
+    <input type="hidden" id="EnquiryId" value="@ViewBag.EnquiryId" />
+    <table class="data-table table nowrap">
+        @if (Model.Count() > 0)
+        {
+            <thead>
+                <tr class="thead-dark">
+                    <th class="table-plus datatable-nosort">
+                        Sr. No.
+                    </th>
+                    <th>
+                        Sample No.
+                    </th>
+                    <th>
+                        Sample Type
+                    </th>
+                    @*<th>
+                            Product Group
+                        </th>
+                        <th>
+                            Sub Group
+                        </th>
+                        <th>
+                            Matrix
+                        </th>*@
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            foreach (var item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SrNo)
+                        </td>
+                        <td>
+                            @Html.HiddenFor(modelItem => item.SampleName)
+                            @Html.DisplayFor(modelItem => item.DisplaySampleName)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.ProductGroupName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubGroupName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MatrixName)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SampleTypeProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NetAmount)
+                        </td>
+                        <td>
+                            <a onclick="funCostEdit(@item.EnquirySampleID, @item.CostingId)" href="#">Edit</a> |
+                            <a onclick="funCostDelete(@item.CostingId)" href="#">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+         }
+    </table>
+
+    @if (Model.Count() > 0)
+    {
+        <div class="row align-items-end item form-group">
+            <div class="col-md-12 col-sm-12" style="margin-top:20px">
+                <input type="button" id="btnNext" value="Next" class="btn btn-info alignright" style="float:right; width:auto" />
+            </div>
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript">
+$(function () {
+        var EnquiryId =  parseInt(@ViewBag.EnquiryId);
+        $("#btnNext").click(function () {
+            debugger
+            if ($(this).val() == "Next") {
+                if (confirm('Have You Save the Cost?')) {
+                    //window.location.href = '/Enquiry/Quotation?EnquiryId=' + EnquiryId;
+                    $(this).val("Go To Quotation Page");
+                }
+                else {
+                    return false;
+                    $(this).val("Next");
+                }
+            }
+            else if ($(this).val() == "Go To Quotation Page") {
+
+                if (confirm('Are you sure you want to go to Quotation Page?')) {
+
+                     window.location.href = '/Enquiry/Quotation/Quotation?EnquiryId=' + EnquiryId;
+                      $(this).val("Next");
+                }
+                else
+                {
+                     return false;
+                     $(this).val("Next");
+                }
+            }
+        });
+});
+</script>
+
+

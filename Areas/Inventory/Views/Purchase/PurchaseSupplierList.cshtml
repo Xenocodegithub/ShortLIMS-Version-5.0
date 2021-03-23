@@ -1,0 +1,135 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Inventory.Models.PurchaseModel>
+@{
+    ViewBag.Title = "PurchaseSupplierList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Supplier List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card-box mb-30">
+                <div class="card-box mb-30 card text-white bg-info card-box">
+                    <div class="pd-20" style="border-bottom:solid">
+                        <h4 class="text-blue h4">PURCHASE SUPPLIER LIST</h4>
+                    </div>
+                    <br />
+                    <table class="data-table table multiple-select-row nowrap">
+                        <thead>
+                            <tr>
+                                @*<th class="width-10">
+                                    All
+                                </th>*@
+                                <th class="width-20">
+                                    @Html.DisplayNameFor(model => model.SupplierName)|Address
+                                </th>
+                                <th class="width-20">
+                                    @Html.DisplayNameFor(model => model.SupplierContactPerson)
+                                </th>
+
+                                <th class="width-20">
+                                    @Html.DisplayNameFor(model => model.SupplierContactNo)
+                                </th>
+
+                                <th class="width-20">
+                                    @Html.DisplayNameFor(model => model.Product)
+                                </th>
+                                <th class="width-20">
+                                    @Html.DisplayNameFor(model => model.Approved)
+                                </th>
+                                <th class="width-20">
+                                    @Html.DisplayNameFor(model => model.ApprovedBy)
+
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateOfApproval)
+                                </th>
+                                <th class="width-20">
+                                    @Html.DisplayNameFor(model => model.Remark)
+                                </th>
+                                <th class="width-10">
+                                    @Html.DisplayNameFor(model => model.IsActive)
+                                </th>
+                                <th class="width-10">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="color:white">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.All)
+                                    </td>*@
+                                    <td>
+
+                                        @Html.DisplayFor(modelItem => item.SupplierName) |
+                                        @Html.DisplayFor(modelItem => item.SupplierAddress)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SupplierContactPerson)
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SupplierContactNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Product)
+                                    </td>
+                                    <td class="width-20">
+                                        @if (item.Approved == true)
+                                        {
+                                            <i class="micon dw icon-copy dw dw-checked" aria-hidden="true"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="icon-copy fa fa-close" style="color:red" aria-hidden="true"></i>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ApprovedBy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateOfApproval)
+                                    </td>
+                                    <td class="width-20">
+                                        @Html.DisplayFor(model => item.Remark)
+                                    </td>
+                                    <td>
+                                        @{ string Active = "Yes"; if (item.IsActive) { Active = "Yes"; } else { Active = "No"; }
+                                        }
+                                        @Active
+                                    </td>
+                                    <td><i class="icon-copy dw dw-edit-file" Style="color:blueviolet"></i>
+                                        @Html.ActionLink("Edit", "PurchasSupplierForm", new { PurchaseSupplierID = item.PurchaseSupplierID }, new { Style = "color:Chartreuse" }) |
+
+                                        <a Style="color:Chartreuse" href="/Inventory/DeletePurchaseSupplier?PurchaseSupplierID=@item.PurchaseSupplierID" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash-o" Style="color:red"></i>&nbsp;Delete</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

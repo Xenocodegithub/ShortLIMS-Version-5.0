@@ -1,0 +1,132 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDAmbientAirMonitoringModel
+@{
+    ViewBag.Title = "FieldAmbientAirMonitoring";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Field Determination</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Field Determination</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Field Determination</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Ambient Air Monitoring Values</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Ambient Air Monitoring Values</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.EnquirySampleID)
+                <div Id="divParameterList">
+                    @{
+                        Html.RenderAction("_FieldParameterUnit", "FieldWasteWater", Model.EnquirySampleID);
+                    }
+                </div>
+                @*@if (Model.FieldId == 0)*@
+                @if (ViewBag.CurrentStatus != "SampleColl")
+                {
+                    <div id="divAddAmbientAir">
+                        <h5 class="m-0 font-weight-bold text-primary text-xl-center">For 4 Hr Testing</h5>
+                        @{ Html.RenderAction("_FDAmbientAirGasesList", "FieldAmbientAirMonitoring", Model.EnquirySampleID);}
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <div id="divAddAmbientAir24Hr">
+                        <h5 class="m-0 font-weight-bold text-primary text-xl-center">For 24 Hr Testing</h5>
+                        @{ Html.RenderAction("_FDAmbientAirGasesList24hr", "FieldAmbientAirMonitoring", Model.EnquirySampleID);}
+                    </div>
+                }
+
+                @using (Ajax.BeginForm("FieldAmbientAirMonitoring", "FieldAmbientAirMonitoring", new AjaxOptions() { HttpMethod = "Post", OnBegin = "VlidateClick()", OnSuccess = "AmbientAirSuccess" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.EnquiryId)
+                    @Html.HiddenFor(model => model.SampleCollectionId)
+                    @Html.HiddenFor(model => model.FieldId)
+                    @Html.HiddenFor(model => model.MatterSizeId)
+                    @*@Html.HiddenFor(model => model.ParameterMappingId)*@
+                    <div id="divGrid">
+                        @{ Html.RenderAction("_FDAmbientAirList", "FieldAmbientAirMonitoring", Model);}
+                    </div>
+                    <div id="divGrid24hr">
+                        @{ Html.RenderAction("_FDAmbientAirList24hr", "FieldAmbientAirMonitoring", Model);}
+                    </div>
+                    <div class="row">
+                        @{ Html.RenderAction("_FieldAmbientAirMonitoring", "FieldAmbientAirMonitoring", Model);}
+                    </div>
+                    <div class="row align-items-end item form-group">
+                        <div class="col-md-12 col-sm-12">
+                            @*@if (Model.FieldId == 0)
+                                 {
+                                  if (ViewBag.CurrentStatus == "SampleColl")
+                                  {
+                                    <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="FieldSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                                  }
+                                  else
+                                  {
+                                    <button type="submit" id="btnSubmit" class="btn btn-primary" name="Save" value="FieldSubmit">Submit</button>
+                                  }
+                                }*@
+                            @*<button type="submit" id="btnSubmit" class="btn btn-primary" name="Save" value="FieldSubmit">Submit</button>*@
+                            @if (ViewBag.CurrentStatus == "SampleColl")
+                            {
+                                @*<button type="submit" id="btnSave" class="btn btn-round btn-secondary" name="Save" value="FieldSave" style="background-color:darkgrey" disabled="disabled">Save </button>*@
+                                <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="FieldSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                            }
+                            else
+                            {
+                                @*<button type="submit" id="btnSave" class="btn btn-success" name="Save" value="FieldSave">Save </button>*@
+                                <button type="submit" id="btnSubmit" class="btn btn-primary" name="Save" value="FieldSubmit">Submit</button>
+                            }
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    @{ Html.RenderAction("_FieldAmbientAirMonitoringShift", "FieldAmbientAirMonitoring", Model);}
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    function VlidateClick() {
+        $('#btnSubmit').prop('disabled', true);
+    }
+
+    function AmbientAirSuccess(result) {
+        if (result.FieldId != "0") {
+            alert('Values Entered successfully.');
+            // window.location.href = '/Collection/CollectorList';
+
+        }
+    }
+
+    //function Error() {
+    //    $('#btnSubmit').html('Submit');
+    //    $('#btnSubmit').prop('disabled', false);
+    //}
+</script>
+

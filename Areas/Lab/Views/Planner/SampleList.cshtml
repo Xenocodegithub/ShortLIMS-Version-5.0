@@ -1,0 +1,502 @@
+﻿@model IEnumerable<LIMS_DEMO.Core.Lab.PlanEntity>
+@{
+    ViewBag.Title = "SampleList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Planner</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active" aria-current="page">Planner</li>
+                                <li class="breadcrumb-item active" aria-current="page">Planner List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Planner List</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                    @*<div class="pull-right">
+                          <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                <!-- Simple Datatable start -->
+                <div class="card-box mb-30">
+                    <div class="pb-20">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">Sr No.</th>
+                                    <th>Sample ID</th>
+                                    <th>Sample Type</th>
+                                    <th>Product Group</th>
+                                    <th>Sub Group</th>
+                                    <th>Matrix</th>
+                                    <th class="table-plus datatable-nosort" >Status</th>
+                                    <th class="datatable-nosort">Report</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowNo = 0; }
+                                @if (Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="table-plus">@{rowNo++;}@rowNo</td>
+                                            <td>
+                                                <a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal1" style="color:blue">@item.SampleNameOriginal</a>
+                                               @Html.HiddenFor(modelitem =>item.SampleCollectionId)
+                                            </td>
+                                            <td>@item.SampleTypeProductName</td>
+                                            <td>@item.ProductGroupName</td>
+                                            <td>@item.SubGroupName</td>
+                                            <td>@item.MatrixName</td>
+                                            @if (item.StatusName == "RequestCreated")
+                                            {
+                                                <td>
+                                                    @item.StatusName<br />
+                                                    <img src='/Content/images/active.png' alt='Active' id='imgStatus'>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @item.StatusName<br />
+                                                    <img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'>
+                                                </td>
+                                            }
+
+                                            <td>
+                                                <a href="../../Reporting/frmShowReport.aspx?path=PlannerReport.rdl&SampleCollectionId=@item.SampleCollectionId" target="_blank">Download</a>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="pagination pagination-centered"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <!-- Simple Datatable End -->
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<div id="myModal1" class="modal" style="display:none;margin-right:0px">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width:70%">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
+                <h4 style="text-align:center;">Sample Details</h4>
+                <a class="Closeup" href="/Lab/Planner/SampleList"><span class="close CPopup">&times;</span></a>
+            </div>
+            <div class="modal-body">
+                <div class="clear" id="LoadPopup"></div>
+                <div class="col-sm-12" id="Sampleactive">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Location &nbsp;:</label>
+                                <span class="text-span" id="location"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Collected By &nbsp;:</label><span id="collectedBy" class="text-span"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="labeltext">Condition &nbsp;:</label><span class="text-span" id="condition"></span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Report to be sent by &nbsp;:</label><span class="text-span" id="reportSent"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Date & Time of Sampling  &nbsp;:</label><span class="text-span" id="samplingDateTime"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Date of Receipt of Sampling  &nbsp;:</label><span class="text-span" id="dateReceiptOfSampling"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="card-box mb-30">
+                            <div class="pb-20">
+                                <table class="data-table table stripe hover nowrap" id="tblparameter">
+                                    
+                                    <tbody>
+                                        <tr class="thead-dark">
+                                            <th class="width-5">
+                                                Parameter
+                                            </th>
+                                            <th class="width-15">
+                                                Units
+                                            </th>
+                                            <th class="width-20">
+                                                Test Method
+                                            </th>
+                                            <th class="width-20">
+                                                Analyst
+                                            </th>
+                                            <th class="width-10">
+                                                Reviewer
+                                            </th>
+                                            <th class="width-10">
+                                                Approver
+                                            </th>
+                                            <th class="width-10">
+                                                Action
+                                            </th>
+                                            <th class="width-10">
+                                                Status
+                                            </th>
+                                        </tr>
+                                        <tr class="thead-dark">
+                                            <td class="width-5"></td>
+                                            <td class="width-15"></td>
+                                            <td class="width-20"></td>
+                                            <td class="width-20">
+                                                <div id="divAnalystApplyToAll" style="width:110%"></div>
+                                                <br />
+                                                <button id="btnAnalystApplyToAll" style="width:110%">Apply to all</button>
+                                            </td>
+                                            <td class="width-10">
+                                                <div id="divReviewerApplyToAll" style="width:110%"></div>
+                                                <br />
+                                                <button id="btnReviewerApplyToAll" style="width:110%">Apply to all</button>
+                                            </td>
+                                            <td class="width-10">
+                                                <div id="divApproverApplyToAll" style="width:110%"></div>
+                                                <br />
+                                                <button id="btnApproverApplyToAll" style="width:110%">Apply to all</button>
+                                            </td>
+                                            <td class="width-10"></td>
+                                            <td class="width-10"></td>
+                                        </tr>
+                                    </tbody>                                 
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="9">
+                                                <div class="dataTables_paginate paging_simple_numbers" id=""></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function convertDate(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat)
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
+    }
+    function formatAMPM(date) {
+
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+    function createDropDownList(list, id, selected, disable) {
+        debugger
+        var ddhtml = '';
+        if (!disable) {
+            ddhtml = "<select class='form-control cls" + id + "' id='" + id + "' disabled >";
+        }
+        else {
+            ddhtml = "<select class='form-control cls" + id + "' id='" + id + "' >";
+        }
+        ddhtml = ddhtml + "<option value=-1 >Select</option>";
+        $.each(list, function (key, option) {
+            if (option.UserId == selected) {
+                ddhtml = ddhtml + "<option value=" + option.UserId + " selected >" + option.Username + "</option>";
+
+            }
+            else {
+                ddhtml = ddhtml + "<option value=" + option.UserId + ">" + option.Username + "</option>";
+            }
+        });
+        ddhtml = ddhtml + "</select>";
+        return ddhtml;
+    }
+    function createTestMethodDropDownList(list, id, selected, disable) {
+        debugger
+        var ddhtml = '';
+        if (!disable) {
+            ddhtml = "<select class='form-control' id='" + id + "' disabled >";
+
+        }
+        else {
+            ddhtml = "<select class='form-control' id=" + id + ">";
+        }
+        ddhtml = ddhtml + "<option value=-1 >Select</option>";
+        $.each(list, function (key, option) {
+            if (option.TestMethodId == selected) {
+                ddhtml = ddhtml + "<option value=" + option.TestMethodId + " selected>" + option.TestMethodName + "</option>";
+
+            }
+            else {
+                ddhtml = ddhtml + "<option value=" + option.TestMethodId + ">" + option.TestMethodName + "</option>";
+            }
+        });
+        ddhtml = ddhtml + "</select>";
+        return ddhtml;
+    }
+    $(function () {
+        debugger
+        var sampleId = 0;
+        $('.clickSmaple').click(function () {
+            sampleId = $(this).siblings('#item_SampleCollectionId').val();
+            $.ajax({
+                url: "/Planner/GetPopUpData",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                data: { SampleId: sampleId, },
+                success: function (response) {
+                    debugger
+                    var x = response;
+                    var loc = response.SampleLocation;
+                    if (loc != null) {
+                        $('#location').text(response.SampleLocation);
+
+                    }
+                    //  $('#quantity').text(response.Quantity);
+                    $('#collectedBy').text(response.CollectedBy);
+                    // $('#procedure').text(response.Procedure);
+                    $('#condition').text(response.EnvCondition);
+
+                    var mydate = '';
+                    var mytime = '';
+                    if (response.ReportSent != null) {
+                        $('#reportSent').text(convertDate(parseInt(response.ReportSent.substr(6))));
+                    }
+                    if (response.SamplingDateTime != null) {
+                        mydate = convertDate(parseInt(response.SamplingDateTime.substr(6)));
+
+                    }
+                    if (response.SamplingDateTime != null) {
+                        mytime = formatAMPM(new Date(parseInt(response.SamplingDateTime.substr(6))));
+
+                    }
+                    $('#samplingDateTime').text(mydate + " " + mytime);
+                    if (response.DateReceiptOfSampling != null) {
+                        $('#dateReceiptOfSampling').text(convertDate(parseInt(response.DateReceiptOfSampling.substr(6))));
+
+                    }
+
+                    var tableContent = "";
+
+                    var parameterData = response.ParameterInfos;
+                    var analystData = response.Analysts;
+                    var reviewerData = response.Reviewers;
+                    var approverData = response.Approvers;
+
+                    var ddlAnalystApplyToAllHtml = createDropDownList(analystData, 'ddlAnalystApplyToAll', 0, true)
+                    var ddlReviewerApplyToAllHtml = createDropDownList(reviewerData, 'ddlReviewerApplyToAll', 0, true)
+                    var ddlApproverApplyToAllHtml = createDropDownList(approverData, 'ddlApproverApplyToAll', 0, true)
+                    $('#divAnalystApplyToAll').html(ddlAnalystApplyToAllHtml);
+                    $('#divReviewerApplyToAll').html(ddlReviewerApplyToAllHtml);
+                    $('#divApproverApplyToAll').html(ddlApproverApplyToAllHtml);
+
+                    $.each(parameterData, function (key, value) {
+                        var currentData = value;
+                        var currentStatus = currentData.CurrentStatus;
+                        var selectedAnalyst = currentData.AnalystUserMasterID;
+                        var selectedReviewer = currentData.ReviewerUserMasterID;
+                        var selectedApprover = currentData.ApproverUserMasterID;
+                        var testMethodList = currentData.TestMethodList;
+                        var selectedTestMethod = currentData.TestMethodId;
+
+
+                        if (currentData.SelectedTestMethodId != 0) {
+                            selectedTestMethod = currentData.SelectedTestMethodId;
+                        }
+                        var isActive = currentData.IsActive;
+                        if (currentStatus == 5) {
+                            isActive = false;
+                        }
+                        tableContent = tableContent + "<tr>";
+                        tableContent = tableContent + "<td><input type='hidden' id='parameterGroupId'  value='" + currentData.ParameterGroupId + " '>"
+                        tableContent = tableContent + "<input type='hidden' id='parameterMasterId'  value='" + currentData.ParameterMasterId + " '>"
+                        tableContent = tableContent + value.ParameterName + "</td>";
+                        tableContent = tableContent + "<td><input type='hidden' id='hdnUnitId'  value='" + currentData.UnitId + " '>" + currentData.Unit + "</td>";
+                        tableContent = tableContent + "<td>" + createTestMethodDropDownList(testMethodList, 'ddlTestMethods', selectedTestMethod, !isActive) + "</td>";
+
+                        tableContent = tableContent + "<td>" + createDropDownList(analystData, 'ddlAnalyst', selectedAnalyst, !isActive) + "</td>";
+                        tableContent = tableContent + "<td>" + createDropDownList(reviewerData, 'ddlReviewer', selectedReviewer, !isActive) + "</td>";
+                        tableContent = tableContent + "<td>" + createDropDownList(approverData, 'ddlApprover', selectedApprover, !isActive) + "</td>";
+
+
+                        if (!isActive) {
+                            tableContent = tableContent + "<td><input type='button' value='submit' class='submitParameter btn btn-success' /></td>";
+                            tableContent = tableContent + "<td><img src='/Content/images/active.png' alt='Active'></td>";
+
+                        }
+                        else {
+                            tableContent = tableContent + "<td><input type='button' value='submit' class='submitParameter  btn btn-success' disabled /></td>";
+                            tableContent = tableContent + "<td><img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'></td>";
+
+                        }
+                        tableContent = tableContent + "</tr>";
+
+                    });
+                    $('#tblparameter tr:not(.thead-dark)').remove();
+                    $('#tblparameter tr:last').after(tableContent);
+
+                },
+                error: function (xhr) {
+                    console.log('error');
+                }
+            });
+            $('#myModal1').show();
+        });
+        $('.CPopup').click(function () {
+            $('#myModal1').hide();
+        });
+        $(document).on('click', '.submitParameter', function (event) {
+            var current = $(this);
+            var ParameterGroupId = $(this).parent().parent().find('#parameterGroupId').val();
+            var ParameterMasterId = $(this).parent().parent().find('#parameterMasterId').val();
+            var UnitId = $(this).parent().parent().find('#hdnUnitId').val();
+            var TestMethodID = $(this).parent().parent().find('#ddlTestMethods option:selected').val();
+            var AnalystUserMasterID = $(this).parent().parent().find('#ddlAnalyst option:selected').val();
+            var ReviewerUserMasterID = $(this).parent().parent().find('#ddlReviewer option:selected').val();
+            var ApproverUserMasterID = $(this).parent().parent().find('#ddlApprover option:selected').val();
+            if (AnalystUserMasterID == -1 || ReviewerUserMasterID == -1 || ApproverUserMasterID == -1) {
+                alert('Please select Analyst, Reviewer and Approver')
+                event.preventDefault();
+            }
+            else {
+                var jsonObject = { "SampleCollectionId": sampleId, "ParameterGroupId": ParameterGroupId, "ParameterMasterId": ParameterMasterId, "TestMethodID": TestMethodID, "UnitId": UnitId, "AnalystUserMasterID": AnalystUserMasterID, "ReviewerUserMasterID": ReviewerUserMasterID, "ApproverUserMasterID": ApproverUserMasterID, "IsActive": false };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Planner/SaveSampleParameterPlan",
+                    dataType: 'text',
+                    cache: false,
+                    data: "model=" + JSON.stringify(jsonObject),
+                    success: function (response) {
+                        if (response != null) {
+                            $(event.target).parent().parent().find('select').prop('disabled', true);
+                            $(event.target).prop('disabled', true);
+                            $($(event.target).parent().parent().find('img')).attr('src', '/Content/images/unactive.png');
+
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    },
+
+                    error: function (xhr) {
+                        console.log('error');
+                    }
+                });
+            }
+
+        });
+        $('.redioBtn').change(function () {
+            if (this.innerText == 'Accept') {
+                $('#Rejectactive').hide();
+                $('#Sampleactive').show();
+            }
+            else if (this.innerText == 'Reject') {
+                $('#Sampleactive').hide();
+                $('#Rejectactive').show();
+            }
+        });
+        $('#RejectSample').click(function (e) {
+            var remarks = $('#txtRemarks').val();
+            var obj = {
+                SampleId: sampleId,
+                Remarks: remarks
+            };
+
+            $.ajax({
+                url: "/Plan/RejectSample",
+                type: 'GET',
+                data: obj,
+                success: function (response) {
+                    alert('Sample Rejected');
+                    window.location.href = '/Lab/Plan/Index/';
+                },
+                error: function (response) {
+                    console.log("error");
+                    console.log(response);
+                }
+            });
+
+        });
+
+        $(document).on('click', '#btnAnalystApplyToAll', function (event) {
+            $(this).val('Please wait..');
+
+            var selectedVal = $('#ddlAnalystApplyToAll').val();
+            $('.clsddlAnalyst').prop("disabled", false);
+            $('.clsddlAnalyst:enabled').val(selectedVal).change();
+        });
+        $(document).on('click', '#btnReviewerApplyToAll', function (event) {
+
+            var selectedVal = $('#ddlReviewerApplyToAll').val();
+            $('.clsddlReviewer').prop("disabled", false);
+            $('.clsddlReviewer:enabled').val(selectedVal);
+        });
+        $(document).on('click', '#btnApproverApplyToAll', function (event) {
+
+            var selectedVal = $('#ddlApproverApplyToAll').val();
+            $('.clsddlApprover').prop("disabled", false);
+            $('.clsddlApprover:enabled').val(selectedVal);
+        });
+    });
+</script>
+

@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "AddWorkOrderCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Create WorkOrder</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Create WorkOrder</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Create WorkOrder</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add WorkOrder Customer</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+           <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add WorkOrder Customer</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                    <div class="tab">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist" style="background-color:silver;color:black;">
+                            <li role="presentation" class="active"><a href="#first" aria-controls="first" role="tab" data-toggle="tab" class="nav-link text-blue" style="color:black">Customer Details</a></li>
+                            <li role="presentation" class="nav-item"><a href="#second" aria-controls="second" role="tab" data-toggle="tab" class="nav-link text-blue" style="color:black">Sample Details</a></li>
+                            <li role="presentation" class="nav-item"><a href="#third" aria-controls="third" role="tab" data-toggle="tab" class="nav-link text-blue" style="color:black">Costing Details</a></li>
+                            <li role="presentation" class="nav-item"><a href="#fourth" aria-controls="fourth" role="tab" data-toggle="tab" class="nav-link text-blue" style="color:black">WorkOrder Details</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="first">
+                                @{
+                                    Html.RenderAction("_AddCustomerDetails", "WorkOrderCustomer");
+                                }
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="second">
+                               @{
+                                   Html.RenderAction("_AddSampleDetails", "WorkOrderCustomer");
+                               }
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="third">
+                               @{
+                                   Html.RenderAction("_AddCostingDetails", "WorkOrderCustomer");
+                                }
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="fourth">
+                                @{
+                                    Html.RenderAction("_AddWorkOrderDetails", "WorkOrderCustomer");
+                                }
+                            </div>
+                        </div>
+                    </div>
+            </div>
+           <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+

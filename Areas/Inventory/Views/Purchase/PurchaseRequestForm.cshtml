@@ -1,0 +1,72 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.PurchaseModel
+@{
+    ViewBag.Title = "PurchaseRequestForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px" id="divAddPurchase">
+            @{ Html.RenderAction("_PurchaseRequestFormList", "Purchase");}
+        </div>
+        @using (Ajax.BeginForm("PurchaseRequestForm", "Purchase", new AjaxOptions() { HttpMethod = "Post", OnBegin = "VlidateClick()", OnSuccess = "PurchaseRequestSuccess" }))
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.PurchaseRequestID)
+            @Html.HiddenFor(model => model.PurchaseMasterID)
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <p class="text-muted font-13 m-b-30">
+                        </p>
+                        <div id="divList">
+                            @{ Html.RenderAction("_PurchaseList", "Purchase");}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr style="color:darkmagenta;" />
+            <div class="row d-flex justify-content-center">
+                @if (Model.PurchaseRequestID == 0)
+                {
+                    <button type="submit" id="btnSubmit" class="btn btn-outline-primary primary" name="Save" value="PurchaseSubmit">Create</button>
+                }
+                else
+                {
+                    <button type="submit" id="btnUpdate" class="btn btn-outline-primary" name="Save" value="PurchaseUpdate">Update</button>
+                }
+            </div>
+        }
+    </div>
+</div>
+<script>
+    function VlidateClick() {
+        debugger
+
+        $('#btnSubmit').val('Please Wait..');
+        $('#btnSubmit').prop('disabled', true); 
+
+    }
+
+    function PurchaseRequestSuccess(result) {
+        swal(
+            {
+                position: 'top-end',
+                type: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                //timer: 1500
+            }
+        )
+
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Inventory/Purchase/PurchaseRequestList';
+        }
+    }
+
+</script>

@@ -1,0 +1,282 @@
+﻿@model LIMS_DEMO.Areas.WorkOrderCustomer.Models.WorkOrderCustomerListModel
+@{
+    ViewBag.Title = "_AddWorkOrderDetails";
+}
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <label class="form-label">Customer Name: </label>
+            <div class="col-sm-7">
+                @Html.DisplayFor(model => model.WorkOrderCustomer.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">WorkOrder Received On: </label>
+            <div class="col-sm-7">
+                @Html.DisplayFor(model => model.WorkOrderCustomer.WORecvDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderReceivedDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">WorkOrder End Date: </label>
+            <div class="col-sm-7">
+                @Html.DisplayFor(model => model.WorkOrderCustomer.WOEDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderEndDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <hr />
+        <div class="col-md-4">
+            <label class="form-label">Upload Work Order:</label>
+            <div class="col-sm-7">
+                @Html.DisplayFor(model => model.WorkOrderCustomer.FileName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <label class="form-label">Duration(in months): </label>
+            <div class="col-sm-7">
+                @Html.DisplayFor(model => model.WorkOrderCustomer.Duration, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Expected Sample Collection Date: </label>
+            <div class="col-sm-7">
+                @Html.DisplayFor(model => model.WorkOrderCustomer.expSampleDate, new { htmlAttributes = new { @class = "form-control col-sm-5" } })
+                @Html.HiddenFor(model => model.WorkOrderCustomer.SampleCollectionDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <hr />
+        <div class="col-md-4">
+            <label class="form-label col-md-12">Number of Days(Only for Hourly And Six times a Day Frequency):</label>
+            <div class="col-sm-7">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.NoOfDays, new { @class = "form-control", @autocomplete = "false", disabled = "disabled" })
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-sm-7" style="margin-top:10px;">
+                <input type="button" id="btnAddNoOfDays" value="AddNoOfDays" class="btn btn-sm btn-info text-nowrap" />
+            </div>
+        </div>
+
+    </div>
+  <hr />
+  @using (Ajax.BeginForm("_AddWorkOrderDetails", "WorkOrderCustomer", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FinalSuccess" }))
+   {
+         @Html.AntiForgeryToken()
+         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+         @Html.HiddenFor(model => model.WorkOrderCustomer.CustomerMasterId)
+         @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderId)
+         @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderUpload)
+         @Html.HiddenFor(model => model.WorkOrderCustomer.SampleCollectionDate)
+         @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderReceivedDate)
+         @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderEndDate)
+         @Html.HiddenFor(model => model.WorkOrderCustomer.Duration)
+                          
+          <div class="row">
+               <div class="col-md-3">
+                      Any amendment to contract:
+                      <span class="required" style="color:red">*</span>
+                       <label class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.ContractAmendment, new { @class = "form-control", @autocomplete = "false" })
+                                            </label>
+                 </div>
+               <div class="col-sm-8 form-group">
+                                            <div class="col-sm-4">
+                                                <label> @Html.RadioButtonFor(item => Model.IsIGST, false, new { id = "IsIGST-false", @checked = "checked" }) CGST(9 %) + SGST(9 %) </label>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label> @Html.RadioButtonFor(item => Model.IsIGST, true, new { id = "IsIGST-true" }) IGST(18%)</label>
+                                            </div>
+               </div>
+          </div>
+          <hr />
+          <div class="col-sm-12">
+                                        <table class="data-table table nowrap">
+                                            <thead>
+                                                <tr class="thead-dark">
+                                                    <th class="table-plus datatable-nosort">
+                                                        SrNo.
+                                                    </th>
+                                                    <th>
+                                                        SampleType
+                                                    </th>
+                                                    <th>
+                                                        ParameterName
+                                                    </th>
+                                                    <th>
+                                                        Limit
+                                                    </th>
+                                                    <th>
+                                                        No Of Sample And Location <span class="required" style="color:red">*</span>
+                                                    </th>
+                                                    <th>
+                                                        View Location  <span class="required" style="color:red">*</span>
+                                                    </th>
+                                                    <th>
+                                                        Frequency
+                                                    </th>
+                                                    <th>
+                                                        Unit Price
+                                                    </th>
+                                                    <th>
+                                                        Total
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (int i = 0; i < Model.FinalWorkOrderList.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Model.FinalWorkOrderList[i].SerialNo
+                                                            @Html.HiddenFor(x => Model.FinalWorkOrderList[i].EnquirySampleID)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(x => Model.FinalWorkOrderList[i].SampleTypeProductName, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].SampleTypeProductName)
+                                                            @Html.HiddenFor(x => Model.FinalWorkOrderList[i].DisplaySampleName, new { @class = "form-control" })
+                                                            @Html.HiddenFor(x => Model.FinalWorkOrderList[i].SampleName, new { @class = "form-control" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(x => Model.FinalWorkOrderList[i].ParameterName, new { @class = "form-control" })
+                                                            @*@Html.EditorFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })*@
+                                                            @*@Html.ValidationMessageFor(x => Model.workorderList[i].ParameterName)*@
+                                                        </td>
+                                                        <td>
+                                                            @if (Model.FinalWorkOrderList[i].IsSetPCBLimit)
+                                                            {
+                                                                <a href="#" onclick="funLoadPCBParam(@Model.FinalWorkOrderList[i].EnquirySampleID,@Model.WorkOrderId)"> Limit</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class=" btn-disabled">NA</a>
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.FinalWorkOrderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control" })
+                                                            @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].Quantity)
+                                                        </td>
+                                                        <td>
+                                                            <a href="#" onclick="funAddLocation(@Model.FinalWorkOrderList[i].EnquirySampleID,@Model.WorkOrderCustomer.WorkOrderId);" class="btn btn-primary btn-sm">View Location</a>
+                                                            @*@Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Location, new { @class = "form-control", @style = "color:black" })
+                                                             @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].Location)*@
+                                                        </td>
+                                                        <td>
+                                                            @Html.DropDownListFor(x => Model.FinalWorkOrderList[i].FrequencyMasterId, new SelectList(ViewBag.Frequency, "FrequencyMasterId", "Frequency"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(x => Model.FinalWorkOrderList[i].UnitPrice, new { @class = "form-control" })
+                                                            @Html.HiddenFor(x => Model.FinalWorkOrderList[i].UnitPrice)
+                                                            @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].UnitPrice)
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
+                                                            @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].Total)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                          <hr />
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align:center;">
+                                        <button type="submit" class="btn btn-info" id="btnsubmit">Submit</button>
+                                    </div>
+                                </div>
+   }
+</div>
+
+<div class="modal" id="PCBLimitPopup" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="text-align:center;">Add  Limit</h4>
+                <button type="button" onclick="$('#PCBLimitPopup').hide();" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="divPCBLimit" style="border:none"> </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="LocationPopup" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="text-align:center;">Add Location </h4>
+                <button type="button" onclick="$('#LocationPopup').hide();" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="divLocation" style="border:none"> </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function funLoadPCBParam(EnquirySampleID, WorkOrderId) {
+        debugger
+        $('#divPCBLimit').load('/Enquiry/SampleAndParameter/_ParameterPCBLimit?EnquirySampleID=' + EnquirySampleID + '&WorkOrderId=0');
+        $('#PCBLimitPopup').show();
+    }
+
+    function FinalSuccess(result) {
+        debugger
+
+        if (result.status == "success") {
+            $('#btnsubmit').prop('disabled', false);
+            $('#btnsubmit').html('Please Wait..')
+            alert(' Success.');
+            window.location.href = "/WorkOrderCustomer/WorkOrderCustomer/Index";
+        }
+        else if (result.status == "Fail NoOfLocation")
+        {
+             alert('Number of Location should not be Less than No. of Samples !!!');
+        }
+       else
+        {
+            debugger
+           alert('Please Select All Mandatory fields!')
+           $('#btnSubmit').prop('disabled', false);
+           $('#btnSubmit').html('Submit')
+         }
+
+    }
+
+    function funCalTotal(e,eid) {
+        debugger
+        var NoOfSample = $(e).val();
+        var UnitPriceId = e.id.replace('Quantity', 'UnitPrice');
+        var UnitPrice = $('#' + UnitPriceId).val();
+        var TotalId = e.id.replace('Quantity', 'Total');
+        if (NoOfSample.trim() == '') {
+            $('#' + TotalId).val('0');
+        } else {
+            var Total = Number(NoOfSample) * Number(UnitPrice);
+            $('#' + TotalId).val(Total);
+        }
+        var WorkOrderId = @Model.WorkOrderId;
+       $('#divLocation').load('/Enquiry/WorkOrder/_AddLocation?EnquirySampleID=' + eid + '&WorkOrderId=' + WorkOrderId + '&count=' + NoOfSample);
+       $('#LocationPopup').show();
+    }
+
+    function funAddLocation(EnquirySampleID, WorkOrderId) {
+        debugger
+
+        $('#divLocation').load('/Enquiry/WorkOrder/_AddLocation?EnquirySampleID=' + EnquirySampleID + '&WorkOrderId=' + WorkOrderId + '&count=' + 0);
+        $('#LocationPopup').show();
+    }
+
+   $('#btnAddNoOfDays').click( function () {
+        debugger
+         $('#NoOfDays').prop("disabled", false);
+   });
+
+</script>
+

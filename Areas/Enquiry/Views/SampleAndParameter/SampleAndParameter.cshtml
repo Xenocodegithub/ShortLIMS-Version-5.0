@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "SampleAndParameter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>SampleAndParameter</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Enquiry</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Enquiry</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Parameter</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Parameter</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+               
+                    <div class="body-content" id="validation">
+                        <input type="hidden" id="EnquiryId" value="@ViewBag.EnquiryId" />
+                        <div id="divSampleContract" class="pd-20 card-box mb-30">
+                            @{
+                                Html.RenderAction("_SampleContract", "SampleAndParameter", new { EnquiryId = ViewBag.EnquiryId });
+                            }
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div id="divParameters" class="pd-20 card-box mb-30">
+                            @{
+                                Html.RenderAction("_Parameters", "SampleAndParameter", new { EnquiryDetailId = 0, EnquiryId = ViewBag.EnquiryId });
+                            }
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div id="divSampleDetails" class="pd-20 card-box mb-30" style="margin-top:20px">
+                            @{
+                                Html.RenderAction("_SampleList", "SampleAndParameter", new { EnquiryId = ViewBag.EnquiryId });
+                            }
+                            <script>
+                                function onSuccess() {
+                                    alert('asd')
+                                    $('.btnChoose').prop('disabled', false);
+                                    $('.btnChoose').html('Choose Parameters')
+                                }
+                            </script>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <a href="~/Enquiry/Contract/AddContract?EnquiryId=@ViewBag.EnquiryId" class="btn btn-danger alignleft" style="float:left" data-toggle="tooltip" data-placement="top" title="">Back</a>
+                                @*<a href="~/Enquiry/Contract/AddContract" class="btn btn-danger alignleft" style="float:left" data-toggle="tooltip" data-placement="top" title="">Back</a>*@
+                            </div>
+                        </div>
+                    </div>
+              
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+     function funContractSelected(EnquiryId,EnquiryDetailId,SampleTypeProductId,SampleTypeProductCode, SubroupCode) {
+        debugger
+        $('.btnChoose').prop('disabled', true);
+        $('.btnChoose').html('Please Wait..')
+        $('#divParameters').show();
+        $('#divParameters').load('/Enquiry/SampleAndParameter/_Parameters?EnquiryId=' + EnquiryId + "&EnquiryDetailId=" + EnquiryDetailId + "&SampleTypeProductId=" + SampleTypeProductId + "&SampleTypeProductCode=" + SampleTypeProductCode  + "&SubroupCode=" + SubroupCode);
+    }
+
+    function funEditSampleDetail(EnquiryDetailId, EnquirySampleID) {
+        debugger
+        $('#divParameters').show();
+        $('#divParameters').load('/Enquiry/SampleAndParameter/_Parameters?EnquiryDetailId=' + EnquiryDetailId + "&EnquirySampleID=" + EnquirySampleID);
+    }
+
+    function funDeleteSampleDetail(EnquirySampleId, CurrentStatus) {
+         debugger
+        if (confirm('Are you sure you want to delete this record?')) {
+            $.ajax({
+                url: '/Enquiry/SampleAndParameter/_DeleteSample?EnquirySampleId=' + EnquirySampleId + "&CurrentStatus=" + CurrentStatus,
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == "success") {
+                        $('#divSampleDetails').load('/Enquiry/SampleAndParameter/_SampleList?EnquiryId=@ViewBag.EnquiryId');
+                    }
+                },
+                error: function (data) {
+                }
+            });
+        }
+    }
+
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tblParameters");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+</script>

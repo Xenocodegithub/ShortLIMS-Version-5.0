@@ -1,0 +1,172 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Inventory.Models.InventoryMaintainanceAndCalibrationModel>
+@{
+    ViewBag.Title = "MaintainanceList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Maintaince List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Maintaince List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-header card text-white bg-dark card-box">
+                <div class="card-header">Laboratory Instrument Report</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            @Html.Label("Catagory Name")
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                @Html.DropDownList("CatagoryId1", new SelectList(ViewBag.InvCategoryList, "CatagoryMasterID", "CategoryName"), "Select Item..", new { @class = "form-control " })
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                                <input type="button" value="Print" class="btn btn-primary" id="buttonPrint" name="buttonSearch" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+
+                <!-- Simple Datatable start -->
+                <div class="card-box mb-30">
+                    <div class="pd-20">
+                        <h4 class="text-blue h4">Maintaince List</h4>
+                        <p class="mb-0"><a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+                    </div>
+                    <div class="pb-20">
+                        <table class="data-table table stripe hover nowrap">
+
+                            <thead>
+                                <tr>
+                                    <th class="table-plus datatable-nosort">Sr No</th>
+                                    <th>Category Name</th>
+                                    <th>Item Name</th>
+                                    <th>Serial Number</th>
+                                    <th>Completion Date</th>
+                                    <th>Next Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    int SerialNumber = 1;
+                                    foreach (var item in Model)
+                                    {
+                                        if (item.NextDate < DateTime.Now)
+                                        {
+                                            <tr style="background-color:azure; color: black;">
+                                                <td>@SerialNumber</td>
+                                                <td>@item.CategoryName</td>
+                                                <td>@item.ItemName</td>
+                                                <td>@item.InventoryBasicItemDetailsNumber</td>
+                                                @if (item.CompletionDate == null)
+                                                {
+                                                    <td></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><a style="color:black; font-weight: bold;" href="@Url.Action("Maintainance", "InventoryMaintainanceAndCalibration", new { InventoryBasicItemDetailsNumber = item.InventoryBasicItemDetailsNumber, ItemName = item.ItemName, ItemID = item.ItemID, InventoryBasicItemDetailsID = item.InventoryBasicItemDetailsID, InventoryMaintainanceAndCalibrationScheduleDatesID = item.CompletionDateID, BasicDetailsID = item.InventoryBasicDetailsID,IMCID=item.ID })">@Convert.ToDateTime(item.CompletionDate).ToString("dd/MM/yyyy")</a></td>
+
+                                                }
+                                                @if (item.NextDate != null)
+                                                {
+                                                    <td><a style="color: black; font-weight: bold;" href="@Url.Action("Maintainance", "InventoryMaintainanceAndCalibration", new { InventoryBasicItemDetailsNumber = item.InventoryBasicItemDetailsNumber, ItemName = item.ItemName, ItemID = item.ItemID, InventoryBasicItemDetailsID = item.InventoryBasicItemDetailsID, InventoryMaintainanceAndCalibrationScheduleDatesID = item.NextDateID, BasicDetailsID = item.InventoryBasicDetailsID,IMCID=item.ID })">@Convert.ToDateTime(item.NextDate).ToString("dd/MM/yyyy")</a></td>
+
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                }
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr style="background-color: cadetblue ; color: black;">
+                                                <td>@SerialNumber</td>
+                                                <td>@item.CategoryName</td>
+                                                <td>@item.ItemName</td>
+                                                <td>@item.InventoryBasicItemDetailsNumber</td>
+                                                @if (item.CompletionDate == null)
+                                                {
+                                                    <td></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><a style="color:black; font-weight: bold;" href="@Url.Action("Maintainance", "InventoryMaintainanceAndCalibration", new { InventoryBasicItemDetailsNumber = item.InventoryBasicItemDetailsNumber, ItemName = item.ItemName, ItemID = item.ItemID, InventoryBasicItemDetailsID = item.InventoryBasicItemDetailsID, InventoryMaintainanceAndCalibrationScheduleDatesID = item.CompletionDateID, BasicDetailsID = item.InventoryBasicDetailsID,IMCID=item.ID })">@Convert.ToDateTime(item.CompletionDate).ToString("dd/MM/yyyy")</a></td>
+
+                                                }
+                                                @if (item.NextDate != null)
+                                                {
+                                                    <td><a style="color: black; font-weight: bold;" href="@Url.Action("Maintainance", "InventoryMaintainanceAndCalibration", new { InventoryBasicItemDetailsNumber = item.InventoryBasicItemDetailsNumber, ItemName = item.ItemName, ItemID = item.ItemID, InventoryBasicItemDetailsID = item.InventoryBasicItemDetailsID, InventoryMaintainanceAndCalibrationScheduleDatesID = item.NextDateID, BasicDetailsID = item.InventoryBasicDetailsID,IMCID=item.ID })">@Convert.ToDateTime(item.NextDate).ToString("dd/MM/yyyy")</a></td>
+
+                                                }
+                                                else
+                                                {
+                                                    <td>Inventory to be renewed</td>
+                                                }
+                                            </tr>
+
+                                        }
+                                        ++SerialNumber;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Simple Datatable End -->
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+            <!-- Simple Datatable End -->
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    $("#buttonPrint").click(function () {
+        debugger;
+        if ($("#InventoryTypeID1 option:selected").val() == "" || $("#CatagoryId1 option:selected").val() == "") {
+            alert('Please Select Catagory');
+        } else {
+            alert('Reporit is open Please Wait');
+            var x = "/Reporting/frmShowReport.aspx?path=NonConsumableInstrumentMaintainanceSchedule.rdl&CategoryName=" + $("#CatagoryId1 option:selected").text() + "";
+            window.location = x;
+        }
+    });
+</script>

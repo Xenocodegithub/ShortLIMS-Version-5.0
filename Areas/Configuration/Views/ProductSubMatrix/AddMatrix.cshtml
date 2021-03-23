@@ -1,0 +1,184 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.MatrixMasterModel
+@{
+    ViewBag.Title = "AddMatrix";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+           
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Matrix</h4>
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("AddMatrix", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddTestMethodSuccess" }))
+                {
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">SampleTypeProduct Name </label>
+                        <div class="col-sm-12 col-md-10">
+                            @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = "form-control col-md-7" })
+                            @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SampleTypeProductName)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Product Group Name</label>
+                        <div class="col-sm-12 col-md-10">
+                            @Html.DropDownListFor(model => model.ProductGroupId, new SelectList(ViewBag.ProductGroupList, "ProductGroupId", "ProductGroupName"), "---Select---", new { @class = "form-control col-md-7" })
+                            @Html.ValidationMessageFor(model => model.ProductGroupId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ProductGroupName)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Sub Group Name</label>
+                        <div class="col-sm-12 col-md-10">
+                            @Html.DropDownListFor(model => model.SubGroupId, new SelectList(ViewBag.SubGroupList, "SubGroupId", "SubGroupName"), "---Select---", new { @class = "form-control  col-md-7" })
+                            @Html.ValidationMessageFor(model => model.SubGroupId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SubGroupName)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Matrix Name</label>
+                        <div class="col-sm-12 col-md-10">
+                            @*<input class="form-control" placeholder="Search Here" type="search">*@
+                            @Html.TextBoxFor(model => model.MatrixName, new { @class = "form-control col-md-7", placeholdder = "MatrixName" })
+                            @Html.ValidationMessageFor(model => model.MatrixName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Matrix Code</label>
+                        <div class="col-sm-12 col-md-10">
+                            @*<input class="form-control" placeholder="Search Here" type="search">*@
+                            @Html.TextBoxFor(model => model.MatrixCode, new { @class = "form-control col-md-7", placeholdder = "MatrixCode" })
+                            @Html.ValidationMessageFor(model => model.MatrixCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                        <div class="col-sm-12 col-md-10">
+                            <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                            <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <a class="btn btn-outline-danger" href="@Url.Action("MatrixList", "ProductSubMatrix")">Cancel</a>&emsp;
+                        <button type="submit" class="btn btn-outline-success">Save</button>
+
+                    </div>
+                }
+
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    $(document).ready(function () {
+        console.log("ready!");
+    });
+    function AddMatrixSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/MatrixList';
+        }
+    }
+
+    $('#SampleTypeProductId').change(function () {
+        if ($('#SampleTypeProductId').val() == '') {
+            $('#ProductGroupId').html('');
+            $('#ProductGroupId').append('<option value="">---Select---</option>');
+            $('#SubGroupId').html('');
+            $('#SubGroupId').append('<option value="">---Select---</option>');
+            $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+            var SampleTypeProductID = $('#SampleTypeProductId').val();
+            $('#ProductGroupId').html('');
+            $('#ProductGroupId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/ProductSubMatrix/ProductGroups',
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                data: { SampleTypeProductId: SampleTypeProductID },
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#ProductGroupId').append('<option value="' + item.ProductGroupId + '">' + item.ProductGroupName + '</option>');
+                    })
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+    $('#ProductGroupId').change(function () {
+        if ($('#ProductGroupId').val() == '') {
+            $('#SubGroupId').html('');
+            $('#SubGroupId').append('<option value="">---Select---</option>');
+            $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+            var ProductGroupID = $('#ProductGroupId').val();
+            var SampleTypeProductID = $('#SampleTypeProductId').val();
+            $('#SubGroupId').html('');
+            $('#SubGroupId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/ProductSubMatrix/SubGroups',
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                data: { SampleTypeProductId: SampleTypeProductID, ProductGroupId: ProductGroupID},
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#SubGroupId').append('<option value="' + item.SubGroupId + '">' + item.SubGroupName + '</option>');
+                    })
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+
+    $('#SubGroupId').change(function () {
+        if ($('#SubGroupId').val() == '') {
+            $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+            var ProductGroupID = $('#ProductGroupId').val();
+            var SampleTypeProductID = $('#SampleTypeProductId').val();
+            var SubGroupID = $('#SubGroupId').val();
+            $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/ProductSubMatrix/Matrix',
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                data: { SampleTypeProductId: SampleTypeProductID, ProductGroupId: ProductGroupID, SubGroupId: SubGroupID},
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#MatrixId').append('<option value="' + item.MatrixId + '">' + item.MatrixName + '</option>');
+                    })
+                },
+                error: function (data) {
+
+                }
+            });
+        }
+    });
+</script>
+
+

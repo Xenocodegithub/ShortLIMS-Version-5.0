@@ -1,0 +1,113 @@
+﻿@model  LIMS_DEMO.Areas.FieldDetermination.Models.FDNoiseLevelMonitoringModel
+
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pb-20">
+        @if (Model.GridSourceModel.Count() > 0)
+        {
+            <table id="tblField" class="data-table table stripe hover nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            Sr.No.
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Shift
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Test Method
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Unit
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Location
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Day/Night
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Time
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Inside
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Outside
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Insertion Loss
+                        </th>
+
+                        @if (Model.CurrentStatus != "SampleColl")
+                        {
+                            <th class="table-plus datatable-nosort">
+                                Action
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.GridSourceModel.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Model.GridSourceModel[i].SrNo
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].ShiftName
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].TestMethodName
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].UnitName
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].LocationGrid
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].DayNight
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].TimeSource
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].Inside
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].Outside
+                            </td>
+                            <td>
+                                @Model.GridSourceModel[i].InsertionLoss
+                            </td>
+                            @if (Model.CurrentStatus != "SampleColl")
+                            {
+                                <td>
+                                    @*<a href="#" onclick="funEditField(@Model.GridModel[i].SrNo);">Edit</a> |*@
+                                    <a href="#" onclick="funDeleteField(@Model.GridSourceModel[i].SrNo);">Delete</a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+    </div>
+</div>
+<!-- Simple Datatable End -->
+<script>
+    function funEditField(Id) {
+        debugger
+        $("#tblField").attr("disabled", true);
+        $('#divAddSourceNoiseLevel').load('/FieldDetermination/FieldNoiseLevelMonitoring/_FieldSourceNoiseLevelList?Id=' + Id);
+    }
+
+</script>
+
+
+
+
+
+

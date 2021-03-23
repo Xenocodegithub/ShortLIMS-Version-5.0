@@ -1,0 +1,114 @@
+﻿
+@model LIMS_DEMO.Areas.Enquiry.Models.QuotationPreviewModel
+
+@{
+    ViewBag.Title = "Quotation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Quotation</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Enquiry</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Quotation</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Quotation</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Quotation</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.EnquiryId)
+            <div>
+                <!-- Simple Datatable start -->
+                   <table class="data-table table nowrap">
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">
+                                    Sr. No.
+                                </th>
+                                <th>
+                                    Sample No.
+                                </th>
+                                <th>
+                                    Particulars
+                                </th>
+                                <th>
+                                    Rate/Unit
+                                </th>
+                            </tr>
+
+                            @foreach (var item in Model.costing)
+                            {
+                                <tr>
+                                    <td rowspan="2">
+                                        @Html.DisplayFor(modelItem => item.SrNo)
+                                    </td>
+                                    <td rowspan="2">
+                                        @*@Html.HiddenFor(modelItem => item.SampleName)*@
+                                        @Html.DisplayFor(modelItem => item.DisplaySampleName)
+                                    </td>
+                                    <td style="font-weight:bold">
+                                        @Html.Raw(@Html.DisplayFor(modelItem => item.Particulars))
+                                    </td>
+                                    <td rowspan="2">
+                                        @Html.DisplayFor(modelItem => item.NetAmount)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.Raw(@Html.DisplayFor(modelItem => item.Parameters))
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                   <div class="row" style="margin-top:10px;">
+                            <div class="form-group col-md-12 text-right">
+                                <a href="~/Enquiry/Costing/AddCosting?EnquiryId=@Model.EnquiryId" class="btn btn-danger alignleft" style="float:left" data-toggle="tooltip" data-placement="top" title="">Back</a>
+                                <a id="btnApprove" target="_blank" href="/Enquiry/QuotationReport?Format=Word&EnquiryId=@Model.EnquiryId" class="btn btn-success btn-sm">Download DOC</a>
+                                <a id="btnApprove" target="_blank" href="/Enquiry/QuotationReport?Format=PDF&EnquiryId=@Model.EnquiryId" class="btn btn-success btn-sm">Download PDF</a>
+                                <a id="btnSentMail" onclick="QuotationSent();" href="#" class="btn btn-info btn-sm">Save Quotation</a>
+                            </div>
+                        </div>
+                <!-- Simple Datatable End -->
+            </div>
+                <div class="col-md-12">
+                    @{ Html.RenderAction("_QuotationLog", "Quotation", new { EnquiryId = Model.EnquiryId });}
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function QuotationSent() {
+        $.ajax({
+            url: '/Enquiry/Quotation/QuotationSent?EnquiryId=' + $('#EnquiryId').val() + "&EnquirySampleID=" + $('#EnquirySampleID').val(),
+            type: 'Get',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function () {
+                alert('Quotation sent');
+                location.href = '/Enquiry/Quotation/QuotationList';
+                //location.href = '/Enquiry/Quotation?EnquiryId= @Model.EnquiryId';
+            },
+        });
+    }
+</script>
+
+

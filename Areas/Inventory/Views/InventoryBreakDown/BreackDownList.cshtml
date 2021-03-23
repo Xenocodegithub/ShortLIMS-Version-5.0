@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "BreackDownList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Breack-Down List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="page-header card text-white bg-dark card-box">
+                        <div class="card-header">BREAKDOWN-REPORTS</div>
+                        <div class="card-body">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-sm-1 justify-content-center">
+                                    <label> From </label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" id="StartDate" placeholder="Search..." type="date" />
+                                </div>
+                                <div class="col-sm-1 justify-content-center">
+                                    <label> TO </label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" id="EndDate" style="margin-left:-67px" placeholder="Search..." type="date" />
+                                </div>
+                                <div class="col-sm-1">
+                                    <input type="button" value="Print" class="btn btn-primary" id="buttonPrint" name="buttonPrint" />
+                                </div>
+                            </div>
+                        </div>
+                   
+               
+            </div>
+                <div class="card-box mb-30">
+                    <div class="card-box mb-30 card text-white bg-info card-box">
+                        <div class="pd-20" style="border-bottom:solid">
+                            <h4 class="text-blue h4">BREAK-DOWN LIST</h4>
+                        </div>
+                        <br />
+                        <div class="pb-20">
+                            <table class="data-table table nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>SR.NO.</th>
+                                        <th>Instrument/Equipment</th>
+                                        <th>Serial Number</th>
+                                        <th>Problem Description</th>
+                                        <th>Reported Date</th>
+                                        <th>Name Of Agency</th>
+                                        <th>Date of Repairs</th>
+                                        <th>Expenses</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody style="color:white">
+                                    @{ if (Model != null)
+                                        {
+                                            int SerialNumber = 1;
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.DateOfStartRepair != null && item.DateOfCompletionRepair != null)
+                                                {
+                            <tr class="bg-primary" id="@item.InventoryMaintAndCalibBreakDownId">
+                                <td>@SerialNumber</td>
+                                <td>@item.NameOfInstrument</td>
+                                <td><a style="color:red; font-weight: bold;" href="@Url.Action("EditBreakDown", "InventoryBreakDown", new { ID = @item.InventoryMaintAndCalibBreakDownId })">@item.IDNO</a></td>
+                                <td>@item.ProblemDescription</td>
+                                <td>@item.ProblemReportedDate.ToString().Replace("00:00:00", "")</td>
+                                <td>@item.NameOfAgency</td>
+                                <td>@item.DateOfCompletionRepair.ToString().Replace("00:00:00", "")</td>
+                                <td>@item.Expenses</td>
+                            </tr>
+ }
+                        else
+                        {
+        <tr class="bg-dark" id="@item.InventoryMaintAndCalibBreakDownId">
+            <td>@SerialNumber</td>
+            <td>@item.NameOfInstrument</td>
+            <td>@item.IDNO</td>
+            <td>@item.ProblemReportedBy</td>
+            @if (@item.ProblemReportedDate == null)
+            {
+        <td>--</td>
+ }
+    else
+    {
+        <td>@item.ProblemReportedDate.ToString().Replace("00:00:00", "")</td>
+}
+            <td>@item.NameOfAgency</td>
+            @if (@item.DateOfCompletionRepair == null)
+            {
+        <td>--</td>
+ }
+    else
+    {
+        <td>@item.DateOfCompletionRepair.ToString().Replace("00:00:00", "")</td>
+}
+            <td>@item.Expenses</td>
+        </tr>
+ }
+    ++SerialNumber;
+}
+} }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<script>
+    $("#buttonPrint").click(function () {
+        debugger;
+        if ($("#StartDate").val() == "" || $("#EndDate").val() == "") {
+            alert('Please enter Date');
+        } else {
+
+            var x = "/Reporting/frmShowReport.aspx?path=BreakdownmaintenanceRecordReport.rdl&FromDate=" + $("#StartDate").val() + " &ToDate=" + $("#EndDate").val() + "";
+            window.location = x;
+        }
+    });
+</script>

@@ -1,0 +1,14 @@
+﻿
+@model LIMS_DEMO.Areas.Inventory.Models.PurchaseModel
+
+<div class="card text-white bg-info card-box">
+    <div class="card-header">Terms And Conditions</div>
+    @for (int i = 0; i < Model.TermsList.Count; i++)
+    {
+        <div style="margin-left:20px;padding:7px">
+            @Html.CheckBoxFor(model => model.TermsList[i].IsSelected)
+            @Html.HiddenFor(model => model.TermsList[i].TermAndCondtId)
+            @Model.TermsList[i].TermAndCondt
+        </div>
+    }
+</div>

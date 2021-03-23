@@ -1,0 +1,157 @@
+﻿@model LIMS_DEMO.Core.Lab.SampleParameterInfo
+@using LIMS_DEMO.Common
+@{
+    ViewBag.Title = "ParameterList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var recordCount = Model.ParameterInfos.Count();
+    CurrentStatusEnum currentStatus;
+}
+@{ long SampleCollectionId = Model.SampleDetails.SampleCollectionId;}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Tester</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active" aria-current="page">Tester</li>
+                                <li class="breadcrumb-item active" aria-current="page">Parameter List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Parameter List</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                    @*<div class="pull-right">
+                          <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                <!-- Simple Datatable start -->
+                <div class="card-box mb-30">
+                    <div class="pb-20">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                   
+                                    <th class="table-plus datatable-nosort">Sample ID</th>
+                                    <th>Sample Type</th>
+                                    <th>
+                                        Product Group Name
+                                    </th>
+                                    <th>
+                                        Sub Group Name
+                                    </th>
+                                    <th>
+                                        Matrix
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                
+                                        <tr>
+                                            <td>@Model.SampleDetails.SampleNameOriginal</td>
+                                            <td>@Model.SampleDetails.SampleTypeProductName</td>
+                                            <td>@Model.SampleDetails.ProductGroupName</td>
+                                            <td>@Model.SampleDetails.SubGroupName</td>
+                                            <td>@Model.SampleDetails.MatrixName</td>
+                                          </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+
+                                        <div class="dataTables_paginate paging_simple_numbers" id=""></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <hr/>
+                <div class="card-box mb-30">
+                    <div class="pb-20">
+                        <table class="data-table table stripe hover nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">Sr No.</th>
+                                    <th>Parameter</th>
+                                    <th>Test Method</th>
+                                    <th>Unit</th>
+                                    <th>
+                                        Remark
+                                    </th>
+                                    <th>
+                                        Current Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowNo = 0; }
+                                @foreach (var item in Model.ParameterInfos)
+                                {
+                                    currentStatus = (CurrentStatusEnum)Enum.ToObject(typeof(CurrentStatusEnum), item.CurrentStatus);
+                                    <tr>
+                                        <td>
+                                            @{ rowNo++; }
+                                            @rowNo
+                                        </td>
+                                        @if (item.CurrentStatus == 1 || item.CurrentStatus == 4)
+                                        {
+                                            <td>
+                                                @Html.ActionLink(item.ParameterName, "Tester", "Tester", new { @ParameterMasterId = item.ParameterMasterId, @SampleId = SampleCollectionId }, null)
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                               @item.ParameterName
+                                            </td>
+                                        }
+                                        <td>
+                                           @item.Unit
+                                        </td>
+                                        <td>
+                                           @item.TestMethod
+                                        </td>
+                                        <td>
+                                           @item.ReviewerComment
+                                        </td>
+                                        <td>
+                                            @currentStatus
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="9">
+                                        <div class="dataTables_paginate paging_simple_numbers" id=""></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+

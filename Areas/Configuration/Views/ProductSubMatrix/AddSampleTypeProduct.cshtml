@@ -1,0 +1,73 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.ProductGroupMasterModel
+@{
+    ViewBag.Title = "AddSampleTypeProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>SampleTypeProduct Name</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                    </div>
+                    @using (Ajax.BeginForm("AddSampleTypeProduct", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddTestMethodSuccess" }))
+                    {
+                        @Html.HiddenFor(Model => Model.SampleTypeProductId)
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">SampleTypeProduct Name </label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.SampleTypeProductName, new { @class = "form-control col-md-5", placeholdder = "SampleTypeProductName" })
+                                @Html.ValidationMessageFor(model => model.SampleTypeProductName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">SampleTypeProduct Code </label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.SampleTypeProductCode, new { @class = "form-control col-md-5", placeholdder = "SampleTypeProductCode" })
+                                @Html.ValidationMessageFor(model => model.SampleTypeProductCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <a class="btn btn-outline-danger" href="@Url.Action("SampleTypeProductList", "ProductSubMatrix")">Cancel</a>&emsp;
+                            <button type="submit" class="btn btn-outline-success">Save</button>
+                        </div>
+                     }
+                    </div>
+                <!-- Default Basic Forms End -->
+            </div>
+    </div>
+</div>
+
+

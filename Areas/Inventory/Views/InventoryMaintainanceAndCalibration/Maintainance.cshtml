@@ -1,0 +1,255 @@
+﻿
+@model LIMS_DEMO.Areas.Inventory.Models.InventoryMaintainanceAndCalibrationModel
+@{
+    ViewBag.Title = "Maintainance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body onload="myFunction()">
+    <div class="mobile-menu-overlay"></div>
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="title">
+                                <h4>Maintaince</h4>
+                            </div>
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Maintaince</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Maintaince</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-md-6 col-sm-12 text-right">
+                            <div class="dropdown">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    January 2018
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">Export List</a>
+                                    <a class="dropdown-item" href="#">Policies</a>
+                                    <a class="dropdown-item" href="#">View Assets</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <h4 class="text-blue h4">Add Maintenance Form</h4>
+                        <p class="mb-30"></p>
+                    </div>
+                    <div class="wizard-content">
+                        @using (Ajax.BeginForm("Maintainance", "InventoryMaintainanceAndCalibration", new AjaxOptions() { HttpMethod = "Post" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.InventoryBasicItemDetailsNumber)
+                            @Html.HiddenFor(model => model.ItemName)
+                            @Html.HiddenFor(model => model.ID)
+                            @Html.HiddenFor(model => model.InventoryBasicDetailsID)
+                            @Html.HiddenFor(model => model.Type)
+                            @Html.Hidden("HiddenItemID", (object)ViewBag.ItemIDViewBag)
+                            @Html.Hidden("HiddenInventoryBasicItemsDetailsID", (object)ViewBag.BasicItemDetailsIDViewBag)
+                            @Html.Hidden("HiddenDateID", (object)ViewBag.DateIDViewBag)
+
+
+                            <h5></h5>
+                            <section>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Item: </label>
+                                            @Html.DropDownListFor(model => model.ItemID, (SelectList)ViewBag.InventoryItemListViewBag, ".....Select Item......", new { @class = "custom-select form-control" })
+                                            @Html.ValidationMessageFor(model => model.ItemID)
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Serial Number:</label>
+                                            @Html.DropDownListFor(model => model.InventoryBasicItemDetailsID, (SelectList)ViewBag.InventorySerialNumberListViewBag, "........Select Serial Number...", new { @class = "custom-select form-control" })
+                                            @Html.ValidationMessageFor(model => model.InventoryBasicItemDetailsID)
+                                            @Html.HiddenFor(model => model.InventoryBasicItemDetailsNumber)
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Maintenance Date: </label>
+                                            @Html.DropDownListFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID, (SelectList)ViewBag.InventoryFrequencyDateListViewBag, ".....Select Maintainance Date.....", new { @class = "custom-select form-control" })
+                                            @Html.ValidationMessageFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID)
+                                            @Html.HiddenFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID)
+                                            @Html.HiddenFor(model => model.ScheduleDate)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Next Date Of Maintenance:</label>
+                                            @*<input type="date" id="NextCalibrationDate" name="NextCalibrationDate"  class="form-control" style="width:470px;" placeholder="Next Date Of Maintenance"  value="NextCalibrationDate"/>*@
+                                            @*<input class="form-control date-picker" placeholder="Select Date" type="text" name="NextCalibrationDate"  style="width:540px;" id="NextCalibrationDate" value="NextCalibrationDate" />*@
+                                            @*<input type="text" id="NextCalibrationDate" name="NextCalibrationDate" value="NextCalibrationDate" class="form-control" style="width:470px;" disabled />*@
+                                            @*@Html.DropDownListFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID, (SelectList)ViewBag.InventoryFrequencyDateListViewBag1, ".......Select Maintainance Date.....", new { @class = "custom-select form-control" })
+                                                @Html.ValidationMessageFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID,"",new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID)
+                                                @Html.HiddenFor(model => model.NextCalibrationDate)*@
+                                            @*@Html.TextBoxFor(model => model.NextCalibrationDate, new { @class = "form-control", placeholder = "Next Date Of Maintenance", @style = "width:470px;" })*@
+                                            @Html.TextBoxFor(model => model.ndate, new {@class = "form-control", @style = "width:470px;" ,disabled=true})
+                                            @Html.HiddenFor(model => model.NextCalibrationDate)
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Maintainance Start Date:</label>
+                                            <input type="date" id="CalibrationStartDate" name="CalibrationStartDate" value="" class="form-control" style="width:470px;"/>
+                                            @Html.TextBoxFor(model => model.CalibrationStartDate, new {@class = "form-control", @style = "width:470px;" , disabled = true })
+                                            @Html.ValidationMessageFor(model => model.CalibrationStartDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Maintainance End Date:</label>
+                                            <input type="date" id="CalibrationEndDate" name="CalibrationEndDate" value="" class="form-control" style="width:470px;"/>
+                                            @Html.TextBoxFor(model => model.CalibrationStartDate, new {@class = "form-control", @style = "width:470px;", disabled = true })
+                                            @Html.ValidationMessageFor(model => model.CalibrationEndDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Auditor Name:</label>
+                                            @Html.TextBoxFor(model => model.Auditor, new { @class = "form-control",@style = "width:470px;" })
+                                            @Html.ValidationMessageFor(model => model.Auditor, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Auditor Date:</label>
+                                            <input type="date" id="AuditDate" name="AuditDate" value="" class="form-control" style="width:470px;" />
+                                            @Html.TextBoxFor(model => model.AuditDate, new {@class = "form-control", @style = "width:470px;" ,disabled=true})
+                                            @Html.ValidationMessageFor(model => model.AuditDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Maintenance Details:</label>
+                                            @Html.TextBoxFor(model => model.AuditObservations, new { @class = "form-control", @style = "width:470px;" })
+                                            @Html.ValidationMessageFor(model => model.AuditObservations, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Action Taken:</label>
+                                            @Html.TextBoxFor(model => model.ActionTaken, new { @class = "form-control",@style = "width:470px;" })
+                                            @Html.ValidationMessageFor(model => model.ActionTaken, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Completion Status:</label>
+                                            @Html.DropDownListFor(model => model.CompletionStatus, (SelectList)ViewBag.MaintainanceListViewBag, "Select Status...", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CompletionStatus)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-6" style="margin-left:450px;">
+                                        <div class="form-group">
+                                            <input type="submit" value="Submit" class="btn btn-primary" id="buttonSave" name="buttonSave" style="background-color:mediumblue;color:white;" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        }
+                    </div>
+                    <!-- Default Basic Forms Start -->
+                    <div class="pd-20 card-box mb-30">
+
+                        <!-- Simple Datatable start -->
+                        <div class="card-box mb-30">
+                            <div class="pd-20">
+                                <h4 class="text-blue h4">Maintaince List</h4>
+                                <p class="mb-0"><a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+                            </div>
+                            <div class="pb-20">
+                                <table class="data-table table stripe hover nowrap" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-plus datatable-nosort">Sr No</th>
+                                            <th>PROPOSED DATE</th>
+                                            <th>AUDIT DATE</th>
+                                            <th>AUDITOR</th>
+                                            <th>STATUS</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="mytableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Simple Datatable End -->
+                        <div class="collapse collapse-box" id="basic-form1">
+                            <div class="code-box">
+                                <div class="clearfix">
+                                    <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                                    <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                                </div>
+                                <pre>
+                                <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Default Basic Forms End -->
+                </div>
+
+                <!-- Simple Datatable End -->
+                <!-- success Popup html Start -->
+                <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body text-center font-18">
+                                <h3 class="mb-20">Form Submitted!</h3>
+                                <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- success Popup html End -->
+            </div>
+        </div>
+    </div>
+</body>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/InventoryMaintainanceAndCalibration")
+<script type="text/javascript">
+    $(document).ready(function () {
+        InventoryMaintainanceAndCalibration.initialize();
+        InventoryMaintainanceAndCalibration.Type = "Maintainance";
+        if (parseInt($("#HiddenItemID").val()) > 0) {
+            $("#ItemID").val($("#HiddenItemID").val()).change();
+            $("#ItemID").attr("disabled", "disabled");
+        }
+    });
+</script>
+

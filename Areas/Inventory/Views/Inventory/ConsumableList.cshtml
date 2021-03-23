@@ -1,0 +1,138 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Inventory.Models.InventoryBasicDetailModel>
+@{
+    ViewBag.Title = "ConsumableList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Consumable List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Consumable List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-header card text-white bg-dark card-box">
+                <div class="card-header">Consumable Item Report</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.Label("Catagory Name")
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.DropDownList("CatagoryId1", new SelectList(ViewBag.InvCategoryList, "CatagoryMasterID", "CategoryName"), "Select Item..", new { @class = "form-control " })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="button" value="Print" class="btn btn-primary" id="buttonPrint" name="buttonSearch" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h4 class="text-blue h4">Consumable List</h4>
+                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">Sr No</th>
+                                <th>Inventory Number</th>
+                                <th>Item Name</th>
+                                <th>Category</th>
+                                <th>Total Quantity</th>
+                                <th>Unit</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model != null)
+                            {
+                                int SerialNumber = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@SerialNumber</td>
+                                        <td>@item.InventoryBasicDetailsNumber</td>
+                                        <td>@item.ItemName</td>
+                                        <td>@item.CategoryName</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.Unit</td>
+                                        <td>
+                                            <div class="btn-list">
+                                                <a href="@Url.Action("Index","Inventory",new { @TypeID=item.TypeID,@ID=item.ID,@PurchaseRequestID=item.PurchaseRequestID,@InventoryBasicDetailsID=item.InventoryBasicDetailsID,@TotalQuantity=item.TotalQuantity,@ItemID=item.ItemID })" title="NewBill" id="rowedit_@SerialNumber" operation="NewBill" class="btn btn-primary">
+                                                    New Bill
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    ++SerialNumber;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Simple Datatable End -->
+        </div>
+    </div>
+</div>
+@*@section Scripts {*@
+@*@Scripts.Render("~/bundles/jqueryval")*@
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+    $("#buttonPrint").click(function () {
+        debugger;
+        var CatagoryID = $("#CatagoryId1 option:selected").text()
+        CatagoryID = CatagoryID.toLocaleLowerCase();
+
+        if ($("#InventoryTypeID1 option:selected").val() == "" || $("#CatagoryId1 option:selected").val() == "") {
+            alert('Please Select Catagory');
+        } else {
+            var Catagory = CatagoryID;
+            if (Catagory == "Chemical" || Catagory == "media") {
+                var x = "/Reporting/frmShowReport.aspx?path=ConsumableChemicalBiologicalMediaReport.rdl&CategoryName=" + $("#CatagoryId1 option:selected").text() + "";
+                window.location = x;
+            }
+            else if (Catagory == "filter paper") {
+                var x = "/Reporting/frmShowReport.aspx?path=ConsumableFilterAid.rdl&CategoryName=" + $("#CatagoryId1 option:selected").text() + "";
+                window.location = x;
+            }
+            else if (Catagory == "safety material") {
+                var x = "/Reporting/frmShowReport.aspx?path=ConsumableSafetyMaterial.rdl&CategoryName=" + $("#CatagoryId1 option:selected").text() + "";
+                window.location = x;
+            }
+            else if (Catagory == "crm") {
+                var x = "/Reporting/frmShowReport.aspx?path=CRMReport.rdl&CategoryName=" + $("#CatagoryId1 option:selected").text() + "";
+                window.location = x;
+            }
+            else {
+                var x = "/Reporting/frmShowReport.aspx?path=ConsumableOtherConsumable.rdl&CategoryName=" + $("#CatagoryId1 option:selected").text() + "";
+                window.location = x;
+            }
+
+        }
+    });
+</script>

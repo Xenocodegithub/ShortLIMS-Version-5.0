@@ -1,0 +1,125 @@
+﻿@model List<LIMS_DEMO.Areas.Inventory.Models.PurchaseModel>
+
+
+<table id="tblContract" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="width-5">
+                SrNo.
+            </th>
+            <th class="width-10">
+                Item
+            </th>
+            <th class="width-10">
+                Brand
+            </th>
+            <th class="width-5">
+                Grade
+            </th>
+            <th class="width-10">
+                Pack Size
+            </th>
+            <th class="width-10">
+                Quantity
+            </th>
+            <th class="width-5">
+                COA/COC
+            </th>
+            <th class="width-10">
+                Priority
+            </th>
+            <th class="width-10">
+                Specification
+            </th>
+            <th class="width-5">
+                Purpose
+            </th>
+            <th class="width-10">
+                Remark
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody style="color:white">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr class="bg-info">
+                <td>
+                    @Model[i].SrNo
+                </td>
+                <td>
+                    @Model[i].Item
+
+                </td>
+                <td>
+                    @Model[i].Brand
+
+                </td>
+                <td>
+                    @Model[i].Grade
+
+                </td>
+                <td>
+                    @Model[i].PackSize
+
+                </td>
+                <td>
+                    @Model[i].Quantity
+
+                </td>
+                <td>
+                    @Model[i].COA
+
+                </td>
+                <td>
+                    @Model[i].Priority
+
+                </td>
+                <td>
+                    @Model[i].Specification
+
+                </td>
+                <td>
+                    @Model[i].Purpose
+
+                </td>
+                <td>
+                    @Model[i].Remark
+
+                </td>
+                <td>
+                    <a href="#" onclick="funEditContract(@Model[i].SrNo);" style="color:white">Edit<i class="icon-copy dw dw-edit-file" style="color:darkblue;"></i></a> |
+                    <a href="#" onclick="funDeleteContract(@Model[i].SrNo);"style="color:white">Delete<i class="icon-copy dw dw-delete-3" style="color:maroon"></i></a>
+                </td>
+            </tr>
+        }
+        </tbody>
+</table>
+<script>
+    function funEditContract(Id) {
+        debugger
+        $("#tblContract").attr("disabled", true);
+        $('#divAddPurchase').load('/Inventory/Purchase/_PurchaseRequestFormList?Id=' + Id);
+        //$('#divList').hide();
+
+    }
+    function funDeleteContract(Id) {
+        if (confirm('Are you sure you want to delete this record?')) {
+            $.ajax({
+                url: '/Purchase/_DeletePurchaseRequest?Id=' + Id,
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == "success") {
+                        $('#divList').load('/Inventory/Purchase/_PurchaseList');
+                    }
+                },
+                error: function (data) {
+                }
+            });
+        }
+    }
+</script>

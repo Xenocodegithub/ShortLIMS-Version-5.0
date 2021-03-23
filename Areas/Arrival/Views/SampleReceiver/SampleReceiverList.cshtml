@@ -1,0 +1,117 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel>
+
+@{
+    ViewBag.Title = "SampleReceiverList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Arrival</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Sample Receiver</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sample Receiver</li>
+                                <li class="breadcrumb-item active" aria-current="page">Sample Receiver List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+         <!-- Default Basic Forms Start -->
+         <div class="pd-20 card-box mb-30">
+            <div class="clearfix">
+               <div class="pull-left">
+                  <h4 class="text-blue h4">Sample Returned List</h4>
+                   <p class="mb-30">@*All bootstrap element classies*@</p>
+               </div>
+            </div>
+            <table id="datatable" class="data-table table nowrap">
+                <thead>
+                   <tr>
+                     <th class="table-plus datatable-nosort">
+                       SrNo.
+                      </th>
+                     <th>
+                       Sample Type
+                     </th>
+                     <th>
+                        Sample Location
+                     </th>
+                     <th>
+                       Customer Name
+                     </th>
+                     @*<th class="width-5">
+                         Sample Name
+                      </th>*@
+                      <th>
+                         Sample ID
+                      </th>
+                      <th>
+                          Report Number
+                      </th>
+                      <th>
+                        Status
+                      </th>
+                   </tr>
+                </thead>
+                <tbody>
+                  @foreach (var item in Model)
+                   {
+                     <tr>
+                         <td>
+                           @Html.DisplayFor(modelItem => item.SerialNo)
+                        </td>
+                         <td>
+                            @Html.DisplayFor(modelItem => item.SampleTypeProductName)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.SampleLocation)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.CustomerName)
+                          </td>
+                         @*<td>
+                           @Html.DisplayFor(modelItem => item.SampleName)
+                          </td>*@
+                          <td>
+                             @*@Html.ActionLink("View Details", "AddSampleArrival", new { SampleCollectionId = item.SampleCollectionId, SampleNo = item.SampleNo, ARCId = item.ARCId }, new { @class = "btn btn-sm btn-App fa fa-pencil" })
+                             *@
+                           <a href="#" onclick="funView(@item.SampleCollectionId, '@item.SampleNo',@item.ARCId);" class="sampleName" style="color:blue">
+                            @Html.DisplayFor(modelItem => item.SampleNameOriginal)
+                             @*@Html.DisplayFor(modelItem => item.SampleNo)*@
+                             </a>
+                           </td>
+                          <td>
+                             @Html.DisplayFor(modelItem => item.RequestNo)
+                          </td>
+                          <td>
+                             @Html.DisplayFor(modelItem => item.CurrentStatus)
+                         </td>
+                     </tr>
+                   }
+                </tbody>
+            </table>
+         </div>
+         <!-- Default Basic Forms End -->
+       </div>
+    </div>
+</div>
+          
+
+<script>
+
+    function funView(SampleCollectionId, SampleNo, ARCId) {
+        debugger;
+        location.href = '/Arrival/SampleReceiver/AddSampleReceiver?SampleCollectionId=' + SampleCollectionId + '&ARCId=' + ARCId + '&SampleNo=' + SampleNo;
+    }
+
+</script>
+
+

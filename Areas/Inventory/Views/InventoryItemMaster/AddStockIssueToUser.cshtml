@@ -1,0 +1,166 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryItemMasterModel
+@{
+    ViewBag.Title = "AddStockIssueToUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory Item</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Inventory</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Item</li>
+                                <li class="breadcrumb-item active" aria-current="page">Item-Stock Issue</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                January 2018
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Export List</a>
+                                <a class="dropdown-item" href="#">Policies</a>
+                                <a class="dropdown-item" href="#">View Assets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <h4 class="text-blue h4">Stock Issue Form</h4>
+                    <p class="mb-30"></p>
+                </div>
+                <div class="wizard-content">
+                    @using (Ajax.BeginForm("AddStockIssueToUser", "InventoryItemMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "ItemSuccess()" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.ItemMasterID)
+
+                        <h5></h5>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Item Name :</label>
+                                        @Html.DropDownListFor(model => model.ItemMasterID, new SelectList(ViewBag.InventoryItemList, "ItemMasterID", "NameOfStock"), "--------Select---------", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.ItemMasterID, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.NameOfStock)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Min Quantity:</label>
+                                        @Html.TextBoxFor(model => model.MinimumStock, new { @class = "form-control", @style = "width:540px;" })
+                                        @Html.ValidationMessageFor(model => model.MinimumStock, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Available  Quantity:</label>
+                                        @Html.TextBoxFor(model => model.AvailableStock, new { @class = "form-control",@style = "width:540px;" })
+                                        @Html.ValidationMessageFor(model => model.AvailableStock, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Issue To:</label>
+                                        @Html.DropDownListFor(model => model.IssueToNameID, new SelectList(ViewBag.EmployeeList, "EmpId", "EmpName"), "--------Select--------", new { @class = "custom-select form-control" })
+                                        @Html.ValidationMessageFor(model => model.IssueToNameID, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.IssueToNameID)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Issue Quantity:</label>
+                                        @Html.TextBoxFor(model => model.IssueQty, new { @class = "form-control",@style = "width:540px;" })
+                                        @Html.ValidationMessageFor(model => model.IssueQty, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Issue Date:</label>
+                                        @*<input type="date" id="IssueDate" name="IssueDate" value="" class="form-control date-picker" style="width:540px;" />*@
+                                        <input class="form-control date-picker" type="text" name="IssueDate" value="" style="width:540px;" id="IssueDate">
+                                        @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="margin-left:450px;">
+                                    <div class="form-group">
+                                        <input type="submit" value="Issue" class="btn btn-primary" id="buttonSave1" name="buttonSave" style="background-color:mediumblue;color:white;" onclick="return validateData();" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    }
+                </div>
+            </div>
+            <!-- success Popup html Start -->
+            <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center font-18">
+                            <h3 class="mb-20">Form Submitted!</h3>
+                            <div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- success Popup html End -->
+        </div>
+    </div>
+</div>
+
+@*@section Scripts {*@
+@*@Scripts.Render("~/bundles/InventoryItemMaster")*@
+<script src="~/Scripts/sweet-alert.init.js"></script>
+<script src="~/Scripts/sweetalert2.all.js"></script>
+<script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
+<script>
+    function validateData() {
+
+        debugger
+        if ($("#ItemMasterID").val() == "") {
+            swal("Please Enter Item Name !");
+            return false;
+        } else if ($("#MinimumStock").val() == "") {
+            swal("Please Ener MinimumStock !");
+            return false;
+        } else if ($("#AvailableStock").val() == "") {
+            swal("Please Ener AvailableStock !");
+            return false;
+        } else if ($("#IssueToNameID").val() == "") {
+            swal("Please Ener Issue Name !");
+            return false;
+        } else if ($("#IssueQty").val() == "") {
+            swal("Please Ener Quantity !");
+            return false;
+        } else if ($("#IssueDate").val() == "") {
+            swal("Please Ener Date !");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>

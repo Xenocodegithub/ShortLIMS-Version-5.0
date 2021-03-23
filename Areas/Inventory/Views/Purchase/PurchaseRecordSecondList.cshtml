@@ -1,0 +1,118 @@
+﻿@model IEnumerable<LIMS_DEMO.Core.Inventory.PurchaseEntity>
+@{
+    ViewBag.Title = "PurchaseRecordSecondList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PurchaseRecordSecondList</h2>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Record Second List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30 card text-white bg-info card-box">
+                <div class="clearfix"  style="border-bottom:solid">
+                    <div class="pull-left bord">
+                        <h4 class="text-blue h4">PURCHASE RECORD LIST</h4>
+                    </div>
+                </div>
+                <br />
+                <table class="data-table table multiple-select-row nowrap">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                PO Number
+                            </th>
+                            <th>
+                                Supplier Name
+                            </th>
+                            <th>
+                                Item
+                            </th>
+                            <th>
+                                Quantity
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="color:white">
+
+                        @foreach (var item in Model)
+                        {
+                            //currentStatus = (CurrentStatusEnum)Enum.ToObject(typeof(CurrentStatusEnum), item.CurrentStatus);
+                            <tr>
+
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.PurchaseOrderNo)
+                                    @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                    @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                    @Html.HiddenFor(modelItem => item.InventoryTypeID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SupplierName)
+                                </td>
+                                @if (item.CurrentStatus == 8)
+                                {
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                        @Html.DisplayFor(modelItem => item.Item)
+                                    </td>
+                                }
+                                else
+                                {
+                            <td>
+
+                                @Html.HiddenFor(modelItem => item.ItemMasterId)
+
+                                @*<a style="color: Chartreuse" href="/Inventory/Inventory/Index/InventoryTypeMasterID=@item.InventoryTypeID&ItemID=@item.ItemMasterId&PurchaseRequestID=@item.PurchaseRequestID">@item.Item</a>*@
+                                <a style="color: Chartreuse" href="@Url.Action("Index","Inventory",new {InventoryTypeMasterID=item.InventoryTypeID,ItemID=item.ItemMasterId,PurchaseRequestID=item.PurchaseRequestID })">@item.Item</a>
+                                @*<a href="@Url.Action("Edit","CategoryMaster",new {CatagoryMasterId=item.CatagoryMasterID })" title="Edit" id="rowedit_@SerialNumber" operation="edit" class="btn btn-primary">*@
+
+                                @*@Html.ActionLink(item.Item, "RegisterConAdd", "Inventory", new {@InventoryTypeMasterID = item.InventoryTypeID }, null)*@
+                            </td>
+
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Convert.ToDateTime(item.EnteredDate).ToString("dd/MM/yyyy")
+                                    @Html.HiddenFor(modelItem => item.EnteredDate)
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <div class="pagination pagination-centered"></div>
+                            </td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<LIMS_DEMO.Core.Inventory.PurchaseEntity>
+@{
+    ViewBag.Title = "PurchaseInchargeList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Incharge List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="card-box mb-30">
+                <div class="card-box mb-30 card text-white bg-info card-box">
+                    <div class="pd-20" style="border-bottom:solid">
+                        <h4 class="text-blue h4">PURCHASE INCHARGE LIST</h4>
+                    </div>
+                    <br />
+                            <div class="pb-20">
+                                <table class="data-table table nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-plus datatable-nosort">SR.NO.</th>
+                                            <th>PURCHASE ORDER NO</th>
+                                            <th>SUPPLIER NAME</th>
+                                            <th>ITEM</th>
+                                            <th>PRINT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="color:white">
+                                        @{ int i = 0; long PrevPurchaseRequestID = 0; string itemName = string.Empty; int InventoryId = 0; string strPurchaseRequestId = string.Empty; string CategoryName = string.Empty;}
+                                        @foreach (var item in Model)
+                                        {
+                                            if (PrevPurchaseRequestID != item.PurchaseMasterID || InventoryId != item.InventoryTypeID || CategoryName != item.CategoryName)
+                                            {
+
+                                                itemName = item.Item;
+                                                <tr id="@i">
+                                                    <td>
+                                                        @{ int SrNo = i + 1;}
+                                                        @SrNo
+                                                    </td>
+                                                    <td>
+                                                        @*@Html.HiddenFor(modelItem => item.PurchaseRequestID)*@
+                                                        @Html.HiddenFor(modelItem => item.IsIGST)
+                                                        @Html.DisplayFor(modelItem => item.PurchaseOrderNo)
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.SupplierName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Item)
+                                                    </td>
+
+                                                    @if (item.InventoryTypeID == 1 || item.CategoryName.Trim() == "Glassware")
+                                                    {
+                                                        <td>
+                                                            <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportsecond.rdl&PurchaseMasterID=@item.PurchaseMasterID" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        if (item.IsIGST == false)
+                                                        {
+                                                            <td>
+                                                                <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportThird.rdl&PurchaseMasterID=@item.PurchaseMasterID&IsIGST=0" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>
+                                                                <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportThird.rdl&PurchaseMasterID=@item.PurchaseMasterID&IsIGST=1" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
+                                                            </td>
+                                                        }
+
+                                                    }
+
+                                                </tr>
+                                            }
+
+
+                                            PrevPurchaseRequestID = item.PurchaseMasterID;
+                                            InventoryId = item.InventoryTypeID;
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

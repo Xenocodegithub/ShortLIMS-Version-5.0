@@ -1,0 +1,142 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Arrival.Models.DisposalModel>
+@{
+    ViewBag.Title = "DisposalList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Arrival</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Arrival</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Disposal</li>
+                                <li class="breadcrumb-item active" aria-current="page">Disposal List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Disposal List</h4>
+                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:10px;">
+                        <div class="col-sm-2">
+                            <input class="form-control" style="width:150px" id="FromDate" placeholder="Search..." type="date" />
+                        </div>
+                        <div class="col-sm-1" style="margin-left:20px">
+                            <label>To</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control" style="width:150px" id="ToDate" placeholder="Search..." type="date" />
+                            @*<a target="_blank" href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" >Print List</a>*@
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="button" value="Print" id="SaveParameters" class="btn btn-sm btn-info alignright" onclick="search();" />
+                        </div>
+                </div>
+                <hr />
+                <div>
+                    <table class="data-table table nowrap">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">
+                                    @Html.DisplayNameFor(model => model.SampleType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SampleCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateofRecieptofSample)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateofReporting)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateofDisposal)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DisposalMethod)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DisposedBy)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SuperwisedBy)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Remark)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SampleType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SampleCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateofRecieptofSample)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateofReporting)
+                                    </td>
+                                    <td>
+                                        @Convert.ToDateTime(item.DateofDisposal).ToString("dd/MM/yyyy")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DisposalMethod)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DisposedBy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SuperwisedBy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Remark)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+     </div>
+</div>
+     
+<script type="text/javascript">
+
+    function search() {
+        debugger
+        if ($("#ToDate").val() == null || $("#FromDate").val() == null) {
+            alert('Please enter Date');
+        } else {
+            debugger;
+            // var x = "/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=" + Arr[0] + " &startDate=" + sdate + " &endDate=" + edate + " &IGST=" + igst + "";
+            //window.location = x;
+            var x = "/Reporting/frmShowReport.aspx?path=DisposalReport.rdl&FromDate=" + $("#FromDate").val() + " &ToDate=" + $("#ToDate").val() + "";
+            window.location = x;
+        }
+    }
+
+</script>
+
+

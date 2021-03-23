@@ -1,0 +1,171 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryBasicDetailModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Item</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Register Item</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            @Html.Hidden("ItemIdHidden", (object)ViewBag.ItemIdViewBag)
+            @Html.Hidden("TypeIdHidden", (object)ViewBag.InventoryTypeMasterIDViewBag)
+            @Html.Hidden("RequestHidden", (object)ViewBag.InventoryRequestViewBag)
+            @Html.Hidden("PurchaseRequestID", (object)ViewBag.PurchaseRequestId)
+            @Html.Hidden("InventoryBasicDetailsID", (object)ViewBag.InventoryBasicDetailsID)
+
+
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
+                    <div class="pd-20 card-box" style="width:1130px;">
+                        <h5 class="h4 text-blue mb-20">Register Item</h5>
+                        <div class="tab" style="width:1000px;">
+                            <ul class="nav nav-tabs" role="tablist" style="background-color:silver;color:black;">
+                                <li class="nav-item">
+                                    <a class="nav-link active text-blue" data-toggle="tab" href="#tab_1" role="tab" aria-expanded="false" id="tabHead_BasicDetails" style="color:black">Basic Details</a>
+                                </li>
+                                <li class="nav-item" id="tabLi2">
+                                    <a class="nav-link text-blue" data-toggle="tab" href="#tab_2" role="tab" aria-selected="true" id="tabHead_CommercialDetails" style="color:black">Commercial Details</a>
+                                </li>
+                                <li class="nav-item" id="tabLi3">
+                                    <a class="nav-link text-blue" data-toggle="tab" href="#tab_3" role="tab" aria-selected="false" id="tabHead_Maintainance" style="color:black">Maintaince</a>
+                                </li>
+                                <li class="nav-item" id="tabLi4">
+                                    <a class="nav-link text-blue" data-toggle="tab" href="#tab_4" role="tab" aria-selected="false" id="tabHead_Calibration" style="color:black">Calibration </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
+                                    @Html.Partial("_BasicDetails", Model)
+                                </div>
+                                <div class="tab-pane fade" id="tab_2" role="tabpanel">
+                                    <div class="pd-20">
+                                        @Html.Partial("_CommercialDetails")
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab_3" role="tabpanel">
+                                    <div class="pd-20">
+                                        @Html.Partial("_MaintainanceDetails")
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab_4" role="tabpanel">
+                                    <div class="pd-20">
+                                        @Html.Partial("_CalibrationDetails")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@* @section Scripts {*@
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+@*@Scripts.Render("~/bundles/jqueryval")*@
+@Scripts.Render("~/bundles/InventoryCommercialDetails")
+@Scripts.Render("~/bundles/InventoryBasicDetail")
+@Scripts.Render("~/bundles/MaintainanceDetails")
+@Scripts.Render("~/bundles/CalibrationDetails")
+@Scripts.Render("~/bundles/ApplicationSystem")
+<script type="text/javascript">
+
+    function InventoryBasicDetailsSuccess(result) {
+        if (result.ID != "0") {
+            location.href = '/Inventory/Index?ID=' + result.ID;
+        } else {
+            alert('Error!!!');
+        }
+    }
+    $(document).ready(function () {
+        debugger
+        //$("#QuantityType").val("Quantity")
+        InventoryCommercialDetails.initialize();
+        InventoryBasicDetail.initialize();
+        MaintainanceDetails.initialize();
+        CalibrationDetails.initialize();
+
+        //var baseUrl = applicationSystem.get_hostname();
+        if ($("#TypeIdHidden").val() == "1") {
+            debugger;
+            $("#tabLi3").css("display", "none");
+            $("#tabLi4").css("display", "none");
+            // $("#getURL").attr("href", baseUrl + "/Inventory/Inventory/ConsumableList");
+        }
+        else {
+            // $("#getURL").attr("href", baseUrl + "/Inventory/Inventory/NonConsumableList");
+        }
+
+        if ($('#ItemIdHidden').val() != null) {
+            // alert($('#ItemIdHidden').val());
+            $('#ItemID').val($('#ItemIdHidden').val()).change()
+        }
+        if ($('#RequestHidden').val() != null && $('#RequestHidden').val() != "") {
+            //alert('asd')
+            var data = JSON.parse($('#RequestHidden').val());
+            $('#PurchaseOrderNumber').val(data.PurchaseOrderNo);
+            $('#QuantityType').val(data.QuantityType);
+            $('#Grade').val(data.Grade);
+            $('#PackSize').val(data.PackSize);
+            $('#Brand').val(data.Brand);
+            $('#Manufacturer').val(data.Manufacturer);
+            $('#VendorName').val(data.SupplierName);
+            $('#AMCVendorName').val(data.SupplierName);
+            $('#CalibrationAMCVendorName').val(data.SupplierName);
+            $('#PurchaseOrderDate').val(data.EnteredDate);
+            $('#PurchaseRequestID').val(data.PurchaseRequestID);
+            if (data.PurchaseOrderDate != null) {
+                var newdate = data.PurchaseOrderDate;
+                var dateString = newdate.toString().substr(6);
+                var currentTime = new Date(parseInt(dateString));
+                var month = currentTime.getMonth() + 1;
+                var day = currentTime.getDate();
+                var year = currentTime.getFullYear();
+                if (parseInt(month) < 10) {
+                    month = "0" + month;
+                }
+                if (parseInt(day) < 10) {
+                    day = "0" + day;
+                }
+                var ReceivedDate = day + "/" + month + "/" + year;
+                $("#PurchaseOrderDate").val(ReceivedDate);
+            }
+            // new code add
+            $('#ItemID').val(data.ItemID);
+            $('#TypeID').val(data.TypeID);
+            $('#InventoryTypeID').val(data.InventoryTypeID);
+            $('#CategoryID').val(data.CategoryID);
+            $('#CatagoryMasterID').val(data.CatagoryMasterID);
+            $('#UnitID').val(data.UnitID);
+        }
+
+        if (parseInt($("#BasicDetailsID").val()) > 0) {
+            InventoryCommercialDetails.fatchInventoryCommercialDetails();
+        }
+        else {
+            $("#tabHead_CommercialDetails").removeAttr("data-toggle", "tab");
+            $("#tabHead_Maintainance").removeAttr("data-toggle", "tab");
+            $("#tabHead_Calibration").removeAttr("data-toggle", "tab");
+        }
+    });
+</script>
+

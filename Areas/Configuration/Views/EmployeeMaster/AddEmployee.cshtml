@@ -1,0 +1,257 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.EmployeeMasterModel
+@{
+    ViewBag.Title = "AddEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Employee</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                @*<li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Discipline</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Discipline</li>*@
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                @*January 2018*@
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                @*<a class="dropdown-item" href="#">Export List</a>
+                                    <a class="dropdown-item" href="#">Policies</a>
+                                    <a class="dropdown-item" href="#">View Assets</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Employee</h4>
+                        <!--<p class="mb-30">-->@*All bootstrap element classies*@<!--</p>-->
+                    </div>
+                    @*<div class="pull-right">
+                            <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                <div>
+                    @using (Ajax.BeginForm("AddEmployee", "EmployeeMaster", new AjaxOptions { HttpMethod = "Post", OnSuccess = "AddEmployeeSuccess" }))
+                    {
+                        @Html.HiddenFor(model => model.UserDetailId);
+                        @*@Html.HiddenFor(model => model.UserMasterId);*@
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">First Name</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholdder = "First Name" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Middle Name</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control", placeholdder = "Middle Name" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Last Name</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholdder = "Last Name" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">User Name</label>
+                            <div class="col-sm-12 col-md-10">
+                                @Html.DropDownListFor(model => model.UserMasterId, new SelectList(ViewBag.UserMasterList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control has-feedback-right" })
+                                @Html.ValidationMessageFor(model => model.UserMasterId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.UserName)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Gender</label>
+                            <div class="col-sm-12 col-md-10">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.Gender, "Male", new { @checked = "checked" }) Male </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.Gender, "Female") Female</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">DOB</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", placeholdder = "DOB" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Email</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholdder = "Email" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Email</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholdder = "Email" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Mobile No.</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", placeholdder = "Mobile" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Employee Code</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.EmployeeCode, new { @class = "form-control", placeholdder = "Employee Code" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Area Of Expertise</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.AreaOfExpertise, new { @class = "form-control", placeholdder = "AreaOfExpertise" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Experience In Year</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.ExperienceInYear, new { @class = "form-control", placeholdder = "ExperienceInYear" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Master Designation</label>
+                            <div class="col-sm-12 col-md-10">
+                                @Html.DropDownListFor(model => model.MasterDesignationID, new SelectList(ViewBag.DesignationList, "RoleId", "RoleName"), "---Select---", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MasterDesignationID, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.MasterDesignation)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Qualification</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Qualification, new { @class = "form-control", placeholdder = "Qualification" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Address1</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Address1, new { @class = "form-control", placeholdder = "Address1" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Address2</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", placeholdder = "Address2" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Area</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Area, new { @class = "form-control", placeholdder = "Area" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">CityName</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.CityName, new { @class = "form-control", placeholdder = "CityName" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">StateName</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.StateName, new { @class = "form-control", placeholdder = "StateName" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">CountryName</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.CountryName, new { @class = "form-control", placeholdder = "CountryName" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Pincode</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control", placeholdder = "Pincode" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Alternate Number</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.AlternateNumber, new { @class = "form-control", placeholdder = "AlternateNumber" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">PAN NUMBER</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.PANNo, new { @class = "form-control", placeholdder = "PAN NUMBER" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Adhar No</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.AdharNo, new { @class = "form-control", placeholdder = "Adhar No" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <a class="btn btn-danger" href="/Configuration/UserMasterList">Cancel</a>
+                            <a class="btn btn-warning" href="/Configuration/Add">Reset</a>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                       }
+                        </div>
+                        <div class="collapse collapse-box" id="basic-form1">
+                            <div class="code-box">
+                                <div class="clearfix">
+
+                                    @*<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                        <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>*@
+                                </div>
+                                <pre>
+                                <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                            </div>
+                        </div>
+                    </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+
+
