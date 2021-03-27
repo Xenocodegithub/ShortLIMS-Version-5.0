@@ -625,7 +625,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
             int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("WORejected");
             BALFactory.workordercustomerBAL.UpdateWorkOrderCustomerStatus(WorkOrderId, (byte)iStatusId);
             BALFactory.workOrderBAL.WorkOrderReject(WorkOrderId, Remark, LIMS.User.UserMasterID);
-            if (LIMS.User.RoleName == "Admin" || LIMS.User.RoleName == "BDM")
+            if ( LIMS.User.RoleName == "BDM")
             {
                 return RedirectToAction("HODWorkOrderDirectList");
             }
@@ -633,7 +633,11 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            else if (LIMS.User.RoleName == "Admin")
+            {
+                return RedirectToAction("Index");
+            }
+                return RedirectToAction("Index");
         }
         public PartialViewResult _AddWorkOrderDetails(int? WorkOrderId = 0)
         {

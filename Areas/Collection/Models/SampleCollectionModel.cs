@@ -9,6 +9,8 @@ namespace LIMS_DEMO.Areas.Collection.Models
 {
     public class SampleCollectionModel
     {
+        public bool IsFieldSelected { get; set; }
+        public bool IsLabSelected { get; set; }
         public Nullable<long> No { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }

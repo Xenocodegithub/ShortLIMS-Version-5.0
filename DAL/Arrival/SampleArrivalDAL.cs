@@ -669,11 +669,12 @@ namespace LIMS_DEMO.DAL.Arrival
         {
             try
             {
+                
                 var arc = _dbContext.ARCs.Find(samplearrivalEntity.ARCId);
                 arc.ARCId = samplearrivalEntity.ARCId;
                 arc.SampleCollectionId = samplearrivalEntity.SampleCollectionId;
-                arc.UserRoleId = samplearrivalEntity.UserRoleId;
-                //arc.ActionDate = samplearrivalEntity.ActionDate;
+                //arc.UserRoleId = samplearrivalEntity.UserRoleId;
+                arc.ActionDate = samplearrivalEntity.ActionDate;
                 arc.IsActive = samplearrivalEntity.IsActive;
                 arc.EnteredBy = samplearrivalEntity.EnteredBy;
                 arc.EnteredDate = DateTime.Now;
@@ -685,6 +686,9 @@ namespace LIMS_DEMO.DAL.Arrival
                     sampleCollection.SampleCollectionId = samplearrivalEntity.SampleCollectionId;
                     sampleCollection.RequestNo = samplearrivalEntity.RequestNo;
                     sampleCollection.ULRNo = samplearrivalEntity.ULRNo;
+                    sampleCollection.IsSampleIntact = samplearrivalEntity.IsSampleIntact;
+                    sampleCollection.ProbableDateOfReport = samplearrivalEntity.ProbableDateOfReport;
+                    sampleCollection.PlannerId = samplearrivalEntity.PlannerId;//to be removed later
                     _dbContext.SaveChanges();
                 }
                 else
@@ -695,6 +699,9 @@ namespace LIMS_DEMO.DAL.Arrival
                     sampleCollection.ReturnedDate = DateTime.UtcNow;
                     sampleCollection.ReturnedRemark = samplearrivalEntity.ReturnedRemark;
                     sampleCollection.IsDisposed = false;
+                    sampleCollection.IsSampleIntact = samplearrivalEntity.IsSampleIntact;
+                    sampleCollection.ProbableDateOfReport = samplearrivalEntity.ProbableDateOfReport;
+                    sampleCollection.PlannerId = samplearrivalEntity.PlannerId;//to be removed later
                     _dbContext.SaveChanges();
                 }
                
@@ -917,6 +924,7 @@ namespace LIMS_DEMO.DAL.Arrival
                 return ex.InnerException.Message;
             }
         }
+        //////////////For Received Person////////////////////////////////////////////////////////////////////////////////
         public string UpdateSampleReceived(SampleArrivalEntity samplearrivalEntity)
         {
             try

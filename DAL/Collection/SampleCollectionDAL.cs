@@ -190,6 +190,21 @@ namespace LIMS_DEMO.DAL.Collection
                 return ex.InnerException.Message;
             }
         }
+
+        public string AddARC(int SampleCollectionId,int EnteredBy)
+        {
+            _dbContext.ARCs.Add(new ARC()
+            {
+                SampleCollectionId = SampleCollectionId,
+                // UserRoleId=1,
+                IsActive = true,
+                EnteredBy = EnteredBy,
+                EnteredDate = DateTime.Now,
+            });
+            _dbContext.SaveChanges();
+
+            return "success";
+        }
         public SampleCollectionEntity GetSampleCollectionDetails(int SampleCollectionId)
         {
             return (from loc in _dbContext.LocationSampleCollections

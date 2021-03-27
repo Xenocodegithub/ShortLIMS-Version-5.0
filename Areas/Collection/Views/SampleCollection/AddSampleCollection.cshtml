@@ -338,7 +338,6 @@
                                     }
                                 </div>
                             </div>
-                            
                             <div class="col-sm-4 form-group">
                                 <label class="form-label col-sm-4">Industry Type</label>
                                 <div class="col-sm-6">
@@ -346,7 +345,20 @@
                                     @Html.ValidationMessageFor(model => model.Collection.IndustryType, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+                            <div class="col-sm-4 form-group">
+                                @*@Html.LabelFor(model => model.Collection.IsWitness, htmlAttributes: new { @class = "control-label col-sm-4" })*@
+                                <label class="form-label  col-sm-4">
+                                    IsWitness
+                                    <span style="padding:15px;">
+                                        <input id="IsWitness" name="IsWitness" type="checkbox" value="false" />
+                                        @Html.HiddenFor(model => model.Collection.IsWitness)
+                                    </span>
+                                </label>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(model => model.Collection.WitnessName, new { @class = "form-control", @placeholder = "In the Presence Of" })
+                                </div>
                             </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 @Html.LabelFor(model => model.Collection.Remark, htmlAttributes: new { @class = "control-label col-sm-4" })
@@ -516,6 +528,7 @@
 
         $('#Collection_WitnessName').prop("disabled", true);
         $('#IsWitness').click(function () {
+            debugger
             //If the checkbox is checked.
             if ($(this).is(':checked')) {
                 //Enable the WitnessName.

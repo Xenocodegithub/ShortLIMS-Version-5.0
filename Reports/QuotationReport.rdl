@@ -131,27 +131,35 @@ where EM.EnquiryId=@EnquiryId</CommandText>
       <Query>
         <DataSourceName>LimsConnection</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@EnquirySampleID">
-            <Value>=Parameters!EnquirySampleID.Value</Value>
+          <QueryParameter Name="@EnquiryId">
+            <Value>=Parameters!EnquiryId.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandText>Select Distinct
-P.ParameterName,
+STUFF(
+			 (SELECT ', ' + REPLACE(t2.ParameterName,CHAR(13),'') 
+			  FROM Master.ParameterMaster t2
+			  where t2.ParameterMasterId in (select ParameterMasterId from Lims.ParameterMapping PM where PM.ParameterMappingId=EPD.ParameterMappingId)
+			  FOR XML PATH (''))
+			  , 1, 1, '')  AS ParameterName,
 STP.SampleTypeProductName,
 GM.ProductGroupName,
 SM.SubGroupName,
 MM.MatrixName,
-C.UnitPrice
-From Lims.EnquiryParameterDetail ED
-inner join Lims.Costing C on ED.EnquirySampleID=C.EnquirySampleID
-inner join Lims.ParameterMapping PM on ED.ParameterMappingId=PM.ParameterMappingId
+Q.QuotedAmount,
+ED.EnquiryId
+From Lims.EnquiryDetail ED
+inner join Lims.EnquirySampleDetail ESD on ED.EnquiryDetailId=ESD.EnquiryDetailId
+inner join Lims.EnquiryParameterDetail EPD on ESD.EnquirySampleID=EPD.EnquirySampleID
+inner join Lims.Quotation Q on ED.EnquiryId=Q.EnquiryId
+inner join Lims.ParameterMapping PM on EPD.ParameterMappingId=PM.ParameterMappingId
 inner join Master.ParameterMaster P on PM.ParameterMasterId=P.ParameterMasterId
 inner join Lims.ParameterGroupMaster PGM on PM.ParameterGroupId=PGM.ParameterGroupId
 inner join Master.ProductGroupMaster GM on PGM.ProductGroupId=GM.ProductGroupId
 inner join Master.SubGroupMaster SM on PGM.SubGroupId=SM.SubGroupId
 inner join Master.MatrixMaster MM on PGM.MatrixId=MM.MatrixId
 inner join Master.SampleTypeProductMaster STP on PGM.SampleTypeProductId=STP.SampleTypeProductId
-where ED.EnquirySampleID = @EnquirySampleID</CommandText>
+where ED.EnquiryId = @EnquiryId</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -175,9 +183,13 @@ where ED.EnquirySampleID = @EnquirySampleID</CommandText>
           <DataField>MatrixName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="UnitPrice">
-          <DataField>UnitPrice</DataField>
+        <Field Name="QuotedAmount">
+          <DataField>QuotedAmount</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="EnquiryId">
+          <DataField>EnquiryId</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -1708,14 +1720,14 @@ where Q.QuotationId=@QuotationId</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="UnitPrice">
+                        <Textbox Name="QuotedAmount">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!UnitPrice.Value</Value>
+                                  <Value>=Fields!QuotedAmount.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1724,7 +1736,7 @@ where Q.QuotationId=@QuotationId</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>UnitPrice</rd:DefaultName>
+                          <rd:DefaultName>QuotedAmount</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -3153,10 +3165,6 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
     <ReportParameter Name="EnquiryId">
       <DataType>String</DataType>
       <Prompt>Enquiry Id</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="EnquirySampleID">
-      <DataType>String</DataType>
-      <Prompt>Enquiry Sample ID</Prompt>
     </ReportParameter>
     <ReportParameter Name="QuotationId">
       <DataType>String</DataType>

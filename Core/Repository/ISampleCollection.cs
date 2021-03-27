@@ -9,7 +9,7 @@ namespace LIMS_DEMO.Core.Repository
 {
     public interface ISampleCollection : IDisposable
     {
-      
+        string AddARC(int SampleCollectionId, int EnteredBy);
         long AddNotification(string Msg, string RoleName, SampleCollectionEntity samplecollectionEntity);
         string GetExpectedCollDate(int WorkOrderSampleCollectionDateId);
         long GetFDDetails(int SampleCollectionId);
