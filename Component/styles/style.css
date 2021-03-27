@@ -59,7 +59,7 @@ img {
 }
 
 input, select, textarea {
-    resize: none;
+    resize:  horizontal;
     font-family: 'Inter',sans-serif
 }
 
