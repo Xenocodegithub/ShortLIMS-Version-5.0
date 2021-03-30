@@ -20,16 +20,16 @@
                         </div> <hr/>
                         <div class="body-nest" id="validation">
                             <div class="form_left">
-                                @if (Model.ReviewerComment != "")
+                                @*@if (Model.ReviewerComment != "")
                                 {
                                     <div class="alert alert-warning">
                                         <span class="reviewerComment" id="reviewerComment">
                                             <strong> Reviewer Comment :@Model.ReviewerComment </strong>
                                         </span>
                                     </div>
-                                }
+                                }*@
                                 <br />
-                                @if (Model.ReviewerComment != "")
+                                @if (Model.ApproverComment != "")
                                 {
                                     <div class="alert alert-warning">
                                         <span class="approverComment" id="approverComment">
@@ -83,11 +83,11 @@
                                                         <td><b>:</b></td>
                                                         <td>@Model.Analyst</td>
                                                     </tr>
-                                                    <tr>
+                                                    @*<tr>
                                                         <td>Reviewer</td>
                                                         <td><b>:</b></td>
                                                         <td>@Model.Reviewer</td>
-                                                    </tr>
+                                                    </tr>*@
                                                     <tr>
                                                         <td>Approver </td>
                                                         <td><b>:</b></td>
@@ -316,30 +316,32 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-
-                                    </div> <br />
-                                   
-                                    <div class="col-md-12">
-                                        <table style="border-collapse:collapse" border="1" align="center" class="table table-hover" id="tblAvrgResult">
-                                            <tbody>
+                                        <table style="border-collapse:collapse" border="1" align="center" class="table">
+                                            <thead>
                                                 <tr class="thead-dark">
-                                                    <th>
+                                                    <th class="col-md-2">
                                                         Sr. No.
                                                     </th>
-                                                    <th>
+                                                    <th class="col-md-4">
                                                         Name Of Test
                                                     </th>
-                                                    <th>
+                                                    <th class="col-md-4">
                                                         Result
                                                     </th>
                                                 </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <table style="border-collapse:collapse" border="1" align="center" class="table" id="tblAvrgResult">
+                                            <tbody>
                                                 <tr id="inputAvrgResultRow">
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                   
-                                    <div class="col-md-12" >
+
+                                    <div class="col-md-12">
                                         <table>
                                             <tr style="background: #e8e8e8;">
                                                 <td colspan="4" style="text-align: right;font-weight: 600;">Final Result</td>
@@ -353,7 +355,7 @@
                                     </div>
                                     <div class="col-md-12" style="text-align:right;margin-top:20px;margin-bottom:20px">
                                         @*<input type="button" id="btnSave" value="Save" class="btn btn-sm btn-primary" />*@
-                                        <input type="button" id="btnSubmit" value="Forward to Reviewer" class="btn btn-sm btn-info" />
+                                        <input type="button" id="btnSubmit" value="Forward to Approver" class="btn btn-sm btn-info" />
                                         <input type="button" value="Close" id="btnclose" class="btn btn-Colse btn-danger" onclick="location.href='@Url.Action("ParameterList", "Analyse")'">
                                     </div>
                                 </div>
@@ -930,17 +932,16 @@
                 window.location.href = "@Url.Action("SampleList", "Tester", new { Area="Lab"})";
 
                 $('#btnSubmit').attr('disabled', false);
-                $("#btnSubmit").attr('value','Forward to Reviewer');
+                $("#btnSubmit").attr('value','Forward to Approver');
             }
             else {
                 alert('Please Enter Mandatory Data');
                 $('#btnSubmit').attr('disabled', false);
-                $("#btnSubmit").attr('value','Forward to Reviewer');
+                $("#btnSubmit").attr('value','Forward to Approver');
             }
         });
 
     $('#btnCalculate').click(function () {
-        debugger
         if (ValidateDate() == false) {
             return false;
         }
@@ -1074,7 +1075,6 @@
             }
             else {
                 PopulateResultRows();
-                debugger
                 var rowHtml = '';
                 var TblrowCount = $("#tblAvrgResult tr").length;
                 var srNo = TblrowCount - 1;
@@ -1169,6 +1169,7 @@
             }
         }
     });
+
     function GetAvgResultfor_4() {
         debugger
         var arr1 = [];
@@ -1527,7 +1528,7 @@
             type: "POST",
             url: "/Tester/UpdateFinalResult",
             dataType: 'JSON',
-            cache: false,
+            cache: false,               
             data: { "model": parameter, "isSubmitted": isSubmitted },
             success: function (response) {
                 var x = response;

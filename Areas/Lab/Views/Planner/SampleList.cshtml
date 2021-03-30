@@ -173,9 +173,9 @@
                                             <th class="width-20">
                                                 Analyst
                                             </th>
-                                            <th class="width-10">
+                                            @*<th class="width-10">
                                                 Reviewer
-                                            </th>
+                                            </th>*@
                                             <th class="width-10">
                                                 Approver
                                             </th>
@@ -195,11 +195,11 @@
                                                 <br />
                                                 <button id="btnAnalystApplyToAll" style="width:110%">Apply to all</button>
                                             </td>
-                                            <td class="width-10">
+                                            @*<td class="width-10">
                                                 <div id="divReviewerApplyToAll" style="width:110%"></div>
                                                 <br />
                                                 <button id="btnReviewerApplyToAll" style="width:110%">Apply to all</button>
-                                            </td>
+                                            </td>*@
                                             <td class="width-10">
                                                 <div id="divApproverApplyToAll" style="width:110%"></div>
                                                 <br />
@@ -344,17 +344,17 @@
                     var approverData = response.Approvers;
 
                     var ddlAnalystApplyToAllHtml = createDropDownList(analystData, 'ddlAnalystApplyToAll', 0, true)
-                    var ddlReviewerApplyToAllHtml = createDropDownList(reviewerData, 'ddlReviewerApplyToAll', 0, true)
+                   // var ddlReviewerApplyToAllHtml = createDropDownList(reviewerData, 'ddlReviewerApplyToAll', 0, true)
                     var ddlApproverApplyToAllHtml = createDropDownList(approverData, 'ddlApproverApplyToAll', 0, true)
                     $('#divAnalystApplyToAll').html(ddlAnalystApplyToAllHtml);
-                    $('#divReviewerApplyToAll').html(ddlReviewerApplyToAllHtml);
+                    //$('#divReviewerApplyToAll').html(ddlReviewerApplyToAllHtml);
                     $('#divApproverApplyToAll').html(ddlApproverApplyToAllHtml);
 
                     $.each(parameterData, function (key, value) {
                         var currentData = value;
                         var currentStatus = currentData.CurrentStatus;
                         var selectedAnalyst = currentData.AnalystUserMasterID;
-                        var selectedReviewer = currentData.ReviewerUserMasterID;
+                        //var selectedReviewer = currentData.ReviewerUserMasterID;
                         var selectedApprover = currentData.ApproverUserMasterID;
                         var testMethodList = currentData.TestMethodList;
                         var selectedTestMethod = currentData.TestMethodId;
@@ -375,7 +375,7 @@
                         tableContent = tableContent + "<td>" + createTestMethodDropDownList(testMethodList, 'ddlTestMethods', selectedTestMethod, !isActive) + "</td>";
 
                         tableContent = tableContent + "<td>" + createDropDownList(analystData, 'ddlAnalyst', selectedAnalyst, !isActive) + "</td>";
-                        tableContent = tableContent + "<td>" + createDropDownList(reviewerData, 'ddlReviewer', selectedReviewer, !isActive) + "</td>";
+                        //tableContent = tableContent + "<td>" + createDropDownList(reviewerData, 'ddlReviewer', selectedReviewer, !isActive) + "</td>";
                         tableContent = tableContent + "<td>" + createDropDownList(approverData, 'ddlApprover', selectedApprover, !isActive) + "</td>";
 
 
@@ -412,14 +412,14 @@
             var UnitId = $(this).parent().parent().find('#hdnUnitId').val();
             var TestMethodID = $(this).parent().parent().find('#ddlTestMethods option:selected').val();
             var AnalystUserMasterID = $(this).parent().parent().find('#ddlAnalyst option:selected').val();
-            var ReviewerUserMasterID = $(this).parent().parent().find('#ddlReviewer option:selected').val();
+           // var ReviewerUserMasterID = $(this).parent().parent().find('#ddlReviewer option:selected').val();
             var ApproverUserMasterID = $(this).parent().parent().find('#ddlApprover option:selected').val();
-            if (AnalystUserMasterID == -1 || ReviewerUserMasterID == -1 || ApproverUserMasterID == -1) {
+            if (AnalystUserMasterID == -1 || ApproverUserMasterID == -1) {
                 alert('Please select Analyst, Reviewer and Approver')
                 event.preventDefault();
             }
             else {
-                var jsonObject = { "SampleCollectionId": sampleId, "ParameterGroupId": ParameterGroupId, "ParameterMasterId": ParameterMasterId, "TestMethodID": TestMethodID, "UnitId": UnitId, "AnalystUserMasterID": AnalystUserMasterID, "ReviewerUserMasterID": ReviewerUserMasterID, "ApproverUserMasterID": ApproverUserMasterID, "IsActive": false };
+                var jsonObject = { "SampleCollectionId": sampleId, "ParameterGroupId": ParameterGroupId, "ParameterMasterId": ParameterMasterId, "TestMethodID": TestMethodID, "UnitId": UnitId, "AnalystUserMasterID": AnalystUserMasterID, "ApproverUserMasterID": ApproverUserMasterID, "IsActive": false };
 
                 $.ajax({
                     type: "POST",

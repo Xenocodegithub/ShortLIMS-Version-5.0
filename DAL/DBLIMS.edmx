@@ -398,7 +398,7 @@
           <Property Name="DeletedDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'SingleFlowLIMS.dbo.InventoryPurchaseFileUpload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InventoryPurchaseFileUpload">
           <Key>
             <PropertyRef Name="ID" />
@@ -4646,18 +4646,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SampleParameterPlanning_ReviewerUserMaster">
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
-          <End Role="SampleParameterPlanning" Type="Self.SampleParameterPlanning" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserMaster">
-              <PropertyRef Name="UserMasterID" />
-            </Principal>
-            <Dependent Role="SampleParameterPlanning">
-              <PropertyRef Name="ReviewerUserMasterID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SampleParameterPlanning_SampleCollection">
           <End Role="SampleCollection" Type="Self.SampleCollection" Multiplicity="1" />
           <End Role="SampleParameterPlanning" Type="Self.SampleParameterPlanning" Multiplicity="*" />
@@ -6494,10 +6482,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
           </AssociationSet>
           <AssociationSet Name="FK_SampleParameterPlanning_ParameterMaster" Association="Self.FK_SampleParameterPlanning_ParameterMaster">
             <End Role="ParameterMaster" EntitySet="ParameterMaster" />
-            <End Role="SampleParameterPlanning" EntitySet="SampleParameterPlanning" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SampleParameterPlanning_ReviewerUserMaster" Association="Self.FK_SampleParameterPlanning_ReviewerUserMaster">
-            <End Role="UserMaster" EntitySet="UserMaster" />
             <End Role="SampleParameterPlanning" EntitySet="SampleParameterPlanning" />
           </AssociationSet>
           <AssociationSet Name="FK_SampleParameterPlanning_SampleCollection" Association="Self.FK_SampleParameterPlanning_SampleCollection">
@@ -8619,7 +8603,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
           <NavigationProperty Name="UserMaster" Relationship="Self.FK_SampleParameterPlanning_AnalystUserMaster" FromRole="SampleParameterPlanning" ToRole="UserMaster" />
           <NavigationProperty Name="UserMaster1" Relationship="Self.FK_SampleParameterPlanning_ApproverUserMaster" FromRole="SampleParameterPlanning" ToRole="UserMaster" />
           <NavigationProperty Name="ParameterMaster" Relationship="Self.FK_SampleParameterPlanning_ParameterMaster" FromRole="SampleParameterPlanning" ToRole="ParameterMaster" />
-          <NavigationProperty Name="UserMaster2" Relationship="Self.FK_SampleParameterPlanning_ReviewerUserMaster" FromRole="SampleParameterPlanning" ToRole="UserMaster" />
           <NavigationProperty Name="UnitMaster" Relationship="Self.FK_SampleParameterPlanning_Unit" FromRole="SampleParameterPlanning" ToRole="UnitMaster" />
         </EntityType>
         <EntityType Name="SolutionPreparationData">
@@ -9515,7 +9498,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
           <NavigationProperty Name="SampleParameterFiles" Relationship="Self.FK_SampleParameterFiles_AnalystUserMaster" FromRole="UserMaster" ToRole="SampleParameterFiles" />
           <NavigationProperty Name="SampleParameterPlannings" Relationship="Self.FK_SampleParameterPlanning_AnalystUserMaster" FromRole="UserMaster" ToRole="SampleParameterPlanning" />
           <NavigationProperty Name="SampleParameterPlannings1" Relationship="Self.FK_SampleParameterPlanning_ApproverUserMaster" FromRole="UserMaster" ToRole="SampleParameterPlanning" />
-          <NavigationProperty Name="SampleParameterPlannings2" Relationship="Self.FK_SampleParameterPlanning_ReviewerUserMaster" FromRole="UserMaster" ToRole="SampleParameterPlanning" />
           <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetail_UserMaster" FromRole="UserMaster" ToRole="UserDetail" />
           <NavigationProperty Name="UserLabs" Relationship="Self.FK_UserLab_UserMaster" FromRole="UserMaster" ToRole="UserLab" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRoles_UserMaster" FromRole="UserMaster" ToRole="UserRoles" />
@@ -11010,18 +10992,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
             </Principal>
             <Dependent Role="SampleParameterPlanning">
               <PropertyRef Name="ParameterMasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SampleParameterPlanning_ReviewerUserMaster">
-          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
-          <End Role="SampleParameterPlanning" Type="Self.SampleParameterPlanning" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserMaster">
-              <PropertyRef Name="UserMasterID" />
-            </Principal>
-            <Dependent Role="SampleParameterPlanning">
-              <PropertyRef Name="ReviewerUserMasterID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12634,10 +12604,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
           </AssociationSet>
           <AssociationSet Name="FK_SampleParameterPlanning_ParameterMaster" Association="Self.FK_SampleParameterPlanning_ParameterMaster">
             <End Role="ParameterMaster" EntitySet="ParameterMasters" />
-            <End Role="SampleParameterPlanning" EntitySet="SampleParameterPlannings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SampleParameterPlanning_ReviewerUserMaster" Association="Self.FK_SampleParameterPlanning_ReviewerUserMaster">
-            <End Role="UserMaster" EntitySet="UserMasters" />
             <End Role="SampleParameterPlanning" EntitySet="SampleParameterPlannings" />
           </AssociationSet>
           <AssociationSet Name="FK_SampleParameterPlanning_Unit" Association="Self.FK_SampleParameterPlanning_Unit">

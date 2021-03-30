@@ -20,7 +20,6 @@ namespace LIMS_DEMO.DAL
             this.SampleParameterFiles = new HashSet<SampleParameterFile>();
             this.SampleParameterPlannings = new HashSet<SampleParameterPlanning>();
             this.SampleParameterPlannings1 = new HashSet<SampleParameterPlanning>();
-            this.SampleParameterPlannings2 = new HashSet<SampleParameterPlanning>();
             this.UserDetails = new HashSet<UserDetail>();
             this.UserLabs = new HashSet<UserLab>();
             this.UserRoles = new HashSet<UserRole>();
@@ -45,8 +44,6 @@ namespace LIMS_DEMO.DAL
         public virtual ICollection<SampleParameterPlanning> SampleParameterPlannings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SampleParameterPlanning> SampleParameterPlannings1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SampleParameterPlanning> SampleParameterPlannings2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDetail> UserDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
