@@ -7,7 +7,7 @@
                 <div class="form-group row">
                     <label class="col-sm-12 col-md-2 col-form-label">Customer Name: </label>
                     <div class="col-sm-12 col-md-10">
-                        @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control", placeholdder = "Category Name" })
+                        @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control", placeholdder = "Customer Name" })
                     </div>
                 </div>
                 @using (Ajax.BeginForm("_CommunicationLog", "Enquiry", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "EnquiryLogSuccess" }, new { id = "frmCommunicationLog" }))

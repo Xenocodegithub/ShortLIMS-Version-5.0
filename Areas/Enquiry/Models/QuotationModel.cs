@@ -9,6 +9,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
     public class QuotationModel
     {
         //-----------------custmer---------------------------
+        public long EnquirySampleID { get; set; }
         public long QuotationId { get; set; }
         public string QuotationNo { get; set; }
         public string EnquiryNo { get; set; }
@@ -70,6 +71,8 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
 
     public class QuotationPreviewModel
     {
+        public long EnquirySampleID { get; set; }
+        public long  QuotationId { get; set; } 
         public long EnquiryId { get; set; }
         public string LabName { get; set; }
         public string RefName { get; set; }

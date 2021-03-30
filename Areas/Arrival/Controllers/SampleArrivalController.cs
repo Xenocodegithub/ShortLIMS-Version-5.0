@@ -82,12 +82,24 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                 model.ARCId = CoreFactory.samplearrivalEntity.ARCId;
                 model.SampleCollectionId = CoreFactory.samplearrivalEntity.SampleCollectionId;
                 model.UserRoleId = CoreFactory.samplearrivalEntity.UserRoleId;
+                model.ActionDate = CoreFactory.samplearrivalEntity.ActionDate;
+                model.Date2 = Convert.ToDateTime(CoreFactory.samplearrivalEntity.ActionDate).Date;
+                model.dt2 = Convert.ToDateTime(model.Date2).ToString("dd/MM/yyyy");
+                model.Time2 = Convert.ToDateTime(CoreFactory.samplearrivalEntity.ActionDate).TimeOfDay;
             }
             if (SampleCollectionId != 0)
             {
                 CoreFactory.samplearrivalEntity = BALFactory.samplearrivalBAL.GetSampleArrivalDetails((Int32)SampleCollectionId);
                 model.WorkOrderID = CoreFactory.samplearrivalEntity.WorkOrderID;
                 model.LocationSampleCollectionID = CoreFactory.samplearrivalEntity.LocationSampleCollectionID;
+                if (model.SampleTypeProductName == "Ambient Noise Level" || model.SampleTypeProductName == "Source Noise Level" || model.SampleTypeProductName == "Workplace Noise Level")
+                {
+                    model.flag = true; //For Noise SampleType Only
+                }
+                else
+                {
+                    model.flag = false;
+                }
                 model.SampleTypeProductId = CoreFactory.samplearrivalEntity.SampleTypeProductId;
                 model.SampleTypeProductName = CoreFactory.samplearrivalEntity.SampleTypeProductName;
                 model.Url = model.SampleTypeProductName;//for FieldDetermination
@@ -104,6 +116,7 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                 //model.CollectedBy = CoreFactory.samplearrivalEntity.CollectedBy;
                 model.CustomerName = CoreFactory.samplearrivalEntity.CustomerName;
                 model.CityName = CoreFactory.samplearrivalEntity.CityName;
+                model.PlannerId = CoreFactory.samplearrivalEntity.PlannerId;
                 model.SampleCollectedBy = CoreFactory.samplearrivalEntity.SampleCollectedBy;
                 a = (Int32)model.SampleCollectedBy;
                 if (a == 1)
@@ -114,9 +127,10 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                 {
                     model.CollectedBy = "Customer";
                 }
-                //model.ProductGroupName = CoreFactory.samplearrivalEntity.ProductGroupName;
-                //model.SubGroupName = CoreFactory.samplearrivalEntity.SubGroupName;
-
+                model.ProductGroupName = CoreFactory.samplearrivalEntity.ProductGroupName;
+                model.SubGroupName = CoreFactory.samplearrivalEntity.SubGroupName;
+                model.MatrixName = CoreFactory.samplearrivalEntity.MatrixName;
+                model.Url = model.MatrixName;//for FieldDetermination
                 model.CollectionDate = CoreFactory.samplearrivalEntity.CollectionDate;
                 model.Date = Convert.ToDateTime(model.CollectionDate).ToString("dd/MM/yyyy");
                 model.SampleCollectionTime = CoreFactory.samplearrivalEntity.SampleCollectionTime;
@@ -126,6 +140,9 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                 model.EnvCondts = CoreFactory.samplearrivalEntity.EnvCondts;
                 model.EmployeeId = CoreFactory.samplearrivalEntity.EmployeeId;
                 model.WitnessName = CoreFactory.samplearrivalEntity.WitnessName;
+                model.ProbableDateOfReport = Convert.ToDateTime(CoreFactory.samplearrivalEntity.ProbableDateOfReport).Date;
+                model.podr = Convert.ToDateTime(model.ProbableDateOfReport).ToString("dd/MM/yyyy");
+                model.IsSampleIntact = (bool)CoreFactory.samplearrivalEntity.IsSampleIntact;
                 model.ULRNo = CoreFactory.samplearrivalEntity.ULRNo;//To be genrated here
                 model.RequestNo = CoreFactory.samplearrivalEntity.RequestNo;//To be genrated here
                 model.IsReturnedOrIsRetained = CoreFactory.samplearrivalEntity.IsReturnedOrIsRetained;
@@ -133,6 +150,66 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                 model.SubContractedParameters = CoreFactory.samplearrivalEntity.SubContractedParameters;
                 model.AckRemarks = CoreFactory.samplearrivalEntity.AckRemarks;
 
+            }
+            if (model.flag == true)
+            {
+                ///////For Approver Selection only For Noise Level SapmleType///////////////
+                CoreFactory.samplearrivalList = BALFactory.samplearrivalBAL.GetDisciplineList();
+                model.ParaDisciplineList = new List<ParameterDisciplineModel>();
+                int iSrNo = 1;
+                foreach (var item in CoreFactory.samplearrivalList)
+                {
+                    model.ParaDisciplineList.Add(new ParameterDisciplineModel()
+                    {
+                        SerialNo = iSrNo,
+                        //EnquirySampleID = item.EnquirySampleID,
+                        //EnquiryParameterDetailID = item.EnquiryParameterDetailID,
+                        //ParameterMappingId = item.ParameterMappingId,
+                        //UnitId = item.UnitId,
+                        //Unit = item.Unit,
+                        //ParameterMasterId = item.ParameterMasterId,
+                        //ParameterName = item.ParameterName,
+                        //ParameterGroupId = item.ParameterGroupId,
+                        DisciplineId = item.DisciplineId,
+                        Discipline = item.Discipline,
+                        ApproverId = item.ApproverId,
+                        Parameters = BALFactory.samplearrivalBAL.GetParameterByDiscipline((Int32)model.EnquirySampleID, (int)item.DisciplineId), //sample.Parameters,
+                        Approver = BALFactory.dropdownsBAL.GetPlannerList("Approver", LIMS.User.LabId, (int)item.DisciplineId),//For selection of Planner,
+                    });
+                    iSrNo++;
+                }
+
+                ViewBag.ApproverList = BALFactory.dropdownsBAL.GetApproverList("Approver", LIMS.User.LabId);//For selection of Approver
+                model.Parameters = BALFactory.samplearrivalBAL.GetParameterByDiscipline((Int32)model.EnquirySampleID, 0);
+            }
+            else
+            {
+                /////////////////Planner by Chemical OR Biological///////////////////////////////////////////////////////////////////////////////////
+                CoreFactory.samplearrivalList = BALFactory.samplearrivalBAL.GetDisciplineList();
+                //CoreFactory.samplearrivalList = BALFactory.samplearrivalBAL.GetArrivalParameterUnitList((Int32)model.EnquirySampleID);
+                model.ParaDisciplineList = new List<ParameterDisciplineModel>();
+                int iSrNo = 1;
+                foreach (var item in CoreFactory.samplearrivalList)
+                {
+                    model.ParaDisciplineList.Add(new ParameterDisciplineModel()
+                    {
+                        SerialNo = iSrNo,
+                        //EnquirySampleID = item.EnquirySampleID,
+                        //EnquiryParameterDetailID = item.EnquiryParameterDetailID,
+                        //ParameterMappingId = item.ParameterMappingId,
+                        //UnitId = item.UnitId,
+                        //Unit = item.Unit,
+                        //ParameterMasterId = item.ParameterMasterId,
+                        //ParameterName = item.ParameterName,
+                        //ParameterGroupId = item.ParameterGroupId,
+                        DisciplineId = item.DisciplineId,
+                        Discipline = item.Discipline,
+                        PlannerId = item.PlannerId,
+                        Parameters = BALFactory.samplearrivalBAL.GetParameterByDiscipline((Int32)model.EnquirySampleID, (int)item.DisciplineId), //sample.Parameters,
+                        Planner = BALFactory.dropdownsBAL.GetPlannerList("Planner", LIMS.User.LabId, (int)item.DisciplineId),//For selection of Planner,
+                    });
+                    iSrNo++;
+                }
             }
             ViewBag.SampleReceviedLabBy = BALFactory.dropdownsBAL.GetReceiver(LIMS.User.LabId);
             return View(model);
@@ -159,6 +236,20 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
             }
             CoreFactory.samplearrivalEntity.AckRemarks = model.AckRemarks;
             //CoreFactory.samplearrivalEntity.SampleNo = model.SampleNo;
+            CoreFactory.samplearrivalEntity.Date2 = model.Date2;
+            CoreFactory.samplearrivalEntity.Time2 = model.Time2;/* DateTime(int year, int month, int day);*/
+            if (model.Date2 == null)
+            {
+                CoreFactory.samplearrivalEntity.ActionDate = null; //For Noise SampleType Only
+            }
+            else
+            {
+                CoreFactory.samplearrivalEntity.ActionDate = Convert.ToDateTime(model.Date2 + model.Time2);
+            }
+            CoreFactory.samplearrivalEntity.IsSampleIntact = model.IsSampleIntact;
+            CoreFactory.samplearrivalEntity.ProbableDateOfReport = model.ProbableDateOfReport;
+            CoreFactory.samplearrivalEntity.PlannerId = model.PlannerId;//For selection of Planner
+
             CoreFactory.samplearrivalEntity.CollectedBy = model.CollectedBy;
             CoreFactory.samplearrivalEntity.CustomerName = model.CustomerName;
             CoreFactory.samplearrivalEntity.CityName = model.CityName;
@@ -207,13 +298,76 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                         //CoreFactory.samplearrivalEntity.RequestNo = Reportno_ULRno;
                     }
                 }
+
                 else
                 {
                     CoreFactory.samplearrivalEntity.ULRNo = BALFactory.samplearrivalBAL.GenerateULRNo((Int32)model.SampleCollectionId, (Int32)model.EnquiryDetailId);
                     CoreFactory.samplearrivalEntity.RequestNo = BALFactory.samplearrivalBAL.GenerateReportNo((Int32)model.SampleCollectionId, model.SampleName, model.CollectedBy, model.CustomerName, model.CityName);
                 }
+                if (model.flag == true)//For Noise Level sampleType Only
+                {
+                    CoreFactory.plannerbydisciplineList = new List<PlannerByDisciplineEntity>();
+                    foreach (var item in model.ParaDisciplineList)
+                    {
+                        if (item.ApproverId != null && item.Parameters != null)
+                        {
+                            CoreFactory.plannerbydisciplineList.Add(new PlannerByDisciplineEntity()
+                            {
+                                ApproverId = item.ApproverId,
+                                //ParameterName = item.ParameterName,
+                                Parameters = item.Parameters,
+                                DisciplineId = item.DisciplineId,
+                                SampleCollectionId = model.SampleCollectionId,
+                                IsActive = true,
+                                EnteredBy = LIMS.User.UserMasterID,
+                                EnteredDate = DateTime.Now,
+                            });
 
+                            BALFactory.samplearrivalBAL.AddApprover(CoreFactory.plannerbydisciplineList, model.EnquirySampleID, model.SampleCollectionId);
+                        }
+                        else if (item.ApproverId == null && item.Parameters != null)
+                        {
+                            return Json(new { status = "Fail" }, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                }
+                else
+                {
+                    CoreFactory.plannerbydisciplineList = new List<PlannerByDisciplineEntity>();
+                    foreach (var item in model.ParaDisciplineList)
+                    {
+                        if (item.PlannerId != null && item.Parameters != null)
+                        {
+                            CoreFactory.plannerbydisciplineList.Add(new PlannerByDisciplineEntity()
+                            {
+                                PlannerId = item.PlannerId,
+                                //ParameterName = item.ParameterName,
+                                Parameters = item.Parameters,
+                                DisciplineId = item.DisciplineId,
+                                SampleCollectionId = model.SampleCollectionId,
+                                IsActive = true,
+                                EnteredBy = LIMS.User.UserMasterID,
+                                EnteredDate = DateTime.Now,
+                            });
 
+                            BALFactory.samplearrivalBAL.AddPlannerByDiscipline(CoreFactory.plannerbydisciplineList);
+                        }
+                        else if (item.PlannerId == null && item.Parameters != null)
+                        {
+                            return Json(new { status = "Fail" }, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                }
+
+                int iStatusId2 = BALFactory.dropdownsBAL.GetStatusIdByCode("ReqCreated");
+                BALFactory.samplecollectionBAL.UpdateCollectionStatus(model.SampleCollectionId, (byte)iStatusId2);
+
+                string Msg2 = "Reports to be Submitted";//reports to be submitted 
+                CoreFactory.samplearrivalEntity.SampleName = model.SampleName;
+                long NotificationDetailId22 = BALFactory.samplearrivalBAL.AddNotification(Msg2, "Sample Receipt and Report Incharge", CoreFactory.samplearrivalEntity);
+                long NotificationDetailId23 = BALFactory.samplearrivalBAL.AddNotification(Msg2, "Sample Receiver", CoreFactory.samplearrivalEntity);
+                long NotificationDetailId24 = BALFactory.samplearrivalBAL.AddNotification(Msg2, "Planner", CoreFactory.samplearrivalEntity);
+                long NotificationDetailId25 = BALFactory.samplearrivalBAL.AddNotification(Msg2, "Reviewer", CoreFactory.samplearrivalEntity);
             }
             var status = BALFactory.samplearrivalBAL.UpdateSampleArrival(CoreFactory.samplearrivalEntity);
             return Json(new { status = status, message = "Sample Arrival updated." }, JsonRequestBehavior.AllowGet);

@@ -50,6 +50,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                     select new QuotationPreviewEntity()
                     {
                         EnquiryId = e.EnquiryId,
+                        QuotationId = q.QuotationId,
                         LabName = l.LabBranchName,
                         RefName = q.QuotationNo,
                         CompanyName = c.RegistrationName,

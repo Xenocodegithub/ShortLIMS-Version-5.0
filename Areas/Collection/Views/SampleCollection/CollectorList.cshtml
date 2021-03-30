@@ -32,7 +32,7 @@
                         <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
                 </div>
-                <table class="data-table table nowrap">
+                <table id="tblColl" class="data-table table nowrap">
                     <thead>
                         <tr class="thead-dark">
                             <th class="table-plus datatable-nosort">
@@ -76,7 +76,8 @@
                     <tbody>
                         @for (int i = 0; i < Model.Count; i++)
                         {
-                            <tr>
+                          
+                            <tr rowCount="@i">
                                 <td>
                                     @Html.HiddenFor(item => Model[i].SampleCollectionId)
                                     @Html.HiddenFor(item => Model[i].SampleName)
@@ -97,40 +98,49 @@
                                 @*<td>
                                 @Html.HiddenFor(modelItem => item.ExpectSampleCollDate)
                                 @Html.DisplayFor(modelItem => item.CollectedOn)
-                            </td>*@
-                                <td>
-                                    @if (Model[i].StatusCodeField == "SampleColl")
-                                    {
-                                        @Html.ActionLink("Field", "FieldDetermination", new { SampleCollectionId = Model[i].SampleCollectionId, Url = Model[i].Url, EnquiryId = Model[i].EnquiryId, EnquirySampleID = Model[i].EnquirySampleID }, new { @class = "btn btn-sm btn-primary", @style = "background-color: darkgrey" })
-                                        @*<a href="#" type="submit" id="btnSave" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="Field">Field </a>*@
-                                    }
-                                    else
-                                    {
-                                        @Html.ActionLink("Field", "FieldDetermination", new { SampleCollectionId = Model[i].SampleCollectionId, Url = Model[i].Url, EnquiryId = Model[i].EnquiryId, EnquirySampleID = Model[i].EnquirySampleID }, new { @class = "btn btn-sm btn-info" })
-                                    }
-                                </td>
-                                <td>
-                                    @*|| item.MatrixName == "Ambient Air"*@
-                                    @if (Model[i].StatusCodeLab == "SampleColl" || Model[i].MatrixName == "NoiseLevel" || Model[i].StatusCodeLab == "SampleSub")
-                                    {
-                                        @*<a href="#" type="submit" id="btnSave" class="btn btn-sm btn-primary btn-disabled " style="background-color:darkgrey" name="Lab">Lab </a>*@
-                                        @Html.ActionLink("Lab", "AddSampleCollection", new { SampleCollectionId = Model[i].SampleCollectionId, EnquirySampleID = Model[i].EnquirySampleID }, new { @class = "btn btn-sm btn-primary", @style = "background-color: darkgrey" })
-                                    }
-                                    else
-                                    {
-                                        @Html.ActionLink("Lab", "AddSampleCollection", new { SampleCollectionId = Model[i].SampleCollectionId, EnquirySampleID = Model[i].EnquirySampleID }, new { @class = "btn btn-sm btn-info" })
-                                    }
-                                </td>
-                                <td>
-                                    @if (Model[i].StatusCodeField == "SampleSub" || (Model[i].StatusCodeLab == "SampleSub" && Model[i].StatusCodeField == "SampleColl"))
-                                    {
-                                        <a href="#" type="submit" id="btnSave" class="btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="Submit">Submit </a>
-                                    }
-                                    else
-                                    {
-                                        @Html.ActionLink("Submit", "SampleSubmit", new { SampleCollectionId = Model[i].SampleCollectionId, CollBy = Model[i].CollBy }, new { @class = "btn btn-sm btn-info", @onclick = "return confirm ('Are you sure want to submit?');" })
-                                    }
-                                </td>
+                                </td>*@
+                            <td>
+                                @if (Model[i].StatusCodeField == "SampleColl" || Model[i].StatusCodeLab == "SampleSub")
+                                {
+                                    @Html.ActionLink("Field", "FieldDetermination", new { SampleCollectionId = Model[i].SampleCollectionId, Url = Model[i].Url, EnquiryId = Model[i].EnquiryId, EnquirySampleID = Model[i].EnquirySampleID }, new { @class = "btn btn-sm btn-primary", @style = "background-color: darkgrey" })
+                                    @*<a href="#" type="submit" id="btnSave" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="Field">Field </a>*@
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Field", "FieldDetermination", new { SampleCollectionId = Model[i].SampleCollectionId, Url = Model[i].Url, EnquiryId = Model[i].EnquiryId, EnquirySampleID = Model[i].EnquirySampleID }, new { id = i + "_Field", @class = "btn btn-sm btn-success disabled" });
+                                    <input type="checkbox" id="@i+F" value="@Model[i].IsFieldSelected" onchange="SelectCheckBoxField(@i,this)" />
+                              
+                                }
+                            </td>
+                            <td>
+                                @*|| item.MatrixName == "Ambient Air"*@
+                                @if (Model[i].StatusCodeLab == "SampleColl" || Model[i].MatrixName == "NoiseLevel" || Model[i].StatusCodeLab == "SampleSub")
+                                {
+                                    @*<a href="#" type="submit" id="btnSave" class="btn btn-sm btn-primary btn-disabled " style="background-color:darkgrey" name="Lab">Lab </a>*@
+                                    @Html.ActionLink("Lab", "AddSampleCollection", new { SampleCollectionId = Model[i].SampleCollectionId, EnquirySampleID = Model[i].EnquirySampleID }, new { @class = "btn btn-sm btn-primary", @style = "background-color: darkgrey" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Lab", "AddSampleCollection", new { SampleCollectionId = Model[i].SampleCollectionId, EnquirySampleID = Model[i].EnquirySampleID }, new { id = i + "_LAB", @class = "btn btn-sm btn-success disabled" })
+                                    <input type="checkbox" id="@i+Lab" value="@Model[i].IsLabSelected" onchange="SelectCheckBoxLAB(@i,this)" />
+                                }
+                            </td>
+                            <td>
+                                @if (Model[i].StatusCodeField == "SampleSub" || (Model[i].StatusCodeLab == "SampleSub" && Model[i].StatusCodeField == "SampleColl"))
+                                {
+                                    <a href="#" type="submit" id="btnSave" class="btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="Submit">Submit </a>
+                                }
+                                else if (Model[i].StatusCodeLab == "SampleSub")
+                                {
+                                    <a href="#" type="submit" id="btnSave" class="btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="Submit">Submit </a>
+
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Submit", "SampleSubmit", new { SampleCollectionId = Model[i].SampleCollectionId, CollBy = Model[i].CollBy }, new { @class = "btn btn-sm btn-info", @onclick = "return confirm ('Are you sure want to submit?');" })
+
+                                }
+                            </td>
                                 <td class="width-5">
                                     @Html.DisplayFor(item => Model[i].CurrentStatus)
                                 </td>
@@ -149,10 +159,9 @@
                                 {
                                     <td></td>
                                 }
-
                                 <td>
                                     @{
-                                        if (Model[i].Url != null && (Model[i].StatusCodeField == "SampleSub" || (Model[i].StatusCodeLab == "SampleSub" && Model[i].StatusCodeField == "SampleColl")))
+                                        if (Model[i].Url != null && ((Model[i].StatusCodeLab == "SampleSub")||(Model[i].StatusCodeField == "SampleSub" || (Model[i].StatusCodeLab == "SampleSub" && Model[i].StatusCodeField == "SampleColl"))))
                                         {
                                             if (Model[i].Url.ToString().Trim() == "Admixture" || Model[i].Url.ToString().Trim() == "Cement" || Model[i].Url.ToString().Trim() == "Fly Ash" ||
                                               Model[i].Url.ToString().Trim() == "Coal" || Model[i].Url.ToString().Trim() == "Coke" || Model[i].Url.ToString().Trim() == "Charcoal" || Model[i].Url.ToString().Trim() == "Briquettes" || Model[i].Url.ToString().Trim() == "Other Solid fuel" || Model[i].Url.ToString().Trim() == "Food" ||
@@ -199,6 +208,7 @@
                                     }
                                 </td>
                             </tr>
+                        
                         }
                     </tbody>
                 </table>
@@ -239,6 +249,65 @@
             })
         }
     };
+
+    function SelectCheckBoxField(i,e) {
+        debugger;
+        var ID = i + "_Field";
+        if ($('#' + i + '+F').prop('checked', true)) {
+            $('#' + i + '_Field').attr('class', 'btn btn-sm btn-info');
+            $(this).attr("value", "true");
+        }
+        else {
+            //If it is not checked, disable .
+            $('#' + i + '_Field').attr('class', 'btn btn-sm btn-success disabled');
+            $(this).attr("value", "false");
+        }
+        tableParameter = document.getElementById("tblColl");
+        trParameter = tableParameter.getElementsByTagName('tr');
+       
+        //for (i = 0; i < trParameter.length; i++) {
+        //   // $('#CollectionList_' + rowCount + '__IsSelected').prop('checked', true);
+           
+        //    if ($('#' + i + '+F').prop('checked' , true)) {
+        //        $('#' + i + '_Field').attr('class', 'btn btn-sm btn-info');
+        //        $(this).attr("value", "true");
+        //    }
+        //    else {
+        //        //If it is not checked, disable .
+        //        $('#' + i + '_Field').attr('class', 'btn btn-sm btn-success disabled');
+        //        $(this).attr("value", "false");
+        //    }
+        //}
+    }
+
+    function SelectCheckBoxLAB(i, e) {
+        debugger;
+        var ID = i + "_LAB";
+        if ($('#' + i + '+Lab').prop('checked', true)) {
+            $('#' + i + '_LAB').attr('class', 'btn btn-sm btn-info');
+            $(this).attr("value", "true");
+        }
+        else {
+            //If it is not checked, disable .
+            $('#' + i + '_LAB').attr('class', 'btn btn-sm btn-success disabled');
+            $(this).attr("value", "false");
+        }
+        tableParameter = document.getElementById("tblColl");
+        trParameter = tableParameter.getElementsByTagName('tr');
+        //for (i = 0; i < trParameter.length; i++) {
+
+        //    if ($('#' + i + '+Lab').prop('checked', true)) {
+        //        $('#' + i + '_LAB').attr('class', 'btn btn-sm btn-info');
+        //        $(this).attr("value", "true");
+        //    }
+        //    else {
+        //        //If it is not checked, disable .
+        //        $('#' + i + '_LAB').attr('class', 'btn btn-sm btn-success disabled');
+        //        $(this).attr("value", "false");
+        //    }
+        //}
+       
+    }
 </script>
 
 

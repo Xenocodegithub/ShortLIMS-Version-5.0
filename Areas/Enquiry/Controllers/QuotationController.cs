@@ -56,6 +56,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             var QuotationDetail = BALFactory.quotationBAL.GetQuotationPreview(EnquiryId);
             QuotationPreviewModel model = new QuotationPreviewModel();
             model.EnquiryId = EnquiryId;
+            model.QuotationId = QuotationDetail.QuotationId;
             if (QuotationDetail != null)
             {
                 model.EnquiryId = QuotationDetail.EnquiryId;

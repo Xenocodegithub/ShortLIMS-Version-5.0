@@ -35,7 +35,10 @@ namespace LIMS_DEMO.BAL.Collection
             return CoreFactory.samplecollection.UpdateWorkOrderSampleCollectionDate(WorkOrderSampleCollectionDateId, CollectionDate);
 
         }
-
+        public string AddARC(int SampleCollectionId, int EnteredBy)
+        {
+            return CoreFactory.samplecollection.AddARC(SampleCollectionId, EnteredBy);
+        }
         public string AddSampleCollection(SampleCollectionEntity samplecollectionEntity)
         {
             return CoreFactory.samplecollection.AddSampleCollection(samplecollectionEntity);

@@ -37,6 +37,7 @@ namespace LIMS_DEMO.Core.Enquiry
 
     public class QuotationPreviewEntity
     {
+        public long QuotationId { get; set; }
         public long EnquiryId { get; set; }
         public string LabName { get; set; }
         public string RefName { get; set; }
