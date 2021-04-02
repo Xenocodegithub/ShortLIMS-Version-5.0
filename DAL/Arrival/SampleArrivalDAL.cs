@@ -222,7 +222,7 @@ namespace LIMS_DEMO.DAL.Arrival
                                into ep
                                from pr in ep.DefaultIfEmpty()
                                join pmgm in _dbContext.ParameterGroupMasters on a.ParameterGroupId equals pmgm.ParameterGroupId
-                               join dis in _dbContext.DisciplineMasters on pmgm.DisciplineId equals dis.DisciplineId
+                               join dis in _dbContext.DisciplineMasters on a.DisciplineId equals dis.DisciplineId
                                into d
                                from dis in d.DefaultIfEmpty()
                                where epd.EnquirySampleID == EnquirySampleID
@@ -246,7 +246,7 @@ namespace LIMS_DEMO.DAL.Arrival
                                into ep
                                from pr in ep.DefaultIfEmpty()
                                join pmgm in _dbContext.ParameterGroupMasters on a.ParameterGroupId equals pmgm.ParameterGroupId
-                               join dis in _dbContext.DisciplineMasters on pmgm.DisciplineId equals dis.DisciplineId
+                               join dis in _dbContext.DisciplineMasters on a.DisciplineId equals dis.DisciplineId
                                into d
                                from dis in d.DefaultIfEmpty()
                                where epd.EnquirySampleID == EnquirySampleID
@@ -281,7 +281,7 @@ namespace LIMS_DEMO.DAL.Arrival
                         join pmaster in _dbContext.ParameterMasters on pm.ParameterMasterId equals pmaster.ParameterMasterId
                         join pmgm in _dbContext.ParameterGroupMasters on pm.ParameterGroupId equals pmgm.ParameterGroupId
 
-                        join dis in _dbContext.DisciplineMasters on pmgm.DisciplineId equals dis.DisciplineId
+                        join dis in _dbContext.DisciplineMasters on pm.DisciplineId equals dis.DisciplineId
                         where epd.EnquirySampleID == EnquirySampleID
                         select new SampleArrivalEntity()
                         {
@@ -293,8 +293,8 @@ namespace LIMS_DEMO.DAL.Arrival
                             ParameterMasterId = pm.ParameterMasterId,
                             ParameterName = pmaster.ParameterName,
                             ParameterGroupId = pm.ParameterGroupId,
-                            DisciplineId = pmgm.DisciplineId,
-                            Discipline = pmgm.DisciplineMaster.Discipline,
+                            DisciplineId = pm.DisciplineId,
+                            Discipline = pm.DisciplineMaster.Discipline,
                             TestMethodId = pm.TestMethodId,
                             TestMethodName = tm.TestMethod1,
                             InField = pm.InField,
@@ -319,7 +319,7 @@ namespace LIMS_DEMO.DAL.Arrival
                         join pmaster in _dbContext.ParameterMasters on pm.ParameterMasterId equals pmaster.ParameterMasterId
                         join pmgm in _dbContext.ParameterGroupMasters on pm.ParameterGroupId equals pmgm.ParameterGroupId
 
-                        join dis in _dbContext.DisciplineMasters on pmgm.DisciplineId equals dis.DisciplineId
+                        join dis in _dbContext.DisciplineMasters on pm.DisciplineId equals dis.DisciplineId
                         where epd.EnquirySampleID == EnquirySampleID && pm.ParameterMasterId == ParameterMasterId && pm.TestMethodId == TestMethodId
                         select new SampleArrivalEntity()
                         {
@@ -347,7 +347,7 @@ namespace LIMS_DEMO.DAL.Arrival
                         join pmaster in _dbContext.ParameterMasters on pm.ParameterMasterId equals pmaster.ParameterMasterId
                         join pmgm in _dbContext.ParameterGroupMasters on pm.ParameterGroupId equals pmgm.ParameterGroupId
 
-                        join dis in _dbContext.DisciplineMasters on pmgm.DisciplineId equals dis.DisciplineId
+                        join dis in _dbContext.DisciplineMasters on pm.DisciplineId equals dis.DisciplineId
                         where epd.EnquirySampleID == EnquirySampleID && pm.ParameterMasterId == ParameterMasterId
                         select new SampleArrivalEntity()
                         {
@@ -871,7 +871,7 @@ namespace LIMS_DEMO.DAL.Arrival
                            into ep
                            from pr in ep.DefaultIfEmpty()
                            join pmgm in _dbContext.ParameterGroupMasters on a.ParameterGroupId equals pmgm.ParameterGroupId
-                           join dis in _dbContext.DisciplineMasters on pmgm.DisciplineId equals dis.DisciplineId
+                           join dis in _dbContext.DisciplineMasters on a.DisciplineId equals dis.DisciplineId
                            into d
                            from dis in d.DefaultIfEmpty()
                            where epd.EnquirySampleID == EnquirySampleID

@@ -229,7 +229,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                         join p in _dbContext.ParameterMasters on pm.ParameterMasterId equals p.ParameterMasterId
                         into b
                         from c in b.DefaultIfEmpty()
-                        join d in _dbContext.DisciplineMasters on a.DisciplineId equals d.DisciplineId
+                        join d in _dbContext.DisciplineMasters on pm.DisciplineId equals d.DisciplineId
                         into d
                         from e in d.DefaultIfEmpty()
                         join ep in _dbContext.EnquiryParameterDetails on pm.ParameterMappingId equals ep.ParameterMappingId//for saved pg,sg,matrix at enquiry

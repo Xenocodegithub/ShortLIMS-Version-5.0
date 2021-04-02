@@ -42,7 +42,7 @@ namespace LIMS_DEMO.DAL.Lab
                               new { ParameterGroupId = spp.ParameterGroupId, SubGroupId = sgm.SubGroupId } equals
                               new { ParameterGroupId = pm1.ParameterGroupId, SubGroupId = pm1.SubGroupId }
 
-                              where pm.DisciplineId == DisciplineId
+                              where pmp.DisciplineId == DisciplineId
                               where spp.ApproverUserMasterID == UserMasterId
                               where pm.SubGroupId == sgm.SubGroupId
                               where pm.ProductGroupId == pgm.ProductGroupId
@@ -171,7 +171,7 @@ namespace LIMS_DEMO.DAL.Lab
 
                                        into parameterDetails
                                        from pd in parameterDetails.DefaultIfEmpty()
-                                       where sc.SampleCollectionId == SampleId && pamg.DisciplineId == DisciplineId
+                                       where sc.SampleCollectionId == SampleId && pm.DisciplineId == DisciplineId
                                        && pamg.ParameterGroupId == pm.ParameterGroupId
                                        && spp.ApproverUserMasterID == UserMasterId
 
@@ -216,7 +216,7 @@ namespace LIMS_DEMO.DAL.Lab
 
                                        into parameterDetails
                                        from pd in parameterDetails.DefaultIfEmpty()
-                                       where sc.SampleCollectionId == SampleId && pamg.DisciplineId == DisciplineId
+                                       where sc.SampleCollectionId == SampleId && pm.DisciplineId == DisciplineId
                                        && pamg.ParameterGroupId == pm.ParameterGroupId
                                        && spp.ApproverUserMasterID == UserMasterId
 
@@ -280,7 +280,7 @@ namespace LIMS_DEMO.DAL.Lab
                                           new { ParameterGroupId = pma.ParameterGroupId, ParameterMasterId = pma.ParameterMasterId, TestMethodID = (int)pma.TestMethodId, UnitId = pma.UnitId }
 
 
-                                          where pm.DisciplineId == DisciplineId
+                                          where pma.DisciplineId == DisciplineId
                                           // where pm.SubGroupId == sgm.SubGroupId
                                           where pm.ProductGroupId == pgm.ProductGroupId
                                           where pm.SampleTypeProductId == stpm.SampleTypeProductId
@@ -728,7 +728,7 @@ namespace LIMS_DEMO.DAL.Lab
                                         {
                                             NotationValue = spf.NotationValue ?? ""
                                         }
-                                        ).Distinct().ToList();
+                                        ).ToList();
                 return objParam;
             }
             catch (Exception ex)

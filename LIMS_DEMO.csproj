@@ -2622,7 +2622,6 @@
     <Content Include="Reports\QuotationData.xss">
       <DependentUpon>QuotationData.xsd</DependentUpon>
     </Content>
-    <Content Include="Reports\QuotationReport.rdlc" />
     <Content Include="Reports\ReviewerReport.rdl" />
     <Content Include="Reports\SampleReport.rdl" />
     <Content Include="Reports\SampleReport.rdlc" />

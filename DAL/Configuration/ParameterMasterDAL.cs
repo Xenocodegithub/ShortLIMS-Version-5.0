@@ -143,7 +143,7 @@ namespace LIMS_DEMO.DAL.Configuration
                     ProductGroupId = parameterMasterEntity.ProductGroupId,
                     SubGroupId = parameterMasterEntity.SubGroupId,
                     MatrixId = parameterMasterEntity.MatrixId,
-                    DisciplineId = parameterMasterEntity.DisciplineId,
+                   
                     IsSetPCBLimit = parameterMasterEntity.IsIndustrySpecified,
                     IsActive = parameterMasterEntity.IsActive,
                     EnteredBy = parameterMasterEntity.EnteredBy,
@@ -170,7 +170,7 @@ namespace LIMS_DEMO.DAL.Configuration
                 SubGroupId = u.SubGroupId,
                 MatrixId = u.MatrixId,
                 SampleTypeProductId = (Int32)u.SampleTypeProductId,
-                DisciplineId = u.DisciplineId,
+               
                 IsIndustrySpecified = u.IsSetPCBLimit,
                 IsActive = u.IsActive,
             }).FirstOrDefault();
@@ -221,7 +221,7 @@ namespace LIMS_DEMO.DAL.Configuration
                 parameterGroup.SubGroupId = parameterMasterEntity.SubGroupId;
                 parameterGroup.MatrixId = parameterMasterEntity.MatrixId;
                 parameterGroup.SampleTypeProductId = parameterMasterEntity.SampleTypeProductId;
-                parameterGroup.DisciplineId = parameterMasterEntity.DisciplineId;
+               
                 parameterGroup.IsSetPCBLimit = parameterMasterEntity.IsIndustrySpecified;
 
                 var parameterMapping = _dbContext1.ParameterMappings.Find(parameterMasterEntity.ParameterMappingId);
@@ -231,6 +231,7 @@ namespace LIMS_DEMO.DAL.Configuration
                 parameterMapping.UnitId = parameterMasterEntity.UnitId;
                 parameterMapping.LOD = parameterMasterEntity.LOD;
                 parameterMapping.MaxTestingRange = parameterMasterEntity.MaxRange;
+                parameterMapping.DisciplineId = parameterMasterEntity.DisciplineId;
                 parameterMapping.IsNABLAccredited = parameterMasterEntity.IsNABLAccredited;
                 parameterMapping.InField = parameterMasterEntity.IsField;
                 parameterMapping.PermissibleMax = parameterMasterEntity.PermissibleMax;
@@ -278,7 +279,7 @@ namespace LIMS_DEMO.DAL.Configuration
                         from m in _dbContext.MatrixMasters
                         where pgm.MatrixId == m.MatrixId && m.IsActive == true
                         from d in _dbContext.DisciplineMasters
-                        where pgm.DisciplineId == d.DisciplineId && d.IsActive == true
+                        where pm.DisciplineId == d.DisciplineId && d.IsActive == true
                         select new ParameterMasterEntity()
                         {
                             ParameterMappingId = pm.ParameterMappingId,
@@ -286,7 +287,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             ParameterMasterId = pm.ParameterMasterId,
                             Parameter = p.ParameterName,
                             MaxRange = pm.MaxTestingRange,
-                            DisciplineId = pgm.DisciplineId,
+                            DisciplineId = pm.DisciplineId,
                             DisciplineName = d.Discipline,
                             ProductGroupId = pgm.ProductGroupId,
                             ProductGroupName = pg.ProductGroupName,
