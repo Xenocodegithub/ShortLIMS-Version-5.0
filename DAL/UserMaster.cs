@@ -20,7 +20,6 @@ namespace LIMS_DEMO.DAL
             this.SampleParameterFiles = new HashSet<SampleParameterFile>();
             this.SampleParameterPlannings = new HashSet<SampleParameterPlanning>();
             this.SampleParameterPlannings1 = new HashSet<SampleParameterPlanning>();
-            this.SampleParameterPlannings2 = new HashSet<SampleParameterPlanning>();
             this.UserDetails = new HashSet<UserDetail>();
             this.UserLabs = new HashSet<UserLab>();
             this.UserRoles = new HashSet<UserRole>();
@@ -45,8 +44,6 @@ namespace LIMS_DEMO.DAL
         public virtual ICollection<SampleParameterPlanning> SampleParameterPlannings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SampleParameterPlanning> SampleParameterPlannings1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SampleParameterPlanning> SampleParameterPlannings2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDetail> UserDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -103,5 +100,53 @@ namespace LIMS_DEMO.DAL
         public virtual DisciplineMaster DisciplineMaster45 { get; set; }
         public virtual DisciplineMaster DisciplineMaster46 { get; set; }
         public virtual DisciplineMaster DisciplineMaster47 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster48 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster49 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster50 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster51 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster52 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster53 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster54 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster55 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster56 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster57 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster58 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster59 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster60 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster61 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster62 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster63 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster64 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster65 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster66 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster67 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster68 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster69 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster70 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster71 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster72 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster73 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster74 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster75 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster76 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster77 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster78 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster79 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster80 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster81 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster82 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster83 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster84 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster85 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster86 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster87 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster88 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster89 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster90 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster91 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster92 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster93 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster94 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster95 { get; set; }
     }
 }

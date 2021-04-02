@@ -42,7 +42,7 @@ namespace LIMS_DEMO.DAL.Lab
                               new { ParameterGroupId = spp.ParameterGroupId, SubGroupId = sgm.SubGroupId } equals
                               new { ParameterGroupId = pm1.ParameterGroupId, SubGroupId = pm1.SubGroupId }
 
-                              where pm.DisciplineId == DisciplineId
+                              where pmp.DisciplineId == DisciplineId
                               where spp.ApproverUserMasterID == UserMasterId
                               where pm.SubGroupId == sgm.SubGroupId
                               where pm.ProductGroupId == pgm.ProductGroupId
@@ -171,7 +171,7 @@ namespace LIMS_DEMO.DAL.Lab
 
                                        into parameterDetails
                                        from pd in parameterDetails.DefaultIfEmpty()
-                                       where sc.SampleCollectionId == SampleId && pamg.DisciplineId == DisciplineId
+                                       where sc.SampleCollectionId == SampleId && pm.DisciplineId == DisciplineId
                                        && pamg.ParameterGroupId == pm.ParameterGroupId
                                        && spp.ApproverUserMasterID == UserMasterId
 
@@ -216,7 +216,7 @@ namespace LIMS_DEMO.DAL.Lab
 
                                        into parameterDetails
                                        from pd in parameterDetails.DefaultIfEmpty()
-                                       where sc.SampleCollectionId == SampleId && pamg.DisciplineId == DisciplineId
+                                       where sc.SampleCollectionId == SampleId && pm.DisciplineId == DisciplineId
                                        && pamg.ParameterGroupId == pm.ParameterGroupId
                                        && spp.ApproverUserMasterID == UserMasterId
 
@@ -268,7 +268,7 @@ namespace LIMS_DEMO.DAL.Lab
                                           join tm in _dbContext.TestMethods on spp.TestMethodID equals tm.TestMethodId
                                           join um in _dbContext.UnitMasters on spp.UnitId equals um.UnitId
                                           join um1 in _dbContext.UserMasters on spp.AnalystUserMasterID equals um1.UserMasterID
-                                          join um2 in _dbContext.UserMasters on spp.ReviewerUserMasterID equals um2.UserMasterID
+                                          //join um2 in _dbContext.UserMasters on spp.ReviewerUserMasterID equals um2.UserMasterID
                                           join um3 in _dbContext.UserMasters on spp.ApproverUserMasterID equals um3.UserMasterID
                                           //join fss in _dbContext.FDStackEmissions on sc.SampleCollectionId equals fss.SampleCollectionId
                                           //join aam in _dbContext.FieldAmbientAirMonitorings on sc.SampleCollectionId equals aam.SampleCollectionId
@@ -280,7 +280,7 @@ namespace LIMS_DEMO.DAL.Lab
                                           new { ParameterGroupId = pma.ParameterGroupId, ParameterMasterId = pma.ParameterMasterId, TestMethodID = (int)pma.TestMethodId, UnitId = pma.UnitId }
 
 
-                                          where pm.DisciplineId == DisciplineId
+                                          where pma.DisciplineId == DisciplineId
                                           // where pm.SubGroupId == sgm.SubGroupId
                                           where pm.ProductGroupId == pgm.ProductGroupId
                                           where pm.SampleTypeProductId == stpm.SampleTypeProductId
@@ -308,7 +308,7 @@ namespace LIMS_DEMO.DAL.Lab
                                               MatrixName = mm.MatrixName,
                                               WorkOrderId = sc.WorkOrderID,
                                               Analyst = um1.UserName,
-                                              Reviewer = um2.UserName,
+                                              //Reviewer = um2.UserName,
                                               Approver = um3.UserName,
                                               ParameterName = p.ParameterName,
                                               TestMethodId = tm.TestMethodId,
@@ -325,7 +325,7 @@ namespace LIMS_DEMO.DAL.Lab
                 {
                     //Changes by Nivedita for Noise level Sample Type
                     sampleParameterApprove.Analyst = "";
-                    sampleParameterApprove.Reviewer = "";
+                   // sampleParameterApprove.Reviewer = "";
                 }
                 return sampleParameterApprove;
             }
@@ -553,7 +553,36 @@ namespace LIMS_DEMO.DAL.Lab
                     }
                     else if (sampleParameter.ApproverApproveSts == 0)
                     {
-                        sampleParameter.CurrentStatus = (int?)CurrentStatusEnum.Under_Reviewer;
+                        sampleParameter.CurrentStatus = (sampleParameterApprove.Rejectapprovestatus == "retest") ? (int?)CurrentStatusEnum.Re_Test : (int?)CurrentStatusEnum.Re_Plan;
+
+                        var analysisProcessScheduleDetails = _dbContext.AnalysisProcessScheduleDetails.Where(x => x.SampleCollectionId == sampleParameterApprove.SampleCollectionId &&
+                        x.ParameterGroupId == sampleParameterApprove.ParameterGroupId && x.ParameterMasterId == sampleParameterApprove.ParameterMasterId).ToList();
+                        if (analysisProcessScheduleDetails != null && analysisProcessScheduleDetails.Count > 0)
+                        {
+                            _dbContext.AnalysisProcessScheduleDetails.RemoveRange(analysisProcessScheduleDetails);
+                        }
+
+                        var sampleParameterFiles = _dbContext.SampleParameterFiles.Where(x => x.SampleCollectionId == sampleParameterApprove.SampleCollectionId &&
+                        x.ParameterGroupId == sampleParameterApprove.ParameterGroupId && x.ParameterMasterId == sampleParameterApprove.ParameterMasterId).ToList();
+                        if (sampleParameterFiles != null && sampleParameterFiles.Count > 0)
+                        {
+                            _dbContext.SampleParameterFiles.RemoveRange(sampleParameterFiles);
+                        }
+
+                        var sampleParameterFormulaValues = _dbContext.SampleParameterFormulaValues.Where(x => x.SampleCollectionId == sampleParameterApprove.SampleCollectionId &&
+                        x.ParameterGroupId == sampleParameterApprove.ParameterGroupId && x.ParameterMasterId == sampleParameterApprove.ParameterMasterId).ToList();
+                        if (sampleParameterFormulaValues != null && sampleParameterFormulaValues.Count > 0)
+                        {
+                            _dbContext.SampleParameterFormulaValues.RemoveRange(sampleParameterFormulaValues);
+                        }
+
+                        var solutionPreparationDatas = _dbContext.SolutionPreparationDatas.Where(x => x.SampleCollectionId == sampleParameterApprove.SampleCollectionId &&
+                        x.ParameterGroupId == sampleParameterApprove.ParameterGroupId && x.ParameterMasterId == sampleParameterApprove.ParameterMasterId).ToList();
+                        if (solutionPreparationDatas != null && solutionPreparationDatas.Count > 0)
+                        {
+                            _dbContext.SolutionPreparationDatas.RemoveRange(solutionPreparationDatas);
+                        }
+                        //sampleParameter.CurrentStatus = (int?)CurrentStatusEnum.Under_Testing;
                     }
 
                     _dbContext.SaveChanges();
@@ -699,7 +728,7 @@ namespace LIMS_DEMO.DAL.Lab
                                         {
                                             NotationValue = spf.NotationValue ?? ""
                                         }
-                                        ).Distinct().ToList();
+                                        ).ToList();
                 return objParam;
             }
             catch (Exception ex)

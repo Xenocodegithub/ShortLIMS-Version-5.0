@@ -50,6 +50,7 @@ namespace LIMS_DEMO.DAL
         public Nullable<int> ModifiedBy { get; set; }
         public byte[] ModifiedDate { get; set; }
         public Nullable<bool> IsNABLAccredited { get; set; }
+        public Nullable<byte> DisciplineId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnquiryParameterDetail> EnquiryParameterDetails { get; set; }
@@ -58,6 +59,7 @@ namespace LIMS_DEMO.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FieldWasteWater> FieldWasteWaters { get; set; }
         public virtual ParameterGroupMaster ParameterGroupMaster { get; set; }
+        public virtual DisciplineMaster DisciplineMaster { get; set; }
         public virtual ParameterMaster ParameterMaster { get; set; }
         public virtual TestMethod TestMethod { get; set; }
         public virtual UnitMaster UnitMaster { get; set; }

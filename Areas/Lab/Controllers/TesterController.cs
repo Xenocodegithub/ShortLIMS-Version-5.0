@@ -219,7 +219,7 @@ namespace LIMS_DEMO.Areas.Lab.Controllers
                 analysisProcessScheduleDetail.EnteredDate = DateTime.UtcNow;
                 var status = BALFactory.testerBAL.UpdateFinalResult(analysisProcessScheduleDetail, isSubmitted);
 
-                string Msg = "Sample Received for Review";//samples received for review from tester
+                string Msg = "Sample Received for Approve";//samples received for review from tester
 
                 long NotificationDetailId = BALFactory.testerBAL.AddNotification(Msg, "Planner", analysisProcessScheduleDetail);
                 long NotificationDetailId1 = BALFactory.testerBAL.AddNotification(Msg, "Reviewer", analysisProcessScheduleDetail);
@@ -303,11 +303,24 @@ namespace LIMS_DEMO.Areas.Lab.Controllers
                     {
                         fname = file.FileName;
                     }
+
+
+                    string filename = Path.GetFileName(fname
+                        );
+                    string storepath = "/Uploads/Tester/" + filename.Replace(" ", "") + "";
+                    if (!Directory.Exists(Server.MapPath("/Uploads/Tester")))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("/Uploads/Tester"));
+                    }
+                    string targetPath = Server.MapPath("~/Uploads/Tester/") + filename.Replace(" ", "") + "";
+                    file.SaveAs(targetPath);
+
+
                     // Get the complete folder path and store the file inside it.      
-                    fname = Path.Combine(Server.MapPath("~/Content/Uploads/"), fname);
-                    file.SaveAs(fname);
+                    //fname = Path.Combine(Server.MapPath("~/Content/Uploads/"), fname);
+                    //file.SaveAs(fname);
                     SampleParameterFileInfo sampleParameterFileInfo = new SampleParameterFileInfo();
-                    sampleParameterFileInfo.FileName = fname;
+                    sampleParameterFileInfo.FileName = filename;
                     sampleParameterFileInfo.ParameterMasterId = Convert.ToInt32(ParameterMasterId);
                     sampleParameterFileInfo.ParameterGroupId = Convert.ToInt32(ParameterGroupId);
                     sampleParameterFileInfo.SampleCollectionId = Convert.ToInt32(SampleCollectionId);
@@ -328,7 +341,7 @@ namespace LIMS_DEMO.Areas.Lab.Controllers
             }
             catch (Exception ex)
             {
-                
+
                 return null;
             }
 

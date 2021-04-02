@@ -96,7 +96,7 @@ namespace LIMS_DEMO.DAL.Lab
                               new { ParameterGroupId = spp.ParameterGroupId, SubGroupId = sgm.SubGroupId } equals
                               new { ParameterGroupId = pm1.ParameterGroupId, SubGroupId = pm1.SubGroupId }
 
-                              where pm.DisciplineId == DisciplineId
+                              where pmp.DisciplineId == DisciplineId
                               where spp.AnalystUserMasterID == UserMasterId
                               //where pm.SubGroupId == sgm.SubGroupId
                               //where pm.ProductGroupId == pgm.ProductGroupId
@@ -221,7 +221,7 @@ namespace LIMS_DEMO.DAL.Lab
                                        into parameterDetails
 
                                        from pd in parameterDetails.DefaultIfEmpty()
-                                       where sc.SampleCollectionId == SampleId && pamg.DisciplineId == DisciplineId
+                                       where sc.SampleCollectionId == SampleId && pm.DisciplineId == DisciplineId
                                        && pamg.ParameterGroupId == pm.ParameterGroupId
                                        && spp.AnalystUserMasterID == UserMasterId
 
@@ -302,7 +302,7 @@ namespace LIMS_DEMO.DAL.Lab
                                            join tm in _dbContext.TestMethods on spp.TestMethodID equals tm.TestMethodId
                                            join um in _dbContext.UnitMasters on spp.UnitId equals um.UnitId
                                            join um1 in _dbContext.UserMasters on spp.AnalystUserMasterID equals um1.UserMasterID
-                                           join um2 in _dbContext.UserMasters on spp.ReviewerUserMasterID equals um2.UserMasterID
+                                           //join um2 in _dbContext.UserMasters on spp.ReviewerUserMasterID equals um2.UserMasterID
                                            join um3 in _dbContext.UserMasters on spp.ApproverUserMasterID equals um3.UserMasterID
                                            //join fss in _dbContext.FDStackEmissions on sc.SampleCollectionId equals fss.SampleCollectionId
                                            //join aam in _dbContext.FieldAmbientAirMonitorings on sc.SampleCollectionId equals aam.SampleCollectionId
@@ -314,7 +314,7 @@ namespace LIMS_DEMO.DAL.Lab
                                            new { ParameterGroupId = pma.ParameterGroupId, ParameterMasterId = pma.ParameterMasterId, TestMethodID = (int)pma.TestMethodId, UnitId = pma.UnitId }
 
 
-                                           where pm.DisciplineId == DisciplineId
+                                           where pma.DisciplineId == DisciplineId
                                            // where pm.SubGroupId == sgm.SubGroupId
                                            where pm.ProductGroupId == pgm.ProductGroupId
                                            where pm.SampleTypeProductId == stpm.SampleTypeProductId
@@ -339,7 +339,7 @@ namespace LIMS_DEMO.DAL.Lab
                                                SubGroupName = sgm.SubGroupName,
                                                MatrixName = mm.MatrixName,
                                                Analyst = um1.UserName,
-                                               Reviewer = um2.UserName,
+                                               //Reviewer = um2.UserName,
                                                Approver = um3.UserName,
                                                ParameterName = p.ParameterName,
                                                TestMethodId = tm.TestMethodId,
@@ -415,7 +415,7 @@ namespace LIMS_DEMO.DAL.Lab
                     {
                         spp.AnalystApproveSts = 1;
                         // spp.ReviewerApproveSts = 1;
-                        spp.CurrentStatus = (int?)CurrentStatusEnum.Under_Reviewer;
+                        spp.CurrentStatus = (int?)CurrentStatusEnum.Under_Approver;
                         spp.ModifiedDate = DateTime.Now;
                         _dbContext.SaveChanges();
 
@@ -586,7 +586,7 @@ namespace LIMS_DEMO.DAL.Lab
                                         {
                                             NotationValue = spf.NotationValue ?? ""
                                         }
-                                        ).Distinct().ToList();
+                                        ).ToList();
                 return objParam;
             }
             catch (Exception ex)

@@ -98,7 +98,7 @@ namespace LIMS_DEMO.DAL.FormBuilder
             IList<ParameterInfo> parameterInfos = new List<ParameterInfo>();
             var result = (from pgm in _dbContext.ParameterGroupMasters
                           join pm in _dbContext.ParameterMappings on pgm.ParameterGroupId equals pm.ParameterGroupId
-                          join dm in _dbContext.DisciplineMasters on pgm.DisciplineId equals dm.DisciplineId
+                          join dm in _dbContext.DisciplineMasters on pm.DisciplineId equals dm.DisciplineId
                           join p in _dbContext.ParameterMasters on pm.ParameterMasterId equals p.ParameterMasterId
                           where pgm.SampleTypeProductId == SampleTypeProductId && pgm.IsActive == true && pgm.ProductGroupId == ProductgroupId
                           && pgm.SubGroupId == SubgroupId && pgm.MatrixId == MatrixId
@@ -124,7 +124,7 @@ namespace LIMS_DEMO.DAL.FormBuilder
                 List<Unit> unitList = new List<Unit>();
                 var myUnitList = (from pgm in _dbContext.ParameterGroupMasters
                                   join pm in _dbContext.ParameterMappings on pgm.ParameterGroupId equals pm.ParameterGroupId
-                                  join dm in _dbContext.DisciplineMasters on pgm.DisciplineId equals dm.DisciplineId
+                                  join dm in _dbContext.DisciplineMasters on pm.DisciplineId equals dm.DisciplineId
                                   join p in _dbContext.ParameterMasters on pm.ParameterMasterId equals p.ParameterMasterId
                                   join um in _dbContext.UnitMasters on pm.UnitId equals um.UnitId
                                   where pgm.IsActive == true && pgm.SampleTypeProductId == SampleTypeProductId && pgm.ProductGroupId == ProductgroupId
@@ -140,7 +140,7 @@ namespace LIMS_DEMO.DAL.FormBuilder
                 List<TestMethods> testMethodList = new List<TestMethods>();
                 var mytestMethodList = (from pgm in _dbContext.ParameterGroupMasters
                                         join pm in _dbContext.ParameterMappings on pgm.ParameterGroupId equals pm.ParameterGroupId
-                                        join dm in _dbContext.DisciplineMasters on pgm.DisciplineId equals dm.DisciplineId
+                                        join dm in _dbContext.DisciplineMasters on pm.DisciplineId equals dm.DisciplineId
                                         join p in _dbContext.ParameterMasters on pm.ParameterMasterId equals p.ParameterMasterId
                                         join tm in _dbContext.TestMethods on pm.TestMethodId equals tm.TestMethodId
                                         where pgm.IsActive == true && pgm.SampleTypeProductId == SampleTypeProductId && pgm.ProductGroupId == ProductgroupId
@@ -242,7 +242,7 @@ namespace LIMS_DEMO.DAL.FormBuilder
             List<TestMethods> testMethodList = new List<TestMethods>();
             testMethodList = (from pgm in _dbContext.ParameterGroupMasters
                               join pm in _dbContext.ParameterMappings on pgm.ParameterGroupId equals pm.ParameterGroupId
-                              join dm in _dbContext.DisciplineMasters on pgm.DisciplineId equals dm.DisciplineId
+                              join dm in _dbContext.DisciplineMasters on pm.DisciplineId equals dm.DisciplineId
                               join p in _dbContext.ParameterMasters on pm.ParameterMasterId equals p.ParameterMasterId
                               join tm in _dbContext.TestMethods on pm.TestMethodId equals tm.TestMethodId
                               where pgm.IsActive == true && pgm.SampleTypeProductId == SampleTypeProductId && pgm.ProductGroupId == ProductgroupId
@@ -260,7 +260,7 @@ namespace LIMS_DEMO.DAL.FormBuilder
             List<Unit> unitList = new List<Unit>();
             unitList = (from pgm in _dbContext.ParameterGroupMasters
                         join pm in _dbContext.ParameterMappings on pgm.ParameterGroupId equals pm.ParameterGroupId
-                        join dm in _dbContext.DisciplineMasters on pgm.DisciplineId equals dm.DisciplineId
+                        join dm in _dbContext.DisciplineMasters on pm.DisciplineId equals dm.DisciplineId
                         join p in _dbContext.ParameterMasters on pm.ParameterMasterId equals p.ParameterMasterId
                         join um in _dbContext.UnitMasters on pm.UnitId equals um.UnitId
                         where pgm.IsActive == true && pgm.SampleTypeProductId == SampleTypeProductId && pgm.ProductGroupId == ProductgroupId
@@ -279,7 +279,7 @@ namespace LIMS_DEMO.DAL.FormBuilder
 
             var result = (from pgm in _dbContext.ParameterGroupMasters
                           join pm in _dbContext.ParameterMappings on pgm.ParameterGroupId equals pm.ParameterGroupId
-                          join dm in _dbContext.DisciplineMasters on pgm.DisciplineId equals dm.DisciplineId
+                          join dm in _dbContext.DisciplineMasters on pm.DisciplineId equals dm.DisciplineId
                           join p in _dbContext.ParameterMasters on pm.ParameterMasterId equals p.ParameterMasterId
                           where pgm.SampleTypeProductId == SampleTypeProductId && pgm.IsActive == true && pgm.ProductGroupId == ProductgroupId
                           && pgm.SubGroupId == SubgroupId && pgm.MatrixId == MatrixId

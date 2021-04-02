@@ -41,7 +41,7 @@ namespace LIMS_DEMO.DAL.Lab
                               join sgm in _dbContext.SubGroupMasters on pm.SubGroupId equals sgm.SubGroupId
                               join mm in _dbContext.MatrixMasters on pm.MatrixId equals mm.MatrixId
 
-                              where pm.DisciplineId == DisciplineId
+                              where pmp.DisciplineId == DisciplineId
                               where pm.SampleTypeProductId == stp.SampleTypeProductId
                               where pm.SubGroupId == sgm.SubGroupId
                               where pm.ProductGroupId == pgm.ProductGroupId && pmp.InField == false
@@ -156,7 +156,7 @@ namespace LIMS_DEMO.DAL.Lab
                                        into parameterDetails
 
                                        from pd in parameterDetails.DefaultIfEmpty()
-                                       where sc.SampleCollectionId == SampleId && pamg.DisciplineId == DisciplineId && pamg.ParameterGroupId == pm.ParameterGroupId && pm.InField == false
+                                       where sc.SampleCollectionId == SampleId && pm.DisciplineId == DisciplineId && pamg.ParameterGroupId == pm.ParameterGroupId && pm.InField == false
                                        // && pd.IsActive==true
                                        select new ParameterInfo
                                        {
@@ -275,16 +275,16 @@ namespace LIMS_DEMO.DAL.Lab
                     TestMethodID = parameterSelectedDetails.TestMethodID,
                     UnitId = parameterSelectedDetails.UnitId,
                     AnalystUserMasterID = parameterSelectedDetails.AnalystUserMasterID,
-                    ReviewerUserMasterID = parameterSelectedDetails.ReviewerUserMasterID,
+                    //ReviewerUserMasterID = parameterSelectedDetails.ReviewerUserMasterID,
                     ApproverUserMasterID = parameterSelectedDetails.ApproverUserMasterID,
                     IsActive = true,
                     EnteredBy = parameterSelectedDetails.EnteredBy,
                     AnalystApproveSts = 0,
-                    ReviewerApproveSts = 0,
+                    //ReviewerApproveSts = 0,
                     ApproverApproveSts = 0,
                     CurrentStatus = (int)CurrentStatusEnum.Under_Testing,
                     AnalystComment = "",
-                    ReviewerComment = "",
+                    //ReviewerComment = "",
                     ApproverComment = "",
                     EnteredDate = DateTime.Now
                 }); ;

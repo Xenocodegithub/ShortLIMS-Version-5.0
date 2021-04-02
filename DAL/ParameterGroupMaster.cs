@@ -26,7 +26,6 @@ namespace LIMS_DEMO.DAL
     
         public int ParameterGroupId { get; set; }
         public int ProductGroupId { get; set; }
-        public Nullable<byte> DisciplineId { get; set; }
         public int SubGroupId { get; set; }
         public Nullable<int> MatrixId { get; set; }
         public Nullable<bool> IsSetPCBLimit { get; set; }
@@ -39,7 +38,6 @@ namespace LIMS_DEMO.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ParameterFormula> ParameterFormulas { get; set; }
-        public virtual DisciplineMaster DisciplineMaster { get; set; }
         public virtual MatrixMaster MatrixMaster { get; set; }
         public virtual ProductGroupMaster ProductGroupMaster { get; set; }
         public virtual SubGroupMaster SubGroupMaster { get; set; }

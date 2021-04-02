@@ -64,6 +64,7 @@ namespace LIMS_DEMO.Core.Lab
         public int? ReviewerApprovedStatus { get; set; }
         public string ReviewerComments { get; set; }
         public int? ApproverApprovedStatus { get; set; }
+        public string Rejectapprovestatus { get; set; }
         public string ApproverComments { get; set; }
 
     }

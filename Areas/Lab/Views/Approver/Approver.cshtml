@@ -64,11 +64,11 @@
                                                         <td><b>:</b></td>
                                                         <td>@Model.Analyst</td>
                                                     </tr>
-                                                    <tr>
+                                                    @*<tr>
                                                         <td>Reviewer</td>
                                                         <td><b>:</b></td>
                                                         <td>@Model.Reviewer</td>
-                                                    </tr>
+                                                    </tr>*@
                                                     <tr>
                                                         <td>Approver </td>
                                                         <td><b>:</b></td>
@@ -464,7 +464,7 @@
                 $.each(data, function (index, value) {
                     let srandomid = Math.random().toString(36).substring(7);
                     var FileName = value.FileName.split('\\').pop();
-                    var filepath = "../../Content/uploads/" + FileName;
+                    var filepath = "../../Uploads/Tester/" + FileName;
                     var markup = "<tr id='" + srandomid + "'><td>" + FileName + "</td><td><a target='_blank' href='" + filepath + "' ><span class='icon-copy dw dw-download1'></span></a></td></tr>"; // Binding the file name
                     $("#FilesList tbody").append(markup);
 
@@ -697,6 +697,7 @@
                 var ParameterGroupId = $('#ParameterGroupId').val();
                 var WorkOrderId = $('#WorkOrderId').val();
                 var SampleNameOriginal = $('#SampleNameOriginal').val();
+                var Rejectapprovestatus = $('#Rejectreviewstatus').find(":selected").val();
                 var ProbableDateOfReport = $('#ProbableDateOfReport').val();
                 var AnalysisProcessScheduleDetailId = $('#AnalysisProcessScheduleDetailId').val();
                 var TestMethodId = $('#TestMethodId').val();
@@ -714,7 +715,8 @@
                         TestMethodId: TestMethodId,
                         UnitId:UnitId,
                         ApproverApprovedStatus: ApproverApprovedStatus,
-                        ApproverComments:ApproverComments
+                       ApproverComments: ApproverComments,
+                       Rejectapprovestatus: Rejectapprovestatus
                     };
                         var parameter = JSON.stringify(obj);
                      $.ajax({
