@@ -8,6 +8,7 @@ namespace LIMS_DEMO.Core.Enquiry
 {
     public class CostingEntity
     {
+        public string SampleTypeProductCode { get; set; }
         public string SampleTypeProductName { get; set; }
         public long EnquiryMasterSampleTypeId { get; set; }
         public int  SampleTypeProductId {get; set;}

@@ -77,8 +77,11 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             else
             {
                 EnquirySMID = (Int32)BALFactory.sampleParameterBAL.GetEnquirySampleID();
-              //  CoreFactory.enqurySampleEntity.DisplaySampleName = BALFactory.sampleParameterBAL.GenerateDisplaySampleName();
-               // CoreFactory.enqurySampleEntity.SampleName = SampleTypeProductCode.ToString() + "/" + CoreFactory.enqurySampleEntity.DisplaySampleName;
+                //CoreFactory.enqurySampleEntity.DisplaySampleName = BALFactory.sampleParameterBAL.GenerateDisplaySampleName();
+                //CoreFactory.enqurySampleEntity.SampleName = SampleTypeProductCode.ToString() + "/" + CoreFactory.enqurySampleEntity.DisplaySampleName;
+                var name = BALFactory.sampleParameterBAL.GenerateDisplaySampleName();
+                CoreFactory.enqurySampleEntity.SampleName = SampleTypeProductCode.ToString() + "/" + name;
+                CoreFactory.enqurySampleEntity.DisplaySampleName = SampleTypeProductCode.ToString() + BALFactory.sampleParameterBAL.GetSampleCount(Convert.ToInt32(DateTime.Now.Year), Convert.ToInt32(DateTime.Today.Month)) + "/" + name;
 
             }
             if (EnquirySampleID == 0)

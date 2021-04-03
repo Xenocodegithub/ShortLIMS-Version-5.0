@@ -334,6 +334,7 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
                         DisplaySampleName = es.DisplaySampleName,
                         SampleTypeProductId = (Int32)ed.SampleTypeProductId,
                         SampleTypeProductName = stp.SampleTypeProductName,
+                        SampleTypeProductCode = stp.SampleTypeProductCode,
                         //ProductGroupName = p.ProductGroupName,
                         //SubGroupName = s.SubGroupName,
                         //MatrixName = m.MatrixName,

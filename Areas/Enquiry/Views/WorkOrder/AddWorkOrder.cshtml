@@ -154,6 +154,9 @@
                                     <th class="table-plus datatable-nosort">
                                         SrNo.
                                     </th>
+                                     <th>
+                                       SampleNo.
+                                     </th>
                                     <th>
                                         SampleType
                                     </th>
@@ -195,77 +198,81 @@
                             <tbody>
                                 @for (int i = 0; i < Model.workorderList.Count; i++)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Model.workorderList[i].SrNo
-                                            @Html.HiddenFor(x => Model.workorderList[i].EnquirySampleID)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(x => Model.workorderList[i].SampleTypeProductName, new { @class = "form-control" })
-                                            @Html.HiddenFor(x => Model.workorderList[i].DisplaySampleName, new { @class = "form-control" })
-                                            @Html.HiddenFor(x => Model.workorderList[i].SampleName, new { @class = "form-control" })
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
-                                            @*@Html.EditorFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })*@
-                                            @*@Html.ValidationMessageFor(x => Model.workorderList[i].ParameterName)*@
-                                        </td>
-                                        @*<td>
-                                        @Html.DisplayFor(x => Model.workorderList[i].ProductGroupName, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(x => Model.workorderList[i].ProductGroupName)
+                                <tr>
+                                    <td>
+                                        @Model.workorderList[i].SrNo
+                                        @Html.HiddenFor(x => Model.workorderList[i].EnquirySampleID)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(x => Model.workorderList[i].SubGroupName, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(x => Model.workorderList[i].SubGroupName)
+                                        @Model.workorderList[i].DisplaySampleName
+                                        @Html.HiddenFor(x => Model.workorderList[i].SampleTypeProductCode)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(x => Model.workorderList[i].MatrixName, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(x => Model.workorderList[i].MatrixName)
-                                    </td>*@
-                                        <td>
-                                            @if (Model.workorderList[i].IsSetPCBLimit)
-                                            {
-                                                <a href="#" onclick="funLoadPCBParam(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId)"> Limit</a>
-                                            }
-                                            else
-                                            {
-                                                <a class=" btn-disabled">NA</a>
-                                            }
-                                        </td>
-                                        @*<td>
-                                        @if (Model.workorderList[i].PCBLimit != " " && Model.workorderList[i].IsSetPCBLimit)
+                                        @Html.DisplayFor(x => Model.workorderList[i].SampleTypeProductName, new { @class = "form-control" })
+                                        @Html.HiddenFor(x => Model.workorderList[i].DisplaySampleName, new { @class = "form-control" })
+                                        @Html.HiddenFor(x => Model.workorderList[i].SampleName, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
+                                        @*@Html.EditorFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })*@
+                                        @*@Html.ValidationMessageFor(x => Model.workorderList[i].ParameterName)*@
+                                    </td>
+                                    @*<td>
+            @Html.DisplayFor(x => Model.workorderList[i].ProductGroupName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.workorderList[i].ProductGroupName)
+        </td>
+        <td>
+            @Html.DisplayFor(x => Model.workorderList[i].SubGroupName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.workorderList[i].SubGroupName)
+        </td>
+        <td>
+            @Html.DisplayFor(x => Model.workorderList[i].MatrixName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => Model.workorderList[i].MatrixName)
+        </td>*@
+                                    <td>
+                                        @if (Model.workorderList[i].IsSetPCBLimit)
                                         {
-                                            @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
-                                            @Html.DisplayFor(x => Model.workorderList[i].PCBLimit, new { @class = "form-control" })
+                                            <a href="#" onclick="funLoadPCBParam(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId)"> Limit</a>
                                         }
                                         else
                                         {
-                                           <a class=" btn-disabled">NA</a>
+                                            <a class=" btn-disabled">NA</a>
                                         }
-                                    </td>*@
-                                        <td>
-                                            @Html.TextBoxFor(x => Model.workorderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.workorderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control col-md-7", @onchange = "ValidateDate();" })
-                                            @Html.ValidationMessageFor(x => Model.workorderList[i].Quantity)
-                                        </td>
-                                        <td>
-                                            <a href="#" onclick="funAddLocation(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId);" class="btn btn-warning btn-sm">View Location</a>
-                                            @*@Html.TextBoxFor(x => Model.workorderList[i].Location, new { @class = "form-control", @style = "color:black" })
-                                        @Html.ValidationMessageFor(x => Model.workorderList[i].Location)*@
-                                        </td>
-                                        <td>
-                                            @Html.DropDownListFor(x => Model.workorderList[i].FrequencyMasterId, new SelectList(ViewBag.Frequency, "FrequencyMasterId", "Frequency"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
-                                            @*@Html.ValidationMessageFor(x => Model.workorderList[i].FrequencyMasterId)*@
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(x => Model.workorderList[i].UnitPrice, new { @class = "form-control" })
-                                            @Html.HiddenFor(x => Model.workorderList[i].UnitPrice)
-                                            @Html.ValidationMessageFor(x => Model.workorderList[i].UnitPrice)
-                                        </td>
-                                        <td>
-                                            @Html.TextBoxFor(x => Model.workorderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
-                                            @Html.ValidationMessageFor(x => Model.workorderList[i].Total)
-                                        </td>
-                                    </tr>
+                                    </td>
+                                    @*<td>
+            @if (Model.workorderList[i].PCBLimit != " " && Model.workorderList[i].IsSetPCBLimit)
+            {
+                @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
+                @Html.DisplayFor(x => Model.workorderList[i].PCBLimit, new { @class = "form-control" })
+            }
+            else
+            {
+               <a class=" btn-disabled">NA</a>
+            }
+        </td>*@
+                                    <td>
+                                        @Html.TextBoxFor(x => Model.workorderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.workorderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control col-md-7", @onchange = "ValidateDate();" })
+                                        @Html.ValidationMessageFor(x => Model.workorderList[i].Quantity)
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="funAddLocation(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId);" class="btn btn-warning btn-sm">View Location</a>
+                                        @*@Html.TextBoxFor(x => Model.workorderList[i].Location, new { @class = "form-control", @style = "color:black" })
+            @Html.ValidationMessageFor(x => Model.workorderList[i].Location)*@
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(x => Model.workorderList[i].FrequencyMasterId, new SelectList(ViewBag.Frequency, "FrequencyMasterId", "Frequency"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
+                                        @*@Html.ValidationMessageFor(x => Model.workorderList[i].FrequencyMasterId)*@
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => Model.workorderList[i].UnitPrice, new { @class = "form-control" })
+                                        @Html.HiddenFor(x => Model.workorderList[i].UnitPrice)
+                                        @Html.ValidationMessageFor(x => Model.workorderList[i].UnitPrice)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(x => Model.workorderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
+                                        @Html.ValidationMessageFor(x => Model.workorderList[i].Total)
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

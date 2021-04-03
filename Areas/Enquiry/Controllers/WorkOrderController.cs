@@ -164,6 +164,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                         //SubGroupName = cost.SubGroupName,
                         //MatrixName = cost.MatrixName,
                         SampleTypeProductName = cost.SampleTypeProductName,
+                        SampleTypeProductCode = cost.SampleTypeProductCode,
                         ParameterName = BALFactory.sampleParameterBAL.GetSampleParameters((Int32)cost.EnquirySampleID), //sample.Parameters,
                         PCBLimit = BALFactory.sampleParameterBAL.GetSamplePCBLimit((Int32)cost.EnquirySampleID), //sample.PCBLimit,
                         UnitPrice = cost.UnitPrice,
@@ -315,6 +316,8 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                         enquirySample.Add(new EnquirySampleEntity()
                         {
                             EnquirySampleID = sample.EnquirySampleID,
+                            SampleTypeProductCode = sample.SampleTypeProductCode,
+                            SampleTypeProductName = sample.SampleTypeProductName,
                             WorkOrderId = (Int32)WorkOrderId,
                             NoOfSample = sample.Quantity,
                             SampleLocation = sample.Location,

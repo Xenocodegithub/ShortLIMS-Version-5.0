@@ -16,6 +16,10 @@ namespace LIMS_DEMO.BAL.Enquiry
         {
             CoreFactory.sampleParameter = new SampleParameterDAL();
         }
+        public long GetSampleCount(int Year, int Month)
+        {
+            return CoreFactory.sampleParameter.GetSampleCount(Year, Month);
+        }
         public string GenerateDisplaySampleName()
         {
             return CoreFactory.sampleParameter.GenerateDisplaySampleName();

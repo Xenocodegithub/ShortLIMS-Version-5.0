@@ -8,8 +8,8 @@ namespace LIMS_DEMO.Core.Enquiry
 {
     public class EnquirySampleEntity
     {
+        public string SampleTypeProductCode { get; set; }
         public int WorkOrderId { get; set; }
-
         public int SampleTypeProductId { get; set; }
         public long EnquiryMasterSampleTypeId { get; set; }
         public string Remarks { get; set; }

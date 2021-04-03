@@ -184,6 +184,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Models
     }
     public class FinalWorkOrderModel
     {
+        public string SampleTypeProductCode { get; set; }
         public int SerialNo { get; set; }
         public bool IsSetPCBLimit { get; set; }
         public string PCBLimit { get; set; }

@@ -9,6 +9,7 @@ namespace LIMS_DEMO.Core.Repository
 {
     public interface ISampleParameter : IDisposable
     {
+        long GetSampleCount(int Year, int Month);
         string GenerateDisplaySampleName();
         List<SampleLocationEntity> GetSampleLocationList(int EnquirySampleID);
         void UpdateSampleTypeProductId(long EnquiryMasterSampleTypeId,string DisplaySampleName);

@@ -16,6 +16,7 @@ namespace LIMS_DEMO.DAL
         public Nullable<int> Year1 { get; set; }
         public Nullable<int> Month1 { get; set; }
         public string Month_Name1 { get; set; }
+        public string Day_Name1 { get; set; }
         public Nullable<int> WOCount1 { get; set; }
     }
 }

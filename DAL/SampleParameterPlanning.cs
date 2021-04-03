@@ -41,6 +41,7 @@ namespace LIMS_DEMO.DAL
         public virtual UserMaster UserMaster { get; set; }
         public virtual UserMaster UserMaster1 { get; set; }
         public virtual ParameterMaster ParameterMaster { get; set; }
+        public virtual UserMaster UserMaster2 { get; set; }
         public virtual UnitMaster UnitMaster { get; set; }
     }
 }
