@@ -30,6 +30,8 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View();
         }
         //--------------------------------------Pages------------------------------------------------
+        
+        //Add Requisition main view
         public ActionResult PurchaseRequestForm(int? PurchaseRequestID = 0, int? PurchaseMasterID = 0)
         {
             PurchaseModel model = new PurchaseModel();
@@ -69,6 +71,8 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
             return View(model);
         }
+
+        //Add Requisition Partial View 
         [HttpGet]
         public PartialViewResult _PurchaseRequestFormList(int? Id = 0, int? PurchaseRequestID = 0)
         {
@@ -94,19 +98,19 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     model.CatagoryName = CoreFactory.purchaseEntity.CategoryName;
                     model.PurchaseUpload = CoreFactory.purchaseEntity.PurchaseUpload;
                     model.Quantity = (Int32)CoreFactory.purchaseEntity.Quantity;
-                    //model.Amount = CoreFactory.purchaseEntity.Amount;
-                    //model.GSTAmount = CoreFactory.purchaseEntity.GSTAmount;
-                    //model.DiscAmount = CoreFactory.purchaseEntity.DiscAmount;
-                    //model.NetAmount = (Int32)CoreFactory.purchaseEntity.NetAmount;
+                    model.Amount = CoreFactory.purchaseEntity.Amount;
+                    model.GSTAmount = CoreFactory.purchaseEntity.GSTAmount;
+                    model.DiscAmount = CoreFactory.purchaseEntity.DiscAmount;
+                    model.NetAmount = (Int32)CoreFactory.purchaseEntity.NetAmount;
                     model.PackSize = CoreFactory.purchaseEntity.PackSize;
                     model.Grade = CoreFactory.purchaseEntity.Grade;
                     model.Priority = CoreFactory.purchaseEntity.Priority;
                     model.Purpose = CoreFactory.purchaseEntity.Purpose;
                     model.Specification = CoreFactory.purchaseEntity.Specification;
                     model.Remark = CoreFactory.purchaseEntity.Remark;
-                    //model.Rate = CoreFactory.purchaseEntity.Rate;
-                    //model.EstimatedLagTime = CoreFactory.purchaseEntity.EstimatedLagTime;
-                    //model.TickIf = CoreFactory.purchaseEntity.TickIf;
+                    model.Rate = CoreFactory.purchaseEntity.Rate;
+                    model.EstimatedLagTime = CoreFactory.purchaseEntity.EstimatedLagTime;
+                    model.TickIf = CoreFactory.purchaseEntity.TickIf;
                     model.COA = CoreFactory.purchaseEntity.COA;
 
                     model.IsActive = CoreFactory.purchaseEntity.IsActive;
@@ -115,8 +119,12 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
             ViewBag.InventoryName = BALFactory.dropdownsBAL.GetInventoryType();
             ViewBag.Item = BALFactory.dropdownsBAL.GetItemMaster(model.InventoryTypeID);
+            ViewBag.Supplier = BALFactory.dropdownsBAL.GetSupplierName();
             return PartialView(model);
         }
+        
+        
+        //Add requisition Grid
         public PartialViewResult _PurchaseList()
          {
             List<PurchaseModel> model = new List<PurchaseModel>();
@@ -128,6 +136,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return PartialView(model);
         }
 
+        //Technical Manager info page
         public ActionResult PurchaseForm(int PurchaseRequestID, string Category)
         {
             PurchaseModel model = new PurchaseModel();
@@ -165,6 +174,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(model);
         }
 
+        //HO info Page
         public ActionResult PurchaseFormHO(int PurchaseRequestID)
         {
             PurchaseModel model = new PurchaseModel();
@@ -204,6 +214,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(model);
         }
 
+        //Purchase inchrge extra info page
         public ActionResult PurchaseFormPI(int PurchaseRequestID)
         {
             PurchaseModel model = new PurchaseModel();
@@ -317,6 +328,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         }
 
         //--------------------------------------Lists------------------------------------------------
+        //After Adding requistion details redirect to this list
         public ActionResult PurchaseRequestList()
         {
             CoreFactory.purchaseRequestList = BALFactory.PurchaseBAL.GetPurchaseRequestList();
@@ -334,7 +346,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     Grade = Item.Grade,
                     Rate = Item.Rate,
                     RemarkIfRejectedByTM = Item.TMStatus,
-                    RemarkIfRejectedByHO = Item.HOStatus,
+                   // RemarkIfRejectedByHO = Item.HOStatus,
                     PackSize = Item.PackSize,
                     Quantity = Item.Quantity,
                     NetAmount = Item.NetAmount,
@@ -352,11 +364,15 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             }
             return View(modelList);
         }
+
+        //Teschnical manager list
         public ActionResult TechnicalManagerList()
         {
             IList<Core.Inventory.PurchaseEntity> purchaseEntities = BALFactory.PurchaseBAL.GetTML();
             return View(purchaseEntities);
         }
+
+        //Ho List
         public ActionResult PurchaseOrderList()
         {
             IList<Core.Inventory.PurchaseEntity> purchaseEntities = BALFactory.PurchaseBAL.GetPOList();
@@ -368,11 +384,15 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
             return View(purchaseEntities);
         }
+
+        //Purchase incharge Next info fill List 
         public ActionResult PurchaseInchargeFillList()
         {
             IList<Core.Inventory.PurchaseEntity> purchaseEntities = BALFactory.PurchaseBAL.GetPIL();
             return View(purchaseEntities);
         }
+
+        //Purchase incharge PO report List
         public ActionResult PurchaseInchargeList()
         {
             IList<Core.Inventory.PurchaseEntity> purchaseEntities = BALFactory.PurchaseBAL.GetInchargeList();
@@ -417,6 +437,8 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             IList<Core.Inventory.PurchaseEntity> purchaseEntities = BALFactory.PurchaseBAL.GetPurchaseRecordSecondList(PurchaseMasterID, InventoryTypeID, PurchaseOrderNo);
             return View(purchaseEntities);
         }
+        
+        //Supplier List
         public ActionResult PurchaseSupplierList()
         {
             CoreFactory.purchaseRequestList = BALFactory.PurchaseBAL.GetPurchaseSupplierList();
@@ -443,6 +465,9 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
 
         //--------------------------------------post Functions------------------------------------------------
+        
+        
+        //For Purchase Requisition all list post
         [HttpPost]
         public JsonResult PurchaseRequestForm(PurchaseModel model, string Save)
         {
@@ -495,7 +520,17 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     //CoreFactory.purchaseEntity.EnteredBy = LIMS.User.UserMasterID;
                     CoreFactory.purchaseEntity.EnteredDate = DateTime.Now;
                     CoreFactory.purchaseEntity.IsActive = true;
-
+                    CoreFactory.purchaseEntity.PurchaseSupplierID = purchase.PurchaseSupplierID;
+                    CoreFactory.purchaseEntity.IsIGST = purchase.IsGST;
+                    CoreFactory.purchaseEntity.EstimatedLagTime = purchase.EstimatedLagTime;
+                    CoreFactory.purchaseEntity.Rate = purchase.Rate;
+                    CoreFactory.purchaseEntity.Amount = purchase.Amount;
+                    CoreFactory.purchaseEntity.NetAmount = purchase.NetAmount;
+                    CoreFactory.purchaseEntity.DiscAmount = purchase.DiscAmount;
+                    CoreFactory.purchaseEntity.GSTAmount = purchase.GSTAmount;
+                    CoreFactory.purchaseEntity.GSTPercent = purchase.GSTPercent;
+                    CoreFactory.purchaseEntity.DiscPercent = purchase.DiscPercent;
+                    CoreFactory.purchaseEntity.TickIf = purchase.TickIf;
                     var PurchaseRequestID = BALFactory.PurchaseBAL.AddPurchaseDetails(CoreFactory.purchaseEntity);
                     model.PurchaseRequestID = (Int32)PurchaseRequestID;
 
@@ -554,7 +589,17 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     //CoreFactory.purchaseEntity.EnteredBy = LIMS.User.UserMasterID;
                     CoreFactory.purchaseEntity.EnteredDate = DateTime.Now;
                     CoreFactory.purchaseEntity.IsActive = true;
-
+                    CoreFactory.purchaseEntity.PurchaseSupplierID = purchase.PurchaseSupplierID;
+                    CoreFactory.purchaseEntity.IsIGST = purchase.IsGST;
+                    CoreFactory.purchaseEntity.Rate = purchase.Rate;
+                    CoreFactory.purchaseEntity.Amount = purchase.Amount;
+                    CoreFactory.purchaseEntity.NetAmount = purchase.NetAmount;
+                    CoreFactory.purchaseEntity.DiscAmount = purchase.DiscAmount;
+                    CoreFactory.purchaseEntity.GSTAmount = purchase.GSTAmount;
+                    CoreFactory.purchaseEntity.GSTPercent = purchase.GSTPercent;
+                    CoreFactory.purchaseEntity.DiscPercent = purchase.DiscPercent;
+                    CoreFactory.purchaseEntity.EstimatedLagTime = purchase.EstimatedLagTime;
+                    CoreFactory.purchaseEntity.TickIf = purchase.TickIf;
                     CoreFactory.purchaseEntity.Approvests = null;
                     CoreFactory.purchaseEntity.PurchaseSupplierID2 = null;
                     long PurchaseRequestID = BALFactory.PurchaseBAL.UpdatePurchaseDetails(CoreFactory.purchaseEntity);
@@ -580,12 +625,10 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             TempData["PurchaseList"] = null;
             return Json(new { Status = "success", message = "Created successfully." }, JsonRequestBehavior.AllowGet);
 
-
-
-
-
         }
 
+
+        //for Purchase Requisition Form in grid
         [HttpPost]
         public JsonResult _PurchaseRequestFormList1(HttpPostedFileBase file, PurchaseModel model, TermsAndConditionPurchaseModel model1)
         {
@@ -634,6 +677,16 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 purchase.Remark = model.Remark;
                 purchase.Purpose = model.Purpose;
                 purchase.COA = model.COA;
+                purchase.TickIf = model.TickIf;
+                purchase.EstimatedLagTime = model.EstimatedLagTime;
+                purchase.Rate = model.Rate;
+                purchase.Amount = model.Amount;
+                purchase.AmountAfterDisc = model.AmountAfterDisc; 
+                purchase.DiscAmount = model.DiscAmount;
+                purchase.DiscPercent = model.DiscPercent;
+                purchase.GSTAmount = model.GSTAmount;
+                purchase.GSTPercent = model.GSTPercent;
+                purchase.IsGST = model.IsGST;
                 purchase.PackSize = model.PackSize;
                 purchase.Quantity = model.Quantity;
             }
@@ -665,45 +718,8 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             TempData["PurchaseTermsList"] = purchaseTermsList;
             return Json(new { status = "success", message = "Added" }, JsonRequestBehavior.AllowGet);
         }
-
-        [HttpPost]
-        public JsonResult PurchaseRecord(PurchaseModel model)
-        {
-            CoreFactory.purchaseEntity = new PurchaseEntity();
-            CoreFactory.purchaseEntity.PurchaseRecordID = model.PurchaseRecordID;
-            CoreFactory.purchaseEntity.PurchaseRequestID = model.PurchaseRequestID;
-            CoreFactory.purchaseEntity.QtyReceived = model.QtyReceived;
-            CoreFactory.purchaseEntity.BrandReceived = model.BrandReceived;
-            CoreFactory.purchaseEntity.GradeReceived = model.GradeReceived;
-            CoreFactory.purchaseEntity.DeliveryChallanDate = model.DeliveryChallanDate;
-            CoreFactory.purchaseEntity.DeliveryChallanNo = model.DeliveryChallanNo;
-            CoreFactory.purchaseEntity.DeliveryTime = model.DeliveryTime;
-            CoreFactory.purchaseEntity.BillDate = model.BillDate;
-            CoreFactory.purchaseEntity.BillNo = model.BillNo;
-            CoreFactory.purchaseEntity.RemarkRecord = model.RemarkRecord;
-            CoreFactory.purchaseEntity.ReceivedDate = model.ReceivedDate;
-            CoreFactory.purchaseEntity.ConditionOfPackaging = model.ConditionOfPackaging;
-            CoreFactory.purchaseEntity.IntegrityOfPackaging = model.IntegrityOfPackaging;
-            CoreFactory.purchaseEntity.CurrentStatus = model.CurrentStatus;
-            CoreFactory.purchaseEntity.EnteredBy = LIMS.User.UserMasterID;
-            CoreFactory.purchaseEntity.EnteredDate = DateTime.Now;
-            CoreFactory.purchaseEntity.IsActive = true;
-
-            if (model.PurchaseRecordID == 0)
-            {
-                strStatus = BALFactory.PurchaseBAL.AddPurchaseRecordDetails(CoreFactory.purchaseEntity);
-                return Json(new { Status = strStatus, message = "Created successfully." }, JsonRequestBehavior.AllowGet);
-            }
-
-            //Use for update
-            else
-            {
-                strStatus = BALFactory.PurchaseBAL.UpdatePurchaseRecord(CoreFactory.purchaseEntity);
-                return Json(new { Status = strStatus, message = "Updated successfully." }, JsonRequestBehavior.AllowGet);
-            }
-
-        }
-
+    
+        //Supplier Form
         [HttpPost]
         public JsonResult PurchasSupplierForm(PurchaseModel model)
         {
@@ -831,6 +847,8 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
 
         }
+
+        //For HO
         public string UpdateStatus(string model)
         {
             PurchaseEntity purchaseEntity = JsonConvert.DeserializeObject<PurchaseEntity>(model);
@@ -840,6 +858,9 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
             return "Commented";
         }
+
+
+        //for Purchase incharge fill 
         public string UpdatePRD(string model)
         {
 
@@ -857,6 +878,9 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
             return "Commented";
         }
+
+
+        //For TM
         public string UpdateComment(string model)
         {
 

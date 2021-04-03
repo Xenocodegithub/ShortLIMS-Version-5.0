@@ -9,6 +9,7 @@ namespace LIMS_DEMO.Areas.Inventory.Models
     public class PurchaseModel
     {
         public int TermAndCondtId { get; set; }
+        public bool IsGST { get; set; }
         public string TermAndCondt { get; set; }
         public string CatagoryName { get; set; }
         public bool IsSelected { get; set; }

@@ -59,7 +59,7 @@ namespace LIMS_DEMO.DAL.Inventory
 
                     ItemMasterID = purchaseEntity.ItemMasterId,
                     InventoryTypeID = (short)purchaseEntity.InventoryTypeID,
-                    // PurchaseSupplierID = purchaseEntity.PurchaseSupplierID,
+                    PurchaseSupplierID = purchaseEntity.PurchaseSupplierID,
                     PurchaseMasterID = purchaseEntity.PurchaseMasterID,
                     Brand = purchaseEntity.Brand,
                     PackSize = purchaseEntity.PackSize,
@@ -70,16 +70,17 @@ namespace LIMS_DEMO.DAL.Inventory
                     GSTPercent = purchaseEntity.GSTPercent,
                     Specification = purchaseEntity.Specification,
                     Remark = purchaseEntity.Remark,
-                    //Rate = purchaseEntity.Rate,
-                    //Amount = purchaseEntity.Amount,
-                    //GSTAmount = purchaseEntity.GSTAmount,
-                    //DiscAmount = purchaseEntity.DiscAmount,
-                    //NetAmount = purchaseEntity.NetAmount,
-                    //EstimatedLagTime = purchaseEntity.EstimatedLagTime,
+                    Rate = purchaseEntity.Rate,
+                    Amount = purchaseEntity.Amount,
+                    GSTAmount = purchaseEntity.GSTAmount,
+                    DiscAmount = purchaseEntity.DiscAmount,
+                    NetAmount = purchaseEntity.NetAmount,
+                    EstimatedLagTime = purchaseEntity.EstimatedLagTime,
                     COA_COC = purchaseEntity.COA,
+                    IsIGST = purchaseEntity.IsIGST,
                     Priority = purchaseEntity.Priority,
                     Purpose = purchaseEntity.Purpose,
-                    //TickIf = purchaseEntity.TickIf,
+                    TickIf = purchaseEntity.TickIf,
                     FileName = purchaseEntity.FileName,
                     PurchaseUpload = purchaseEntity.PurchaseUpload,
                     RecordStatus = (int?)CurrentStatusEnum.notsubmit,
@@ -295,7 +296,7 @@ namespace LIMS_DEMO.DAL.Inventory
                               prd.Quantity,
                               prd.Brand,
                               prd.Specification,
-                              prd.DiscAmount,
+                              prd.NetAmount,
                               psd.SupplierName
                           }).OrderByDescending(prd => prd.PurchaseRequestID).ToList();
 
@@ -312,7 +313,7 @@ namespace LIMS_DEMO.DAL.Inventory
                 purchaseEntity.Specification = Item.Specification;
                 purchaseEntity.InventoryTypeID = (Int32)Item.InventoryTypeID;
                 purchaseEntity.Quantity = (Int32)Item.Quantity;
-                purchaseEntity.NetAmount = Item.DiscAmount;
+                purchaseEntity.NetAmount = Item.NetAmount;
                 purchaseEntities.Add(purchaseEntity);
             }
             return purchaseEntities;
@@ -323,7 +324,7 @@ namespace LIMS_DEMO.DAL.Inventory
                           join pmd in _dbContext.PurchaseMasterDetails on prd.PurchaseMasterID equals pmd.PurchaseMasterID
                           join psd in _dbContext.PurchaseSupplierDetails on prd.PurchaseSupplierID equals psd.PurchaseSupplierID
                           join im in _dbContext.InventoryItemMasters on prd.ItemMasterID equals im.ID
-                          where prd.ApprovePO == 1 & prd.Approvests == 1
+                          where prd.Approvests == 1
                           select new
                           {
                               prd.PurchaseRequestID,
@@ -414,7 +415,7 @@ namespace LIMS_DEMO.DAL.Inventory
                           join psd in _dbContext.PurchaseSupplierDetails on prd.PurchaseSupplierID equals psd.PurchaseSupplierID
                           join iim in _dbContext.InventoryItemMasters on prd.ItemMasterID equals iim.ID
                           join icm in _dbContext.InventoryCategoryMasters on iim.CategoryID equals icm.ID
-                          where prd.IsActive == true & prd.ApprovePO == 1 & prd.Approvests == 1
+                          where prd.IsActive == true & prd.Approvests == 1
                           select new
                           {
                               prd.PurchaseRequestID,
@@ -893,7 +894,7 @@ namespace LIMS_DEMO.DAL.Inventory
                             Priority = stp.Priority,
                             Purpose = stp.Purpose,
                             TMStatus = stp.Approvests == 0 ? "Rejected" : stp.Approvests == 1 ? "Accepted" : "NA",
-                            HOStatus = stp.ApproveStatus == 7 ? "Rejected" : stp.ApproveStatus == 6 ? "Accepted" : "NA",
+                            //HOStatus = stp.ApproveStatus == 7 ? "Rejected" : stp.ApproveStatus == 6 ? "Accepted" : "NA",
                             Specification = stp.Specification,
                             Remark = stp.Remark,
                             COA = stp.COA_COC,
