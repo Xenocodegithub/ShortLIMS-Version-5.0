@@ -362,7 +362,8 @@ namespace LIMS_DEMO.DAL.Enquiry
                                 SampleCollectedBy = 1,
                                 //SampleName = es.SampleName,
                                 IsActive = true,
-                                SampleNameOriginal = es.SampleName + i,
+                                //SampleNameOriginal = es.SampleName + i,
+                                SampleNameOriginal = es.SampleTypeProductCode + "/" + GenerateDisplaySampleName(),
                                 EnteredBy = es.EnteredBy,
                                 EnteredDate = DateTime.Now
                             };
@@ -383,6 +384,115 @@ namespace LIMS_DEMO.DAL.Enquiry
                 _dbContext.SaveChanges();
             }
         }
+
+        ///////////For Sample NAME as per Locations in autoincrement way in sequence////////////
+
+        public string GenerateDisplaySampleName()
+        {
+            try
+            {
+                // int Year = DateTime.Now.Year;
+                long sampleCount = GetSampleCount(Convert.ToInt32(DateTime.Now.Year), Convert.ToInt32(DateTime.Today.Month));
+                long SrNumber = 0;
+                string DigitCode = "0000";//4 digit code
+                if (sampleCount == 0 || sampleCount == null)
+                {
+                    SrNumber = 1;//Doubt 
+                    DigitCode = "0001";
+                    AddSampleNo(1, DateTime.Now.Year, DateTime.Now.Month);
+                }
+                else
+                {
+                    SrNumber = sampleCount + 1;
+
+                    if (SrNumber.ToString().Length == 1)
+                    {
+                        DigitCode = "000" + SrNumber.ToString();
+                    }
+                    else if (SrNumber.ToString().Length == 2)
+                    {
+                        DigitCode = "00" + SrNumber.ToString();
+                    }
+                    else if (SrNumber.ToString().Length == 3)
+                    {
+                        DigitCode = "0" + SrNumber.ToString();
+                    }
+
+                    UpdateSampleNo(SrNumber, DateTime.Now.Year, DateTime.Now.Month);
+                }
+
+                var DisplaySampleName = DateTime.Now.ToString("yyMM") + "/" + DigitCode;
+                return DisplaySampleName;
+            }
+            catch (Exception ex)
+            {
+                return ex.InnerException.Message;
+            }
+        }
+        public long GetSampleCount(int Year, int Month)
+        {
+            var sampleNum = (from e in _dbContext.SampleNumber_ReceiptIncharge
+                             where e.Year == Year && e.Month == Month
+                             select new SampleNameEntity()
+                             {
+                                 SampleCount = e.SampleCount,
+                             }
+             ).FirstOrDefault();
+            if (sampleNum != null)
+            {
+                return sampleNum.SampleCount;
+            }
+            else { return 0; }
+
+        }
+        public long AddSampleNo(long SampleCount, int Year, int Month)
+        {
+            try
+            {
+                var sample = new SampleNumber_ReceiptIncharge()
+                {
+                    SampleCount = SampleCount,
+                    Year = Year,
+                    Month = Month,
+                    IsActive = true,
+                    EnteredBy = 1,
+                    EnteredDate = DateTime.Now
+                };
+                _dbContext.SampleNumber_ReceiptIncharge.Add(sample);
+                _dbContext.SaveChanges();
+                return sample.ID;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public string UpdateSampleNo(long SampleCount, int Year, int Month)
+        {
+            try
+            {
+                var sampleNum = (from e in _dbContext.SampleNumber_ReceiptIncharge
+                                 where e.Year == Year && e.Month == Month
+                                 select new SampleNameEntity()
+                                 {
+                                     SampleNumberId = e.ID,
+                                 }
+                     ).FirstOrDefault();
+
+                var sampleMaster = _dbContext.SampleNumber_ReceiptIncharge.Find(sampleNum.SampleNumberId);
+                sampleMaster.SampleCount = SampleCount;
+                sampleMaster.Year = Year;
+                sampleMaster.Month = Month;
+                _dbContext.SaveChanges();
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return ex.InnerException.Message;
+            }
+        }
+
+        //////////////////////////For Sample NAME as per Locations in autoinrement way in sequence////////////
         public List<WorkOrderHODEntity> GetWorkOrderList(int LabMasterId, DateTime? FromDate, DateTime? ToDate)
         {
             return (from w in _dbContext.WorkOrders

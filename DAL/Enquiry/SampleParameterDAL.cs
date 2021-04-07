@@ -181,8 +181,8 @@ namespace LIMS_DEMO.DAL.Enquiry
                 return (from ep in _dbContext.EnquirySampleDetails
                         join es in _dbContext.EnquiryDetails on ep.EnquiryDetailId equals es.EnquiryDetailId
                         
-                        where es.EnquiryId == EnquiryId && es.SampleTypeProductId == SampleTypeProductId
-                            
+                        where es.EnquiryId == EnquiryId && es.SampleTypeProductId == SampleTypeProductId && es.EnquiryDetailId == EnquiryDetailId
+
                         select new EnquirySampleEntity()
                         {
                             SampleName = ep.SampleName,
@@ -203,7 +203,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                         join es in _dbContext.EnquiryDetails
                           on ep.EnquiryDetailId equals es.EnquiryDetailId
 
-                        where es.WorkOrderID == WorkOrderId && es.SampleTypeProductId == SampleTypeProductId
+                        where es.WorkOrderID == WorkOrderId && es.SampleTypeProductId == SampleTypeProductId && es.EnquiryDetailId == EnquiryDetailId
 
                         select new EnquirySampleEntity()
                         {

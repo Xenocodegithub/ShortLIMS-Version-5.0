@@ -9,6 +9,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
 {
     public class WorkOrderModel
     {
+        public string SampleTypeProductCode { get; set; }
         public int CountNoOfSample { get; set; }
         public string PCBLimit { get; set; }
         public int SrNo { get; set; }

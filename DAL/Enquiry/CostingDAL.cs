@@ -116,6 +116,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                         SampleName = es.SampleName,
                         DisplaySampleName = es.DisplaySampleName,
                         SampleTypeProductName = stp.SampleTypeProductName,
+                        SampleTypeProductCode = stp.SampleTypeProductCode,
                         SampleTypeProductId = (Int32)ed.SampleTypeProductId,
                         //ProductGroupName = p.ProductGroupName,
                         //SubGroupName = s.SubGroupName,

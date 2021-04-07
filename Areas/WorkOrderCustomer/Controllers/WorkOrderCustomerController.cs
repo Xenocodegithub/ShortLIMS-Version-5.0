@@ -424,8 +424,12 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
             else
             {
                 EnquirySMID = (Int32)BALFactory.sampleParameterBAL.GetEnquirySampleID();
-                CoreFactory.enqurySampleEntity.DisplaySampleName = BALFactory.sampleParameterBAL.GenerateDisplaySampleName();
-                CoreFactory.enqurySampleEntity.SampleName = model.SampleTypeProductCode.ToString() + "/" + CoreFactory.enqurySampleEntity.DisplaySampleName;
+                //CoreFactory.enqurySampleEntity.DisplaySampleName = BALFactory.sampleParameterBAL.GenerateDisplaySampleName();
+                //CoreFactory.enqurySampleEntity.SampleName = model.SampleTypeProductCode.ToString() + "/" + CoreFactory.enqurySampleEntity.DisplaySampleName;
+                var name = BALFactory.sampleParameterBAL.GenerateDisplaySampleName();
+                CoreFactory.enqurySampleEntity.SampleName = model.SampleTypeProductCode.ToString() + "/" + name;
+                CoreFactory.enqurySampleEntity.DisplaySampleName = model.SampleTypeProductCode.ToString() + BALFactory.sampleParameterBAL.GetSampleCount(Convert.ToInt32(DateTime.Now.Year), Convert.ToInt32(DateTime.Today.Month)) + "/" + name;
+
             }
             CoreFactory.enqurySampleEntity = BALFactory.sampleParameterBAL.AddEnquirySampleDetail(CoreFactory.enqurySampleEntity);
             CoreFactory.enqurySampleEntity = BALFactory.sampleParameterBAL.GetEnquirySampleDetail((Int32)CoreFactory.enqurySampleEntity.EnquirySampleID);
@@ -687,6 +691,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
                         SampleName = cost.SampleName,
                         DisplaySampleName = cost.DisplaySampleName,
                         SampleTypeProductName = cost.SampleTypeProductName,
+                        SampleTypeProductCode = cost.SampleTypeProductCode,
                         //ProductGroupName = cost.ProductGroupName,
                         //SubGroupName = cost.SubGroupName,
                         //MatrixName = cost.MatrixName,
@@ -738,6 +743,8 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
                     enquirySample.Add(new EnquirySampleEntity()
                     {
                         EnquirySampleID = sample.EnquirySampleID,
+                        SampleTypeProductCode = sample.SampleTypeProductCode,
+                        SampleTypeProductName = sample.SampleTypeProductName,
                         WorkOrderId = model.WorkOrderCustomer.WorkOrderId,
                         NoOfSample = sample.Quantity,
                         SampleLocation = sample.Location,
