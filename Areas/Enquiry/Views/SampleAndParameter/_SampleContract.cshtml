@@ -9,7 +9,7 @@
                     <th class="table-plus datatable-nosort">SrNo.</th>
                     <th> Sample Type</th>
                     @*<th>Product Group</th>
-                     <th>Sub Group</th>*@
+                <th>Sub Group</th>*@
                     <th>Action</th>
                 </tr>
             </thead>
@@ -24,20 +24,27 @@
                             @Model[i].SampleTypeProductName
                         </td>
                         @*<td>
-                              @Model[i].ProductGroupName
-                             </td>
-                             <td>
-                              @Model[i].SubGroupName
-                             </td>
-                             <td>
-                             @Model[i].MatrixName
-                            </td>*@
+                      @Model[i].ProductGroupName
+                     </td>
+                     <td>
+                      @Model[i].SubGroupName
+                     </td>
+                     <td>
+                     @Model[i].MatrixName
+                    </td>*@
                         <td>
                             <button onclick="funContractSelected(@Model[i].EnquiryId,@Model[i].EnquiryDetailId,@Model[i].SampleTypeProductId, '@Model[i].SampleTypeProductCode','@Model[i].SubGroupCode')" class="btn btn-sm btn-info text-nowrap btnChoose" style="width:auto">Choose Parameters</button>
                         </td>
                     </tr>
                 }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8">
+                        <div class="pagination pagination-centered"></div>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
