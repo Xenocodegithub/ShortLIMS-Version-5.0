@@ -130,7 +130,6 @@ namespace LIMS_DEMO.DAL
         public virtual DbSet<BranchCategoryMaster> BranchCategoryMasters { get; set; }
         public virtual DbSet<CatagoryMaster> CatagoryMasters { get; set; }
         public virtual DbSet<CityMaster> CityMasters { get; set; }
-        public virtual DbSet<CompanyRegistrationMaster> CompanyRegistrationMasters { get; set; }
         public virtual DbSet<CompanyTypeMaster> CompanyTypeMasters { get; set; }
         public virtual DbSet<CountryMaster> CountryMasters { get; set; }
         public virtual DbSet<CustomerGroupMaster> CustomerGroupMasters { get; set; }

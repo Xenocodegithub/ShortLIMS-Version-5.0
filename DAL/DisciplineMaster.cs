@@ -67,6 +67,54 @@ namespace LIMS_DEMO.DAL
             this.UserMasters45 = new HashSet<UserMaster>();
             this.UserMasters46 = new HashSet<UserMaster>();
             this.UserMasters47 = new HashSet<UserMaster>();
+            this.UserMasters48 = new HashSet<UserMaster>();
+            this.UserMasters49 = new HashSet<UserMaster>();
+            this.UserMasters50 = new HashSet<UserMaster>();
+            this.UserMasters51 = new HashSet<UserMaster>();
+            this.UserMasters52 = new HashSet<UserMaster>();
+            this.UserMasters53 = new HashSet<UserMaster>();
+            this.UserMasters54 = new HashSet<UserMaster>();
+            this.UserMasters55 = new HashSet<UserMaster>();
+            this.UserMasters56 = new HashSet<UserMaster>();
+            this.UserMasters57 = new HashSet<UserMaster>();
+            this.UserMasters58 = new HashSet<UserMaster>();
+            this.UserMasters59 = new HashSet<UserMaster>();
+            this.UserMasters60 = new HashSet<UserMaster>();
+            this.UserMasters61 = new HashSet<UserMaster>();
+            this.UserMasters62 = new HashSet<UserMaster>();
+            this.UserMasters63 = new HashSet<UserMaster>();
+            this.UserMasters64 = new HashSet<UserMaster>();
+            this.UserMasters65 = new HashSet<UserMaster>();
+            this.UserMasters66 = new HashSet<UserMaster>();
+            this.UserMasters67 = new HashSet<UserMaster>();
+            this.UserMasters68 = new HashSet<UserMaster>();
+            this.UserMasters69 = new HashSet<UserMaster>();
+            this.UserMasters70 = new HashSet<UserMaster>();
+            this.UserMasters71 = new HashSet<UserMaster>();
+            this.UserMasters72 = new HashSet<UserMaster>();
+            this.UserMasters73 = new HashSet<UserMaster>();
+            this.UserMasters74 = new HashSet<UserMaster>();
+            this.UserMasters75 = new HashSet<UserMaster>();
+            this.UserMasters76 = new HashSet<UserMaster>();
+            this.UserMasters77 = new HashSet<UserMaster>();
+            this.UserMasters78 = new HashSet<UserMaster>();
+            this.UserMasters79 = new HashSet<UserMaster>();
+            this.UserMasters80 = new HashSet<UserMaster>();
+            this.UserMasters81 = new HashSet<UserMaster>();
+            this.UserMasters82 = new HashSet<UserMaster>();
+            this.UserMasters83 = new HashSet<UserMaster>();
+            this.UserMasters84 = new HashSet<UserMaster>();
+            this.UserMasters85 = new HashSet<UserMaster>();
+            this.UserMasters86 = new HashSet<UserMaster>();
+            this.UserMasters87 = new HashSet<UserMaster>();
+            this.UserMasters88 = new HashSet<UserMaster>();
+            this.UserMasters89 = new HashSet<UserMaster>();
+            this.UserMasters90 = new HashSet<UserMaster>();
+            this.UserMasters91 = new HashSet<UserMaster>();
+            this.UserMasters92 = new HashSet<UserMaster>();
+            this.UserMasters93 = new HashSet<UserMaster>();
+            this.UserMasters94 = new HashSet<UserMaster>();
+            this.UserMasters95 = new HashSet<UserMaster>();
         }
     
         public byte DisciplineId { get; set; }
@@ -179,5 +227,101 @@ namespace LIMS_DEMO.DAL
         public virtual ICollection<UserMaster> UserMasters46 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserMaster> UserMasters47 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters48 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters49 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters50 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters51 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters52 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters53 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters54 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters55 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters56 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters57 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters58 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters59 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters60 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters61 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters62 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters63 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters64 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters65 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters66 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters67 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters68 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters69 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters70 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters71 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters72 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters73 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters74 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters75 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters76 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters77 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters78 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters79 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters80 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters81 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters82 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters83 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters84 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters85 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters86 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters87 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters88 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters89 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters90 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters91 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters92 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters93 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters94 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserMaster> UserMasters95 { get; set; }
     }
 }

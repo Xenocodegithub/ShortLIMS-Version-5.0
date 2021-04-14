@@ -5,7 +5,7 @@
     <DataSource Name="LIMSConnection">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=Merge9FebDB</ConnectString>
+        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=01MarchLIMSDB</ConnectString>
         <Prompt>Specify a user name and password for data source LIMSConnection:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>

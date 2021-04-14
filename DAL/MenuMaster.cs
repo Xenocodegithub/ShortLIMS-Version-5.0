@@ -33,7 +33,6 @@ namespace LIMS_DEMO.DAL
         public System.DateTime EnteredDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public byte[] ModifiedDate { get; set; }
-        public Nullable<int> MenuHead { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuRoleBranchMapping> MenuRoleBranchMappings { get; set; }

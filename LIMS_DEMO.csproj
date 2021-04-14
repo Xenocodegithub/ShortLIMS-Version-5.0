@@ -523,9 +523,6 @@
     </Compile>
     <Compile Include="DAL\Collection\SampleCollectionDAL.cs" />
     <Compile Include="DAL\Collection\SurveyingTeamLeadDAL.cs" />
-    <Compile Include="DAL\CompanyRegistrationMaster.cs">
-      <DependentUpon>DBLIMS.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\CompanyTypeMaster.cs">
       <DependentUpon>DBLIMS.tt</DependentUpon>
     </Compile>
