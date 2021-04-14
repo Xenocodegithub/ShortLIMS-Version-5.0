@@ -17,14 +17,14 @@
                         Sample Type
                     </th>
                     @*<th>
-                            Product Group
-                        </th>
-                        <th>
-                            Sub Group
-                        </th>
-                        <th>
-                            Matrix
-                        </th>*@
+                        Product Group
+                    </th>
+                    <th>
+                        Sub Group
+                    </th>
+                    <th>
+                        Matrix
+                    </th>*@
                     <th>
                         Amount
                     </th>
@@ -65,8 +65,15 @@
                         </td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div class="pagination pagination-centered"></div>
+                        </td>
+                    </tr>
+                </tfoot>
             }
-         }
+        }
     </table>
 
     @if (Model.Count() > 0)
