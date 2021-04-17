@@ -54,16 +54,16 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             if (model.SampleTypeProductId == 0)
             {
                 strStatus = BALFactory.productSubMatrixBAL.AddSampleTypeProduct(CoreFactory.productSubMatrixEntity);
-                //return Json(new { Status = strStatus, message = "Sample Type Product has been registered successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "Sample Type Product has been registered successfully." }, JsonRequestBehavior.AllowGet);
                 
             }
             //Use for update
             else
             {
                 strStatus = BALFactory.productSubMatrixBAL.UpdateSTP(CoreFactory.productSubMatrixEntity);
-                //return Json(new { Status = strStatus, message = "Sample Type Product has been updated successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "Sample Type Product has been updated successfully." }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("SampleTypeProductList");
+            //return RedirectToAction("SampleTypeProductList");
         }
         public ActionResult DeleteSTP(int? SampleTypeProductId = 0)
         {
@@ -129,15 +129,15 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             if (model.ProductGroupId == 0)
             {
                 strStatus = BALFactory.productSubMatrixBAL.AddProductGroup(CoreFactory.productSubMatrixEntity);
-               // return Json(new { Status = strStatus, message = "ProductGroup has been registered successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "ProductGroup has been registered successfully." }, JsonRequestBehavior.AllowGet);
             }
             //Use for update
             else
             {
                 strStatus = BALFactory.productSubMatrixBAL.UpdatePG(CoreFactory.productSubMatrixEntity);
-               // return Json(new { Status = strStatus, message = "ProductGroup has been updated successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "ProductGroup has been updated successfully." }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("ProductGroupList");
+            //return RedirectToAction("ProductGroupList");
         }
         public ActionResult ProductGroupList()
         {

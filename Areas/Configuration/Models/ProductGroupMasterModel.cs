@@ -9,11 +9,12 @@ namespace LIMS_DEMO.Areas.Configuration.Models
     public class ProductGroupMasterModel
     {
         [Display(Name = "Sample Type Name")]
-        [Required(ErrorMessage = "SampleTypeProduct Name field is Required")]
+        [Required(ErrorMessage = "Please Enter Sample Type Product Name")]
         public int SampleTypeProductId { get; set; }
         [Display(Name = "Sample Type Name")]
         [Required(ErrorMessage = "SampleTypeProduct Name field is Required")]
         public string SampleTypeProductName { get; set; }
+        [Required(ErrorMessage = "Please Enter Sample Type Product Code")]
         public string SampleTypeProductCode { get; set; }
         [Required(ErrorMessage = "Product Group field is Required")]
         public int ProductGroupId { get; set; }

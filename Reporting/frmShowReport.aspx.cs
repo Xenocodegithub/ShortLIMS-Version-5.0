@@ -164,8 +164,9 @@ namespace Application.Web.UI.Reporting
                     {
                         Report_No = Convert.ToString(Request.QueryString["reportno"]);
                     }
-                    ShowReport(); //with data
+                    //ShowReport(); //with data
                     //DownloadReportFile();
+                    DownloadReport1();
 
 
                     string reportFullPath = this.ReportFile.ToString();
@@ -180,13 +181,21 @@ namespace Application.Web.UI.Reporting
         {
             //string exportOption = "Excel";
             //string exportOption = "Word";
-            string exportOption = "PDF";
-            RenderingExtension extension = rvReportViewer.LocalReport.ListRenderingExtensions().ToList().Find(x => x.Name.Equals(exportOption, StringComparison.CurrentCultureIgnoreCase));
-            if (extension != null)
-            {
-                System.Reflection.FieldInfo fieldInfo = extension.GetType().GetField("m_isVisible", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-                fieldInfo.SetValue(extension, false);
-            }
+            //string exportOption = "PDF";
+            //RenderingExtension extension = rvReportViewer.LocalReport.ListRenderingExtensions().ToList().Find(x => x.Name.Equals(exportOption, StringComparison.CurrentCultureIgnoreCase));
+            //if (extension != null)
+            //{
+            //    System.Reflection.FieldInfo fieldInfo = extension.GetType().GetField("m_isVisible", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            //    fieldInfo.SetValue(extension, false);
+            //}
+            //foreach (RenderingExtension extension in rvReportViewer.LocalReport.ListRenderingExtensions())
+            //{
+            //    if (extension.Name == "IMAGE" || extension.Name == "EXCELOPENXML")
+            //    {
+            //        FieldInfo fi = extension.GetType().GetField("m_isVisible", BindingFlags.Instance | BindingFlags.NonPublic);
+            //        fi.SetValue(extension, false);
+            //    }
+            //}
         }
         void rvReportViewer_ReportError(object sender, ReportErrorEventArgs e)
         {
@@ -432,10 +441,10 @@ namespace Application.Web.UI.Reporting
 
         protected void rvReportViewer_PreRender(object sender, EventArgs e)
         {
-            DisableUnwantedExportFormat((ReportViewer)sender, "EXCELOPENXML");
-            DisableUnwantedExportFormat((ReportViewer)sender, "WORDOPENXML");
-            DisableUnwantedExportFormat((ReportViewer)sender, "Word");
-            DisableUnwantedExportFormat((ReportViewer)sender, "Pdf");
+            //DisableUnwantedExportFormat((ReportViewer)sender, "EXCELOPENXML");
+            //DisableUnwantedExportFormat((ReportViewer)sender, "WORDOPENXML");
+            //DisableUnwantedExportFormat((ReportViewer)sender, "Word");
+            //DisableUnwantedExportFormat((ReportViewer)sender, "Pdf");
             //string exportOption = "pdf";
 
             //RenderingExtension extension = rvReportViewer.LocalReport.ListRenderingExtensions().ToList().Find(x => x.Name.Equals(exportOption, StringComparison.CurrentCultureIgnoreCase));
@@ -446,29 +455,163 @@ namespace Application.Web.UI.Reporting
             //}
         }
 
+        protected void rvReportViewer_Load(object sender, EventArgs e)
+        {
+            //foreach (RenderingExtension extension in rvReportViewer.LocalReport.ListRenderingExtensions())
+            //{
+            //    if (extension.Name == "IMAGE" || extension.Name == "EXCELOPENXML")
+            //    {
+            //        FieldInfo fi = extension.GetType().GetField("m_isVisible", BindingFlags.Instance | BindingFlags.NonPublic);
+            //        fi.SetValue(extension, false);
+            //    }
+            //}
+        }
+
         /// <summary>
         /// Hidden the special SSRS rendering format in ReportViewer control
         /// </summary>
         /// <param name="ReportViewerID">The ID of the relevant ReportViewer control</param>
         /// <param name="strFormatName">Format Name</param>
-        public void DisableUnwantedExportFormat(ReportViewer ReportViewerID, string strFormatName)
-        {
-            FieldInfo info;
-            foreach (RenderingExtension extension in ReportViewerID.LocalReport.ListRenderingExtensions())
-            {
-                if (extension.Name.Trim().ToUpper() == strFormatName.Trim().ToUpper())
-                {
-                    info = extension.GetType().GetField("m_isVisible", BindingFlags.Instance | BindingFlags.NonPublic);
-                    info.SetValue(extension, false);
-                }
-            }
+        //public void DisableUnwantedExportFormat(ReportViewer ReportViewerID, string strFormatName)
+        //{
+        //    FieldInfo info;
+        //    foreach (RenderingExtension extension in ReportViewerID.LocalReport.ListRenderingExtensions())
+        //    {
+        //        if (extension.Name.Trim().ToUpper() == strFormatName.Trim().ToUpper())
+        //        {
+        //            info = extension.GetType().GetField("m_isVisible", BindingFlags.Instance | BindingFlags.NonPublic);
+        //            info.SetValue(extension, false);
+        //        }
+        //    }
 
-        }
+        //}
         //Further reading:
         //sub-reports: http://www.codeproject.com/Articles/473844/Using-Custom-Data-Source-to-create-RDLC-Reports
 
         #endregion
         #endregion
+        private void DownloadReport1()
+        {
+            FileInfo reportFullPath = this.ReportFile;
+
+            if (reportFullPath != null)
+            {
+                string reportName = reportFullPath.Name.Substring(0, reportFullPath.Name.Length - reportFullPath.Extension.Length - 1);
+                LoadReportDefinitionFile(rvReportViewer.LocalReport, reportFullPath);
+                rvReportViewer.LocalReport.DataSources.Clear();
+                Serialization.Report reportDef = this.ReportDefinition;
+                foreach (Serialization.DataSet ds in reportDef.DataSets)
+                {
+                    ds.AssignParameters(this.ReportParameters);
+                    //run the query to get real data for the report
+                    System.Data.DataTable tbl = ds.GetDataTable(DBConnectionString);
+                    //attach the data/table to the Report's dataset(s), by name
+                    ReportDataSource rds = new ReportDataSource();
+                    rds.Name = ds.Name; //This refers to the dataset name in the RDLC file
+                    rds.Value = tbl;
+                    rvReportViewer.LocalReport.DataSources.Add(rds);
+                }
+                CheckReportParameters(rvReportViewer.LocalReport);
+                rvReportViewer.LocalReport.Refresh();
+                if (Report_No != null)
+                {
+                    string[] getdata = Report_No.Split('/');//for ex. Report No. is MPIL/00001
+                    rvReportViewer.LocalReport.DisplayName = Report_No.ToString().Trim();
+                    ConvertReportToPDF(rvReportViewer.LocalReport, reportName);
+                    //  string Url = ConvertReportToPDF(rvReportViewer.LocalReport, reportName);
+                    // System.Diagnostics.Process.Start(Url);
+                    //Report Name generate as ReportNo.pdf in Test Report time, added by POONAM 
+                }
+            }
+        }
+
+        //private void DownloadReport1()
+        //{
+        //    FileInfo reportFullPath = this.ReportFile;
+
+        //    if (reportFullPath != null)
+        //    {
+        //        string reportName = reportFullPath.Name.Substring(0, reportFullPath.Name.Length - reportFullPath.Extension.Length - 1);
+        //        LoadReportDefinitionFile(rvReportViewer.LocalReport, reportFullPath);
+        //        rvReportViewer.LocalReport.DataSources.Clear();
+        //        Serialization.Report reportDef = this.ReportDefinition;
+        //        foreach (Serialization.DataSet ds in reportDef.DataSets)
+        //        {
+        //            ds.AssignParameters(this.ReportParameters);
+        //            //run the query to get real data for the report
+        //            System.Data.DataTable tbl = ds.GetDataTable(DBConnectionString);
+        //            //attach the data/table to the Report's dataset(s), by name
+        //            ReportDataSource rds = new ReportDataSource();
+        //            rds.Name = ds.Name; //This refers to the dataset name in the RDLC file
+        //            rds.Value = tbl;
+        //            rvReportViewer.LocalReport.DataSources.Add(rds);
+        //        }
+        //        rvReportViewer.LocalReport.Refresh();
+        //        if (Report_No != null)
+        //        {
+        //            string[] getdata = Report_No.Split('/');//for ex. Report No. is MPIL/00001
+        //            rvReportViewer.LocalReport.DisplayName = Report_No.ToString().Trim();
+        //           ConvertReportToPDF(rvReportViewer.LocalReport, reportName);
+        //           // string Url = ConvertReportToPDF(rvReportViewer.LocalReport, reportName);
+        //            // System.Diagnostics.Process.Start(Url);
+        //            //Report Name generate as ReportNo.pdf in Test Report time, added by POONAM 
+        //        }
+        //    }
+        //}
+        private void  ConvertReportToPDF(LocalReport rep, string reportName)
+        {
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+
+            //string deviceInfo = "<DeviceInfo>" +
+            //   "  <OutputFormat>PDF</OutputFormat>" +
+            //   "  <PageWidth>8.27in</PageWidth>" +
+            //   "  <PageHeight>6.0in</PageHeight>" +
+            //   "  <MarginTop>0.2in</MarginTop>" +
+            //   "  <MarginLeft>0.2in</MarginLeft>" +
+            //   "  <MarginRight>0.2in</MarginRight>" +
+            //   "  <MarginBottom>0.2in</MarginBottom>" +
+            //   "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streamIds;
+            string extension = string.Empty;
+
+            byte[] bytes = rep.Render(reportType, null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+
+
+
+            // string localPath = System.Configuration.ConfigurationManager.AppSettings["TempFiles"].ToString();
+            // string localPath = AppDomain.CurrentDomain.BaseDirectory;
+            // string localPath = "";
+            //string fileName = reportName + ".pdf";
+            //localPath = localPath + fileName;
+            //System.IO.File.WriteAllBytes(localPath, bytes);
+            //return localPath;
+
+            ////Response.Clear();
+            ////Response.AddHeader("content–disposition", "attachment; filename=" + reportName + ".pdf");
+            ////Response.ContentType = "application/pdf";
+            ////Response.BinaryWrite(bytes);
+
+            using (FileStream fs = File.Create(Server.MapPath("/Reports/") + reportName + ".pdf"))
+            {
+                fs.Write(bytes, 0, bytes.Length);
+            }
+
+            Response.ClearHeaders();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.Clear();
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + reportName + ".pdf");
+            Response.WriteFile(Server.MapPath("~/Reports/" + reportName + ".pdf"));
+            Response.Flush();
+            Response.Close();
+            Response.End();
+        }
     }
 
 }

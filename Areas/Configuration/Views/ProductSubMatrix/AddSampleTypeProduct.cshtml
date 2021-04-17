@@ -33,7 +33,7 @@
                 <div class="clearfix">
                     <div class="pull-left">
                     </div>
-                    @using (Ajax.BeginForm("AddSampleTypeProduct", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddTestMethodSuccess" }))
+                    @using (Ajax.BeginForm("AddSampleTypeProduct", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddSampleSuccess" }))
                     {
                         @Html.HiddenFor(Model => Model.SampleTypeProductId)
                         <div class="form-group row">
@@ -63,11 +63,21 @@
                             <a class="btn btn-outline-danger" href="@Url.Action("SampleTypeProductList", "ProductSubMatrix")">Cancel</a>&emsp;
                             <button type="submit" class="btn btn-outline-success">Save</button>
                         </div>
-                     }
-                    </div>
+                    }
+                </div>
                 <!-- Default Basic Forms End -->
             </div>
+        </div>
     </div>
-</div>
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/unobtrusive")
+    <script>
+    function AddSampleSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/ProductSubMatrix/SampleTypeProductList';
+        }
+    }
+    </script>
 
 

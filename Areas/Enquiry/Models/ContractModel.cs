@@ -7,6 +7,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
 {
     public class ContractModel
     {
+        [Required(ErrorMessage ="Please select Sample Type")]
         [Display(Name = "Sample Type Name")]
         public int SampleTypeProductId { get; set; }
 

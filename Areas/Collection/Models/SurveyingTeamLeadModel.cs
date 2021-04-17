@@ -71,7 +71,7 @@ namespace LIMS_DEMO.Areas.Collection.Models
         [Display(Name = "Collected By")]
         public string CollectedBy { get; set; }
 
-        [Required(ErrorMessage = "The Collector By field is Required")]
+        [Required(ErrorMessage = "Please Select Collector By")]
         public string EmployeeId { get; set; }//EnquirySampleDetail tbl Set Collector Name
         public int UserRoleId { get; set; }//tbl UserRole
         public int UserMasterId { get; set; }//tbl UserRole

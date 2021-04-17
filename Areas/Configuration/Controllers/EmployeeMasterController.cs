@@ -100,15 +100,15 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             if (model.UserDetailId == 0)
             {
                 strStatus = BALFactory.employeeMasterBAL.AddEmployee(employeeMasterEntity);
-                //return Json(new { Status = strStatus, message = "Employee has been registered successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "Employee has been registered successfully." }, JsonRequestBehavior.AllowGet);
             }
             //Use for update
             else
             {
                 strStatus = BALFactory.employeeMasterBAL.Update(employeeMasterEntity);
-                //return Json(new { Status = strStatus, message = "Employee has been updated successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "Employee has been updated successfully." }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("EmployeeMasterList");
+            //return RedirectToAction("EmployeeMasterList");
         }
         public ActionResult EmployeeMasterList()
         {

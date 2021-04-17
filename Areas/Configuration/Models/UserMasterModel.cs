@@ -9,8 +9,11 @@ namespace LIMS_DEMO.Areas.Configuration.Models
     public class UserMasterModel
     {
         public int UserMasterID { get; set; }
+        [Required(ErrorMessage ="Please Enter User Name")]
         public string UserName { get; set; }
+        [Required(ErrorMessage ="Please Enter Password")]
         public string Password { get; set; }
+        [Required(ErrorMessage ="Please Enter Confirm Password")]
         public string ConfirmPassword { get; set; }
         public string VerificationCode { get; set; }
         public bool IsActive { get; set; }

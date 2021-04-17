@@ -56,18 +56,21 @@
                                 <label class="col-sm-12 col-md-2 col-form-label">User Name</label>
                                 <div class="col-sm-12 col-md-10">
                                     @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholdder = "UserName" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Password</label>
                                 <div class="col-sm-12 col-md-10">
                                     @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholdder = "Password" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-2 col-form-label">Confirm Password</label>
                                 <div class="col-sm-12 col-md-10">
                                     @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholdder = "ConfirmPassword" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -97,6 +100,17 @@
         </div>
     </div>
 </div>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+
+<script>
+    function AddUserSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/UserMaster/UserMasterList';
+        }
+    }
+</script>
 
 
 

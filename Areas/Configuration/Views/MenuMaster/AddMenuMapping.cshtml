@@ -65,6 +65,7 @@
                             <div class="col-sm-12 col-md-10">
                                 @Html.DropDownListFor(model => model.SubMenuId, new SelectList(ViewBag.SubMenuList, "SubMenuId", "SubMenuName"), "---Select---", new { @class = "form-control col-md-7" })
                                 @Html.HiddenFor(model => model.SubMenu)
+                                @Html.ValidationMessageFor(model => model.SubMenuId, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
@@ -76,7 +77,7 @@
                         </div>
                         <div class="form-group row">
                             @*<a class="btn btn-outline-danger" href='/Configuration/ParentMenuList'>Close</a>
-                             <a class="btn btn-outline-primary" href="/Configuration/AddParentMenu">Reset</a>*@
+                                <a class="btn btn-outline-primary" href="/Configuration/AddParentMenu">Reset</a>*@
                             <button type="submit" class="btn btn-outline-success">Submit</button>
                         </div>
                     }
@@ -93,8 +94,17 @@
                         </div>
                     </div>
                 </div>
-            <!-- Default Basic Forms End -->
+                <!-- Default Basic Forms End -->
+            </div>
         </div>
     </div>
-</div>
-
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/unobtrusive")
+    <script>
+    function AddMenuMappingSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/MenuMaster/MenuMappingList';
+        }
+    }
+    </script>
