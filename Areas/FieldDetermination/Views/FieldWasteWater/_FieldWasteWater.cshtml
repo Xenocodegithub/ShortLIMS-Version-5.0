@@ -15,7 +15,7 @@
                     <div class="col-sm-6 form-group">
                         @Html.LabelFor(model => model.ParameterName, htmlAttributes: new { @class = "control-label col-sm-4 " })
                         <div class="col-sm-8" id="Parameter">
-                            @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control", @style = "font-size:13px;" })
                             @Html.HiddenFor(model => model.ParameterName)
                             @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
                         </div>
@@ -23,7 +23,7 @@
                     <div class="col-sm-6 form-group">
                         @Html.LabelFor(model => model.TestMethodName, htmlAttributes: new { @class = "control-label col-sm-4 " })
                         <div class="col-sm-8" id="TestMethod">
-                            @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control", @style = "font-size:13px;" })
                             @Html.HiddenFor(model => model.TestMethodName)
                             @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
                         </div>
@@ -31,7 +31,7 @@
                     <div class="col-sm-6 form-group">
                         @Html.LabelFor(model => model.TestResults, htmlAttributes: new { @class = "control-label col-sm-4" })
                         <div class="col-sm-8" id="TestResult">
-                            @Html.EditorFor(model => model.TestResults, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TestResults, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
                             @Html.ValidationMessageFor(model => model.TestResults, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                                     <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" />
                                 }
                             }
-                            <input class="btn btn-success btn-sm alignright" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" />
+                            <input class="btn btn-success btn-sm alignright" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" style="float:right;" />
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
     function CancelNameValues() {
         $('#ParameterMasterId').val(-1);
         $('#TestMethodId').val(-1);
-       //$('#Parameters').val("");
+        //$('#Parameters').val("");
         $('#TestResults').val("");
         $('#btnAdd').val("Add")
         $('#btnCancel').css('display', 'none')
@@ -95,7 +95,7 @@
             $('#TestMethodId').html('');
             $('#TestMethodId').append('<option value="">---Select---</option>');
             $.ajax({
-                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val()+ "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val() + "&ParameterMasterId=" + $('#ParameterMasterId').val(),
                 type: 'Get',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'json',
@@ -105,7 +105,7 @@
                         $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
                     })
 
-                     $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+                    $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
                 },
                 error: function (data) {
                 }

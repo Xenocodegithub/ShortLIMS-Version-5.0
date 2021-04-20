@@ -49,20 +49,17 @@
 
                         <h5></h5>
                         <section>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Name of Capacity:</label>
-                                        @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control", @style = "width:470px;" })
-                                        @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
-                                    </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Name of Capacity:</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Description:</label>
-                                        @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @style = "width:470px;" })
-                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                                    </div>
+
+                                <label class="col-sm-12 col-md-2 col-form-label">Description:</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             @*<div class="row">

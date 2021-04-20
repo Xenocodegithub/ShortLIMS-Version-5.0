@@ -9,57 +9,57 @@
     <br/>
     <fieldset>
         @*For ProductGroup,SubGroup,Matrix*@
-        <div class="row">
-            <table border="0" cellpadding="2" cellspacing="4">
-                <tr>
-                    <td align="center">
-                        <div class="form-check-inline">
-                            <label class="col-md-7 mr-btm-15"> Sample Type <span style="color:red;text-align:left">*</span></label>
-                            <div class="col-md-8 mr-btm-15">
-                                @Html.DropDownListFor(model => model.WorkOrderCustomer.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = " form-control" })
-                                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleTypeProductId, "", new { @class = "text-danger" })
-                                @Html.HiddenFor(model => model.WorkOrderCustomer.SampleTypeProductName)
-                            </div>
+
+        <table border="0" cellpadding="2" cellspacing="4">
+            <tr>
+                <td align="center">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-3 col-form-label"> Sample Type: <span style="color:red;text-align:left">*</span></label>
+                        <div class="col-sm-6">
+                            @Html.DropDownListFor(model => model.WorkOrderCustomer.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = " form-control" })
+                            @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleTypeProductId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.WorkOrderCustomer.SampleTypeProductName)
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    @*<td style="width: 350px" align="center">
-                            @Html.LabelFor(model => model.WorkOrderCustomer.ProductGroupName, htmlAttributes: new { @class = "control-label col-sm-6 text-nowrap" })
-                            <span class="required" style="color:red">*</span><br />
-                            @Html.DropDownListFor(model => model.WorkOrderCustomer.ProductGroupId, new SelectList(ViewBag.ProductGroupList, "ProductGroupId", "ProductGroupName"), "---Select---", new { @class = " form-control btn-sm dropdown-toggle border" })
-                            @Html.ValidationMessageFor(model => model.WorkOrderCustomer.ProductGroupId, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.WorkOrderCustomer.ProductGroupName)
-                        </td>
-                        <td style="width: 350px" align="center">
-                            @Html.LabelFor(model => model.WorkOrderCustomer.SubGroupName, htmlAttributes: new { @class = "control-label col-sm-6" })
-                            <span class="required" style="color:red">*</span><br />
-                            @Html.DropDownListFor(model => model.WorkOrderCustomer.SubGroupId, new SelectList(ViewBag.SubGroupList, "SubGroupId", "SubGroupName"), "---Select---", new { @class = "form-control  btn-sm dropdown-toggle border" })
-                            @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SubGroupId, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.WorkOrderCustomer.SubGroupName)
-                        </td>
-                        <td style="width: 350px" align="center">
-                            @Html.LabelFor(model => model.WorkOrderCustomer.MatrixName, htmlAttributes: new { @class = "control-label col-sm-6" })
-                            <span class="required" style="color:red">*</span><br />
-                            @Html.DropDownListFor(model => model.WorkOrderCustomer.MatrixId, new SelectList(ViewBag.MatrixList, "MatrixId", "MatrixName"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
-                            @Html.ValidationMessageFor(model => model.WorkOrderCustomer.MatrixId, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.WorkOrderCustomer.MatrixName)
-                        </td>*@
-                    <td style="width: 200px" align="right">
-                       
-                        <input type="button" id="btnAdd" value="Add" class="btn btn-sm btn-info text-nowrap" style="margin-right:-40%;margin-top:-11%"/>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                @*<td style="width: 350px" align="center">
+                    @Html.LabelFor(model => model.WorkOrderCustomer.ProductGroupName, htmlAttributes: new { @class = "control-label col-sm-6 text-nowrap" })
+                    <span class="required" style="color:red">*</span><br />
+                    @Html.DropDownListFor(model => model.WorkOrderCustomer.ProductGroupId, new SelectList(ViewBag.ProductGroupList, "ProductGroupId", "ProductGroupName"), "---Select---", new { @class = " form-control btn-sm dropdown-toggle border" })
+                    @Html.ValidationMessageFor(model => model.WorkOrderCustomer.ProductGroupId, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.WorkOrderCustomer.ProductGroupName)
+                </td>
+                <td style="width: 350px" align="center">
+                    @Html.LabelFor(model => model.WorkOrderCustomer.SubGroupName, htmlAttributes: new { @class = "control-label col-sm-6" })
+                    <span class="required" style="color:red">*</span><br />
+                    @Html.DropDownListFor(model => model.WorkOrderCustomer.SubGroupId, new SelectList(ViewBag.SubGroupList, "SubGroupId", "SubGroupName"), "---Select---", new { @class = "form-control  btn-sm dropdown-toggle border" })
+                    @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SubGroupId, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.WorkOrderCustomer.SubGroupName)
+                </td>
+                <td style="width: 350px" align="center">
+                    @Html.LabelFor(model => model.WorkOrderCustomer.MatrixName, htmlAttributes: new { @class = "control-label col-sm-6" })
+                    <span class="required" style="color:red">*</span><br />
+                    @Html.DropDownListFor(model => model.WorkOrderCustomer.MatrixId, new SelectList(ViewBag.MatrixList, "MatrixId", "MatrixName"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
+                    @Html.ValidationMessageFor(model => model.WorkOrderCustomer.MatrixId, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.WorkOrderCustomer.MatrixName)
+                </td>*@
+                <td style="width: 200px" align="right">
+
+                    <input type="button" id="btnAdd" value="Add" class="btn btn-sm btn-info text-nowrap" style="margin-right:-40%;margin-top:-11%;float:right;" />
+                </td>
+            </tr>
+        </table>
+
         <hr />
         <table id="tblContract" class="data-table table nowrap">
             <tr class="thead-dark">
                 <th class="table-plus datatable-nosort">SerialNo.</th>
                 <th>Sample Type</th>
                 @*<th style="width:150px">Product Group</th>
-                    <th style="width:150px">Sub Group</th>
-                    <th style="width:150px">Matrix</th>*@
+                <th style="width:150px">Sub Group</th>
+                <th style="width:150px">Matrix</th>*@
                 <th>Choose Parameters</th>
                 <th>Action</th>
             </tr>
@@ -75,19 +75,19 @@
                             @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].SampleTypeProductId)
                         </td>
                         @*<td>
-                                <span>@Model.WorkOrderCustomerList[i].ProductGroupName</span>
-                                @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].ProductGroupId)
-                            </td>
-                            <td>
-                                <span>@Model.WorkOrderCustomerList[i].SubGroupName</span>
-                                @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].SubGroupId)
-                            </td>
-                            <td>
-                                <span>@Model.WorkOrderCustomerList[i].MatrixName</span>
-                                @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].MatrixId)
-                            </td>*@
+                            <span>@Model.WorkOrderCustomerList[i].ProductGroupName</span>
+                            @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].ProductGroupId)
+                        </td>
                         <td>
-                            <button onclick="funContractSelected(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@Model.WorkOrderCustomerList[i].SampleTypeProductId,'@Model.WorkOrderCustomerList[i].SampleTypeProductCode', '@Model.WorkOrderCustomerList[i].SubGroupCode')" class="btn btn-sm btn-primary text-nowrap btnChoose">Choose Parameters</button>
+                            <span>@Model.WorkOrderCustomerList[i].SubGroupName</span>
+                            @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].SubGroupId)
+                        </td>
+                        <td>
+                            <span>@Model.WorkOrderCustomerList[i].MatrixName</span>
+                            @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].MatrixId)
+                        </td>*@
+                        <td>
+                            <button onclick="funContractSelected(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@Model.WorkOrderCustomerList[i].SampleTypeProductId,'@Model.WorkOrderCustomerList[i].SampleTypeProductCode', '@Model.WorkOrderCustomerList[i].SubGroupCode')" class="btn btn-sm btn-info text-nowrap btnChoose">Choose Parameters</button>
                         </td>
                         <td>
                             <a href="#" onclick="funDeleteContract(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@ViewBag.WorkOrderId);">Delete</a>
@@ -117,20 +117,20 @@
                             Sample Type
                         </th>
                         @*<th class="width-12">
-                                Product Group
-                            </th>
-                            <th class="width-10">
-                                Sub Group
-                            </th>
-                            <th class="width-5">
-                                Matrix
-                            </th>*@
+                            Product Group
+                        </th>
+                        <th class="width-10">
+                            Sub Group
+                        </th>
+                        <th class="width-5">
+                            Matrix
+                        </th>*@
                         <th class="table-plus datatable-nosort">
                             Parameters
                         </th>
                         @*<th class="width-5">
-                                Cost
-                            </th>*@
+                            Cost
+                        </th>*@
                         <th>
                             Remarks
                         </th>
@@ -156,20 +156,20 @@
                                 @Html.DisplayFor(model => model.ParaList[i].SampleTypeProductName)
                             </td>
                             @*<td>
-                                       @Html.DisplayFor(model => model.ParaList[i].ProductGroupName)
-                                 </td>
-                                 <td>
-                                       @Html.DisplayFor(model => model.ParaList[i].SubGroupName)
-                                 </td>
-                                <td>
-                                       @Html.DisplayFor(model => model.ParaList[i].MatrixName)
-                                </td>*@
+                                   @Html.DisplayFor(model => model.ParaList[i].ProductGroupName)
+                             </td>
+                             <td>
+                                   @Html.DisplayFor(model => model.ParaList[i].SubGroupName)
+                             </td>
+                            <td>
+                                   @Html.DisplayFor(model => model.ParaList[i].MatrixName)
+                            </td>*@
                             <td>
                                 @Html.DisplayFor(model => model.ParaList[i].Parameters)
                             </td>
                             @*<td>
-                                    @Html.DisplayFor(model => model.ParaList[i].Cost)
-                                </td>*@
+                                @Html.DisplayFor(model => model.ParaList[i].Cost)
+                            </td>*@
                             <td>
                                 @Html.DisplayFor(model => model.ParaList[i].Remarks)
                             </td>
@@ -185,11 +185,11 @@
             </table>
             @if (Model.ParaList.Count >= 1)
             {
-                <div class="row">
-                    <div class="form-actions" style="margin:20px 0 0 0; text-align: center;">
-                        <input type="button" id="btnSave" value="Save" class="btn btn-primary alignright" style="float:right" />
-                    </div>
+
+                <div class="col-sm-12 col-md-12">
+                    <input type="button" id="btnSave" value="Save" class="btn btn-info btn-sm" style="float:right" />
                 </div>
+
             }
         </div>
         <hr />

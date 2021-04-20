@@ -39,240 +39,182 @@
                     @Html.HiddenFor(model => model.InventoryTypeID)
                     @Html.HiddenFor(model => model.CatagoryName)
             <fieldset>
-                <div class="form-group">
-                    <label class="col-form-label col-md-2 col-sm-2 label-align mr-btm-15">Item  <span class="required">*</span></label>
-                    <div class="col-md-6 mr-btm-15">
-                        @Html.DropDownListFor(model => model.ItemMasterId, new SelectList(ViewBag.Item, "ItemMasterId", "Item"), "Please Select", new { @class = "form-control " })
+                <div class="form-group row">
+                    <label class="col-form-label col-md-2 col-sm-2 label-align mr-btm-15">Item:<span class="required">*</span></label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.ItemMasterId, new SelectList(ViewBag.Item, "ItemMasterId", "Item"), "Please Select", new { @class = "form-control", @style = "font-size:13px;" })
                         @Html.ValidationMessageFor(model => model.ItemMasterId, "", new { @class = "text-danger" })
                     </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12  mr-btm-15 ">
-                                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12 mr-btm-15 ">
-                                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Brand: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" }*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.PackSize, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12  mr-btm-15 ">
-                                @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control  " } })
-                                @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Grade: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12 mr-btm-15 ">
-                                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control  " } })
-                                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Pack Size: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.PackSize, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.PackSize, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12  mr-btm-15 ">
-                                @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Quantity: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12  mr-btm-15 ">
-                                @Html.EditorFor(model => model.Purpose, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Priority: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                                <div class="col-md-12  mr-btm-15 ">
-                                    @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Purpose: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4 ">
+                        @Html.EditorFor(model => model.Purpose, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12  mr-btm-15 ">
-                                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Specification: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="col-form-label col-md-6 col-sm-2 label-align mr-btm-15">Supplier Name  <span class="required">*</span></label>
-                            <div class="col-md-12 mr-btm-15">
-                                @Html.DropDownListFor(model => model.PurchaseSupplierID, new SelectList(ViewBag.Supplier, "PurchaseSupplierID", "SupplierName"), "Please Select", new { @class = "form-control " })
-                                @Html.ValidationMessageFor(model => model.PurchaseSupplierID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Remark: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.EstimatedLagTime, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12  mr-btm-15 ">
-                                @Html.EditorFor(model => model.EstimatedLagTime, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.EstimatedLagTime, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Supplier Name: <span style="color:red">*</span></label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.PurchaseSupplierID, new SelectList(ViewBag.Supplier, "PurchaseSupplierID", "SupplierName"), "Please Select", new { @class = "form-control", @style = "font-size:13px;" })
+                        @Html.ValidationMessageFor(model => model.PurchaseSupplierID, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.COA, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-
-                            <div class="col-md-6  mr-btm-15 ">
-                                <label> @Html.RadioButtonFor(model => model.COA, true, new { id = "COA-COA", @checked = "checked" }) COA </label>&emsp;
-                                <label> @Html.RadioButtonFor(model => model.COA, false, new { id = "COA-COC" }) COC </label>
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Estimated Lag Time: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.EstimatedLagTime, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.EstimatedLagTime, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.EstimatedLagTime, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.TickIf, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-6  mr-btm-15 ">
-
-                                @*@Html.CheckBoxFor(model => model.TickIf.Value)*@
-
-                                @if (Model.TickIf == true)
-                                {
-                                    <input id="TickIfId" name="TickIfname" type="checkbox" value="true" checked="checked" />
-                                    @Html.HiddenFor(model => model.TickIf)
-                                }
-                                else
-                                {
-                                    <input id="TickIfId" name="TickIfname" type="checkbox" value="false" />
-                                    @Html.HiddenFor(model => model.TickIf)
-                                }
-
-                            </div>
-                        </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">COA/COC: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.COA, htmlAttributes: new { @class = "col-form-label col-md-8 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        <label> @Html.RadioButtonFor(model => model.COA, true, new { id = "COA-COA", @style = "font-size:13px;" }) COA </label>&emsp;
+                        <label> @Html.RadioButtonFor(model => model.COA, false, new { id = "COA-COC", @style = "font-size:13px;" }) COC </label>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })
-                            <div class="col-md-12  mr-btm-15 ">
-                                @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" } })
-                                @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Tick If: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.TickIf, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+
+                        @*@Html.CheckBoxFor(model => model.TickIf.Value)*@
+
+                        @if (Model.TickIf == true)
+                        {
+                            <input id="TickIfId" name="TickIfname" type="checkbox" value="true" checked="checked" style="font-size:13px;" />
+                            @Html.HiddenFor(model => model.TickIf)
+                        }
+                        else
+                        {
+                            <input id="TickIfId" name="TickIfname" type="checkbox" value="false" style="font-size:13px;" />
+                            @Html.HiddenFor(model => model.TickIf)
+                        }
+
                     </div>
-                    <div class="col-sm-6">
-                        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15 " })
-                        <div class="col-md-12 mr-btm-15">
-                            @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", @readonly = "readonly" })
-                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    <label class="col-sm-12 col-md-2 col-form-label">Rate: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "col-form-label col-md-6 col-sm-2 label-align mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''", @style = "font-size:13px;" } })
+                        @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Amount: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15 " })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", @readonly = "readonly", @style = "font-size:13px;" })
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Discount Amount: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.DiscAmount, htmlAttributes: new { @class = "control-label col-md-12 mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.DiscAmount, new { @class = "form-control", @readonly = "readonly", onfocus = "this.value=''", @style = "font-size:13px;" })
+                        @Html.ValidationMessageFor(model => model.DiscAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">GST Amount: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.GSTAmount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.GSTAmount, new { @class = "form-control", @readonly = "readonly", @style = "font-size:13px;" })
+                        @Html.ValidationMessageFor(model => model.GSTAmount, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Net Amount: <span style="color:red">*</span></label>
+                    @*@Html.LabelFor(model => model.NetAmount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.NetAmount, new { @class = "form-control", @readonly = "readonly", @style = "font-size:13px;" })
+                        @Html.ValidationMessageFor(model => model.NetAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comment" class="col-sm-12 col-md-2 col-form-label">Your Comment:</label>
+                    <div class="col-sm-4">
+                        <textarea id="txtComment" name="comment" class="form-control" rows="2" style="height:65px;font-size:13px;"></textarea>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="checkbox checkbox-success">
+
+                            <label class="redioBtn"><input type="radio" id="accept" name="action" value="Accept" checked="checked">Accept</label>
+
+                            <label class="redioBtn"><input type="radio" id="reject" name="action" value="Reject">Reject</label>
                         </div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.DiscAmount, htmlAttributes: new { @class = "control-label col-md-12 mr-btm-15" })
-                            
-                            <div class="col-md-12 mr-btm-15">
-                                @Html.TextBoxFor(model => model.DiscAmount, new { @class = "form-control", @readonly = "readonly", onfocus = "this.value=''" })
-                                @Html.ValidationMessageFor(model => model.DiscAmount, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="col-md-12 mr-btm-15">
-
-                            <table class="table" id="FilesList" style="visibility:hidden">
-                                <tr style="background-color:aqua">
-                                    <th>
-                                        Attachment(s)
-                                    </th>
-                                    <th>
-                                        Action
-                                    </th>
-                                </tr>
-                            </table>
-                        </div>
+                <div class="col-sm-12 col-md-12">
+                    <button type="button" class="btn btn-info btn-sm" id="approveBtn" style="float:right"> &ensp;Accept</button>
+                    <button type="button" class="btn btn-danger btn-sm" id="rejectBtn" style="display:none">&ensp;Reject</button>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group mr-btm-15">
+                        <table class="table" id="FilesList" style="visibility:hidden">
+                            <tr style="background-color:aqua">
+                                <th>
+                                    Attachment(s)
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.GSTAmount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })
-                            <div class="col-md-6 mr-btm-15">
-                                @Html.TextBoxFor(model => model.GSTAmount, new { @class = "form-control", @readonly = "readonly" })
-                                @Html.ValidationMessageFor(model => model.GSTAmount, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.NetAmount, htmlAttributes: new { @class = "control-label col-md-6 mr-btm-15" })
-                            <div class="col-md-6 mr-btm-15">
-                                @Html.TextBoxFor(model => model.NetAmount, new { @class = "form-control", @readonly = "readonly" })
-                                @Html.ValidationMessageFor(model => model.NetAmount, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="form-group">
-                            <div class="checkbox checkbox-success col-md-12">
-
-                                <label class="redioBtn"><input type="radio" id="accept" name="action" value="Accept" checked="checked">Accept</label>&ensp;&ensp;&ensp;&ensp;&ensp;
-
-                                <label class="redioBtn"><input type="radio" id="reject" name="action" value="Reject">Reject</label>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="comment" class="control-label">Your Comment</label>
-                            <textarea id="txtComment" name="comment" class="form-control" rows="2"></textarea>
-                        </div>
-                        <div class="col-md-12 d-flex justify-content-center">
-                            <button type="button" class="btn btn-primary" id="approveBtn"> &ensp;Accept</button>
-                            <button type="button" class="btn btn-info" id="rejectBtn" style="display:none">&ensp;Reject</button>
-                        </div>
-
-                 </fieldset>
+            </fieldset>
                 }
             </div>
         </div>

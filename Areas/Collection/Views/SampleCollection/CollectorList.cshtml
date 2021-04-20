@@ -29,10 +29,9 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Sample Collection List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
                 </div>
-                <table id="tblColl" class="data-table table nowrap">
+                <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                     <thead>
                         <tr class="thead-dark">
                             <th class="table-plus datatable-nosort">
@@ -295,6 +294,13 @@
        
     }
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 
 

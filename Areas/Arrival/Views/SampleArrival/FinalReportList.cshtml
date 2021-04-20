@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <table class="data-table table nowrap">
+                <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                     <thead>
                         <tr class="thead-dark">
                             <th class="table-plus datatable-nosort">
@@ -246,4 +246,12 @@
             })
         }
     };
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>

@@ -22,9 +22,9 @@
                         </th>
                         @if (Model.CurrentStatus != "SampleColl")
                         {
-                         <th class="table-plus datatable-nosort">
-                             Action
-                         </th>
+                            <th class="table-plus datatable-nosort">
+                                Action
+                            </th>
                         }
                     </tr>
                 </thead>
@@ -46,10 +46,10 @@
                             </td>
                             @if (Model.CurrentStatus != "SampleColl")
                             {
-                             <td>
-                                @*<a href="#" onclick="funEditField(@Model.GridModel[i].SrNo);">Edit</a> |*@
-                                <a href="#" onclick="funDeleteField(@Model.GridModel[i].SrNo);">Delete</a>
-                             </td>
+                                <td>
+                                    @*<a href="#" onclick="funEditField(@Model.GridModel[i].SrNo);">Edit</a> |*@
+                                    <a href="#" onclick="funDeleteField(@Model.GridModel[i].SrNo);">Delete</a>
+                                </td>
                             }
                         </tr>
                     }
@@ -88,4 +88,12 @@
         }
     }
 
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>

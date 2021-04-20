@@ -16,13 +16,14 @@
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Menu Master</li>
                                 <li class="breadcrumb-item active" aria-current="page">Sub-Menu List</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-md-6 col-sm-12 text-right">
                         <div class="dropdown">
-                            <a class="btn btn-primary" href="@Url.Action("AddSubMenu"," MenuMaster")" role="button">
+                            <a class="btn btn-info btn-sm" href="@Url.Action("AddSubMenu"," MenuMaster")" role="button">
                                 Add Sub-Menu
                             </a>
                         </div>
@@ -30,18 +31,20 @@
                 </div>
             </div>
             <!-- Simple Datatable start -->
-            <div class="card-box mb-30">
-                <div class="pd-20">
-                    <h4 class="text-blue h4">Sub Menu List</h4>
-                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Sub Menu List</h4>
+                    </div>
                 </div>
+
                 <div class="pb-20">
                     <table class="data-table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">SR.NO.</th>
-                                <th class="table-plus datatable-nosort">ParentMenu</th>
-                                <th class="table-plus datatable-nosort">SubMenu</th>
+                                <th class="table-plus datatable-nosort">Parent Menu</th>
+                                <th class="table-plus datatable-nosort">Sub Menu</th>
                                 <th class="table-plus datatable-nosort">Target Url</th>
                                 <th class="table-plus datatable-nosort">Is Active</th>
                                 <th class="datatable-nosort">Action</th>
@@ -53,43 +56,37 @@
                             {
                                 foreach (var item in Model)
                                 {
-                            <tr>
-                                <td class="table-plus">@{rowNo++;}@rowNo</td>
-                                <td>@item.ParentMenu</td>
-                                <td>@item.SubMenu</td>
-                                <td>@item.TargetUrl</td>
-                                <td style="align-items:center">
-                                    @if (item.IsActive == true)
-                                    {
-                                        <i class="icon-copy fa fa-check" style="color:green" aria-hidden="true"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="icon-copy fa fa-close" style="color:red" aria-hidden="true"></i>
-                                    }
-                                </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="@Url.Action("AddSubMenu","MenuMaster",new {MenuMasterId=@item.MenuMasterId })"><i class="dw dw-edit2"></i> Edit</a>
-                                            <a class="dropdown-item" href="#" onclick="Delete(@item.MenuMasterId);"><i class="dw dw-delete-3"></i>Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    <tr>
+                                        <td class="table-plus">@{rowNo++;}@rowNo</td>
+                                        <td>@item.ParentMenu</td>
+                                        <td>@item.SubMenu</td>
+                                        <td>@item.TargetUrl</td>
+                                        <td style="align-items:center">
+                                            @if (item.IsActive == true)
+                                            {
+                                                <i class="icon-copy fa fa-check" style="color:green" aria-hidden="true"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="icon-copy fa fa-close" style="color:red" aria-hidden="true"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                    <i class="dw dw-more"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                    <a class="dropdown-item" href="@Url.Action("AddSubMenu","MenuMaster",new {MenuMasterId=@item.MenuMasterId })"><i class="dw dw-edit2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" onclick="Delete(@item.MenuMasterId);"><i class="dw dw-delete-3"></i>Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 }
                             }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                </td>
-                            </tr>
-
-                        </tfoot>
+                       
                     </table>
                 </div>
             </div>
@@ -97,5 +94,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 
 

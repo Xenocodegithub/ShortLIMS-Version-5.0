@@ -1,260 +1,198 @@
 ﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryBasicDetailModel
 
-<div class="mobile-menu-overlay"></div>
-<div class="main-container">
-    <div class="pd-ltr-20 xs-pd-20-10">
-        <div class="min-height-200px">
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 text-right">
+
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Basic Details Form</h4>
                     </div>
                 </div>
-            </div>
-            <div class="pd-20 card-box mb-30" style="margin-left:-260px;margin-top:-140px;width:900px;">
-                <div class="clearfix">
-                    <h4 class="text-blue h4">Add Basic Details Form</h4>
-                    <p class="mb-30"></p>
-                </div>
-                <div class="wizard-content">
-                    @using (Html.BeginForm("InventoryBasicDetails", "Inventory", FormMethod.Post, new { id = "_BasicDetails" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-                        @Html.Hidden("BasicDetailsID", (object)ViewBag.BasicDetailsIdViewBag)
-                        @Html.Hidden("InventoryBasicDetailsNumber")
-                        @Html.Hidden("InventoryTypeMasterID", (object)ViewBag.InventoryTypeMasterIDViewBag)
-                        @Html.HiddenFor(model => model.PurchaseRequestID)
-                        @Html.Hidden("ID",(object)ViewBag.BasicDetailsIdViewBag)
+                <br />
+                <div class="pb-20">
+                    <div class="wizard-content">
+                        @using (Html.BeginForm("InventoryBasicDetails", "Inventory", FormMethod.Post, new { id = "_BasicDetails" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.Hidden("BasicDetailsID", (object)ViewBag.BasicDetailsIdViewBag)
+                            @Html.Hidden("InventoryBasicDetailsNumber")
+                            @Html.Hidden("InventoryTypeMasterID", (object)ViewBag.InventoryTypeMasterIDViewBag)
+                            @Html.HiddenFor(model => model.PurchaseRequestID)
+                            @Html.Hidden("ID", (object)ViewBag.BasicDetailsIdViewBag)
 
-                        <h5></h5>
-                        <section>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Item Name:</label>
-                                        @Html.DropDownListFor(model => model.ItemID, (SelectList)ViewBag.InventoryItemListViewBag1, "Select Inventory Item...", new { @class = "custom-select form-control" })
+                            <section>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Item Name:</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.ItemID, (SelectList)ViewBag.InventoryItemListViewBag1, "Select Inventory Item...", new { @class = " form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.ItemID)
                                         @Html.HiddenFor(model => model.ItemID)
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Inventory Type:</label>
-                                        @Html.DropDownListFor(model => model.TypeID, new SelectList(ViewBag.InvInventoryTypeList, "InventoryTypeID", "InventoryTypeName"), "-------Select-------", new { @class = "custom-select form-control" })
+                                    <label class="col-sm-12 col-md-2 col-form-label">Inventory Type:</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.TypeID, new SelectList(ViewBag.InvInventoryTypeList, "InventoryTypeID", "InventoryTypeName"), "-------Select-------", new { @class = " form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(model => model.TypeID)
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Category Type:</label>
-                                        @Html.DropDownListFor(model => model.CategoryID, new SelectList(ViewBag.InvCategoryList, "CatagoryMasterID", "CategoryName"), "------Select------", new { @class = "custom-select form-control" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Category Type:</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.CategoryID, new SelectList(ViewBag.InvCategoryList, "CatagoryMasterID", "CategoryName"), "------Select------", new { @class = " form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(model => model.CategoryID)
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Unit:</label>
-                                        @Html.DropDownListFor(model => model.UnitID, new SelectList(ViewBag.InvUnitList, "UnitId", "Unit"), "-------Select-------", new { @class = "custom-select form-control" })
+                                    <label class="col-sm-12 col-md-2 col-form-label">Unit:</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.UnitID, new SelectList(ViewBag.InvUnitList, "UnitId", "Unit"), "-------Select-------", new { @class = " form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.UnitID, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(model => model.UnitID)
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Capacity/PackSize:</label>
-                                        @Html.TextBoxFor(model => model.PackSize, new { @class = "form-control",@style = "width:400px;" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Capacity/PackSize:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.PackSize, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.PackSize, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Quantity:</label>
-                                        @Html.TextBoxFor(model => model.QuantityType, new { @class = "form-control",@style = "width:400px;"})
+                                    <label class="col-sm-12 col-md-2 col-form-label">Quantity:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.QuantityType, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.QuantityType, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Quantity Received:</label>
-                                        @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control",@style = "width:400px;" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Quantity Received:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Pre-Received Quantity:</label>
+                                    <label class="col-sm-12 col-md-2 col-form-label">Pre-Received Quantity:</label>
+                                    <div class="col-sm-4">
                                         @*@Html.TextBoxFor(model => model.QuantityLeft, new { @class = "form-control", @style = "width:400px;" })*@
-                                        <input type="text" id="QuantityLeft" name="QuantityLeft" value="" class="form-control" style="width:400px;" />
+                                        <input type="text" id="QuantityLeft" name="QuantityLeft" value="" class="form-control" style="font-size:13px;" />
                                         @Html.ValidationMessageFor(model => model.QuantityLeft, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Brand:</label>
-                                        @Html.TextBoxFor(model => model.Brand, new { @class = "form-control",@style = "width:400px;" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Brand:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Brand, new { @class = "form-control", @style = "font-size:13px;" })
+                                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                                    </div>
+                                    <label class="col-sm-12 col-md-2 col-form-label">Brand Received:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.BrandReceived, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Brand Received:</label>
-                                        @Html.TextBoxFor(model => model.BrandReceived, new { @class = "form-control",@style = "width:400px;" })
-                                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Grade:</label>
-                                        @Html.TextBoxFor(model => model.Grade, new { @class = "form-control",@style = "width:400px;" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Grade:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Grade, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Grade Received:</label>
-                                        @Html.TextBoxFor(model => model.GradeReceived, new { @class = "form-control",@style = "width:400px;" })
+                                    <label class="col-sm-12 col-md-2 col-form-label">Grade Received:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.GradeReceived, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.GradeReceived, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Integrity and Condition Packaging:</label>
-                                        @Html.TextBoxFor(model => model.ConditionOfPackaging, new { @class = "form-control",@style = "width:400px;" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Integrity/Condition Packaging:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.ConditionOfPackaging, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.ConditionOfPackaging, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Storage temperature:</label>
-                                        @Html.TextBoxFor(model => model.IntegrityOfPackaging, new { @class = "form-control",@style = "width:400px;" })
+                                    <label class="col-sm-12 col-md-2 col-form-label">Storage temperature:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.IntegrityOfPackaging, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.IntegrityOfPackaging, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Warranty (in months):</label>
-                                        @Html.TextBoxFor(model => model.Warranty, new { @class = "form-control",@style = "width:400px;" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Warranty (in months):</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Warranty, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Name of Manufacturer:</label>
-                                        @Html.TextBoxFor(model => model.Manufacturer, new { @class = "form-control",@style = "width:400px;" })
+                                    <label class="col-sm-12 col-md-2 col-form-label">Name of Manufacturer:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Manufacturer, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.Manufacturer, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Date of Manufacturing:</label>
-                                        <input type="date" id="DOM" name="DOM" value="" class="form-control" style="width:400px;" />
-                                        <input type="text" id="DOMval" name="DOMval" value="" class="form-control" disabled  style="width:400px;"/>
-
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Date of Manufacturing:</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" id="DOM" name="DOM" value="" class="form-control" style="font-size:13px;" />
+                                        <input type="text" id="DOMval" name="DOMval" value="" class="form-control" disabled style="font-size:13px;" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Certified Concentration:</label>
-                                        @Html.TextBoxFor(model => model.CertifiedConcentration, new { @class = "form-control",@style = "width:400px;" })
+                                    <label class="col-sm-12 col-md-2 col-form-label">Certified Concentration:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.CertifiedConcentration, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.CertifiedConcentration, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Traceability:</label>
-                                        @Html.TextBoxFor(model => model.Praceability, new { @class = "form-control",@style = "width:400px;" })
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Traceability:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Praceability, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.Praceability, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Date of Expiry:</label>
-                                        <input type="date" id="DOE" name="DOE" value="" class="form-control" style="width:400px;" />
-                                        <input type="text" id="DOEval" name="DOEval" value="" class="form-control" disabled  style="width:400px;"/>
-
-                                        <input type="date" id="DOExpiry" name="DOExpiry" value="" class="form-control" style="width:400px;" />
-                                        <input type="text" id="DOEval" name="DOEval" value="" class="form-control" disabled  style="width:400px;"/>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Remark:</label>
-                                        @Html.TextBoxFor(model => model.Remark, new { @class = "form-control",@style = "width:400px;" })
+                                    <label class="col-sm-12 col-md-2 col-form-label">Remark:</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Remark, new { @class = "form-control", @style = "font-size:13px;" })
                                         @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
- 
-                                <div class="clearfix">
-                                    <h4 class="text-blue h4">Add Basic Details Form</h4>
-                                    <p class="mb-30"></p>
-                                </div>
-                                <div style="display: block;">
-                                        <!-- attach parameter list here -->
-                                        <div class="pb-20">
-                                            <table class="data-table table stripe hover nowrap"  id="myItemTable" data-filter="#filter" data-filter-text-only="true" style="width:100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 6%;">Sr.No.</th>
-                                                        <th style="width:5%; text-align: left;">BATCH NO</th>
-                                                        <th style="width:5%; text-align: left;">LOT NO</th>
-                                                        <th style="width:5%; text-align: left;">MODEL NO</th>
-                                                        <th style="width:5%; text-align: left;">SERIAL NO</th>
-                                                        <th style="width:5%; text-align: left;">BARCODE NO</th>
-                                                        <th style="width:5%; text-align: left;">DESCRIPTION</th>
-                                                        @*<th style=" text-align: center;" id="HeaderQuantity">QUANTITY</th>*@
+                                <div class="form-group row">
+                                    <label class="col-sm-12 col-md-2 col-form-label">Date of Expiry:</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" id="DOE" name="DOE" value="" class="form-control" style="font-size:13px" />
+                                        <input type="text" id="DOEval" name="DOEval" value="" class="form-control" disabled style="font-size:13px" />
 
-                                                @*    <th style=" text-align: center;">ACTION</th>*@
-                                            </tr>
-                                        </thead>
-                                        <tbody id="myItemTableBody">
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- attach parameter list here -->
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-6" style="margin-left:450px;">
-                                    <div class="form-group">
-                                        <input type="submit" value="Create" class="btn btn-primary" id="buttonSaveInventoryBasicDetails" name="buttonSaveInventoryBasicDetails" style="background-color:mediumblue;color:white;" />
+
+                                        @*<input type="date" id="DOExpiry" name="DOExpiry" value="" class="form-control" />*@
                                     </div>
                                 </div>
-                            </div>
-                        </section>
-                    }
+                                <div class="clearfix">
+                                    <h4 class="text-blue h4">Add Basic Details Form</h4>
+                                </div>
+                                <div style="display: block;">
+                                    <!-- attach parameter list here -->
+                                    <div class="pb-20">
+                                        <table class="data-table table stripe hover nowrap" id="myItemTable" data-filter="#filter" data-filter-text-only="true" style="width:100%;">
+                                            <thead>
+                                                <tr class="thead-dark">
+                                                    <th style="width: 6%;">Sr.No.</th>
+                                                    <th style="width:5%; text-align: left;font-size:12px;">BATCH NO</th>
+                                                    <th style="width:5%; text-align: left;font-size:12px;">LOT NO</th>
+                                                    <th style="width:5%; text-align: left;font-size:12px;">MODEL NO</th>
+                                                    <th style="width:5%; text-align: left;font-size:12px;">SERIAL NO</th>
+                                                    <th style="width:5%; text-align: left;font-size:12px;">BARCODE NO</th>
+                                                    <th style="width:5%; text-align: left;font-size:12px;">DESCRIPTION</th>
+                                                    @*<th style=" text-align: center;" id="HeaderQuantity">QUANTITY</th>*@
+
+                                                    @*    <th style=" text-align: center;">ACTION</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody id="myItemTableBody" style="font-size: 12px;">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- attach parameter list here -->
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <input type="submit" value="Create" class="btn btn-info btn-sm" id="buttonSaveInventoryBasicDetails" name="buttonSaveInventoryBasicDetails" style="float:right" />
+                                    </div>
+                                </div>
+                            </section>
+                        }
+                    </div>
                 </div>
             </div>
             <!-- success Popup html Start -->
@@ -273,10 +211,7 @@
                 </div>
             </div>
             <!-- success Popup html End -->
-        </div>
-    </div>
-</div>
-
+       
 <script type="text/javascript">
 
     $("#Quantity").on('change', function () {

@@ -53,36 +53,30 @@
                     @Html.HiddenFor(model => model.EnquiryId)
                     @Html.HiddenFor(model => model.SampleCollectionId)
                     @Html.HiddenFor(model => model.FieldFoodAndAgriCultureId)
-                    <hr />
-                    <div class="row">
-                        <div class="card-box table-responsive">
-                            <p class="text-muted font-13 m-b-30">
-                            </p>
-                            <div id="divList">
-                                @{ Html.RenderAction("_FieldFoodAndAgriProductsList", "FieldFoodAndAgriProducts", Model);}
-                            </div>
+                    <br /><br />
+                    <div id="divList">
+                        @{ Html.RenderActiorn("_FieldFoodAndAgriProductsList", "FieldFoodAndAgriProducts", Model);}
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-3 col-form-label">Any Other Observation:</label>
+                        @*@Html.LabelFor(model => model.AnyOtherObservation, htmlAttributes: new { @class = "control-label col-sm-3 " })*@
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.AnyOtherObservation, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            @Html.LabelFor(model => model.AnyOtherObservation, htmlAttributes: new { @class = "control-label col-sm-3 " })
-                            <div class="col-sm-6">
-                                @Html.EditorFor(model => model.AnyOtherObservation, new { htmlAttributes = new { @class = "form-control" } })
-                             </div>
-                        </div>
-                    </div>
-                    <br/>
+
+                    <br />
                     <div class="row align-items-end item form-group">
                         <div class="col-md-12 col-sm-12">
                             @if (ViewBag.CurrentStatus == "SampleColl")
                             {
                                 @*<button type="submit" id="btnSave" class="btn btn-round btn-secondary" name="Save" value="FieldSave" style="background-color:darkgrey" disabled="disabled">Save </button>*@
-                                <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="FieldSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                                <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary btn-sm" name="Save" value="FieldSubmit" style="background-color:darkgrey;float:right" disabled="disabled">Submit</button>
                             }
                             else
                             {
                                 @*<button type="submit" id="btnSave" class="btn btn-success" name="Save" value="FieldSave">Save </button>*@
-                                <button type="submit" id="btnSubmit" class="btn btn-primary" name="Save" value="FieldSubmit" align="center">Submit</button>
+                                <button type="submit" id="btnSubmit" class="btn btn-primary btn-sm" name="Save" value="FieldSubmit" align="center" style="float:right">Submit</button>
                             }
                         </div>
                     </div>

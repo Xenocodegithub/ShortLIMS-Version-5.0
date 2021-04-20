@@ -55,138 +55,107 @@
                         @Html.Hidden("HiddenInventoryBasicItemsDetailsID", (object)ViewBag.BasicItemDetailsIDViewBag)
                         @Html.Hidden("HiddenDateID", (object)ViewBag.DateIDViewBag)
 
-                        <h5></h5>
+                      
                         <section>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Item: </label>
-                                        @Html.DropDownListFor(model => model.ItemID, (SelectList)ViewBag.InventoryItemListViewBag, ".....Select Item......", new { @class = "custom-select form-control" })
+                           
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Item: </label>
+                                        <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.ItemID, (SelectList)ViewBag.InventoryItemListViewBag, ".....Select Item......", new { @class = " form-control" })
                                         @Html.ValidationMessageFor(model => model.ItemID)
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Serial Number:</label>
-                                        @Html.DropDownListFor(model => model.InventoryBasicItemDetailsID, (SelectList)ViewBag.InventorySerialNumberListViewBag, "........Select Serial Number...", new { @class = "custom-select form-control" })
+                                         </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Serial Number:</label>
+                                        <div class="'col-sm-4">
+                                        @Html.DropDownListFor(model => model.InventoryBasicItemDetailsID, (SelectList)ViewBag.InventorySerialNumberListViewBag, "........Select Serial Number...", new { @class = " form-control" })
                                         @Html.ValidationMessageFor(model => model.InventoryBasicItemDetailsID)
                                         @Html.HiddenFor(model => model.InventoryBasicItemDetailsNumber)
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Calibration Date:</label>
-                                        @Html.DropDownListFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID, (SelectList)ViewBag.InventoryFrequencyDateListViewBag, ".....Select Maintainance Date.....", new { @class = "custom-select form-control" })
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Calibration Date:</label>
+                                        <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID, (SelectList)ViewBag.InventoryFrequencyDateListViewBag, ".....Select Maintainance Date.....", new { @class = " form-control" })
                                         @Html.ValidationMessageFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID)
                                         @Html.HiddenFor(model => model.InventoryMaintainanceAndCalibrationScheduleDatesID)
                                         @Html.HiddenFor(model => model.ScheduleDate)
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Next Date Of Calibration:</label>
+                                         </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Next Date Of Calibration:</label>
+                                        <div class="col-sm-4">
                                         @*<input type="date" id="NextCalibrationDate" name="NextCalibrationDate" value="" class="form-control" style="width:470px;" placeholder="Next Date Of Maintenance" />*@
-                                        @Html.TextBoxFor(model => model.ndate, new {@class = "form-control", @style = "width:470px;", disabled = true })
+                                        @Html.TextBoxFor(model => model.ndate, new {@class = "form-control",  disabled = true })
                                         @Html.HiddenFor(model => model.NextCalibrationDate)
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Calibration Start Date:</label>
-                                        <input type="date" id="CalibrationStartDate" name="CalibrationStartDate" value="" class="form-control" style="width:470px;" />
-                                        @Html.TextBoxFor(model => model.CalibrationStartDate, new {@class = "form-control", @style = "width:470px;", disabled = true })
+                                 <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label" >Calibration Start Date:</label>
+                                        <div class="col-sm-4">
+                                        <input type="date" id="CalibrationStartDate" name="CalibrationStartDate" value="" class="form-control" />
+                                        @Html.TextBoxFor(model => model.CalibrationStartDate, new {@class = "form-control", disabled = true })
                                         @Html.ValidationMessageFor(model => model.CalibrationStartDate, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Calibration End Date:</label>
-                                        <input type="date" id="CalibrationEndDate" name="CalibrationEndDate" value="" class="form-control" style="width:470px;"/>
-                                        @Html.TextBoxFor(model => model.CalibrationEndDate, new {@class = "form-control", @style = "width:470px;", disabled = true })
+                                         </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Calibration End Date:</label>
+                                         <div class="col-sm-4">
+                                        <input type="date" id="CalibrationEndDate" name="CalibrationEndDate" value="" class="form-control" />
+                                        @Html.TextBoxFor(model => model.CalibrationEndDate, new {@class = "form-control", disabled = true })
                                         @Html.ValidationMessageFor(model => model.CalibrationEndDate, "", new { @class = "text-danger" })
-                                    </div>
+                                        </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Auditor Name:</label>
-                                        @Html.TextBoxFor(model => model.Auditor, new { @class = "form-control", @style = "width:470px;" })
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Auditor Name:</label>
+                                        <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.Auditor, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.Auditor, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Auditor Date:</label>
-                                        <input type="date" id="AuditDate" name="AuditDate" value="" class="form-control" style="width:470px;"/>
-                                        @Html.TextBoxFor(model => model.AuditDate, new {@class = "form-control", @style = "width:470px;", disabled = true })
+                                        </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Auditor Date:</label>
+                                        <div class="col-sm-4">
+                                        <input type="date" id="AuditDate" name="AuditDate" value="" class="form-control" />
+                                        @Html.TextBoxFor(model => model.AuditDate, new {@class = "form-control", disabled = true })
                                         @Html.ValidationMessageFor(model => model.AuditDate, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Calibration  Details:</label>
-                                        @Html.TextBoxFor(model => model.AuditObservations, new { @class = "form-control", @style = "width:470px;" })
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Calibration  Details:</label>
+                                        <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.AuditObservations, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.AuditObservations, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Action Taken:</label>
-                                        @Html.TextBoxFor(model => model.ActionTaken, new { @class = "form-control", @style = "width:470px;" })
+                                        </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Action Taken:</label>
+                                        <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.ActionTaken, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.ActionTaken, "", new { @class = "text-danger" })
-                                    </div>
+                                        </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Calibrator Name:</label>
-                                        @Html.TextBoxFor(model => model.CalibratorName, new { @class = "form-control",@style = "width:470px;" })
+                                 <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Calibrator Name:</label>
+                                        <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.CalibratorName, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.CalibratorName, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Completion Status:</label>
+                                         </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Completion Status:</label>
+                                        <div class="col-sm-4">
                                         @Html.DropDownListFor(model => model.CompletionStatus, (SelectList)ViewBag.MaintainanceListViewBag, "Select Completion Status...", new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.CompletionStatus)
-                                    </div>
+                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-6" style="margin-left:450px;">
-                                    <div class="form-group">
-                                        <input type="submit" value="Submit" class="btn btn-primary" id="buttonSave" name="buttonSave" style="background-color:mediumblue;color:white;" />
-
-                                    </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                        <input type="submit" value="Submit" class="btn btn-info btn-sm" id="buttonSave" name="buttonSave" style="float:right" />
                                 </div>
                             </div>
                         </section>
                     }
                 </div>
                 <!-- Default Basic Forms Start -->
-                <div class="pd-20 card-box mb-30">
-
-                    <!-- Simple Datatable start -->
-                    <div class="card-box mb-30">
-                        <div class="pd-20">
+               
+                     <div class="clearfix">
+                        <div class="pull-left">
                             <h4 class="text-blue h4">Calibration List</h4>
-                            <p class="mb-0"><a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
                         </div>
+                      </div>
                         <div class="pb-20">
                             <table class="data-table table stripe hover nowrap" id="myTable">
                                 <thead>
-                                    <tr>
+                                    <tr class="thead-dark">
                                         <th class="table-plus datatable-nosort">Sr No</th>
                                         <th>PROPOSED DATE</th>
                                         <th>ACTUAL DATE</th>
@@ -232,8 +201,7 @@
             </div>
             <!-- success Popup html End -->
         </div>
-    </div>
-</div>
+    
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/InventoryMaintainanceAndCalibration")
 <script type="text/javascript">

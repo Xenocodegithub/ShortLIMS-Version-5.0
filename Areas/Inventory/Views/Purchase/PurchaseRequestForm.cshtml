@@ -8,7 +8,7 @@
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px" id="divAddPurchase">
             @{ Html.RenderAction("_PurchaseRequestFormList", "Purchase");}
-        </div>
+        
         @using (Ajax.BeginForm("PurchaseRequestForm", "Purchase", new AjaxOptions() { HttpMethod = "Post", OnBegin = "VlidateClick()", OnSuccess = "PurchaseRequestSuccess" }))
         {
 
@@ -18,30 +18,25 @@
             @Html.HiddenFor(model => model.PurchaseRequestID)
             @Html.HiddenFor(model => model.PurchaseMasterID)
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card-box table-responsive">
-                        <p class="text-muted font-13 m-b-30">
-                        </p>
-                        <div id="divList">
-                            @{ Html.RenderAction("_PurchaseList", "Purchase");}
-                        </div>
-                    </div>
+            <div class="pb-20">
+                <div id="divList">
+                    @{ Html.RenderAction("_PurchaseList", "Purchase");}
                 </div>
             </div>
-            <hr style="color:darkmagenta;" />
-            <div class="row d-flex justify-content-center">
+            <div style="margin-bottom:20px">
                 @if (Model.PurchaseRequestID == 0)
                 {
-                    <button type="submit" id="btnSubmit" class="btn btn-outline-primary primary" name="Save" value="PurchaseSubmit">Create</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-info btn-sm" name="Save" value="PurchaseSubmit" style="float:right">Create</button>
                 }
                 else
                 {
-                    <button type="submit" id="btnUpdate" class="btn btn-outline-primary" name="Save" value="PurchaseUpdate">Update</button>
+                    <button type="submit" id="btnUpdate" class="btn btn-primary btn-sm" name="Save" value="PurchaseUpdate" style="float:right">Update</button>
                 }
             </div>
         }
     </div>
+
+</div>
 </div>
 <script>
     function VlidateClick() {

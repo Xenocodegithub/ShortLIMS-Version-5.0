@@ -23,13 +23,13 @@
 
                 </div>
             </div>
-            <div class="page-header card text-white bg-dark card-box">
+            <div class="page-header card text-black bg-light card-box">
                 <div class="card-header">Consumable Item Report</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                @Html.Label("Catagory Name")
+                                @Html.Label("Catagory Name:")
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -39,22 +39,23 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="button" value="Print" class="btn btn-primary" id="buttonPrint" name="buttonSearch" />
+                                <input type="button" value="Print" class="btn btn-success btn-sm" id="buttonPrint" name="buttonSearch" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Simple Datatable start -->
-            <div class="card-box mb-30">
-                <div class="pd-20">
-                    <h4 class="text-blue h4">Consumable List</h4>
-                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4"> Consumable List</h4>
+                    </div>
                 </div>
                 <div class="pb-20">
                     <table class="data-table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">Sr No</th>
                                 <th>Inventory Number</th>
                                 <th>Item Name</th>
@@ -80,7 +81,7 @@
                                         <td>@item.Unit</td>
                                         <td>
                                             <div class="btn-list">
-                                                <a href="@Url.Action("Index","Inventory",new { @TypeID=item.TypeID,@ID=item.ID,@PurchaseRequestID=item.PurchaseRequestID,@InventoryBasicDetailsID=item.InventoryBasicDetailsID,@TotalQuantity=item.TotalQuantity,@ItemID=item.ItemID })" title="NewBill" id="rowedit_@SerialNumber" operation="NewBill" class="btn btn-primary">
+                                                <a href="@Url.Action("Index","Inventory",new { @TypeID=item.TypeID,@ID=item.ID,@PurchaseRequestID=item.PurchaseRequestID,@InventoryBasicDetailsID=item.InventoryBasicDetailsID,@TotalQuantity=item.TotalQuantity,@ItemID=item.ItemID })" title="NewBill" id="rowedit_@SerialNumber" operation="NewBill" class="btn btn-info btn-sm">
                                                     New Bill
                                                 </a>
                                             </div>
@@ -134,5 +135,13 @@
             }
 
         }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
     });
 </script>

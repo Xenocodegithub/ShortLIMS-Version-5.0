@@ -34,24 +34,24 @@
                 <div class="body-content">
                     <div class="row">
                         <div class="col-sm-4 form-group">
-                            @Html.LabelFor(model => model.EnquiryId, "EnquiryId", htmlAttributes: new { @class = "col-form-label" })
-                                <div class="col-sm-4"style="padding-left:10px">
-                                    @Model.EnquiryId
-                                </div>
-                            </div>
-                            <div class="col-sm-4 form-group">
-                                @Html.LabelFor(model => model.CustomerTypeName, htmlAttributes: new { @class = "col-form-label" })
-                                <div class="col-sm-4" style="padding-left:15px">
-                                    @Model.CustomerTypeName
-                                </div>
-                            </div>
-                            <div class="col-sm-4 form-group">
-                                @Html.LabelFor(model => model.EnquiryOn, htmlAttributes: new { @class = "col-form-label" })
-                                <div class="col-sm-5" style="padding-left:15px">
-                                    @Model.EnquiryOn.ToString("dd/MM/yyyy")
-                                </div>
-                            </div>
+                            @Html.LabelFor(model => model.EnquiryId, "Enquiry Id:", htmlAttributes: new { @class = "col-form-label" })
+                            @*<div class="col-sm-4"style="padding-left:10px">*@
+                            &emsp; @Model.EnquiryId
+                            @*</div>*@
                         </div>
+                        <div class="col-sm-4 form-group">
+                            @Html.LabelFor(model => model.CustomerTypeName, "Customer Type Name:", htmlAttributes: new { @class = "col-form-label" })
+                            @*<div class="col-sm-4" style="padding-left:15px">*@
+                            &emsp; @Model.CustomerTypeName
+                            @*</div>*@
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            @Html.LabelFor(model => model.EnquiryOn, "Enquiry On:", htmlAttributes: new { @class = "col-form-label" })
+                            @*<div class="col-sm-5" style="padding-left:15px">*@
+                            &emsp;  @Model.EnquiryOn.ToString("dd/MM/yyyy")
+                            @*</div>*@
+                        </div>
+                    </div>
                     <hr />
 
                     <div id="divSampleList">
@@ -61,12 +61,12 @@
                         }
                     </div>
                     <hr />
-                      <div id="divCosting">
+                    <div id="divCosting">
                         <!--This call to Partial View should be removed and the _SampleList in SampleAndParameters should be used .Please make necessary changes.Remove Partial View also from Costing Folder-->
                         @{
                             Html.RenderAction("_Costing", "Costing");
-                         }
-                      </div>
+                        }
+                    </div>
                     <hr />
                     <div class="class-md-6">
                         @using (Ajax.BeginForm("AddCosting", "Costing", new AjaxOptions() { HttpMethod = "Post", OnBegin = "NextPage", OnSuccess = "CostingSuccess" }))
@@ -84,18 +84,18 @@
                                     @Model.TermsList[i].TermAndCondt
                                 </div>
                             }
-                       
-                        <hr/>
+
+                            <hr />
                             <div class="col-md-12">
-                                @Html.LabelFor(model => model.Remarks , htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                                 @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control col-md-3" })
                             </div>
-                          
+
                             <hr />
-                            <div class="align-items-end item form-group" style="margin-top:20px">
+                            <div class="form-group row">
                                 <div class="col-md-12 col-sm-12">
-                                    <a href="~/Enquiry/SampleAndParameter/SampleAndParameter?EnquiryId=@ViewBag.EnquiryId" class="btn btn-danger alignleft" data-toggle="tooltip" data-placement="top" title="">Back</a>
-                                    <button type="submit" class="btn btn-success alignright" id="btnSave"  value="Save">Save</button>
+                                    <a href="~/Enquiry/SampleAndParameter/SampleAndParameter?EnquiryId=@ViewBag.EnquiryId" class="btn btn-danger alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Back</a>
+                                    <button type="submit" class="btn btn-info btn-sm" id="btnSave" value="Save" style="float:right">Save</button>
                                 </div>
                             </div>
                         }

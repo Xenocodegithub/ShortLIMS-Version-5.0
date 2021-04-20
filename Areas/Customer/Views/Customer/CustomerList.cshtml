@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 text-right">
                         <div class="dropdown">
-                            <a class="btn btn-info" href="#" role="button">
+                            <a class="btn btn-info btb-sm" href="#" role="button">
                                 Add Customer
                             </a>
                         </div>
@@ -30,15 +30,16 @@
                 </div>
             </div>
             <!-- Simple Datatable start -->
-            <div class="card-box mb-30">
-                <div class="pd-20">
-                    <h4 class="text-blue h4">Customer List</h4>
-                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Customer List</h4>
+                    </div>
                 </div>
                 <div class="pb-20">
-                    <table class="data-table table nowrap">
+                    <table  id="dtHorizontalExample" class="table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">Sr.No.</th>
                                 <th>Customer Name</th>
                                 <th>Contact Person Name</th>
@@ -55,33 +56,33 @@
                                 foreach (var item in Model)
                                 {
                                     <tr>
-                                <td class="table-plus">@{rowNo++;}@rowNo</td>
-                                <td>@item.RegistrationName</td>
-                                <td>@item.ContactPersonName</td>
-                                <td>@item.ContactMobileNo</td>
-                                <td>@item.Address1,@item.CityName,@item.StateName,@item.CountryName</td>
-                                <td style="align-items:center">
-                                    @if (item.IsActive == true)
-                                    {
-                                        <i class="icon-copy fa fa-check" style="color:green" aria-hidden="true"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="icon-copy fa fa-close" style="color:red" aria-hidden="true"></i>
-                                    }
-                                </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="@Url.Action("AddCustomer","Customer",new {CustomerMasterId=item.CustomerMasterId })"><i class="dw dw-edit2"></i> Edit</a>
-                                            <a class="dropdown-item" href="#" onclick="Delete(@item.CustomerMasterId);"><i class="dw dw-delete-3"></i>Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                        <td class="table-plus">@{rowNo++;}@rowNo</td>
+                                        <td>@item.RegistrationName</td>
+                                        <td>@item.ContactPersonName</td>
+                                        <td>@item.ContactMobileNo</td>
+                                        <td>@item.Address1,@item.CityName,@item.StateName,@item.CountryName</td>
+                                        <td style="align-items:center">
+                                            @if (item.IsActive == true)
+                                            {
+                                                <i class="icon-copy fa fa-check" style="color:green" aria-hidden="true"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="icon-copy fa fa-close" style="color:red" aria-hidden="true"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                    <i class="dw dw-more"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                    <a class="dropdown-item" href="@Url.Action("AddCustomer","Customer",new {CustomerMasterId=item.CustomerMasterId })"><i class="dw dw-edit2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" onclick="Delete(@item.CustomerMasterId);"><i class="dw dw-delete-3"></i>Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -123,6 +124,14 @@
             }
         })
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>
 
 

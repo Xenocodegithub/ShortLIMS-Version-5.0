@@ -11,10 +11,10 @@
         @Html.HiddenFor(model => model.LocationSampleCollectionID)
         @Html.HiddenFor(model => model.WorkOrderSampleCollectionDateId)
 
-        <div class="row">
+       
             <div class="form-group row">
                 @Html.LabelFor(model => model.SampleCollectionId, htmlAttributes: new { @class = "form-label col-md-6" })
-                <div class="col-md-6"style="text-align:center">
+                <div class="col-md-6">
                     @Html.DisplayFor(model => model.SampleCollectionId)
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class=" col-md-12"style="text-align:center;margin:auto">
                     <input type="submit" value="Submit" id="btnSubmit" class="btn btn-info"  />
                 </div>
-        </div>
+       
     </div>
 
 }

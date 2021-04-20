@@ -23,54 +23,48 @@
 
                 </div>
             </div>
-            <div class="page-header card text-white bg-dark card-box">
-                <div class="card-header">Laboratory Instrument Report</div>
+            <div class="page-header card text-black bg-light card-box" style="margin-top:-19px;">
+                <div class="card-header text-blue">Laboratory Instrument Report</div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="col-sm-6">
-                                    <label>Calibration Schedule Report</label>
-                                </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>Calibration Schedule Report</label>
                             </div>
-                            <div class="col-md-6" style="border-left:3px solid green">
-                                <div class="col-sm-5">
-                                    <input class="form-control" id="StartDate" placeholder="StartDate..." type="date" />
-                                </div>
-                                <div class="col-sm-1">
-                                    <label> TO </label>
-                                </div>
-                                <div class="col-sm-5">
-                                    <input class="form-control" id="EndDate" placeholder="EndDate..." type="date" />
-                                </div>
-                                <div class="col-sm-1">
-                                    <input type="button" value="Print" class="btn btn-primary" id="buttonPrint" name="buttonPrint" />
-                                </div>
+
+                            <div class="col-md-3" style="border-left:3px solid green">
+                                <label> from Date: </label>
+                                <input class="form-control" id="StartDate" placeholder="StartDate..." type="date" />
+
                             </div>
+                            <div class="col-sm-3">
+                                <label> To Date: </label>
+                                <input class="form-control" id="EndDate" placeholder="EndDate..." type="date" />
+                            </div>
+                            <div class="col-sm-3" style="margin-top:25px;">
+                                <input type="button" value="Print" class="btn btn-info btn-sm" id="buttonPrint" name="buttonPrint" />
+                            </div>
+
                         </div>
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="col-sm-12">
-                                    <label>Glassware Calibration Schedule Report</label>
+                    </div> <hr />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <lable>Glassware Calibration Schedule Report</lable>
+                            </div>
+
+                            <div class="col-md-3" style="border-left:3px solid green;">
+                                <div class="form-group">
+                                    @Html.Label("Catagory Name")
+                                    @Html.DropDownList("CatagoryId1", new SelectList(ViewBag.InvCategoryList, "CatagoryMasterID", "CategoryName"), "Select Item..", new { @class = "form-control class-md-4" })
                                 </div>
                             </div>
-                            <div class="col-md-6" style="border-left:3px solid green">
-                                <div class="col-md-4" style="margin-top:5px">
-                                    <div class="form-group">
-                                        @Html.Label("Catagory Name")
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        @Html.DropDownList("CatagoryId1", new SelectList(ViewBag.InvCategoryList, "CatagoryMasterID", "CategoryName"), "Select Item..", new { @class = "form-control " })
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <input type="button" value="Print" class="btn btn-primary" id="buttonPrint2" style="float:right" name="buttonSearch" />
-                                    </div>
+                            <div class="col-md-2">
+                                <div class="form-group" style="margin-top:25px;">
+                                    <input type="button" value="Print" class="btn btn-info btn-sm" id="buttonPrint2" name="buttonSearch" />
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -82,12 +76,11 @@
                 <div class="card-box mb-30">
                     <div class="pd-20">
                         <h4 class="text-blue h4">Calibration List</h4>
-                        <p class="mb-0"><a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
                     </div>
                     <div class="pb-20">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
-                                <tr>
+                                <tr class="thead-dark">
                                     <th class="table-plus datatable-nosort">Sr No</th>
                                     <th>Category Name</th>
                                     <th>Item Name</th>
@@ -133,7 +126,7 @@
                                         }
                                         else
                                         {
-                                            <tr style="background-color: cadetblue ; color: black;">
+                                            <tr>
                                                 <td>@SerialNumber</td>
                                                 <td>@item.CategoryName</td>
                                                 <td>@item.ItemName</td>

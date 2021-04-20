@@ -7,374 +7,405 @@
 @*@Html.Hidden("SampleRecievedDateHidden1", (object)@Model.DateReceiptOfSampling))*@
 @Html.Hidden("SampleRecievedDateHidden", (object)@Convert.ToDateTime(Model.DateReceiptOfSampling).ToString("yyyy-MM-dd"))
 <div class="main-container">
-
     <div class="pd-ltr-20 xs-pd-20-10">
-        <div class="content-wrap">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="nest" id="validationClose">
-                        <div class="title-alt">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="title-alt" id="validationClose">
                             <h6>
                                 Tester
                             </h6>
-                        </div> <hr/>
-                        <div class="body-nest" id="validation">
-                            <div class="form_left">
-                                @*@if (Model.ReviewerComment != "")
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Lab</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Tester</li>
+                                <li class="breadcrumb-item active" aria-current="page">Tester</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30" style="margin-top:-19px">
+                <div class="body-nest" id="validation">
+                    @*@if (Model.ReviewerComment != "")
                                 {
-                                    <div class="alert alert-warning">
-                                        <span class="reviewerComment" id="reviewerComment">
-                                            <strong> Reviewer Comment :@Model.ReviewerComment </strong>
-                                        </span>
-                                    </div>
-                                }*@
+                         <div class="alert alert-warning">
+                             <span class="reviewerComment" id="reviewerComment">
+                                 <strong> Reviewer Comment :@Model.ReviewerComment </strong>
+                             </span>
+                         </div>
+                        }*@
+                    <br />
+                    @if (Model.ApproverComment != "")
+                    {
+                        <div class="alert alert-warning">
+                            <span class="approverComment" id="approverComment">
+                                <strong> Approver Comment :@Model.ApproverComment </strong>
+                            </span>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="blog-side-nest">
+                                <h4 class="text-left">Sample Details</h4>
+                                <hr style="margin:0">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td width="5%">Sample ID</td>
+                                            <td width="5%"><b>:</b></td>
+                                            <td width="20%">
+                                                @Html.HiddenFor(model => Model.SampleCollectionId)
+                                                @Html.HiddenFor(model => Model.ParameterGroupId)
+                                                @Html.HiddenFor(model => Model.ParameterMasterId)
+                                                @Html.HiddenFor(model => Model.UnitId)
+                                                @Html.HiddenFor(model => Model.TestMethodId)
+                                                @Html.HiddenFor(model => Model.UnitName)
+                                                @Html.Hidden("AnalysisProcessScheduleDetailId")
+                                                @Model.SampleName
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sample Type</td>
+                                            <td><b>:</b></td>
+                                            <td> @Model.SampleTypeProductName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Product Group</td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.ProductGroupName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sub Group</td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.SubGroupName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Matrix</td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.MatrixName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tester</td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.Analyst</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Reviewer</td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.Reviewer</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Approver </td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.Approver</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parameters </td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.ParameterName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Test Method</td>
+                                            <td><b>:</b></td>
+                                            <td>@Model.TestMethodName</td>
+                                        </tr>
+                                        <tr>
+                                            <td> Sample Received Date</td>
+                                            <td><b>:</b></td>
+                                            <td>@recieptDate</td>
+                                            @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-left">Upload Documents :</h4>
+                            <hr style="margin-bottom:20px;">
+                            <form id="uploader">
+                                <div class="upload">
+                                    <input class="col-md-8" id="fileInput" type="file" multiple> <br />
+                                    <input type="button" id="btnupload" class="btn btn-success btn-sm uploadButton col-md-3" value="Upload" style="margin-left: 30px; margin-top: 20px;" />
+                                </div>
                                 <br />
-                                @if (Model.ApproverComment != "")
+                                <hr />
+                                <table class="table" id="FilesList" style="visibility:hidden">
+                                    <tr>
+                                        <th>
+                                            Attachment(s)
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="blog-side-nest">
+                                <h4 class="text-left">Tester Process Scheduler</h4>
+                                <hr style="margin:0"><br />
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="control-label " for="inputEmail1">Testing Start Date  <span class="required" style="color:red">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div>
+                                                <input type="date" id="txtAnalysisStartDatetime" name="txtAnalysisStartDatetime" placeholder="dd-MM-yyyy" onchange="ValidateDate();" style="color:black" class="form-control dtSolutionPrep" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label " for="inputEmail1">Testing End Date  <span class="required" style="color:red">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div>
+                                                <input type="date" id="txtAnalysisEndDatetime" name="txtAnalysisEndDatetime" placeholder="dd/MM/yyyy" onchange="ValidateDate();" style="color:black" class="form-control dtSolutionPrep" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div><br />
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="label-texts">Total Time(Hrs)</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" style="color:black" class="form-control" id="txtTotalDuration">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="label-texts">Quality Control Measures</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" style="color:black" class="form-control" id="txtQualityControl">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (Model.MatrixName == "Stack Emission")
                                 {
-                                    <div class="alert alert-warning">
-                                        <span class="approverComment" id="approverComment">
-                                            <strong> Approver Comment :@Model.ApproverComment </strong>
-                                        </span>
+                                    <div>
+                                        @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FDStackEmissionId = Model.FDStackEmissionId }, null)
                                     </div>
                                 }
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="blog-side-nest">
-                                            <h4 class="text-left">Sample Details</h4>
-                                            <hr style="margin:0">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td width="5%">Sample ID</td>
-                                                        <td width="5%"><b>:</b></td>
-                                                        <td width="20%">
-                                                            @Html.HiddenFor(model => Model.SampleCollectionId)
-                                                            @Html.HiddenFor(model => Model.ParameterGroupId)
-                                                            @Html.HiddenFor(model => Model.ParameterMasterId)
-                                                            @Html.HiddenFor(model => Model.UnitId)
-                                                            @Html.HiddenFor(model => Model.TestMethodId)
-                                                            @Html.HiddenFor(model => Model.UnitName)
-                                                            @Html.Hidden("AnalysisProcessScheduleDetailId")
-                                                            @Model.SampleNameOriginal
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Sample Type</td>
-                                                        <td><b>:</b></td>
-                                                        <td> @Model.SampleTypeProductName</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Product Group</td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.ProductGroupName</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Sub Group</td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.SubGroupName</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Matrix</td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.MatrixName</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tester</td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.Analyst</td>
-                                                    </tr>
-                                                    @*<tr>
-                                                        <td>Reviewer</td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.Reviewer</td>
-                                                    </tr>*@
-                                                    <tr>
-                                                        <td>Approver </td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.Approver</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Parameters </td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.ParameterName</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Test Method</td>
-                                                        <td><b>:</b></td>
-                                                        <td>@Model.TestMethodName</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3"> Sample Received Date : @recieptDate</td>
-                                                        @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <hr>
-                                        </div>
+                                else if (Model.MatrixName == "Ambient Air")
+                                {
+                                    <div>
+                                        @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FieldId = Model.FieldId }, null)
                                     </div>
-                                    <div class="col-md-4">
-                                        <h4 class="text-left">Upload Documents :</h4>
-                                        <hr style="margin-bottom:20px;">
-                                        <form id="uploader">
-                                            <div class="upload">
-                                                <input class="col-md-8" id="fileInput" type="file" multiple> <br/>
-                                                <input type="button" id="btnupload" class="btn btn-success uploadButton col-md-3" value="Upload" style="margin-left: 30px; margin-top: 20px;" />
-                                            </div>
-                                            <br />
-                                            <hr />
-                                            <table class="table" id="FilesList" style="visibility:hidden">
-                                                <tr>
-                                                    <th>
-                                                        Attachment(s)
-                                                    </th>
-                                                    <th>
-                                                        Action
-                                                    </th>
-                                                </tr>
-                                            </table>
-                                        </form>
-                                    </div>
+                                }
+                                <div class="col-sm-4">
+                                    <img src="~/Content/images/@Model.QRCodePath" style="height:180px;width:180px;" />
                                 </div>
+                                <hr>
+                            </div>
+                        </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="blog-side-nest">
-                                            <h4 class="text-left">Tester Process Scheduler</h4>
-                                            <hr style="margin:0"><br />
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label class="control-label " for="inputEmail1">Testing Start Date  <span class="required" style="color:red">*</span></label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div>
-                                                            <input type="date" id="txtAnalysisStartDatetime" name="txtAnalysisStartDatetime" placeholder="dd-MM-yyyy" onchange="ValidateDate();" style="color:black" class="form-control dtSolutionPrep" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <label class="control-label " for="inputEmail1">Testing End Date  <span class="required" style="color:red">*</span></label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div>
-                                                            <input type="date" id="txtAnalysisEndDatetime" name="txtAnalysisEndDatetime" placeholder="dd/MM/yyyy" onchange="ValidateDate();" style="color:black" class="form-control dtSolutionPrep" />
-                                                        </div>
-                                                    </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <div class="form-horizontal">
+                                <table class="table td-center" id="tblSolPreparation">
+                                    <thead>
+                                        <tr class="reco-solu thead-dark">
+
+                                            <th class="width-20">
+                                                Date of preparation
+                                            </th>
+
+                                            <th class="width-20">
+                                                Name of solution
+                                            </th>
+                                            <th class="width-20">
+                                                Quantity of solution prepared
+                                            </th>
+                                            <th>
+                                                Add Chemicals
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="inputRow">
+                                            <td>
+                                                <div id="">
+                                                    <input type="date" id="txtdtPreparation" name="txtdtPreparation" placeholder="dd/MM/yyyy" style="color:black" class="form-control dtSolutionPrep" />
                                                 </div>
-                                            </div>
-                                            <div class="clearfix"></div><br />
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label class="label-texts">Total Time(Hrs)</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="text" style="color:black" class="form-control" id="txtTotalDuration">
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <label class="label-texts">Quality Control Measures</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="text" style="color:black" class="form-control" id="txtQualityControl">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="color:black" class="form-control" id="txtNameOfSolution" />
+                                            </td>
+                                            <td>
+                                                <input type="text" style="color:black" class="form-control" id="txtQtyOfSolutionPrepared" />
+                                            </td>
+                                            <td>
+                                                <input type="button" id="ShowPopup" class="btn btn-info btn-sm" value="Add Chemicals">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row" style="border: solid 2px black; border-radius: 5px; margin-left: 15px; margin-right: 15px; padding-top: 18px;width:98%;">
+                            <div class="col-md-2">
+                                <span style="margin-left:0px;">Select Testing Hours:</span>
+                            </div>
+                            <div class="col-md-4">
+                                <select id="SelectTestingHours" class="form-control" onchange="ButtonsControl();">
+                                    <option value="0" disabled selected>Select Testing Methods</option>
+                                    <option value="1">1 Hour Testing (Minimum 8 Tests)</option>
+                                    <option value="4">4 Hour Testing</option>
+                                    <option value="8">8 Hour Testing</option>
+                                    <option value="24">24 Hour Testing</option>
+                                </select>
+                                <br />
+                            </div>
+                            <div class="col-md-6">
+                                <label><input type="checkbox" id="chkTesthr" class="checkbox" value="Select Minimum Testing Hours" />  Select Minimum Testing Hours</label>
 
-                                            @if (Model.MatrixName == "Stack Emission")
-                                            {
-                                                <div>
-                                                    @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FDStackEmissionId = Model.FDStackEmissionId }, null)
-                                                </div>
-                                            }
-                                            else if (Model.MatrixName == "Ambient Air")
-                                            {
-                                                <div>
-                                                    @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FieldId = Model.FieldId }, null)
-                                                </div>
-                                            }
-                                            <div class="col-sm-4">
-                                                <img src="~/Content/images/@Model.QRCodePath" style="height:180px;width:180px;" />
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
+                            </div>
 
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-12">
-                                        <div class="form-horizontal">
-                                            <table class="table td-center" id="tblSolPreparation">
-                                                <thead>
-                                                    <tr class="reco-solu thead-dark">
-
-                                                        <th class="width-20">
-                                                            Date of preparation
-                                                        </th>
-
-                                                        <th class="width-20">
-                                                            Name of solution
-                                                        </th>
-                                                        <th class="width-20">
-                                                            Quantity of solution prepared
-                                                        </th>
-                                                        <th>
-                                                            Add Chemicals
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr id="inputRow">
-                                                        <td>
-                                                            <div id="">
-                                                                <input type="date" id="txtdtPreparation" name="txtdtPreparation" placeholder="dd/MM/yyyy" style="color:black" class="form-control dtSolutionPrep" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" style="color:black" class="form-control" id="txtNameOfSolution" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" style="color:black" class="form-control" id="txtQtyOfSolutionPrepared" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="button" id="ShowPopup" class="btn btn-info btn-sm" value="Add Chemicals">
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="row" style="border: solid 2px black; border-radius: 5px; margin-left: 15px; margin-right: 15px; padding-top: 18px;width:98%;">
-                                        <div class="col-md-2">
-                                            <span style="margin-left:0px;">Select Testing Hours:</span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <select id="SelectTestingHours" class="form-control" onchange="ButtonsControl();">
-                                                <option value="0" disabled selected>Select Testing Methods</option>
-                                                <option value="1">1 Hour Testing (Minimum 8 Tests)</option>
-                                                <option value="4">4 Hour Testing</option>
-                                                <option value="8">8 Hour Testing</option>
-                                                <option value="24">24 Hour Testing</option>
-                                            </select>
-                                            <br />
-                                        </div>
-                                        <div class="col-md-6">
-                                           <label><input type="checkbox" id="chkTesthr" class="checkbox" value="Select Minimum Testing Hours" />  Select Minimum Testing Hours</label>
-                                           
-                                        </div>
-
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="col-sm-12" style="margin-top:20px">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="textLabels"><b>LOD</b>&nbsp;:&nbsp; <span> @Model.LOD</span></label> <span class="dash-line"></span>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label class="textLabels"><b>Regulatory Standards</b>&nbsp;:&nbsp; <span>@Model.RegulatoryMin - @Model.RegulatoryMax</span></label><span class="dash-line"></span>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label class="textLabels"><b>Permissible limits</b>&nbsp;:&nbsp; <span> @Model.PermissibleMin - @Model.PermissibleMax</span></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 filed-div">
-                                        <table id="tblFormula" class="demo table table-bordered" style="text-align:center">
-                                            <colgroup>
-                                                <col style="width: 10%;">
-                                                <col style="width: 10%;">
-                                                <col style="width: 10%;">
-                                                <col style="width: 35%;">
-                                                <col style="width: 20%;">
-                                            </colgroup>
-                                            <tbody>
-                                                <tr>
-                                                    <th>Sr. No.</th>
-                                                    <th>Notation</th>
-                                                    <th>Display Name</th>
-                                                    <th>Formula</th>
-                                                    <th>Value</th>
-                                                    <th>Unit</th>
-                                                </tr>
-                                                <tr style="background: #e8e8e8;">
-                                                    <td colspan="4" style="text-align: right;font-weight: 600;font-size: 14px; ">Current Test Result</td>
-
-                                                    <td><input type="text" style="color:black " class="allowNumbersWithDecimalOnly" id="txtFinalResult"></td>
-                                                    <td style="color:black;display:none;">
-                                                        <select id="UnitConvert" disabled style="color:black">
-                                                        </select> 
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-12" style="margin-top:20px">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label class="textLabels"><b>LOD</b>&nbsp;:&nbsp; <span> @Model.LOD</span></label> <span class="dash-line"></span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 " style="margin-top:20px">
-                                        <input id="btnCalculate" type="submit" value="Calculate" class="btn btn-sm btn-info" style="text-align:center;margin:auto">
-                                    </div>
+                                <div class="col-sm-4">
+                                    <label class="textLabels"><b>Regulatory Standards</b>&nbsp;:&nbsp; <span>@Model.RegulatoryMin - @Model.RegulatoryMax</span></label><span class="dash-line"></span>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table style="border-collapse:collapse" border="1" align="center" class="table">
-                                            <thead>
-                                                <tr class="thead-dark">
-                                                    <th class="col-md-2">
-                                                        Sr. No.
-                                                    </th>
-                                                    <th class="col-md-4">
-                                                        Name Of Test
-                                                    </th>
-                                                    <th class="col-md-4">
-                                                        Result
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <table style="border-collapse:collapse" border="1" align="center" class="table" id="tblAvrgResult">
-                                            <tbody>
-                                                <tr id="inputAvrgResultRow">
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <table>
-                                            <tr style="background: #e8e8e8;">
-                                                <td colspan="4" style="text-align: right;font-weight: 600;">Final Result</td>
-                                                <td><input type="text" style="color:black " class="allowNumbersWithDecimalOnly" id="txtAverageFinalResult"></td>
-                                                <td style="color:black">
-                                                    <select id="UnitConvert" disabled style="color:black">
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="col-md-12" style="text-align:right;margin-top:20px;margin-bottom:20px">
-                                        @*<input type="button" id="btnSave" value="Save" class="btn btn-sm btn-primary" />*@
-                                        <input type="button" id="btnSubmit" value="Forward to Approver" class="btn btn-sm btn-info" />
-                                        <input type="button" value="Close" id="btnclose" class="btn btn-Colse btn-danger" onclick="location.href='@Url.Action("ParameterList", "Analyse")'">
-                                    </div>
+                                <div class="col-sm-4">
+                                    <label class="textLabels"><b>Permissible limits</b>&nbsp;:&nbsp; <span> @Model.PermissibleMin - @Model.PermissibleMax</span></label>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 filed-div">
+                            <table id="tblFormula" class="demo table table-bordered" style="text-align:center">
+                                <colgroup>
+                                    <col style="width: 10%;">
+                                    <col style="width: 10%;">
+                                    <col style="width: 10%;">
+                                    <col style="width: 35%;">
+                                    <col style="width: 20%;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Notation</th>
+                                        <th>Display Name</th>
+                                        <th>Formula</th>
+                                        <th>Value</th>
+                                        <th>Unit</th>
+                                    </tr>
+                                    <tr style="background: #e8e8e8;">
+                                        <td colspan="4" style="text-align: right;font-weight: 600;font-size: 14px; ">Current Test Result</td>
+
+                                        <td><input type="text" style="color:black " class="allowNumbersWithDecimalOnly" id="txtFinalResult"></td>
+                                        <td style="color:black;display:none;">
+                                            <select id="UnitConvert" disabled style="color:black">
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 " style="margin-top:20px">
+                            <input id="btnCalculate" type="submit" value="Calculate" class="btn btn-sm btn-info" style="text-align:center;margin:auto">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <table style="border-collapse:collapse" border="1" align="center" class="table">
+                                <thead>
+                                    <tr class="thead-dark">
+                                        <th>
+                                            Sr. No.
+                                        </th>
+                                        <th>
+                                            Name Of Test
+                                        </th>
+                                        <th>
+                                            Result
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="col-md-12">
+                            <table style="border-collapse:collapse" border="1" align="center" class="table" id="tblAvrgResult">
+                                <tbody>
+                                    <tr id="inputAvrgResultRow">
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        @*<table class="table table-bordered" style="border-collapse:collapse" border="1" align="center"   id="tblAvrgResult">
+                                <thead>
+                                    <tr class="thead-dark">
+                                        <th>
+                                            Sr. No.
+                                        </th>
+                                        <th>
+                                            Name Of Test
+                                        </th>
+                                        <th>
+                                            Result
+                                        </th>
+                                    </tr>
+                                    <tr id="inputAvrgResultRow">
+                                    </tr>
+                                </thead>
+                            </table>*@
+                    </div>
+                    @*<div class="col-md-12">
+                            <table style="border-collapse:collapse" border="1" align="center" class="table">
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>*@
+
+                    <div class="col-md-12">
+                        <table>
+                            <tr style="background: #e8e8e8;">
+                                <td colspan="4" style="text-align: right;font-weight: 600;">Final Result</td>
+                                <td><input type="text" style="color:black " class="allowNumbersWithDecimalOnly" id="txtAverageFinalResult"></td>
+                                <td style="color:black">
+                                    <select id="UnitConvert" disabled style="color:black">
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12" style="text-align:right;margin-top:20px;margin-bottom:20px">
+                        @*<input type="button" id="btnSave" value="Save" class="btn btn-sm btn-primary" />*@
+                        <input type="button" id="btnSubmit" value="Forward to Reviewer" class="btn btn-sm btn-info" />
+                        <input type="button" value="Close" id="btnclose" class="btn btn-Colse btn-sm btn-danger" onclick="location.href='@Url.Action("ParameterList", "Analyse")'">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="ChemicalsPopup" tabindex="-1" class="modal" style="display:none">
-    <div class="modal-dialog modal-lg modal-dialog-centered" style="width:100%">
+<div id="ChemicalsPopup" class="modal">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <!-- Modal content -->
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color: steelblue;height: 42px;">
                 @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
-                <h4 style="text-align:center;">Add Chemical Details</h4>
-                <a class="Closeup" href="/Lab/Tester/Tester?ParameterMasterId=@Model.ParameterMasterId&SampleId=@Model.SampleCollectionId"><span class="close CPopup">&times;</span></a>
+                <h4 style="text-align:center;color:white;font-weight:bold;">Add Chemical Details</h4>
+                <a class="Closeup" href="/Lab/Tester/Tester?ParameterMasterId=@Model.ParameterMasterId&SampleId=@Model.SampleCollectionId"><span class="close CPopup" style="color:white;">&times;</span></a>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="dtPre" />
@@ -384,51 +415,56 @@
                 <input type="hidden" id="SampleCollectionId" />
                 <input type="hidden" id="ParameterGroupId" />
                 <div id="divChemicals" style="border:none" class="row">
-                    <div class="col-md-12" >
-                        <div class="col-md-4">
-                               <label> Name of chemical </label>
-                                <input type="text" id="txtNameofChemicalUse" />
-                        </div>
-                        <div class="col-md-4">
-                                <label> Quantity of chemical </label>
-                                <input type="text" id="txtQualityofChemicalUse" />
-                        </div>
+                    <div class="col-md-12">
+
+                        <div class="row" style="margin-left:17px">
+                            <label> Chemical Name: </label>
+                            <div class="col-sm-6">
+                                <input type="text" id="txtNameofChemicalUse" class="form-control" style="margin-left:16px;" />
+                            </div>
+                        </div><br />
+                        <div class="row" style="margin-left:17px">
+                            <label> Chemical  Quantity : </label>
+                            <div class="col-sm-6">
+                                <input type="text" id="txtQualityofChemicalUse" class="form-control" />
+                            </div>
+                        </div><br />
                         <div class="col-md-4" style="margin:auto">
                             <input type="button" class="btn btn-info btn-sm" value="Add Chemicals" id="ShowChemicalPopup" style="margin-bottom:10px" />
                         </div>
-                    </div> <br />
-                    <div class="col-md-12">
-                        <table style="border-collapse:collapse" border="1" align="center" class="table" id="tblChemicalsUsed">
-                            <tr class="thead-dark">
-                                <th class="width-15">
-                                    Name of chemical
-                                </th>
-                                <th class="width-15">
-                                    Quantity of chemical
-                                </th>
-                            </tr>
-                            <tbody>
-                                <tr id="inputChemicalsRow">
+                        <br />
+                        <div class="col-md-12">
+                            <table style="border-collapse:collapse" border="1" align="center" class="table table-bordered" id="tblChemicalsUsed">
+                                <tr class="thead-dark">
+                                    <th class="width-15">
+                                        Name of chemical
+                                    </th>
+                                    <th class="width-15">
+                                        Quantity of chemical
+                                    </th>
                                 </tr>
-                            </tbody>
-                        </table>
+                                <tbody>
+                                    <tr id="inputChemicalsRow">
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer" style="border:none">
+                <div class="modal-footer" style="border:none">
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<div id="ChemicalsPopupView" class="modal" style="display:none">
-    <div class="modal-dialog modal-lg modal-dialog-centered" style="width:100%">
+<div id="ChemicalsPopupView" class="modal">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <!-- Modal content -->
         <div class="modal-content">
-            <div class="modal-header">
+            <div style="background-color:steelblue;height: 42px;">
                 @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
-                <h4 style="text-align:center;">Show Chemical Details</h4>
-                <a class="Closeup" href="/Lab/Tester/Tester?ParameterMasterId=@Model.ParameterMasterId&SampleId=@Model.SampleCollectionId"><span class="close CPopup">&times;</span></a>
+                <h4 style="text-align:left;color:white;font-weight:bold;margin-top:18px;margin-left:3px;">View Chemicals</h4>
+                <a class="Closeup" href="/Lab/Tester/Tester?ParameterMasterId=@Model.ParameterMasterId&SampleId=@Model.SampleCollectionId"><span class="close CPopup" style="color:white;margin-top:-13px;">&times;</span></a>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="dtPre" />
@@ -462,6 +498,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="~/Scripts/Application/Validation.js"></script>
 <script>
@@ -1528,7 +1565,7 @@
             type: "POST",
             url: "/Tester/UpdateFinalResult",
             dataType: 'JSON',
-            cache: false,               
+            cache: false,
             data: { "model": parameter, "isSubmitted": isSubmitted },
             success: function (response) {
                 var x = response;

@@ -25,80 +25,77 @@
                 </div>
             </div>
          <!-- Default Basic Forms Start -->
-         <div class="pd-20 card-box mb-30">
-            <div class="clearfix">
-               <div class="pull-left">
-                  <h4 class="text-blue h4">Sample Returned List</h4>
-                   <p class="mb-30">@*All bootstrap element classies*@</p>
-               </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Sample Returned List</h4>
+                    </div>
+                </div>
+                <hr />
+                <table id="dtHorizontalExample" class="table table stripe hover nowrap">
+                    <thead>
+                        <tr class="thead-dark">
+                            <th class="table-plus datatable-nosort">
+                                SrNo.
+                            </th>
+                            <th>
+                                Sample Type
+                            </th>
+                            <th>
+                                Sample Location
+                            </th>
+                            <th>
+                                Customer Name
+                            </th>
+                            <th>
+                                Sample ID
+                            </th>
+                            <th>
+                                Report Number
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SerialNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SampleTypeProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SampleLocation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CustomerName)
+                                </td>
+                                @*<td>
+                         @Html.DisplayFor(modelItem => item.SampleName)
+                        </td>*@
+                                <td>
+                                    @*@Html.ActionLink("View Details", "AddSampleArrival", new { SampleCollectionId = item.SampleCollectionId, SampleNo = item.SampleNo, ARCId = item.ARCId }, new { @class = "btn btn-sm btn-App fa fa-pencil" })
+                                    *@
+                                    <a href="#" onclick="funView(@item.SampleCollectionId, '@item.SampleNo',@item.ARCId);" class="sampleName" style="color:blue">
+                                        @Html.DisplayFor(modelItem => item.SampleName)
+                                        @*@Html.DisplayFor(modelItem => item.SampleNo)*@
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RequestNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CurrentStatus)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
-            <table id="datatable" class="data-table table nowrap">
-                <thead>
-                   <tr>
-                     <th class="table-plus datatable-nosort">
-                       SrNo.
-                      </th>
-                     <th>
-                       Sample Type
-                     </th>
-                     <th>
-                        Sample Location
-                     </th>
-                     <th>
-                       Customer Name
-                     </th>
-                     @*<th class="width-5">
-                         Sample Name
-                      </th>*@
-                      <th>
-                         Sample ID
-                      </th>
-                      <th>
-                          Report Number
-                      </th>
-                      <th>
-                        Status
-                      </th>
-                   </tr>
-                </thead>
-                <tbody>
-                  @foreach (var item in Model)
-                   {
-                     <tr>
-                         <td>
-                           @Html.DisplayFor(modelItem => item.SerialNo)
-                        </td>
-                         <td>
-                            @Html.DisplayFor(modelItem => item.SampleTypeProductName)
-                         </td>
-                         <td>
-                             @Html.DisplayFor(modelItem => item.SampleLocation)
-                         </td>
-                         <td>
-                             @Html.DisplayFor(modelItem => item.CustomerName)
-                          </td>
-                         @*<td>
-                           @Html.DisplayFor(modelItem => item.SampleName)
-                          </td>*@
-                          <td>
-                             @*@Html.ActionLink("View Details", "AddSampleArrival", new { SampleCollectionId = item.SampleCollectionId, SampleNo = item.SampleNo, ARCId = item.ARCId }, new { @class = "btn btn-sm btn-App fa fa-pencil" })
-                             *@
-                           <a href="#" onclick="funView(@item.SampleCollectionId, '@item.SampleNo',@item.ARCId);" class="sampleName" style="color:blue">
-                            @Html.DisplayFor(modelItem => item.SampleNameOriginal)
-                             @*@Html.DisplayFor(modelItem => item.SampleNo)*@
-                             </a>
-                           </td>
-                          <td>
-                             @Html.DisplayFor(modelItem => item.RequestNo)
-                          </td>
-                          <td>
-                             @Html.DisplayFor(modelItem => item.CurrentStatus)
-                         </td>
-                     </tr>
-                   }
-                </tbody>
-            </table>
-         </div>
          <!-- Default Basic Forms End -->
        </div>
     </div>
@@ -113,5 +110,12 @@
     }
 
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 

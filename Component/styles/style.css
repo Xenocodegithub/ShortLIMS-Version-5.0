@@ -34,7 +34,7 @@ body {
     font-weight: 400;
     min-height: 100%;
     color: #031e23;
-    background: #ecf0f4
+    background: #eaeef3
 }
 
 a {
@@ -286,11 +286,12 @@ p {
 }
 
 .mt-30 {
-    margin-top: 30px
+    margin-top: -20px
 }
 
 .device-manage-progress-chart ul li, .mb-30 {
-    margin-bottom: 30px
+    margin-bottom: 30px;                                                                                                                                                                                b
+    margin-top:-20px;
 }
 
 .mb-20 {

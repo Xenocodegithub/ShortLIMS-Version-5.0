@@ -6,51 +6,46 @@
     @Html.HiddenFor(model => model.SrNo)
     @Html.HiddenFor(model => model.CoalCokeId)
     @Html.HiddenFor(model => model.EnquirySampleID)
-    <div class="form-horizontal align align-content-lg-center">
-        <div class="card shadow mb-4">
-            <div class="card-body align-content-center">
-                <div class="row" id="p">
-                    <div class="col-sm-6 form-group">
-                        @Html.LabelFor(model => model.Parameters, htmlAttributes: new { @class = "control-label col-sm-4 " })
-                        <div class="col-sm-8" id="Parameter">
-                            @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control" })
-                            @Html.HiddenFor(model => model.ParameterName)
-                            @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
-                        </div>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        @Html.LabelFor(model => model.TestMethodName, htmlAttributes: new { @class = "control-label col-sm-4 " })
-                        <div class="col-sm-8" id="TestMethod">
-                            @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
-                            @Html.HiddenFor(model => model.TestMethodName)
-                            @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
-                        </div>
-                    </div>
-                    <div class="col-sm-6 form-group">
-                        @Html.LabelFor(model => model.TestResults, htmlAttributes: new { @class = "control-label col-sm-4" })
-                        <div class="col-sm-8" id="TestResult">
-                            @Html.EditorFor(model => model.TestResults, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.TestResults, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <div class="col-md-12 col-sm-12">
-                            @{ string btnText = "Add";
-                                if (Model.SrNo != 0)
-                                {
-                                    btnText = "Update";
-                                    <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" />
-                                }
-                            }
-                            <input class="btn btn-success btn-sm alignright" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <hr />
+    <div class="form-group row" id="p">
+        <label class="col-sm-12 col-md-2 col-form-label">Parameter:</label>
+        @*@Html.LabelFor(model => model.Parameters, htmlAttributes: new { @class = "control-label col-sm-4 " })*@
+        <div class="col-sm-4" id="Parameter">
+            @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control" })
+            @Html.HiddenFor(model => model.ParameterName)
+            @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
+        </div>
+
+        <label class="col-sm-12 col-md-2 col-form-label">Test Method Name:</label>
+        @*@Html.LabelFor(model => model.TestMethodName, htmlAttributes: new { @class = "control-label col-sm-4 " })*@
+        <div class="col-sm-4" id="TestMethod">
+            @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
+            @Html.HiddenFor(model => model.TestMethodName)
+            @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
         </div>
     </div>
+    <div class="form-group row">
+        <label class="col-sm-12 col-md-2 col-form-label">Test Result:</label>
+        @*@Html.LabelFor(model => model.TestResults, htmlAttributes: new { @class = "control-label col-sm-4" })*@
+        <div class="col-sm-4" id="TestResult">
+            @Html.EditorFor(model => model.TestResults, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TestResults, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            @{ string btnText = "Add";
+                if (Model.SrNo != 0)
+                {
+                    btnText = "Update";
+                    <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" style="float:right" />
+                }
+            }
+            <input class="btn btn-info btn-sm alignright btn-sm" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" style="float:right" />
+        </div>
+    </div>
+
 }
 
 <script>
@@ -70,7 +65,7 @@
     function CancelNameValues() {
         $('#ParameterMasterId').val(-1);
         $('#TestMethodId').val(-1);
-       //$('#Parameters').val("");
+        //$('#Parameters').val("");
         $('#TestResults').val("");
         $('#btnAdd').val("Add")
         $('#btnCancel').css('display', 'none')
@@ -94,7 +89,7 @@
             $('#TestMethodId').html('');
             $('#TestMethodId').append('<option value="">---Select---</option>');
             $.ajax({
-                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val()+ "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val() + "&ParameterMasterId=" + $('#ParameterMasterId').val(),
                 type: 'Get',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'json',
@@ -104,7 +99,7 @@
                         $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
                     })
 
-                     $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+                    $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
                 },
                 error: function (data) {
                 }

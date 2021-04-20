@@ -20,30 +20,20 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-md-6 col-sm-12 text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                January 2018
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Export List</a>
-                                <a class="dropdown-item" href="#">Policies</a>
-                                <a class="dropdown-item" href="#">View Assets</a>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <!-- Simple Datatable start -->
-            <div class="card-box mb-30">
-                <div class="pd-20">
-                    <h4 class="text-blue h4">Item List</h4>
-                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Item List</h4>
+                    </div>
                 </div>
                 <div class="pb-20">
                     <table class="data-table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">Sr No</th>
                                 <th>Type</th>
                                 <th>Category Type</th>
@@ -70,21 +60,21 @@
                                         <td>@item.AvailableStock</td>
                                         <td>@item.MinimumStock</td>
                                         <td>
-                                                    @if (@item.InventoryTypeID == 1 && @item.IsActive == true)
-                                                    {
-                                                        <a href="@Url.Action("AddStockIssueToUser","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="IssueTo" id="rowedit_@SerialNumber" operation="Issueto" class="btn btn-primary">
-                                                            IssueTo
-                                                            </a>
-                                                     }
-                                                       else
-                                                         {
-                                                          <a href="#" id="rowIssueto_@SerialNumber" operation="IssueTo"></a>
-                                                         }
-                                                            @*<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-        <a class="dropdown-item" href="@Url.Action("Edit","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Edit" id="rowedit_@SerialNumber" operation="edit"><i class="dw dw-edit2"></i> Edit</a>
-        <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>*@
+                                            @if (@item.InventoryTypeID == 1 && @item.IsActive == true)
+                                            {
+                                                <a href="@Url.Action("AddStockIssueToUser","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="IssueTo" id="rowedit_@SerialNumber" operation="Issueto" class="btn btn-info btn-sm">
+                                                    IssueTo
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" id="rowIssueto_@SerialNumber" operation="IssueTo"></a>
+                                            }
+                                            @*<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                        <a class="dropdown-item" href="@Url.Action("Edit","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Edit" id="rowedit_@SerialNumber" operation="edit"><i class="dw dw-edit2"></i> Edit</a>
+                                        <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>*@
 
-                                      
+
                                         </td>
                                     </tr>
                                     ++SerialNumber;
@@ -102,10 +92,11 @@
     <div class="modal-dialog" style="width:600px">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #357ca5;">
+                <h4 class="modal-title" style="color:white;">Items Issue Log</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="CrossClose">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" style="color:white;">Items Issue Log</h4>
+
             </div>
             <div class="modal-body">
                 @*<p>One fine body&hellip;</p>*@
@@ -187,3 +178,11 @@
     <!-- /.modal-dialog -->
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

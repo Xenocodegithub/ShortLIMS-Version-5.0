@@ -15,24 +15,13 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                @*<li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Discipline</li>
-                            <li class="breadcrumb-item active" aria-current="page">Add Discipline</li>*@
+                               <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Parameter Master/li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Paramter </li>
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-md-6 col-sm-12 text-right">
-                        <div class="dropdown">
-                            @*<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">*@
-                            @*January 2018*@
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                @*<a class="dropdown-item" href="#">Export List</a>
-                            <a class="dropdown-item" href="#">Policies</a>
-                            <a class="dropdown-item" href="#">View Assets</a>*@
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
             @using (Ajax.BeginForm("AddParameter", "ParameterMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddParameterSuccess" }))
@@ -43,7 +32,6 @@
                     <div class="clearfix">
                         <div class="pull-left">
                             <h4 class="text-blue h4">Add Parameter</h4>
-                            <!--<p class="mb-30">-->@*All bootstrap element classies*@<!--</p>-->
                         </div>
                         @*<div class="pull-right">
                         <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
@@ -51,15 +39,13 @@
                     </div>
                     <form>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Parameter</label>
-                            <div class="col-sm-12 col-md-10">
-                                @Html.TextAreaFor(model => model.Parameter, new { @id = "Parameter", @class = "form-control ckeditor", @rows = "10" })
+                            <label class="col-sm-12 col-md-2 col-form-label">Parameter:</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(model => model.Parameter, new { @id = "Parameter", @class = "form-control ckeditor"})
 
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
+                            <div class="col-sm-4">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
                             </div>

@@ -22,85 +22,85 @@
                     </div>
                 </div>
             </div>
-            <div class="card-box mb-30">
-                <div class="card-box mb-30 card text-white bg-info card-box">
-                    <div class="pd-20" style="border-bottom:solid">
-                        <h4 class="text-blue h4">PURCHASE INCHARGE LIST</h4>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Purchase Incharge List</h4>
                     </div>
-                    <br />
-                            <div class="pb-20">
-                                <table class="data-table table nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th class="table-plus datatable-nosort">SR.NO.</th>
-                                            <th>PURCHASE ORDER NO</th>
-                                            <th>SUPPLIER NAME</th>
-                                            <th>ITEM</th>
-                                            <th>PRINT</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="color:white">
-                                        @{ int i = 0; long PrevPurchaseRequestID = 0; string itemName = string.Empty; int InventoryId = 0; string strPurchaseRequestId = string.Empty; string CategoryName = string.Empty;}
-                                        @foreach (var item in Model)
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table nowrap">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">SR.NO.</th>
+                                <th>PURCHASE ORDER NO</th>
+                                <th>SUPPLIER NAME</th>
+                                <th>ITEM</th>
+                                <th>PRINT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int i = 0; long PrevPurchaseRequestID = 0; string itemName = string.Empty; int InventoryId = 0; string strPurchaseRequestId = string.Empty; string CategoryName = string.Empty;}
+                            @foreach (var item in Model)
+                            {
+                                if (PrevPurchaseRequestID != item.PurchaseMasterID || InventoryId != item.InventoryTypeID || CategoryName != item.CategoryName)
+                                {
+
+                                    itemName = item.Item;
+                                    <tr id="@i">
+                                        <td>
+                                            @{ int SrNo = i + 1;}
+                                            @SrNo
+                                        </td>
+                                        <td>
+                                            @*@Html.HiddenFor(modelItem => item.PurchaseRequestID)*@
+                                            @Html.HiddenFor(modelItem => item.IsIGST)
+                                            @Html.DisplayFor(modelItem => item.PurchaseOrderNo)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SupplierName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Item)
+                                        </td>
+
+                                        @if (item.InventoryTypeID == 1 || item.CategoryName.Trim() == "Glassware")
                                         {
-                                            if (PrevPurchaseRequestID != item.PurchaseMasterID || InventoryId != item.InventoryTypeID || CategoryName != item.CategoryName)
+                                            <td>
+                                                <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportsecond.rdl&PurchaseMasterID=@item.PurchaseMasterID" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+
+                                            if (item.IsIGST == false)
                                             {
-
-                                                itemName = item.Item;
-                                                <tr id="@i">
-                                                    <td>
-                                                        @{ int SrNo = i + 1;}
-                                                        @SrNo
-                                                    </td>
-                                                    <td>
-                                                        @*@Html.HiddenFor(modelItem => item.PurchaseRequestID)*@
-                                                        @Html.HiddenFor(modelItem => item.IsIGST)
-                                                        @Html.DisplayFor(modelItem => item.PurchaseOrderNo)
-                                                    </td>
-
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.SupplierName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Item)
-                                                    </td>
-
-                                                    @if (item.InventoryTypeID == 1 || item.CategoryName.Trim() == "Glassware")
-                                                    {
-                                                        <td>
-                                                            <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportsecond.rdl&PurchaseMasterID=@item.PurchaseMasterID" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
-                                                        </td>
-                                                    }
-                                                    else
-                                                    {
-
-                                                        if (item.IsIGST == false)
-                                                        {
-                                                            <td>
-                                                                <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportThird.rdl&PurchaseMasterID=@item.PurchaseMasterID&IsIGST=0" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
-                                                            </td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td>
-                                                                <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportThird.rdl&PurchaseMasterID=@item.PurchaseMasterID&IsIGST=1" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
-                                                            </td>
-                                                        }
-
-                                                    }
-
-                                                </tr>
+                                                <td>
+                                                    <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportThird.rdl&PurchaseMasterID=@item.PurchaseMasterID&IsIGST=0" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=POReportThird.rdl&PurchaseMasterID=@item.PurchaseMasterID&IsIGST=1" class="btn btn-outline-dark btn-sm"><span class="micon dw dw-print"></span></a>
+                                                </td>
                                             }
 
-
-                                            PrevPurchaseRequestID = item.PurchaseMasterID;
-                                            InventoryId = item.InventoryTypeID;
-                                            i++;
                                         }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+
+                                    </tr>
+                                }
+
+
+                                PrevPurchaseRequestID = item.PurchaseMasterID;
+                                InventoryId = item.InventoryTypeID;
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
                     </div>
                 </div>
             </div>

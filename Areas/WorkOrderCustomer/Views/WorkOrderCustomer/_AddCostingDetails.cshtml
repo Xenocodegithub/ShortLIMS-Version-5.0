@@ -50,100 +50,92 @@
     </div>
     <hr />
   @*For Costing*@
-  <div id="divCosting">
-            @using (Ajax.BeginForm("_Costing", "WorkOrderCustomer", new AjaxOptions() { HttpMethod = "Post", OnBegin = "OnClick", OnSuccess = "AddCostSuccess" }))
-            {
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    @Html.HiddenFor(model => model.WorkOrderCustomer.CostingId)
-                                    @Html.HiddenFor(model => model.WorkOrderCustomer.getID)
-                                    @Html.HiddenFor(model => model.WorkOrderCustomer.EnquirySampleID)
-                                    <input id="gstRate" type="hidden" value="@ViewBag.GSTRate" />
-                                    <input id="Id" type="hidden" value="@ViewBag.EnquiryId" />
-                                    <div class="form-group col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                @Html.LabelFor(model => model.WorkOrderCustomer.TotalCharges, htmlAttributes: new { @class = "control-label col-md-3" })
-                                                @Html.TextBoxFor(model => model.WorkOrderCustomer.TotalCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
-                                                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TotalCharges, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="col-md-4">
-                                                @Html.LabelFor(model => model.WorkOrderCustomer.DiscountAmount, htmlAttributes: new { @class = "control-label col-md-7" })
-                                                <input type="text" onkeyup="funCalNetAmount(true);" id="txtDiscountPercent" class="form-control" /><br/>
-                                                @Html.TextBoxFor(model => model.WorkOrderCustomer.DiscountAmount, new { @class = "form-control", @readonly = "readonly" })
-                                                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.DiscountAmount, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                       <div class="row">
-                                           <div class="col-md-4">
-                                               @Html.LabelFor(model => model.WorkOrderCustomer.SampleAmount, htmlAttributes: new { @class = "control-label col-md-8" })
-                                               @Html.TextBoxFor(model => model.WorkOrderCustomer.SampleAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
-                                               @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleAmount, "", new { @class = "text-danger" })
-                                           </div>
-                                        @*@Html.LabelFor(model => model.WorkOrderCustomer.GSTCharges, htmlAttributes: new { @class = "control-label col-md-3" })
-                                          <div class="col-md-3">
-                                              @Html.TextBoxFor(model => model.WorkOrderCustomer.GSTCharges, new { @class = "form-control", @readonly = "readonly" })
-                                              @Html.ValidationMessageFor(model => model.WorkOrderCustomer.GSTCharges, "", new { @class = "text-danger" })
-                                        </div>*@            
-                                      <div class="col-md-4">
-                                           @Html.LabelFor(model => model.WorkOrderCustomer.TransportationAmount, htmlAttributes: new { @class = "control-label col-md-6" })
-                                           @Html.TextBoxFor(model => model.WorkOrderCustomer.TransportationAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
-                                           @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TransportationAmount, "", new { @class = "text-danger" })
-                                       </div>
-                                     </div>
-                                  </div>   
-                                   <div class="form-group col-md-12">
-                                        <div class="row">
-                                               <div class="col-md-4">
-                                                   @Html.LabelFor(model => model.WorkOrderCustomer.TotalAmount, htmlAttributes: new { @class = "control-label col-md-6" })
-                                                   @Html.TextBoxFor(model => model.WorkOrderCustomer.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
-                                                   @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TotalAmount, "", new { @class = "text-danger" })
-                                               </div>
-                                               <div class="col-md-4">
-                                                   @Html.LabelFor(model => model.WorkOrderCustomer.TestingCharges, htmlAttributes: new { @class = "control-label col-md-6" })
-                                                   @Html.TextBoxFor(model => model.WorkOrderCustomer.TestingCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
-                                                   @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TestingCharges, "", new { @class = "text-danger" })
-                                               </div>
-                                           </div>
-                                     </div>
-                                     <div class="form-group col-md-12">
-                                         <div class="col-md-4">
-                                             @Html.LabelFor(model => model.WorkOrderCustomer.NetAmount, htmlAttributes: new { @class = "control-label col-md-5" })
-                                             @Html.TextBoxFor(model => model.WorkOrderCustomer.NetAmount, new { @class = "form-control", @readonly = "readonly" })
-                                             @Html.ValidationMessageFor(model => model.WorkOrderCustomer.NetAmount, "", new { @class = "text-danger" })
-                                         </div>
-                                      </div>
-                                           <div class="form-group col-md-12" style="text-align:center;margin:auto">
-                                               <button id="btnAdd" class="btn btn-sm btn-info text-nowrap btnChoose">Add Cost</button>
-                                           </div>
-             }
-   </div>
+<div id="divCosting">
+    @using (Ajax.BeginForm("_Costing", "WorkOrderCustomer", new AjaxOptions() { HttpMethod = "Post", OnBegin = "OnClick", OnSuccess = "AddCostSuccess" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.WorkOrderCustomer.CostingId)
+        @Html.HiddenFor(model => model.WorkOrderCustomer.getID)
+        @Html.HiddenFor(model => model.WorkOrderCustomer.EnquirySampleID)
+        <input id="gstRate" type="hidden" value="@ViewBag.GSTRate" />
+        <input id="Id" type="hidden" value="@ViewBag.EnquiryId" />
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Total Charges:</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TotalCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TotalCharges, "", new { @class = "text-danger" })
+            </div>
+            <label class="col-sm-12 col-md-2 col-form-label">Discount Amount:</label>
+            <div class="col-md-4">
+                <input type="text" onkeyup="funCalNetAmount(true);" id="txtDiscountPercent" class="form-control" /><br />
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.DiscountAmount, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.DiscountAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class=" form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Sample Colllection Charges:</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.SampleAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleAmount, "", new { @class = "text-danger" })
+            </div>
+            <label class="col-sm-12 col-md-2 col-form-label">Transportation Amount:</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TransportationAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TransportationAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Total Amount:</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TotalAmount, "", new { @class = "text-danger" })
+            </div>
+            <label class="col-sm-12 col-md-2 col-form-label">Testing Charges:</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TestingCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TestingCharges, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Net Amount:</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.NetAmount, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.NetAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <button id="btnAdd" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;margin-top:-30px">Add Cost</button>
+        </div>
+    }
+</div>
          <hr />
          <div id="divTermsCond">
              @using (Ajax.BeginForm("_AddCostingDetails", "WorkOrderCustomer", new AjaxOptions() { HttpMethod = "Post", OnBegin = "NextPage", OnSuccess = "CostingSuccess" }))
              {
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderId)
-                                    <hr />
+                 @Html.AntiForgeryToken()
+                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                 @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderId)
+
                  for (int i = 0; i < Model.TermsList.Count; i++)
                  {
-                                        <div>
-                                            @Html.CheckBoxFor(model => model.TermsList[i].IsSelected)
-                                            @Html.HiddenFor(model => model.TermsList[i].TermAndCondtId)
-                                            @Model.TermsList[i].TermAndCondt
-                                        </div>
+                     <div>
+                         @Html.CheckBoxFor(model => model.TermsList[i].IsSelected)
+                         @Html.HiddenFor(model => model.TermsList[i].TermAndCondtId)
+                         @Model.TermsList[i].TermAndCondt
+                     </div>
                  }
-                                    <hr />
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.WorkOrderCustomer.Remarks, htmlAttributes: new { @class = "control-label col-sm-4" })
-                                        <div class="col-sm-6">
-                                            @Html.TextAreaFor(model => model.WorkOrderCustomer.Remarks, new { @class = "form-control col-sm-6" })
-                                        </div>
-                                    </div>
-                                    <button id="btnSaveTerms" class="btn btn-sm btn-info text-nowrap btnChoose">Save Terms And Conditions</button>
+
+                 <div class="form-group row">
+                     @Html.LabelFor(model => model.WorkOrderCustomer.Remarks, htmlAttributes: new { @class = "control-label col-sm-2" })
+                     <br/>
+                     <div class="col-sm-6">
+                         @Html.TextAreaFor(model => model.WorkOrderCustomer.Remarks, new { @class = "form-control col-sm-6", @style = "height:65px" })
+                     </div>
+                 </div>
+                 <button id="btnSaveTerms" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;">Save Terms And Conditions</button>
+                 <br />
              }
          </div>
          <hr />
@@ -214,10 +206,10 @@
             @if (Model.CostList.Count >= 1)
             {
                    <div class="row">
-                                                <div class="form-actions" style="margin:20px 0 0 0;    text-align: center;">
+                                                <div class="col-sm-12 col-md-12">
                                                     @*<a href="~/Enquiry/SampleAndParameter?EnquiryId=@ViewBag.EnquiryId" class="btn btn-primary alignleft" style="float:left" data-toggle="tooltip" data-placement="top" title="">Back</a>*@
                                                     @*<a href="/Enquiry/AddWorkOrder?WorkOrderId=@ViewBag.WorkOrderId&EnquiryId=0" class="btn btn-primary btn-sm alignright">Next</a>*@
-                                                    <input type="button" id="btnNext" value="Save" class="btn btn-primary alignright" style="float:right" />
+                                                    <input type="button" id="btnNext" value="Save" class="btn btn-info btn-sm  alignright" style="float:right" />
                                                 </div>
                                             </div>
             }

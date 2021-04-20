@@ -24,14 +24,14 @@
                     </div>
                 </div>
             </div>
-            <div class="page-header card text-white bg-dark card-box">
+            <div class="page-header card text-black bg-light card-box">
                 <div class="card-header">Laboratory Instrument Report</div>
                 <div class="card-body">
                     <div class="row" style="margin-bottom:10px;">
 
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                @Html.Label("Inventory Type")
+                                @Html.Label("Inventory Type:")
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -41,9 +41,9 @@
                             </div>
                         </div>
 
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                @Html.Label("Catagory Name")
+                                @Html.Label("Catagory Name:")
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-1">
                             <div class="form-group">
-                                <input type="button" value="Print" class="btn btn-primary" style="float:left" id="buttonPrint" name="buttonSearch" />
+                                <input type="button" value="Print" class="btn btn-success btn-sm" style="float:left;margin-top:-15px" id="buttonPrint" name="buttonSearch" />
                             </div>
                         </div>
                     </div>
@@ -63,24 +63,17 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Item List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
                     <div class="pull-right">
-                        <a href="@Url.Action("Create","InventoryItemMaster")" class="btn btn-primary btn-sm scroll-click" role="button"> Add New Item</a>
+                        <a href="@Url.Action("Create","InventoryItemMaster")" class="btn btn-info btn-sm scroll-click" role="button"> Add New Item</a>
                     </div>
                 </div>
 
                 <!-- Simple Datatable start -->
-                <div class="card-box mb-30">
-                    <div class="pd-20">
-                        <h4 class="text-blue h4"> </h4>
-                        <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
-                    </div>
-
                     <div class="pb-20">
                         <table class="data-table table stripe hover nowrap">
                             <thead>
-                                <tr>
+                                <tr class="thead-dark">
                                     <th class="table-plus datatable-nosort">Sr No</th>
                                     <th>Type</th>
                                     <th>Category Type</th>
@@ -119,11 +112,11 @@
                                                         </div>
                                                     </div>*@
                                                 <div class="btn-list">
-                                                    <a href="@Url.Action("Edit","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Edit" id="rowedit_@SerialNumber" operation="Edit" class="btn btn-primary">
+                                                    <a href="@Url.Action("Edit","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Edit" id="rowedit_@SerialNumber" operation="Edit" class="btn btn-info btn-sm">
                                                         Edit
 
                                                     </a>
-                                                    <a href="@Url.Action("Delete","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Delete" id="rowedit_@SerialNumber" operation="Delete" class="btn btn-primary">
+                                                    <a href="@Url.Action("Delete","InventoryItemMaster",new {ItemMasterId=item.ItemID })" title="Delete" id="rowedit_@SerialNumber" operation="Delete" class="btn btn-info btn-sm">
                                                         Delete
                                                     </a>
                                                 </div>

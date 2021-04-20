@@ -21,51 +21,58 @@
                     </div>
                 </div>
             </div>
-            <div class="card-box mb-30 ">
-                <div class="card-box mb-30 card text-white bg-info card-box">
-                    <div class="pd-20" style="border-bottom:solid;">
-                        <h4 class="text-blue h4">TECHNICAL MANAGER LIST</h4>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Technical Manager List</h4>
                     </div>
-                    <br />
-                    <div class="pb-20">
-                        <table class="data-table table multiple-select-row nowrap">
-                            <thead>
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrapp">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">ITEM</th>
+                                <th>QUANTITY</th>
+                                <th>SUPPLIER NAME</th>
+                                <th>NET AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
                                 <tr>
-                                    <th class="table-plus datatable-nosort">ITEM</th>
-                                    <th>QUANTITY</th>
-                                    <th>SUPPLIER NAME</th>
-                                    <th>NET AMOUNT</th>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                        @Html.HiddenFor(modelItem => item.InventoryTypeID)
+                                        @Html.HiddenFor(modelItem => item.CategoryName)
+                                        @Html.ActionLink(item.Item, "PurchaseForm", "Purchase", new { @PurchaseRequestID = item.PurchaseRequestID, @Category = item.CategoryName }, new { Style = "color:blue" })
+
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SupplierName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NetAmount)
+                                    </td>
+
                                 </tr>
-                            </thead>
-                            <tbody style="color:white">
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.HiddenFor(modelItem => item.PurchaseRequestID)
-                                            @Html.HiddenFor(modelItem => item.InventoryTypeID)
-                                            @Html.HiddenFor(modelItem => item.CategoryName)
-                                            @Html.ActionLink(item.Item, "PurchaseForm", "Purchase", new { @PurchaseRequestID = item.PurchaseRequestID, @Category = item.CategoryName }, new { Style = "color:Chartreuse" })
-
-
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Quantity)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SupplierName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.NetAmount)
-                                        </td>
-
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+        </div>
     </div>
-</div>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

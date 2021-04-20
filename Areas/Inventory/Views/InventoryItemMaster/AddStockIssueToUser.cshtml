@@ -21,18 +21,7 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-md-6 col-sm-12 text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                January 2018
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Export List</a>
-                                <a class="dropdown-item" href="#">Policies</a>
-                                <a class="dropdown-item" href="#">View Assets</a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="pd-20 card-box mb-30">
@@ -47,66 +36,53 @@
                         @Html.ValidationSummary(true)
                         @Html.HiddenFor(model => model.ItemMasterID)
 
-                        <h5></h5>
                         <section>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Item Name :</label>
-                                        @Html.DropDownListFor(model => model.ItemMasterID, new SelectList(ViewBag.InventoryItemList, "ItemMasterID", "NameOfStock"), "--------Select---------", new { @class = "custom-select form-control" })
+                            
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Item Name :</label>
+                                        <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.ItemMasterID, new SelectList(ViewBag.InventoryItemList, "ItemMasterID", "NameOfStock"), "--------Select---------", new { @class = " form-control" })
                                         @Html.ValidationMessageFor(model => model.ItemMasterID, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(model => model.NameOfStock)
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Min Quantity:</label>
-                                        @Html.TextBoxFor(model => model.MinimumStock, new { @class = "form-control", @style = "width:540px;" })
+                                        </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Min Quantity:</label>
+                                        <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.MinimumStock, new { @class = "form-control"})
                                         @Html.ValidationMessageFor(model => model.MinimumStock, "", new { @class = "text-danger" })
-                                    </div>
+                                         </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Available  Quantity:</label>
-                                        @Html.TextBoxFor(model => model.AvailableStock, new { @class = "form-control",@style = "width:540px;" })
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Available  Quantity:</label>
+                                        <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.AvailableStock, new { @class = "form-control"})
                                         @Html.ValidationMessageFor(model => model.AvailableStock, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Issue To:</label>
-                                        @Html.DropDownListFor(model => model.IssueToNameID, new SelectList(ViewBag.EmployeeList, "EmpId", "EmpName"), "--------Select--------", new { @class = "custom-select form-control" })
+                                        </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Issue To:</label>
+                                        <div class="col-sm-4">
+                                        @Html.DropDownListFor(model => model.IssueToNameID, new SelectList(ViewBag.EmployeeList, "EmpId", "EmpName"), "--------Select--------", new { @class = " form-control" })
                                         @Html.ValidationMessageFor(model => model.IssueToNameID, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(model => model.IssueToNameID)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Issue Quantity:</label>
-                                        @Html.TextBoxFor(model => model.IssueQty, new { @class = "form-control",@style = "width:540px;" })
+                                        </div>
+                                     </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Issue Quantity:</label>
+                                        <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.IssueQty, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.IssueQty, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Issue Date:</label>
+                                        </div>
+                                        <label class="col-sm-12 col-md-2 col-form-label">Issue Date:</label>
+                                        <div class="col-sm-4">
                                         @*<input type="date" id="IssueDate" name="IssueDate" value="" class="form-control date-picker" style="width:540px;" />*@
-                                        <input class="form-control date-picker" type="text" name="IssueDate" value="" style="width:540px;" id="IssueDate">
+                                        <input class="form-control date-picker" type="text" name="IssueDate" value=""  id="IssueDate">
                                         @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6" style="margin-left:450px;">
-                                    <div class="form-group">
-                                        <input type="submit" value="Issue" class="btn btn-primary" id="buttonSave1" name="buttonSave" style="background-color:mediumblue;color:white;" onclick="return validateData();" />
+                            <div class="form-group row">
+                                <div class="col-md-12" >
+                                        <input type="submit" value="Issue" class="btn btn-info btn-sm" id="buttonSave1" name="buttonSave" style="float:right" onclick="return validateData();" />
                                     </div>
                                 </div>
-                            </div>
+                           
                         </section>
                     }
                 </div>

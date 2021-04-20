@@ -21,18 +21,7 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-md-6 col-sm-12 text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                January 2018
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Export List</a>
-                                <a class="dropdown-item" href="#">Policies</a>
-                                <a class="dropdown-item" href="#">View Assets</a>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
             <div class="pd-20 card-box mb-30">
@@ -49,23 +38,20 @@
 
                         <h5></h5>
                         <section>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Inventory Type :</label>
+                            
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label" >Inventory Type :</label>
+                                        <div class="col-sm-4">
                                         @Html.DropDownListFor(model => model.InventoryTypeID, new SelectList(ViewBag.InvTyp, "InventoryTypeID", "InventoryTypeName"), "---Select---", new { @class = "custom-select form-control" })
                                         @Html.ValidationMessageFor(model => model.InventoryTypeID, "", new { @class = "text-danger" })
                                         @Html.HiddenFor(model => model.InventoryTypeName)
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Category Name:</label>
+                                        </div>
+                                        <label  class="col-sm-12 col-md-2 col-form-label">Category Name:</label>
+                                        <div class="col-sm-4">
                                         @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", @style = "width:450px;" })
                                         @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
-                                    </div>
+                                        </div>
                                 </div>
-                            </div>
                             @*<div class="row">
 
                                 <div class="col-md-6" style="margin-left:450px;">

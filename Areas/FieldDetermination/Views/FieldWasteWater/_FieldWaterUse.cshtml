@@ -1,23 +1,17 @@
 ﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDWasteWaterModel
 
-<div class="form-horizontal align align-content-lg-center">
-    <div class="card shadow mb-4">
-        <div class="card-body align-content-center">
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    @Html.LabelFor(model => model.WaterUse, htmlAttributes: new { @class = "control-label col-sm-4 " })
-                    <div class="col-sm-6">
-                        @Html.EditorFor(model => model.WaterUse, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <div class="col-sm-6 form-group">
-                    @Html.LabelFor(model => model.AnyOtherObservation, htmlAttributes: new { @class = "control-label col-sm-6" })
-                    <div class="col-sm-6">
-                        @Html.EditorFor(model => model.AnyOtherObservation, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.AnyOtherObservation, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-sm-6 form-group">
+        @Html.LabelFor(model => model.WaterUse, htmlAttributes: new { @class = "control-label col-sm-4 " })
+        <div class="col-sm-6">
+            @Html.EditorFor(model => model.WaterUse, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+        </div>
+    </div>
+    <div class="col-sm-6 form-group">
+        @Html.LabelFor(model => model.AnyOtherObservation, htmlAttributes: new { @class = "control-label col-sm-6" })
+        <div class="col-sm-6">
+            @Html.EditorFor(model => model.AnyOtherObservation, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+            @Html.ValidationMessageFor(model => model.AnyOtherObservation, "", new { @class = "text-danger" })
         </div>
     </div>
 </div>

@@ -21,153 +21,160 @@
                     </div>
                 </div>
             </div>
-            <div class="card-box mb-30">
-                <div class="card-box mb-30 card text-white bg-info card-box">
-                    <div class="pd-20" style="border-bottom:solid">
-                        <h4 class="text-blue h4">PURCHASE REQUEST LIST</h4>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Purchase Request First list</h4>
                     </div>
-                    <br />
-                    <div class="pb-20">
-                        <table class="data-table table multiple-select-row nowrap">
-                            <thead>
-                                <tr>
-                                    <th class="table-plus datatable-nosort">ITEM</th>
-                                    <th>BRAMD</th>
-                                    <th>GRAD</th>
-                                    <th>PACK SIZE/CAPACITY</th>
-                                    <th>QUANTITY</th>
-                                    <th>SUPPLIER NAME</th>
-                                    <th>NET AMOUNT</th>
-                                    <th>REMARK TM</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">ITEM</th>
+                                <th>BRAMD</th>
+                                <th>GRAD</th>
+                                <th>PACK SIZE/CAPACITY</th>
+                                <th>QUANTITY</th>
+                                <th>SUPPLIER NAME</th>
+                                <th>NET AMOUNT</th>
+                                <th>REMARK TM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.RemarkIfRejectedByTM == "Rejected")
                                 {
-                                    if (item.RemarkIfRejectedByTM == "Rejected")
-                                    {
-                                        <tr class="table-plus" style="background-color: red; color: antiquewhite;">
-                                            @*<td>
-                                                    @Html.DisplayFor(modelItem => item.All)
-                                                </td>*@
-                                            <td>
-                                                @Html.HiddenFor(modelItem => item.ItemMasterId)
-                                                @Html.HiddenFor(modelItem => item.PurchaseRequestID)
-                                                @Html.HiddenFor(modelItem => item.PurchaseMasterID)
-                                                @Html.DisplayFor(modelItem => item.Item)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Brand)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Grade)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.PackSize)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Quantity)
-                                            </td>
-                                            <td>
-                                                @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
-                                                @Html.DisplayFor(modelItem => item.SupplierName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.NetAmount)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
-                                                @if (item.RemarkIfRejectedByTM == "Rejected")
-                                                {
-                                                    @*@Html.ActionLink("Edit", "PurchaseRequestForm", "Inventory", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID })*@
+                                    <tr class="table-plus">
+                                        @*<td>
+                                                @Html.DisplayFor(modelItem => item.All)
+                                            </td>*@
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                            @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                            @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                            @Html.DisplayFor(modelItem => item.Item)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Brand)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Grade)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PackSize)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
+                                            @Html.DisplayFor(modelItem => item.SupplierName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NetAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
+                                            @if (item.RemarkIfRejectedByTM == "Rejected")
+                                            {
+                                                @*@Html.ActionLink("Edit", "PurchaseRequestForm", "Inventory", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID })*@
 
-                                                    <a href="@Url.Action("PurchaseRequestForm", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID })">
-                                                        <i class="fa fa-pencil"></i>&nbsp;Edit
-                                                    </a>
-                                                   
-                                                }
-                                            </td>
-                                        </tr>
-                                    }
-                                    else if (item.RemarkIfRejectedByTM == "Accepted")
-                                    {
-                                        <tr class="table-plus" style="background-color: darkblue; color:wheat">
-                                            @*<td>
-                                                    @Html.DisplayFor(modelItem => item.All)
-                                                </td>*@
-                                            <td>
-                                                @Html.HiddenFor(modelItem => item.ItemMasterId)
-                                                @Html.HiddenFor(modelItem => item.PurchaseRequestID)
-                                                @Html.HiddenFor(modelItem => item.PurchaseMasterID)
-                                                @Html.DisplayFor(modelItem => item.Item)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Brand)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Grade)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.PackSize)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Quantity)
-                                            </td>
-                                            <td>
-                                                @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
-                                                @Html.DisplayFor(modelItem => item.SupplierName)
-                                            </td>
-                                           
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.NetAmount)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
-                                            </td>
-                                        </tr>
+                                                <a href="@Url.Action("PurchaseRequestForm", new { PurchaseRequestID = item.PurchaseRequestID, PurchaseMasterID = item.PurchaseMasterID })">
+                                                    <i class="fa fa-pencil"></i>&nbsp;Edit
+                                                </a>
 
-                                    }
-                                    else
-                                    {
-                                        <tr class="table-plus">
-                                            <td>
-                                                @Html.HiddenFor(modelItem => item.ItemMasterId)
-                                                @Html.HiddenFor(modelItem => item.PurchaseRequestID)
-                                                @Html.HiddenFor(modelItem => item.PurchaseMasterID)
-                                                @Html.DisplayFor(modelItem => item.Item)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Brand)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Grade)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.PackSize)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Quantity)
-                                            </td>
-                                            <td>
-                                                @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
-                                                @Html.DisplayFor(modelItem => item.SupplierName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.NetAmount)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
-                                            </td>
-                                            
-                                        </tr>
-                                    }
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                                else if (item.RemarkIfRejectedByTM == "Accepted")
+                                {
+                                    <tr class="table-plus">
+                                        @*<td>
+                                                @Html.DisplayFor(modelItem => item.All)
+                                            </td>*@
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                            @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                            @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                            @Html.DisplayFor(modelItem => item.Item)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Brand)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Grade)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PackSize)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
+                                            @Html.DisplayFor(modelItem => item.SupplierName)
+                                        </td>
 
-                                 }
-                            </tbody>
-                        </table>
-                    </div>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NetAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
+                                        </td>
+                                    </tr>
+
+                                }
+                                else
+                                {
+                                    <tr class="table-plus">
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                            @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                            @Html.HiddenFor(modelItem => item.PurchaseMasterID)
+                                            @Html.DisplayFor(modelItem => item.Item)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Brand)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Grade)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PackSize)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.PurchaseSupplierID)
+                                            @Html.DisplayFor(modelItem => item.SupplierName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NetAmount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RemarkIfRejectedByTM)
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

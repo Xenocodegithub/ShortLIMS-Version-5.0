@@ -16,6 +16,7 @@
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Product Sub Matrix</li>
                                 <li class="breadcrumb-item active" aria-current="page">Matrix List</li>
                             </ol>
                         </nav>
@@ -30,21 +31,22 @@
                 </div>
             </div>
             <!-- Simple Datatable start -->
-            <div class="card-box mb-30">
-                <div class="pd-20">
-                    <h4 class="text-blue h4">Matrix List</h4>
-                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4"> Matrix List</h4>
+                    </div>
                 </div>
                 <div class="pb-20">
-                    <table class="data-table table stripe hover nowrap">
+                    <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">SR.NO.</th>
                                 <th class="table-plus datatable-nosort">Sample Type Product Name</th>
                                 <th class="table-plus datatable-nosort">Product Group Name</th>
                                 <th class="table-plus datatable-nosort">Sub Group Name</th>
-                                <th class="table-plus datatable-nosort">MatrixName</th>
-                                <th class="table-plus datatable-nosort">MatrixCode</th>
+                                <th class="table-plus datatable-nosort">Matrix Name</th>
+                                <th class="table-plus datatable-nosort">Matrix Code</th>
                                 <th class="table-plus datatable-nosort">IsActive</th>
                                 <th class="table-plus datatable-nosort">Action</th>
                             </tr>
@@ -88,14 +90,7 @@
                                 }
                             }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="pagination pagination-centered"></div>
-                                </td>
-                            </tr>
-
-                        </tfoot>
+                        
                     </table>
                 </div>
             </div>
@@ -137,4 +132,12 @@
 
         });
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>

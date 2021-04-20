@@ -9,9 +9,10 @@
         @Html.HiddenFor(model => model.QuotationLogId)
         @Html.HiddenFor(model => model.EnquiryId)
         @Html.HiddenFor(model => model.QuotedAmount)
-        <div class="form-group col-md-12">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-6" })
-            <div class="col-md-12">
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Status: </label>
+            @*@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-6" })*@
+            <div class="col-sm-9">
                 @*@Html.TextBoxFor(model => model.Status, new { @class = "form-control" })*@
                 <select id="Status" name="Status" class="form-control">
                     <option value="Approve">Approve</option>
@@ -21,19 +22,21 @@
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group col-md-12">
-            @Html.LabelFor(model => model.StatusUpdatedOn, htmlAttributes: new { @class = "control-label col-md-12" })
-            <div class="col-md-12">
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">StatusUpdate On: </label>
+            @*@Html.LabelFor(model => model.StatusUpdatedOn, htmlAttributes: new { @class = "control-label col-md-12" })*@
+            <div class="col-sm-9">
                 <input type="date" id="StatusUpdatedOn" name="StatusUpdatedOn" class="form-control col-md-12" data_format="dd/MM/yyyy" />
                 @*@Html.TextBoxFor(model => model.StatusUpdatedOn, new { @class = "form-control date-picker", @autocomplete = "false" })*@
                 @Html.ValidationMessageFor(model => model.StatusUpdatedOn, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group col-md-12">
-            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-6" })
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Remark: </label>
+            @*@Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-6" })*@
             @*<span class="required" style="color:red">*</span>*@
-            <div class="col-md-12">
-                @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control col-md-12" })
+            <div class="col-sm-9">
+                @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control col-md-12",@style="height:65px" })
                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
             </div>
         </div>

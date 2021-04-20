@@ -71,7 +71,7 @@
     function CancelNameValues() {
         $('#ParameterMasterId').val(-1);
         $('#TestMethodId').val(-1);
-       //$('#Parameters').val("");
+        //$('#Parameters').val("");
         $('#TestResults').val("");
         $('#btnAdd').val("Add")
         $('#btnCancel').css('display', 'none')
@@ -95,7 +95,7 @@
             $('#TestMethodId').html('');
             $('#TestMethodId').append('<option value="">---Select---</option>');
             $.ajax({
-                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val()+ "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val() + "&ParameterMasterId=" + $('#ParameterMasterId').val(),
                 type: 'Get',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 dataType: 'json',
@@ -105,7 +105,7 @@
                         $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
                     })
 
-                     $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+                    $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
                 },
                 error: function (data) {
                 }

@@ -16,7 +16,7 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Arrival</a></li>
+                                <li class="breadcrumb-item"><a href="#">Arrival</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Sample Arrival</li>
                                 <li class="breadcrumb-item active" aria-current="page">Sample Arrival List</li>
                             </ol>
@@ -30,14 +30,13 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Sample Arrival List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
                 </div>
 
-                <table class="data-table table nowrap">
+                <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                     <thead>
-                        <tr  class="thead-dark">
-                            <th class="table-plus datatable-nosort" >
+                        <tr class="thead-dark">
+                            <th class="table-plus datatable-nosort">
                                 SrNo.
                             </th>
                             <th>
@@ -53,8 +52,8 @@
                                 Contact Number
                             </th>
                             @*<th class="width-5">
-                                Sample No.
-                            </th>*@
+                                    Sample No.
+                                </th>*@
                             <th>
                                 Sample ID
                             </th>
@@ -106,8 +105,8 @@
                                     </a>
                                 </td>
                                 @*<td>
-                                    @Html.DisplayFor(modelItem => item.SampleName)
-                                </td>*@
+                                        @Html.DisplayFor(modelItem => item.SampleName)
+                                    </td>*@
                                 <td>
                                     @Html.HiddenFor(item => Model[i].CollectionDate)
                                     @Html.DisplayFor(item => Model[i].Date)
@@ -121,12 +120,12 @@
                                       Model[i].Url.ToString().Trim() == "Coal" || Model[i].Url.ToString().Trim() == "Coke" || Model[i].Url.ToString().Trim() == "Charcoal" || Model[i].Url.ToString().Trim() == "Briquettes" || Model[i].Url.ToString().Trim() == "Other Solid fuel" || Model[i].Url.ToString().Trim() == "Food" ||
                                       Model[i].Url.ToString().Trim() == "Used Oil" || Model[i].Url.ToString().Trim() == "Waste Oil" || Model[i].Url.ToString().Trim() == "Sediment" || Model[i].Url.ToString().Trim() == "Soil" || Model[i].Url.ToString().Trim() == "Hazardous Waste" || Model[i].Url.ToString().Trim() == "Solid Waste")
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=BuildingMaterial.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=BuildingMaterial.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Drinking Water/Potable Water /Domestic Water" || Model[i].Url.ToString().Trim() == "Ground Water" || Model[i].Url.ToString().Trim() == "Construction Water" || Model[i].Url.ToString().Trim() == "Industrial Water" || Model[i].Url.ToString().Trim() == "Irrigation Water" || Model[i].Url.ToString().Trim() == "Packaged Drinking Water" || Model[i].Url.ToString().Trim() == "Wastewater"
                                         || Model[i].Url.ToString().Trim() == "Surface Water" || Model[i].Url.ToString().Trim() == "Swimming Pool Water" || Model[i].Url.ToString().Trim() == "Water from Purifiers" || Model[i].Url.ToString().Trim() == "Water for Medicinal Purpose" || Model[i].Url.ToString().Trim() == "Disilled/Deminarilized Water" || Model[i].Url.ToString().Trim() == "Other Water" || Model[i].Url.ToString().Trim() == "Domestic Effluent" || Model[i].Url.ToString().Trim() == "Industrial Effluent")
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Water.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Water.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Ambient Air")
                                     {
@@ -136,27 +135,27 @@
                                             <option value="Shift2">Shift 2</option>
                                             <option value="Shift3">Shift 3</option>
                                         </select>
-                                        <a href="" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" onclick="GetShiftData(@i,@Model[i].SampleCollectionId,'@Model[i].Url');">Print</a>
+                                        <a href="" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" onclick="GetShiftData(@i,@Model[i].SampleCollectionId,'@Model[i].Url');">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Surface Swabs" || Model[i].Url.ToString().Trim() == "Air Monitoring")
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDMicrobiologicalAirMonitoring.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDMicrobiologicalAirMonitoring.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignlef tbtn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Ambient Noise Level" || Model[i].Url.ToString().Trim() == "Workplace Noise Level")
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AmbientWorkplaceNoiseSampleID.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AmbientWorkplaceNoiseSampleID.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft btn-sm " data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Source Noise Level")
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=SourceNoiselevelSampleId.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=SourceNoiselevelSampleId.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Workplace Air" || Model[i].Url.ToString().Trim() == "Fugitive Emission" || Model[i].Url.ToString().Trim() == "Workplace Air/Indoor Air Quality")
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDWorkPlaceAndFugutive.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info  alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDWorkPlaceAndFugutive.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info  alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Stack Emission")
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=StackEmissionMonitoringReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=StackEmissionMonitoringReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                 </td>
                                 <td>
@@ -167,7 +166,7 @@
                                             <option value="Shift1">24 Hours</option>
                                             <option value="Shift2">8 Hours</option>
                                         </select>
-                                        <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetShiftDataArc(@i,@Model[i].SampleCollectionId,'@Model[i].Url');">Print</a>
+                                        <a href="" class="btn btn-primary alignleft btn-sm" data-toggle="tooltip" data-placement="top" onclick="GetShiftDataArc(@i,@Model[i].SampleCollectionId,'@Model[i].Url');">Print</a>
                                         //<a target="_blank" href="/Reporting/frmShowReport.aspx?path=AmbientAirARCReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                     else if (Model[i].Url.ToString().Trim() == "Ambient Noise Level" || Model[i].Url.ToString().Trim() == "Workplace Noise Level" || Model[i].Url.ToString().Trim() == "Source Noise Level")
@@ -176,14 +175,14 @@
                                     }
                                     else
                                     {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AnalysisReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AnalysisReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                     }
                                 </td>
                                 <td>
                                     @Html.DisplayFor(item => Model[i].RequestNo)
                                 </td>
                                 <td>
-                                    <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AcknowledgementReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&WorkOrderId=@Model[i].WorkOrderID" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                    <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AcknowledgementReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&WorkOrderId=@Model[i].WorkOrderID" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                 </td>
                             </tr>
                         }
@@ -198,12 +197,12 @@
 <script>
 
     function funView(SampleCollectionId, SampleNo, ARCId) {
-      
+
         location.href = '/Arrival/SampleArrival/AddSampleArrival?SampleCollectionId=' + SampleCollectionId + '&ARCId=' + ARCId + '&SampleNo=' + SampleNo;
     }
 
     function GetShiftData(i, SampleCollectionId, Url) {
-       
+
         var SampleCollectionId = SampleCollectionId;
         var Url = Url;
         var m = "#SelShift" + i;
@@ -232,7 +231,7 @@
     };
 
     function GetShiftDataArc(i, SampleCollectionId, Url) {
-     
+
         var SampleCollectionId = SampleCollectionId;
         var Url = Url;
         var m = "#SelectShift" + i;
@@ -272,3 +271,11 @@
     };
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

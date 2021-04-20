@@ -29,7 +29,6 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Add Water Field Values</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
                 </div>
                 @Html.HiddenFor(model => model.EnquirySampleID)
@@ -46,21 +45,14 @@
                 </div>
                 @using (Ajax.BeginForm("FieldWasteWater", "FieldWasteWater", new AjaxOptions() { HttpMethod = "Post", OnBegin = "VlidateClick()", OnSuccess = "WasteWaterSuccess" }))
                 {
-
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.EnquiryId)
                     @Html.HiddenFor(model => model.SampleCollectionId)
                     @Html.HiddenFor(model => model.WasteWaterID)
-                    <hr />
-                    <div class="row">
-                        <div class="card-box table-responsive">
-                            <p class="text-muted font-13 m-b-30">
-                            </p>
-                            <div id="divList">
-                                @{ Html.RenderAction("_FDWasteWaterList", "FieldWasteWater", Model);}
-                            </div>
-                        </div>
+
+                    <div id="divList">
+                        @{ Html.RenderAction("_FDWasteWaterList", "FieldWasteWater", Model);}
                     </div>
                     <div>
                         @{ Html.RenderAction("_FieldWaterUse", "FieldWasteWater", Model);}
@@ -70,12 +62,12 @@
                             @if (ViewBag.CurrentStatus == "SampleColl")
                             {
                                 @*<button type="submit" id="btnSave" class="btn btn-round btn-secondary" name="Save" value="FieldSave" style="background-color:darkgrey" disabled="disabled">Save </button>*@
-                                <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="FieldSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                                <button type="submit" id="btnSubmit" class="btn btn-round btn-sm btn-secondary " name="Save" value="FieldSubmit" style="background-color:darkgrey;float:right;" disabled="disabled">Submit</button>
                             }
                             else
                             {
                                 @*<button type="submit" id="btnSave" class="btn btn-success" name="Save" value="FieldSave">Save </button>*@
-                                <button type="submit" id="btnSubmit" class="btn btn-primary" name="Save" value="FieldSubmit">Submit</button>
+                                <button type="submit" id="btnSubmit" class="btn btn-info btn-sm" name="Save" value="FieldSubmit" style="float:right;">Submit</button>
                             }
                         </div>
                     </div>

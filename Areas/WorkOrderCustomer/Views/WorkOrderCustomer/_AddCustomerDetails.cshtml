@@ -4,128 +4,105 @@
 @{
     ViewBag.Title = "_AddCustomerDetails";
 }
-<div>
-   <div class="title-alt">
-        <a class="btn btn-sm btn-info pull-right" href="/Customer/Customer/AddCustomer" style="color: #fff; padding: 5px 15px !important; margin: 7px 15px;">Add Customer</a>
-    </div>
-    <br/>
-   <div>
-       @using (Ajax.BeginForm("_AddCustomerDetails", "WorkOrderCustomer", FormMethod.Post, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "WorkOrderCustomerSuccess" }, new { enctype = "multipart/form-data" }))
+
+ <br/> 
+    <div>
+        @using (Ajax.BeginForm("_AddCustomerDetails", "WorkOrderCustomer", FormMethod.Post, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "WorkOrderCustomerSuccess" }, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.WorkOrderId)
-     
-          
-               <div class="form-check-inline">
-                   <label class="col-lg-5 col-sm-5 control-label" for="inputEmail1">Mode Of Communication <span class="required" style="color:red">*</span></label>
-                   @Html.HiddenFor(model => model.ModeOfCommunicationId)
-                   <div class="col-lg-9">
-                       @foreach (var item in (List<CommunicationEntity>)ViewBag.CommunicationMode)
-                       {
-                           if (Model.ModeOfCommunicationId == item.ModeOfCommunicationId)
-                           {
-                               <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @checked = "checked", @class = "modeofcomm" }) @item.CommunicationMode </label>
-                           }
-                           else
-                           {
-                               <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @class = "modeofcomm" }) @item.CommunicationMode </label>
-                           }
-                       }
-                   </div>
-               </div>
-               <hr />
-               <div class="form-check-inline">
-                   <label class="col-lg-6 col-sm-6 control-label" for="inputEmail1">Customer Name  <span class="required" style="color:red">*</span></label>
-                   <div class="col-lg-9">
-                       @Html.DropDownListFor(model => model.CustomerMasterId, new SelectList(ViewBag.Customers, "CustomerMasterId", "RegistrationName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
-                       @Html.ValidationMessageFor(model => model.CustomerMasterId, "", new { @class = "text-danger" })
-                   </div>
-               </div>
-          
-           <hr />
-                <div class="form-check-inline">
-                   <label class="col-lg-6 col-sm-6 control-label" for="inputEmail1">Duration(in months)  <span class="required" style="color:red">*</span></label>
-                   <div class="col-lg-7">
-                       @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", @autocomplete = "false" })
-                       @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger col-md-10" })
-                   </div>
-               </div>
-               <hr />
-               <div class="form-check-inline">
-                   <label class="col-lg-6 col-sm-6 control-label " for="inputEmail1">WorkOrder Received On  <span class="required" style="color:red">*</span></label>
-                   <div class="col-lg-6">
-                       <div class="input-group-text date">
-                           <input type="date" id="WorkOrderReceivedDate" name="WorkOrderReceivedDate"  placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
-                           @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control col-sm-4", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", onfocus = "this.value=''"})*@
-                           @*<span class="input-group-addon add-on">
-                            <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-                            </span>*@ 
-                           @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger col-md-10" })
-                       </div>
-                      
-                   </div>
-               </div>
-              
-               <hr />
-               <div class="form-check-inline">
-                   <label class="col-lg-6 col-sm-6 control-label" for="inputEmail1">WorkOrder End Date  <span class="required" style="color:red">*</span></label>
-                   <div class="col-lg-7">
-                      
-                           @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly" })
-                           @Html.HiddenFor(model => model.WorkOrderEndDate)
-                           @*<input type="date" id="WorkOrderEndDate" name="WorkOrderEndDate" class="input-group col-sm-12" placeholder="dd/MM/yyyy" onblur="ValidateDate();" />*@
-                           @*@Html.TextBoxFor(model => model.WorkOrderEndDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", @readonly = "readonly", onfocus = "this.value=''" })*@
-                           @*<span class="input-group-addon add-on">
-                        <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-                        </span>*@
-                       
-                       @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger col-md-10" })
-                   </div>
-               </div>
-               <hr />
-               <div class="form-check-inline">
-                   <label class="col-lg-7 col-sm-7 control-label" for="inputEmail1">Expected Sample Collection Date <span class="required" style="color:red">*</span></label>
-                   <div class="col-lg-7">
-                       <div class="">
-                           <input type="date" id="SampleCollectionDate" name="SampleCollectionDate"  placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
-                           @*@Html.TextBoxFor(model => model.SampleCollectionDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy" })*@
-                           @*<span class="input-group-addon add-on">
-            <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-             </span>*@
-                           @Html.ValidationMessageFor(model => model.SampleCollectionDate, "", new { @class = "text-danger col-md-10" })
-                       </div>
-                    
-                   </div>
-               </div>
-               <hr />
-               <div class="form-check-inline">
-                   <label class="col-lg-6 col-sm-6 control-label">WorkOrder No <span class="required" style="color:red">*</span></label>
-                   <div class="col-lg-8">
-                       @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control", @autocomplete = "false" })
-                       @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
-                   </div>
-               </div>
-               <hr />
-               <div class="form-check-inline">
-                   <label class="col-lg-6 col-sm-6 control-label mr-btm-15">Upload Work Order</label>
-                   <div class="col-lg-8 ">
-                       <input id="fileInput" name="file" type="file" />
-                   </div>
-               </div>
-        
-           <div class="row">
-               <div class="form-actions" style="margin:20px 0 0 0;text-align: center;">
-                   <a class="btn btn-danger" href="/WorkOrderCustomer/WorkOrderCustomer/Index">Cancel</a>
-                   <a class="btn btn-warning" href="/WorkOrderCustomer/WorkOrderCustomer/AddWorkOrderCustomer">Reset</a>
-                   <button type="submit" id="btnSubmit" class="btn btn-info">Save</button>
-               </div>
-           </div>
-      
+
+
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-3 col-form-label" for="inputEmail1">Mode Of Communication: <span class="required" style="color:red">*</span></label>
+                @Html.HiddenFor(model => model.ModeOfCommunicationId)
+                <div class="col-sm-9">
+                    @foreach (var item in (List<CommunicationEntity>)ViewBag.CommunicationMode)
+                    {
+                        if (Model.ModeOfCommunicationId == item.ModeOfCommunicationId)
+                        {
+                            <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @checked = "checked", @class = "modeofcomm" }) @item.CommunicationMode </label>
+                        }
+                        else
+                        {
+                            <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @class = "modeofcomm" }) @item.CommunicationMode </label>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Customer Name: <span class="required" style="color:red">*</span></label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CustomerMasterId, new SelectList(ViewBag.Customers, "CustomerMasterId", "RegistrationName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
+                    @Html.ValidationMessageFor(model => model.CustomerMasterId, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Duration(in months):  <span class="required" style="color:red">*</span></label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", @autocomplete = "false" })
+                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger col-md-10" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Work Order Received On:  <span class="required" style="color:red">*</span></label>
+                <div class="col-sm-4">
+                    <input type="date" id="WorkOrderReceivedDate" class="form-control" name="WorkOrderReceivedDate" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
+                    @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control col-sm-4", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", onfocus = "this.value=''"})*@
+                    @*<span class="input-group-addon add-on">
+                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                    </span>*@
+                    @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger col-md-10" })
+
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">WorkOrder End Date:  <span class="required" style="color:red">*</span></label>
+                <div class="col-sm-4">
+
+                    @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly" })
+                    @Html.HiddenFor(model => model.WorkOrderEndDate)
+                    @*<input type="date" id="WorkOrderEndDate" name="WorkOrderEndDate" class="input-group col-sm-12" placeholder="dd/MM/yyyy" onblur="ValidateDate();" />*@
+                    @*@Html.TextBoxFor(model => model.WorkOrderEndDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", @readonly = "readonly", onfocus = "this.value=''" })*@
+                    @*<span class="input-group-addon add-on">
+                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                    </span>*@
+
+                    @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger col-md-10" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Expected Sample Collection Date: <span class="required" style="color:red">*</span></label>
+                <div class="col-sm-4">
+
+                    <input type="date" class="form-control" id="SampleCollectionDate" name="SampleCollectionDate" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
+                    @*@Html.TextBoxFor(model => model.SampleCollectionDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy" })*@
+                    @*<span class="input-group-addon add-on">
+                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                     </span>*@
+                    @Html.ValidationMessageFor(model => model.SampleCollectionDate, "", new { @class = "text-danger col-md-10" })
+
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label">WorkOrder No: <span class="required" style="color:red">*</span></label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control", @autocomplete = "false" })
+                    @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-3 col-form-label">Upload Work Order:</label>
+                <div class="col-sm-3">
+                    <input id="fileInput" name="file" type="file" style="margin-left:5px;" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <a class="btn btn-danger btn-sm" href="/WorkOrderCustomer/WorkOrderCustomer/Index" style="margin-left: 22px;">Back</a>
+                <div class="col-sm-12 col-md-12" style="margin-top:-27px">
+                    <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
+                </div>
+            </div>
+
         }
     </div>
-</div>
-
 <script>
 
     $(function () {

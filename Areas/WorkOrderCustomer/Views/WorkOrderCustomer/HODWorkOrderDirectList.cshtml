@@ -11,13 +11,13 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="title">
-                            <h4>WorkOrderCustomer</h4>
+                            <h4>Work Order Customer</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">WorkOrderCustomer</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">WorkOrderCustomer</li>
-                                <li class="breadcrumb-item active" aria-current="page">HODWorkOrderDirect List</li>
+                                <li class="breadcrumb-item"><a href="index.html">Work Order Customer</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Work  Order Customer</li>
+                                <li class="breadcrumb-item active" aria-current="page">HOD Work Order Direct List</li>
                             </ol>
                         </nav>
                     </div>
@@ -27,35 +27,47 @@
             <div class="pd-20 card-box mb-30">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <h4 class="text-blue h4">HODWorkOrderDirect List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                        <h4 class="text-blue h4">HOD Work Order Direct List</h4>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        From Date
-                        <div id="" class="input-group ">
-                            <input type="date" id="FromDate" name="FromDate" class="form-control " data_format="dd/MM/yyyy" />
-                        </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label"> From Date:</label>
+                    <div class="col-sm-3 form-group row">
+                        <input type="date" id="FromDate" name="FromDate" class="form-control" placeholder="dd/MM/yyyy" />
                     </div>
-                    <div class="col-sm-4 form-group">
-                        To Date
-                        <div id="" class="input-group ">
-                            <input type="date" id="ToDate" name="ToDate" class="form-control " data_format="dd/MM/yyyy" />
-                        </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">To Date:</label>
+                    <div class="col-sm-3 form-group row">
+                        <input type="date" id="ToDate" name="ToDate" class="form-control" placeholder="dd/MM/yyyy" />
                     </div>
-                    <div class="col-sm-4 form-group">
-                        <div class="col-sm-8">
-                            <button class="btn btn-primary" onclick="SearchWorkOrderD();" type="button" style="margin-top:20px;">Search</button>
-                        </div>
+                    <div class="col-sm-2">
+                        <button onclick="SearchWorkOrderD();" class="btn btn-success btn-sm" type="button">Search</button>
                     </div>
                 </div>
-                <hr />
-                <div>
+                @*<div class="row">
+                        <div class="col-sm-4 form-group">
+                            From Date
+                            <div id="" class="input-group ">
+                                <input type="date" id="FromDate" name="FromDate" class="form-control " data_format="dd/MM/yyyy" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            To Date
+                            <div id="" class="input-group ">
+                                <input type="date" id="ToDate" name="ToDate" class="form-control " data_format="dd/MM/yyyy" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-8">
+                                <button class="btn btn-primary" onclick="SearchWorkOrderD();" type="button" style="margin-top:20px;">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />*@
+                <div class="pb-20">
                     <!-- Simple Datatable start -->
                     @if (ViewBag.RoleName == "HOD" || ViewBag.RoleName == "Admin" || ViewBag.RoleName == "BDM")
                     {
-                        <table class="data-table table nowrap">
+                        <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
                                     <th class="table-plus datatable-nosort">
@@ -115,7 +127,7 @@
                                                 @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
                                             </td>
                                             <td>
-                                               @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
+                                                @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
                                                     {
                                                         <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
                                                     }
@@ -240,5 +252,13 @@
         }
     }
 
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>
 

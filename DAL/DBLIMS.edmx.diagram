@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8b66733f15594cd89fb0fc58970d8357" Name="Diagram1">
+      <Diagram DiagramId="cdee5f4d4b5b4fe3a6bde4e893e7e688" Name="Diagram1" ZoomLevel="70">
         <EntityTypeShape EntityType="LIMSModel.ErrorLog" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LIMSModel.InventoryAssignedSerialNumberDetail" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LIMSModel.InventoryAssignmentDetail" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />

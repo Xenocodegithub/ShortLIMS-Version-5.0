@@ -21,18 +21,7 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-md-6 col-sm-12 text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                January 2018
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Export List</a>
-                                <a class="dropdown-item" href="#">Policies</a>
-                                <a class="dropdown-item" href="#">View Assets</a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="pd-20 card-box mb-30">
@@ -49,29 +38,27 @@
 
                         <h5></h5>
                         <section>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Name of Capacity:</label>
-                                        @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control", @style = "width:470px;" })
-                                        @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
-                                    </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Name of Capacity:</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.Capacity, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="col-md-6">
+
+                                <label class="col-sm-12 col-md-2 col-form-label">Description:</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12 col-md-12">
                                     <div class="form-group">
-                                        <label>Description:</label>
-                                        @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @style = "width:470px;" })
-                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                        <input type="submit" value="Delete" class="btn btn-info btn-sm" id="buttonSave1" name="buttonSave" style="float:right" onclick="return validateData();" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6" style="margin-left:450px;">
-                                    <div class="form-group">
-                                        <input type="submit" value="Delete" class="btn btn-primary" id="buttonSave1" name="buttonSave" style="background-color:mediumblue;color:white;" onclick="return validateData();" />
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </section>
                     }
                 </div>

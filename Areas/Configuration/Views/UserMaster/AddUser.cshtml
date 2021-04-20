@@ -15,24 +15,13 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                @*<li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Discipline</li>
-                                    <li class="breadcrumb-item active" aria-current="page">Add Discipline</li>*@
+                               <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">User Master</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add User</li>
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-md-6 col-sm-12 text-right">
-                        <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                @*January 2018*@
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                @*<a class="dropdown-item" href="#">Export List</a>
-                                    <a class="dropdown-item" href="#">Policies</a>
-                                    <a class="dropdown-item" href="#">View Assets</a>*@
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
             <!-- Default Basic Forms Start -->
@@ -40,7 +29,7 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Add User</h4>
-                        <!--<p class="mb-30">-->@*All bootstrap element classies*@<!--</p>-->
+                       
                     </div>
                     @*<div class="pull-right">
                             <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
@@ -53,42 +42,40 @@
                             @Html.ValidationSummary(true);
                             @Html.HiddenFor(model => model.UserMasterID);
                             <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">User Name</label>
-                                <div class="col-sm-12 col-md-10">
+                                <label class="col-sm-12 col-md-2 col-form-label">User Name:</label>
+                                <div class="col-sm-4">
                                     @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholdder = "UserName" })
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Password</label>
-                                <div class="col-sm-12 col-md-10">
+                                <label class="col-sm-12 col-md-2 col-form-label">Password:</label>
+                                <div class="col-sm-4">
                                     @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholdder = "Password" })
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Confirm Password</label>
-                                <div class="col-sm-12 col-md-10">
+                                <label class="col-sm-12 col-md-2 col-form-label">Confirm Password:</label>
+                                <div class="col-sm-4">
                                     @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholdder = "ConfirmPassword" })
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Discipline Name</label>
-                                <div class="col-sm-12 col-md-10">
+                                <label class="col-sm-12 col-md-2 col-form-label">Discipline Name:</label>
+                                <div class="col-sm-4">
                                     @Html.DropDownListFor(model => model.DisciplineId, new SelectList(ViewBag.DisciplineList, "DisciplineId", "Discipline"), "Select Discipline ", new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.DisciplineId, "", new { @class = "text-danger" })
                                     @Html.HiddenFor(model => model.DisciplineName)
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
-                                <div class="col-sm-12 col-md-10">
+                                <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
+                                <div class="col-sm-4">
                                     <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
                                     <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <a class="btn btn-danger" href="/Configuration/UserMasterList">Cancel</a>
-                                <a class="btn btn-warning" href="/Configuration/Add">Reset</a>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <div class="c0l-sm-12 col-md-12">
+                                <a class="btn btn-danger btn-sm" href="/Configuration/UserMasterList">Back</a>
+                                @*<a class="btn btn-warning" href="/Configuration/Add">Reset</a>*@
+                                <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
+                                    </div>
                             </div>
                         }
                     </div>

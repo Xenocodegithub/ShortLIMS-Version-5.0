@@ -36,9 +36,9 @@
                         </div>*@
                 </div>
                 <!-- Simple Datatable start -->
-                <div class="card-box mb-30">
+               
                     <div class="pb-20">
-                        <table class="data-table table stripe hover nowrap">
+                        <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
                                     <th class="table-plus datatable-nosort">Sr No.</th>
@@ -104,5 +104,11 @@
             <!-- Default Basic Forms End -->
         </div>
     </div>
-</div>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

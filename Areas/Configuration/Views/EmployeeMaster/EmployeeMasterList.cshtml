@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 text-right">
                         <div class="dropdown">
-                            <a class="btn btn-primary" href="#" role="button">
+                            <a class="btn btn-info btn-sm" href="#" role="button">
                                 Add Employee
                             </a>
                         </div>
@@ -30,16 +30,17 @@
                 </div>
             </div>
             <!-- Simple Datatable start -->
-            <div class="card-box mb-30">
-                <div class="pd-20">
-                    <h4 class="text-blue h4">Employee Master List</h4>
-                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Employee Master List</h4>
+                    </div>
                 </div>
                 <div class="pb-20">
 
-                    <table class="data-table table stripe hover nowrap">
+                    <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">All</th>
                                 <th class="table-plus datatable-nosort">Sr.No.</th>
                                 <th class="table-plus datatable-nosort">First Name</th>
@@ -106,7 +107,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                     @*<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>*@
                                                     <a class="dropdown-item" href="@Url.Action("AddEmployee","EmployeeMaster",new {UserDetailId=item.UserDetailId })" title="Update" id="rowedit_@SerialNumber" operation="Update"><i class="dw dw-edit2"></i> Update</a>
-                                                    <a class="dropdown-item" href="#" onclick="Delete(@item.UserMasterId);" ><i class="dw dw-delete-3"></i> Delete</a>
+                                                    <a class="dropdown-item" href="#" onclick="Delete(@item.UserMasterId);"><i class="dw dw-delete-3"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -115,14 +116,7 @@
                                 }
                             }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="pagination pagination-centered"></div>
-                                </td>
-                            </tr>
 
-                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -131,36 +125,43 @@
     </div>
 </div>
 <script>
-function Delete(id) {
+    function Delete(id) {
 
-            swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                confirmButtonClass: 'btn btn-success margin-5',
-                cancelButtonClass: 'btn btn-danger margin-5',
-                buttonsStyling: false
-            }).then(function () {
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            confirmButtonClass: 'btn btn-success margin-5',
+            cancelButtonClass: 'btn btn-danger margin-5',
+            buttonsStyling: false
+        }).then(function () {
+            swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        }, function (dismiss) {
+            // dismiss can be 'cancel', 'overlay',
+            // 'close', and 'timer'
+            if (dismiss === 'cancel') {
                 swal(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
                 )
-            }, function (dismiss) {
-                // dismiss can be 'cancel', 'overlay',
-                // 'close', and 'timer'
-                if (dismiss === 'cancel') {
-                    swal(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
-                }
-            })
+            }
+        })
     }
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 

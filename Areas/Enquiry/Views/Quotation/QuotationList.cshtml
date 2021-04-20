@@ -30,27 +30,24 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Quotation List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <label> From Date:</label>
-                       <input type="date" id="FromDate" name="FromDate" class="input-group date  col-md-8" placeholder="dd/MM/yyyy" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label"> From Date:</label>
+                    <div class="col-sm-3 form-group row">
+                        <input type="date" id="FromDate" name="FromDate" class="form-control" placeholder="dd/MM/yyyy" />
                     </div>
-                    <div class="col-sm-4 form-group">
-                        <label>To Date:</label>
-                        <input type="date" id="ToDate" name="ToDate" class="input-group date col-md-8" placeholder="dd/MM/yyyy" />
+                    <label class="col-sm-12 col-md-2 col-form-label">To Date:</label>
+                    <div class="col-sm-3 form-group row">
+                        <input type="date" id="ToDate" name="ToDate" class="form-control" placeholder="dd/MM/yyyy" />
                     </div>
-                    <div class="col-sm-4 form-group">
-                         <button onclick="SearchQuotation();" class="btn btn-success" type="button" style="margin-top:18pt">Search</button>
+                    <div class="col-sm-2">
+                        <button onclick="SearchQuotation();" class="btn btn-success btn-sm" type="button">Search</button>
                     </div>
-
                 </div>
-                <hr />
                 <div>
                     <!-- Simple Datatable start -->
-                    <table class="data-table table nowrap">
+                    <table  class="data-table table stripe hover nowrap">
                         <thead>
                             <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">
@@ -109,7 +106,7 @@
                                         }
                                         else if (item.StatusCode.ToLower() == "quotsent")
                                         {
-                                            <a href="#" onclick="funQuotationApprove(@item.EnquiryId, '@tdLinkId');" class="btn btn-warning btn-sm" >Approve/Reject</a>
+                                            <a href="#" onclick="funQuotationApprove(@item.EnquiryId, '@tdLinkId');" class="btn btn-warning btn-sm">Approve/Reject</a>
                                         }
                                     </td>
                                 </tr>
@@ -126,8 +123,8 @@
 <div class="modal" id="divQuotationApprove" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 style="text-align:center;"> Approve Reject Quotation </h4>
+            <div class="modal-header"  style="background-color: steelblue;height: 42px;">
+                <h4 style="text-align:center;color:white;font-weight:bold;"> Approve Reject Quotation </h4>
                 <button type="button" onclick="$('#divQuotationApprove').hide();" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -156,4 +153,11 @@
         $('#divQuotationApprove').show();
     }
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

@@ -21,86 +21,74 @@
                             </ol>
                         </nav>
                     </div>
-                    
+
                 </div>
             </div>
             <!-- Default Basic Forms Start -->
-            <div class="pd-20 card-box mb-30">
+            <div class="pd-20 card-box mb-30" style="margin-top:-19px">
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Planner List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
-                    @*<div class="pull-right">
-                          <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-                        </div>*@
                 </div>
                 <!-- Simple Datatable start -->
-                <div class="card-box mb-30">
-                    <div class="pb-20">
-                        <table class="data-table table stripe hover nowrap">
-                            <thead>
-                                <tr class="thead-dark">
-                                    <th class="table-plus datatable-nosort">Sr No.</th>
-                                    <th>Sample ID</th>
-                                    <th>Sample Type</th>
-                                    <th>Product Group</th>
-                                    <th>Sub Group</th>
-                                    <th>Matrix</th>
-                                    <th class="table-plus datatable-nosort" >Status</th>
-                                    <th class="datatable-nosort">Report</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{ int rowNo = 0; }
-                                @if (Model.Count() > 0)
+
+                <div class="pb-20">
+                    <table id="dtHorizontalExample" class="table table stripe hover nowrap">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">Sr No.</th>
+                                <th>Sample ID</th>
+                                <th>Sample Type</th>
+                                <th>Product Group</th>
+                                <th>Sub Group</th>
+                                <th>Matrix</th>
+                                <th class="table-plus datatable-nosort">Status</th>
+                                @*<th class="datatable-nosort">Report</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int rowNo = 0; }
+                            @if (Model.Count() > 0)
+                            {
+                                foreach (var item in Model)
                                 {
-                                    foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td class="table-plus">@{rowNo++;}@rowNo</td>
+                                    <tr>
+                                        <td class="table-plus">@{rowNo++;}@rowNo</td>
+                                        <td>
+                                            <a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal1" style="color:blue">@item.SampleName</a>
+                                            @Html.HiddenFor(modelitem => item.SampleCollectionId)
+                                        </td>
+                                        <td>@item.SampleTypeProductName</td>
+                                        <td>@item.ProductGroupName</td>
+                                        <td>@item.SubGroupName</td>
+                                        <td>@item.MatrixName</td>
+                                        @if (item.StatusName == "RequestCreated")
+                                        {
                                             <td>
-                                                <a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal1" style="color:blue">@item.SampleNameOriginal</a>
-                                               @Html.HiddenFor(modelitem =>item.SampleCollectionId)
+                                                @item.StatusName<br />
+                                                <img src='/Content/images/active.png' alt='Active' id='imgStatus'>
                                             </td>
-                                            <td>@item.SampleTypeProductName</td>
-                                            <td>@item.ProductGroupName</td>
-                                            <td>@item.SubGroupName</td>
-                                            <td>@item.MatrixName</td>
-                                            @if (item.StatusName == "RequestCreated")
-                                            {
-                                                <td>
-                                                    @item.StatusName<br />
-                                                    <img src='/Content/images/active.png' alt='Active' id='imgStatus'>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    @item.StatusName<br />
-                                                    <img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'>
-                                                </td>
-                                            }
-
+                                        }
+                                        else
+                                        {
                                             <td>
+                                                @item.StatusName<br />
+                                                <img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'>
+                                            </td>
+                                        }
+
+                                        @*<td>
                                                 <a href="../../Reporting/frmShowReport.aspx?path=PlannerReport.rdl&SampleCollectionId=@item.SampleCollectionId" target="_blank">Download</a>
-                                            </td>
+                                            </td>*@
 
-                                        </tr>
-                                    }
+                                    </tr>
                                 }
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="5">
-                                        <div class="pagination pagination-centered"></div>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+
+                    </table>
                 </div>
-                <!-- Simple Datatable End -->
             </div>
             <!-- Default Basic Forms End -->
         </div>
@@ -111,9 +99,9 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width:70%">
         <!-- Modal content -->
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color:steelblue;height:42px;">
                 @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
-                <h4 style="text-align:center;">Sample Details</h4>
+                <h4  style="text-align:center;color:white;font-weight:bold">Sample Details</h4>
                 <a class="Closeup" href="/Lab/Planner/SampleList"><span class="close CPopup">&times;</span></a>
             </div>
             <div class="modal-body">
@@ -133,32 +121,34 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <label class="labeltext">Condition &nbsp;:</label><span class="text-span" id="condition"></span>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-sm-4">
                             <div class="form-group">
-                                <label class="labeltext">Report to be sent by &nbsp;:</label><span class="text-span" id="reportSent"></span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="labeltext">Date & Time of Sampling  &nbsp;:</label><span class="text-span" id="samplingDateTime"></span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="labeltext">Date of Receipt of Sampling  &nbsp;:</label><span class="text-span" id="dateReceiptOfSampling"></span>
+                                <label class="labeltext">Condition &nbsp;:</label><span class="text-span" id="condition"></span>
                             </div>
                         </div>
                         <div class="clearfix"></div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Report Sent On &nbsp;:</label><span class="text-span" id="reportSent"></span>
+                            </div>
+                        </div>
 
-                        <div class="card-box mb-30">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Sampling Date & Time &nbsp;:</label><span class="text-span" id="samplingDateTime"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="labeltext">Sampling Received Date &nbsp;:</label><span class="text-span" id="dateReceiptOfSampling"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="card-box mb-60">
                             <div class="pb-20">
                                 <table class="data-table table stripe hover nowrap" id="tblparameter">
-                                    
+
                                     <tbody>
                                         <tr class="thead-dark">
                                             <th class="width-5">
@@ -173,10 +163,10 @@
                                             <th class="width-20">
                                                 Analyst
                                             </th>
-                                            @*<th class="width-10">
+                                            @*<th class="width-20">
                                                 Reviewer
                                             </th>*@
-                                            <th class="width-10">
+                                            <th class="width-20">
                                                 Approver
                                             </th>
                                             <th class="width-10">
@@ -187,40 +177,35 @@
                                             </th>
                                         </tr>
                                         <tr class="thead-dark">
+
                                             <td class="width-5"></td>
+                                            <td class="width-10"></td>
                                             <td class="width-15"></td>
-                                            <td class="width-20"></td>
-                                            <td class="width-20">
-                                                <div id="divAnalystApplyToAll" style="width:110%"></div>
+                                            <td class="width-15">
+                                                <div id="divAnalystApplyToAll" style="width:140px;font-size:11px;"></div>
                                                 <br />
-                                                <button id="btnAnalystApplyToAll" style="width:110%">Apply to all</button>
+                                                <button id="btnAnalystApplyToAll" style="width:100px;display:grid;background:navy;color:white;">Apply to all</button>
                                             </td>
                                             @*<td class="width-10">
-                                                <div id="divReviewerApplyToAll" style="width:110%"></div>
+                                                <div id="divReviewerApplyToAll" style="width: 140px;font-size: 11px;"></div>
                                                 <br />
-                                                <button id="btnReviewerApplyToAll" style="width:110%">Apply to all</button>
+                                                <button id="btnReviewerApplyToAll" style="width: 100px; display: grid;background: navy;color: white;">Apply to all</button>
                                             </td>*@
                                             <td class="width-10">
-                                                <div id="divApproverApplyToAll" style="width:110%"></div>
+                                                <div id="divApproverApplyToAll" style="width: 140px;font-size: 11px;"></div>
                                                 <br />
-                                                <button id="btnApproverApplyToAll" style="width:110%">Apply to all</button>
+                                                <button id="btnApproverApplyToAll" style="width: 100px;display: grid;background: navy;color: white;">Apply to all</button>
                                             </td>
                                             <td class="width-10"></td>
                                             <td class="width-10"></td>
                                         </tr>
-                                    </tbody>                                 
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="9">
-                                                <div class="dataTables_paginate paging_simple_numbers" id=""></div>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
+                                    </tbody>
+                                    
                                 </table>
                             </div>
                         </div>
 
-                       
+
                     </div>
                 </div>
             </div>
@@ -380,12 +365,12 @@
 
 
                         if (!isActive) {
-                            tableContent = tableContent + "<td><input type='button' value='submit' class='submitParameter btn btn-success' /></td>";
+                            tableContent = tableContent + "<td><input type='button' value='Submit' class='submitParameter btn btn-success' /></td>";
                             tableContent = tableContent + "<td><img src='/Content/images/active.png' alt='Active'></td>";
 
                         }
                         else {
-                            tableContent = tableContent + "<td><input type='button' value='submit' class='submitParameter  btn btn-success' disabled /></td>";
+                            tableContent = tableContent + "<td><input type='button' value='Submit' class='submitParameter  btn btn-success' disabled /></td>";
                             tableContent = tableContent + "<td><img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'></td>";
 
                         }
@@ -412,7 +397,7 @@
             var UnitId = $(this).parent().parent().find('#hdnUnitId').val();
             var TestMethodID = $(this).parent().parent().find('#ddlTestMethods option:selected').val();
             var AnalystUserMasterID = $(this).parent().parent().find('#ddlAnalyst option:selected').val();
-           // var ReviewerUserMasterID = $(this).parent().parent().find('#ddlReviewer option:selected').val();
+            // var ReviewerUserMasterID = $(this).parent().parent().find('#ddlReviewer option:selected').val();
             var ApproverUserMasterID = $(this).parent().parent().find('#ddlApprover option:selected').val();
             if (AnalystUserMasterID == -1 || ApproverUserMasterID == -1) {
                 alert('Please select Analyst, Reviewer and Approver')
@@ -499,4 +484,12 @@
         });
     });
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+       

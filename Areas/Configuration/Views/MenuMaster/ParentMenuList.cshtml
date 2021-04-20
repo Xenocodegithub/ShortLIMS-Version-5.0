@@ -16,13 +16,14 @@
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">ParentMenu List</li>
+                                <li class="breadcrumb-item active" aria-current="page">Menu Master</li>
+                                <li class="breadcrumb-item active" aria-current="page">Parent Menu List</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-md-6 col-sm-12 text-right">
                         <div class="dropdown">
-                            <a class="btn btn-primary" href="@Url.Action("AddParentMenu"," MenuMaster")" role="button">
+                            <a class="btn btn-info btn-sm" href="@Url.Action("AddParentMenu"," MenuMaster")" role="button">
                                 Add Parent-Menu
                             </a>
                         </div>
@@ -30,15 +31,16 @@
                 </div>
             </div>
             <!-- Simple Datatable start -->
-            <div class="card-box mb-30">
-                <div class="pd-20">
-                    <h4 class="text-blue h4">Parent Menu List</h4>
-                    <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Parent Menu List</h4>
+                    </div>
                 </div>
                 <div class="pb-20">
                     <table class="data-table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">SR.NO.</th>
                                 <th class="table-plus datatable-nosort">ParentMenu</th>
                                 <th class="table-plus datatable-nosort">IsActive</th>
@@ -76,17 +78,10 @@
                                             </div>
                                         </td>
                                     </tr>
-                                 }
-                             }
+                                }
+                            }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                   
-                                </td>
-                            </tr>
-
-                        </tfoot>
+                      
                     </table>
                 </div>
             </div>
@@ -94,7 +89,14 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 
 
 

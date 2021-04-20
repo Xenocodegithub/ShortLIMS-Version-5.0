@@ -15,15 +15,15 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                @*<li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Discipline</li>
-                            <li class="breadcrumb-item active" aria-current="page">Add Discipline</li>*@
+                                <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Parameter Master</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Paramter Master </li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-md-6 col-sm-12 text-right">
                         <div class="dropdown">
-                            <a class="btn btn-primary" href="/Configuration/ParameterMaster/AddParameter" role="button">
+                            <a class="btn btn-info btn-sm" href="/Configuration/ParameterMaster/AddParameter" role="button">
                                 Add Parameter
                             </a>
                         </div>
@@ -37,8 +37,7 @@
                 <div class="pd-20 card-box mb-30">
                     <div class="clearfix">
                         <div class="pull-left">
-                            <h4 class="text-blue h4">Add Parameter</h4>
-                            <!--<p class="mb-30">-->@*All bootstrap element classies*@<!--</p>-->
+                            <h4 class="text-blue h4">Add Parameter Master</h4>
                         </div>
                         @*<div class="pull-right">
                         <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
@@ -46,144 +45,127 @@
                     </div>
                     <form>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Sample Type</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Sample Type:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "-----Select------", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.SampleTypeProductName)
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Product Group Name</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Product Group Name:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.ProductGroupId, new SelectList(ViewBag.ProductGroupList, "ProductGroupId", "ProductGroupName"), "-----Select------", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.ProductGroupId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.ProductGroupName)
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Sub Group Name</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Sub Group Name:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.SubGroupId, new SelectList(ViewBag.SubGroupList, "SubGroupId", "SubGroupName"), "-----Select------", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.SubGroupId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.SubGroupName)
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Matrix Name</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Matrix Name:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.MatrixId, new SelectList(ViewBag.MatrixList, "MatrixId", "MatrixName"), "-----Select------", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.MatrixId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.MatrixName)
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Parameter</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Parameter:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.ParameterList, "ParameterMasterId", "Parameter"), "-----Select------", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.ParameterMasterId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.Parameter)
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Discipline Name</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Discipline Name:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.DisciplineId, new SelectList(ViewBag.DisciplineList, "DisciplineId", "Discipline"), "-----Select------", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.DisciplineId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.DisciplineName)
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Unit</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Unit:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.UnitId, new SelectList(ViewBag.UnitList, "UnitId", "Unit"), "---Select---", new { @class = "form-control " })
                                 @Html.ValidationMessageFor(model => model.UnitId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.Unit)
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Test Method</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Test Method:</label>
+                            <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethodList, "TestMethodId", "TestMethod"), "---Select---", new { @class = "form-control " })
                                 @Html.ValidationMessageFor(model => model.TestMethodId, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.TestMethod)
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">IsNABL Accredited</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">IsNABL Accredited:</label>
+                            <div class="col-sm-4">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsNABLAccredited, "True", new { @checked = "checked" }) Yes </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsNABLAccredited, "False") No</label>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">LOD</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">LOD:</label>
+                            <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.LOD, new { @class = "form-control", placeholdder = "LOD" })
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">MaxRange</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Max Range:</label>
+                            <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.MaxRange, new { @class = "form-control", placeholdder = "MaxRange" })
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">IsField</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Field:</label>
+                            <div class="col-sm-4">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsField, "True", new { @checked = "checked" }) Yes </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsField, "False") No</label>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">PermissibleMin</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Permissible Min:</label>
+                            <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.PermissibleMin, new { @class = "form-control", placeholdder = "PermissibleMin" })
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">PermissibleMax</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Permissible Max:</label>
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(model => model.PermissibleMax, new { @class = "form-control", placeholdder = "PermissibleMax" })
 
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">IsIndustry Specified</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">IsIndustry Specified:</label>
+                            <div class="col-sm-4">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsIndustrySpecified, "True", new { @checked = "checked" }) Yes </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsIndustrySpecified, "False") No</label>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">RegulatoryMin</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Regulatory Min:</label>
+                            <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.RegulatoryMin, new { @class = "form-control", placeholdder = "RegulatoryMin" })
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">RegulatoryMax</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Regulatory Max:</label>
+                            <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.RegulatoryMax, new { @class = "form-control", placeholdder = "RegulatoryMax" })
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
-                            <div class="col-sm-12 col-md-10">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
+                            <div class="col-sm-4">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <a class="btn btn-danger" href="/Configuration/UserMasterList">Cancel</a>
-                            <a class="btn btn-warning" href="/Configuration/Add">Reset</a>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <div class="col-sm-12 col-md-12">
+                            <a class="btn btn-danger btn-sm" href="/Configuration/UserMasterList">Back</a>
+                            @*<a class="btn btn-warning" href="/Configuration/Add">Reset</a>*@
+                            <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
+                                </div>
                         </div>
                     </form>
                     <div class="collapse collapse-box" id="basic-form1">

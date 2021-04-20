@@ -30,18 +30,11 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Enquiry List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
-                    @*<div class="pull-right">
-                          <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-                        </div>*@
                 </div>
                 <!-- Simple Datatable start -->
-                <div class="card-box mb-30">
-                    <div class="pd-20">
-                    </div>
                     <div class="pb-20">
-                        <table class="data-table table nowrap">
+                        <table  class="data-table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
                                     <th class="table-plus datatable-nosort">Customer Name</th>
@@ -89,7 +82,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+              
                 <!-- Simple Datatable End -->
                 <div class="collapse collapse-box" id="basic-form1">
                     <div class="code-box">
@@ -165,4 +158,12 @@
     //    $('#divLogList').load('/Enquiry/Enquiry/_CommunicationLogList');
     //    $('#LogModal').show();
     //}
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>

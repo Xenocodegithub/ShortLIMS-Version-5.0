@@ -21,49 +21,30 @@
                             </ol>
                         </nav>
                     </div>
-                    
+
                 </div>
             </div>
 
-            <!-- Default Basic Forms Start -->
-            <div class="pd-20 card-box mb-30">
-                <div class="clearfix">
-                    <div class="pull-left">
-                        <h4 class="text-blue h4">Sample List</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
-                    </div>
-                    @*<div class="pull-right">
-                          <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-                        </div>*@
-                </div>
                 <!-- Simple Datatable start -->
-                <div class="card-box mb-30">
+                <div class="pd-20 card-box mb-30" style="margin-top:-19px">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Sample List</h4>
+                        </div>
+                    </div>
                     <div class="pb-20">
-                        <table class="data-table table stripe hover nowrap">
+                        <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
                                     <th class="table-plus datatable-nosort">Sr No.</th>
-                                    <th class="width-30">
-                                        Sample ID
-                                    </th>
-                                    <th class="width-15">
-                                        Sample Type
-                                    </th>
-                                    <th class="width-15">
-                                        Product Group
-                                    </th>
-                                    <th class="width-20">
-                                        Sub Group
-                                    </th>
-                                    <th class="width-10">
-                                        Matrix
-                                    </th>
-                                    <th class="width-10">
-                                        Report
-                                    </th>
-                                    <th class="width-10">
-                                        Status
-                                    </th>
+                                    <th>Sample ID</th>
+                                    <th>Sample Type</th>
+                                    <th>Product Group</th>
+                                    <th>Sub Group</th>
+                                    <th>Matrix</th>
+                                    <th>Status Name</th>
+                                    @*<th>Report</th>*@
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,59 +53,52 @@
                                 {
                                     foreach (var item in Model)
                                     {
-                                        if (item.NotApproveCount > 0)
-                                        {
-                                <tr>
-                                    <td>
-                                        @{ rowNo++; }
-                                        @rowNo
-                                    </td>
-                                    <td>
-                                        @Html.HiddenFor(modelItem => item.SampleCollectionId)
-                                        @*<a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal">  @Html.DisplayFor(modelItem => item.SampleNo)</a>*@
-                                        @Html.ActionLink(item.SampleName, "ParameterList", "Approver", new { @SampleId = item.SampleCollectionId }, null)
-                                    </td>
-                                    <td>@item.SampleTypeProductName</td>
-                                    <td>@item.ProductGroupName</td>
-                                    <td>@item.SubGroupName</td>
-                                    <td>@item.MatrixName</td>
-                                    <td>@item.StatusName</td>
-                                    <td>
-                                        <a href="../../Reporting/frmShowReport.aspx?path=TesterReport.rdl&SampleCollectionId=@item.SampleCollectionId" target="_blank">Download</a>
-                                    </td>
-                                    @if (item.ApprovalActive > 0)
-                                    {
-                                        <td>
-                                            <img src='/Content/images/active.png' alt='Active' id='imgStatus'>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            <img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'>
-                                        </td>
-                                    }
+                                        <tr>
+                                            <td class="table-plus">@{rowNo++;}@rowNo</td>
+                                            <td>
+                                                @Html.HiddenFor(modelItem => item.SampleCollectionId)
+                                                @*<a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal">  @Html.DisplayFor(modelItem => item.SampleNo)</a>*@
+                                                @Html.ActionLink(item.SampleName, "ParameterList", "Approver", new { @SampleId = item.SampleCollectionId }, null)
+                                            </td>
+                                            <td>@item.SampleTypeProductName</td>
+                                            <td>@item.ProductGroupName</td>
+                                            <td>@item.SubGroupName</td>
+                                            <td>@item.MatrixName</td>
+                                            <td>@item.StatusName</td>
 
-                                </tr>
-                                        }
+                                            @if (item.ApprovalActive > 0)
+                                            {
+                                                <td>
+                                                    <img src='/Content/images/active.png' alt='Active' id='imgStatus'>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'>
+                                                </td>
+                                            }
+                                            @*<td>
+                                                    <a href="../../Reporting/frmShowReport.aspx?path=TesterReport.rdl&SampleCollectionId=@item.SampleCollectionId" target="_blank">Download</a>
+                                                </td>*@
 
-                                       
+                                        </tr>
                                     }
                                 }
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="9">
-                                        <div class="dataTables_paginate paging_simple_numbers" id=""></div>
-                                    </td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
-                </div>               
+
+                </div>
             </div>
             <!-- Default Basic Forms End -->
         </div>
     </div>
-</div>
-
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

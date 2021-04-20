@@ -31,106 +31,77 @@
                 </div>
 
                 <!-- Default Basic Forms Start -->
-                <div class="pd-20 card-box mb-30">
-                    <div class="clearfix"> </div>
-                    <center>
-                        <h4 class="text-blue h4">Add Disposal</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
-                         </center>
-
-                        <div class="form_center" style="margin-left: 25%;">
-                            <fieldset>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label " for="inputEmail1">Sample Type <span class="required" style="color:red;text-align:right">*</span></label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
-                                        @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(model => model.SampleType)
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Sample Code <span class="required" style="color:red">*</span></label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.DropDownListFor(model => model.SampleCollectionId, new SelectList(ViewBag.SampleCodeList, "SampleCollectionId", "SampleName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
-                                        @Html.ValidationMessageFor(model => model.SampleCollectionId, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(model => model.SampleName)
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Date of Reciept of Sample <span class="required" style="color:red">*</span></label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.TextBoxFor(model => model.DateofRecieptofSample, new { @class = "form-control", @readonly = "readonly", @placeholder = "dd/MM/yyyy" })
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Date of Reporting <span class="required" style="color:red">*</span></label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.TextBoxFor(model => model.DateofReporting, new { @class = "form-control", @readonly = "readonly", @placeholder = "dd/MM/yyyy" })
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Date of Disposal <span class="required" style="color:red">*</span></label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        <div id="" class="">
-                                            <input type="date" id="DateOfDisposal" name="DateOfDisposal" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />
-                                            @Html.ValidationMessageFor(model => model.DateofDisposal, "", new { @class = "text-danger col-md-10" })
-                                        </div>
-                                      
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Disposal Method <span class="required" style="color:red">*</span></label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.EditorFor(model => model.DisposalMethod, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.DisposalMethod, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Disposed By</label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.DropDownListFor(model => model.SuperwisedByID, new SelectList(ViewBag.SuperwisedByList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.SuperwisedByID, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(model => model.SuperwisedBy)
-                                        @*@Html.EditorFor(model => model.DisposedBy, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Supervised By</label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.DropDownListFor(model => model.DisposedByID, new SelectList(ViewBag.DisposedByList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.DisposedByID, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(model => model.DisposedBy)
-                                        @*@Html.EditorFor(model => model.SuperwisedBy, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 col-sm-4 control-label  mr-btm-15" for="inputEmail1">Remark</label>
-                                    <div class="col-lg-8 mr-btm-15">
-                                        @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <center>
-                                <div class="row">
-                                    <div class="form-actions col-lg-8 mr-btm-15">
-                                        <a class="btn btn-danger" href="/Arrival/Disposal/DisposalList">Cancel</a>
-                                        <a class="btn btn-warning" href="/Arrival/Disposal/AddDisposal">Reset</a>
-                                        <button type="submit" id="" class="btn btn-info" onclick="SetNameValues();">Save</button>
-                                    </div>
-                                </div>
-                               </center>
-                            </fieldset>
+                <div class="pd-20 card-box mb-30" style="margin-top:-19px">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Add Disposal</h4>
                         </div>
-                   
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label " for="inputEmail1">Sample Type: <span class="required" style="color:red;">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SampleType)
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Sample Code: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SampleCollectionId, new SelectList(ViewBag.SampleCodeList, "SampleCollectionId", "SampleName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.SampleCollectionId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SampleName)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Received Date: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.DateofRecieptofSample, new { @class = "form-control", @readonly = "readonly", @placeholder = "dd-MM-yyyy", @style = "font-size:13px;" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Date of Reporting: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.DateofReporting, new { @class = "form-control", @readonly = "readonly", @placeholder = "dd-MM-yyyy", @style = "font-size:13px;" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Date of Disposal: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input type="date" id="DateOfDisposal" name="DateOfDisposal" class="form-control" placeholder="dd/MM/yyyy" style="font-size:13px;" />
+                            @Html.ValidationMessageFor(model => model.DateofDisposal, "", new { @class = "text-danger col-md-10" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Disposal Method: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.DisposalMethod, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                            @Html.ValidationMessageFor(model => model.DisposalMethod, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Disposed By:</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SuperwisedByID, new SelectList(ViewBag.SuperwisedByList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.SuperwisedByID, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SuperwisedBy)
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Supervised By:</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.DisposedByID, new SelectList(ViewBag.DisposedByList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.DisposedByID, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.DisposedBy)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Remark:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-12">
+                            <a class="btn btn-danger btn-sm" href="/Arrival/Disposal/DisposalList">Back</a>
+                            <button type="submit" id="" class="btn btn-info btn-sm" onclick="SetNameValues();" style="float:right;">Save</button>
+                        </div>
+                    </div>
+
+
                 </div>
                 <!-- Default Basic Forms End -->
             </div>

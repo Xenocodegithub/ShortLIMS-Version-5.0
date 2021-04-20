@@ -32,12 +32,12 @@
                     </div>
                 </div>
                 <div>
-                @Html.HiddenFor(model => model.EnquirySampleID)
-                <div Id="divParameterList">
-                    @{
-                        Html.RenderAction("_FieldParameterUnit", "FieldWasteWater", Model.EnquirySampleID);
-                    }
-                </div>
+                    @Html.HiddenFor(model => model.EnquirySampleID)
+                    <div Id="divParameterList">
+                        @{
+                            Html.RenderAction("_FieldParameterUnit", "FieldWasteWater", Model.EnquirySampleID);
+                        }
+                    </div>
                 </div>
                 <div>
                     @Html.Partial("_FDMicrobiologicalMonitoringOfAir")
