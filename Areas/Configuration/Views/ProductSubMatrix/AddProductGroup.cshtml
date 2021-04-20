@@ -23,6 +23,11 @@
                     </div>
                 </div>
             </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+
+                    </div>
+                </div>
+            </div>
             <!-- Default Basic Forms Start -->
             <div class="pd-20 card-box mb-30">
                 <div class="clearfix">
@@ -30,14 +35,14 @@
                         <h4 class="text-blue h4">Add Product Group</h4>
                     </div>
                     @*<div class="pull-right">
-                <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-            </div>*@
+                            <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
                 </div>
-                @using (Ajax.BeginForm("AddProductGroup", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddTestMethodSuccess" }))
+                @using (Ajax.BeginForm("AddProductGroup", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddProductGroupSuccess" }))
                 {
-                   
+
                     @Html.HiddenFor(Model => Model.ProductGroupId);
-                    
+
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Sample Type Product Name: </label>
                         <div class="col-sm-4">
@@ -78,5 +83,14 @@
         </div>
     </div>
 </div>
-
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+<script>
+    function AddProductGroupSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/ProductSubMatrix/ProductGroupList';
+        }
+    }
+</script>
 

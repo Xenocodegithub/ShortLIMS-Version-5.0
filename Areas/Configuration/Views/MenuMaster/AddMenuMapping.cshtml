@@ -58,6 +58,7 @@
                             <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.SubMenuId, new SelectList(ViewBag.SubMenuList, "SubMenuId", "SubMenuName"), "---Select---", new { @class = "form-control" })
                                 @Html.HiddenFor(model => model.SubMenu)
+                                @Html.ValidationMessageFor(model => model.SubMenuId, "", new { @class = "text-danger" })
                             </div>
                             </div>
                             <div class="form-group row">
@@ -78,6 +79,23 @@
                             <div class="collapse collapse-box" id="basic-form1">
                                 <div class="code-box">
                                     <div class="clearfix">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @*<a class="btn btn-outline-danger" href='/Configuration/ParentMenuList'>Close</a>
+                                <a class="btn btn-outline-primary" href="/Configuration/AddParentMenu">Reset</a>*@
+                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                        </div>
+                    }
+                    <div class="collapse collapse-box" id="basic-form1">
+                        <div class="code-box">
+                            <div class="clearfix">
 
                                         <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
                                         <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
@@ -85,11 +103,11 @@
                                     <pre>
                                     <code class="xml copy-pre" id="copy-pre"></code>
                         </pre>
-                                </div>
-                            </div>
                         </div>
+                    </div>
+                </div>
             <!-- Default Basic Forms End -->
-       
+        </div>
+    </div>
 </div>
-      </div>
-</div>
+

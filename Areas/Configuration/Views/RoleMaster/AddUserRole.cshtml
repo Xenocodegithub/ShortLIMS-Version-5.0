@@ -25,6 +25,8 @@
                         <div class="dropdown">
                             <a class="btn btn-info btn-sm" href="@Url.Action("UserRoleList","RoleMaster")" role="button" >
                                User Role List
+                            <a class="btn btn-primary" href="@Url.Action("UserRoleList","RoleMaster")" role="button">
+                                User Role List
                             </a>
                         </div>
                     </div>
@@ -73,12 +75,24 @@
                                 <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
                                     </div>
                             </div>
-                            }
-                           </div>
-                        </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+<script>
+    function AddUserRoleSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/RoleMaster/UserRoleList';
+        }
+    }
+</script>
+
+
 
 

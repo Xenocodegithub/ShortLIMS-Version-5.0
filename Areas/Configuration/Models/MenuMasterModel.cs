@@ -47,7 +47,7 @@ namespace LIMS_DEMO.Areas.Configuration.Models
         public string ParentMenu { get; set; }
 
         [Display(Name = "SubMenu Name")]
-        [Required(ErrorMessage = "SubMenu field is Required")]
+        [Required(ErrorMessage = "Please enter SubMenu")]
         public string SubMenu { get; set; }
         [Required(ErrorMessage = "ParentMenu Name field is Required")]
         public int ParentMenuId { get; set; }

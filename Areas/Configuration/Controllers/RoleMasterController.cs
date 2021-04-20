@@ -62,7 +62,7 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
                 else
                 {
                     strStatus = BALFactory.roleMasterBAL.AddUserRole(roleMasterEntity);
-                    //return Json(new { Status = strStatus, message = "UserRole has been registered successfully." }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Status = strStatus, message = "UserRole has been registered successfully." }, JsonRequestBehavior.AllowGet);
                 }
             }
 
@@ -70,9 +70,9 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             else
             {
                 strStatus = BALFactory.roleMasterBAL.UpdateUserRole(roleMasterEntity);
-                //return Json(new { Status = strStatus, message = "UserRole has been updated successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "UserRole has been updated successfully." }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("UserRoleList");
+            //return RedirectToAction("UserRoleList");
 
         }
         public ActionResult UserRoleList()

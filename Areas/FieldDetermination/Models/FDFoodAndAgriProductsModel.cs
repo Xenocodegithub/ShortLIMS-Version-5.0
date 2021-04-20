@@ -11,9 +11,11 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Models
         public Nullable<bool> IsNABLAccredited { get; set; }
         public Nullable<bool> InField { get; set; }
         //public int SolidHazardousWasteSoilOilId { get; set; }
+        [Required(ErrorMessage ="Please Select Parameter")]
         public int ParameterMasterId { get; set; }
         public string ParameterName { get; set; }
         public int FieldFoodAndAgriCultureId { get; set; }
+        [Required(ErrorMessage = "Please Select Test Method")]
         public int TestMethodId { get; set; }
         public string TestMethodName { get; set; }
         public Nullable<long> EnquiryId { get; set; }

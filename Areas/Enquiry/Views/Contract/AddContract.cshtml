@@ -76,19 +76,48 @@
                             </div>
                         </div>
                     }
+                </div>
 
-                    <div class="collapse collapse-box" id="basic-form1">
-                        <div class="code-box">
-                            <div class="clearfix">
-                                <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
-                                <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                <div id="divAddContract">
+                    @Html.HiddenFor(model => model.EnquiryId)
+                    @{
+                        Html.RenderAction("_Add", "Contract", Model.EnquiryId);
+                    }
+                </div>
+                @using (Ajax.BeginForm("AddContract", "Contract", new AjaxOptions() { HttpMethod = "Post", OnBegin = "Add", OnSuccess = "ContractSuccess" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.EnquiryId)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <hr />
+                    <div class="row">
+                        <div class="table-responsive">
+                            <p class="text-muted font-13 m-b-30">
+                            </p>
+                            <div id="divList">
+                                @{ Html.RenderAction("_ContractList", "Contract");}
                             </div>
-                            <pre>
-                            <code class="xml copy-pre" id="copy-pre"></code>
-                        </pre>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-10" style="margin-top:10px;">
+                            <input type="submit" value="Save & Next" class="btn btn-info" id="buttonSave1" name="buttonSave" />
+                        </div>
+                    </div>
+                }
+
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
                 </div>
+            </div>
             <!-- Default Basic Forms End -->
         </div>
     </div>
@@ -96,8 +125,9 @@
 
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
 <script>
     function ContractSuccess(result) {
         if (result.status == "success") {

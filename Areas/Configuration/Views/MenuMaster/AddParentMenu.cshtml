@@ -22,6 +22,20 @@
                             </ol>
                         </nav>
                     </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            @*<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    January 2018
+                                </a>*@
+                            <div class="dropdown-menu dropdown-menu-right">
+                                @*<a class="dropdown-item" href="#">Export List</a>
+                                    <a class="dropdown-item" href="#">Policies</a>
+                                    <a class="dropdown-item" href="#">View Assets</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     
                 </div>
             </div>
@@ -35,21 +49,21 @@
                      @using (Ajax.BeginForm("AddParentMenu", "MenuMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddParentMenuSuccess" }))
                      {
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Menu:</label>
-                            <div class="col-sm-4">
+                            <label class="col-sm-12 col-md-2 col-form-label">Menu</label>
+                            <div class="col-sm-12 col-md-10">
                                 @Html.TextBoxFor(model => model.Menu, new { @class = "form-control", placeholdder = "ParentMenu" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
-                            <div class="col-sm-4">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 col-md-11">
-                            <a class="btn btn-danger btn-sm" href="@Url.Action("ParentMenuList", "MenuMaster")">Back</a>&emsp;
-                            <button type="submit" class="btn btn-info btn-sm" style="float:right">Add</button>
-                                </div>
+                        <div class="actions clearfix">
+                            <a class="btn btn-outline-danger" href="@Url.Action("ParentMenuList", "MenuMaster")">Cancel</a>&emsp;
+                            <button type="submit" class="btn btn-outline-success">Add</button>
                         </div>
                      }
             </div>
@@ -57,6 +71,17 @@
         </div>
     </div>
 </div>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+<script>
+    function AddParentMenuSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/MenuMaster/ParentMenuList';
+        }
+    }
+</script>
+
 
 
 

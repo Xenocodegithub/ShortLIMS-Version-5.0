@@ -37,6 +37,7 @@
                 <div>
                     @using (Ajax.BeginForm("AddEmployee", "EmployeeMaster", new AjaxOptions { HttpMethod = "Post", OnSuccess = "AddEmployeeSuccess" }))
                     {
+                        @Html.AntiForgeryToken();
                         @Html.HiddenFor(model => model.UserDetailId);
                         @*@Html.HiddenFor(model => model.UserMasterId);*@
                         <div class="form-group row">
@@ -44,6 +45,7 @@
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholdder = "First Name" })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                             </div>
                             <label class="col-sm-12 col-md-2 col-form-label">Middle Name:</label>
                             <div class="col-sm-4">
@@ -56,6 +58,7 @@
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholdder = "Last Name" })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                             </div>
                             <label class="col-sm-12 col-md-2 col-form-label">User Name:</label>
                             <div class="col-sm-4">
@@ -69,11 +72,13 @@
                             <div class="col-sm-4">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.Gender, "Male", new { @checked = "checked" }) Male </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.Gender, "Female") Female</label>
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                             </div>
                             <label class="col-sm-12 col-md-2 col-form-label">DOB:</label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", placeholdder = "DOB" })
+                                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
@@ -81,6 +86,7 @@
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholdder = "Email" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
                             <label class="col-sm-12 col-md-2 col-form-label">Email:</label>
                             <div class="col-sm-4">
@@ -93,11 +99,13 @@
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", placeholdder = "Mobile" })
+                                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
                             </div>
                             <label class="col-sm-12 col-md-2 col-form-label">Employee Code:</label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.EmployeeCode, new { @class = "form-control", placeholdder = "Employee Code" })
+                                @Html.ValidationMessageFor(model => model.EmployeeCode, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
@@ -166,11 +174,13 @@
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control", placeholdder = "Pincode" })
+                                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
                             </div>
                             <label class="col-sm-12 col-md-2 col-form-label">Alternate Number:</label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.AlternateNumber, new { @class = "form-control", placeholdder = "AlternateNumber" })
+                                @Html.ValidationMessageFor(model => model.AlternateNumber, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
@@ -178,11 +188,13 @@
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.PANNo, new { @class = "form-control", placeholdder = "PAN NUMBER" })
+                                @Html.ValidationMessageFor(model => model.PANNo, "", new { @class = "text-danger" })
                             </div>
                             <label class="col-sm-12 col-md-2 col-form-label">Adhar No:</label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.AdharNo, new { @class = "form-control", placeholdder = "Adhar No" })
+                                @Html.ValidationMessageFor(model => model.AdharNo, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
@@ -199,25 +211,34 @@
                             <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
                                 </div>
                         </div>
-                       }
-                        </div>
-                        <div class="collapse collapse-box" id="basic-form1">
-                            <div class="code-box">
-                                <div class="clearfix">
+                    }
+                </div>
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
 
-                                    @*<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
-                        <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>*@
-                                </div>
-                                <pre>
-                                <code class="xml copy-pre" id="copy-pre"></code>
-                        </pre>
-                            </div>
+                            @*<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                                <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>*@
                         </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
                     </div>
+                </div>
+            </div>
             <!-- Default Basic Forms End -->
         </div>
     </div>
 </div>
-
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+<script>
+    function AddEmployeeSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/EmployeeMaster/EmployeeMasterList';
+        }
+    }
+</script>
 
 

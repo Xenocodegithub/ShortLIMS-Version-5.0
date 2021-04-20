@@ -105,7 +105,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
         [Required(ErrorMessage = "Please select date")]
         public Nullable<System.DateTime> SampleCollectionDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Please Enter Duration")]
         public Nullable<long> Duration { get; set; }
 
         public string FromDate { get; set; }

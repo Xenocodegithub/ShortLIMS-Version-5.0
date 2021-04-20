@@ -32,10 +32,10 @@
                         <!--<p class="mb-30">-->@*All bootstrap element classies*@<!--</p>-->
                     </div>
                     @*<div class="pull-right">
-                <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-            </div>*@
+                            <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
                 </div>
-                @using (Ajax.BeginForm("AddSubMenu", "MenuMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddTestMethodSuccess" }))
+                @using (Ajax.BeginForm("AddSubMenu", "MenuMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddSubMenuSuccess" }))
                 {
                     <div class="container">
                         <div class="form-group row">
@@ -48,15 +48,23 @@
                             <label class="col-sm-12 col-md-2 col-form-label">Sub Menu Name:</label>
                             <div class="col-sm-4">
                                 @Html.TextBoxFor(model => model.SubMenu, new { @class = "form-control ", placeholdder = "SubMenu" })
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">SubMenu Name</label>
+                            <div class="col-sm-12 col-md-10">
+                                @Html.TextBoxFor(model => model.SubMenu, new { @class = "form-control col-md-7", placeholdder = "SubMenu" })
+                                @Html.ValidationMessageFor(model => model.SubMenu, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Target Url:</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(model => model.TargetUrl, new { @class = "form-control ", placeholdder = "TargetUrl" })
+                            <label class="col-sm-12 col-md-2 col-form-label">Target Url</label>
+                            <div class="col-sm-12 col-md-10">
+                                @Html.TextBoxFor(model => model.TargetUrl, new { @class = "form-control col-md-7", placeholdder = "TargetUrl" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
-                            <div class="col-sm-4">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
                             </div>
@@ -70,9 +78,18 @@
                 }
                 <!-- Default Basic Forms End -->
             </div>
+        </div>
     </div>
-</div>
-
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/unobtrusive")
+    <script>
+    function AddSubMenuSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/MenuMaster/SubMenuList';
+        }
+    }
+    </script>
 
 
 

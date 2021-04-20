@@ -31,8 +31,8 @@
             <%--<asp:Label ID="lblError" runat="server" ForeColor="Red">Error: none</asp:Label>--%>
             <asp:ScriptManager ID="ScriptManager2" runat="server">
             </asp:ScriptManager>
-            <rsweb:ReportViewer ID="rvReportViewer" Width="950px" Height="800px" runat="server" OnPreRender="rvReportViewer_PreRender">
-            </rsweb:ReportViewer>
+            <rsweb:ReportViewer ID="rvReportViewer" Width="950px" Height="800px" runat="server">
+            </rsweb:ReportViewer>  <%--OnPreRender="rvReportViewer_PreRender"--%>
             <br />
         </div>
     </form>

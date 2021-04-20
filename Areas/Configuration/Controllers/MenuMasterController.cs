@@ -51,15 +51,15 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             if (model.MenuMasterId == 0)
             {
                 strStatus = BALFactory.menuMasterBAL.AddParentMenu(CoreFactory.menuMasterEntity);
-                //return Json(new { Status = strStatus, message = "Parent Menu has been registered successfully." }, JsonRequestBehavior.AllowGet);
-                return RedirectToAction("ParentMenuList");
+                return Json(new { Status = strStatus, message = "Parent Menu has been registered successfully." }, JsonRequestBehavior.AllowGet);
+               // return RedirectToAction("ParentMenuList");
             }
             //Use for update
             else
             {
                 strStatus = BALFactory.menuMasterBAL.UpdateParentMenu(CoreFactory.menuMasterEntity);
-                //return Json(new { Status = strStatus, message = "Parent Menu has been updated successfully." }, JsonRequestBehavior.AllowGet);
-                return RedirectToAction("ParentMenuList");
+                return Json(new { Status = strStatus, message = "Parent Menu has been updated successfully." }, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("ParentMenuList");
             }
         }
         public ActionResult ParentMenuList()
@@ -152,16 +152,16 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             if (model.MenuMasterId == 0)
             {
                 strStatus = BALFactory.menuMasterBAL.AddSubMenu(CoreFactory.menuMasterEntity);
-                // return Json(new { Status = strStatus, message = "Sub Menu has been registered successfully." }, JsonRequestBehavior.AllowGet);
-                return RedirectToAction("SubMenuList");
+                return Json(new { Status = strStatus, message = "Sub Menu has been registered successfully." }, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("SubMenuList");
             }
 
             //Use for update
             else
             {
                 strStatus = BALFactory.menuMasterBAL.UpdateSubMenu(CoreFactory.menuMasterEntity);
-                //return Json(new { Status = strStatus, message = "Sub Menu has been updated successfully." }, JsonRequestBehavior.AllowGet);
-                return RedirectToAction("SubMenuList");
+                return Json(new { Status = strStatus, message = "Sub Menu has been updated successfully." }, JsonRequestBehavior.AllowGet);
+               // return RedirectToAction("SubMenuList");
             }
         }
         public ActionResult DeleteSubMenu(int MenuMasterId)
@@ -276,8 +276,8 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
                     if (model.SubMenuId != 0)
 
                         strStatus = BALFactory.menuMasterBAL.AddMappingMenu2(CoreFactory.menuMasterEntity, 1);
-                    //return Json(new { Status = strStatus, message = "Menu Mapping has been registered successfully." }, JsonRequestBehavior.AllowGet);
-                    return RedirectToAction("MenuMappingList");
+                    return Json(new { Status = strStatus, message = "Menu Mapping has been registered successfully." }, JsonRequestBehavior.AllowGet);
+                    //return RedirectToAction("MenuMappingList");
                 }
             }
 
