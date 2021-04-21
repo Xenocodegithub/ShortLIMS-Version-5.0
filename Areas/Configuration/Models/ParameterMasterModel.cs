@@ -8,7 +8,7 @@ namespace LIMS_DEMO.Areas.Configuration.Models
 {
     public class ParameterMasterModel
     {
-        [Key]
+      
         [Required(ErrorMessage = "Parameter field is Required")]
         public long ParameterMasterId { get; set; }
 
@@ -21,6 +21,7 @@ namespace LIMS_DEMO.Areas.Configuration.Models
         public int ParameterGroupId { get; set; }
         public string TestMethod { get; set; }
         public int SampleTypeProductId { get; set; }
+        [Required(ErrorMessage = "Please Select Unit")]
         public Nullable<int> UnitId { get; set; }
         //public List<int> lstUnitId { get; set; }
         public string Unit { get; set; }
