@@ -71,5 +71,8 @@ namespace LIMS_DEMO.BAL
 
         //Dashboard
         public static Dashboard.DashboardBAL dashboardBAL = null;
+
+        //Invoice
+        public static Invoice.InvoiceBAL invoiceBAL = null;
     }
 }
