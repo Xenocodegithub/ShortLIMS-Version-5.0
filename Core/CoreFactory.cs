@@ -179,6 +179,8 @@ namespace LIMS_DEMO.Core
 
         public static IDashboard dashboard = null;
 
+        public static IInvoice invoice = null;
+
         //Configuration
         public static DisciplineMasterEntity disciplineMasterEntity = null;
         public static UserMasterEntity userMasterEntity = null;
@@ -204,6 +206,8 @@ namespace LIMS_DEMO.Core
         public static ReviewerEntity reviewerEntity = null;
         public static ApproverEntity approverEntity = null;
 
-        
+        //Invoice
+        public static Invoice.InvoiceEntity invoiceEntity = null;
+
     }
 }

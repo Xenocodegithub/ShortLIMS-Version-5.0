@@ -1,0 +1,146 @@
+﻿@model LIMS_DEMO.Areas.Invoice.Models.InvoiceModel
+
+@using (Ajax.BeginForm("_Costing", "Costing", new AjaxOptions() { HttpMethod = "Post", OnBegin = "OnClick", OnSuccess = "AddCostSuccess" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CostingId)
+    @Html.HiddenFor(model => model.EnquirySampleID)
+    @Html.HiddenFor(model => model.EnquiryMasterSampleTypeId)
+    <input id="gstRate" type="hidden" value="@ViewBag.GSTRate" />
+    <input id="Id" type="hidden" value="@ViewBag.EnquiryId" />
+
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.TotalCharges, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.TextBoxFor(model => model.TotalCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })<br />
+                    @Html.ValidationMessageFor(model => model.TotalCharges, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.DiscountAmount, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <input type="text" onkeyup="funCalNetAmount(true);" id="txtDiscountPercent" class="form-control" />
+                    @Html.TextBoxFor(model => model.DiscountAmount, new { @class = "form-control", @readonly = "readonly", onfocus = "this.value=''" })
+                    @Html.ValidationMessageFor(model => model.DiscountAmount, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.SampleAmount, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.TextBoxFor(model => model.SampleAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                    @Html.ValidationMessageFor(model => model.SampleAmount, "", new { @class = "text-danger" })
+
+                    @*@Html.LabelFor(model => model.GSTCharges, htmlAttributes: new { @class = "control-label col-md-3" })
+                           <div class="col-md-3">
+                             @Html.CheckBoxFor(m => m.isActive)
+                             @Html.TextBoxFor(model => model.GSTCharges, new { @class = "form-control", @readonly = "readonly" })
+                             @Html.ValidationMessageFor(model => model.GSTCharges, "", new { @class = "text-danger" })
+                        </div>*@
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.TransportationAmount, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                    @Html.TextBoxFor(model => model.TransportationAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                    @Html.ValidationMessageFor(model => model.TransportationAmount, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.TestingCharges, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.TextBoxFor(model => model.TestingCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                    @Html.ValidationMessageFor(model => model.TestingCharges, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.TextBoxFor(model => model.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.NetAmount, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                    @Html.TextBoxFor(model => model.NetAmount, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.NetAmount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @{ string btnText = "Add"; if (Model.CostingId != null && Model.CostingId != 0)
+                    {
+                        btnText = "Update";
+                        <input type="button" class="btn btn-danger" onclick="CancelCostValues();" value="Cancel" id="btnCancelCost">
+                    }
+                }
+                <input type="submit" value="@btnText" id="btnAddCosting" class="btn btn-info btn-sm" style="float:right;margin-top:-15px" />
+            </div>
+        
+    </div>
+}
+<script>
+
+    function OnClick() {
+        $('#btnAddCosting').val('Please Wait..');
+        $('#btnAddCosting').prop('disabled', true);
+    }
+
+    function CancelCostValues() {
+        $('#TotalCharges').val(0);
+        $('#TransportationAmount').val(0);
+        $('#TestingCharges').val(0)
+         $('#SampleCollectionCharges').val(0);
+         $('#btnAdd').val("Add")
+         $('#btnCancelCost').css('display', 'none')
+         $('#divCosting').load('/Enquiry/Costing/_Costing?EnquirySampleId=0');
+       // $('#Frequency').val(-1);
+    }
+
+    function AddCostSuccess(result) {
+        debugger
+        $('#divCosting').load('/Enquiry/_Costing')
+        $('#divCostingList').load('/Enquiry/Costing/_CostingList?EnquiryId=' + $('#EnquiryId').val(), '',
+            function (data, success) {
+                //   @{ string btnText1 = "Add"; if (Model.CostingId != null && Model.CostingId != 0) { btnText1 = "Update";
+                    } }
+                $('#btnAddCosting').val("Add");
+                $('#btnAddCosting').prop('disabled', false);
+            }
+        );
+    }
+
+    function funCalNetAmount(IsDisc) {
+        var TotalCharges = $('#TotalCharges').val() == '' ? parseFloat(0.0).toFixed(2) : $('#TotalCharges').val();
+
+        var SampleAmount = $('#SampleAmount').val() == '' ? 0 : $('#SampleAmount').val();
+        var TestingCharges = $('#TestingCharges').val() == '' ? 0 : $('#TestingCharges').val();
+        var TransportationAmount = $('#TransportationAmount').val() == '' ? 0 : $('#TransportationAmount').val();
+        var TotalAmount = Number(TotalCharges) + Number(SampleAmount) + Number(TestingCharges) + Number(TransportationAmount);
+        $('#TotalAmount').val((TotalAmount).toFixed(1));
+
+        var gstRate = $('#gstRate').val() == '' ? 0 : $('#gstRate').val();
+        var GSTCharges = Number(TotalAmount) * Number(gstRate) / 100;
+        $('#GSTCharges').val((GSTCharges).toFixed(1));
+
+       // var NetAmount = Number(TotalAmount) + Number(GSTCharges);
+        var NetAmount = Number(TotalAmount);//New NetAmount Change without GST
+        //$('#NetAmount').val((NetAmount).toFixed(1));
+
+        if (IsDisc) {
+            var DiscPer = $('#txtDiscountPercent').val() == '' ? 0 : $('#txtDiscountPercent').val();
+            var DiscAmount = Number(NetAmount) * Number(DiscPer) / 100;
+            $('#DiscountAmount').val((DiscAmount).toFixed(1));
+        } else {
+            var DiscAmount = $('#DiscountAmount').val() == '' ? parseFloat(0.0).toFixed(2) : $('#DiscountAmount').val();
+        }
+
+        //var NetAmount = Number(TotalAmount) + Number(GSTCharges);
+        $('#NetAmount').val((NetAmount).toFixed(1) - Number(DiscAmount));
+
+    }
+</script>
+
+
