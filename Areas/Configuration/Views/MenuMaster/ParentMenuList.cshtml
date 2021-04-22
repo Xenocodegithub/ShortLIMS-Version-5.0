@@ -72,8 +72,10 @@
                                                     <i class="dw dw-more"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                    <a class="dropdown-item" href="@Url.Action("AddParentMenu","MenuMaster",new {MenuMasterId=@item.MenuMasterId })"><i class="dw dw-edit2"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" onclick="Delete(@item.MenuMasterId);"><i class="dw dw-delete-3"></i>Delete</a>
+                                                    <a class="dropdown-item" href="@Url.Action("AddParentMenu","MenuMaster",new {MenuMasterId=item.MenuMasterId })" title="Update" id="rowedit_@rowNo" operation="Update"><i class="dw dw-edit2"></i>Edit</a>
+                                                   @* <a class="dropdown-item" href="@Url.Action("AddParentMenu","MenuMaster",new {MenuMasterId=@item.MenuMasterId })"><i class="dw dw-edit2"></i> Edit</a>*@
+                                                    @*<a class="dropdown-item" href="#" onclick="DeleteParentMenu(@item.MenuMasterId);"><i class="dw dw-delete-3"></i>Delete</a>*@
+                                                    <a class="dropdown-item" href="/Configuration/MenuMaster/DeleteParentMenu?MenuMasterId=@item.MenuMasterId" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
                                                 </div>
                                             </div>
                                         </td>

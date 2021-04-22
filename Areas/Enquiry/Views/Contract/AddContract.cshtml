@@ -78,34 +78,6 @@
                     }
                 </div>
 
-                <div id="divAddContract">
-                    @Html.HiddenFor(model => model.EnquiryId)
-                    @{
-                        Html.RenderAction("_Add", "Contract", Model.EnquiryId);
-                    }
-                </div>
-                @using (Ajax.BeginForm("AddContract", "Contract", new AjaxOptions() { HttpMethod = "Post", OnBegin = "Add", OnSuccess = "ContractSuccess" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(model => model.EnquiryId)
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <hr />
-                    <div class="row">
-                        <div class="table-responsive">
-                            <p class="text-muted font-13 m-b-30">
-                            </p>
-                            <div id="divList">
-                                @{ Html.RenderAction("_ContractList", "Contract");}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-10" style="margin-top:10px;">
-                            <input type="submit" value="Save & Next" class="btn btn-info" id="buttonSave1" name="buttonSave" />
-                        </div>
-                    </div>
-                }
-
                 <div class="collapse collapse-box" id="basic-form1">
                     <div class="code-box">
                         <div class="clearfix">
