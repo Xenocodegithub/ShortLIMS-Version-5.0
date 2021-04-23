@@ -12,6 +12,7 @@ using LIMS_DEMO.Core.User;
 using LIMS_DEMO.Common;
 using LIMS_DEMO.Models;
 using Newtonsoft.Json;
+using LIMS_DEMO.Core.AppSettings;
 
 namespace LIMS_DEMO.Controllers
 {
@@ -149,35 +150,37 @@ namespace LIMS_DEMO.Controllers
         }
         public PartialViewResult _Menu()
         {
-            IList<MenuModel> model = new List<MenuModel>();
-
+            IList<MenuEntity> model = new List<MenuEntity>();
             var Menus = BALFactory.menuBAL.Get(LIMS.User.UserMasterID);
-            int i = 0;
-            foreach (var menu in Menus)
-            {
-                model.Add(new MenuModel()
-                {
-                    MenuMasterId = menu.MenuMasterId,
-                    ParentId = menu.ParentId,
-                    Menu = menu.Menu,
-                    IconValues = menu.Logo,
-                    TargetUrl = menu.TargetUrl
-                });
+            model = BALFactory.menuBAL.GetMenu(LIMS.User.UserMasterID);
 
-                model[i].SubMenu = new List<MenuModel>();
-                foreach (var subMenu in menu.SubMenu)
-                {
-                    model[i].SubMenu.Add(new MenuModel()
-                    {
-                        MenuMasterId = subMenu.MenuMasterId,
-                        ParentId = subMenu.ParentId,
-                        Menu = subMenu.Menu,
-                        IconValues = subMenu.Logo,
-                        TargetUrl = subMenu.TargetUrl
-                    });
-                }
-                i++;
-            }
+            //var Menus = BALFactory.menuBAL.Get(LIMS.User.UserMasterID);
+            //int i = 0;
+            //foreach (var menu in Menus)
+            //{
+            //    model.Add(new MenuModel()
+            //    {
+            //        MenuMasterId = menu.MenuMasterId,
+            //        ParentId = menu.ParentId,
+            //        Menu = menu.Menu,
+            //        IconValues = menu.Logo,
+            //        TargetUrl = menu.TargetUrl
+            //    });
+
+            //    model[i].SubMenu = new List<MenuModel>();
+            //    foreach (var subMenu in menu.SubMenu)
+            //    {
+            //        model[i].SubMenu.Add(new MenuModel()
+            //        {
+            //            MenuMasterId = subMenu.MenuMasterId,
+            //            ParentId = subMenu.ParentId,
+            //            Menu = subMenu.Menu,
+            //            IconValues = subMenu.Logo,
+            //            TargetUrl = subMenu.TargetUrl
+            //        });
+            //    }
+            //    i++;
+            //}
             return PartialView(model);
         }
         public PartialViewResult _ForgotPassword(bool? Send)

@@ -148,5 +148,54 @@ namespace LIMS_DEMO.DAL
         public virtual DisciplineMaster DisciplineMaster93 { get; set; }
         public virtual DisciplineMaster DisciplineMaster94 { get; set; }
         public virtual DisciplineMaster DisciplineMaster95 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster96 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster97 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster98 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster99 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster100 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster101 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster102 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster103 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster104 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster105 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster106 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster107 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster108 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster109 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster110 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster111 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster112 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster113 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster114 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster115 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster116 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster117 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster118 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster119 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster120 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster121 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster122 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster123 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster124 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster125 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster126 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster127 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster128 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster129 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster130 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster131 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster132 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster133 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster134 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster135 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster136 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster137 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster138 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster139 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster140 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster141 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster142 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster143 { get; set; }
+        public virtual DisciplineMaster DisciplineMaster144 { get; set; }
     }
 }

@@ -18,6 +18,9 @@ namespace LIMS_DEMO.BAL.AppSettings
         {
             return CoreFactory.menu.Get(iUserId);
         }
-
+        public IList<MenuEntity> GetMenu(int iUserId)
+        {
+            return CoreFactory.menu.GetMenu(iUserId);
+        }
     }
 }
