@@ -34,7 +34,7 @@ body {
     font-weight: 400;
     min-height: 100%;
     color: #031e23;
-    background: #eaeef3
+    background: #e9ecef
 }
 
 a {
@@ -59,7 +59,7 @@ img {
 }
 
 input, select, textarea {
-    resize:  horizontal;
+    resize: none;
     font-family: 'Inter',sans-serif
 }
 
@@ -286,12 +286,12 @@ p {
 }
 
 .mt-30 {
-    margin-top: -20px
+    margin-top: 30px
 }
 
 .device-manage-progress-chart ul li, .mb-30 {
-    margin-bottom: 30px;                                                                                                                                                                                b
-    margin-top:-20px;
+    margin-bottom: 30px;
+    margin-top:-23px;
 }
 
 .mb-20 {
@@ -324,7 +324,7 @@ p {
 }
 
 .font-24 {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 1.42em
 }
 
@@ -769,7 +769,7 @@ p {
 }
 
 .custom-file-input, .custom-select, .form-control {
-    font-size: 14px
+    font-size: 12px
 }
 
     .form-control.form-control-sm {
@@ -1272,7 +1272,7 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 }
 
 .dataTables_length, .dt-buttons, div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTables_info, div.dataTables_wrapper div.dataTables_paginate {
-    padding-left: 15px;
+    padding-left: 0px;
     padding-right: 15px
 }
 
@@ -1679,7 +1679,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before
 .brand-logo {
     width: 280px;
     height: 70px;
-    border-bottom: 1px solid rgba(0,0,0,.1)
+    border-bottom: 0px solid rgba(0,0,0,.1)
 }
 
     .brand-logo a {
@@ -1772,8 +1772,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before
 
     .sidebar-menu .dropdown-toggle {
         display: block;
-        padding: 18px 15px 18px 67px;
-        font-size: 14px;
+        padding: 12px 15px 12px 50px;
+        font-size: 12px;
         color: #fff;
         font-weight: 300;
         letter-spacing: .07em;
@@ -2062,7 +2062,7 @@ body.IE .login-wrap, body.IE .register-page-wrap {
 .login-box {
     max-width: 400px;
     width: 100%;
-    padding: 40px 20px;
+    padding: 35px 20px;
     margin: 5px auto
 }
 

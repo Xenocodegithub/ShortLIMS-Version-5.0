@@ -14,6 +14,9 @@ namespace LIMS_DEMO.Core.AppSettings
         public string Logo { get; set; }
         public string TargetUrl { get; set; }
         public bool IsActive { get; set; }
+        public int? MenuHead { get; set; }
+
+        public IEnumerable<MenuEntity> MainMenus { get; set; }
         public IEnumerable<MenuEntity> SubMenu { get; set; }
     }
 }

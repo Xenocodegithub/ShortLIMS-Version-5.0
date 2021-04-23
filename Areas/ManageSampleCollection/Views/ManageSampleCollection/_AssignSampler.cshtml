@@ -42,11 +42,6 @@
                     @Html.DropDownListFor(model => model.EmployeeId, new SelectList(ViewBag.CollectorName, "UserMasterId", "UserName", Model.EmployeeId), "Select Collector", new { @id = Model.EmployeeId, @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                 </div>
-            </div><br/>
-                <div class=" col-md-12"style="text-align:center;margin:auto">
-                    <input type="submit" value="Submit" id="btnSubmit" class="btn btn-info"  />
-                </div>
-       
             </div><br />
             <div class=" col-md-12" style="text-align:center;margin:auto">
                 <input type="submit" value="Submit" id="btnSubmit" class="btn btn-info" />

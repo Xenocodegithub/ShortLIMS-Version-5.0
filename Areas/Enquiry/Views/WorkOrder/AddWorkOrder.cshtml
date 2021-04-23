@@ -79,19 +79,6 @@
                                 @Html.DisplayFor(model => model.QuotationAmount, new { htmlAttributes = new { @class = "form-control col-md-4" } })
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <label class="form-label">Workorder No <span style="color:red">*</span></label>
-                            @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control col-md-7", @autocomplete = "false" })
-                            @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label">Upload Work Order</label>
-                            <div class="col-sm-7">
-                                <input id="fileInput" name="file" type="file" />
-                                @Html.DisplayFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                        </div>
-                    </div>
                     <hr />
                     <div class="row">
                         <div class="col-md-3">

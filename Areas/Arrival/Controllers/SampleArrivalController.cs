@@ -235,7 +235,7 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                 CoreFactory.samplearrivalEntity.ReturnedRemark = model.ReturnedRemarks;
             }
             CoreFactory.samplearrivalEntity.AckRemarks = model.AckRemarks;
-            //CoreFactory.samplearrivalEntity.SampleNo = model.SampleNo;
+            CoreFactory.samplearrivalEntity.SampleNo = model.SampleNo;
             CoreFactory.samplearrivalEntity.Date2 = model.Date2;
             CoreFactory.samplearrivalEntity.Time2 = model.Time2;/* DateTime(int year, int month, int day);*/
             if (model.Date2 == null)

@@ -40,33 +40,34 @@
                 </div>
             </div>
             <!-- Default Basic Forms Start -->
-            <div class="pd-20 card-box mb-30">
-                <div class="clearfix">
-                    <div class="pull-left">
-                        <h4 class="text-blue h4">Add Parent Menu</h4>
-                    </div>
-                </div>
-                     @using (Ajax.BeginForm("AddParentMenu", "MenuMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddParentMenuSuccess" }))
-                     {
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Menu</label>
-                            <div class="col-sm-12 col-md-10">
-                                @Html.TextBoxFor(model => model.Menu, new { @class = "form-control", placeholdder = "ParentMenu" })
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
-                            <div class="col-sm-12 col-md-10">
-                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
-                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
-                            </div>
-                        </div>
-                        <div class="actions clearfix">
-                            <a class="btn btn-outline-danger" href="@Url.Action("ParentMenuList", "MenuMaster")">Cancel</a>&emsp;
-                            <button type="submit" class="btn btn-outline-success">Add</button>
-                        </div>
-                     }
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Add Parent Menu</h4>
             </div>
+        </div>
+        @using (Ajax.BeginForm("AddParentMenu", "MenuMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddParentMenuSuccess" }))
+        {
+          @Html.HiddenFor(model => model.MenuMasterId);
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Menu</label>
+            <div class="col-sm-12 col-md-10">
+                @Html.TextBoxFor(model => model.Menu, new { @class = "form-control", placeholdder = "ParentMenu" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+            <div class="col-sm-12 col-md-10">
+                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+            </div>
+        </div>
+        <div class="actions clearfix">
+            <a class="btn btn-outline-danger" href="@Url.Action("ParentMenuList", "MenuMaster")">Cancel</a>&emsp;
+            <button type="submit" class="btn btn-outline-success">Add</button>
+        </div>
+    }
+    </div>
             <!-- Default Basic Forms End -->
         </div>
     </div>

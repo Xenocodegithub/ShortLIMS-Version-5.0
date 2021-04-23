@@ -8,109 +8,114 @@
     <link rel="stylesheet" type="text/css" href="~/Component/styles/style.css">
 </head>
 <div class="login-header box-shadow">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!--<div class="container-fluid d-flex justify-content-between align-items-center">
         <div class="brand-logo">
             <a href="">
                 <img src="~/Component/Images/logo_lims.png" alt="" />
             </a>
         </div>
         <div class="login-menu">
-            <ul>
-                @*<li><a href="">Login</a></li>*@
-            </ul>
+            <ul>-->
+    @*<li><a href="">Login</a></li>*@
+    <!--</ul>
         </div>
-    </div>
+    </div>-->
 </div>
-<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center" style="background-image: url(Component/Images/bg6.jpg);background-repeat:no-repeat;">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6 col-lg-7" style="margin-top:10px;">
+            <div class="col-md-6 col-lg-7" style="margin-top: -10px;">
                 <div class="col-md-12">
-                    <img src="~/Component/Images/lab.jpg" alt="" style="border:1px solid #70e7ff;" />
+                    <img src="~/Component/Images/banner.png" class="img-fluid" alt="Responsive image" style="margin-left: 60px;"/>
                 </div>
                 <div class="clearfix"></div>
                 <div class="row">
-                    <div class="col-md-6 copyright">
-                        <h6>Develop by Xenocode Technologies Pvt. Ltd.</h6>
-                        <p>Customer Support:</p>
-                        <p>support@xenocodetech.com</p>
-                        <p>+91 712 6500112</p>
+                    <div class="col-md-8 copyright">
+                        <h6 style="margin-left:15px"><strong>Develope by Xenocode Technologies Pvt. Ltd.</strong></h6>
+                        @*<p style="margin-left:15px">Customer Support:<br />
+                            support@xenocodetech.com<br />
+                            +91 712 6500112</p>*@
+                        <p style="margin-left:15px;color:black;">
+                            <strong>Contact Number :</strong>+91 9823556473,+91 8080607122<br />
+                            <strong>Email Id :</strong>vaibhav@xenocodetech.com,vgaidhane5@gmail.com<br />
+                            <strong>Website :</strong> www.xenocodetech.com, www.infolims.com
+                        </p>
                     </div>
-                    <div class="col-md-6 copyright">
+                    <div class="col-md-4 copyright">
                         <h6>Browser Support</h6>
-                        <p>Microsoft &#174;Internet Explorer &#174;versions 9, 10 and 11</p>
-                        <p>Microsoft &#174;Edge for Windows  &#174;10</p>
-                        <p>Mozilla &#174;Firefox &#174; and Google Chrome<sup>TM</sup> are also supported.</p>
+                        <p style="color:black;font-size: smaller;">
+                            Microsoft &#174;Internet Explorer &#174;versions 10 and 11
+                            Microsoft &#174;Edge for Windows  &#174;10 Mozilla &#174;Firefox &#174; and Google Chrome<sup>TM</sup> are also supported.
+                        </p>
                     </div>
                 </div>
             </div>
 
-                <div class="col-md-1 col-lg-5" style="margin-top:-150px;">
-                    <div class="login-box bg-white box-shadow border-radius-10">
-                        <div class="brand-logo">
-                            <img src="~/Component/Images/logo_lims.png" />
-                        </div>
-                        <div class="login-title"></div>
-                        @using (Ajax.BeginForm("_Login", "Home", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "LoginSuccess" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <form>
-                                <div class="input-group custom">
-                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
-                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                                    <div class="input-group-append custom">
-                                        <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
-                                    </div>
-                                </div>
-                                <div class="input-group custom">
-                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "**********" } })
-                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                    <div class="input-group-append custom">
-                                        <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
-                                    </div>
-                                </div>
-                                <div class="row pb-30">
-                                    <div class="col-6">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                            <label class="custom-control-label" for="customCheck1">Remember</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="forgot-password">
-                                            <a href="#" onclick='funAssignPwd();'><i class="fa fa-key"> </i> Forgot Password?</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="input-group mb-0">
-                                            <input class="btn btn-info btn-lg btn-block" type="submit" value="Sign In">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="col-md-12 copyright2 text-center">
-                                <h5>InfoLims V 4.0</h5>
-                                <p>This Product Licence To Xenocode Technologies Pvt Ltd</p>
-                            </div>
-                        }
+            <div class="col-md-1 col-lg-5" style="margin-top:-114px;">
+                <div class="login-box bg-white card-box border-radius-10">
+                    <div class="d-flex justify-content-center" style=" margin-bottom: 20px;">
+                        <img style="width: 45%;" src="~/Component/Images/logo_lims.png" />
                     </div>
+
+                    @using (Ajax.BeginForm("_Login", "Home", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "LoginSuccess" }))
+                    {
+        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <form>
+                                            <div class="input-group custom">
+                                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
+                                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                                <div class="input-group-append custom">
+                                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="input-group custom">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "**********" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                <div class="input-group-append custom">
+                                                    <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="row pb-30">
+                                                <div class="col-6">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">Remember</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="forgot-password">
+                                                        <a href="#" onclick='funAssignPwd();'><i class="fa fa-key"> </i> Forgot Password?</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="input-group mb-0">
+                                                        <input class="btn btn-outline-success btn-block" type="submit" value="Sign In">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                                        <div class="col-md-12 copyright2 text-center" style="margin-top:10px;">
+                                                            <h5>InfoLims V 4.0</h5>
+                                                            <p>This Product Licence To Xenocode Technologies Pvt Ltd</p>
+                                                        </div>}
                 </div>
             </div>
-    </div>
-</div>
-<div class="row" style="margin-top:50px;background-color: #407284;color: #d9ffff;">
-    <div class="container">
-        <div class="col-md-12" style="line-height: 18px;margin-top: 0px;padding: 20px 0px; text-align: center;font-size: 13px;">
-            <p> <strong style="color:#fff795"> Address :</strong> 148,IMSR Technology Building, Ayurvedic Layout, Near NIT Complex, Sakkardara, Nagpur-440034 </p>
-            <p> <strong style="color:#fff795">Contact Number :</strong> +91 9823556473, +91 8080607122</p>
-            <p> <strong style="color:#fff795">Email Id :</strong> vgaidhane5@gmail.com, vaibhav@xenocodetech.com</p>
-            <p> <strong style="color:#fff795">Website :</strong> www.xenocodetech.com, www.infolims.com</p>
         </div>
     </div>
 </div>
+@*<div class="row" style="margin-top:0px;background-color: #052733;color: #d9ffff;">
+        <div class="container">
+            <div class="col-md-12" style="line-height: 18px;margin-top: 0px;padding: 20px 0px; text-align: center;font-size: 13px;">
+                <p> <strong style="color:#fff795"> Address :</strong> 148,IMSR Technology Building, Ayurvedic Layout, Near NIT Complex, Sakkardara, Nagpur-440034 <br />
+                 <strong style="color:#fff795">Contact Number :</strong> +91 9823556473, +91 8080607122<br />
+                 <strong style="color:#fff795">Email Id :</strong> vgaidhane5@gmail.com, vaibhav@xenocodetech.com<br />
+                 <strong style="color:#fff795">Website :</strong> www.xenocodetech.com, www.infolims.com</p>
+            </div>
+        </div>
+    </div>*@
 <div class="modal" id="divForgotPassword" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -124,7 +129,7 @@
     </div>
 </div>
 @*@Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/bundles/unobtrusive")*@
+    @Scripts.Render("~/bundles/unobtrusive")*@
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -134,8 +139,8 @@
     function LoginSuccess(result) {
         if (result.status == 'success') {
             debugger
-           window.location.href = result.returnUrl;
-           
+            window.location.href = result.returnUrl;
+
         } else {
             swal(
                 {
