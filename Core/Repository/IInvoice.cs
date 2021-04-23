@@ -11,5 +11,6 @@ namespace LIMS_DEMO.Core.Repository
     {
 
         List<InvoiceEntity> GetInvoiceList();
+        bool SaveDetails(InvoiceEntity invoiceEntity);
     }
 }

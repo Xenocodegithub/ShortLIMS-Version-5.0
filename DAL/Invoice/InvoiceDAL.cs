@@ -20,6 +20,9 @@ namespace LIMS_DEMO.DAL.Invoice
             return (from w in _dbContext.WorkOrders
                     join q in _dbContext.Quotations on w.QuotationId equals q.QuotationId
                     join e in _dbContext.EnquiryMasters on q.EnquiryId equals e.EnquiryId
+                    join ed in _dbContext.EnquiryDetails on e.EnquiryId equals ed.EnquiryId
+                    join esd in _dbContext.EnquirySampleDetails on ed.EnquiryDetailId equals esd.EnquiryDetailId
+                    join ct in _dbContext.Costings on esd.EnquirySampleID equals ct.EnquirySampleID
                     join c in _dbContext.CustomerMasters on e.CustomerMasterId equals c.CustomerMasterId
                     join s in _dbContext.StatusMasters on e.StatusId equals s.StatusId
                     into workOrder
@@ -27,6 +30,9 @@ namespace LIMS_DEMO.DAL.Invoice
                      select new InvoiceEntity()
                     {
                         RegistrationName = c.RegistrationName,
+                        EnquirySampleID = (Int32)ct.EnquirySampleID,
+                        CostingId = (Int32)ct.CostingId,
+                        UnitPrice = ct.UnitPrice,
                         WorkOrderNo = w.WorkOrderNo,
                         EnquiryId = e.EnquiryId,
                         WorkOrderId = w.WorkOrderId,
@@ -39,6 +45,22 @@ namespace LIMS_DEMO.DAL.Invoice
                         IsIGST = w.IsIGST
                     }).OrderByDescending(e => e.EnquiryId).ToList();
         }
+
+        public bool SaveDetails(InvoiceEntity invoiceEntity)
+        {
+            try
+            {
+                
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+
 
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)

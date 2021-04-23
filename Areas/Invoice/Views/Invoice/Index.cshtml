@@ -52,7 +52,9 @@
                 <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                     <thead>
                         <tr class="thead-dark">
-
+                            <th>
+                               Sr. No.
+                            </th>
                             <th>
                                 Customer Name
                             </th>
@@ -79,52 +81,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 0; i < Model.Count; i++)
+
+
+                        @{ int rowNo = 0; }
+                        @if (Model.Count() > 0)
                         {
+                            foreach (var item in Model)
+                            {
+                    <tr>
+                        <td class="table-plus">@{rowNo++;}@rowNo</td>
 
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(item => Model[i].RegistrationName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(item => Model[i].RegistrationName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(item => Model[i].WorkOrderNo)
-                                    @Html.HiddenFor(item => Model[i].WorkOrderId)
-                                    @Html.HiddenFor(item => Model[i].EnquiryId)
-                                </td>
-
-                                <td>
-                                    Invoice Number
-                                </td>
-                                <td>
-                                    Bill Amount
-                                </td>
-                                <td>
-                                    Received Date
-                                </td>
-                                <td>
-                                    @if (@Model[i].IsIGST == false)
-                                    {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@Model[i].WorkOrderId&IGST=0" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span class="fa fa-download"></span></a>
+                        <td>@item.RegistrationName</td>
+                        <td>@item.RegistrationName</td>
+                        <td>@item.WorkOrderNo</td>
+                        <td>@item.WorkOrderNo</td>
+                        <td>@item.UnitPrice</td>
+                        <td>@item.WORecieveDate</td>
+                        <td>
+                            @if (item.IsIGST == false)
+                            {
+                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=0" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span class="fa fa-download"></span></a>
 
 
-                                    }
-                                    else
-                                    {
-                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@Model[i].WorkOrderId&IGST=1" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span></span></a>
+                            }
+                            else
+                            {
+                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=1" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span></span></a>
 
-                                    }
+                            }
+                        </td>
+                        <td>
+                            <a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal1" style="color:blue"><span class="fa fa-list"></span></a>
+                            @Html.HiddenFor(modelitem => item.EnquirySampleID)
+                            @Html.HiddenFor(modelitem => item.EnquiryId)
+                            @Html.HiddenFor(modelitem => item.CostingId)
+                        </td>
 
-                                </td>
-                                <td>
 
-                                    <a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal1" style="color:blue"><span class="fa fa-list"></span></a>
-                                    @*<a id="btnView" target="_blank" href="/Enquiry/ViewReport?Format=PDF&EnquiryId=@Model[i].EnquiryId" class="btn btn-info btn-sm">View</a>*@
-                                </td>
-                            </tr>
 
+                    </tr>
+                            }
                         }
                     </tbody>
 
@@ -144,15 +140,60 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color:steelblue;height:42px;">
                 @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
-                <h4 style="text-align:center;color:white;font-weight:bold">Costing Details</h4>
+                <h4 style="text-align:center;color:white;font-weight:bold">Are you sure you want to convert this to Invoice  ?</h4>
                 <a class="Closeup" href="/Invoice/Invoice/Index"><span class="close CPopup">&times;</span></a>
             </div>
             <div class="modal-body">
                 <div class="clear" id="LoadPopup"></div>
-                @{
-                    Html.RenderAction("_CostingDetails", "Invoice");
-                }
-               
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">Total Charges &nbsp;:</label>
+                        <span class="text-span" id="TotalCharges"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">DiscountAmount &nbsp;:</label>
+                        <span class="text-span" id="DiscountAmount"></span>
+                       
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">SampleAmount &nbsp;:</label>
+                        <span class="text-span" id="SampleAmount"></span>
+                      
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">TransportationAmount &nbsp;:</label>
+                        <span class="text-span" id="TransportationAmount"></span>
+                       
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">TestingCharges &nbsp;:</label>
+                        <span class="text-span" id="TestingCharges"></span>
+                       
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">TotalAmount &nbsp;:</label>
+                        <span class="text-span" id="TotalAmount"></span>
+                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">NetAmount &nbsp;:</label>
+                        <span class="text-span" id="NetAmount"></span>
+                      
+                    </div>
+                </div>
+                <div class="form-group">
+                   
+                    <input type="submit" class="btn btn-info btn-sm SubmitDetails" style="float:right;margin-top:-15px" />
+                </div>
+                @*@{
+            Html.RenderAction("_CostingDetails", "Invoice");
+        }*@
+
             </div>
             <div class="modal-footer" style="border:none">
             </div>
@@ -170,31 +211,32 @@
     });
 </script>
 <script>
-    $('.CPopup').click(function () {
-        $('#myModal1').hide();
-    });
+    
 
     $(function () {
         debugger
-        var sampleId = 0;
+        var EnquirySampleID = 0;
+        var CostingId = 0;
         $('.clickSmaple').click(function () {
-            sampleId = $(this).siblings('#item_SampleCollectionId').val();
+            EnquirySampleID = $(this).siblings('#item_EnquirySampleID').val();
+            CostingId = $(this).siblings('#item_CostingId').val();
             $.ajax({
-                url: "/Invoice/GetInvoiceData",
+                url: "/Invoice/Invoice/GetInvoiceData",
                 dataType: "json",
                 type: "GET",
                 contentType: 'application/json; charset=utf-8',
                 cache: false,
-                data: { SampleId: sampleId, },
+                data: { EnquirySampleID: EnquirySampleID, CostingId: CostingId },
                 success: function (response) {
                     debugger
                     var x = response;
-                    var loc = response.SampleLocation;
-                    if (loc != null) {
-                        $('#location').text(response.SampleLocation);
-
-                    }
-                  
+                    $('#TotalCharges').text(response.TotalCharges);
+                    $('#DiscountAmount').text(response.DiscountAmount);
+                    $('#SampleAmount').text(response.SampleAmount);
+                    $('#TransportationAmount').text(response.TransportationAmount);
+                    $('#TestingCharges').text(response.TestingCharges);
+                    $('#TotalAmount').text(response.TotalAmount);
+                    $('#NetAmount').text(response.NetAmount);
 
                 },
                 error: function (xhr) {
@@ -207,7 +249,38 @@
             $('#myModal1').hide();
         });
        
-     
+        $(document).on('click', '.SubmitDetails', function (event) {
+            debugger
+            var current = $(this);
+           
+           
+            var jsonObject = { "EnquirySampleID": EnquirySampleID, "CostingId": CostingId };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Invoice/Invoice/SaveDetails",
+                    dataType: 'text',
+                    cache: false,
+                    data: "model=" + JSON.stringify(jsonObject),
+                    success: function (response) {
+                        if (response != null) {
+                            $(event.target).parent().parent().find('select').prop('disabled', true);
+                            $(event.target).prop('disabled', true);
+                            $($(event.target).parent().parent().find('img')).attr('src', '/Content/images/unactive.png');
+
+                        } else {
+                            console.log("Something went wrong");
+                        }
+                    },
+
+                    error: function (xhr) {
+                        console.log('error');
+                    }
+                });
+            
+
+        });
+
        
        
 
