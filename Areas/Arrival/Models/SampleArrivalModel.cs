@@ -56,7 +56,7 @@ namespace LIMS_DEMO.Areas.Arrival.Models
         public string Url { get; set; }//Variable
         public long ARCId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Please Select Sample Reciever")]
         [Display(Name = "Sample Recevied in Lab By")]
         public int UserRoleId { get; set; }
         public Nullable<System.DateTime> ActionDate { get; set; }

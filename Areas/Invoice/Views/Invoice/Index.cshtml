@@ -1,0 +1,218 @@
+﻿
+@model IList<LIMS_DEMO.Areas.Invoice.Models.InvoiceModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Invoice</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Invoice</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Invoice</li>
+                                <li class="breadcrumb-item active" aria-current="page">Invoice List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Invoice List</h4>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label"> From Date:</label>
+                    <div class="col-sm-3 form-group row">
+                        <input type="date" id="FromDate" name="FromDate" class="form-control" placeholder="dd/MM/yyyy" />
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">To Date:</label>
+                    <div class="col-sm-3 form-group row">
+                        <input type="date" id="ToDate" name="ToDate" class="form-control" placeholder="dd/MM/yyyy" />
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-success btn-sm" onclick="SearchWorkOrder();" type="button">Search</button>
+                    </div>
+                </div>
+
+
+                <!-- Simple Datatable start -->
+
+                <table id="dtHorizontalExample" class="table table stripe hover nowrap">
+                    <thead>
+                        <tr class="thead-dark">
+
+                            <th>
+                                Customer Name
+                            </th>
+                            <th>
+                                Billed To
+                            </th>
+                            <th class="table-plus datatable-nosort">
+                                Work Order No
+                            </th>
+                            <th>
+                                Prof. Invoice No.
+                            </th>
+                            <th>
+                                Bill Amount
+                            </th>
+                            <th>Received Date</th>
+                            <th>
+                                Download
+                            </th>
+                            <th>
+                                Invoice
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].RegistrationName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].RegistrationName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].WorkOrderNo)
+                                    @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    @Html.HiddenFor(item => Model[i].EnquiryId)
+                                </td>
+
+                                <td>
+                                    Invoice Number
+                                </td>
+                                <td>
+                                    Bill Amount
+                                </td>
+                                <td>
+                                    Received Date
+                                </td>
+                                <td>
+                                    @if (@Model[i].IsIGST == false)
+                                    {
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@Model[i].WorkOrderId&IGST=0" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span class="fa fa-download"></span></a>
+
+
+                                    }
+                                    else
+                                    {
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@Model[i].WorkOrderId&IGST=1" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span></span></a>
+
+                                    }
+
+                                </td>
+                                <td>
+
+                                    <a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal1" style="color:blue"><span class="fa fa-list"></span></a>
+                                    @*<a id="btnView" target="_blank" href="/Enquiry/ViewReport?Format=PDF&EnquiryId=@Model[i].EnquiryId" class="btn btn-info btn-sm">View</a>*@
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+
+                </table>
+
+                <!-- Simple Datatable End -->
+
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<div id="myModal1" class="modal" style="display:none;margin-right:0px">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width:70%">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:steelblue;height:42px;">
+                @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
+                <h4 style="text-align:center;color:white;font-weight:bold">Costing Details</h4>
+                <a class="Closeup" href="/Invoice/Invoice/Index"><span class="close CPopup">&times;</span></a>
+            </div>
+            <div class="modal-body">
+                <div class="clear" id="LoadPopup"></div>
+                @{
+                    Html.RenderAction("_CostingDetails", "Invoice");
+                }
+               
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+<script>
+    $('.CPopup').click(function () {
+        $('#myModal1').hide();
+    });
+
+    $(function () {
+        debugger
+        var sampleId = 0;
+        $('.clickSmaple').click(function () {
+            sampleId = $(this).siblings('#item_SampleCollectionId').val();
+            $.ajax({
+                url: "/Invoice/GetInvoiceData",
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                data: { SampleId: sampleId, },
+                success: function (response) {
+                    debugger
+                    var x = response;
+                    var loc = response.SampleLocation;
+                    if (loc != null) {
+                        $('#location').text(response.SampleLocation);
+
+                    }
+                  
+
+                },
+                error: function (xhr) {
+                    console.log('error');
+                }
+            });
+            $('#myModal1').show();
+        });
+        $('.CPopup').click(function () {
+            $('#myModal1').hide();
+        });
+       
+     
+       
+       
+
+       
+    });
+
+</script>
+

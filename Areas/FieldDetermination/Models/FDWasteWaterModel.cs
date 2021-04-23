@@ -10,10 +10,12 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Models
     {
         public Nullable<bool> IsNABLAccredited { get; set; }
         public Nullable<bool> InField { get; set; }
+        [Required(ErrorMessage ="Please Select Parameter")]
         public int ParameterMasterId { get; set; }
-
+        
         [Display(Name ="TestMethod")]
         public string TestMethodName { get; set; }
+        [Required(ErrorMessage = "Please Select Test Method")]
         public int TestMethodId { get; set; }
         public string CurrentStatus { get; set; }// StatusMaster tbls
         public int WasteWaterID { get; set; }
