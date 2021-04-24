@@ -5,7 +5,7 @@
     <DataSource Name="LimsConnection">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=Merge9FebDB</ConnectString>
+        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=MotherLIMS</ConnectString>
         <Prompt>Specify a user name and password for data source LimsConnection:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -41,9 +41,9 @@ SELECT Distinct
   IBD.InventoryBasicItemDetailsNumber
 FROM
   InventoryMaintAndCalibBreakDown IMC
-  Inner Join dbo.InventoryItemMaster IM on IMC.NameOfInstrumentId = IM.ID
+  Inner Join dbo.InventoryItemMaster IM on IMC.ItemMasterId = IM.ID
   Inner Join dbo.InventoryBasicItemDetails IBD on IMC.InventoryBasicDetailId = IBD.InventoryBasicDetailsID
-  where IMC.ProblemReportedDate BETWEEN @FromDate AND  @ToDate</CommandText>
+  where IMC.ProblemReportedDate BETWEEN @FromDate AND @ToDate</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>

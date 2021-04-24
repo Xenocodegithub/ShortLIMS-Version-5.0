@@ -1455,7 +1455,6 @@
     <Content Include="Content\images\QRCode_30448131.jpg" />
     <Content Include="Content\images\QRCode_30448134.jpg" />
     <Content Include="Content\images\QRCode_30448135.jpg" />
-    <Content Include="Content\images\QRCode_30450134.jpg" />
     <Content Include="Content\images\QRCode_417131.jpg" />
     <Content Include="Content\images\QRCode_4356.jpg" />
     <Content Include="Content\images\unactive.png" />
@@ -1474,19 +1473,6 @@
       <LastGenOutput>DBLIMS.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
-    <Content Include="fonts\fonts\dropways.css" />
-    <Content Include="fonts\fonts\dropways.svg" />
-    <Content Include="fonts\fonts\font-awesome\css\font-awesome.css" />
-    <Content Include="fonts\fonts\font-awesome\css\font-awesome.min.css" />
-    <Content Include="fonts\fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\fonts\foundation-icons.css" />
-    <Content Include="fonts\fonts\foundation-icons.svg" />
-    <Content Include="fonts\fonts\ionicons-master\css\ionicons.css" />
-    <Content Include="fonts\fonts\ionicons-master\css\ionicons.min.css" />
-    <Content Include="fonts\fonts\ionicons.svg" />
-    <Content Include="fonts\fonts\themify-icons\themify-icons.css" />
-    <Content Include="fonts\fonts\themify.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Component\scripts\advanced-components.js" />
     <Content Include="Component\scripts\apexcharts-setting.js" />
     <Content Include="Component\scripts\calendar-setting.js" />
@@ -2316,23 +2302,6 @@
     <Content Include="Scripts\Application\Validation.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="fonts\fonts\dropways.eot" />
-    <Content Include="fonts\fonts\dropways.ttf" />
-    <Content Include="fonts\fonts\dropways.woff" />
-    <Content Include="fonts\fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fonts\FontAwesome.otf" />
-    <Content Include="fonts\fonts\foundation-icons.eot" />
-    <Content Include="fonts\fonts\foundation-icons.ttf" />
-    <Content Include="fonts\fonts\foundation-icons.woff" />
-    <Content Include="fonts\fonts\ionicons.eot" />
-    <Content Include="fonts\fonts\ionicons.ttf" />
-    <Content Include="fonts\fonts\ionicons.woff" />
-    <Content Include="fonts\fonts\themify.eot" />
-    <Content Include="fonts\fonts\themify.ttf" />
-    <Content Include="fonts\fonts\themify.woff" />
     <Content Include="Component\plugins\bootstrap-select\dist\css\bootstrap-select.css.map" />
     <Content Include="Component\plugins\bootstrap-select\dist\js\bootstrap-select.js.map" />
     <Content Include="Component\plugins\bootstrap-select\dist\js\bootstrap-select.min.js.map" />
@@ -2627,6 +2596,10 @@
     <Content Include="Reports\NonConsumableInstrument.rdl" />
     <Content Include="Reports\NonConsumableInstrumentMaintainanceSchedule.rdl" />
     <Content Include="Reports\PerformanceCheckReport.rdl" />
+    <Content Include="Reports\AcknowledgementRepor.pdf" />
+    <Content Include="Reports\AmbientAirARCReport24hrs.rdl" />
+    <Content Include="Reports\AmbientAirARCReport8hrs.rdl" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Reports\QuotationData.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>QuotationData1.Designer.cs</LastGenOutput>
@@ -3128,10 +3101,6 @@
     <Folder Include="Uploads\PurchaseOrders\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />

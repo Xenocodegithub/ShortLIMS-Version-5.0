@@ -2862,7 +2862,7 @@ Where spf.IsFinalResult=1 and APSD.ParameterMasterId = SPF.ParameterMasterId
             <Top>1.89445in</Top>
             <Left>0.13333in</Left>
             <Height>0.51389in</Height>
-            <Width>6.74878in</Width>
+            <Width>6.74881in</Width>
             <ZIndex>2</ZIndex>
             <Visibility>
               <Hidden>=Iif(CountRows()&gt;0,false,true)</Hidden>

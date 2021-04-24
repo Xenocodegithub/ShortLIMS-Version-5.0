@@ -5,7 +5,7 @@
     <DataSource Name="LIMSConnection">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=01MarchLIMSDB</ConnectString>
+        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=Merge9FebDB</ConnectString>
         <Prompt>Specify a user name and password for data source LIMSConnection:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -2822,8 +2822,8 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId
         <PageWidth>8.27in</PageWidth>
         <LeftMargin>0.5in</LeftMargin>
         <RightMargin>0.5in</RightMargin>
-        <TopMargin>1.75in</TopMargin>
-        <BottomMargin>1.75in</BottomMargin>
+        <TopMargin>0.5in</TopMargin>
+        <BottomMargin>0.5in</BottomMargin>
         <Style>
           <Border />
         </Style>
