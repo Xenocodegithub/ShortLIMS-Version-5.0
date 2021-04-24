@@ -7,7 +7,15 @@ namespace LIMS_DEMO.Core.Invoice
 {
     public class InvoiceEntity
     {
-
+        public int EnquirySampleID { get; set; }
+        public int CostingId { get; set; }
+        public Nullable<decimal> TotalCharges { get; set; }
+        public Nullable<decimal> CollectionCharges { get; set; }
+        public Nullable<decimal> TransportCharges { get; set; }
+        public Nullable<decimal> TestingCharges { get; set; }
+        public Nullable<decimal> GST { get; set; }
+        public Nullable<decimal> Discount { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
         public int WorkOrderSampleCollectionDateId { get; set; }
         public Nullable<int> LabMasterId { get; set; }
         public string FileName { get; set; }

@@ -1138,6 +1138,10 @@
     <Content Include="Component\fonts\ionicons.svg" />
     <Content Include="Component\fonts\themify-icons\themify-icons.css" />
     <Content Include="Component\fonts\themify.svg" />
+    <Content Include="Component\Images\banner.png" />
+    <Content Include="Component\Images\bg1.jpg" />
+    <Content Include="Component\Images\bg6.jpg" />
+    <Content Include="Component\Images\DP.jpg" />
     <Content Include="Component\Images\img.jpg" />
     <Content Include="Component\Images\lab.jpg" />
     <Content Include="Component\Images\logo_lims.png" />

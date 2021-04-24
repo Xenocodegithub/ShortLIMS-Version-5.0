@@ -12,6 +12,7 @@ namespace LIMS_DEMO.Areas.Invoice.Models
         public long EnquiryMasterSampleTypeId { get; set; }
         public long EnquirySampleID { get; set; }
         public string SampleName { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
         public string ProductGroupName { get; set; }
         public string SampleTypeProductName { get; set; }
         public string SubGroupName { get; set; }

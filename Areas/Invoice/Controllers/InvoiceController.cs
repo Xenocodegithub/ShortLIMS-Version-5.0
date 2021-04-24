@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using LIMS_DEMO.Areas.Invoice.Models;
 using LIMS_DEMO.Core;
-using LIMS_DEMO.Core.Enquiry;
+using LIMS_DEMO.Core.Invoice;
 using LIMS_DEMO.BAL;
 using LIMS_DEMO.BAL.Enquiry;
 using LIMS_DEMO.BAL.DropDown;
 using LIMS_DEMO.BAL.WorkOrderCustomer;
+using Newtonsoft.Json;
+
 
 
 
@@ -40,6 +42,8 @@ namespace LIMS_DEMO.Areas.Invoice.Controllers
                 {
                     RegistrationName = wo.RegistrationName,
                     WorkOrderNo = wo.WorkOrderNo,
+                    EnquirySampleID = wo.EnquirySampleID,
+                    CostingId = wo.CostingId,
                     EnquiryId = wo.EnquiryId,
                     WorkOrderId = wo.WorkOrderId,
                     CurrentStatus = wo.CurrentStatus,
@@ -56,34 +60,40 @@ namespace LIMS_DEMO.Areas.Invoice.Controllers
             return View(model);
         }
 
-        public PartialViewResult _CostingDetails(int? EnquirySampleID = 0, int? CostingId = 0)
+        public PartialViewResult _CostingDetails()
         {
-            //ViewBag.GSTRate = GSTRate;
+            
             InvoiceModel model = new InvoiceModel();
-            CoreFactory.costingEntity = BALFactory.costingBAL.GetCosting((Int32)EnquirySampleID, (Int32)CostingId);
-            if (CoreFactory.costingEntity != null)
-            {
-                model.CostingId = CoreFactory.costingEntity.CostingId;
-                model.EnquirySampleID = CoreFactory.costingEntity.EnquirySampleID;
-                model.TotalCharges = CoreFactory.costingEntity.TotalCharges == Decimal.Zero ? Decimal.Zero : Decimal.Round((decimal)CoreFactory.costingEntity.TotalCharges, 1, MidpointRounding.AwayFromZero);
-                model.SampleAmount = CoreFactory.costingEntity.CollectionCharges == Decimal.Zero ? Decimal.Zero : Decimal.Round((decimal)CoreFactory.costingEntity.CollectionCharges, 1, MidpointRounding.AwayFromZero);
-                model.TransportationAmount = CoreFactory.costingEntity.TransportCharges == Decimal.Zero ? Decimal.Zero : Decimal.Round((decimal)CoreFactory.costingEntity.TransportCharges, 1, MidpointRounding.AwayFromZero);
-                model.TestingCharges = CoreFactory.costingEntity.TestingCharges == Decimal.Zero ? Decimal.Zero : Decimal.Round((decimal)CoreFactory.costingEntity.TestingCharges, 1, MidpointRounding.AwayFromZero);
-                model.TotalAmount = CoreFactory.costingEntity.TotalCharges + CoreFactory.costingEntity.CollectionCharges + CoreFactory.costingEntity.TransportCharges - CoreFactory.costingEntity.Discount;
-
-                if (CoreFactory.costingEntity.CostingId == null || CoreFactory.costingEntity.CostingId == 0)
-                {
-                    //model.GSTCharges = (model.TotalAmount * GSTRate) / 100;
-                    model.NetAmount = model.TotalAmount + model.GSTCharges;
-                }
-                else
-                {
-                    model.GSTCharges = CoreFactory.costingEntity.GST;
-                    model.NetAmount = CoreFactory.costingEntity.UnitPrice;
-                }
-                model.DiscountAmount = CoreFactory.costingEntity.Discount;
-            }
+            
             return PartialView(model);
+        }
+        public JsonResult GetInvoiceData(int EnquirySampleID,int CostingId)
+        {
+            try
+            {
+
+                CoreFactory.costingEntity = BALFactory.costingBAL.GetCosting((Int32)EnquirySampleID, (Int32)CostingId);
+                return Json(CoreFactory.costingEntity, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+        }
+        public string SaveDetails(string model)
+        {
+            try
+            {
+                InvoiceEntity psd = JsonConvert.DeserializeObject<InvoiceEntity>(model);
+                bool status = BALFactory.invoiceBAL.SaveDetails(psd);
+                return "success ";
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
         }
     }
 }

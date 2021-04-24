@@ -19,5 +19,10 @@ namespace LIMS_DEMO.BAL.Invoice
         {
             return CoreFactory.invoice.GetInvoiceList();
         }
+        public bool SaveDetails(InvoiceEntity invoiceEntity)
+
+        {
+            return CoreFactory.invoice.SaveDetails(invoiceEntity);
+        }
     }
 }
