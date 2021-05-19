@@ -23,6 +23,27 @@ namespace LIMS_DEMO.DAL.DropDown
         {
             _dbContext = new LIMSEntities();
         }
+        //payment
+        public List<InvoiceEntity> GetPaymentMode()
+        {
+
+            try
+            {
+                return (from pm in _dbContext.PaymentModeMasters
+
+                        select new InvoiceEntity()
+                        {
+                            PaymentModeMasterId = pm.PaymentModeMasterId,
+                            PaymentMode = pm.PaymentMode,
+
+                        }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public List<UserListEntity> GetPassChaReqUserList()
         {
             LIMSEntities _dbContext = new LIMSEntities();
@@ -688,5 +709,7 @@ namespace LIMS_DEMO.DAL.DropDown
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        
     }
 }

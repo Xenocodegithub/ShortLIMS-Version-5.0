@@ -134,7 +134,9 @@ namespace LIMS_DEMO.Core
         public static List<Inventory.PurchaseEntity> purchaseRequestList = null;
 
         public static List<Dashboard.DashboardEntity> dashboardList = null;
-
+        public static List<InvoiceEntity> invoiceList = null; 
+        public static IList<Core.Invoice.InvoiceEntity> invoiceList1 = null;
+        public static List<Core.Invoice.InvoiceEntity> invoiceList2 = null;
 
 
         public static IList<BreakDownEntity> breakDownEntityList = null;
@@ -208,6 +210,6 @@ namespace LIMS_DEMO.Core
 
         //Invoice
         public static Invoice.InvoiceEntity invoiceEntity = null;
-
+        public static Invoice.InvoiceEntity reject = null;
     }
 }

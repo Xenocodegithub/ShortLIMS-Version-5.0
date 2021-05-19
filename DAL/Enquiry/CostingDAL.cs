@@ -72,21 +72,35 @@ namespace LIMS_DEMO.DAL.Enquiry
 
         public CostingEntity GetCosting(int EnquirySampleID, int CostingId)
         {
-            return (from es in _dbContext.EnquirySampleDetails
-                    join c in _dbContext.Costings on es.EnquirySampleID equals c.EnquirySampleID
-                    into costing
+            //return (from es in _dbContext.EnquirySampleDetails
+            //        join c in _dbContext.Costings on es.EnquirySampleID equals c.EnquirySampleID
+            //        into costing
+            //        from cost in costing.DefaultIfEmpty()
+            //        where es.EnquirySampleID == EnquirySampleID && (CostingId == 0 || cost.CostingId == CostingId)
+            //        && es.IsActive == true
+            return (from w in _dbContext.WorkOrders
+                    join q in _dbContext.Quotations on w.QuotationId equals q.QuotationId
+                    join e in _dbContext.EnquiryMasters on q.EnquiryId equals e.EnquiryId
+                    join c in _dbContext.CustomerMasters on e.CustomerMasterId equals c.CustomerMasterId
+                    join ed in _dbContext.EnquiryDetails on e.EnquiryId equals ed.EnquiryId
+                    join esd in _dbContext.EnquirySampleDetails on ed.EnquiryDetailId equals esd.EnquiryDetailId
+                    join ct in _dbContext.Costings on esd.EnquirySampleID equals ct.EnquirySampleID
+                    into  costing
                     from cost in costing.DefaultIfEmpty()
-                    where es.EnquirySampleID == EnquirySampleID && (CostingId == 0 || cost.CostingId == CostingId)
-                    && es.IsActive == true
+                    where esd.EnquirySampleID == EnquirySampleID && (CostingId == 0 || cost.CostingId == CostingId)
+                    && esd.IsActive == true
                     select new CostingEntity()
                     {
+                        RegistrationName = c.RegistrationName,
+                        WorkOrderNumber=w.WorkOrderNo,
+                        InvoiceNumber=w.WorkOrderNo,
                         CostingId = cost.CostingId,
-                        EnquirySampleID = es.EnquirySampleID,
+                        EnquirySampleID = esd.EnquirySampleID,
                         TotalCharges = cost.TotalCharges == null ? 0 : cost.TotalCharges,
                         CollectionCharges = cost.CollectionCharges == null ? 0 : cost.CollectionCharges,
                         TransportCharges = cost.TransportCharges == null ? 0 : cost.TransportCharges,
                         TestingCharges = cost.TestingCharges == null ? 0 : cost.TestingCharges,
-                        GST = cost.GST,
+                        IsIGST = w.IsIGST,
                         Discount = cost.Discount == null ? 0 : cost.Discount,
                         UnitPrice = cost.UnitPrice
                     }).FirstOrDefault();

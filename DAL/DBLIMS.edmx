@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ShortLIMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LIMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ErrorLog">
           <Key>
             <PropertyRef Name="ErrorLogId" />
@@ -703,6 +703,88 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="InsertedBy" Type="bigint" />
           <Property Name="InsertedTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="TBL_DailyInvoice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+          <Property Name="InvoiceNo" Type="nvarchar(max)" />
+          <Property Name="Totalcharge" Type="money" />
+          <Property Name="Discountamt" Type="money" />
+          <Property Name="SampleCollectioncharge" Type="money" />
+          <Property Name="TransportationCharge" Type="money" />
+          <Property Name="TestingCharge" Type="money" />
+          <Property Name="TotalAmount" Type="money" />
+          <Property Name="NetAmount" Type="money" />
+          <Property Name="GSTAmt" Type="money" />
+          <Property Name="Paidamount" Type="money" />
+          <Property Name="Balanceamount" Type="money" />
+          <Property Name="InvoiceDate" Type="date" />
+          <Property Name="Count" Type="int" />
+          <Property Name="EnquirySampleID" Type="int" />
+          <Property Name="CostingId" Type="int" />
+          <Property Name="RejectStatus" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TBL_InvoiceReceiptNoMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FinancialYearID" Type="bigint" />
+          <Property Name="FinancialMonthID" Type="bigint" />
+          <Property Name="NumberType" Type="nvarchar" MaxLength="100" />
+          <Property Name="NumberValue" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tbl_RejectInvoice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+          <Property Name="InvoiceNo" Type="nvarchar(max)" />
+          <Property Name="Totalcharge" Type="money" />
+          <Property Name="Discountamt" Type="money" />
+          <Property Name="SampleCollectioncharge" Type="money" />
+          <Property Name="TransportationCharge" Type="money" />
+          <Property Name="TestingCharge" Type="money" />
+          <Property Name="TotalAmount" Type="money" />
+          <Property Name="NetAmount" Type="money" />
+          <Property Name="GSTAmt" Type="money" />
+          <Property Name="Paidamount" Type="money" />
+          <Property Name="Balanceamount" Type="money" />
+          <Property Name="InvoiceDate" Type="date" />
+          <Property Name="Count" Type="int" />
+          <Property Name="EnquirySampleID" Type="int" />
+          <Property Name="CostingId" Type="int" />
+          <Property Name="RejectStatus" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TBL_REJECTINVOICEDETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+          <Property Name="InvoiceNo" Type="nvarchar(max)" />
+          <Property Name="Totalcharge" Type="money" />
+          <Property Name="Discountamt" Type="money" />
+          <Property Name="SampleCollectioncharge" Type="money" />
+          <Property Name="TransportationCharge" Type="money" />
+          <Property Name="TestingCharge" Type="money" />
+          <Property Name="TotalAmount" Type="money" />
+          <Property Name="NetAmount" Type="money" />
+          <Property Name="GSTAmt" Type="money" />
+          <Property Name="Paidamount" Type="money" />
+          <Property Name="Balanceamount" Type="money" />
+          <Property Name="InvoiceDate" Type="date" />
+          <Property Name="Count" Type="int" />
+          <Property Name="EnquirySampleID" Type="int" />
+          <Property Name="CostingId" Type="int" />
+        </EntityType>
         <EntityType Name="UnitMasterInventory">
           <Key>
             <PropertyRef Name="UnitId" />
@@ -1388,6 +1470,37 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="Vs" Type="int" />
           <Property Name="PreservationDone" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="InvoiceDetails">
+          <Key>
+            <PropertyRef Name="InvoiceDetailsId" />
+          </Key>
+          <Property Name="InvoiceDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EnquirySampleID" Type="bigint" />
+          <Property Name="CostingId" Type="bigint" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EnteredBy" Type="int" Nullable="false" />
+          <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="InvoiceRejectDetails">
+          <Key>
+            <PropertyRef Name="InvoiceRejectDetailsId" />
+          </Key>
+          <Property Name="InvoiceRejectDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceDetailsId" Type="bigint" />
+          <Property Name="EnquirySampleID" Type="bigint" />
+          <Property Name="CostingId" Type="bigint" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EnteredBy" Type="int" Nullable="false" />
+          <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
         <EntityType Name="LabDisciplineMapping">
           <Key>
             <PropertyRef Name="LabDisciplineMappingId" />
@@ -1538,6 +1651,29 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="IsNABLAccredited" Type="bit" />
           <Property Name="DisciplineId" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="PaymentDetails">
+          <Key>
+            <PropertyRef Name="PaymentDetailsId" />
+          </Key>
+          <Property Name="PaymentDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecieptNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PayDate" Type="datetime" Nullable="false" />
+          <Property Name="PaymentMode" Type="int" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DD/ChequeNo/Neft" Type="nvarchar(max)" />
+          <Property Name="DD/ChequeDate" Type="datetime" Nullable="false" />
+          <Property Name="EnteredBy" Type="int" Nullable="false" />
+          <Property Name="EnteredDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistrationName" Type="nvarchar(max)" />
+          <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+          <Property Name="InvoiceNumber" Type="nvarchar(max)" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EnquirySampleId" Type="bigint" />
         </EntityType>
         <EntityType Name="PlannerByDiscipline">
           <Key>
@@ -2347,6 +2483,18 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="PrintCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Charges" Type="money" />
           <Property Name="Currency" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EnteredBy" Type="int" Nullable="false" />
+          <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="PaymentModeMaster">
+          <Key>
+            <PropertyRef Name="PaymentModeMasterId" />
+          </Key>
+          <Property Name="PaymentModeMasterId" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentMode" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="EnteredBy" Type="int" Nullable="false" />
           <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
@@ -6821,7 +6969,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Parameter Name="iEndRow" Type="int" Mode="In" />
           <Parameter Name="sMode" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="ShortLIMSModelStoreContainer">
+        <EntityContainer Name="LIMSModelStoreContainer">
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryAssignedSerialNumberDetails" EntityType="Self.InventoryAssignedSerialNumberDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryAssignmentDetails" EntityType="Self.InventoryAssignmentDetails" Schema="dbo" store:Type="Tables" />
@@ -6858,6 +7006,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="SerialNumberMaster" EntityType="Self.SerialNumberMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpareStock" EntityType="Self.SpareStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockLogData" EntityType="Self.StockLogData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_DailyInvoice" EntityType="Self.TBL_DailyInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_InvoiceReceiptNoMaster" EntityType="Self.TBL_InvoiceReceiptNoMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_RejectInvoice" EntityType="Self.Tbl_RejectInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_REJECTINVOICEDETAILS" EntityType="Self.TBL_REJECTINVOICEDETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitMasterInventory" EntityType="Self.UnitMasterInventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnalysisProcessScheduleDetail" EntityType="Self.AnalysisProcessScheduleDetail" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="ARC" EntityType="Self.ARC" Schema="Lims" store:Type="Tables" />
@@ -6887,6 +7039,8 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="FieldWasteWater" EntityType="Self.FieldWasteWater" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="FieldWorkplaceEnvironmentAndFugitiveEmission" EntityType="Self.FieldWorkplaceEnvironmentAndFugitiveEmission" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="FieldWorkplaceGasSampling" EntityType="Self.FieldWorkplaceGasSampling" Schema="Lims" store:Type="Tables" />
+          <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetails" Schema="Lims" store:Type="Tables" />
+          <EntitySet Name="InvoiceRejectDetails" EntityType="Self.InvoiceRejectDetails" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="LabDisciplineMapping" EntityType="Self.LabDisciplineMapping" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="LocationSampleCollection" EntityType="Self.LocationSampleCollection" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="MenuRoleBranchMapping" EntityType="Self.MenuRoleBranchMapping" Schema="Lims" store:Type="Tables" />
@@ -6895,6 +7049,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="ParameterFormula" EntityType="Self.ParameterFormula" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="ParameterGroupMaster" EntityType="Self.ParameterGroupMaster" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="ParameterMapping" EntityType="Self.ParameterMapping" Schema="Lims" store:Type="Tables" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="PlannerByDiscipline" EntityType="Self.PlannerByDiscipline" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="PONumberCount" EntityType="Self.PONumberCount" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="PurchaseTNC" EntityType="Self.PurchaseTNC" Schema="Lims" store:Type="Tables" />
@@ -6942,6 +7097,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="MenuMaster" EntityType="Self.MenuMaster" Schema="Master" store:Type="Tables" />
           <EntitySet Name="ModeOfCommunication" EntityType="Self.ModeOfCommunication" Schema="Master" store:Type="Tables" />
           <EntitySet Name="ParameterMaster" EntityType="Self.ParameterMaster" Schema="Master" store:Type="Tables" />
+          <EntitySet Name="PaymentModeMaster" EntityType="Self.PaymentModeMaster" Schema="Master" store:Type="Tables" />
           <EntitySet Name="ProcedureMaster" EntityType="Self.ProcedureMaster" Schema="Master" store:Type="Tables" />
           <EntitySet Name="ProductGroupMaster" EntityType="Self.ProductGroupMaster" Schema="Master" store:Type="Tables" />
           <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="Master" store:Type="Tables" />
@@ -8166,7 +8322,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ShortLIMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="LIMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ErrorLog">
           <Key>
             <PropertyRef Name="ErrorLogId" />
@@ -8862,6 +9018,88 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="InsertedBy" Type="Int64" />
           <Property Name="InsertedTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TBL_DailyInvoice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkOrderNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Totalcharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discountamt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SampleCollectioncharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TransportationCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TestingCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NetAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GSTAmt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Paidamount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Balanceamount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="EnquirySampleID" Type="Int32" />
+          <Property Name="CostingId" Type="Int32" />
+          <Property Name="RejectStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBL_InvoiceReceiptNoMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FinancialYearID" Type="Int64" />
+          <Property Name="FinancialMonthID" Type="Int64" />
+          <Property Name="NumberType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NumberValue" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tbl_RejectInvoice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkOrderNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Totalcharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discountamt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SampleCollectioncharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TransportationCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TestingCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NetAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GSTAmt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Paidamount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Balanceamount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="EnquirySampleID" Type="Int32" />
+          <Property Name="CostingId" Type="Int32" />
+          <Property Name="RejectStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBL_REJECTINVOICEDETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkOrderNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Totalcharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discountamt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SampleCollectioncharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TransportationCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TestingCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NetAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GSTAmt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Paidamount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Balanceamount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="EnquirySampleID" Type="Int32" />
+          <Property Name="CostingId" Type="Int32" />
         </EntityType>
         <EntityType Name="UnitMasterInventory">
           <Key>
@@ -9620,6 +9858,37 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="PreservationDone" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="FieldWorkplaceEnvironmentAndFugitiveEmission" Relationship="Self.FK_FieldWorkplaceGasSampling_FieldWorkplaceEnvironmentAndFugitiveEmission" FromRole="FieldWorkplaceGasSampling" ToRole="FieldWorkplaceEnvironmentAndFugitiveEmission" />
         </EntityType>
+        <EntityType Name="InvoiceDetail">
+          <Key>
+            <PropertyRef Name="InvoiceDetailsId" />
+          </Key>
+          <Property Name="InvoiceDetailsId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EnquirySampleID" Type="Int64" />
+          <Property Name="CostingId" Type="Int64" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EnteredBy" Type="Int32" Nullable="false" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="InvoiceRejectDetail">
+          <Key>
+            <PropertyRef Name="InvoiceRejectDetailsId" />
+          </Key>
+          <Property Name="InvoiceRejectDetailsId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceDetailsId" Type="Int64" />
+          <Property Name="EnquirySampleID" Type="Int64" />
+          <Property Name="CostingId" Type="Int64" />
+          <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EnteredBy" Type="Int32" Nullable="false" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
         <EntityType Name="LabDisciplineMapping">
           <Key>
             <PropertyRef Name="LabDisciplineMappingId" />
@@ -9796,6 +10065,29 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <NavigationProperty Name="ParameterMaster" Relationship="Self.FK_ParameterMapping_ParameterMaster" FromRole="ParameterMapping" ToRole="ParameterMaster" />
           <NavigationProperty Name="TestMethod" Relationship="Self.FK_ParameterMapping_TestMethod" FromRole="ParameterMapping" ToRole="TestMethod" />
           <NavigationProperty Name="UnitMaster" Relationship="Self.FK_ParameterMapping_UnitMaster" FromRole="ParameterMapping" ToRole="UnitMaster" />
+        </EntityType>
+        <EntityType Name="PaymentDetail">
+          <Key>
+            <PropertyRef Name="PaymentDetailsId" />
+          </Key>
+          <Property Name="PaymentDetailsId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecieptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentMode" Type="Int32" Nullable="false" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DD_ChequeNo_Neft" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DD_ChequeDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EnteredBy" Type="Int32" Nullable="false" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkOrderNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EnquirySampleId" Type="Int64" />
         </EntityType>
         <EntityType Name="PlannerByDiscipline">
           <Key>
@@ -10873,6 +11165,18 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <NavigationProperty Name="SampleParameterFiles" Relationship="Self.FK_SampleParameterFiles_ParameterMaster" FromRole="ParameterMaster" ToRole="SampleParameterFiles" />
           <NavigationProperty Name="SampleParameterPlannings" Relationship="Self.FK_SampleParameterPlanning_ParameterMaster" FromRole="ParameterMaster" ToRole="SampleParameterPlanning" />
           <NavigationProperty Name="SolutionPreparationDatas" Relationship="Self.FK_SolutionPreparationData_ParameterMaster" FromRole="ParameterMaster" ToRole="SolutionPreparationData" />
+        </EntityType>
+        <EntityType Name="PaymentModeMaster">
+          <Key>
+            <PropertyRef Name="PaymentModeMasterId" />
+          </Key>
+          <Property Name="PaymentModeMasterId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentMode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EnteredBy" Type="Int32" Nullable="false" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="ProcedureMaster">
           <Key>
@@ -14972,6 +15276,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="SerialNumberMasters" EntityType="Self.SerialNumberMaster" />
           <EntitySet Name="SpareStocks" EntityType="Self.SpareStock" />
           <EntitySet Name="StockLogDatas" EntityType="Self.StockLogData" />
+          <EntitySet Name="TBL_DailyInvoice" EntityType="Self.TBL_DailyInvoice" />
+          <EntitySet Name="TBL_InvoiceReceiptNoMaster" EntityType="Self.TBL_InvoiceReceiptNoMaster" />
+          <EntitySet Name="Tbl_RejectInvoice" EntityType="Self.Tbl_RejectInvoice" />
+          <EntitySet Name="TBL_REJECTINVOICEDETAILS" EntityType="Self.TBL_REJECTINVOICEDETAILS" />
           <EntitySet Name="UnitMasterInventories" EntityType="Self.UnitMasterInventory" />
           <EntitySet Name="AnalysisProcessScheduleDetails" EntityType="Self.AnalysisProcessScheduleDetail" />
           <EntitySet Name="ARCs" EntityType="Self.ARC" />
@@ -15001,6 +15309,8 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="FieldWasteWaters" EntityType="Self.FieldWasteWater" />
           <EntitySet Name="FieldWorkplaceEnvironmentAndFugitiveEmissions" EntityType="Self.FieldWorkplaceEnvironmentAndFugitiveEmission" />
           <EntitySet Name="FieldWorkplaceGasSamplings" EntityType="Self.FieldWorkplaceGasSampling" />
+          <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetail" />
+          <EntitySet Name="InvoiceRejectDetails" EntityType="Self.InvoiceRejectDetail" />
           <EntitySet Name="LabDisciplineMappings" EntityType="Self.LabDisciplineMapping" />
           <EntitySet Name="LocationSampleCollections" EntityType="Self.LocationSampleCollection" />
           <EntitySet Name="MenuRoleBranchMappings" EntityType="Self.MenuRoleBranchMapping" />
@@ -15009,6 +15319,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="ParameterFormulas" EntityType="Self.ParameterFormula" />
           <EntitySet Name="ParameterGroupMasters" EntityType="Self.ParameterGroupMaster" />
           <EntitySet Name="ParameterMappings" EntityType="Self.ParameterMapping" />
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetail" />
           <EntitySet Name="PlannerByDisciplines" EntityType="Self.PlannerByDiscipline" />
           <EntitySet Name="PONumberCounts" EntityType="Self.PONumberCount" />
           <EntitySet Name="PurchaseTNCs" EntityType="Self.PurchaseTNC" />
@@ -15056,6 +15367,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="MenuMasters" EntityType="Self.MenuMaster" />
           <EntitySet Name="ModeOfCommunications" EntityType="Self.ModeOfCommunication" />
           <EntitySet Name="ParameterMasters" EntityType="Self.ParameterMaster" />
+          <EntitySet Name="PaymentModeMasters" EntityType="Self.PaymentModeMaster" />
           <EntitySet Name="ProcedureMasters" EntityType="Self.ProcedureMaster" />
           <EntitySet Name="ProductGroupMasters" EntityType="Self.ProductGroupMaster" />
           <EntitySet Name="RoleMasters" EntityType="Self.RoleMaster" />
@@ -16261,7 +16573,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <End Role="SubGroupMaster" EntitySet="SubGroupMasters" />
             <End Role="TermsAndConditions" EntitySet="TermsAndConditions" />
           </AssociationSet>
-          <FunctionImport Name="Procedure_GetWOMasterData" ReturnType="Collection(ShortLIMSModel.Procedure_GetWOMasterData_Result)">
+          <FunctionImport Name="Procedure_GetWOMasterData" ReturnType="Collection(LIMSModel.Procedure_GetWOMasterData_Result)">
             <Parameter Name="ParameterGroupId" Mode="In" Type="Int32" />
             <Parameter Name="ParameterMasterId" Mode="In" Type="Int32" />
             <Parameter Name="analysisProcessScheduleDetailId" Mode="In" Type="Int64" />
@@ -16273,7 +16585,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="bIsActive" Mode="In" Type="Boolean" />
             <Parameter Name="iInsertedBy" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="USP_CategoryMaster_Select" ReturnType="Collection(ShortLIMSModel.USP_CategoryMaster_Select_Result)">
+          <FunctionImport Name="USP_CategoryMaster_Select" ReturnType="Collection(LIMSModel.USP_CategoryMaster_Select_Result)">
             <Parameter Name="iCategoryId" Mode="In" Type="Int32" />
             <Parameter Name="iInventoryTypeId" Mode="In" Type="Int32" />
             <Parameter Name="sCategoryName" Mode="In" Type="String" />
@@ -16291,79 +16603,79 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="bIsActive" Mode="In" Type="Boolean" />
             <Parameter Name="iUpdatedBy" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_BDM" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_BDM_Result)">
+          <FunctionImport Name="USP_DashBoard_BDM" ReturnType="Collection(LIMSModel.USP_DashBoard_BDM_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_Planner" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_Planner_Result)">
+          <FunctionImport Name="USP_DashBoard_Planner" ReturnType="Collection(LIMSModel.USP_DashBoard_Planner_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_Sample" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_Sample_Result)">
+          <FunctionImport Name="USP_DashBoard_Sample" ReturnType="Collection(LIMSModel.USP_DashBoard_Sample_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_SampleApprovedMonthWise" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_SampleApprovedMonthWise_Result)">
+          <FunctionImport Name="USP_DashBoard_SampleApprovedMonthWise" ReturnType="Collection(LIMSModel.USP_DashBoard_SampleApprovedMonthWise_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_Sampler" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_Sampler_Result)">
+          <FunctionImport Name="USP_DashBoard_Sampler" ReturnType="Collection(LIMSModel.USP_DashBoard_Sampler_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_SampleTestedMonthWise" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_SampleTestedMonthWise_Result)">
+          <FunctionImport Name="USP_DashBoard_SampleTestedMonthWise" ReturnType="Collection(LIMSModel.USP_DashBoard_SampleTestedMonthWise_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_Select" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_Select_Result)">
+          <FunctionImport Name="USP_DashBoard_Select" ReturnType="Collection(LIMSModel.USP_DashBoard_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_STL" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_STL_Result)">
+          <FunctionImport Name="USP_DashBoard_STL" ReturnType="Collection(LIMSModel.USP_DashBoard_STL_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_TotalPOAmountMonthWise" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_TotalPOAmountMonthWise_Result)">
+          <FunctionImport Name="USP_DashBoard_TotalPOAmountMonthWise" ReturnType="Collection(LIMSModel.USP_DashBoard_TotalPOAmountMonthWise_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_TotalQuotationSentMonthWise" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_TotalQuotationSentMonthWise_Result)">
+          <FunctionImport Name="USP_DashBoard_TotalQuotationSentMonthWise" ReturnType="Collection(LIMSModel.USP_DashBoard_TotalQuotationSentMonthWise_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_TotalSampleMonthWise" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_TotalSampleMonthWise_Result)">
+          <FunctionImport Name="USP_DashBoard_TotalSampleMonthWise" ReturnType="Collection(LIMSModel.USP_DashBoard_TotalSampleMonthWise_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_TotalWO" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_TotalWO_Result)">
+          <FunctionImport Name="USP_DashBoard_TotalWO" ReturnType="Collection(LIMSModel.USP_DashBoard_TotalWO_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="dtEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_DashBoard_WOExe" ReturnType="Collection(ShortLIMSModel.USP_DashBoard_WOExe_Result)">
+          <FunctionImport Name="USP_DashBoard_WOExe" ReturnType="Collection(LIMSModel.USP_DashBoard_WOExe_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="dtStartDate" Mode="In" Type="DateTime" />
@@ -16376,7 +16688,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iInventorySerialNumber" Mode="In" Type="Int32" />
             <Parameter Name="iItemID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryAssignedSerialNumberDetails_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryAssignedSerialNumberDetails_Select_Result)">
+          <FunctionImport Name="USP_InventoryAssignedSerialNumberDetails_Select" ReturnType="Collection(LIMSModel.USP_InventoryAssignedSerialNumberDetails_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="iInventoryAssignmentDetailsID" Mode="In" Type="Int32" />
@@ -16399,7 +16711,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iInsertedBy" Mode="In" Type="Int32" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryAssignmentDetails_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryAssignmentDetails_Select_Result)">
+          <FunctionImport Name="USP_InventoryAssignmentDetails_Select" ReturnType="Collection(LIMSModel.USP_InventoryAssignmentDetails_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="sSortBy" Mode="In" Type="String" />
@@ -16427,7 +16739,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iInsertedBy" Mode="In" Type="Int32" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryAssignmentMaster_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryAssignmentMaster_Select_Result)">
+          <FunctionImport Name="USP_InventoryAssignmentMaster_Select" ReturnType="Collection(LIMSModel.USP_InventoryAssignmentMaster_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="sSortBy" Mode="In" Type="String" />
@@ -16462,7 +16774,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="sBrandReceived" Mode="In" Type="String" />
             <Parameter Name="iPurchaseRequestID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryBasicDetails_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryBasicDetails_Select_Result)">
+          <FunctionImport Name="USP_InventoryBasicDetails_Select" ReturnType="Collection(LIMSModel.USP_InventoryBasicDetails_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iRowCounter" Mode="InOut" Type="Int32" />
             <Parameter Name="sSortBy" Mode="In" Type="String" />
@@ -16523,7 +16835,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="sSRNO" Mode="In" Type="String" />
             <Parameter Name="iPurchaseRequestID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryBasicItemDetails_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryBasicItemDetails_Select_Result)">
+          <FunctionImport Name="USP_InventoryBasicItemDetails_Select" ReturnType="Collection(LIMSModel.USP_InventoryBasicItemDetails_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="bInventoryBasicDetailsIsActive" Mode="In" Type="Boolean" />
@@ -16551,7 +16863,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="sSRNO" Mode="In" Type="String" />
             <Parameter Name="dDOE" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryCalibrationAndMaintenance_ByItemDetailsID" ReturnType="Collection(ShortLIMSModel.USP_InventoryCalibrationAndMaintenance_ByItemDetailsID_Result)">
+          <FunctionImport Name="USP_InventoryCalibrationAndMaintenance_ByItemDetailsID" ReturnType="Collection(LIMSModel.USP_InventoryCalibrationAndMaintenance_ByItemDetailsID_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="sActionType" Mode="In" Type="String" />
             <Parameter Name="sInventoryBasicItemDetailsNumber" Mode="In" Type="String" />
@@ -16572,7 +16884,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="bIsActive" Mode="In" Type="Boolean" />
             <Parameter Name="iInsertedBy" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryCapacityMaster_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryCapacityMaster_Select_Result)">
+          <FunctionImport Name="USP_InventoryCapacityMaster_Select" ReturnType="Collection(LIMSModel.USP_InventoryCapacityMaster_Select_Result)">
             <Parameter Name="iInventoryCapacityMasterId" Mode="In" Type="Int64" />
             <Parameter Name="sCapacity" Mode="In" Type="String" />
             <Parameter Name="sDescription" Mode="In" Type="String" />
@@ -16605,7 +16917,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="dtBillDate" Mode="In" Type="DateTime" />
             <Parameter Name="sDeliveryTime" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryCommercialDetails_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryCommercialDetails_Select_Result)">
+          <FunctionImport Name="USP_InventoryCommercialDetails_Select" ReturnType="Collection(LIMSModel.USP_InventoryCommercialDetails_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="iInventoryBasicDetailsID" Mode="In" Type="Int32" />
@@ -16624,7 +16936,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="dtBillDate" Mode="In" Type="DateTime" />
             <Parameter Name="sDeliveryTime" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryCommercialFileDetail_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryCommercialFileDetail_Select_Result)">
+          <FunctionImport Name="USP_InventoryCommercialFileDetail_Select" ReturnType="Collection(LIMSModel.USP_InventoryCommercialFileDetail_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="iInventoryBasicDetailsID" Mode="In" Type="Int64" />
@@ -16656,7 +16968,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iErrorMessage" Mode="InOut" Type="String" />
             <Parameter Name="iInventoryCapacityMasterId" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryItemMaster_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryItemMaster_Select_Result)">
+          <FunctionImport Name="USP_InventoryItemMaster_Select" ReturnType="Collection(LIMSModel.USP_InventoryItemMaster_Select_Result)">
             <Parameter Name="iID" Mode="In" Type="Int32" />
             <Parameter Name="iInventoryCategoryMasterID" Mode="In" Type="Int16" />
             <Parameter Name="iInventoryTypeMasterID" Mode="In" Type="Int16" />
@@ -16702,7 +17014,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="daStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="daEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryMaintainanceAndCalibration_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryMaintainanceAndCalibration_Select_Result)">
+          <FunctionImport Name="USP_InventoryMaintainanceAndCalibration_Select" ReturnType="Collection(LIMSModel.USP_InventoryMaintainanceAndCalibration_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="sType" Mode="In" Type="String" />
@@ -16743,13 +17055,13 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iID" Mode="InOut" Type="Int32" />
             <Parameter Name="iInsertedBy" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryMaintainanceAndCalibrationSchedule_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryMaintainanceAndCalibrationSchedule_Select_Result)">
+          <FunctionImport Name="USP_InventoryMaintainanceAndCalibrationSchedule_Select" ReturnType="Collection(LIMSModel.USP_InventoryMaintainanceAndCalibrationSchedule_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="sType" Mode="In" Type="String" />
             <Parameter Name="iInventoryBasicItemDetailsID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryMaintainanceAndCalibrationScheduleDates_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Select_Result)">
+          <FunctionImport Name="USP_InventoryMaintainanceAndCalibrationScheduleDates_Select" ReturnType="Collection(LIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Select_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="iInventoryMaintainanceAndCalibrationScheduleID" Mode="In" Type="Int32" />
@@ -16760,7 +17072,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="bInventoryMaintainanceAndCalibrationScheduleIsActive" Mode="In" Type="Boolean" />
             <Parameter Name="bIsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection" ReturnType="Collection(ShortLIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection_Result)">
+          <FunctionImport Name="USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection" ReturnType="Collection(LIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection_Result)">
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="sType" Mode="In" Type="String" />
@@ -16785,7 +17097,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iInsertedBy" Mode="In" Type="Int16" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryPurchase_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryPurchase_Select_Result)">
+          <FunctionImport Name="USP_InventoryPurchase_Select" ReturnType="Collection(LIMSModel.USP_InventoryPurchase_Select_Result)">
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="sMode" Mode="In" Type="String" />
             <Parameter Name="daPurchaseOrderFromDate" Mode="In" Type="DateTime" />
@@ -16806,7 +17118,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="bIsActive" Mode="In" Type="Boolean" />
             <Parameter Name="iInsertedBy" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryTypeMaster_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryTypeMaster_Select_Result)">
+          <FunctionImport Name="USP_InventoryTypeMaster_Select" ReturnType="Collection(LIMSModel.USP_InventoryTypeMaster_Select_Result)">
             <Parameter Name="sInventoryTypeName" Mode="In" Type="String" />
             <Parameter Name="iInventoryTypeId" Mode="In" Type="Int32" />
             <Parameter Name="sDescription" Mode="In" Type="String" />
@@ -16835,7 +17147,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iInsertedBy" Mode="In" Type="Int16" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="USP_InventoryVendorMaster_Select" ReturnType="Collection(ShortLIMSModel.USP_InventoryVendorMaster_Select_Result)">
+          <FunctionImport Name="USP_InventoryVendorMaster_Select" ReturnType="Collection(LIMSModel.USP_InventoryVendorMaster_Select_Result)">
             <Parameter Name="iID" Mode="In" Type="Int32" />
             <Parameter Name="bIsActive" Mode="In" Type="Boolean" />
             <Parameter Name="bIsDeleted" Mode="In" Type="Boolean" />
@@ -16863,7 +17175,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iAvailableStock" Mode="In" Type="Int64" />
             <Parameter Name="iErrorMessage" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="USP_StockLogData_Select" ReturnType="Collection(ShortLIMSModel.USP_StockLogData_Select_Result)">
+          <FunctionImport Name="USP_StockLogData_Select" ReturnType="Collection(LIMSModel.USP_StockLogData_Select_Result)">
             <Parameter Name="iID" Mode="InOut" Type="Int64" />
             <Parameter Name="iIssueToNameID" Mode="In" Type="Int64" />
             <Parameter Name="dtIssueDate" Mode="In" Type="DateTime" />
@@ -16892,7 +17204,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
             <Parameter Name="iErrorMessage" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="USP_UnitMaster_Select" ReturnType="Collection(ShortLIMSModel.USP_UnitMaster_Select_Result)">
+          <FunctionImport Name="USP_UnitMaster_Select" ReturnType="Collection(LIMSModel.USP_UnitMaster_Select_Result)">
             <Parameter Name="sUnit" Mode="In" Type="String" />
             <Parameter Name="iUnitId" Mode="In" Type="Int32" />
             <Parameter Name="iErrorCode" Mode="InOut" Type="Int32" />
@@ -17274,9 +17586,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ShortLIMSModelStoreContainer" CdmEntityContainer="LIMSEntities">
+        <EntityContainerMapping StorageEntityContainer="LIMSModelStoreContainer" CdmEntityContainer="LIMSEntities">
           <EntitySetMapping Name="ErrorLogs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ErrorLog">
+            <EntityTypeMapping TypeName="LIMSModel.ErrorLog">
               <MappingFragment StoreEntitySet="ErrorLog">
                 <ScalarProperty Name="ErrorLogId" ColumnName="ErrorLogId" />
                 <ScalarProperty Name="SPNAME" ColumnName="SPNAME" />
@@ -17290,7 +17602,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryAssignedSerialNumberDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryAssignedSerialNumberDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryAssignedSerialNumberDetail">
               <MappingFragment StoreEntitySet="InventoryAssignedSerialNumberDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryAssignmentDetailsID" ColumnName="InventoryAssignmentDetailsID" />
@@ -17301,7 +17613,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryAssignmentDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryAssignmentDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryAssignmentDetail">
               <MappingFragment StoreEntitySet="InventoryAssignmentDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryAssignmentMasterID" ColumnName="InventoryAssignmentMasterID" />
@@ -17328,7 +17640,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryAssignmentMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryAssignmentMaster">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryAssignmentMaster">
               <MappingFragment StoreEntitySet="InventoryAssignmentMaster">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
@@ -17347,7 +17659,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryBasicDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryBasicDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryBasicDetail">
               <MappingFragment StoreEntitySet="InventoryBasicDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
@@ -17381,7 +17693,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryBasicItemDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryBasicItemDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryBasicItemDetail">
               <MappingFragment StoreEntitySet="InventoryBasicItemDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryBasicDetailsID" ColumnName="InventoryBasicDetailsID" />
@@ -17406,7 +17718,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryCapacityMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryCapacityMaster">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryCapacityMaster">
               <MappingFragment StoreEntitySet="InventoryCapacityMaster">
                 <ScalarProperty Name="InventoryCapacityMasterId" ColumnName="InventoryCapacityMasterId" />
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
@@ -17423,7 +17735,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryCategoryMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryCategoryMaster">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryCategoryMaster">
               <MappingFragment StoreEntitySet="InventoryCategoryMaster">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -17440,7 +17752,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryCommercialDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryCommercialDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryCommercialDetail">
               <MappingFragment StoreEntitySet="InventoryCommercialDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VendorName" ColumnName="VendorName" />
@@ -17462,7 +17774,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryCommercialFileDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryCommercialFileDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryCommercialFileDetail">
               <MappingFragment StoreEntitySet="InventoryCommercialFileDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryBasicDetailID" ColumnName="InventoryBasicDetailID" />
@@ -17472,7 +17784,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryCurrentStocks">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryCurrentStock">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryCurrentStock">
               <MappingFragment StoreEntitySet="InventoryCurrentStock">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
@@ -17489,7 +17801,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryItemIssueRequests">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryItemIssueRequest">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryItemIssueRequest">
               <MappingFragment StoreEntitySet="InventoryItemIssueRequest">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -17510,7 +17822,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryItemIssueRequestDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryItemIssueRequestDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryItemIssueRequestDetail">
               <MappingFragment StoreEntitySet="InventoryItemIssueRequestDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryItemIssueRequestID" ColumnName="InventoryItemIssueRequestID" />
@@ -17532,7 +17844,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryItemMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryItemMaster">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryItemMaster">
               <MappingFragment StoreEntitySet="InventoryItemMaster">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -17556,7 +17868,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryItemOutwards">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryItemOutward">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryItemOutward">
               <MappingFragment StoreEntitySet="InventoryItemOutward">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryItemIssueRequestDetailsID" ColumnName="InventoryItemIssueRequestDetailsID" />
@@ -17576,7 +17888,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryMaintainanceAndCalibrations">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryMaintainanceAndCalibration">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryMaintainanceAndCalibration">
               <MappingFragment StoreEntitySet="InventoryMaintainanceAndCalibration">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -17601,7 +17913,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryMaintainanceAndCalibrationSchedules">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryMaintainanceAndCalibrationSchedule">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryMaintainanceAndCalibrationSchedule">
               <MappingFragment StoreEntitySet="InventoryMaintainanceAndCalibrationSchedule">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryBasicItemDetailsID" ColumnName="InventoryBasicItemDetailsID" />
@@ -17622,7 +17934,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryMaintainanceAndCalibrationScheduleDates">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryMaintainanceAndCalibrationScheduleDate">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryMaintainanceAndCalibrationScheduleDate">
               <MappingFragment StoreEntitySet="InventoryMaintainanceAndCalibrationScheduleDates">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryMaintainanceAndCalibrationScheduleID" ColumnName="InventoryMaintainanceAndCalibrationScheduleID" />
@@ -17637,7 +17949,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryMaintainanceAndCalibrationScheduleFiles">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryMaintainanceAndCalibrationScheduleFile">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryMaintainanceAndCalibrationScheduleFile">
               <MappingFragment StoreEntitySet="InventoryMaintainanceAndCalibrationScheduleFiles">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryMaintainanceAndCalibrationScheduleID" ColumnName="InventoryMaintainanceAndCalibrationScheduleID" />
@@ -17648,7 +17960,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryMaintAndCalibBreakDowns">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryMaintAndCalibBreakDown">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryMaintAndCalibBreakDown">
               <MappingFragment StoreEntitySet="InventoryMaintAndCalibBreakDown">
                 <ScalarProperty Name="InventoryMaintAndCalibBreakDownId" ColumnName="InventoryMaintAndCalibBreakDownId" />
                 <ScalarProperty Name="ItemMasterId" ColumnName="ItemMasterId" />
@@ -17668,7 +17980,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryPurchases">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryPurchase">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryPurchase">
               <MappingFragment StoreEntitySet="InventoryPurchase">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VendorID" ColumnName="VendorID" />
@@ -17689,7 +18001,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryPurchaseItems">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryPurchaseItem">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryPurchaseItem">
               <MappingFragment StoreEntitySet="InventoryPurchaseItem">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryPurchaseID" ColumnName="InventoryPurchaseID" />
@@ -17716,7 +18028,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryPurchaseItemDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryPurchaseItemDetail">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryPurchaseItemDetail">
               <MappingFragment StoreEntitySet="InventoryPurchaseItemDetails">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryPurchaseItemID" ColumnName="InventoryPurchaseItemID" />
@@ -17737,7 +18049,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryStockDatewises">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryStockDatewise">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryStockDatewise">
               <MappingFragment StoreEntitySet="InventoryStockDatewise">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
@@ -17758,7 +18070,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryTypeMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryTypeMaster">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryTypeMaster">
               <MappingFragment StoreEntitySet="InventoryTypeMaster">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -17775,7 +18087,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryVendorMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryVendorMaster">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryVendorMaster">
               <MappingFragment StoreEntitySet="InventoryVendorMaster">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -17795,7 +18107,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lims_DisposalCollection">
-            <EntityTypeMapping TypeName="ShortLIMSModel.Lims_DisposalCollection">
+            <EntityTypeMapping TypeName="LIMSModel.Lims_DisposalCollection">
               <MappingFragment StoreEntitySet="Lims_DisposalCollection">
                 <ScalarProperty Name="DisposalCollectionId" ColumnName="DisposalCollectionId" />
                 <ScalarProperty Name="SampleTypeProductId" ColumnName="SampleTypeProductId" />
@@ -17813,7 +18125,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lims_IsFieldCombineResult">
-            <EntityTypeMapping TypeName="ShortLIMSModel.Lims_IsFieldCombineResult">
+            <EntityTypeMapping TypeName="LIMSModel.Lims_IsFieldCombineResult">
               <MappingFragment StoreEntitySet="Lims_IsFieldCombineResult">
                 <ScalarProperty Name="ParameterId" ColumnName="ParameterId" />
                 <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
@@ -17825,7 +18137,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Master_PurchaseUnitMaster">
-            <EntityTypeMapping TypeName="ShortLIMSModel.Master_PurchaseUnitMaster">
+            <EntityTypeMapping TypeName="LIMSModel.Master_PurchaseUnitMaster">
               <MappingFragment StoreEntitySet="Master_PurchaseUnitMaster">
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
@@ -17839,7 +18151,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PurchaseMasterDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.PurchaseMasterDetail">
+            <EntityTypeMapping TypeName="LIMSModel.PurchaseMasterDetail">
               <MappingFragment StoreEntitySet="PurchaseMasterDetails">
                 <ScalarProperty Name="PurchaseMasterID" ColumnName="PurchaseMasterID" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -17851,7 +18163,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PurchaseRecords">
-            <EntityTypeMapping TypeName="ShortLIMSModel.PurchaseRecord">
+            <EntityTypeMapping TypeName="LIMSModel.PurchaseRecord">
               <MappingFragment StoreEntitySet="PurchaseRecord">
                 <ScalarProperty Name="PurchaseRecordID" ColumnName="PurchaseRecordID" />
                 <ScalarProperty Name="QtyReceived" ColumnName="QtyReceived" />
@@ -17877,7 +18189,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PurchaseRequestDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.PurchaseRequestDetail">
+            <EntityTypeMapping TypeName="LIMSModel.PurchaseRequestDetail">
               <MappingFragment StoreEntitySet="PurchaseRequestDetails">
                 <ScalarProperty Name="PurchaseRequestID" ColumnName="PurchaseRequestID" />
                 <ScalarProperty Name="ItemMasterID" ColumnName="ItemMasterID" />
@@ -17922,7 +18234,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PurchaseSupplierDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.PurchaseSupplierDetail">
+            <EntityTypeMapping TypeName="LIMSModel.PurchaseSupplierDetail">
               <MappingFragment StoreEntitySet="PurchaseSupplierDetails">
                 <ScalarProperty Name="PurchaseSupplierID" ColumnName="PurchaseSupplierID" />
                 <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
@@ -17943,7 +18255,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SerialNumberMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SerialNumberMaster">
+            <EntityTypeMapping TypeName="LIMSModel.SerialNumberMaster">
               <MappingFragment StoreEntitySet="SerialNumberMaster">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
@@ -17955,7 +18267,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SpareStocks">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SpareStock">
+            <EntityTypeMapping TypeName="LIMSModel.SpareStock">
               <MappingFragment StoreEntitySet="SpareStock">
                 <ScalarProperty Name="SpareStockId" ColumnName="SpareStockId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -17978,7 +18290,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StockLogDatas">
-            <EntityTypeMapping TypeName="ShortLIMSModel.StockLogData">
+            <EntityTypeMapping TypeName="LIMSModel.StockLogData">
               <MappingFragment StoreEntitySet="StockLogData">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IssueToNameID" ColumnName="IssueToNameID" />
@@ -17991,8 +18303,94 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TBL_DailyInvoice">
+            <EntityTypeMapping TypeName="LIMSModel.TBL_DailyInvoice">
+              <MappingFragment StoreEntitySet="TBL_DailyInvoice">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
+                <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
+                <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
+                <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
+                <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+                <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+                <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+                <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+                <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+                <ScalarProperty Name="RejectStatus" ColumnName="RejectStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_InvoiceReceiptNoMaster">
+            <EntityTypeMapping TypeName="LIMSModel.TBL_InvoiceReceiptNoMaster">
+              <MappingFragment StoreEntitySet="TBL_InvoiceReceiptNoMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+                <ScalarProperty Name="FinancialMonthID" ColumnName="FinancialMonthID" />
+                <ScalarProperty Name="NumberType" ColumnName="NumberType" />
+                <ScalarProperty Name="NumberValue" ColumnName="NumberValue" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_RejectInvoice">
+            <EntityTypeMapping TypeName="LIMSModel.Tbl_RejectInvoice">
+              <MappingFragment StoreEntitySet="Tbl_RejectInvoice">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
+                <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
+                <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
+                <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
+                <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+                <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+                <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+                <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+                <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+                <ScalarProperty Name="RejectStatus" ColumnName="RejectStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_REJECTINVOICEDETAILS">
+            <EntityTypeMapping TypeName="LIMSModel.TBL_REJECTINVOICEDETAILS">
+              <MappingFragment StoreEntitySet="TBL_REJECTINVOICEDETAILS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
+                <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
+                <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
+                <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
+                <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+                <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+                <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+                <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+                <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UnitMasterInventories">
-            <EntityTypeMapping TypeName="ShortLIMSModel.UnitMasterInventory">
+            <EntityTypeMapping TypeName="LIMSModel.UnitMasterInventory">
               <MappingFragment StoreEntitySet="UnitMasterInventory">
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
@@ -18005,7 +18403,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AnalysisProcessScheduleDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.AnalysisProcessScheduleDetail">
+            <EntityTypeMapping TypeName="LIMSModel.AnalysisProcessScheduleDetail">
               <MappingFragment StoreEntitySet="AnalysisProcessScheduleDetail">
                 <ScalarProperty Name="AnalysisProcessScheduleDetailId" ColumnName="AnalysisProcessScheduleDetailId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -18031,7 +18429,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ARCs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ARC">
+            <EntityTypeMapping TypeName="LIMSModel.ARC">
               <MappingFragment StoreEntitySet="ARC">
                 <ScalarProperty Name="ARCId" ColumnName="ARCId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -18047,7 +18445,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Costings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.Costing">
+            <EntityTypeMapping TypeName="LIMSModel.Costing">
               <MappingFragment StoreEntitySet="Costing">
                 <ScalarProperty Name="CostingId" ColumnName="CostingId" />
                 <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
@@ -18068,7 +18466,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnquiryDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnquiryDetail">
+            <EntityTypeMapping TypeName="LIMSModel.EnquiryDetail">
               <MappingFragment StoreEntitySet="EnquiryDetail">
                 <ScalarProperty Name="EnquiryDetailId" ColumnName="EnquiryDetailId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18093,7 +18491,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnquiryLogs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnquiryLog">
+            <EntityTypeMapping TypeName="LIMSModel.EnquiryLog">
               <MappingFragment StoreEntitySet="EnquiryLog">
                 <ScalarProperty Name="EnquiryLogId" ColumnName="EnquiryLogId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18109,7 +18507,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnquiryMasterSampleTypes">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnquiryMasterSampleType">
+            <EntityTypeMapping TypeName="LIMSModel.EnquiryMasterSampleType">
               <MappingFragment StoreEntitySet="EnquiryMasterSampleType">
                 <ScalarProperty Name="EnquiryMasterSampleTypeId" ColumnName="EnquiryMasterSampleTypeId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18124,7 +18522,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnquiryParameterDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnquiryParameterDetail">
+            <EntityTypeMapping TypeName="LIMSModel.EnquiryParameterDetail">
               <MappingFragment StoreEntitySet="EnquiryParameterDetail">
                 <ScalarProperty Name="EnquiryParameterDetailID" ColumnName="EnquiryParameterDetailID" />
                 <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
@@ -18146,7 +18544,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnquirySampleDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnquirySampleDetail">
+            <EntityTypeMapping TypeName="LIMSModel.EnquirySampleDetail">
               <MappingFragment StoreEntitySet="EnquirySampleDetail">
                 <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
                 <ScalarProperty Name="EnquiryDetailId" ColumnName="EnquiryDetailId" />
@@ -18170,7 +18568,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnquiryStatus">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnquiryStatu">
+            <EntityTypeMapping TypeName="LIMSModel.EnquiryStatu">
               <MappingFragment StoreEntitySet="EnquiryStatus">
                 <ScalarProperty Name="EnquiryStatusId" ColumnName="EnquiryStatusId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18184,7 +18582,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FDStack_ParameterData">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FDStack_ParameterData">
+            <EntityTypeMapping TypeName="LIMSModel.FDStack_ParameterData">
               <MappingFragment StoreEntitySet="FDStack_ParameterData">
                 <ScalarProperty Name="FDStack_ParameterDataId" ColumnName="FDStack_ParameterDataId" />
                 <ScalarProperty Name="FDStackEmissionId" ColumnName="FDStackEmissionId" />
@@ -18202,7 +18600,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FDStackEmissions">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FDStackEmission">
+            <EntityTypeMapping TypeName="LIMSModel.FDStackEmission">
               <MappingFragment StoreEntitySet="FDStackEmission">
                 <ScalarProperty Name="FDStackEmissionId" ColumnName="FDStackEmissionId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18265,7 +18663,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FDStackEmission_Details">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FDStackEmission_Details">
+            <EntityTypeMapping TypeName="LIMSModel.FDStackEmission_Details">
               <MappingFragment StoreEntitySet="FDStackEmission_Details">
                 <ScalarProperty Name="FDStackEmission_DetailsId" ColumnName="FDStackEmission_DetailsId" />
                 <ScalarProperty Name="FDStackEmissionId" ColumnName="FDStackEmissionId" />
@@ -18281,7 +18679,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FDStackEmission_GaseousData">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FDStackEmission_GaseousData">
+            <EntityTypeMapping TypeName="LIMSModel.FDStackEmission_GaseousData">
               <MappingFragment StoreEntitySet="FDStackEmission_GaseousData">
                 <ScalarProperty Name="FDStackEmission_GaseousDataId" ColumnName="FDStackEmission_GaseousDataId" />
                 <ScalarProperty Name="FDStackEmissionId" ColumnName="FDStackEmissionId" />
@@ -18311,7 +18709,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FDStackEmission_IsoKinetic">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FDStackEmission_IsoKinetic">
+            <EntityTypeMapping TypeName="LIMSModel.FDStackEmission_IsoKinetic">
               <MappingFragment StoreEntitySet="FDStackEmission_IsoKinetic">
                 <ScalarProperty Name="FDStackEmission_IsoKineticId" ColumnName="FDStackEmission_IsoKineticId" />
                 <ScalarProperty Name="FDStackEmissionId" ColumnName="FDStackEmissionId" />
@@ -18333,7 +18731,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldAmbientAirGasesSamplings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldAmbientAirGasesSampling">
+            <EntityTypeMapping TypeName="LIMSModel.FieldAmbientAirGasesSampling">
               <MappingFragment StoreEntitySet="FieldAmbientAirGasesSampling">
                 <ScalarProperty Name="GasesSampledId" ColumnName="GasesSampledId" />
                 <ScalarProperty Name="FieldId" ColumnName="FieldId" />
@@ -18356,7 +18754,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldAmbientAirMatterSizes">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldAmbientAirMatterSize">
+            <EntityTypeMapping TypeName="LIMSModel.FieldAmbientAirMatterSize">
               <MappingFragment StoreEntitySet="FieldAmbientAirMatterSize">
                 <ScalarProperty Name="MatterSizeId" ColumnName="MatterSizeId" />
                 <ScalarProperty Name="FieldId" ColumnName="FieldId" />
@@ -18384,7 +18782,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldAmbientAirMonitorings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldAmbientAirMonitoring">
+            <EntityTypeMapping TypeName="LIMSModel.FieldAmbientAirMonitoring">
               <MappingFragment StoreEntitySet="FieldAmbientAirMonitoring">
                 <ScalarProperty Name="FieldId" ColumnName="FieldId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18420,7 +18818,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldBuildingMaterials">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldBuildingMaterial">
+            <EntityTypeMapping TypeName="LIMSModel.FieldBuildingMaterial">
               <MappingFragment StoreEntitySet="FieldBuildingMaterial">
                 <ScalarProperty Name="FieldBuildingMaterialId" ColumnName="FieldBuildingMaterialId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18441,7 +18839,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldCoalCokeSolidFuels">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldCoalCokeSolidFuel">
+            <EntityTypeMapping TypeName="LIMSModel.FieldCoalCokeSolidFuel">
               <MappingFragment StoreEntitySet="FieldCoalCokeSolidFuel">
                 <ScalarProperty Name="FieldId" ColumnName="FieldId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18462,7 +18860,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldFoodAndAgriCultures">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldFoodAndAgriCulture">
+            <EntityTypeMapping TypeName="LIMSModel.FieldFoodAndAgriCulture">
               <MappingFragment StoreEntitySet="FieldFoodAndAgriCulture">
                 <ScalarProperty Name="FieldFoodAndAgriCultureId" ColumnName="FieldFoodAndAgriCultureId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18483,7 +18881,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldMicrobiologicalMonitoringOfAirs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldMicrobiologicalMonitoringOfAir">
+            <EntityTypeMapping TypeName="LIMSModel.FieldMicrobiologicalMonitoringOfAir">
               <MappingFragment StoreEntitySet="FieldMicrobiologicalMonitoringOfAir">
                 <ScalarProperty Name="MicrobiologicalID" ColumnName="MicrobiologicalID" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18505,7 +18903,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldNoiseLevelMonitorings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldNoiseLevelMonitoring">
+            <EntityTypeMapping TypeName="LIMSModel.FieldNoiseLevelMonitoring">
               <MappingFragment StoreEntitySet="FieldNoiseLevelMonitoring">
                 <ScalarProperty Name="FieldNoiseId" ColumnName="FieldNoiseId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18547,7 +18945,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldNoiseLevelMonitoringParameters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldNoiseLevelMonitoringParameter">
+            <EntityTypeMapping TypeName="LIMSModel.FieldNoiseLevelMonitoringParameter">
               <MappingFragment StoreEntitySet="FieldNoiseLevelMonitoringParameters">
                 <ScalarProperty Name="ParameterId" ColumnName="ParameterId" />
                 <ScalarProperty Name="FieldNoiseId" ColumnName="FieldNoiseId" />
@@ -18581,7 +18979,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldNoiseSourceParameters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldNoiseSourceParameter">
+            <EntityTypeMapping TypeName="LIMSModel.FieldNoiseSourceParameter">
               <MappingFragment StoreEntitySet="FieldNoiseSourceParameters">
                 <ScalarProperty Name="NoiseSourceParameterId" ColumnName="NoiseSourceParameterId" />
                 <ScalarProperty Name="FieldNoiseId" ColumnName="FieldNoiseId" />
@@ -18606,7 +19004,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldSolidHazardousWasteSoilOils">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldSolidHazardousWasteSoilOil">
+            <EntityTypeMapping TypeName="LIMSModel.FieldSolidHazardousWasteSoilOil">
               <MappingFragment StoreEntitySet="FieldSolidHazardousWasteSoilOil">
                 <ScalarProperty Name="SolidHazardousWasteSoilOilId" ColumnName="SolidHazardousWasteSoilOilId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18627,7 +19025,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldWasteWaters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldWasteWater">
+            <EntityTypeMapping TypeName="LIMSModel.FieldWasteWater">
               <MappingFragment StoreEntitySet="FieldWasteWater">
                 <ScalarProperty Name="WasteWaterID" ColumnName="WasteWaterID" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18650,7 +19048,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldWorkplaceEnvironmentAndFugitiveEmissions">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldWorkplaceEnvironmentAndFugitiveEmission">
+            <EntityTypeMapping TypeName="LIMSModel.FieldWorkplaceEnvironmentAndFugitiveEmission">
               <MappingFragment StoreEntitySet="FieldWorkplaceEnvironmentAndFugitiveEmission">
                 <ScalarProperty Name="WorkplaceID" ColumnName="WorkplaceID" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -18683,7 +19081,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FieldWorkplaceGasSamplings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FieldWorkplaceGasSampling">
+            <EntityTypeMapping TypeName="LIMSModel.FieldWorkplaceGasSampling">
               <MappingFragment StoreEntitySet="FieldWorkplaceGasSampling">
                 <ScalarProperty Name="WorkplaceGasID" ColumnName="WorkplaceGasID" />
                 <ScalarProperty Name="WorkplaceID" ColumnName="WorkplaceID" />
@@ -18705,8 +19103,41 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceDetails">
+            <EntityTypeMapping TypeName="LIMSModel.InvoiceDetail">
+              <MappingFragment StoreEntitySet="InvoiceDetails">
+                <ScalarProperty Name="InvoiceDetailsId" ColumnName="InvoiceDetailsId" />
+                <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+                <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceRejectDetails">
+            <EntityTypeMapping TypeName="LIMSModel.InvoiceRejectDetail">
+              <MappingFragment StoreEntitySet="InvoiceRejectDetails">
+                <ScalarProperty Name="InvoiceRejectDetailsId" ColumnName="InvoiceRejectDetailsId" />
+                <ScalarProperty Name="InvoiceDetailsId" ColumnName="InvoiceDetailsId" />
+                <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+                <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LabDisciplineMappings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.LabDisciplineMapping">
+            <EntityTypeMapping TypeName="LIMSModel.LabDisciplineMapping">
               <MappingFragment StoreEntitySet="LabDisciplineMapping">
                 <ScalarProperty Name="LabDisciplineMappingId" ColumnName="LabDisciplineMappingId" />
                 <ScalarProperty Name="LabMasterId" ColumnName="LabMasterId" />
@@ -18723,7 +19154,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LocationSampleCollections">
-            <EntityTypeMapping TypeName="ShortLIMSModel.LocationSampleCollection">
+            <EntityTypeMapping TypeName="LIMSModel.LocationSampleCollection">
               <MappingFragment StoreEntitySet="LocationSampleCollection">
                 <ScalarProperty Name="LocationSampleCollectionID" ColumnName="LocationSampleCollectionID" />
                 <ScalarProperty Name="EnquirySampleId" ColumnName="EnquirySampleId" />
@@ -18741,7 +19172,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MenuRoleBranchMappings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.MenuRoleBranchMapping">
+            <EntityTypeMapping TypeName="LIMSModel.MenuRoleBranchMapping">
               <MappingFragment StoreEntitySet="MenuRoleBranchMapping">
                 <ScalarProperty Name="MenuRoleBranchMappingId" ColumnName="MenuRoleBranchMappingId" />
                 <ScalarProperty Name="MenuMasterId" ColumnName="MenuMasterId" />
@@ -18755,7 +19186,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MonthTotalDays1">
-            <EntityTypeMapping TypeName="ShortLIMSModel.MonthTotalDays1">
+            <EntityTypeMapping TypeName="LIMSModel.MonthTotalDays1">
               <MappingFragment StoreEntitySet="MonthTotalDays1">
                 <ScalarProperty Name="MonthTotalDaysId" ColumnName="MonthTotalDaysId" />
                 <ScalarProperty Name="MonthName" ColumnName="MonthName" />
@@ -18769,7 +19200,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NotificationDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.NotificationDetail">
+            <EntityTypeMapping TypeName="LIMSModel.NotificationDetail">
               <MappingFragment StoreEntitySet="NotificationDetail">
                 <ScalarProperty Name="NotificationDetailId" ColumnName="NotificationDetailId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -18787,7 +19218,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ParameterFormulas">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ParameterFormula">
+            <EntityTypeMapping TypeName="LIMSModel.ParameterFormula">
               <MappingFragment StoreEntitySet="ParameterFormula">
                 <ScalarProperty Name="ParameterFormulaID" ColumnName="ParameterFormulaID" />
                 <ScalarProperty Name="ParameterMasterId" ColumnName="ParameterMasterId" />
@@ -18813,7 +19244,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ParameterGroupMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ParameterGroupMaster">
+            <EntityTypeMapping TypeName="LIMSModel.ParameterGroupMaster">
               <MappingFragment StoreEntitySet="ParameterGroupMaster">
                 <ScalarProperty Name="ParameterGroupId" ColumnName="ParameterGroupId" />
                 <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
@@ -18830,7 +19261,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ParameterMappings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ParameterMapping">
+            <EntityTypeMapping TypeName="LIMSModel.ParameterMapping">
               <MappingFragment StoreEntitySet="ParameterMapping">
                 <ScalarProperty Name="ParameterMappingId" ColumnName="ParameterMappingId" />
                 <ScalarProperty Name="ParameterMasterId" ColumnName="ParameterMasterId" />
@@ -18864,8 +19295,32 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PaymentDetails">
+            <EntityTypeMapping TypeName="LIMSModel.PaymentDetail">
+              <MappingFragment StoreEntitySet="PaymentDetails">
+                <ScalarProperty Name="PaymentDetailsId" ColumnName="PaymentDetailsId" />
+                <ScalarProperty Name="RecieptNo" ColumnName="RecieptNo" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="DD_ChequeNo_Neft" ColumnName="DD/ChequeNo/Neft" />
+                <ScalarProperty Name="DD_ChequeDate" ColumnName="DD/ChequeDate" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="RegistrationName" ColumnName="RegistrationName" />
+                <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="EnquirySampleId" ColumnName="EnquirySampleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PlannerByDisciplines">
-            <EntityTypeMapping TypeName="ShortLIMSModel.PlannerByDiscipline">
+            <EntityTypeMapping TypeName="LIMSModel.PlannerByDiscipline">
               <MappingFragment StoreEntitySet="PlannerByDiscipline">
                 <ScalarProperty Name="PlannerByDisciplineId" ColumnName="PlannerByDisciplineId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -18883,7 +19338,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PONumberCounts">
-            <EntityTypeMapping TypeName="ShortLIMSModel.PONumberCount">
+            <EntityTypeMapping TypeName="LIMSModel.PONumberCount">
               <MappingFragment StoreEntitySet="PONumberCount">
                 <ScalarProperty Name="PONumberId" ColumnName="PONumberId" />
                 <ScalarProperty Name="POCount" ColumnName="POCount" />
@@ -18898,7 +19353,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PurchaseTNCs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.PurchaseTNC">
+            <EntityTypeMapping TypeName="LIMSModel.PurchaseTNC">
               <MappingFragment StoreEntitySet="PurchaseTNC">
                 <ScalarProperty Name="PurchaseTNCId" ColumnName="PurchaseTNCId" />
                 <ScalarProperty Name="InventoryTypeId" ColumnName="InventoryTypeId" />
@@ -18914,7 +19369,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuantityPreservatives">
-            <EntityTypeMapping TypeName="ShortLIMSModel.QuantityPreservative">
+            <EntityTypeMapping TypeName="LIMSModel.QuantityPreservative">
               <MappingFragment StoreEntitySet="QuantityPreservative">
                 <ScalarProperty Name="QtyPreservativeId" ColumnName="QtyPreservativeId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -18930,7 +19385,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Quotations">
-            <EntityTypeMapping TypeName="ShortLIMSModel.Quotation">
+            <EntityTypeMapping TypeName="LIMSModel.Quotation">
               <MappingFragment StoreEntitySet="Quotation">
                 <ScalarProperty Name="QuotationId" ColumnName="QuotationId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18947,7 +19402,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuotationLogs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.QuotationLog">
+            <EntityTypeMapping TypeName="LIMSModel.QuotationLog">
               <MappingFragment StoreEntitySet="QuotationLog">
                 <ScalarProperty Name="QuotationLogId" ColumnName="QuotationLogId" />
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -18966,7 +19421,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuotationNumbers">
-            <EntityTypeMapping TypeName="ShortLIMSModel.QuotationNumber">
+            <EntityTypeMapping TypeName="LIMSModel.QuotationNumber">
               <MappingFragment StoreEntitySet="QuotationNumber">
                 <ScalarProperty Name="QuotationNumberId" ColumnName="QuotationNumberId" />
                 <ScalarProperty Name="QuotationCount" ColumnName="QuotationCount" />
@@ -18980,7 +19435,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="QuotationTNCs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.QuotationTNC">
+            <EntityTypeMapping TypeName="LIMSModel.QuotationTNC">
               <MappingFragment StoreEntitySet="QuotationTNC">
                 <ScalarProperty Name="QuotationTNCId" ColumnName="QuotationTNCId" />
                 <ScalarProperty Name="QuotationId" ColumnName="QuotationId" />
@@ -18996,7 +19451,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReportNumbers">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ReportNumber">
+            <EntityTypeMapping TypeName="LIMSModel.ReportNumber">
               <MappingFragment StoreEntitySet="ReportNumber">
                 <ScalarProperty Name="ReportNumberId" ColumnName="ReportNumberId" />
                 <ScalarProperty Name="ReportCount" ColumnName="ReportCount" />
@@ -19010,7 +19465,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleCollections">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleCollection">
+            <EntityTypeMapping TypeName="LIMSModel.SampleCollection">
               <MappingFragment StoreEntitySet="SampleCollection">
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
                 <ScalarProperty Name="WorkOrderID" ColumnName="WorkOrderID" />
@@ -19064,7 +19519,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleCollectionDevices">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleCollectionDevice">
+            <EntityTypeMapping TypeName="LIMSModel.SampleCollectionDevice">
               <MappingFragment StoreEntitySet="SampleCollectionDevices">
                 <ScalarProperty Name="SampleCollectionDevicesId" ColumnName="SampleCollectionDevicesId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -19078,7 +19533,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleCollectionProcedures">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleCollectionProcedure">
+            <EntityTypeMapping TypeName="LIMSModel.SampleCollectionProcedure">
               <MappingFragment StoreEntitySet="SampleCollectionProcedure">
                 <ScalarProperty Name="SampleCollectionProcedureId" ColumnName="SampleCollectionProcedureId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -19092,7 +19547,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleLocations">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleLocation">
+            <EntityTypeMapping TypeName="LIMSModel.SampleLocation">
               <MappingFragment StoreEntitySet="SampleLocation">
                 <ScalarProperty Name="SampleLocationId" ColumnName="SampleLocationId" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
@@ -19106,7 +19561,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleNumbers">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleNumber">
+            <EntityTypeMapping TypeName="LIMSModel.SampleNumber">
               <MappingFragment StoreEntitySet="SampleNumber">
                 <ScalarProperty Name="SampleNumberId" ColumnName="SampleNumberId" />
                 <ScalarProperty Name="SampleCount" ColumnName="SampleCount" />
@@ -19121,7 +19576,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleNumber_ReceiptIncharge">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleNumber_ReceiptIncharge">
+            <EntityTypeMapping TypeName="LIMSModel.SampleNumber_ReceiptIncharge">
               <MappingFragment StoreEntitySet="SampleNumber_ReceiptIncharge">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SampleCount" ColumnName="SampleCount" />
@@ -19136,7 +19591,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleParameterFiles">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleParameterFile">
+            <EntityTypeMapping TypeName="LIMSModel.SampleParameterFile">
               <MappingFragment StoreEntitySet="SampleParameterFiles">
                 <ScalarProperty Name="SampleParameterFilesID" ColumnName="SampleParameterFilesID" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -19153,7 +19608,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleParameterFormulaValues">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleParameterFormulaValue">
+            <EntityTypeMapping TypeName="LIMSModel.SampleParameterFormulaValue">
               <MappingFragment StoreEntitySet="SampleParameterFormulaValues">
                 <ScalarProperty Name="SampleParameterFormulaValueId" ColumnName="SampleParameterFormulaValueId" />
                 <ScalarProperty Name="ParameterFormulaID" ColumnName="ParameterFormulaID" />
@@ -19173,7 +19628,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleParameterFormulaValuesTemps">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleParameterFormulaValuesTemp">
+            <EntityTypeMapping TypeName="LIMSModel.SampleParameterFormulaValuesTemp">
               <MappingFragment StoreEntitySet="SampleParameterFormulaValuesTemp">
                 <ScalarProperty Name="SampleParameterFormulaValueTempId" ColumnName="SampleParameterFormulaValueTempId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -19185,7 +19640,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleParameterPlannings">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleParameterPlanning">
+            <EntityTypeMapping TypeName="LIMSModel.SampleParameterPlanning">
               <MappingFragment StoreEntitySet="SampleParameterPlanning">
                 <ScalarProperty Name="SampleParameterPlanningID" ColumnName="SampleParameterPlanningID" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -19212,7 +19667,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SolutionPreparationDatas">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SolutionPreparationData">
+            <EntityTypeMapping TypeName="LIMSModel.SolutionPreparationData">
               <MappingFragment StoreEntitySet="SolutionPreparationData">
                 <ScalarProperty Name="SolutionPreparationDataId" ColumnName="SolutionPreparationDataId" />
                 <ScalarProperty Name="SampleCollectionId" ColumnName="SampleCollectionId" />
@@ -19232,7 +19687,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ULRNumbers">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ULRNumber">
+            <EntityTypeMapping TypeName="LIMSModel.ULRNumber">
               <MappingFragment StoreEntitySet="ULRNumber">
                 <ScalarProperty Name="ULRNumberId" ColumnName="ULRNumberId" />
                 <ScalarProperty Name="ULRCount" ColumnName="ULRCount" />
@@ -19246,7 +19701,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="ShortLIMSModel.UserDetail">
+            <EntityTypeMapping TypeName="LIMSModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetail">
                 <ScalarProperty Name="UserDetailID" ColumnName="UserDetailID" />
                 <ScalarProperty Name="UserMasterID" ColumnName="UserMasterID" />
@@ -19290,7 +19745,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserLabs">
-            <EntityTypeMapping TypeName="ShortLIMSModel.UserLab">
+            <EntityTypeMapping TypeName="LIMSModel.UserLab">
               <MappingFragment StoreEntitySet="UserLab">
                 <ScalarProperty Name="UserLabId" ColumnName="UserLabId" />
                 <ScalarProperty Name="UserMasterId" ColumnName="UserMasterId" />
@@ -19304,7 +19759,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="ShortLIMSModel.UserRole">
+            <EntityTypeMapping TypeName="LIMSModel.UserRole">
               <MappingFragment StoreEntitySet="UserRoles">
                 <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
                 <ScalarProperty Name="UserMasterId" ColumnName="UserMasterId" />
@@ -19318,7 +19773,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WOMasterSampleCollectionDates">
-            <EntityTypeMapping TypeName="ShortLIMSModel.WOMasterSampleCollectionDate">
+            <EntityTypeMapping TypeName="LIMSModel.WOMasterSampleCollectionDate">
               <MappingFragment StoreEntitySet="WOMasterSampleCollectionDate">
                 <ScalarProperty Name="WOMasterSampleCollectionDateId" ColumnName="WOMasterSampleCollectionDateId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -19331,7 +19786,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkOrders">
-            <EntityTypeMapping TypeName="ShortLIMSModel.WorkOrder">
+            <EntityTypeMapping TypeName="LIMSModel.WorkOrder">
               <MappingFragment StoreEntitySet="WorkOrder">
                 <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
                 <ScalarProperty Name="QuotationId" ColumnName="QuotationId" />
@@ -19361,7 +19816,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkOrderSampleCollectionDates">
-            <EntityTypeMapping TypeName="ShortLIMSModel.WorkOrderSampleCollectionDate">
+            <EntityTypeMapping TypeName="LIMSModel.WorkOrderSampleCollectionDate">
               <MappingFragment StoreEntitySet="WorkOrderSampleCollectionDate">
                 <ScalarProperty Name="WorkOrderSampleCollectionDateId" ColumnName="WorkOrderSampleCollectionDateId" />
                 <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
@@ -19382,7 +19837,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BranchCategoryMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.BranchCategoryMaster">
+            <EntityTypeMapping TypeName="LIMSModel.BranchCategoryMaster">
               <MappingFragment StoreEntitySet="BranchCategoryMaster">
                 <ScalarProperty Name="BranchCategoryId" ColumnName="BranchCategoryId" />
                 <ScalarProperty Name="BranchCategory" ColumnName="BranchCategory" />
@@ -19395,7 +19850,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CatagoryMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.CatagoryMaster">
+            <EntityTypeMapping TypeName="LIMSModel.CatagoryMaster">
               <MappingFragment StoreEntitySet="CatagoryMaster">
                 <ScalarProperty Name="CatagoryMasterId" ColumnName="CatagoryMasterId" />
                 <ScalarProperty Name="InventoryType" ColumnName="InventoryType" />
@@ -19409,7 +19864,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CityMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.CityMaster">
+            <EntityTypeMapping TypeName="LIMSModel.CityMaster">
               <MappingFragment StoreEntitySet="CityMaster">
                 <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
@@ -19423,7 +19878,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CompanyTypeMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.CompanyTypeMaster">
+            <EntityTypeMapping TypeName="LIMSModel.CompanyTypeMaster">
               <MappingFragment StoreEntitySet="CompanyTypeMaster">
                 <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
                 <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
@@ -19436,7 +19891,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CountryMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.CountryMaster">
+            <EntityTypeMapping TypeName="LIMSModel.CountryMaster">
               <MappingFragment StoreEntitySet="CountryMaster">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
@@ -19449,7 +19904,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CustomerGroupMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.CustomerGroupMaster">
+            <EntityTypeMapping TypeName="LIMSModel.CustomerGroupMaster">
               <MappingFragment StoreEntitySet="CustomerGroupMaster">
                 <ScalarProperty Name="CustomerGroupId" ColumnName="CustomerGroupId" />
                 <ScalarProperty Name="CustomerGroupType" ColumnName="CustomerGroupType" />
@@ -19462,7 +19917,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CustomerMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.CustomerMaster">
+            <EntityTypeMapping TypeName="LIMSModel.CustomerMaster">
               <MappingFragment StoreEntitySet="CustomerMaster">
                 <ScalarProperty Name="CustomerMasterId" ColumnName="CustomerMasterId" />
                 <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
@@ -19502,7 +19957,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CustomerTypeMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.CustomerTypeMaster">
+            <EntityTypeMapping TypeName="LIMSModel.CustomerTypeMaster">
               <MappingFragment StoreEntitySet="CustomerTypeMaster">
                 <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
                 <ScalarProperty Name="CustomerTypeName" ColumnName="CustomerTypeName" />
@@ -19515,7 +19970,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DisciplineMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.DisciplineMaster">
+            <EntityTypeMapping TypeName="LIMSModel.DisciplineMaster">
               <MappingFragment StoreEntitySet="DisciplineMaster">
                 <ScalarProperty Name="DisciplineId" ColumnName="DisciplineId" />
                 <ScalarProperty Name="Discipline" ColumnName="Discipline" />
@@ -19530,7 +19985,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnquiryMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnquiryMaster">
+            <EntityTypeMapping TypeName="LIMSModel.EnquiryMaster">
               <MappingFragment StoreEntitySet="EnquiryMaster">
                 <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
                 <ScalarProperty Name="ModeOfCommunicationId" ColumnName="ModeOfCommunicationId" />
@@ -19548,7 +20003,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnvironmentalConditions">
-            <EntityTypeMapping TypeName="ShortLIMSModel.EnvironmentalCondition">
+            <EntityTypeMapping TypeName="LIMSModel.EnvironmentalCondition">
               <MappingFragment StoreEntitySet="EnvironmentalCondition">
                 <ScalarProperty Name="EnvCondtId" ColumnName="EnvCondtId" />
                 <ScalarProperty Name="EnvCondts" ColumnName="EnvCondts" />
@@ -19561,7 +20016,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FrequencyMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.FrequencyMaster">
+            <EntityTypeMapping TypeName="LIMSModel.FrequencyMaster">
               <MappingFragment StoreEntitySet="FrequencyMaster">
                 <ScalarProperty Name="FrequencyMasterId" ColumnName="FrequencyMasterId" />
                 <ScalarProperty Name="Frequency" ColumnName="Frequency" />
@@ -19576,7 +20031,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ItemMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ItemMaster">
+            <EntityTypeMapping TypeName="LIMSModel.ItemMaster">
               <MappingFragment StoreEntitySet="ItemMaster">
                 <ScalarProperty Name="ItemMasterId" ColumnName="ItemMasterId" />
                 <ScalarProperty Name="CatagoryMasterId" ColumnName="CatagoryMasterId" />
@@ -19593,7 +20048,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LabFieldAndDisciplines">
-            <EntityTypeMapping TypeName="ShortLIMSModel.LabFieldAndDiscipline">
+            <EntityTypeMapping TypeName="LIMSModel.LabFieldAndDiscipline">
               <MappingFragment StoreEntitySet="LabFieldAndDiscipline">
                 <ScalarProperty Name="LabFieldAndDisciplineId" ColumnName="LabFieldAndDisciplineId" />
                 <ScalarProperty Name="LabTypeId" ColumnName="LabTypeId" />
@@ -19609,7 +20064,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LabMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.LabMaster">
+            <EntityTypeMapping TypeName="LIMSModel.LabMaster">
               <MappingFragment StoreEntitySet="LabMaster">
                 <ScalarProperty Name="LabMasterId" ColumnName="LabMasterId" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
@@ -19646,7 +20101,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LabTypeMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.LabTypeMaster">
+            <EntityTypeMapping TypeName="LIMSModel.LabTypeMaster">
               <MappingFragment StoreEntitySet="LabTypeMaster">
                 <ScalarProperty Name="LabTypeId" ColumnName="LabTypeId" />
                 <ScalarProperty Name="LabTypeName" ColumnName="LabTypeName" />
@@ -19659,7 +20114,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MatrixMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.MatrixMaster">
+            <EntityTypeMapping TypeName="LIMSModel.MatrixMaster">
               <MappingFragment StoreEntitySet="MatrixMaster">
                 <ScalarProperty Name="MatrixId" ColumnName="MatrixId" />
                 <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
@@ -19677,7 +20132,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MenuMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.MenuMaster">
+            <EntityTypeMapping TypeName="LIMSModel.MenuMaster">
               <MappingFragment StoreEntitySet="MenuMaster">
                 <ScalarProperty Name="MenuMasterId" ColumnName="MenuMasterId" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
@@ -19696,7 +20151,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ModeOfCommunications">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ModeOfCommunication">
+            <EntityTypeMapping TypeName="LIMSModel.ModeOfCommunication">
               <MappingFragment StoreEntitySet="ModeOfCommunication">
                 <ScalarProperty Name="ModeOfCommunicationId" ColumnName="ModeOfCommunicationId" />
                 <ScalarProperty Name="CommunicationMode" ColumnName="CommunicationMode" />
@@ -19710,7 +20165,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ParameterMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ParameterMaster">
+            <EntityTypeMapping TypeName="LIMSModel.ParameterMaster">
               <MappingFragment StoreEntitySet="ParameterMaster">
                 <ScalarProperty Name="ParameterMasterId" ColumnName="ParameterMasterId" />
                 <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
@@ -19725,8 +20180,21 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PaymentModeMasters">
+            <EntityTypeMapping TypeName="LIMSModel.PaymentModeMaster">
+              <MappingFragment StoreEntitySet="PaymentModeMaster">
+                <ScalarProperty Name="PaymentModeMasterId" ColumnName="PaymentModeMasterId" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProcedureMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ProcedureMaster">
+            <EntityTypeMapping TypeName="LIMSModel.ProcedureMaster">
               <MappingFragment StoreEntitySet="ProcedureMaster">
                 <ScalarProperty Name="ProcedureId" ColumnName="ProcedureId" />
                 <ScalarProperty Name="ProcedureName" ColumnName="ProcedureName" />
@@ -19741,7 +20209,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductGroupMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.ProductGroupMaster">
+            <EntityTypeMapping TypeName="LIMSModel.ProductGroupMaster">
               <MappingFragment StoreEntitySet="ProductGroupMaster">
                 <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
                 <ScalarProperty Name="ProductGroupName" ColumnName="ProductGroupName" />
@@ -19759,7 +20227,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoleMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.RoleMaster">
+            <EntityTypeMapping TypeName="LIMSModel.RoleMaster">
               <MappingFragment StoreEntitySet="RoleMaster">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -19772,7 +20240,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleDescriptionMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleDescriptionMaster">
+            <EntityTypeMapping TypeName="LIMSModel.SampleDescriptionMaster">
               <MappingFragment StoreEntitySet="SampleDescriptionMaster">
                 <ScalarProperty Name="SampleDescriptionId" ColumnName="SampleDescriptionId" />
                 <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
@@ -19789,7 +20257,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleDeviceMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleDeviceMaster">
+            <EntityTypeMapping TypeName="LIMSModel.SampleDeviceMaster">
               <MappingFragment StoreEntitySet="SampleDeviceMaster">
                 <ScalarProperty Name="SampleDeviceId" ColumnName="SampleDeviceId" />
                 <ScalarProperty Name="SampleDevice" ColumnName="SampleDevice" />
@@ -19804,7 +20272,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleQtyMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleQtyMaster">
+            <EntityTypeMapping TypeName="LIMSModel.SampleQtyMaster">
               <MappingFragment StoreEntitySet="SampleQtyMaster">
                 <ScalarProperty Name="SampleQtyId" ColumnName="SampleQtyId" />
                 <ScalarProperty Name="SampleQty" ColumnName="SampleQty" />
@@ -19820,7 +20288,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleTypeMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleTypeMaster">
+            <EntityTypeMapping TypeName="LIMSModel.SampleTypeMaster">
               <MappingFragment StoreEntitySet="SampleTypeMaster">
                 <ScalarProperty Name="SampleTypeId" ColumnName="SampleTypeId" />
                 <ScalarProperty Name="SampleType" ColumnName="SampleType" />
@@ -19834,7 +20302,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SampleTypeProductMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SampleTypeProductMaster">
+            <EntityTypeMapping TypeName="LIMSModel.SampleTypeProductMaster">
               <MappingFragment StoreEntitySet="SampleTypeProductMaster">
                 <ScalarProperty Name="SampleTypeProductId" ColumnName="SampleTypeProductId" />
                 <ScalarProperty Name="SampleTypeProductName" ColumnName="SampleTypeProductName" />
@@ -19849,7 +20317,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StateMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.StateMaster">
+            <EntityTypeMapping TypeName="LIMSModel.StateMaster">
               <MappingFragment StoreEntitySet="StateMaster">
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -19863,7 +20331,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatusMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.StatusMaster">
+            <EntityTypeMapping TypeName="LIMSModel.StatusMaster">
               <MappingFragment StoreEntitySet="StatusMaster">
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
@@ -19880,7 +20348,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubGroupMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.SubGroupMaster">
+            <EntityTypeMapping TypeName="LIMSModel.SubGroupMaster">
               <MappingFragment StoreEntitySet="SubGroupMaster">
                 <ScalarProperty Name="SubGroupId" ColumnName="SubGroupId" />
                 <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
@@ -19897,7 +20365,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TermsAndConditions">
-            <EntityTypeMapping TypeName="ShortLIMSModel.TermsAndCondition">
+            <EntityTypeMapping TypeName="LIMSModel.TermsAndCondition">
               <MappingFragment StoreEntitySet="TermsAndConditions">
                 <ScalarProperty Name="TermAndCondtId" ColumnName="TermAndCondtId" />
                 <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
@@ -19913,7 +20381,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TermsAndConditionsPurchases">
-            <EntityTypeMapping TypeName="ShortLIMSModel.TermsAndConditionsPurchase">
+            <EntityTypeMapping TypeName="LIMSModel.TermsAndConditionsPurchase">
               <MappingFragment StoreEntitySet="TermsAndConditionsPurchase">
                 <ScalarProperty Name="TermAndCondtId" ColumnName="TermAndCondtId" />
                 <ScalarProperty Name="InventoryTypeId" ColumnName="InventoryTypeId" />
@@ -19927,7 +20395,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestMethods">
-            <EntityTypeMapping TypeName="ShortLIMSModel.TestMethod">
+            <EntityTypeMapping TypeName="LIMSModel.TestMethod">
               <MappingFragment StoreEntitySet="TestMethod">
                 <ScalarProperty Name="TestMethodId" ColumnName="TestMethodId" />
                 <ScalarProperty Name="TestMethod1" ColumnName="TestMethod" />
@@ -19941,7 +20409,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnitMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.UnitMaster">
+            <EntityTypeMapping TypeName="LIMSModel.UnitMaster">
               <MappingFragment StoreEntitySet="UnitMaster">
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
@@ -19955,7 +20423,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserMasters">
-            <EntityTypeMapping TypeName="ShortLIMSModel.UserMaster">
+            <EntityTypeMapping TypeName="LIMSModel.UserMaster">
               <MappingFragment StoreEntitySet="UserMaster">
                 <ScalarProperty Name="UserMasterID" ColumnName="UserMasterID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -19972,7 +20440,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventoryPurchaseFileUploads">
-            <EntityTypeMapping TypeName="ShortLIMSModel.InventoryPurchaseFileUpload">
+            <EntityTypeMapping TypeName="LIMSModel.InventoryPurchaseFileUpload">
               <MappingFragment StoreEntitySet="InventoryPurchaseFileUpload">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryPurchaseID" ColumnName="InventoryPurchaseID" />
@@ -19988,18 +20456,18 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Procedure_GetWOMasterData" FunctionName="ShortLIMSModel.Store.Procedure_GetWOMasterData">
+          <FunctionImportMapping FunctionImportName="Procedure_GetWOMasterData" FunctionName="LIMSModel.Store.Procedure_GetWOMasterData">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.Procedure_GetWOMasterData_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.Procedure_GetWOMasterData_Result">
                 <ScalarProperty Name="WOMasterSampleCollectionDateId" ColumnName="WOMasterSampleCollectionDateId" />
                 <ScalarProperty Name="IsNablSave" ColumnName="IsNablSave" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_CategoryMaster_Insert" FunctionName="ShortLIMSModel.Store.USP_CategoryMaster_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_CategoryMaster_Select" FunctionName="ShortLIMSModel.Store.USP_CategoryMaster_Select">
+          <FunctionImportMapping FunctionImportName="USP_CategoryMaster_Insert" FunctionName="LIMSModel.Store.USP_CategoryMaster_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_CategoryMaster_Select" FunctionName="LIMSModel.Store.USP_CategoryMaster_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_CategoryMaster_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_CategoryMaster_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -20012,10 +20480,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_CategoryMaster_Update" FunctionName="ShortLIMSModel.Store.USP_CategoryMaster_Update" />
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_BDM" FunctionName="ShortLIMSModel.Store.USP_DashBoard_BDM">
+          <FunctionImportMapping FunctionImportName="USP_CategoryMaster_Update" FunctionName="LIMSModel.Store.USP_CategoryMaster_Update" />
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_BDM" FunctionName="LIMSModel.Store.USP_DashBoard_BDM">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_BDM_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_BDM_Result">
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="MonthEnquiry" ColumnName="MonthEnquiry" />
                 <ScalarProperty Name="Month_Name" ColumnName="Month Name" />
@@ -20023,41 +20491,41 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_Planner" FunctionName="ShortLIMSModel.Store.USP_DashBoard_Planner">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_Planner" FunctionName="LIMSModel.Store.USP_DashBoard_Planner">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_Planner_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_Planner_Result">
                 <ScalarProperty Name="TotalSample" ColumnName="TotalSample" />
                 <ScalarProperty Name="SampleType" ColumnName="SampleType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_Sample" FunctionName="ShortLIMSModel.Store.USP_DashBoard_Sample">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_Sample" FunctionName="LIMSModel.Store.USP_DashBoard_Sample">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_Sample_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_Sample_Result">
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Item" ColumnName="Item" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_SampleApprovedMonthWise" FunctionName="ShortLIMSModel.Store.USP_DashBoard_SampleApprovedMonthWise">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_SampleApprovedMonthWise" FunctionName="LIMSModel.Store.USP_DashBoard_SampleApprovedMonthWise">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_SampleApprovedMonthWise_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_SampleApprovedMonthWise_Result">
                 <ScalarProperty Name="TotalSample" ColumnName="TotalSample" />
                 <ScalarProperty Name="SampleType" ColumnName="SampleType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_Sampler" FunctionName="ShortLIMSModel.Store.USP_DashBoard_Sampler">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_Sampler" FunctionName="LIMSModel.Store.USP_DashBoard_Sampler">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_Sampler_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_Sampler_Result">
                 <ScalarProperty Name="TotalSample" ColumnName="TotalSample" />
                 <ScalarProperty Name="SampleType" ColumnName="SampleType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_SampleTestedMonthWise" FunctionName="ShortLIMSModel.Store.USP_DashBoard_SampleTestedMonthWise">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_SampleTestedMonthWise" FunctionName="LIMSModel.Store.USP_DashBoard_SampleTestedMonthWise">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_SampleTestedMonthWise_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_SampleTestedMonthWise_Result">
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Month_Name" ColumnName="Month Name" />
@@ -20066,17 +20534,17 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_Select" FunctionName="ShortLIMSModel.Store.USP_DashBoard_Select">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_Select" FunctionName="LIMSModel.Store.USP_DashBoard_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_Select_Result">
                 <ScalarProperty Name="TotalSampleTypeWise" ColumnName="TotalSampleTypeWise" />
                 <ScalarProperty Name="SampleType" ColumnName="SampleType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_STL" FunctionName="ShortLIMSModel.Store.USP_DashBoard_STL">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_STL" FunctionName="LIMSModel.Store.USP_DashBoard_STL">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_STL_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_STL_Result">
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="MonthWO" ColumnName="MonthWO" />
                 <ScalarProperty Name="MonthNameExe" ColumnName="MonthNameExe" />
@@ -20085,9 +20553,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalPOAmountMonthWise" FunctionName="ShortLIMSModel.Store.USP_DashBoard_TotalPOAmountMonthWise">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalPOAmountMonthWise" FunctionName="LIMSModel.Store.USP_DashBoard_TotalPOAmountMonthWise">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_TotalPOAmountMonthWise_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_TotalPOAmountMonthWise_Result">
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
@@ -20095,9 +20563,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalQuotationSentMonthWise" FunctionName="ShortLIMSModel.Store.USP_DashBoard_TotalQuotationSentMonthWise">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalQuotationSentMonthWise" FunctionName="LIMSModel.Store.USP_DashBoard_TotalQuotationSentMonthWise">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_TotalQuotationSentMonthWise_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_TotalQuotationSentMonthWise_Result">
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="MonthQuotation" ColumnName="MonthQuotation" />
                 <ScalarProperty Name="MonthNameQuotation" ColumnName="MonthNameQuotation" />
@@ -20105,9 +20573,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalSampleMonthWise" FunctionName="ShortLIMSModel.Store.USP_DashBoard_TotalSampleMonthWise">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalSampleMonthWise" FunctionName="LIMSModel.Store.USP_DashBoard_TotalSampleMonthWise">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_TotalSampleMonthWise_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_TotalSampleMonthWise_Result">
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Month_Name" ColumnName="Month Name" />
@@ -20115,9 +20583,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalWO" FunctionName="ShortLIMSModel.Store.USP_DashBoard_TotalWO">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_TotalWO" FunctionName="LIMSModel.Store.USP_DashBoard_TotalWO">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_TotalWO_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_TotalWO_Result">
                 <ScalarProperty Name="Year1" ColumnName="Year1" />
                 <ScalarProperty Name="Month1" ColumnName="Month1" />
                 <ScalarProperty Name="Month_Name1" ColumnName="Month Name1" />
@@ -20125,9 +20593,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_DashBoard_WOExe" FunctionName="ShortLIMSModel.Store.USP_DashBoard_WOExe">
+          <FunctionImportMapping FunctionImportName="USP_DashBoard_WOExe" FunctionName="LIMSModel.Store.USP_DashBoard_WOExe">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_DashBoard_WOExe_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_DashBoard_WOExe_Result">
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="MonthWO" ColumnName="MonthWO" />
                 <ScalarProperty Name="MonthNameExe" ColumnName="MonthNameExe" />
@@ -20136,10 +20604,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignedSerialNumberDetails_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignedSerialNumberDetails_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignedSerialNumberDetails_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignedSerialNumberDetails_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignedSerialNumberDetails_Insert" FunctionName="LIMSModel.Store.USP_InventoryAssignedSerialNumberDetails_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignedSerialNumberDetails_Select" FunctionName="LIMSModel.Store.USP_InventoryAssignedSerialNumberDetails_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryAssignedSerialNumberDetails_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryAssignedSerialNumberDetails_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryAssignmentDetailsID" ColumnName="InventoryAssignmentDetailsID" />
                 <ScalarProperty Name="InventorySerialNumber" ColumnName="InventorySerialNumber" />
@@ -20148,11 +20616,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignedSerialNumberDetails_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignedSerialNumberDetails_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentDetails_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignmentDetails_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentDetails_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignmentDetails_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignedSerialNumberDetails_Update" FunctionName="LIMSModel.Store.USP_InventoryAssignedSerialNumberDetails_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentDetails_Insert" FunctionName="LIMSModel.Store.USP_InventoryAssignmentDetails_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentDetails_Select" FunctionName="LIMSModel.Store.USP_InventoryAssignmentDetails_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryAssignmentDetails_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryAssignmentDetails_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryAssignmentMasterID" ColumnName="InventoryAssignmentMasterID" />
                 <ScalarProperty Name="InventoryTypeID" ColumnName="InventoryTypeID" />
@@ -20173,11 +20641,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentDetails_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignmentDetails_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentMaster_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignmentMaster_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentMaster_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryAssignmentMaster_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentDetails_Update" FunctionName="LIMSModel.Store.USP_InventoryAssignmentDetails_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentMaster_Insert" FunctionName="LIMSModel.Store.USP_InventoryAssignmentMaster_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryAssignmentMaster_Select" FunctionName="LIMSModel.Store.USP_InventoryAssignmentMaster_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryAssignmentMaster_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryAssignmentMaster_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
@@ -20188,10 +20656,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryBasicDetails_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryBasicDetails_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryBasicDetails_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryBasicDetails_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryBasicDetails_Insert" FunctionName="LIMSModel.Store.USP_InventoryBasicDetails_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryBasicDetails_Select" FunctionName="LIMSModel.Store.USP_InventoryBasicDetails_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryBasicDetails_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryBasicDetails_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -20223,12 +20691,12 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryBasicDetails_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryBasicDetails_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Delete" FunctionName="ShortLIMSModel.Store.USP_InventoryBasicItemDetails_Delete" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryBasicItemDetails_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryBasicItemDetails_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryBasicDetails_Update" FunctionName="LIMSModel.Store.USP_InventoryBasicDetails_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Delete" FunctionName="LIMSModel.Store.USP_InventoryBasicItemDetails_Delete" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Insert" FunctionName="LIMSModel.Store.USP_InventoryBasicItemDetails_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Select" FunctionName="LIMSModel.Store.USP_InventoryBasicItemDetails_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryBasicItemDetails_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryBasicItemDetails_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryBasicDetailsID" ColumnName="InventoryBasicDetailsID" />
                 <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
@@ -20247,10 +20715,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryBasicItemDetails_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryCalibrationAndMaintenance_ByItemDetailsID" FunctionName="ShortLIMSModel.Store.USP_InventoryCalibrationAndMaintenance_ByItemDetailsID">
+          <FunctionImportMapping FunctionImportName="USP_InventoryBasicItemDetails_Update" FunctionName="LIMSModel.Store.USP_InventoryBasicItemDetails_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryCalibrationAndMaintenance_ByItemDetailsID" FunctionName="LIMSModel.Store.USP_InventoryCalibrationAndMaintenance_ByItemDetailsID">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryCalibrationAndMaintenance_ByItemDetailsID_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryCalibrationAndMaintenance_ByItemDetailsID_Result">
                 <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
                 <ScalarProperty Name="CompletionDateID" ColumnName="CompletionDateID" />
                 <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
@@ -20266,11 +20734,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Active" FunctionName="ShortLIMSModel.Store.USP_InventoryCapacityMaster_Active" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryCapacityMaster_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryCapacityMaster_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Active" FunctionName="LIMSModel.Store.USP_InventoryCapacityMaster_Active" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Insert" FunctionName="LIMSModel.Store.USP_InventoryCapacityMaster_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Select" FunctionName="LIMSModel.Store.USP_InventoryCapacityMaster_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryCapacityMaster_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryCapacityMaster_Select_Result">
                 <ScalarProperty Name="InventoryCapacityMasterId" ColumnName="InventoryCapacityMasterId" />
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -20285,11 +20753,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryCapacityMaster_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialDetails_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryCommercialDetails_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialDetails_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryCommercialDetails_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryCapacityMaster_Update" FunctionName="LIMSModel.Store.USP_InventoryCapacityMaster_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialDetails_Insert" FunctionName="LIMSModel.Store.USP_InventoryCommercialDetails_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialDetails_Select" FunctionName="LIMSModel.Store.USP_InventoryCommercialDetails_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryCommercialDetails_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryCommercialDetails_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryBasicDetailsID" ColumnName="InventoryBasicDetailsID" />
                 <ScalarProperty Name="VendorName" ColumnName="VendorName" />
@@ -20309,10 +20777,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialDetails_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryCommercialDetails_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialFileDetail_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryCommercialFileDetail_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialDetails_Update" FunctionName="LIMSModel.Store.USP_InventoryCommercialDetails_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialFileDetail_Select" FunctionName="LIMSModel.Store.USP_InventoryCommercialFileDetail_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryCommercialFileDetail_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryCommercialFileDetail_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryBasicDetailID" ColumnName="InventoryBasicDetailID" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
@@ -20320,12 +20788,12 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialFileDetails_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryCommercialFileDetails_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Active" FunctionName="ShortLIMSModel.Store.USP_InventoryItemMaster_Active" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryItemMaster_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryItemMaster_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryCommercialFileDetails_Insert" FunctionName="LIMSModel.Store.USP_InventoryCommercialFileDetails_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Active" FunctionName="LIMSModel.Store.USP_InventoryItemMaster_Active" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Insert" FunctionName="LIMSModel.Store.USP_InventoryItemMaster_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Select" FunctionName="LIMSModel.Store.USP_InventoryItemMaster_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryItemMaster_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryItemMaster_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -20348,11 +20816,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryItemMaster_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibration_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibration_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibration_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibration_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryItemMaster_Update" FunctionName="LIMSModel.Store.USP_InventoryItemMaster_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibration_Insert" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibration_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibration_Select" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibration_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryMaintainanceAndCalibration_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryMaintainanceAndCalibration_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="InventoryBasicDetailsID" ColumnName="InventoryBasicDetailsID" />
@@ -20378,11 +20846,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibration_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibration_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationSchedule_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibrationSchedule_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationSchedule_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibrationSchedule_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibration_Update" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibration_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationSchedule_Insert" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibrationSchedule_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationSchedule_Select" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibrationSchedule_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryMaintainanceAndCalibrationSchedule_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryMaintainanceAndCalibrationSchedule_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryBasicItemDetailsID" ColumnName="InventoryBasicItemDetailsID" />
                 <ScalarProperty Name="AMCVendorName" ColumnName="AMCVendorName" />
@@ -20401,9 +20869,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationScheduleDates_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibrationScheduleDates_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationScheduleDates_Select" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibrationScheduleDates_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="InventoryMaintainanceAndCalibrationScheduleID" ColumnName="InventoryMaintainanceAndCalibrationScheduleID" />
                 <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
@@ -20418,9 +20886,9 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection">
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryMaintainanceAndCalibrationScheduleDates_Selection_Result">
                 <ScalarProperty Name="ScheduleDateID" ColumnName="ScheduleDateID" />
                 <ScalarProperty Name="CompletionStatus" ColumnName="CompletionStatus" />
                 <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
@@ -20432,11 +20900,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationScheduleFiles_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryMaintainanceAndCalibrationScheduleFiles_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryPurchase_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryPurchase_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryPurchase_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryPurchase_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryMaintainanceAndCalibrationScheduleFiles_Insert" FunctionName="LIMSModel.Store.USP_InventoryMaintainanceAndCalibrationScheduleFiles_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryPurchase_Insert" FunctionName="LIMSModel.Store.USP_InventoryPurchase_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryPurchase_Select" FunctionName="LIMSModel.Store.USP_InventoryPurchase_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryPurchase_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryPurchase_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VendorID" ColumnName="VendorID" />
                 <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
@@ -20456,10 +20924,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryTypeMaster_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryTypeMaster_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryTypeMaster_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryTypeMaster_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryTypeMaster_Insert" FunctionName="LIMSModel.Store.USP_InventoryTypeMaster_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryTypeMaster_Select" FunctionName="LIMSModel.Store.USP_InventoryTypeMaster_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryTypeMaster_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryTypeMaster_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -20471,11 +20939,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryTypeMaster_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryTypeMaster_Update" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryVendorMaster_Insert" FunctionName="ShortLIMSModel.Store.USP_InventoryVendorMaster_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_InventoryVendorMaster_Select" FunctionName="ShortLIMSModel.Store.USP_InventoryVendorMaster_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryTypeMaster_Update" FunctionName="LIMSModel.Store.USP_InventoryTypeMaster_Update" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryVendorMaster_Insert" FunctionName="LIMSModel.Store.USP_InventoryVendorMaster_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_InventoryVendorMaster_Select" FunctionName="LIMSModel.Store.USP_InventoryVendorMaster_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_InventoryVendorMaster_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_InventoryVendorMaster_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -20493,11 +20961,11 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_InventoryVendorMaster_Update" FunctionName="ShortLIMSModel.Store.USP_InventoryVendorMaster_Update" />
-          <FunctionImportMapping FunctionImportName="USP_StockLogData_Insert" FunctionName="ShortLIMSModel.Store.USP_StockLogData_Insert" />
-          <FunctionImportMapping FunctionImportName="USP_StockLogData_Select" FunctionName="ShortLIMSModel.Store.USP_StockLogData_Select">
+          <FunctionImportMapping FunctionImportName="USP_InventoryVendorMaster_Update" FunctionName="LIMSModel.Store.USP_InventoryVendorMaster_Update" />
+          <FunctionImportMapping FunctionImportName="USP_StockLogData_Insert" FunctionName="LIMSModel.Store.USP_StockLogData_Insert" />
+          <FunctionImportMapping FunctionImportName="USP_StockLogData_Select" FunctionName="LIMSModel.Store.USP_StockLogData_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_StockLogData_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_StockLogData_Select_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IssueToNameID" ColumnName="IssueToNameID" />
                 <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
@@ -20509,10 +20977,10 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="USP_StockLogData_Update" FunctionName="ShortLIMSModel.Store.USP_StockLogData_Update" />
-          <FunctionImportMapping FunctionImportName="USP_UnitMaster_Select" FunctionName="ShortLIMSModel.Store.USP_UnitMaster_Select">
+          <FunctionImportMapping FunctionImportName="USP_StockLogData_Update" FunctionName="LIMSModel.Store.USP_StockLogData_Update" />
+          <FunctionImportMapping FunctionImportName="USP_UnitMaster_Select" FunctionName="LIMSModel.Store.USP_UnitMaster_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShortLIMSModel.USP_UnitMaster_Select_Result">
+              <ComplexTypeMapping TypeName="LIMSModel.USP_UnitMaster_Select_Result">
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
