@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LIMS_DEMO.Core.AppSettings.MenuEntity>
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="index.html">
+            <img src="~/Component/Images/logo_lims.png" alt="" class="dark-logo">
+            <img src="~/Component/Images/logo_lims.png" class="light-logo" />
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            @foreach (var item in Model)
+            {
+        <a href="#" class="dropdown-toggle" style="background-color: #431d56;" title="@item.Menu.Replace(" ", "_")" data-toggle="collapse" data-target="#@item.Menu.Replace(" ", "_")" aria-expanded="false" aria-controls="@item.Menu.Replace(" ", "_")">
+            <i class="micon dw dw-add"></i>
+            <span class="mtext">@item.Menu</span>
+        </a>
+                        <div class="collapse multi-collapse" id="@item.Menu.Replace(" ", "_")">
+
+                            @foreach (var Mitem in item.MainMenus)
+                            {
+            <a href="#" style="margin-left: -20px;" class="dropdown-toggle" title="@Mitem.Menu" data-toggle="collapse" data-target="#@Mitem.Menu.ToLower().Replace(" ", "")" aria-expanded="false" aria-controls="@Mitem.Menu">
+                <i class="dw @Mitem.Logo"></i>
+                <span class="mtext">@Mitem.Menu</span>
+            </a>
+                                <div class="collapse multi-collapse" id="@Mitem.Menu.ToLower().Replace(" ", "")">
+                                    @foreach (var submenu in Mitem.SubMenu)
+                                    {
+                <div class="dropdown" style="color: black; padding:2px;">
+                    <a class="dropdown-toggle" href="@submenu.TargetUrl" style="border-radius: 0px 35px 0px ;background-color: cornflowerblue;">
+                        <i class="icon-copy ion-minus-round"></i>&ensp;
+                        <span class="mtext">@submenu.Menu</span>
+                    </a>
+                </div>
+                                     }
+                                </div>
+                                }
+
+
+                        </div>
+             }
+        </div>
+    </div>
+</div>

@@ -1,9 +1,7 @@
 ﻿@model LIMS_DEMO.Core.Lab.SampleParameterAnalysis
-@{
-    ViewBag.Title = "Tester";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    var recieptDate = Model.DateReceiptOfSampling == null ? "" : @Convert.ToDateTime(Model.DateReceiptOfSampling).ToString("dd/MM/yyyy");
-}
+@{ ViewBag.Title = "Tester";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+                var recieptDate = Model.DateReceiptOfSampling == null ? "" : @Convert.ToDateTime(Model.DateReceiptOfSampling).ToString("dd/MM/yyyy"); }
 @*@Html.Hidden("SampleRecievedDateHidden1", (object)@Model.DateReceiptOfSampling))*@
 @Html.Hidden("SampleRecievedDateHidden", (object)@Convert.ToDateTime(Model.DateReceiptOfSampling).ToString("yyyy-MM-dd"))
 <div class="main-container">
@@ -19,7 +17,7 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Lab</a></li>
+                                <li class="breadcrumb-item"><a href="#">Lab</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tester</li>
                                 <li class="breadcrumb-item active" aria-current="page">Tester</li>
                             </ol>
@@ -40,112 +38,117 @@
                     <br />
                     @if (Model.ApproverComment != "")
                     {
-                        <div class="alert alert-warning">
-                            <span class="approverComment" id="approverComment">
-                                <strong> Approver Comment :@Model.ApproverComment </strong>
-                            </span>
-                        </div>
-                    }
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="blog-side-nest">
-                                <h4 class="text-left">Sample Details</h4>
-                                <hr style="margin:0">
-                                <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td width="5%">Sample ID</td>
-                                            <td width="5%"><b>:</b></td>
-                                            <td width="20%">
-                                                @Html.HiddenFor(model => Model.SampleCollectionId)
-                                                @Html.HiddenFor(model => Model.ParameterGroupId)
-                                                @Html.HiddenFor(model => Model.ParameterMasterId)
-                                                @Html.HiddenFor(model => Model.UnitId)
-                                                @Html.HiddenFor(model => Model.TestMethodId)
-                                                @Html.HiddenFor(model => Model.UnitName)
-                                                @Html.Hidden("AnalysisProcessScheduleDetailId")
-                                                @*@Model.SampleName*@
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sample Type</td>
-                                            <td><b>:</b></td>
-                                            <td> @Model.SampleTypeProductName</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Product Group</td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.ProductGroupName</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sub Group</td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.SubGroupName</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Matrix</td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.MatrixName</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tester</td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.Analyst</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Reviewer</td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.Reviewer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Approver </td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.Approver</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Parameters </td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.ParameterName</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Test Method</td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.TestMethodName</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Sample Received Date</td>
-                                            <td><b>:</b></td>
-                                            <td>@recieptDate</td>
-                                            @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <h4 class="text-left">Upload Documents :</h4>
-                            <hr style="margin-bottom:20px;">
-                            <form id="uploader">
-                                <div class="upload">
-                                    <input class="col-md-8" id="fileInput" type="file" multiple> <br />
-                                    <input type="button" id="btnupload" class="btn btn-success btn-sm uploadButton col-md-3" value="Upload" style="margin-left: 30px; margin-top: 20px;" />
-                                </div>
-                                <br />
-                                <hr />
-                                <table class="table" id="FilesList" style="visibility:hidden">
+        <div class="alert alert-warning">
+            <span class="approverComment" id="approverComment">
+                <strong> Approver Comment :@Model.ApproverComment </strong>
+            </span>
+        </div>}
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="blog-side-nest">
+                            <h4 class="text-left">Sample Details :</h4>
+                            <hr />
+                            <table class="table table-bordered">
+                                <tbody>
                                     <tr>
-                                        <th>
-                                            Attachment(s)
-                                        </th>
-                                        <th>
-                                            Action
-                                        </th>
+                                        <td width="5%">Sample ID :</td>
+                                        @*<td width="5%"><b>:</b></td>*@
+                                        <td width="20%">
+                                            @Html.HiddenFor(model => Model.SampleCollectionId)
+                                            @Html.HiddenFor(model => Model.ParameterGroupId)
+                                            @Html.HiddenFor(model => Model.ParameterMasterId)
+                                            @Html.HiddenFor(model => Model.UnitId)
+                                            @Html.HiddenFor(model => Model.TestMethodId)
+                                            @Html.HiddenFor(model => Model.UnitName)
+                                            @Html.Hidden("AnalysisProcessScheduleDetailId")
+                                            @Model.SampleName
+                                        </td>
                                     </tr>
-                                </table>
-                            </form>
+                                    <tr>
+                                        <td>Sample Type :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td> @Model.SampleTypeProductName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Product Group :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@Model.ProductGroupName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub Group :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@Model.SubGroupName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Matrix :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@Model.MatrixName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tester :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@Model.Analyst</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Approver :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@Model.Approver</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Parameters :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@Model.ParameterName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Test Method :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@Model.TestMethodName</td>
+                                    </tr>
+                                    <tr>
+                                        <td> Sample Received Date :</td>
+                                        @*<td><b>:</b></td>*@
+                                        <td>@recieptDate</td>
+                                        @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <h4 class="text-left">Upload Documents :</h4>
+                        <hr style="margin-bottom:20px;">
+                        <form id="uploader">
+                            <div class="upload">
+                                <input class="col-md-8" id="fileInput" type="file" multiple> <br />
+                                <input type="button" id="btnupload" class="btn btn-success btn-sm uploadButton col-md-3" value="Upload" style="margin-left: 30px; margin-top: 20px;" />
+                            </div>
+                          
+                           
+                            <table class="table" id="FilesList" style="visibility:hidden">
+                                <tr>
+                                    <th>
+                                        Attachment(s)
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </table>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                       
+                                            <img src="~/Content/images/@Model.QRCodePath" style="height:150px;width:150px;" />
+                                      
+                                    </th>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    
+                </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="blog-side-nest">
@@ -154,7 +157,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="control-label " for="inputEmail1">Testing Start Date  <span class="required" style="color:red">*</span></label>
+                                            <label class="control-label " for="inputEmail1" style="font-weight:bold;">Testing Start Date:  <span class="required" style="color:red">*</span></label>
                                         </div>
                                         <div class="col-md-3">
                                             <div>
@@ -162,7 +165,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="control-label " for="inputEmail1">Testing End Date  <span class="required" style="color:red">*</span></label>
+                                            <label class="control-label " for="inputEmail1" style="font-weight:bold;">Testing End Date : <span class="required" style="color:red">*</span></label>
                                         </div>
                                         <div class="col-md-3">
                                             <div>
@@ -175,13 +178,13 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="label-texts">Total Time(Hrs)</label>
+                                            <label class="label-texts" style="font-weight:bold;">Total Time(Hrs):</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" style="color:black" class="form-control" id="txtTotalDuration">
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="label-texts">Quality Control Measures</label>
+                                            <label class="label-texts" style="font-weight:bold;">Quality Control Measures:</label>
                                         </div>
                                         <div class="col-md-3">
                                             <input type="text" style="color:black" class="form-control" id="txtQualityControl">
@@ -191,19 +194,17 @@
 
                                 @if (Model.MatrixName == "Stack Emission")
                                 {
-                                    <div>
-                                        @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FDStackEmissionId = Model.FDStackEmissionId }, null)
-                                    </div>
-                                }
+                    <div>
+                        @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FDStackEmissionId = Model.FDStackEmissionId }, null)
+                    </div> }
                                 else if (Model.MatrixName == "Ambient Air")
                                 {
-                                    <div>
-                                        @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FieldId = Model.FieldId }, null)
-                                    </div>
-                                }
-                                <div class="col-sm-4">
-                                    <img src="~/Content/images/@Model.QRCodePath" style="height:180px;width:180px;" />
-                                </div>
+                    <div>
+                        @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FieldId = Model.FieldId }, null)
+                    </div>}
+                                @*<div class="col-sm-4">
+                                    <img src="~/Content/images/@Model.QRCodePath" style="height:100px;width:100px;" />
+                                </div>*@
                                 <hr>
                             </div>
                         </div>
@@ -253,10 +254,10 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="row" style="border: solid 2px black; border-radius: 5px; margin-left: 15px; margin-right: 15px; padding-top: 18px;width:98%;">
-                            <div class="col-md-2">
-                                <span style="margin-left:0px;">Select Testing Hours:</span>
+                            <div class="col-md-3">
+                                <span style="margin-left:0px;font-weight:bold;">Select Testing Hours:</span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <select id="SelectTestingHours" class="form-control" onchange="ButtonsControl();">
                                     <option value="0" disabled selected>Select Testing Methods</option>
                                     <option value="1">1 Hour Testing (Minimum 8 Tests)</option>
@@ -267,7 +268,7 @@
                                 <br />
                             </div>
                             <div class="col-md-6">
-                                <label><input type="checkbox" id="chkTesthr" class="checkbox" value="Select Minimum Testing Hours" />  Select Minimum Testing Hours</label>
+                                <label><input type="checkbox" id="chkTesthr" class="checkbox" value="Select Minimum Testing Hours" /> <b> Select Minimum Testing Hours</b></label>
 
                             </div>
 
@@ -305,13 +306,13 @@
                                         <th>Unit</th>
                                     </tr>
                                     <tr style="background: #e8e8e8;">
-                                        <td colspan="4" style="text-align: right;font-weight: 600;font-size: 14px; ">Current Test Result</td>
+                                        <td colspan="4" style="text-align: right;font-weight: 600;">Current Test Result:</td>
 
-                                        <td><input type="text" style="color:black " class="allowNumbersWithDecimalOnly" id="txtFinalResult"></td>
-                                        <td style="color:black;display:none;">
-                                            <select id="UnitConvert" disabled style="color:black">
-                                            </select>
-                                        </td>
+                                        <td><input type="text" style="color:black " class="form-control forallowNumbersWithDecimalOnly" id="txtFinalResult"></td>
+                                        @*<td style="color:black;display:none;">
+                                                <select id="UnitConvert" disabled style="color:black">
+                                                </select>
+                                            </td>*@
                                     </tr>
                                 </tbody>
                             </table>
@@ -378,19 +379,19 @@
 
                     <div class="col-md-12">
                         <table>
-                            <tr style="background: #e8e8e8;">
-                                <td colspan="4" style="text-align: right;font-weight: 600;">Final Result</td>
-                                <td><input type="text" style="color:black " class="allowNumbersWithDecimalOnly" id="txtAverageFinalResult"></td>
-                                <td style="color:black">
-                                    <select id="UnitConvert" disabled style="color:black">
-                                    </select>
-                                </td>
+                            <tr>
+                                <td colspan="4" style="text-align: right;font-weight: 600;">Final Result:</td>&nbsp&nbsp&nbsp&nbsp
+                                <td><input type="text" style="color:black " class="form-control allowNumbersWithDecimalOnly" id="txtAverageFinalResult"></td>
+                                @*<td style="color:black">
+                                        <select id="UnitConvert" disabled style="color:black">
+                                        </select>
+                                    </td>*@
                             </tr>
                         </table>
                     </div>
                     <div class="col-md-12" style="text-align:right;margin-top:20px;margin-bottom:20px">
                         @*<input type="button" id="btnSave" value="Save" class="btn btn-sm btn-primary" />*@
-                        <input type="button" id="btnSubmit" value="Forward to Reviewer" class="btn btn-sm btn-info" />
+                        <input type="button" id="btnSubmit" value="Forward to Approver" class="btn btn-sm btn-info" />
                         <input type="button" value="Close" id="btnclose" class="btn btn-Colse btn-sm btn-danger" onclick="location.href='@Url.Action("ParameterList", "Analyse")'">
                     </div>
                 </div>
@@ -498,7 +499,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="~/Scripts/Application/Validation.js"></script>
 <script>
@@ -873,6 +873,7 @@
             return false;
     }
     function PopulateResultRows() {
+        debugger;
         var parameterMasterId = $('#ParameterMasterId').val();
         var testMethodId = $('#TestMethodId').val();
         var parameterGroupId = $('#ParameterGroupId').val();
@@ -901,7 +902,7 @@
                 $.each(formulaList2, function (key, value) {
                     sr = sr + 1;
                     var NameOfTest = "Test_" + sr;
-                    rowHtml += '<tr class="solutionRow"><td>' + sr + '</td><td>' + NameOfTest + '</td><td>' + value.NotationValue + '</td></tr>'
+                    rowHtml += '<tr class="solutionRow"><td style="text-align:center;">' + sr + '</td><td style="text-align:center;">' + NameOfTest + '</td><td style="text-align:center;">' + value.NotationValue + '</td></tr>'
                 });
                 $('#tblAvrgResult tr#inputAvrgResultRow').before(rowHtml);
             },
@@ -1152,6 +1153,7 @@
                     }
                 }
                 else if (TestingHours == "4") {
+                    debugger;
                     if (srNo < 5) {
                         $('#btnSave').attr('disabled', true);
                         updateCalculatedValue(TestingHours + " of " + TblrowCount);
@@ -1493,6 +1495,7 @@
         });
     }
     function updateCalculatedValue(TestingHours) {
+        debugger;
         var sampleCollectionId = $('#SampleCollectionId').val();
         $.ajax({
             type: "POST",

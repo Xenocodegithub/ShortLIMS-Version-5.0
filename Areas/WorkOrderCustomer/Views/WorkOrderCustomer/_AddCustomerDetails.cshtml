@@ -54,7 +54,7 @@
                     @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger col-md-10" })
 
                 </div>
-                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">WorkOrder End Date:  <span class="required" style="color:red">*</span></label>
+                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Work Order End Date:<span class="required" style="color:red">*</span></label>
                 <div class="col-sm-4">
 
                     @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly" })
@@ -122,7 +122,7 @@
             var date = add_months(recieveDate, parseInt($('#Duration').val()))
             var x = ConvertDateFormat(date.toString());
             //var y = ConvertDateFormatMonthWise(date.toString());
-            $("#WorkOrderEndDate").val(x);
+            //$("#WorkOrderEndDate").val(x);
             $("#WOEDate").val(x);
         }
         return true
@@ -147,6 +147,8 @@
             mm = '0' + mm;
         }
         var date = dd + '/' + mm + '/' + yyyy;
+        var ISODate = yyyy + '-' + mm + '-' + dd;
+        $("#WorkOrderEndDate").val(ISODate);
         return date;
     }
 

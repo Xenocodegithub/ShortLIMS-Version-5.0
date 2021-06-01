@@ -11,7 +11,7 @@ namespace LIMS_DEMO.Areas.Inventory.Models
     {
 
         [Key]
-        public short CatagoryMasterID { get; set; } // CatagoryMasterId
+        public int CatagoryMasterID { get; set; } // CatagoryMasterId
         [Required(ErrorMessage = "Please enter Category Name")]
         public string CategoryName { get; set; }
         [Required(ErrorMessage = "Please enter InventoryTypeID")]

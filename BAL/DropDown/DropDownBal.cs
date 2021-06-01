@@ -26,10 +26,6 @@ namespace LIMS_DEMO.BAL.DropDown
         //{
         //    return CoreFactory.dropdowns.GetRole();
         //}
-        public List<InvoiceEntity> GetPaymentMode()
-        {
-            return CoreFactory.dropdowns.GetPaymentMode();
-        }
         public List<UserListEntity> GetPassChaReqUserList()
         {
             return CoreFactory.dropdowns.GetPassChaReqUserList();

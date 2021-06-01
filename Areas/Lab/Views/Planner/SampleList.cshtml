@@ -34,7 +34,7 @@
                 <!-- Simple Datatable start -->
 
                 <div class="pb-20">
-                    <table id="dtHorizontalExample" class="table table stripe hover nowrap">
+                    <table  id="dtHorizontalExample" class="table table stripe hover nowrap">
                         <thead>
                             <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">Sr No.</th>
@@ -102,7 +102,7 @@
             <div class="modal-header" style="background-color:steelblue;height:42px;">
                 @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
                 <h4  style="text-align:center;color:white;font-weight:bold">Sample Details</h4>
-                <a class="Closeup" href="/Lab/Planner/SampleList"><span class="close CPopup">&times;</span></a>
+                <a class="Closeup" href="/Lab/Planner/SampleList"><span class="close CPopup" style="color:white">&times;</span></a>
             </div>
             <div class="modal-body">
                 <div class="clear" id="LoadPopup"></div>
@@ -147,8 +147,8 @@
 
                         <div class="card-box mb-60">
                             <div class="pb-20">
-                                <table class="data-table table stripe hover nowrap" id="tblparameter">
-
+                                <div style="overflow:scroll">
+                                <table class="data-table table stripe hover nowrap" id="tblparameter" >
                                     <tbody>
                                         <tr class="thead-dark">
                                             <th class="width-5">
@@ -202,6 +202,7 @@
                                     </tbody>
                                     
                                 </table>
+                                    </div>
                             </div>
                         </div>
 
@@ -365,12 +366,12 @@
 
 
                         if (!isActive) {
-                            tableContent = tableContent + "<td><input type='button' value='Submit' class='submitParameter btn btn-success' /></td>";
+                            tableContent = tableContent + "<td><input type='button' value='Submit' class='submitParameter btn btn-success btn-sm' /></td>";
                             tableContent = tableContent + "<td><img src='/Content/images/active.png' alt='Active'></td>";
 
                         }
                         else {
-                            tableContent = tableContent + "<td><input type='button' value='Submit' class='submitParameter  btn btn-success' disabled /></td>";
+                            tableContent = tableContent + "<td><input type='button' value='Submit' class='submitParameter  btn btn-success btn-sm' disabled /></td>";
                             tableContent = tableContent + "<td><img src='/Content/images/unactive.png' alt='Inactive' id='imgStatus'></td>";
 
                         }

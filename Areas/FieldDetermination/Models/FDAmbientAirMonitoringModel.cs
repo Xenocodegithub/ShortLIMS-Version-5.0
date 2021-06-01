@@ -96,11 +96,16 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Models
         public int ShiftNos2 { get; set; }
         public int ShiftNos3 { get; set; }
         public string GasesSampled { get; set; }
+
+        [Display(Name = "VolImpinging Solution")]
         public Nullable<int> VolImpingingSolution { get; set; }
+        [Display(Name = "Bottle No")]
         public Nullable<int> BottleNo { get; set; }
+        [Display(Name = "Rota Meter Flow")]
         public Nullable<int> RotaMeterFlow { get; set; }
         public Nullable<int> Duration { get; set; }
         public Nullable<int> Vs { get; set; }
+        [Display(Name = "Preservation Done")]
         public string PreservationDone { get; set; }
         public bool IsActive { get; set; }
         public int EnteredBy { get; set; }

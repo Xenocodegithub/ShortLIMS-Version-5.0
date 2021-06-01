@@ -13,58 +13,59 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @if (Model.EnquirySampleID != 0)
         {
-            <div class="row">
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.TotalCharges, htmlAttributes: new { @class = "control-label col-md-6" })
+       <div class="row">
+           <div class="form-group col-md-4">
+               @Html.LabelFor(model => model.TotalCharges, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.TextBoxFor(model => model.TotalCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })<br />
-                    @Html.ValidationMessageFor(model => model.TotalCharges, "", new { @class = "text-danger" })
+               @Html.TextBoxFor(model => model.TotalCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })<br />
+               @Html.ValidationMessageFor(model => model.TotalCharges, "", new { @class = "text-danger" })
 
-                </div>
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.DiscountAmount, htmlAttributes: new { @class = "control-label col-md-6" })
-                    <input type="text" onkeyup="funCalNetAmount(true);" id="txtDiscountPercent" class="form-control" />
-                    @Html.TextBoxFor(model => model.DiscountAmount, new { @class = "form-control", @readonly = "readonly", onfocus = "this.value=''" })
-                    @Html.ValidationMessageFor(model => model.DiscountAmount, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.SampleAmount, htmlAttributes: new { @class = "control-label col-md-6" })
+           </div>
+           
+           <div class="form-group col-md-4">
+               @Html.LabelFor(model => model.SampleAmount, htmlAttributes: new { @class = "control-label " })
 
-                    @Html.TextBoxFor(model => model.SampleAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
-                    @Html.ValidationMessageFor(model => model.SampleAmount, "", new { @class = "text-danger" })
+               @Html.TextBoxFor(model => model.SampleAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+               @Html.ValidationMessageFor(model => model.SampleAmount, "", new { @class = "text-danger" })
 
-                    @*@Html.LabelFor(model => model.GSTCharges, htmlAttributes: new { @class = "control-label col-md-3" })
-                       <div class="col-md-3">
-                         @Html.CheckBoxFor(m => m.isActive)
-                         @Html.TextBoxFor(model => model.GSTCharges, new { @class = "form-control", @readonly = "readonly" })
-                         @Html.ValidationMessageFor(model => model.GSTCharges, "", new { @class = "text-danger" })
-                    </div>*@
-                </div>
+               @*@Html.LabelFor(model => model.GSTCharges, htmlAttributes: new { @class = "control-label col-md-3" })
+               <div class="col-md-3">
+                 @Html.CheckBoxFor(m => m.isActive)
+                 @Html.TextBoxFor(model => model.GSTCharges, new { @class = "form-control", @readonly = "readonly" })
+                 @Html.ValidationMessageFor(model => model.GSTCharges, "", new { @class = "text-danger" })
+            </div>*@
+           </div>
+           <div class="form-group col-md-4">
+               @Html.LabelFor(model => model.TransportationAmount, htmlAttributes: new { @class = "control-label" })
 
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.TransportationAmount, htmlAttributes: new { @class = "control-label col-md-3" })
+               @Html.TextBoxFor(model => model.TransportationAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+               @Html.ValidationMessageFor(model => model.TransportationAmount, "", new { @class = "text-danger" })
+           </div>
 
-                    @Html.TextBoxFor(model => model.TransportationAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
-                    @Html.ValidationMessageFor(model => model.TransportationAmount, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.TestingCharges, htmlAttributes: new { @class = "control-label col-md-6" })
+       </div>
+       <div class="row">
+           <div class="form-group col-md-4">
+               @Html.LabelFor(model => model.TestingCharges, htmlAttributes: new { @class = "control-label " })
 
-                    @Html.TextBoxFor(model => model.TestingCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
-                    @Html.ValidationMessageFor(model => model.TestingCharges, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label col-md-6" })
+               @Html.TextBoxFor(model => model.TestingCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+               @Html.ValidationMessageFor(model => model.TestingCharges, "", new { @class = "text-danger" })
+           </div>
+           <div class="form-group col-md-4">
+               @Html.LabelFor(model => model.DiscountAmount, htmlAttributes: new { @class = "control-label " })
+               <input type="text" onkeyup="funCalNetAmount(true);" id="txtDiscountPercent" class="form-control" />
+               @Html.TextBoxFor(model => model.DiscountAmount, new { @class = "form-control", @readonly = "readonly", onfocus = "this.value=''" })
+               @Html.ValidationMessageFor(model => model.DiscountAmount, "", new { @class = "text-danger" })
+           </div>
+           <div class="form-group col-md-4">
+               @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label" })
 
-                    @Html.TextBoxFor(model => model.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
-                </div>
-            </div>
+               @Html.TextBoxFor(model => model.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
+               @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
+           </div>
+       </div>
            <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.NetAmount, htmlAttributes: new { @class = "control-label col-md-6" })
+                @Html.LabelFor(model => model.NetAmount, htmlAttributes: new { @class = "control-label" })
                
                     @Html.TextBoxFor(model => model.NetAmount, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(model => model.NetAmount, "", new { @class = "text-danger" })
@@ -73,8 +74,8 @@
             <div class="form-group">
                 @{ string btnText = "Add"; if (Model.CostingId != null && Model.CostingId != 0)
                     {
-                        btnText = "Update";
-                        <input type="button" class="btn btn-danger" onclick="CancelCostValues();" value="Cancel" id="btnCancelCost">
+                        btnText = "Update Cost";
+                        <input type="button" class="btn btn-danger btn-sm" onclick="CancelCostValues();" value="Cancel" id="btnCancelCost">
                     }
                 }
                 <input type="submit" value="@btnText" id="btnAddCosting" class="btn btn-info btn-sm" style="float:right;margin-top:-15px" />

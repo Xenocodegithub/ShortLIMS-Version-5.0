@@ -25,7 +25,7 @@
     <Area_SelectedScaffolderID>MvcAreaScaffolder</Area_SelectedScaffolderID>
     <Area_SelectedScaffolderCategoryPath>root/Common/MVC/Area</Area_SelectedScaffolderCategoryPath>
     <WebStackScaffolding_DbContextTypeFullName>LIMS_DEMO.DAL.LIMSEntities</WebStackScaffolding_DbContextTypeFullName>
-    <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>FolderProfile14</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

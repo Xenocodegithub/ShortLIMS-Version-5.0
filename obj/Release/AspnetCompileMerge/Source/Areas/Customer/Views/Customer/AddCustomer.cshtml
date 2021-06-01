@@ -1,0 +1,230 @@
+﻿@model LIMS_DEMO.Areas.Customer.Models.CustomerModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Customer</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Customer</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Customer</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Customer</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Customer</h4>
+                    </div>
+                    @*<div class="pull-right">
+              <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+            </div>*@
+                </div>
+                @using (Ajax.BeginForm("AddCustomer", "Customer", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "CustomerSuccess" }))
+                {
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CustomerMasterId)
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Registration Date:</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.RegistrationDate, new { @class = "form-control date-picker", @autocomplete = "false" })
+                            @Html.ValidationMessageFor(model => model.RegistrationDate, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Customer Group:</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.CustomerGroupId, new SelectList(ViewBag.CustomerGroups, "CustomerGroupId", "CustomerGroupType"), "Please Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CustomerGroupId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Customer Type :<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.CustomerTypeId, new SelectList(ViewBag.CustomerTypes, "CustomerTypeId", "CustomerTypeName"), "Please Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CustomerTypeId, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Company Type:</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.CompanyTypeId, new SelectList(ViewBag.CompanyTypes, "CompanyTypeId", "CompanyType"), "Please Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CompanyTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Registration Name:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.RegistrationName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Contact Person Name:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Contact Person Designation:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.ContactDesignation, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <label class="col-sm-5 col-md-2 col-form-label">Contact Person Mobile No:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.ContactMobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Contact Person Email:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Country:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                     </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">State: </label>
+                            <div class="col-sm-4 ">
+                                @Html.EditorFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">City:</label>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Taluka:</label>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(model => model.Taluka, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Address:</label>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-md-2 col-form-label">Land Mark:</label>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(model => model.LandMark, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Pin Code:</label>
+                            <div class="col-sm-4">
+                                @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Phone No.:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.PhoneNo, new { @class = "form-control", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Mobile No.:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Email:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">PAN No.:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.PANNo, new { @class = "form-control", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.PANNo, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Fax No.:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.FaxNo, new { @class = "form-control", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.FaxNo, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">CIN No.:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.CINNumber, new { @class = "form-control", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.CINNumber, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">GST No.:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.GSTNo, new { @class = "form-control", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.GSTNo, "", new { @class = "text-danger col-md-10" })
+                                @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">PAN Upload:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.PANUpload, new { type = "file", htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(model => model.PANUpload, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Address Proof Upload:</label>
+                            <div class="col-sm-4 ">
+                                @Html.TextBoxFor(model => model.AddressProofUpload, new { type = "file", htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(model => model.AddressProofUpload, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
+                                @*<a href="~/Enquiry/Contract/AddContract" class="btn btn-primary" style="background-color:mediumblue;color:white;" data-toggle="tooltip" data-placement="top" title="">Next</a>*@
+                            </div>
+                        </div>
+
+
+                            }
+                            <div class="collapse collapse-box" id="basic-form1">
+                                <div class="code-box">
+                                    <div class="clearfix">
+                                        <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                                        <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                                    </div>
+                                    <pre>
+                                    <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                                </div>
+                            </div>
+
+                        </div>
+            <!-- Default Basic Forms End -->
+        
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+@*@Scripts.Render("~/bundles/unobtrusive")*@
+@*@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/unobtrusive")*@
+@*<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+@*<script>
+        function CustomerSuccess(result) {
+            NProgress.done();
+            if (result= "success") {
+                location.href = '/Customer/Customer/CustomerList';
+            } else {
+                alert('Error!!!');
+            }
+        }
+    </script>*@ 

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Enquiry.Models.EnquiryLogModel>
+
+
+<div class="form-horizontal">
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+                    <div class="pd-20">
+                    </div>
+                    <div class="pb-20">
+                        <table class="data-table table nowrap">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">SrNo</th>
+                                    <th> Customer Name</th>
+                                    <th>Enquiry On</th>
+                                    <th>Mode Of Communication</th>
+                                    <th>Remarks</th>
+                                    <th class="datatable-nosort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td class="width-5">
+                                        @Html.DisplayFor(modelItem => item.SerialNo)
+                                    </td>
+
+                                    <td class="width-15">
+                                        @Html.DisplayFor(modelItem => item.CustomerName)
+                                    </td>
+                                    <td class="width-15">
+                                        @Html.DisplayFor(modelItem => item.CommunicationDate)
+                                    </td>
+                                    <td class="width-15">
+                                        @Html.DisplayFor(modelItem => item.CommunicationMode)
+                                    </td>
+                                    <td class="width-15">
+                                        @Html.DisplayFor(modelItem => item.Remarks)
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+<!-- Simple Datatable End -->
+</div>
+  

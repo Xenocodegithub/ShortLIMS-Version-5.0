@@ -725,65 +725,6 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="Count" Type="int" />
           <Property Name="EnquirySampleID" Type="int" />
           <Property Name="CostingId" Type="int" />
-          <Property Name="RejectStatus" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="TBL_InvoiceReceiptNoMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FinancialYearID" Type="bigint" />
-          <Property Name="FinancialMonthID" Type="bigint" />
-          <Property Name="NumberType" Type="nvarchar" MaxLength="100" />
-          <Property Name="NumberValue" Type="bigint" />
-          <Property Name="IsActive" Type="bit" />
-        </EntityType>
-        <EntityType Name="Tbl_RejectInvoice">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="CustomerName" Type="nvarchar(max)" />
-          <Property Name="WorkOrderNo" Type="nvarchar(max)" />
-          <Property Name="InvoiceNo" Type="nvarchar(max)" />
-          <Property Name="Totalcharge" Type="money" />
-          <Property Name="Discountamt" Type="money" />
-          <Property Name="SampleCollectioncharge" Type="money" />
-          <Property Name="TransportationCharge" Type="money" />
-          <Property Name="TestingCharge" Type="money" />
-          <Property Name="TotalAmount" Type="money" />
-          <Property Name="NetAmount" Type="money" />
-          <Property Name="GSTAmt" Type="money" />
-          <Property Name="Paidamount" Type="money" />
-          <Property Name="Balanceamount" Type="money" />
-          <Property Name="InvoiceDate" Type="date" />
-          <Property Name="Count" Type="int" />
-          <Property Name="EnquirySampleID" Type="int" />
-          <Property Name="CostingId" Type="int" />
-          <Property Name="RejectStatus" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="TBL_REJECTINVOICEDETAILS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerName" Type="nvarchar(max)" />
-          <Property Name="WorkOrderNo" Type="nvarchar(max)" />
-          <Property Name="InvoiceNo" Type="nvarchar(max)" />
-          <Property Name="Totalcharge" Type="money" />
-          <Property Name="Discountamt" Type="money" />
-          <Property Name="SampleCollectioncharge" Type="money" />
-          <Property Name="TransportationCharge" Type="money" />
-          <Property Name="TestingCharge" Type="money" />
-          <Property Name="TotalAmount" Type="money" />
-          <Property Name="NetAmount" Type="money" />
-          <Property Name="GSTAmt" Type="money" />
-          <Property Name="Paidamount" Type="money" />
-          <Property Name="Balanceamount" Type="money" />
-          <Property Name="InvoiceDate" Type="date" />
-          <Property Name="Count" Type="int" />
-          <Property Name="EnquirySampleID" Type="int" />
-          <Property Name="CostingId" Type="int" />
         </EntityType>
         <EntityType Name="UnitMasterInventory">
           <Key>
@@ -1659,15 +1600,15 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="PaymentDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RecieptNo" Type="nvarchar" MaxLength="50" />
           <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="PayDate" Type="datetime" Nullable="false" />
-          <Property Name="PaymentMode" Type="int" Nullable="false" />
+          <Property Name="PayDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="PaymentMode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="BankName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DD/ChequeNo/Neft" Type="nvarchar(max)" />
-          <Property Name="DD/ChequeDate" Type="datetime" Nullable="false" />
+          <Property Name="DD/ChequeDate" Type="smalldatetime" Nullable="false" />
           <Property Name="EnteredBy" Type="int" Nullable="false" />
-          <Property Name="EnteredDate" Type="datetime" Nullable="false" />
+          <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" />
-          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="smalldatetime" />
           <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
           <Property Name="RegistrationName" Type="nvarchar(max)" />
           <Property Name="WorkOrderNo" Type="nvarchar(max)" />
@@ -7007,9 +6948,6 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="SpareStock" EntityType="Self.SpareStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockLogData" EntityType="Self.StockLogData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_DailyInvoice" EntityType="Self.TBL_DailyInvoice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TBL_InvoiceReceiptNoMaster" EntityType="Self.TBL_InvoiceReceiptNoMaster" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_RejectInvoice" EntityType="Self.Tbl_RejectInvoice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TBL_REJECTINVOICEDETAILS" EntityType="Self.TBL_REJECTINVOICEDETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitMasterInventory" EntityType="Self.UnitMasterInventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnalysisProcessScheduleDetail" EntityType="Self.AnalysisProcessScheduleDetail" Schema="Lims" store:Type="Tables" />
           <EntitySet Name="ARC" EntityType="Self.ARC" Schema="Lims" store:Type="Tables" />
@@ -9041,65 +8979,6 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="Count" Type="Int32" />
           <Property Name="EnquirySampleID" Type="Int32" />
           <Property Name="CostingId" Type="Int32" />
-          <Property Name="RejectStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TBL_InvoiceReceiptNoMaster">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FinancialYearID" Type="Int64" />
-          <Property Name="FinancialMonthID" Type="Int64" />
-          <Property Name="NumberType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NumberValue" Type="Int64" />
-          <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Tbl_RejectInvoice">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="WorkOrderNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Totalcharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Discountamt" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="SampleCollectioncharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TransportationCharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TestingCharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="NetAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="GSTAmt" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Paidamount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Balanceamount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="EnquirySampleID" Type="Int32" />
-          <Property Name="CostingId" Type="Int32" />
-          <Property Name="RejectStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TBL_REJECTINVOICEDETAILS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="WorkOrderNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Totalcharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Discountamt" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="SampleCollectioncharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TransportationCharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TestingCharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="NetAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="GSTAmt" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Paidamount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Balanceamount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="EnquirySampleID" Type="Int32" />
-          <Property Name="CostingId" Type="Int32" />
         </EntityType>
         <EntityType Name="UnitMasterInventory">
           <Key>
@@ -10073,15 +9952,15 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="PaymentDetailsId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RecieptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PaymentMode" Type="Int32" Nullable="false" />
+          <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PaymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DD_ChequeNo_Neft" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DD_ChequeDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DD_ChequeDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EnteredBy" Type="Int32" Nullable="false" />
-          <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
           <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RegistrationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WorkOrderNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -15277,9 +15156,6 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySet Name="SpareStocks" EntityType="Self.SpareStock" />
           <EntitySet Name="StockLogDatas" EntityType="Self.StockLogData" />
           <EntitySet Name="TBL_DailyInvoice" EntityType="Self.TBL_DailyInvoice" />
-          <EntitySet Name="TBL_InvoiceReceiptNoMaster" EntityType="Self.TBL_InvoiceReceiptNoMaster" />
-          <EntitySet Name="Tbl_RejectInvoice" EntityType="Self.Tbl_RejectInvoice" />
-          <EntitySet Name="TBL_REJECTINVOICEDETAILS" EntityType="Self.TBL_REJECTINVOICEDETAILS" />
           <EntitySet Name="UnitMasterInventories" EntityType="Self.UnitMasterInventory" />
           <EntitySet Name="AnalysisProcessScheduleDetails" EntityType="Self.AnalysisProcessScheduleDetail" />
           <EntitySet Name="ARCs" EntityType="Self.ARC" />
@@ -18306,68 +18182,6 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <EntitySetMapping Name="TBL_DailyInvoice">
             <EntityTypeMapping TypeName="LIMSModel.TBL_DailyInvoice">
               <MappingFragment StoreEntitySet="TBL_DailyInvoice">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
-                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
-                <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
-                <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
-                <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
-                <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
-                <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
-                <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
-                <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
-                <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
-                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
-                <ScalarProperty Name="CostingId" ColumnName="CostingId" />
-                <ScalarProperty Name="RejectStatus" ColumnName="RejectStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBL_InvoiceReceiptNoMaster">
-            <EntityTypeMapping TypeName="LIMSModel.TBL_InvoiceReceiptNoMaster">
-              <MappingFragment StoreEntitySet="TBL_InvoiceReceiptNoMaster">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
-                <ScalarProperty Name="FinancialMonthID" ColumnName="FinancialMonthID" />
-                <ScalarProperty Name="NumberType" ColumnName="NumberType" />
-                <ScalarProperty Name="NumberValue" ColumnName="NumberValue" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_RejectInvoice">
-            <EntityTypeMapping TypeName="LIMSModel.Tbl_RejectInvoice">
-              <MappingFragment StoreEntitySet="Tbl_RejectInvoice">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
-                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
-                <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
-                <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
-                <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
-                <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
-                <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
-                <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
-                <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
-                <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
-                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
-                <ScalarProperty Name="CostingId" ColumnName="CostingId" />
-                <ScalarProperty Name="RejectStatus" ColumnName="RejectStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TBL_REJECTINVOICEDETAILS">
-            <EntityTypeMapping TypeName="LIMSModel.TBL_REJECTINVOICEDETAILS">
-              <MappingFragment StoreEntitySet="TBL_REJECTINVOICEDETAILS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />

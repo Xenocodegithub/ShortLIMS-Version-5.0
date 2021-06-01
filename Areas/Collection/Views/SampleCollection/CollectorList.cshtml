@@ -16,7 +16,7 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Collection</a></li>
+                                <li class="breadcrumb-item"><a href="#">Collection</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Collection</li>
                                 <li class="breadcrumb-item active" aria-current="page">Sample Collection List</li>
                             </ol>
@@ -34,40 +34,40 @@
                 <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                     <thead>
                         <tr class="thead-dark">
-                            <th class="table-plus datatable-nosort">
+                            <th class="table-plus datatable-nosort" style="width:120px">
                                 SampleNo.
                             </th>
-                            <th>
+                            <th style="width:120px">
                                 Sample Type
                             </th>
-                            <th>
+                            <th >
                                 Sample Location
                             </th>
-                            <th>
+                            <th >
                                 Customer Name
                             </th>
-                            <th>
+                            <th >
                                 Contact Number
                             </th>
                             @*<th class="width-5">
                                 Sample Collected On
                              </th>*@
-                            <th>
+                            <th >
                                 Field Determination
                             </th>
-                            <th>
+                            <th >
                                 Lab
                             </th>
-                            <th>
+                            <th  >
                                 Action
                             </th>
-                            <th>
+                            <th >
                                 Status
                             </th>
-                            <th>
+                            <th >
                                 Shift
                             </th>
-                            <th>
+                            <th >
                                 Print
                             </th>
                         </tr>
@@ -77,12 +77,12 @@
                         {
                           
                             <tr rowCount="@i">
-                                <td>
+                                <td style="width:120px">
                                     @Html.HiddenFor(item => Model[i].SampleCollectionId)
                                     @Html.HiddenFor(item => Model[i].SampleName)
                                     @Html.DisplayFor(item => Model[i].DisplaySampleName)
                                 </td>
-                                <td>
+                                <td style="width:120px">
                                     @Html.DisplayFor(item => Model[i].SampleTypeProductName)
                                 </td>
                                 <td>

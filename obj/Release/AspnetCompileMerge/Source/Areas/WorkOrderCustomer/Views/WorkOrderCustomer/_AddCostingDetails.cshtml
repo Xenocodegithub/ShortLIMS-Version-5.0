@@ -1,0 +1,351 @@
+﻿@model LIMS_DEMO.Areas.WorkOrderCustomer.Models.WorkOrderCustomerListModel
+
+@{
+    ViewBag.Title = "_AddCostingDetails";
+}
+
+<div>
+     @*For Costing Details*@
+    <div>
+        <table id="tblCostDetails" class="data-table table nowrap">
+            <tr class="thead-dark">
+                <th class="table-plus datatable-nosort">SerialNo.</th>
+                <th>Sample No.</th>
+                <th>Sample Type</th>
+                @*<th style="width:150px">Product Group</th>
+                 <th style="width:150px">Sub Group</th>
+                <th style="width:150px">Matrix</th>*@
+                <th>Parameters</th>
+            </tr>
+            @for (int i = 0; i < Model.WorkOrderCustomerList.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.WorkOrderCustomerList[i].SerialNo)
+                    </td>
+                    <td>
+                        <a href="#" onclick="funSampleSelected(@Model.WorkOrderCustomerList[i].EnquirySampleID);" class="sampleName" style="color:blue;">@Html.DisplayFor(model => model.WorkOrderCustomerList[i].DisplaySampleName)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.WorkOrderCustomerList[i].SampleTypeProductName)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(model => model.WorkOrderCustomerList[i].ProductGroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.WorkOrderCustomerList[i].SubGroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.WorkOrderCustomerList[i].MatrixName)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(model => model.WorkOrderCustomerList[i].Parameters)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(model => model.WorkOrderCustomerList[i].Cost)
+                    </td>*@
+                </tr>
+            }
+        </table>
+    </div>
+    <hr />
+  @*For Costing*@
+<div id="divCosting">
+    @using (Ajax.BeginForm("_Costing", "WorkOrderCustomer", new AjaxOptions() { HttpMethod = "Post", OnBegin = "OnClick", OnSuccess = "AddCostSuccess" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.WorkOrderCustomer.CostingId)
+        @Html.HiddenFor(model => model.WorkOrderCustomer.getID)
+        @Html.HiddenFor(model => model.WorkOrderCustomer.EnquirySampleID)
+        <input id="gstRate" type="hidden" value="@ViewBag.GSTRate" />
+        <input id="Id" type="hidden" value="@ViewBag.EnquiryId" />
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Total Charges:</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TotalCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TotalCharges, "", new { @class = "text-danger" })
+            </div>
+            <label class="col-sm-12 col-md-2 col-form-label">Discount Amount:</label>
+            <div class="col-md-4">
+                <input type="text" onkeyup="funCalNetAmount(true);" id="txtDiscountPercent" class="form-control" /><br />
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.DiscountAmount, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.DiscountAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class=" form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Sample Colllection Charges:</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.SampleAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleAmount, "", new { @class = "text-danger" })
+            </div>
+            <label class="col-sm-12 col-md-2 col-form-label">Transportation Amount:</label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TransportationAmount, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TransportationAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Total Amount:</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TotalAmount, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TotalAmount, "", new { @class = "text-danger" })
+            </div>
+            <label class="col-sm-12 col-md-2 col-form-label">Testing Charges:</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.TestingCharges, new { @class = "form-control", @onkeyup = "funCalNetAmount(false);", onfocus = "this.value=''" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.TestingCharges, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Net Amount:</label>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.WorkOrderCustomer.NetAmount, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.NetAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <button id="btnAdd" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;margin-top:-30px">Add Cost</button>
+        </div>
+    }
+</div>
+         <hr />
+         <div id="divTermsCond">
+             @using (Ajax.BeginForm("_AddCostingDetails", "WorkOrderCustomer", new AjaxOptions() { HttpMethod = "Post", OnBegin = "NextPage", OnSuccess = "CostingSuccess" }))
+             {
+                 @Html.AntiForgeryToken()
+                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                 @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderId)
+
+                 for (int i = 0; i < Model.TermsList.Count; i++)
+                 {
+                     <div>
+                         @Html.CheckBoxFor(model => model.TermsList[i].IsSelected)
+                         @Html.HiddenFor(model => model.TermsList[i].TermAndCondtId)
+                         @Model.TermsList[i].TermAndCondt
+                     </div>
+                 }
+              <br/>
+         <div class="form-group row">
+             <label class="col-sm-12 col-md-1 col-form-label">Remarks:</label>
+             @*@Html.LabelFor(model => model.WorkOrderCustomer.Remarks, "Remarks:", htmlAttributes: new { @class = "control-label col-sm-2" })*@
+
+             <div class="col-sm-4">
+                 @Html.TextAreaFor(model => model.WorkOrderCustomer.Remarks, new { @class = "form-control", @style = "height:65px" })
+             </div>
+         </div>
+                 <button id="btnSaveTerms" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;">Save Terms And Conditions</button>
+                 <br />
+             }
+         </div>
+         <hr />
+         @*For CostingList*@
+         <div>
+            <table class="data-table table nowrap">
+                                            <thead>
+                                                <tr class="thead-dark">
+                                                    <th class="table-plus datatable-nosort">
+                                                        Sr.No.
+                                                    </th>
+                                                    <th>
+                                                        Sample No.
+                                                    </th>
+                                                    <th>
+                                                        Sample Type
+                                                    </th>
+                                                    @*<th class="width-12">
+                                                       Product Group
+                                                     </th>
+                                                    <th class="width-10">
+                                                       Sub Group
+                                                    </th>
+                                                    <th class="width-5">
+                                                       Matrix
+                                                    </th>*@
+                                                    <th>
+                                                        Amount
+                                                    </th>
+                                                    <th>
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (int i = 0; i < Model.CostList.Count; i++)
+                                                {
+                                                 <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.CostList[i].SerialNo)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.CostList[i].DisplaySampleName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.CostList[i].SampleTypeProductName)
+                                                        </td>
+                                                        @*<td>
+                                                              @Html.DisplayFor(model => model.CostList[i].ProductGroupName)
+                                                          </td>
+                                                          <td>
+                                                              @Html.DisplayFor(model => model.CostList[i].SubGroupName)
+                                                          </td>
+                                                          <td>
+                                                              @Html.DisplayFor(model => model.CostList[i].MatrixName)
+                                                          </td>*@
+                                                        <td>
+                                                            @Html.DisplayFor(model => model.CostList[i].NetAmount)
+                                                        </td>
+                                                        <td>
+                                                            <a onclick="funCostEdit(@Model.CostList[i].EnquirySampleID, @Model.CostList[i].CostingId)" href="#">Edit</a> |
+                                                            <a onclick="funCostDelete(@Model.CostList[i].CostingId)" href="#">Delete</a>
+                                                        </td>
+                                                 </tr>
+                                                }
+                                            </tbody>
+           </table>
+            @if (Model.CostList.Count >= 1)
+            {
+                   <div class="row">
+                                                <div class="col-sm-12 col-md-12">
+                                                    @*<a href="~/Enquiry/SampleAndParameter?EnquiryId=@ViewBag.EnquiryId" class="btn btn-primary alignleft" style="float:left" data-toggle="tooltip" data-placement="top" title="">Back</a>*@
+                                                    @*<a href="/Enquiry/AddWorkOrder?WorkOrderId=@ViewBag.WorkOrderId&EnquiryId=0" class="btn btn-primary btn-sm alignright">Next</a>*@
+                                                    <input type="button" id="btnNext" value="Save" class="btn btn-info btn-sm  alignright" style="float:right" />
+                                                </div>
+                                            </div>
+            }
+         </div>
+         <hr />
+</div>
+            
+         
+<script>
+
+    function funCostEdit(EnquirySampleId, CostingId) {
+      debugger
+        $("#divCosting").css("display", "block");
+        $('#third').load('/WorkOrderCustomer/WorkOrderCustomer/_AddCostingDetails?WorkOrderId=' + @ViewBag.WorkOrderId + "&EnquirySampleID=" + EnquirySampleId + '&CostingId=' + CostingId);
+
+    }
+
+    function funCostDelete(CostingId) {
+        if (confirm('Are you sure want to delete this record?')) {
+            $.ajax({
+                url: '/WorkOrderCustomer/WorkOrderCustomer/DeleteCosting?CostingId=' + CostingId,
+                type: 'Get',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    $('#third').load('/WorkOrderCustomer/WorkOrderCustomer/_AddCostingDetails?WorkOrderId=' + @ViewBag.WorkOrderId);
+                },
+                error: function (data) {
+                    alert('failed!');
+                }
+            })
+        }
+    }
+
+
+    $(document).ready(function () {
+
+        var CostingID = $("#WorkOrderCustomer_CostingId").val();
+
+        if (CostingID == 0) {
+            $("#divCosting").css("display", "none");
+        }
+
+    });
+
+    $("#btnNext").click(function () {
+        debugger
+        var WorkOrderId =  parseInt(@ViewBag.WorkOrderId);
+        alert('Click on Add WorkOrder Details!')
+       // $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        $('#fourth').load('/WorkOrderCustomer/WorkOrderCustomer/_AddWorkOrderDetails?WorkOrderId=' + WorkOrderId);
+    });
+
+    function funSampleSelected(EnquirySampleId) {
+        debugger
+        $("#divCosting").css("display", "block");
+        var WorkOrderId = parseInt(@ViewBag.WorkOrderId);
+        $("#WorkOrderCustomer_getID").val(EnquirySampleId);
+    }
+
+    function NextPage() {
+        $('#btnNext').prop('disabled', true);
+        $('#btnNext').html('Please Wait..')
+        $('#btnSave').prop('disabled', true);
+        $('#btnSave').html('Please Wait..')
+    }
+
+    function CostingSuccess(result) {
+        if (result.status == "success") {
+            debugger
+            alert('Terms And Conditions Saved!')
+            $('#btnNext').prop('disabled', false);
+            $('#btnSave').prop('disabled', false);
+            $('#btnSave').html('Save')
+        }
+        else {
+               alert('Please Click on each SampleNo with Required Charges fields!')
+               $('#btnSave').prop('disabled', false);
+               $('#btnSave').html('Save')
+        }
+    }
+</script>
+<script>
+
+    function AddCostSuccess(result) {
+        debugger
+        var WorkOrderId =  parseInt(@ViewBag.WorkOrderId);
+        $('#divCosting').hide();
+        $('#third').load('/WorkOrderCustomer/WorkOrderCustomer/_AddCostingDetails?WorkOrderId=' + WorkOrderId + "&EnquirySampleID=" + result.EnquirySampleId + '&CostingId='+ result.CostingId, '',
+            function (data, success) {
+                //   @{ string btnText1 = "Add"; if (Model.WorkOrderCustomer.CostingId != null && Model.WorkOrderCustomer.CostingId != 0) { btnText1 = "Update";
+                    } }
+                $('#btnAddCosting').val("Add");
+                $('#btnAddCosting').prop('disabled', false);
+            }
+        );
+    }
+
+    function funCalNetAmount(IsDisc) {
+        var TotalCharges = $('#WorkOrderCustomer_TotalCharges').val() == '' ? parseFloat(0.0).toFixed(2) : $('#WorkOrderCustomer_TotalCharges').val();
+
+        var SampleAmount = $('#WorkOrderCustomer_SampleAmount').val() == '' ? 0 : $('#WorkOrderCustomer_SampleAmount').val();
+        var TestingCharges = $('#WorkOrderCustomer_TestingCharges').val() == '' ? 0 : $('#WorkOrderCustomer_TestingCharges').val();
+        var TransportationAmount = $('#WorkOrderCustomer_TransportationAmount').val() == '' ? 0 : $('#WorkOrderCustomer_TransportationAmount').val();
+        var TotalAmount = Number(TotalCharges) + Number(SampleAmount) + Number(TestingCharges) + Number(TransportationAmount);
+        $('#WorkOrderCustomer_TotalAmount').val((TotalAmount).toFixed(1));
+
+        var gstRate = $('#gstRate').val() == '' ? 0 : $('#gstRate').val();
+        var GSTCharges = Number(TotalAmount) * Number(gstRate) / 100;
+        $('#WorkOrderCustomer_GSTCharges').val((GSTCharges).toFixed(1));
+
+        //var NetAmount = Number(TotalAmount) + Number(GSTCharges);
+        var NetAmount = Number(TotalAmount);//New NetAmount Change without GST
+        //$('#NetAmount').val((NetAmount).toFixed(1));
+
+        if (IsDisc) {
+            var DiscPer = $('#txtDiscountPercent').val() == '' ? 0 : $('#txtDiscountPercent').val();
+            var DiscAmount = Number(NetAmount) * Number(DiscPer) / 100;
+            $('#WorkOrderCustomer_DiscountAmount').val((DiscAmount).toFixed(1));
+        } else {
+            var DiscAmount = $('#WorkOrderCustomer_DiscountAmount').val() == '' ? parseFloat(0.0).toFixed(2) : $('#WorkOrderCustomer_DiscountAmount').val();
+        }
+
+        //var NetAmount = Number(TotalAmount) + Number(GSTCharges);
+        $('#WorkOrderCustomer_NetAmount').val((NetAmount).toFixed(1) - Number(DiscAmount));
+
+    }
+
+    function OnClick() {
+        $('#btnAddCosting').val('Please Wait..');
+        $('#btnAddCosting').prop('disabled', true);
+    }
+
+</script>
+
+
+
+            

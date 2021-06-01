@@ -131,13 +131,14 @@ namespace LIMS_DEMO.DAL.Inventory
         // Get Category Details List Data (list)
         public List<Core.Inventory.CategoryEntity> GetInventoryCategoryList()
         {
+          
             try
             {
                 return (from e in _dbContext.InventoryCategoryMasters
                         join cat in _dbContext.InventoryTypeMasters on e.InventoryTypeID equals cat.ID
                         select new Core.Inventory.CategoryEntity()
                         {
-                            CatagoryMasterID = (byte)e.ID,
+                            CatagoryMasterID = e.ID,
                             CategoryName = e.CategoryName,
                             InventoryTypeID = e.InventoryTypeID,
                             InventoryTypeName = cat.Name,
@@ -148,6 +149,7 @@ namespace LIMS_DEMO.DAL.Inventory
             {
                 return null;
             }
+
 
         }
         public List<InventoryItemEntity> SelectInventoryDetails(int ITID, int InventoryCategoryMasterID, int InventoryTypeMasterID, bool InventoryTypeMasterIsActive, bool InventoryTypeMasterIsDeleted, bool InventoryCategoryMasterIsActive, bool InventoryCategoryMasterIsDeleted, bool InventoryItemMasterIsActive, bool InventoryItemMasterIsDeleted, bool IsActive, string Mode)
@@ -303,7 +305,7 @@ namespace LIMS_DEMO.DAL.Inventory
                 {
                     ItemMasterID = item.ID,
                     ItemID = item.ID,
-                    CatagoryMasterID =(int)item.CategoryID,
+                    CatagoryMasterID = (int)item.CategoryID,
                     NameOfStock = item.Name,
                     UnitID = item.UnitID,
                     Code = item.Code,

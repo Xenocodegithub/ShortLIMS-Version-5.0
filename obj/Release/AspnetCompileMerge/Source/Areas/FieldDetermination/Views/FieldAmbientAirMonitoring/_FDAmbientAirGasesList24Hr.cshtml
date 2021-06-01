@@ -1,0 +1,138 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDAmbientAirMonitoringModel
+
+@using (Ajax.BeginForm("_FDAmbientAirGasesList24Hr", "FieldAmbientAirMonitoring", new { area = "FieldDetermination" }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FDAdd24" }, new { id = "frmAddAmbientAir" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SrNo)
+    @Html.HiddenFor(model => model.FieldId)
+    @Html.HiddenFor(model => model.MatterSizeId)
+    @Html.HiddenFor(model => model.GasesSampledId)
+    @Html.HiddenFor(model => model.EnquirySampleID)
+
+    <table class="table table-bordered" id="tblGasesSampling24" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    Shift
+                </th>
+                <th>
+                    Parameters
+                </th>
+                @*<th>
+                   @Html.DisplayNameFor(model => model.GasesSampled)
+                 </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.VolImpingingSolution)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BottleNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RotaMeterFlow)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vs)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PreservationDone)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select class="form-control" id="ShiftNoAir24Hr" name="ShiftNoAir24Hr">
+                        <option value="Select Shift" disabled>Select Shift</option>
+                        <option value="Shift 1">Shift 1</option>
+                        <option value="Shift 2">Shift 2</option>
+                        <option value="Shift 3">Shift 3</option>
+                    </select>
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.ParameterName, new SelectList(ViewBag.Parameter, "ParameterName", "ParameterName"), "--- Select ---", new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(model => model.ParameterMasterId, "", new { @class = "text-danger" })*@
+                </td>
+                @*<td>
+                    @Html.TextBoxFor(model => model.GasesSampled, new { @class = "form-control", @placeholder = "GasesSampled" })
+                </td>*@
+                <td>
+                    @Html.TextBoxFor(model => model.VolImpingingSolution, new { @class = "form-control", @placeholder = "VolImpingingSolution" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.BottleNo, new { @class = "form-control", @placeholder = "BottleNo" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.RotaMeterFlow, new { @class = "form-control", @placeholder = "RotaMeterFlow" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", @placeholder = "Duration" })
+
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Vs, new { @class = "form-control", @placeholder = "VS" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.PreservationDone, new { @class = "form-control", @placeholder = "Preservation Done" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        @{ string btnText = "Add";
+            if (Model.SrNo != 0)
+            {
+                btnText = "Update";
+                <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel24" value="Cancel" />
+            }
+        }
+        <input class="btn btn-success btn-sm alignright" type="submit" id="btnAdd24" value="@btnText" />
+        @*<input class="btn btn-success pull-left" type="submit" id="btnAdd" value="@btnText" style="width:100px; padding:5px 25px !important;" />*@
+    </div>
+
+}
+<script>
+
+    $(function () {
+        $("#frmAddAmbientAir").removeData("validator");
+        $("#frmAddAmbientAir").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmAddAmbientAir");
+    })
+
+    function FDAdd24(result) {
+        debugger;
+        $('#divGrid24hr').load('/FieldDetermination/FieldAmbientAirMonitoring/_FDAmbientAirList24Hr');
+        $('#divAddAmbientAir24Hr').load('/FieldDetermination/FieldAmbientAirMonitoring/_FDAmbientAirGasesList24Hr');
+        $('#btnAdd24').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#ParameterName').val("");
+        $('#VolImpingingSolution').val("");
+        $('#ShiftNoAir24Hr').val("");
+        $('#BottleNo').val("");
+        $('#RotaMeterFlow').val("");
+        $('#Duration').val("");
+        $('#Vs').val("");
+        $('#PreservationDone').val("");
+    }
+
+    function CancelNameValues() {
+        $('#ParameterName').val("");
+        $('#VolImpingingSolution').val("");
+        $('#BottleNo').val("");
+        $('#RotaMeterFlow').val("");
+        $('#ShiftNoAir24Hr').val("");
+        $('#Duration').val("");
+        $('#Vs').val("");
+        $('#PreservationDone').val("");
+        $('#btnAdd24').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#SrNo').val(0)
+    }
+
+</script>
+
+

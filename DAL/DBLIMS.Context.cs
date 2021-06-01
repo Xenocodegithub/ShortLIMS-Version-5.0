@@ -64,9 +64,6 @@ namespace LIMS_DEMO.DAL
         public virtual DbSet<SpareStock> SpareStocks { get; set; }
         public virtual DbSet<StockLogData> StockLogDatas { get; set; }
         public virtual DbSet<TBL_DailyInvoice> TBL_DailyInvoice { get; set; }
-        public virtual DbSet<TBL_InvoiceReceiptNoMaster> TBL_InvoiceReceiptNoMaster { get; set; }
-        public virtual DbSet<Tbl_RejectInvoice> Tbl_RejectInvoice { get; set; }
-        public virtual DbSet<TBL_REJECTINVOICEDETAILS> TBL_REJECTINVOICEDETAILS { get; set; }
         public virtual DbSet<UnitMasterInventory> UnitMasterInventories { get; set; }
         public virtual DbSet<AnalysisProcessScheduleDetail> AnalysisProcessScheduleDetails { get; set; }
         public virtual DbSet<ARC> ARCs { get; set; }

@@ -10,11 +10,11 @@
     @Html.HiddenFor(model => model.FDStackEmission_GaseousDataId)
     @Html.HiddenFor(model => model.EnquirySampleID)
 
-    <table class="table table-bordered">
+    <table id="dtHorizontalExample" class="table table-bordered">
         <thead>
             <tr>
                 <th rowspan="2">Parameter</th>
-                <th rowspan="2">TestMethod</th>
+                <th rowspan="2">Test Method</th>
                 <th rowspan="2">Flow Rate (LPM) (R)</th>
                 <th rowspan="2">Sampling time in minutes (T)</th>
                 <th rowspan="2"> Gas Temp <sup>0</sup>K (Tg) </th>
@@ -168,5 +168,13 @@
         }
      });
 
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').Table({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
 </script>
 

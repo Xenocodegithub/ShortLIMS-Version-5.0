@@ -29,6 +29,8 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View();
         }
         [HttpGet]
+        
+       
         public ActionResult Create()
         {
             ViewBag.InvTyp = BALFactory.dropdownsBAL.GetInventoryTypeList();
@@ -36,6 +38,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+     
         public ActionResult Create(InventoryCategoryMasterModel model)
         {
            
@@ -60,6 +63,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         }
 
         [HttpGet]
+      
         public ActionResult Edit(int? CatagoryMasterID = 0)
         {
             InventoryTypeMasterModel model = new InventoryTypeMasterModel();
@@ -79,7 +83,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(model);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult Edit(InventoryCategoryMasterModel model)
         {
             Core.Inventory.CategoryEntity categoryEntity = new Core.Inventory.CategoryEntity();
@@ -103,6 +107,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             }
         }
         [HttpGet]
+       
         public ActionResult List()
         {
             CoreFactory.categoryList = BALFactory.NewInventoryBAL.GetInventoryCategoryList();
@@ -121,6 +126,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(CategoryDataList);
         }
         [HttpGet]
+       
         public ActionResult Delete(int? CatagoryMasterID = 0)
         {
             InventoryTypeMasterModel model = new InventoryTypeMasterModel();
@@ -140,6 +146,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(model);
         }
         [HttpPost]
+        
         public ActionResult Delete(InventoryCategoryMasterModel model)
         {
             Core.Inventory.CategoryEntity categoryEntity = new CategoryEntity();
@@ -156,6 +163,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             }
         }
         [HttpGet]
+        
         public ActionResult View(int? CatagoryMasterID=0)
         {
             InventoryTypeMasterModel model = new InventoryTypeMasterModel();

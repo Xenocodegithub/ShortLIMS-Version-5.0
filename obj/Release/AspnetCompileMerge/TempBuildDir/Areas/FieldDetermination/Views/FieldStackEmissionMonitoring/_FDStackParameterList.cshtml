@@ -1,0 +1,86 @@
+﻿@model  LIMS_DEMO.Areas.FieldDetermination.Models.FDStackEmissionModel
+
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pb-20">
+        @if (Model.GridParaModel.Count() > 0)
+        {
+            <table id="tblField" class="data-table table stripe hover nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            SrNo.
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Parameters
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            TestMethod
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Test Results
+                        </th>
+                        @if (Model.CurrentStatus != "SampleColl")
+                        {
+                            <th class="table-plus datatable-nosort">
+                                Action
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.GridParaModel.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Model.GridParaModel[i].SrNo
+                            </td>
+                            <td>
+                                @Model.GridParaModel[i].ParameterName
+                            </td>
+                            <td>
+                                @Model.GridParaModel[i].TestMethodName
+                            </td>
+                            <td>
+                                @Model.GridParaModel[i].TestResults
+                            </td>
+                            @if (Model.CurrentStatus != "SampleColl")
+                            {
+                                <td>
+                                    <a href="#" onclick="funDeleteFieldPara(@Model.GridParaModel[i].SrNo);">Delete</a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<script>
+
+  function funDeleteFieldPara(Id) {
+            debugger
+            if (confirm('Are you sure you want to delete this record?')) {
+                $.ajax({
+                    url: '/FieldDetermination/FieldStackEmissionMonitoring/_DeleteStackPara?Id=' + Id,
+                    type: 'Get',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.status == "success") {
+                            $('#divListPara').load('/FieldDetermination/FieldStackEmissionMonitoring/_FDStackParameterList');
+                        }
+                    },
+                    error: function (data) {
+                    }
+                });
+            }
+    }
+
+</script>
+    
+
+
+

@@ -14,7 +14,7 @@
             <tr>
                 <td align="center">
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-3 col-form-label"> Sample Type: <span style="color:red;text-align:left">*</span></label>
+                        <label class="col-sm-12 col-md-4 col-form-label"> Sample Type: <span style="color:red">*</span></label>
                         <div class="col-sm-6">
                             @Html.DropDownListFor(model => model.WorkOrderCustomer.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = " form-control" })
                             @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleTypeProductId, "", new { @class = "text-danger" })
@@ -47,7 +47,7 @@
                 </td>*@
                 <td style="width: 200px" align="right">
 
-                    <input type="button" id="btnAdd" value="Add" class="btn btn-sm btn-info text-nowrap" style="margin-right:-40%;margin-top:-11%;float:right;" />
+                    <input type="button" id="btnAdd" value="Add" class="btn btn-sm btn-info text-nowrap" style="margin-right:-40%;margin-top:-12%;float:right;" />
                 </td>
             </tr>
         </table>
@@ -55,7 +55,7 @@
         <hr />
         <table id="tblContract" class="data-table table nowrap">
             <tr class="thead-dark">
-                <th class="table-plus datatable-nosort">SerialNo.</th>
+                <th class="table-plus datatable-nosort"> Sr.No.</th>
                 <th>Sample Type</th>
                 @*<th style="width:150px">Product Group</th>
                 <th style="width:150px">Sub Group</th>
@@ -102,7 +102,7 @@
                 Html.RenderAction("_Parameters", "WorkOrderCustomer", new { EnquiryDetailId = 0 });
             }
         </div>
-        <hr />
+        
         <div class="row">
             <table id="tblPara" class="data-table table nowrap">
                 <thead>
@@ -192,7 +192,7 @@
 
             }
         </div>
-        <hr />
+       
     </fieldset>
 </div>
 

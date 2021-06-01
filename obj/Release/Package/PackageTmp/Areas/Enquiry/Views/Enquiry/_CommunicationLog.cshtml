@@ -1,0 +1,77 @@
+﻿@model LIMS_DEMO.Areas.Enquiry.Models.EnquiryLogModel
+@using LIMS_DEMO.Core.DropDowns;
+<div class="row">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="pd-20 card-box mb-30">
+            <div class="min-height-200px">
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Customer Name: </label>
+                    <div class="col-sm-12 col-md-10">
+                        @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control", placeholdder = "Customer Name" })
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("_CommunicationLog", "Enquiry", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "EnquiryLogSuccess" }, new { id = "frmCommunicationLog" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.EnquiryId)
+                    @Html.HiddenFor(model => model.EnquiryLogId)
+                    @Html.HiddenFor(model => model.CustomerName)
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Mode Of Communication: </label>
+                        @Html.HiddenFor(model => model.ModeOfCommunicationId)
+                        <div class="col-sm-12 col-md-10">
+                            @foreach (var item in (List<CommunicationEntity>)ViewBag.CommunicationMode)
+                            {
+                                if (Model.ModeOfCommunicationId == item.ModeOfCommunicationId)
+                                {
+                                    <label class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @checked = "checked", @class = "modeofcomm" }) @item.CommunicationMode </label>
+                                }
+                                else
+                                {
+                                    <label class="radio-btn-pd"> @Html.RadioButtonFor(model => item.ModeOfCommunicationId, item.ModeOfCommunicationId, new { @class = "modeofcomm" }) @item.CommunicationMode </label>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Enquiry On:</label>
+                        <div class="col-sm-12 col-md-10">
+                            @Html.TextBoxFor(model => model.CommunicationDate, new { @class = "form-control date-picker" , @type="date"})
+                            @Html.ValidationMessageFor(model => model.CommunicationDate, "", new { @class = "text-danger" })
+                            @*<input type="date" id="CommunicationDate" name="CommunicationDate">*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Remark:</label>
+                        <div class="col-sm-12 col-md-10">
+                            @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-10" style="margin: auto;text-align: center;">
+                            <input type="submit" value="Create" class="btn btn-info" id="buttonSave1" name="buttonSave"/>
+                        </div>
+                    </div>
+
+                }
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+

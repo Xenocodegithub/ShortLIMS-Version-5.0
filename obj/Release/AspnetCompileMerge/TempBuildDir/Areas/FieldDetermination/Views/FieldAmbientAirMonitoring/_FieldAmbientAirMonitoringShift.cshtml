@@ -1,0 +1,581 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDAmbientAirMonitoringModel
+
+@Html.HiddenFor(model => model.FieldId)
+@Html.HiddenFor(model => model.SampleCollectionId)
+
+<div class="col-md-12">
+    <div class="title-alt">
+        <h6 class="m-0 font-weight-bold text-primary text-xl-center">Particulate Matter Size less than 10 microns (PM10)/B(a)P/Metals Particulate (Specify) Sampling </h6>
+    </div>
+    <div>
+        <div>
+            @Html.TextBoxFor(Model => Model.MatterSize1, new { @class = "form-control", @placeholder = "<10Microns" })
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h4 class="font-weight-bold text-primary" style="text-align:center">First Shift</h4>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Start Time</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.MatterSizeStartTime, new { @type = "time", @class = "form-control mr-btm-15", @autocomplete = "false", @placeholder = "HH:mm" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12 mr-btm-15">End Time</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.MatterSizeEndTime, new { @type = "time", @class = "form-control mr-btm-15", @autocomplete = "false", @placeholder = "HH:mm" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12 mr-btm-15">Filter Paper No.</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FilterPaperNo, new { @class = "form-control mr-btm-15", @placeholder = "Filter Paper No." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Cyclone Cup No.</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.CycloneCupNo, new { @class = "form-control mr-btm-15", @placeholder = "Cyclone Cup No.." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Flow Rate Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateFinal, new { @class = "form-control mr-btm-15", @placeholder = "m3/min" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Flow Rate Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateInitial, new { @class = "form-control  mr-btm-15", @placeholder = "m3/min" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Difference Flow Rate</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateDiff, new { @class = "form-control mr-btm-15", @placeholder = "Average/Difference." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Sampling Duration Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationFinal, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12 mr-btm-15">Sampling Duration Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationInitial, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Difference Sampling Duration</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationDiff, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Time Totalizer Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerFinal, new { @class = "form-control mr-btm-15", @placeholder = "Time Totalizer Final" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Time Totalizer Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerInitial, new { @class = "form-control mr-btm-15", @placeholder = "Time Totalizer Initial." })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Difference Time Totalizer</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerDiff, new { @class = "form-control mr-btm-15", @placeholder = "Average Time Totalizer" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @if (Model.ShiftNo == 1)
+                    {
+                        <div class="col-md-6">
+                            <button type="button" id="btnSubmitFirstShift" class="btn btn-primary" name="SaveShift1" value="SaveShift1" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <button type="button" id="btnSubmitFirstShift" class="btn btn-primary" name="SaveShift1" value="SaveShift1">Submit</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-4" style="border-left: 6px solid #17566b;">
+                <h4 class="font-weight-bold text-primary" style="text-align:center">Second Shift</h4>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Start Time</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.MatterSizeStartTime2, new { @type = "time", @class = "form-control mr-btm-15", @autocomplete = "false", @placeholder = "HH:mm" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">End Time</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.MatterSizeEndTime2, new { @type = "time", @class = "form-control mr-btm-15", @autocomplete = "false", @placeholder = "HH:mm" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Filter Paper No.</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FilterPaperNos2, new { @class = "form-control mr-btm-15", @placeholder = "Filter Paper No." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Cyclone Cup No.</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.CycloneCupNos2, new { @class = "form-control mr-btm-15", @placeholder = "Cyclone Cup No.." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Flow Rate Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateFinals2, new { @class = "form-control mr-btm-15", @placeholder = "m3/min" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Flow Rate Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateInitials2, new { @class = "form-control  mr-btm-15", @placeholder = "m3/min" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12 mr-btm-15">Difference Flow Rate</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateDiffs2, new { @class = "form-control mr-btm-15", @placeholder = "Average/Difference." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12 mr-btm-15">Sampling Duration Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationFinals2, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12 mr-btm-15">Sampling Duration Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationInitials2, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="col-md-6 col-md-12 mr-btm-15">Difference Sampling Duration</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationDiffs2, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Time Totalizer Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerFinals2, new { @class = "form-control", @placeholder = "Time Totalizer Final" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Time Totalizer Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerInitials2, new { @class = "form-control mr-btm-15", @placeholder = "Time Totalizer Initial." })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Difference Time Totalizer</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerDiffs2, new { @class = "form-control mr-btm-15", @placeholder = "Average Time Totalizer" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @if (Model.ShiftNos2 == 2)
+                    {
+                        <div class="col-md-6">
+                            <button type="submit" id="btnSubmitSecondShift" class="btn btn-primary" name="Save" value="Submit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <button type="submit" id="btnSubmitSecondShift" class="btn btn-primary" name="Save" value="Submit">Submit</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-4" style="border-left: 6px solid #17566b;">
+                <h4 class="font-weight-bold text-primary" style="text-align:center">Third Shift</h4>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Start Time</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.MatterSizeStartTime3, new { @type = "time", @class = "form-control mr-btm-15", @autocomplete = "false", @placeholder = "HH:mm" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">End Time</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.MatterSizeEndTime3, new { @type = "time", @class = "form-control mr-btm-15", @autocomplete = "false", @placeholder = "HH:mm" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Filter Paper No.</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FilterPaperNos3, new { @class = "form-control mr-btm-15", @placeholder = "Filter Paper No." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Cyclone Cup No.</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.CycloneCupNos3, new { @class = "form-control mr-btm-15", @placeholder = "Cyclone Cup No.." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Flow Rate Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateFinals3, new { @class = "form-control mr-btm-15", @placeholder = "m3/min" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Flow Rate Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateInitials3, new { @class = "form-control  mr-btm-15", @placeholder = "m3/min" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Difference Flow Rate</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.FlowRateDiffs3, new { @class = "form-control mr-btm-15", @placeholder = "Average/Difference." })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Sampling Duration Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationFinals3, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Sampling Duration Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationInitials3, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="col-md-12  mr-btm-15">Difference Sampling Duration</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.SamplingDurationDiffs3, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Time Totalizer Final</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerFinals3, new { @class = "form-control", @placeholder = "Time Totalizer Final" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Time Totalizer Initial</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerInitials3, new { @class = "form-control mr-btm-15", @placeholder = "Time Totalizer Initial." })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group row">
+                    <div class="col-md-6 row">
+                        <label class="form-label col-md-12  mr-btm-15">Difference Time Totalizer</label>
+                    </div>
+                    <div class="col-md-6 row">
+                        @Html.TextBoxFor(Model => Model.TimeTotalizerDiffs3, new { @class = "form-control mr-btm-15", @placeholder = "Average Time Totalizer" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @if (Model.ShiftNos3 == 3)
+                    {
+                        <div class="col-md-6">
+                            <button type="submit" id="btnSubmitThirdShift" class="btn btn-primary" name="Save" value="Submit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <button type="submit" id="btnSubmitThirdShift" class="btn btn-primary" name="Save" value="Submit">Submit</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $('#btnSubmitFirstShift').click(function () {
+        AddShiftWiseData1(1);
+    });
+
+    $('#btnSubmitSecondShift').click(function () {
+
+        AddShiftWiseData2(2);
+    });
+
+    $('#btnSubmitThirdShift').click(function () {
+        AddShiftWiseData3(3);
+    });
+
+    function AddShiftWiseData1(status) {
+        debugger
+            var MatterSizeStartTime = $('#MatterSizeStartTime').val();
+            var MatterSizeEndTime = $('#MatterSizeEndTime').val();
+            var FilterPaperNo = $('#FilterPaperNo').val();
+            var CycloneCupNo = $('#CycloneCupNo').val();
+            var FlowRateFinal = $('#FlowRateFinal').val();
+            var FlowRateInitial = $('#FlowRateInitial').val();
+            var FlowRateDiff = $('#FlowRateDiff').val();
+            var SamplingDurationFinal = $('#SamplingDurationFinal').val();
+            var SamplingDurationInitial = $('#SamplingDurationInitial').val();
+            var SamplingDurationDiff = $('#SamplingDurationDiff').val();
+            var TimeTotalizerFinal = $('#TimeTotalizerFinal').val();
+            var TimeTotalizerInitial = $('#TimeTotalizerInitial').val();
+            var TimeTotalizerDiff = $('#TimeTotalizerDiff').val();
+            var SampleCollectionId = $('#SampleCollectionId').val();
+            var ShiftNo = status;
+            var obj = {
+                SampleCollectionId: SampleCollectionId,
+                FilterPaperNo: FilterPaperNo,
+                CycloneCupNo: CycloneCupNo,
+                FlowRateFinal: FlowRateFinal,
+                FlowRateInitial: FlowRateInitial,
+                FlowRateDiff: FlowRateDiff,
+                SamplingDurationFinal: SamplingDurationFinal,
+                ShiftNo: ShiftNo,
+                SamplingDurationInitial: SamplingDurationInitial,
+                TimeTotalizerInitial: TimeTotalizerInitial,
+                SamplingDurationDiff: SamplingDurationDiff,
+                TimeTotalizerFinal: TimeTotalizerFinal,
+                TimeTotalizerDiff: TimeTotalizerDiff,
+                MatterSizeStartTime: MatterSizeStartTime,
+                MatterSizeEndTime:MatterSizeEndTime
+        };
+
+        var parameter = JSON.stringify(obj);
+        $.ajax({
+                    type: "POST",
+            url: "/FieldDetermination/FieldAmbientAirMonitoring/FieldAmbientAirMonitoringShift",
+                    dataType: 'text',
+                    cache: false,
+                    data: "model=" + parameter,
+                    success: function (response) {
+                        var x = response;
+                        alert(response);
+                        $('#btnSubmitFirstShift').prop('disabled', true);
+                        @*window.location.href = "@Url.Action("Index", "Review", new { Area="Lab"})";*@
+                    },
+                    error: function (xhr) {
+                        console.log('error');
+                    }
+                });
+    }
+
+    function AddShiftWiseData2(status) {
+        debugger
+        var MatterSizeStartTime = $('#MatterSizeStartTime2').val();
+        var MatterSizeEndTime = $('#MatterSizeEndTime2').val();
+        var FilterPaperNo = $('#FilterPaperNos2').val();
+        var CycloneCupNo = $('#CycloneCupNos2').val();
+        var FlowRateFinal = $('#FlowRateFinals2').val();
+        var FlowRateInitial = $('#FlowRateInitials2').val();
+        var FlowRateDiff = $('#FlowRateDiffs2').val();
+        var SamplingDurationFinal = $('#SamplingDurationFinals2').val();
+        var SamplingDurationInitial = $('#SamplingDurationInitials2').val();
+        var SamplingDurationDiff = $('#SamplingDurationDiffs2').val();
+        var TimeTotalizerFinal = $('#TimeTotalizerFinals2').val();
+        var TimeTotalizerInitial = $('#TimeTotalizerInitials2').val();
+        var TimeTotalizerDiff = $('#TimeTotalizerDiffs2').val();
+        var SampleCollectionId = $('#SampleCollectionId').val();
+        var ShiftNo = status;
+        var obj = {
+            SampleCollectionId: SampleCollectionId,
+            FilterPaperNo: FilterPaperNo,
+            CycloneCupNo: CycloneCupNo,
+            FlowRateFinal: FlowRateFinal,
+            FlowRateInitial: FlowRateInitial,
+            FlowRateDiff: FlowRateDiff,
+            SamplingDurationFinal: SamplingDurationFinal,
+            ShiftNo: ShiftNo,
+            SamplingDurationInitial: SamplingDurationInitial,
+            TimeTotalizerInitial: TimeTotalizerInitial,
+            SamplingDurationDiff: SamplingDurationDiff,
+            TimeTotalizerFinal: TimeTotalizerFinal,
+            TimeTotalizerDiff: TimeTotalizerDiff,
+            MatterSizeStartTime: MatterSizeStartTime,
+            MatterSizeEndTime: MatterSizeEndTime
+        };
+
+        var parameter = JSON.stringify(obj);
+        $.ajax({
+            type: "POST",
+            url: "/FieldDetermination/FieldAmbientAirMonitoring/FieldAmbientAirMonitoringShift",
+            dataType: 'text',
+            cache: false,
+            data: "model=" + parameter,
+            success: function (response) {
+                var x = response;
+                alert(response);
+                $('#btnSubmitSecondShift').prop('disabled', true);
+                @* window.location.href = "@Url.Action("Index", "Review", new { Area="Lab"})";*@
+                    },
+            error: function (xhr) {
+                console.log('error');
+            }
+        });
+    }
+
+    function AddShiftWiseData3(status) {
+        debugger
+        var MatterSizeStartTime = $('#MatterSizeStartTime3').val();
+        var MatterSizeEndTime = $('#MatterSizeEndTime3').val();
+        var FilterPaperNo = $('#FilterPaperNos3').val();
+        var CycloneCupNo = $('#CycloneCupNos3').val();
+        var FlowRateFinal = $('#FlowRateFinals3').val();
+        var FlowRateInitial = $('#FlowRateInitials3').val();
+        var FlowRateDiff = $('#FlowRateDiffs3').val();
+        var SamplingDurationFinal = $('#SamplingDurationFinals3').val();
+        var SamplingDurationInitial = $('#SamplingDurationInitials3').val();
+        var SamplingDurationDiff = $('#SamplingDurationDiffs3').val();
+        var TimeTotalizerFinal = $('#TimeTotalizerFinals3').val();
+        var TimeTotalizerInitial = $('#TimeTotalizerInitials3').val();
+        var TimeTotalizerDiff = $('#TimeTotalizerDiffs3').val();
+        var SampleCollectionId = $('#SampleCollectionId').val();
+        var ShiftNo = status;
+        var obj = {
+            SampleCollectionId: SampleCollectionId,
+            FilterPaperNo: FilterPaperNo,
+            CycloneCupNo: CycloneCupNo,
+            FlowRateFinal: FlowRateFinal,
+            FlowRateInitial: FlowRateInitial,
+            FlowRateDiff: FlowRateDiff,
+            SamplingDurationFinal: SamplingDurationFinal,
+            ShiftNo: ShiftNo,
+            SamplingDurationInitial: SamplingDurationInitial,
+            TimeTotalizerInitial: TimeTotalizerInitial,
+            SamplingDurationDiff: SamplingDurationDiff,
+            TimeTotalizerFinal: TimeTotalizerFinal,
+            TimeTotalizerDiff: TimeTotalizerDiff,
+            MatterSizeStartTime: MatterSizeStartTime,
+            MatterSizeEndTime: MatterSizeEndTime
+        };
+
+        var parameter = JSON.stringify(obj);
+        $.ajax({
+            type: "POST",
+            url: "/FieldDetermination/FieldAmbientAirMonitoring/FieldAmbientAirMonitoringShift",
+            dataType: 'text',
+            cache: false,
+            data: "model=" + parameter,
+            success: function (response) {
+                var x = response;
+                alert(response);
+                $('#btnSubmitThirdShift').prop('disabled', true);
+                @* window.location.href = "@Url.Action("Index", "Review", new { Area="Lab"})";*@
+                    },
+            error: function (xhr) {
+                console.log('error');
+            }
+        });
+    }
+
+</script>
+

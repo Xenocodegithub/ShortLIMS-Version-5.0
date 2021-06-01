@@ -1,0 +1,113 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.MenuMasterModel
+@{
+    ViewBag.Title = "AddMenuMapping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Add Menu Mapping</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Menu Master</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add  Menu Mapping</li>
+                            </ol>
+                        </nav>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Menu Mapping</h4>
+                    </div>
+                    </div>
+                    @using (Ajax.BeginForm("AddSubMenu", "MenuMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddTestMethodSuccess" }))
+                    {
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Role Name</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.RoleList, "RoleId", "RoleName"), "---Select---", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.RoleName)
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Parent Menu</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.ParentMenuId, new SelectList(ViewBag.ParentMenuList, "ParentMenuId", "ParentMenuName"), "---Select---", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ParentMenuId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.ParentMenu)
+                                @Html.HiddenFor(model => model.MenuMasterId)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Child:</label>
+                            <div class="col-sm-4">
+                                <label>
+                                    <input id="IsChild" name="IsChild" type="checkbox" value="false" />
+                                </label>
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Sub  Menu Name:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.SubMenuId, new SelectList(ViewBag.SubMenuList, "SubMenuId", "SubMenuName"), "---Select---", new { @class = "form-control" })
+                                @Html.HiddenFor(model => model.SubMenu)
+                                @Html.ValidationMessageFor(model => model.SubMenuId, "", new { @class = "text-danger" })
+                            </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
+                                <div class="col-sm-4">
+                                    <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                    <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-md-12">
+                                @*<a class="btn btn-outline-danger" href='/Configuration/ParentMenuList'>Close</a>
+            <a class="btn btn-outline-primary" href="/Configuration/AddParentMenu">Reset</a>*@
+                                <button type="submit" class="btn btn-info btn-sm" style="float:right">Submit</button>
+                                    </div>
+                            </div>
+                            }
+                            <div class="collapse collapse-box" id="basic-form1">
+                                <div class="code-box">
+                                    <div class="clearfix">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @*<a class="btn btn-outline-danger" href='/Configuration/ParentMenuList'>Close</a>
+                                <a class="btn btn-outline-primary" href="/Configuration/AddParentMenu">Reset</a>*@
+                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                        </div>
+                    }
+                    <div class="collapse collapse-box" id="basic-form1">
+                        <div class="code-box">
+                            <div class="clearfix">
+
+                                        <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                                        <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                                    </div>
+                                    <pre>
+                                    <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+

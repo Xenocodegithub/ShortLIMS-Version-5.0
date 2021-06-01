@@ -1,0 +1,210 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDWorkplaceEnvAndFugutiveEmissionModel
+
+<div class="row" style="margin-top:20px;">
+    <div class="col-md-12">
+        <div class="title-alt d-flex justify-content-center">
+            <h5>Enter Values </h5>
+        </div>
+        <br /><br />
+        <div>
+            <div style="margin-left:20px;">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="form-label col-md-3">Survey Date</label>
+                            <div class="col-md-8">
+                                <input type="date" id="SurveyDate" name="SurveyDate" placeholder="dd/mm/yyyy" vale="@Model.SurveyDate" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" value="@Model.SurveyDateDisplay" disabled />
+                                @*@Html.TextBoxFor(Model => Model.SurveyDate, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="form-label col-md-3">Instrument ID</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(Model => Model.InstrumentId, new { @class = "form-control  mr-btm-15", @placeholder = "InstrumentId" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="form-label col-md-3">FilterPaper Analyzed</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(Model => Model.FilterPaperAnalyzed, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="form-label col-md-3">FilterPaper No</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(Model => Model.FilterPaperNo, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="form-label col-md-3">Relative Humidity</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(Model => Model.RelativeHumidity, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="form-label col-md-3">Temperature</label>
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(Model => Model.Temperature, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <div class="title-alt d-flex justify-content-center">
+                            <h5>Enter Flow Rate Values </h5>
+                        </div>
+                        <br /><br />
+                        <div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="form-label col-md-3">FlowRate_Final</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(Model => Model.FlowRate_Final, new { @class = "form-control  mr-btm-15", @placeholder = "InstrumentId" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="form-label col-md-3">FlowRate_Initial</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(Model => Model.FlowRate_Initial, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="form-label col-md-3">FlowRate_Avg</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(Model => Model.FlowRate_Avg, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <div class="title-alt d-flex justify-content-center">
+                            <h5>Enter Sampling Duration Values </h5>
+                        </div>
+                        <br /><br />
+                        <div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="form-label col-md-3">Duration Of Sampling</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(Model => Model.DurationOfSampling, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="form-label col-md-3">Any Observation</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(Model => Model.AnyObservation, new { @class = "form-control  mr-btm-15", @placeholder = "Hrs" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="title-alt">
+                        <h6 class="m-0 font-weight-bold text-primary text-xl-center">Particulate Matter Size less than 2.5 microns (PM2.5) Sampling </h6>
+                    </div>
+                    <br /><br />
+                    <div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3">Filter Paper No.</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(Model => Model.FilterPaperNo2, new { @class = "form-control mr-btm-15", @placeholder = "Filter Paper No." })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3">Start Time</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(Model => Model.StartTime, new { @class = "form-control mr-btm-15", @placeholder = "Start Time" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3">End Time</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(Model => Model.EndTime, new { @class = "form-control mr-btm-15", @placeholder = "End Time" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3">Sampling Duration</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(Model => Model.Sampling_Duration, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3">Avg Flow Rate</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(Model => Model.AvgFlowRate, new { @class = "form-control mr-btm-15", @placeholder = "(LPM)" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-3">Total Vol. Air Passed (V) in L</label>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(Model => Model.TotalVolAirPassed_L, new { @class = "form-control mr-btm-15", @placeholder = "Flow rate (LPM) x Sampling Duration (min)" })
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="form-label col-md-3">Total Volume Air Passed in m3</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(Model => Model.TotalVolumeAirPassed_m3, new { @class = "form-control  mr-btm-15", @placeholder = "V(Liter)/1000" })
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

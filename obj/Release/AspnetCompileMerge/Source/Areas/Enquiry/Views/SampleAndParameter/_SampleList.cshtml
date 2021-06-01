@@ -1,0 +1,87 @@
+﻿
+@model IEnumerable<LIMS_DEMO.Areas.Enquiry.Models.SampleAndParametersModel>
+
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <input type="hidden" id="EnquiryId" value="@ViewBag.EnquiryId" />
+    @if (Model.Count() > 0)
+    {
+        <div class="pb-20">
+            <table class="data-table table nowrap">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="table-plus datatable-nosort">Sr.No.</th>
+                        <th>Sample No.</th>
+                        <th>SampleType</th>
+                        @*<th>Product Group</th>
+                            <th>Sub Group</th>*@
+                        <th>Parameters</th>
+                        <th>Remarks</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SrNo)
+                            </td>
+                            <td>
+                                @Html.HiddenFor(modelItem => item.SampleName)
+                                @Html.DisplayFor(modelItem => item.DisplaySampleName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SampleTypeProductName)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.ProductGroupName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SubGroupName)
+                                </td>
+                            *@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Parameters)
+                            </td>
+                            @*<td>
+                                   @Html.DisplayFor(modelItem => item.Cost)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Remarks)
+                            </td>
+                            <td>
+                                <a href="#divParameters" onclick="funEditSampleDetail(@item.EnquiryDetailId, @item.EnquirySampleID);">Edit</a>
+                                <a href="#divSampleDetails" onclick="funDeleteSampleDetail(@item.EnquirySampleID,'@item.CurrentStatus');">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row align-items-end item form-group">
+            <div class="col-md-12 col-sm-12" style="margin-top:20px">
+                <input type="button" id="btnSave" value="Save" class="btn btn-info alignright btn-sm" style="float:right" />
+            </div>
+        </div>
+    }
+</div>
+<!-- Simple Datatable End -->
+
+<script type="text/javascript">
+
+    $(function () {
+        var EnquiryId =  parseInt(@ViewBag.EnquiryId);
+        $("#btnSave").click(function () {
+            debugger
+            if ($(this).val() == "Save") {
+                $(this).val("Next");
+                alert('Save & Next!')
+        }
+        else {
+               alert('Go to Add Costing Page!')
+               window.location.href = '/Enquiry/Costing/AddCosting?EnquiryId='+ EnquiryId;
+        }
+    });
+});
+</script>

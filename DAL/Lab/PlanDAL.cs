@@ -57,6 +57,7 @@ namespace LIMS_DEMO.DAL.Lab
                                   sgm.SubGroupName,
                                   mm.MatrixName,
                                   sm.StatusName
+
                               }).OrderByDescending(sc => sc.SampleCollectionId).ToList().Distinct();
                 IList<PlanEntity> PlanEntities = new List<PlanEntity>();
 

@@ -106,6 +106,7 @@ namespace LIMS_DEMO.DAL.Lab
                               {
                                   sc.SampleCollectionId,
                                   sc.SampleNo,
+                                  esd.SampleName,
                                   loc.SampleNameOriginal,
                                   stpm.SampleTypeProductName,
                                   pgm.ProductGroupName,
@@ -137,6 +138,7 @@ namespace LIMS_DEMO.DAL.Lab
                     TesterEntity testerEntity = new TesterEntity();
                     testerEntity.SampleCollectionId = item.SampleCollectionId;
                     testerEntity.SampleNo = item.SampleNo;
+                    testerEntity.SampleName = item.SampleName;
                     testerEntity.SampleNameOriginal = item.SampleNameOriginal;
                     testerEntity.SampleTypeProductName = item.SampleTypeProductName;
                     testerEntity.ProductGroupName = item.ProductGroupName;
@@ -186,6 +188,7 @@ namespace LIMS_DEMO.DAL.Lab
                               {
                                   SampleCollectionId = sc.SampleCollectionId,
                                   SampleNo = sc.SampleNo,
+                                  SampleName = esd.SampleName,
                                   SampleNameOriginal = loc.SampleNameOriginal,
                                   SampleTypeProductName = stpm.SampleTypeProductName,
                                   ProductGroupName = pgm.ProductGroupName,
@@ -335,6 +338,7 @@ namespace LIMS_DEMO.DAL.Lab
                                                ParameterGroupId = pm.ParameterGroupId,
                                                ProductGroupName = pgm.ProductGroupName,
                                                SampleNameOriginal = loc.SampleNameOriginal,
+                                                SampleName=esd.SampleName,
                                                SampleTypeProductName = stpm.SampleTypeProductName,
                                                SubGroupName = sgm.SubGroupName,
                                                MatrixName = mm.MatrixName,

@@ -11,7 +11,9 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
         public int WorkOrderSampleCollectionDateId { get; set; }
         [Display(Name = "Customer Name")]
         public string RegistrationName { get; set; }
+        public int EnquirySampleID { get; set; }
 
+        public int QuotationId { get; set; }
         [Display(Name = "Enquiry No")]
         public int? CompanyTypeId { get; set; }
 

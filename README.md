@@ -1,2 +1,2 @@
-# ShortLIMS-Version-5.0
-This the demo version of Short LIMS
+# InfoLIMSDemoVersion1.0
+Repository created for demo version of InfoLIMS

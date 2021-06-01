@@ -28,10 +28,10 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Add Microbiological Monitoring Field Values</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
+                        
                     </div>
                 </div>
-            </div>
+            
             @using (Ajax.BeginForm("FieldMicrobiologicalMonitoringOfAir", "FieldMicrobiologicalMonitoringOfAir", new AjaxOptions() { HttpMethod = "Post", OnBegin = "VlidateClick()", OnSuccess = "MicrobiologicalSuccess" }))
             {
 
@@ -105,10 +105,13 @@
                         </div>
                     </div>
 
-                    }
+                 
                 </div>
+                   }
             </div>
-
+     </div>
+   </div>
+ </div>
 
             <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
             <script src="~/Scripts/jquery.validate.min.js"></script>

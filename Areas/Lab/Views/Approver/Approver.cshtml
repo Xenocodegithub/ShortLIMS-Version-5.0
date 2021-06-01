@@ -12,7 +12,7 @@
                     <div class="col-sm-12">
                         <div class="title-alt" id="validationClose">
                             <h6>
-                                Tester
+                                Approver
                             </h6>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pd-20 card-box mb-30" style="margin-top:-19px">
+            <div class="pd-20 card-box mb-30" >
                 <div class="body-nest" id="validation">
                     <br />
                     @if (Model.ApproverComments != "")
@@ -39,13 +39,13 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="blog-side-nest">
-                                <h4 class="text-left">Sample Details</h4><br />
-                                @*<hr style="margin:0">*@
+                                <h4 class="text-left">Sample Details :</h4><br />
+                                <hr />
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
-                                            <td width="5%">Sample ID</td>
-                                            <td width="5%"><b>:</b></td>
+                                            <td width="5%">Sample ID :</td>
+                                            @*<td width="5%"><b>:</b></td>*@
                                             <td width="20%">
                                                 @Html.HiddenFor(model => Model.SampleCollectionId)
                                                 @Html.HiddenFor(model => Model.ParameterGroupId)
@@ -58,53 +58,49 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Sample Type</td>
-                                            <td><b>:</b></td>
+                                            <td>Sample Type :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td> @Model.SampleTypeProductName</td>
                                         </tr>
                                         <tr>
-                                            <td>Product Group</td>
-                                            <td><b>:</b></td>
+                                            <td>Product Group :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@Model.ProductGroupName</td>
                                         </tr>
                                         <tr>
-                                            <td>Sub Group</td>
-                                            <td><b>:</b></td>
+                                            <td>Sub Group :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@Model.SubGroupName</td>
                                         </tr>
                                         <tr>
-                                            <td>Matrix</td>
-                                            <td><b>:</b></td>
+                                            <td>Matrix :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@Model.MatrixName</td>
                                         </tr>
                                         <tr>
-                                            <td>Tester</td>
-                                            <td><b>:</b></td>
+                                            <td>Tester :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@Model.Analyst</td>
                                         </tr>
+                                       
                                         <tr>
-                                            <td>Reviewer</td>
-                                            <td><b>:</b></td>
-                                            <td>@Model.Reviewer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Approver </td>
-                                            <td><b>:</b></td>
+                                            <td>Approver :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@Model.Approver</td>
                                         </tr>
                                         <tr>
-                                            <td>Parameters </td>
-                                            <td><b>:</b></td>
+                                            <td>Parameters :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@Model.ParameterName</td>
                                         </tr>
                                         <tr>
-                                            <td>Test Method</td>
-                                            <td><b>:</b></td>
+                                            <td>Test Method :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@Model.TestMethodName</td>
                                         </tr>
                                         <tr>
-                                            <td> Sample Received Date</td>
-                                            <td><b>:</b></td>
+                                            <td> Sample Received Date :</td>
+                                            @*<td><b>:</b></td>*@
                                             <td>@recieptDate</td>
                                             @*<td colspan="3"> Sample Received Date : @Html.DisplayFor(Model => Model.DateReceiptOfSampling) </td>*@
                                             @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
@@ -124,6 +120,15 @@
                                     </th>
                                     <th>
                                         Action
+                                    </th>
+                                </tr>
+                            </table>
+                            <table class="table">
+                                <tr>
+                                    <th>
+
+                                        <img src="~/Content/images/@Model.QRCodePath" style="height:150px;width:150px;" />
+
                                     </th>
                                 </tr>
                             </table>
@@ -180,9 +185,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <img src="~/Content/images/@Model.QRCodePath" style="height:180px;width:180px;" />
-                                    </div>
+                                    @*<div class="col-sm-4">
+                                        <img src="~/Content/images/@Model.QRCodePath" style="height:100px;width:100px;" />
+                                    </div>*@
                                     <hr>
                                 </div>
                             </div>
@@ -267,9 +272,9 @@
                                             <th>Unit</th>
                                         </tr>
                                         <tr style="background: #e8e8e8;">
-                                            <td colspan="4" style="text-align: right;font-weight: 600;font-size: 14px; ">Current Test Result</td>
+                                            <td colspan="4" style="text-align: right;font-weight: 600;">Current Test Result:</td>
 
-                                            <td><input type="text" style="color:black " class="allowNumbersWithDecimalOnly" id="txtFinalResult"></td>
+                                            <td><input type="text" style="color:black " class="form-control allowNumbersWithDecimalOnly" id="txtFinalResult"></td>
                                             <td style="color:black">
                                                 <select id="UnitConvert" disabled style="color:black">
                                                 </select>
@@ -304,11 +309,9 @@
                                     <option value="replan">Re-Plan</option>
                                 </select>
                             </div>
-
-                            <div style="margin-bottom:10px">
                                 <div class="form-group">
                                     <label for="comment">Your Comment :</label>
-                                    <textarea id="txtComment" name="comment" class="form-control col-md-4" rows="3"></textarea>
+                                    <input type="text" id="txtComment" name="comment" class="form-control col-md-3" style="height:65px">
                                 </div>
                                 <button type="button" class="btn btn-info btn-sm" id="approveBtn" style="float:right;">Approve</button>
                                 <button type="button" class="btn btn-info btn-sm" id="rejectBtn" style="display:none">Re-Test</button>
@@ -321,7 +324,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <div class="modal" id="ChemicalsPopupView">
     <div class="modal-dialog modal-md modal-dialog-centered">

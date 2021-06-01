@@ -438,9 +438,11 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 MID = BALFactory.NewInventoryBAL.UpdateInventoryMaintainanceAndCalibration(CoreFactory.inventoryMaintainanceAndCalibrationEntity);
                 if (MID != null)
                 {
-                    return RedirectToAction("MaintainanceList");
-                  //  Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                   // return Json(new { TypeCM = model.Type, status = "success", message = "Maintaince Details updated successfully.", ID = MID });
+                   // return RedirectToAction("MaintainanceList", "InventoryMaintainanceAndCalibration");
+                  // return  RedirectToAction("MaintainanceList", "InventoryMaintainanceAndCalibration", new { Area = "" });
+                  //  return Redirect("/InventoryMaintainanceAndCalibration/MaintainanceList"); // redirects to internal url
+                    //  Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                     return Json(new { TypeCM = model.Type, status = "success", message = "Maintaince Details updated successfully.", ID = MID });
                 }
                 else
                 {
@@ -478,10 +480,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 MID = BALFactory.NewInventoryBAL.InsertInventoryMaintainanceAndCalibration(CoreFactory.inventoryMaintainanceAndCalibrationEntity);
                 if (MID == "success")
                 {
-                    return RedirectToAction("MaintainanceList");
-                    
-                   // Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                   // return Json(new { TypeCM = model.Type, status = "success", message = "Maintaince Details Saved successfully.", ID = MID });
+                          return Json(new { TypeCM = model.Type, status = "success", message = "Maintaince Details Saved successfully.", ID = MID });
                 }
                 else
                 {
@@ -756,15 +755,15 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 {
                     if (MID != null)
                     {
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        return Json(new { TypeCM = model.Type, status = "success", message = "Customer details updated successfully.", ID = MID });
+                       // return RedirectToAction("CalibrationList", "InventorytainanceAndCalibration");
+                        //  Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                         return Json(new { TypeCM = model.Type, status = "success", message = "Calibration Details updated successfully.", ID = MID });
                     }
                     else
                     {
                         Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                         return Json(new { status = "info", message = "No record found." });
                     }
-
                 }
                 else
                 {
@@ -796,15 +795,15 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 {
                     if (MID != null)
                     {
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        return Json(new { TypeCM = model.Type, status = "success", message = "Customer details added successfully.", ID = MID });
+                       // return RedirectToAction("CalibrationList", "InventoryMaintainanceAndCalibration");
+                        //  Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                         return Json(new { TypeCM = model.Type, status = "success", message = "Calibration Details updated successfully.", ID = MID });
                     }
                     else
                     {
                         Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                         return Json(new { status = "info", message = "No record found." });
                     }
-
                 }
                 else
                 {

@@ -10,7 +10,5 @@ namespace LIMS_DEMO.Core.DropDowns
     {
         public Nullable<int> SampleTypeId { get; set; }//SampleTypeMaster tbl
         public string SampleType { get; set; }//SampleTypeMaster tbl
-       
-       
     }
 }

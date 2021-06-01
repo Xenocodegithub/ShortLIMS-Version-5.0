@@ -18,7 +18,7 @@ namespace LIMS_DEMO.DAL
         public string RecieptNo { get; set; }
         public Nullable<decimal> PaidAmount { get; set; }
         public System.DateTime PayDate { get; set; }
-        public int PaymentMode { get; set; }
+        public string PaymentMode { get; set; }
         public string BankName { get; set; }
         public string DD_ChequeNo_Neft { get; set; }
         public System.DateTime DD_ChequeDate { get; set; }

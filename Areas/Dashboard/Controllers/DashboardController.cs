@@ -13,8 +13,7 @@ using System.IO;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Web.Configuration;
-
-
+using System.Globalization;
 
 namespace LIMS_DEMO.Areas.Dashboard.Controllers
 {
@@ -32,7 +31,7 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
             return View();
         }
         public ActionResult Admin()
-       {
+        {
 
 
             var totalenquiry = BALFactory.dashboardBAL.GetTotalEnquiryCount();
@@ -50,7 +49,7 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
             decimal? TotalPOAmount = BALFactory.dashboardBAL.GetTotalPOAmount();
             LIMS.User.TotalPOAmount = TotalPOAmount;
 
-            
+
             return View();
         }
         public ActionResult BDM()
@@ -79,12 +78,12 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
             var totalWO = BALFactory.dashboardBAL.GetTotalWOCount();
             LIMS.User.TotalWOCount = totalWO.Count();
 
-            
+
             return View();
         }
         public ActionResult STL()
         {
-           
+
 
             var totalWOComp = BALFactory.dashboardBAL.GetTotalWOCompCount();
             LIMS.User.TotalWOComp = totalWOComp.Count();
@@ -128,7 +127,7 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
         }
         public ActionResult SampleReceiver()
         {
-           
+
             var totalsamplecollected = BALFactory.dashboardBAL.GetTotalSampleCollectedCount();
             LIMS.User.TotalSampleCollectedCount = totalsamplecollected.Count();
             return View();
@@ -144,7 +143,7 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
         {
             var totalsamplecollected = BALFactory.dashboardBAL.GetTotalSampleCollectedCount();
             LIMS.User.TotalSampleCollectedCount = totalsamplecollected.Count();
-           
+
             var totalsampleTested = BALFactory.dashboardBAL.GetTotalSampleTestedCount();
             LIMS.User.TotalSampleTestedCount = totalsampleTested.Count();
             return View();
@@ -167,13 +166,13 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
             DashboardEntity dash1 = new DashboardEntity();
 
             dash1.Mode = "SELECT Total Enquiry";
-            var jsonDashBoardDTO="";
+            var jsonDashBoardDTO = "";
             List<DashboardEntity> baseEntityCollectionResponseDashBoard = BALFactory.dashboardBAL.GetTotalEnquiry(dash1);
             if (baseEntityCollectionResponseDashBoard != null)
             {
                 if (baseEntityCollectionResponseDashBoard != null && baseEntityCollectionResponseDashBoard.Count > 0)
                 {
-                     jsonDashBoardDTO = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(baseEntityCollectionResponseDashBoard);
+                    jsonDashBoardDTO = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(baseEntityCollectionResponseDashBoard);
                     ViewBag.TotalEnquiry = jsonDashBoardDTO;
                 }
             }
@@ -190,7 +189,7 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
             {
                 if (baseEntityCollectionResponseSampleMonth != null && baseEntityCollectionResponseSampleMonth.Count > 0)
                 {
-                     jsonDashBoardDTO = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(baseEntityCollectionResponseSampleMonth);
+                    jsonDashBoardDTO = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(baseEntityCollectionResponseSampleMonth);
                     ViewBag.SampleMonthItemViewBag = jsonDashBoardDTO;
                 }
             }
@@ -199,8 +198,30 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
         }
         public ActionResult GetTotalWO()
         {
+
+
             DashboardEntity dash1 = new DashboardEntity();
-            dash1.Mode ="SELECT TOTAL WO";
+            dash1.Mode = "SELECT TOTAL WO";
+            dash1.EndDate = System.DateTime.Now;
+
+            var today = DateTime.Now.Date; // This can be any date.
+            var day = 7; //Number of the day in week. (0 - Sunday, 1 - Monday... and so On)
+
+            dash1.StartDate = (today.AddDays(-7).Date);
+            //const int totalDaysOfWeek = 7; // Number of days in a week stays constant.
+            //int z = 1;
+            //for (var i = day; i < day + totalDaysOfWeek; i++)
+            //{
+            //    if (z == 1)
+            //    {
+            //        dash1.StartDate = (today.AddDays(i).Date);
+            //    }
+            //    else if (z == 7)
+            //    {
+            //        dash1.EndDate = (today.AddDays(7).Date);
+            //    }
+            //    z++;
+            //}
 
             List<DashboardEntity> baseEntityCollectionResponseWO = BALFactory.dashboardBAL.GetTotalWO(dash1);
             if (baseEntityCollectionResponseWO != null)
@@ -250,6 +271,7 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
         }
         public ActionResult GetTotalQuotationMonthWise()
         {
+            BALFactory.dashboardBAL.Initialize();
             //DashBoard dash1 = new DashBoard();
             DashboardEntity dash1 = new DashboardEntity();
             dash1.Mode = "SELECT Quotation Sent";
@@ -317,11 +339,17 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
         }
         public ActionResult GetTotalSampleTestedMonthWise()
         {
-            DashboardEntity dash1 = new DashboardEntity();
-            dash1.Mode = "SELECT TOTAL Tested Month Wise";
+            BALFactory.loginBAL.Initialize();
 
-            List<DashboardEntity> baseEntityCollectionResponseSampleTestedMonth = BALFactory.dashboardBAL.GetTotalSampleTestedMonthWise(dash1);
-            if (baseEntityCollectionResponseSampleTestedMonth != null)
+            DashboardEntity dash1 = new DashboardEntity();
+
+            dash1.Mode = "SELECT TOTAL Tested Month Wise";
+            var baseEntityCollectionResponseSampleTestedMonth = BALFactory.dashboardBAL.GetTotalSampleTestedMonthWise(dash1);
+
+            dash1.Mode = "SELECT Total Sample Month GRAPH";
+            var baseEntityCollectionResponseSampleMonth = BALFactory.dashboardBAL.GetTotalSampleMonthWise(dash1);
+
+            if (baseEntityCollectionResponseSampleTestedMonth != null && baseEntityCollectionResponseSampleMonth != null)
             {
                 if (baseEntityCollectionResponseSampleTestedMonth != null && baseEntityCollectionResponseSampleTestedMonth.Count > 0)
                 {
@@ -329,7 +357,23 @@ namespace LIMS_DEMO.Areas.Dashboard.Controllers
                     ViewBag.TotalWO = jsonDashBoardDTOWO;
                 }
             }
-            return Json(new { data = baseEntityCollectionResponseSampleTestedMonth }, JsonRequestBehavior.AllowGet);
+            List<DashboardEntity> CollectionResponseSampleTestedMonth = new List<DashboardEntity>();
+            for (int i = 0; i < baseEntityCollectionResponseSampleMonth.Count(); i++)
+            {
+                //if(baseEntityCollectionResponseSampleTestedMonth[i].Month == baseEntityCollectionResponseSampleMonth[i].Month)
+                //{
+                CollectionResponseSampleTestedMonth.Add(new DashboardEntity()
+                {
+                    Month = baseEntityCollectionResponseSampleTestedMonth[i].Month,
+                    MonthCount = baseEntityCollectionResponseSampleTestedMonth[i].MonthCount,
+                    Year = baseEntityCollectionResponseSampleTestedMonth[i].Year,
+                    count = baseEntityCollectionResponseSampleTestedMonth[i].count,
+                    count1 = baseEntityCollectionResponseSampleMonth[i].count1
+                });
+                //}
+
+            }
+            return Json(new { data = CollectionResponseSampleTestedMonth }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetTotalSampleTestedSampleTypeWise()
         {

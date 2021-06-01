@@ -52,6 +52,7 @@ namespace LIMS_DEMO.DAL.Lab
                               {
                                   sc.SampleCollectionId,
                                   sc.SampleNo,
+                                  esd.SampleName,
                                   loc.SampleNameOriginal,
                                   stpm.SampleTypeProductName,
                                   pgm.ProductGroupName,
@@ -81,7 +82,7 @@ namespace LIMS_DEMO.DAL.Lab
                     ApproverEntity approveEntity = new ApproverEntity();
                     approveEntity.SampleCollectionId = item.SampleCollectionId;
                     approveEntity.SampleNo = item.SampleNo;
-                    approveEntity.SampleName = item.SampleNameOriginal;
+                    approveEntity.SampleName = item.SampleName;
                     approveEntity.SampleTypeProductName = item.SampleTypeProductName;
                     approveEntity.ProductGroupName = item.ProductGroupName;
                     approveEntity.SubGroupName = item.SubGroupName;
@@ -131,7 +132,8 @@ namespace LIMS_DEMO.DAL.Lab
                               {
                                   SampleCollectionId = sc.SampleCollectionId,
                                   SampleNo = sc.SampleNo,
-                                  SampleName = loc.SampleNameOriginal,
+                                 // SampleName = loc.SampleNameOriginal,
+                                  SampleName = esd.SampleName,
                                   //SampleNameOriginal = loc.SampleNameOriginal,
                                   SampleTypeProductName = stpm.SampleTypeProductName,
                                   ProductGroupName = pgm.ProductGroupName,
@@ -296,7 +298,8 @@ namespace LIMS_DEMO.DAL.Lab
                                               EnquirySampleID = sc.EnquirySampleID,
                                               ProbableDateOfReport = sc.ProbableDateOfReport,
                                               SampleNo = sc.SampleNo,
-                                              SampleName = sc.SampleName,
+                                              //SampleName = sc.SampleName,
+                                              SampleName = esd.SampleName,
                                               UnitId = spp.UnitId,
                                               UnitName = um.Unit,
                                               ParameterMasterId = p.ParameterMasterId,

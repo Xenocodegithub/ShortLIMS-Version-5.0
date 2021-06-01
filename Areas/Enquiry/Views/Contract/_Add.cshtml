@@ -8,16 +8,15 @@
     @Html.HiddenFor(model => model.EnquiryDetailId)
     @Html.HiddenFor(model => model.EnquiryId)
     <div class="row">
-
-        <label style="margin-left:20px;"><b> Sample Type: </b>&nbsp;&nbsp;<span style="color:red;">*</span></label>
-        <div class="col-sm-4">
-            @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = " form-control" })
+        <div class="col-md-6 form-group row" style=" margin-left: -20px; ">
+            <label class="col-md-4"> Sample Type:&nbsp&nbsp</label>
+            @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = " form-control col-md-8",@style="font-size:13px;" })
             @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.SampleTypeProductName)
-        </div>
 
+        </div>
         @*---------------------------For Product Group and SubGroup Dropdown if needed-------------------------------*@
-        @*<div class="col-sm-4 form-group">
+        @*<div class="col-sm-4 form-group">"
                 <label class="col-sm-6 mr-btm-15"> Product Group <span style="color:red;">  *</span></label>
                 <div class="col-sm-6">
                     @Html.DropDownListFor(model => model.ProductGroupId, new SelectList(ViewBag.ProductGroupList, "ProductGroupId", "ProductGroupName"), "---Select---", new { @class = " form-control btn-sm dropdown-toggle border" })
@@ -34,22 +33,18 @@
                 </div>
             </div>*@
         @*---------------------------For Product Group and SubGroup Dropdown Code if needed-------------------------------*@
-    </div>
-    <br />
-    <br />
-    <div class="row">
-        <div class="form-group col-md-12">
-            <div class="col-md-12 col-sm-12">
-                @{ string btnText = "Add";
-                    if (Model.SerialNo != 0)
-                    {
-                        btnText = "Update";
-                        @*<a class="btn btn-danger" href="/Enquiry/AddContract?EnquiryId=@Model.EnquiryId">Cancel</a>*@
-                        <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" />
-                    }
+
+        <div class="form-group col-md-3">
+
+            @{ string btnText = "Add";
+                if (Model.SerialNo != 0)
+                {
+                    btnText = "Update";
+                    @*<a class="btn btn-danger" href="/Enquiry/AddContract?EnquiryId=@Model.EnquiryId">Cancel</a>*@
+                    <input class="btn btn-success btn-sm" onclick="CancelNameValues();" id="btnCancel" value="Cancel" style="width:65px;" />
                 }
-                <input class="btn btn-success btn-sm" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" style="float:right;margin-top: -65px;margin-right: 25%;" />
-            </div>
+            }
+            <input class="btn btn-success btn-sm" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" style="margin-right:-36px;" />
         </div>
     </div>
 }

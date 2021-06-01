@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-12 col-md-2 col-form-label">WorkOrder End Date: </label>
+        <label class="col-sm-12 col-md-2 col-form-label">Work Order End Date: </label>
         <div class="col-sm-4">
             @Html.DisplayFor(model => model.WorkOrderCustomer.WOEDate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderEndDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -141,7 +141,7 @@
                                 }
                             </td>
                             <td>
-                                @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.FinalWorkOrderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control" })
+                                @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.FinalWorkOrderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control col-md-8" })
                                 @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].Quantity)
                             </td>
                             <td>
@@ -180,8 +180,9 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: steelblue;height: 42px;">
                 <h4 style="text-align:center;color:white;font-weight:bold;">Add Limit </h4>
-                <button type="button" onclick="$('#PCBLimitPopup').hide();" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" onclick="$('#PCBLimitPopup').hide();" class="close" data-dismiss="modal" style="color:white">&times;</button>
             </div>
+            <br />
             <div class="modal-body">
                 <div id="divPCBLimit" style="border:none"> </div>
             </div>
@@ -195,7 +196,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: steelblue;height: 42px;">
                 <h4 style="text-align:center;color:white;font-weight:bold;">Add Location </h4>
-                <button type="button" onclick="$('#LocationPopup').hide();" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" onclick="$('#LocationPopup').hide();" class="close" data-dismiss="modal" style="color:white">&times;</button>
             </div>
             <br />
             <div class="modal-body">
@@ -262,11 +263,11 @@
         $('#LocationPopup').show();
     }
 
-   $('#btnAddNoOfDays').click( function () {
-        debugger
-         $('#NoOfDays').prop("disabled", false);
-   });
 
+    $('#btnAddNoOfDays').click(function () {
+        debugger
+        $('#WorkOrderCustomer.NoOfDays').prop("disabled", false);
+    });
 
 
 </script>

@@ -7,11 +7,15 @@ namespace LIMS_DEMO.Areas.Inventory.Models
 {
     public class InventoryCommercialDetailModel
     {
-        [Key]
+        
         public int ID { get; set; }
+        //[Required(ErrorMessage ="Please Enter Supplier Name")]
         public string VendorName { get; set; }
+        //[Required(ErrorMessage = "Please Enter Purchase Order Number")]
         public string PurchaseOrderNumber { get; set; }
+        //[Required(ErrorMessage = "Please Enter Purchase Order Value ")]
         public Nullable<decimal> PurchaseOrderValue { get; set; }
+        //[Required(ErrorMessage = "Please Select Purchase Date")]
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public string InvoiceNumber { get; set; }
         public Nullable<bool> IsActive { get; set; }
@@ -22,6 +26,7 @@ namespace LIMS_DEMO.Areas.Inventory.Models
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<int> InventoryBasicDetailsID { get; set; }
+        //[Required(ErrorMessage = "Please Enter Delivery Challan No ")]
         public string DeliveryChallanNo { get; set; }
         public Nullable<System.DateTime> DeliveryChallanDate { get; set; }
         public Nullable<System.DateTime> BillDate { get; set; }

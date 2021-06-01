@@ -1,0 +1,795 @@
+﻿@model LIMS_DEMO.Core.Lab.SampleParameterApprove
+@{
+    ViewBag.Title = "Tester";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var recieptDate = Model.DateReceiptOfSampling == null ? "" : @Convert.ToDateTime(Model.DateReceiptOfSampling).ToString("dd/MM/yyyy");
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="title-alt" id="validationClose">
+                            <h6>
+                                Approver
+                            </h6>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Lab</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Approver</li>
+                                <li class="breadcrumb-item active" aria-current="page">Approver</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30" >
+                <div class="body-nest" id="validation">
+                    <br />
+                    @if (Model.ApproverComments != "")
+                    {
+                        <div class="alert alert-warning">
+                            <span class="approverComment" id="approverComment">
+                                <strong> Approver Comment :@Model.ApproverComments </strong>
+                            </span>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="blog-side-nest">
+                                <h4 class="text-left">Sample Details :</h4><br />
+                                <hr />
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td width="5%">Sample ID :</td>
+                                            @*<td width="5%"><b>:</b></td>*@
+                                            <td width="20%">
+                                                @Html.HiddenFor(model => Model.SampleCollectionId)
+                                                @Html.HiddenFor(model => Model.ParameterGroupId)
+                                                @Html.HiddenFor(model => Model.ParameterMasterId)
+                                                @Html.HiddenFor(model => Model.UnitId)
+                                                @Html.HiddenFor(model => Model.TestMethodId)
+                                                @Html.HiddenFor(model => Model.UnitName)
+                                                @Html.Hidden("AnalysisProcessScheduleDetailId")
+                                                @Model.SampleName
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sample Type :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td> @Model.SampleTypeProductName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Product Group :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.ProductGroupName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sub Group :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.SubGroupName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Matrix :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.MatrixName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tester :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.Analyst</td>
+                                        </tr>
+                                       
+                                        <tr>
+                                            <td>Approver :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.Approver</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parameters :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.ParameterName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Test Method :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.TestMethodName</td>
+                                        </tr>
+                                        <tr>
+                                            <td> Sample Received Date :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@recieptDate</td>
+                                            @*<td colspan="3"> Sample Received Date : @Html.DisplayFor(Model => Model.DateReceiptOfSampling) </td>*@
+                                            @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-left">Upload Documents :</h4>
+                            <table class="table" id="FilesList" style="visibility:hidden">
+                                <tr>
+                                    <th>
+                                        Attachment(s)
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    @if (Model.MatrixName == "Ambient Noise Level" || Model.MatrixName == "Source Noise Level" || Model.MatrixName == "Workplace Noise Level")
+                    {
+                        <div>
+                            @Html.ActionLink("FieldDetermination", "FieldDeterminationApprover", "Approver", new { @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @EnquirySampleID = Model.EnquirySampleID, @Style = "font-weight:bold;" }, null)
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="blog-side-nest">
+                                    <h4 class="text-left">Tester Process Scheduler</h4>
+                                    <hr style="margin:0"><br />
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="control-label " for="inputEmail1">Testing Start Date  <span class="required" style="color:red">*</span></label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <input type="date" id="txtAnalysisStartDatetime" name="txtAnalysisStartDatetime" placeholder="dd/MM/yyyy" onchange="ValidateDate();" style="color:black" class="form-control dtSolutionPrep" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="control-label " for="inputEmail1">Testing End Date  <span class="required" style="color:red">*</span></label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <input type="date" id="txtAnalysisEndDatetime" name="txtAnalysisEndDatetime" placeholder="dd/MM/yyyy" onchange="ValidateDate();" style="color:black" class="form-control dtSolutionPrep" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div><br />
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="label-texts">Total Time(Hrs)</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" style="color:black" class="form-control" id="txtTotalDuration">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="label-texts">Quality Control Measures</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" style="color:black" class="form-control" id="txtQualityControl">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <img src="~/Content/images/@Model.QRCodePath" style="height:100px;width:100px;" />
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <div class="form-horizontal">
+                                    <table class="table table-bordered" id="tblSolPreparation">
+                                        <thead>
+                                            <tr class="reco-solu thead-dark">
+
+                                                <th class="width-20">
+                                                    Date of preparation
+                                                </th>
+
+                                                <th class="width-20">
+                                                    Name of solution
+                                                </th>
+                                                <th class="width-20">
+                                                    Quantity of solution prepared
+                                                </th>
+                                                <th>
+                                                    View Chemicals
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="inputRow">
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <table class="table td-center" id="tblTestingHours" style="overflow-x:scroll; ">
+                                    <thead>
+                                        <tr class="reco-solu thead-dark">
+                                            <th>
+                                                <input type="button" class="btn btn-warning" value="Populate Test Hours" onclick="BindTestingHoursTable();" />
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="TestingHours_Rows" style="font-size:16px;font-weight:bold">
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <br />
+                            <div class="clearfix"></div>
+                            <div class="col-sm-12" style="margin-top:20px">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="textLabels"><b>LOD</b>&nbsp;:&nbsp; <span> @Model.LOD</span></label> <span class="dash-line"></span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="textLabels"><b>Regulatory Standards</b>&nbsp;:&nbsp; <span>@Model.RegulatoryMin - @Model.RegulatoryMax</span></label><span class="dash-line"></span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="textLabels"><b>Permissible limits</b>&nbsp;:&nbsp; <span> @Model.PermissibleMin - @Model.PermissibleMax</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 filed-div">
+                                <table id="tblFormula" class="demo table table-bordered">
+                                    <colgroup>
+                                        <col style="width: 10%;">
+                                        <col style="width: 10%;">
+                                        <col style="width: 35%;">
+                                        <col style="width: 20%;">
+                                        <col style="width: 20%;">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Notation</th>
+                                            <th>Display Name</th>
+                                            <th>Formula</th>
+                                            <th>Value</th>
+                                            <th>Unit</th>
+                                        </tr>
+                                        <tr style="background: #e8e8e8;">
+                                            <td colspan="4" style="text-align: right;font-weight: 600;">Current Test Result:</td>
+
+                                            <td><input type="text" style="color:black " class="form-control allowNumbersWithDecimalOnly" id="txtFinalResult"></td>
+                                            <td style="color:black">
+                                                <select id="UnitConvert" disabled style="color:black">
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="checkbox checkbox-success">
+                                    <label class="redioBtn"><input type="radio" id="accept" name="action" value="Accept" checked="checked">Accept</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @if (Model.MatrixName == "Ambient Noise Level" || Model.MatrixName == "Source Noise Level" || Model.MatrixName == "Workplace Noise Level")
+                                    {
+                                        //No reject option for Noise Level Sample Type by Approver
+                                    }
+                                    else
+                                    {
+                                        <label class="redioBtn"><input type="radio" id="reject" name="action" value="Reject">Reject</label>
+                                    }
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-offset-2 reviewerReject" style="display:none">
+                                <select class="form-control" id="Rejectreviewstatus">
+                                    <option value="retest">Re-Test</option>
+                                    <option value="replan">Re-Plan</option>
+                                </select>
+                            </div>
+                                <div class="form-group">
+                                    <label for="comment">Your Comment :</label>
+                                    <input type="text" id="txtComment" name="comment" class="form-control col-md-3" style="height:65px">
+                                </div>
+                                <button type="button" class="btn btn-info btn-sm" id="approveBtn" style="float:right;">Approve</button>
+                                <button type="button" class="btn btn-info btn-sm" id="rejectBtn" style="display:none">Re-Test</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal" id="ChemicalsPopupView">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: steelblue;height: 42px;">
+                <h4 style="text-align:left;color:white;font-weight:bold;">View Chemicals</h4>
+                <a class="Closeup" href="/Lab/Approver/Approver?ParameterMasterId=@Model.ParameterMasterId&SampleId=@Model.SampleCollectionId"><span class="close CPopup" style="color:white;">&times;</span></a>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="dtPre" />
+                <input type="hidden" id="soluName" />
+                <input type="hidden" id="qtyOfSolu" />
+                <input type="hidden" id="ParameterMasterId" />
+                <input type="hidden" id="SampleCollectionId" />
+                <input type="hidden" id="ParameterGroupId" />
+                <div id="divChemicals" style="border:none" class="row">
+
+                    <div class="col-md-12">
+                        <table style="border-collapse:collapse" border="1" align="center" class="table" id="tblChemicalUsedData">
+                            <tr class="thead-dark">
+                                <th class="width-15">
+                                    Name of chemical
+                                </th>
+                                <th class="width-15">
+                                    Quantity of chemical
+                                </th>
+                            </tr>
+                            <tbody>
+                                <tr id="inputChemicalRowData">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+            var unitMasterList = [];
+            var formulaList = [];
+            function GetDateTime(date) {
+
+                var d = new Date(date)
+                var datepart = [d.getFullYear(), pad(d.getMonth() + 1), pad(d.getDate())].join('-');
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var secs = pad(date.getSeconds());
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                var timePart = hours + ':' + minutes + ':' + secs + ' ' + ampm;
+                //return datepart + " " + timePart;
+                return datepart;
+            }
+            function BindSolutionPreparationData() {
+                var ParameterMasterId = $('#ParameterMasterId').val();
+                var SampleCollectionId = $('#SampleCollectionId').val();
+                var ParameterGroupId = $('#ParameterGroupId').val();
+                var obj = {
+                    ParameterMasterId: ParameterMasterId,
+                    SampleCollectionId: SampleCollectionId,
+                    ParameterGroupId: ParameterGroupId
+                };
+                $.ajax({
+                    url: "/Approver/GetSolutionPreparationData",
+                    type: 'GET',
+                    data: obj,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        var rowHtml = '';
+
+                        $.each(data, function (index, value) {
+                            var button = document.createElement('input');
+                            button.type = 'button';
+                            button.id = 'btnViewChemical';
+                            button.value = 'View Chemicals';
+                            button.className = 'btn btn-primary btn-sm';
+                            button.onclick = "ViewChemicalData('" + value.NameOfSolution + "')";
+
+                            var dtprep = new Date(parseInt(value.DateOfPreparation.substr(6)));
+                            var prepDate = [pad(dtprep.getDate()), pad(dtprep.getMonth() + 1), dtprep.getFullYear()].join('/');
+                            rowHtml += '<tr class="solutionRow"><td>' + prepDate + '</td><td>' + value.NameOfSolution + '</td><td>' + value.QtyOfSolutionPrepared + '</td><td id="column1"><input type="button" id="chemicalpopupview"  value="View" class="btn btn-sm btn-primary" onclick="ViewChemicalData(\'' + value.NameOfSolution + '\')" /></td></tr>'
+
+                        });
+                        $('#tblSolPreparation tbody').append(rowHtml);
+
+                    },
+                    error: function (response) {
+                        console.log("error");
+                        console.log(response);
+                    }
+                });
+            }
+            function ViewChemicalUsedData(nameOfSolution) {
+                var ParameterMasterId = $('#ParameterMasterId').val();
+                var SampleCollectionId = $('#SampleCollectionId').val();
+                var ParameterGroupId = $('#ParameterGroupId').val();
+                var obj = {
+                    ParameterMasterId: ParameterMasterId,
+                    SampleCollectionId: SampleCollectionId,
+                    ParameterGroupId: ParameterGroupId,
+                    nameOfSolution: nameOfSolution
+                };
+                $.ajax({
+                    url: "/Tester/GetChemicalUsedData",
+                    type: 'GET',
+                    data: obj,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        //$("#tblChemicalUsedData tbody").find("#inputChemicalRowData").remove();
+                        var rowHtml2 = '';
+
+                        $.each(data, function (index, value) {
+                            rowHtml2 += '<tr class="solutionRow"><td>' + value.NameofChemicalUsed + '</td><td>' + value.QualityofChemicalUsed + '</td></tr>'
+                        });
+                        $('#tblChemicalUsedData tr#inputChemicalRowData').after(rowHtml2);
+
+                        //$("#tblChemicalUsed tbody").find("#inputChemicalRow").remove();
+
+                        $('#ChemicalsPopupView').modal('show');
+                        //$('#ChemicalsPopup').modal('show');
+                    },
+                    error: function (response) {
+                        console.log("error");
+                        console.log(response);
+                    }
+                });
+            }
+            function ViewChemicalData(nameOfSolution) {
+                //$('#ChemicalsPopupView').modal('show');  tblChemicalUsedData
+
+                ViewChemicalUsedData(nameOfSolution);
+
+            }
+            function BindFileTable() {
+        var ParameterMasterId = $('#ParameterMasterId').val();
+        var SampleCollectionId = $('#SampleCollectionId').val();
+        var ParameterGroupId = $('#ParameterGroupId').val();
+        var obj = {
+            ParameterMasterId: ParameterMasterId,
+            SampleCollectionId: SampleCollectionId,
+            ParameterGroupId: ParameterGroupId
+        };
+        $.ajax({
+            type: 'GET',
+            url: "/Approver/GetParameterFileInfo",
+            data: obj,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var rowHtml = '';
+                $.each(data, function (index, value) {
+                    let srandomid = Math.random().toString(36).substring(7);
+                    var FileName = value.FileName.split('\\').pop();
+                    var filepath = "../../Uploads/Tester/" + FileName;
+                    var markup = "<tr id='" + srandomid + "'><td>" + FileName + "</td><td><a target='_blank' href='" + filepath + "' ><span class='icon-copy dw dw-download1'></span></a></td></tr>"; // Binding the file name
+                    $("#FilesList tbody").append(markup);
+
+                });
+                chkatchtbl();
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+
+    }
+            //by khushboo
+            function BindTestingHoursTable() {
+                var ParameterMasterId = $('#ParameterMasterId').val();
+                var SampleCollectionId = $('#SampleCollectionId').val();
+                var ParameterGroupId = $('#ParameterGroupId').val();
+                var obj = {
+                    ParameterMasterId: ParameterMasterId,
+                    SampleCollectionId: SampleCollectionId,
+                    ParameterGroupId: ParameterGroupId
+                };
+                $.ajax({
+                    url: "/Approver/GetTestingHoursData",
+                    type: 'GET',
+                    data: obj,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        var count = 0;
+                        var nValue = [];
+                        var SampleId = 0;
+                        var ParameterMasterId = 0;
+
+                        $.each(data, function (index, value) {
+                            nValue[count] = value.TestingHour;
+                            count += 1;
+                        });
+
+                        var rowHtml = '';
+                        var colHtml = '';
+                        // creating all cells
+                        for (var i = 0; i < 1; i++) {
+                            // creates a table row
+                            var row = document.createElement("tr");
+                            for (var j = 0; j < count; j++) {
+                                var temp = nValue[j];
+                                var cell = document.createElement("td");
+                                row.setAttribute('class', "col-md-12");
+                                var aTag = document.createElement('a');
+                                aTag.setAttribute('href', "#");
+                                aTag.setAttribute('style', "font-size:16px;font-weight:bold");
+                                aTag.setAttribute('onclick', "PopulateFormula('" + temp + "')");
+                                var cellText = document.createTextNode(nValue[j]);
+                                aTag.appendChild(cellText)
+                                cell.appendChild(aTag);
+                                row.appendChild(cell);
+                            }
+                            $('#tblTestingHours tr#TestingHours_Rows').after(row);
+                        }
+
+
+                    },
+                    error: function (response) {
+                        console.log("error");
+                        console.log(response);
+                    }
+                });
+            }
+            function GetUnitMaster() {
+                $.ajax({
+                    url: "/FormulaBuilder/GetUnitMaster",
+                    type: 'GET',
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        unitMasterList = data;
+                    },
+                    error: function (response) {
+                        console.log("error");
+                        console.log(response);
+                    }
+                });
+            }
+            function PopulateFormula(TestingHour) {
+                var parameterMasterId = $('#ParameterMasterId').val();
+                var testMethodId = $('#TestMethodId').val();
+                var parameterGroupId = $('#ParameterGroupId').val();
+                var sampleCollectionId = $('#SampleCollectionId').val();
+                var unitId = $('#UnitId').val();
+                var objParam = {
+                    ParameterMasterId: parameterMasterId,
+                    TestMethodId: testMethodId,
+                    ParameterGroupId: parameterGroupId,
+                    SampleCollectionId: sampleCollectionId,
+                    UnitId: unitId,
+                    TestingHour: TestingHour
+                };
+                $.ajax({
+                    url: "/Reviewer/GetFormula",
+                    type: 'GET',
+                    data: objParam,
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+
+                        formulaList = data.FormulaList;
+                        var tableHtml = '';
+                        //$('#tblFormula tr:first').after(tableHtml);
+                        $("#tblFormula tbody").find(".formulaRow").remove();
+                        $.each(formulaList, function (key, value) {
+                            console.log(value.IsFDV);
+                            //console.log(unitMasterList);
+                            var unit = '';
+                            var entry = unitMasterList.find(function (e) { return e.UnitId == value.Unit; });
+                            if (entry) {
+                                unit = entry.UnitName;
+                            }
+                            var row = '';
+                            var strFormula = value.DisplayName;
+                            var mys = '';
+                            if (strFormula.indexOf('~') > 0 && strFormula.indexOf('!') > 0) {
+                                while (strFormula.indexOf('~') > 0 && strFormula.indexOf('!') > 0) {
+                                    var mys = strFormula.substring(strFormula.indexOf('~') + 1, strFormula.indexOf("!"));
+                                    strFormula = strFormula.replace('~' + mys + '!', '<sub>' + mys + '</sub>');
+                                }
+                            }
+                            if (strFormula.indexOf('#') > 0 && strFormula.indexOf('$') > 0) {
+                                while (strFormula.indexOf('#') > 0 && strFormula.indexOf('$') > 0) {
+                                    var mys = strFormula.substring(strFormula.indexOf('#') + 1, strFormula.indexOf("$"));
+                                    strFormula = strFormula.replace('#' + mys + '$', '<sup>' + mys + '</sup>');
+                                }
+                            }
+                            console.log(strFormula);
+                            if (value.Formula == "") {
+                                row = '<tr class="formulaRow ">';
+
+                            }
+                            else {
+                                row = '<tr class="formulaRow">';
+                            }
+                            row = row + '<td>' + value.SrNo + '</td>';
+                            row = row + '<td>' + value.Notation + '</td>';
+                            row = row + '<td>' + strFormula + '</td>';
+                            row = row + '<td>' + value.Formula + '</td>';
+
+                            if (value.Formula == "") {
+                                if (value.IsFDV) {
+                                    row = row + '<td><input type="text" style="color:black" class="formula" disabled value="' + value.NotationValue + '" /></td>';
+                                }
+                                else {
+                                    row = row + '<td><input type="text" style="color:black" class="formula" disabled value="' + value.NotationValue + '" /></td>';
+                                }
+                            }
+
+                            else {
+                                row = row + '<td><input type="text" style="color:black" class="formula" disabled value="' + value.NotationValue + '" /></td>';
+                            }
+                            row = row + '<td style="color:black">' + unit + '</td>';
+                            row = row + '</tr>';
+                            tableHtml = tableHtml + row;
+                        });
+                        $('#tblFormula tr:first').after(tableHtml);
+                    },
+                    error: function (response) {
+                        console.log("error");
+                        console.log(response);
+                    }
+                });
+            }
+            function pad(s) { return (s < 10) ? '0' + s : s; }
+            function AnalysisProcessScheduler() {
+                var ParameterMasterId = $('#ParameterMasterId').val();
+                var SampleCollectionId = $('#SampleCollectionId').val();
+                var ParameterGroupId = $('#ParameterGroupId').val();
+
+                var jsonObject = { "SampleCollectionId": SampleCollectionId, "ParameterGroupId": ParameterGroupId, "ParameterMasterId": ParameterMasterId };
+
+                $.ajax({
+                    type: "Get",
+                    url: "/Approver/GetTestProcessScheduler",
+                    dataType: 'text',
+                    cache: false,
+                    async: false,
+                    data: "model=" + JSON.stringify(jsonObject),
+                    success: function (response) {
+                        debugger
+                        var x = response;
+                        $('#txtFinalResult').val(JSON.parse(response).FinalResult);
+                        $('#txtTotalDuration').val(JSON.parse(response).TotalDuration);
+                        $('#txtQualityControl').val(JSON.parse(response).QualityControl);
+                        $('#AnalysisProcessScheduleDetailId').val(JSON.parse(response).AnalysisProcessScheduleDetailId);
+                        var analysisStartAt = new Date(JSON.parse((parseInt(JSON.parse(response).AnalysisStartAt.substr(6)))));
+                        var analysisEndAt = new Date(JSON.parse((parseInt(JSON.parse(response).AnalysisEndAt.substr(6)))));
+                        $('#txtAnalysisStartDatetime').val(GetDateTime(analysisStartAt));
+                        $('#txtAnalysisEndDatetime').val(GetDateTime(analysisEndAt));
+                        $('#txtFinalResult').prop('disabled', true);
+                        $('#txtQualityControl').prop('disabled', true);
+                        $('#txtTotalDuration').prop('disabled', true);
+                        $('#txtAnalysisStartDatetime').prop('disabled', true);
+                        $('#txtAnalysisEndDatetime').prop('disabled', true);
+
+                    },
+
+                    error: function (xhr) {
+                        console.log('error');
+                    }
+                });
+
+            }
+            function chkatchtbl() {
+                if ($('#FilesList tr').length > 1) {
+                    $("#FilesList").css("visibility", "visible");
+                } else {
+                    $("#FilesList").css("visibility", "hidden");
+                }
+            }
+            function PopulateFinalResultUnit() {
+                // var UnitConvert = "";
+                var unitId = $('#UnitId').val();
+                var unitName = $('#UnitName').val();
+
+                $('#UnitConvert').append('<option value="' + unitId + '">' + unitName + '</option>');
+
+            }
+            function acceptRejectApprover(status) {
+                var ParameterMasterId = $('#ParameterMasterId').val();
+                var SampleCollectionId = $('#SampleCollectionId').val();
+                var ParameterGroupId = $('#ParameterGroupId').val();
+                var WorkOrderId = $('#WorkOrderId').val();
+                var SampleNameOriginal = $('#SampleNameOriginal').val();
+                var Rejectapprovestatus = $('#Rejectreviewstatus').find(":selected").val();
+                var ProbableDateOfReport = $('#ProbableDateOfReport').val();
+                var AnalysisProcessScheduleDetailId = $('#AnalysisProcessScheduleDetailId').val();
+                var TestMethodId = $('#TestMethodId').val();
+                var UnitId = $('#UnitId').val();
+                var ApproverApprovedStatus = status;
+                var ApproverComments = $('#txtComment').val();
+                   var obj = {
+                        ParameterMasterId: ParameterMasterId,
+                        SampleCollectionId: SampleCollectionId,
+                        ParameterGroupId: ParameterGroupId,
+                            SampleNameOriginal: SampleNameOriginal,
+                            WorkOrderId: WorkOrderId,
+                        ProbableDateOfReport: ProbableDateOfReport,
+                        AnalysisProcessScheduleDetailId: AnalysisProcessScheduleDetailId,
+                        TestMethodId: TestMethodId,
+                        UnitId:UnitId,
+                        ApproverApprovedStatus: ApproverApprovedStatus,
+                       ApproverComments: ApproverComments,
+                       Rejectapprovestatus: Rejectapprovestatus
+                    };
+                        var parameter = JSON.stringify(obj);
+                     $.ajax({
+                                type: "POST",
+                                url: "/Approver/UpdateApproverComment",
+                                dataType: 'text',
+                                cache: false,
+                                data: "model=" + parameter,
+                                success: function (response) {
+                                    var x = response;
+                                    alert(response);
+                                    window.location.href = "@Url.Action("SampleList", "Approver", new { Area="Lab"})";
+                                },
+                                error: function (xhr) {
+                                    console.log('error');
+                                }
+                     });
+            }
+            $(function () {
+                GetUnitMaster();
+                BindSolutionPreparationData();
+                BindFileTable();
+                //PopulateFormula();
+                //BindTestingHoursTable();
+                AnalysisProcessScheduler();
+                PopulateFinalResultUnit();
+
+                var stop = false;
+                $('#TodayDate').text(GetDateTime(new Date()));
+                var start = new Date();
+                $('.redioBtn').change(function () {
+                    if (this.innerText == 'Accept') {
+                        debugger
+                        $('#approveBtn').show();
+                        $('#rejectBtn').hide();
+                        $('.reviewerReject').hide();
+                    }
+                    else if (this.innerText == 'Reject') {
+                        debugger
+                        $('#rejectBtn').show();
+                        $('#approveBtn').hide();
+                        $('.reviewerReject').show();
+                    }
+                });
+
+                $('#approveBtn').click(function () {
+                    acceptRejectApprover(1);
+                });
+                $('#rejectBtn').click(function () {
+                    acceptRejectApprover(0);
+                });
+
+                $('#Rejectreviewstatus').change(function () {
+                    debugger
+                    var selectedValue = $('#Rejectreviewstatus :selected').text();
+                    if (selectedValue == "Re-Plan") {
+                        $('#rejectBtn').text('Re-Plan');
+                    }
+                    else if (selectedValue == "Re-Test") {
+                        $('#rejectBtn').text('Re-Test');
+                    }
+                });
+            });
+</script>
+

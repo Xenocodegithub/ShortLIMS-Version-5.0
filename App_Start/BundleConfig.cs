@@ -57,8 +57,8 @@ namespace LIMS_DEMO
                 "~/Component/styles/icon-font.min.css",
                 "~/Component/styles/dataTables.bootstrap4.min.css",
                 "~/Component/styles/responsive.bootstrap4.min.css",
-                "~/Component/fonts/font-awesome/css/font-awesome.min.css",
-                "~/Component/styles/style.css"
+                "~/Component/fonts/font-awesome/css/font-awesome.min.css"
+               // "~/Component/styles/style.css"
                 ));
 
             #region-----------------Inventory Managemnt------------------

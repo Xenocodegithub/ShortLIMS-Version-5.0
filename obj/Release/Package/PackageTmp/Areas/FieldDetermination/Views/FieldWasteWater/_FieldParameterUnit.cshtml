@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel>
+
+ <table id="datatable" class="data-table table stripe hover nowrap">
+            <thead>
+                <tr class="thead-dark">
+                    <th class="table-plus datatable-nosort">
+                        SrNo
+                    </th>
+                    <th class="table-plus datatable-nosort">
+                        Parameters
+                    </th>
+                    <th class="table-plus datatable-nosort">
+                        InField
+                    </th>
+                    <th class="table-plus datatable-nosort">
+                        Units
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SerialNo)
+                        </td>
+                        <td>
+                            <a href="#" class="sampleName">@Html.DisplayFor(modelItem => item.ParameterName)</a>
+                            @*@Html.DisplayFor(modelItem => item.ParameterName)*@
+                        </td>
+                        <td>
+                            @Html.HiddenFor(modelItem => item.InField)
+                            @Html.DisplayFor(modelItem => item.Field)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Unit)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    

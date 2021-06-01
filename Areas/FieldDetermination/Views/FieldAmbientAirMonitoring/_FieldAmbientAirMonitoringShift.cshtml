@@ -127,20 +127,18 @@
                 <div class="form-group">
                     @if (Model.ShiftNo == 1)
                     {
-                        <div class="col-md-6">
-                            <button type="button" id="btnSubmitFirstShift" class="btn btn-primary" name="SaveShift1" value="SaveShift1" style="background-color:darkgrey" disabled="disabled">Submit</button>
-                        </div>
-                    }
+        <div class="col-md-6">
+            <button type="button" id="btnSubmitFirstShift" class="btn btn-info btn-sm" name="SaveShift1" value="SaveShift1" style="background-color:darkgrey;margin-left:90px;" disabled="disabled">Submit</button>
+        </div> }
                     else
                     {
-                        <div class="col-md-6">
-                            <button type="button" id="btnSubmitFirstShift" class="btn btn-primary" name="SaveShift1" value="SaveShift1">Submit</button>
-                        </div>
-                    }
+        <div class="col-md-6">
+            <button type="button" id="btnSubmitFirstShift" class="btn btn-info btn-sm" name="SaveShift1" value="SaveShift1" style="margin-left:180px;">Submit</button>
+        </div>}
                 </div>
             </div>
 
-            <div class="col-md-4" style="border-left: 6px solid #17566b;">
+            <div class="col-md-4" style="border-left: 1px solid #17566b;">
                 <h4 class="font-weight-bold text-primary" style="text-align:center">Second Shift</h4>
                 <div class="form-group row">
                     <div class="col-md-6 row">
@@ -200,7 +198,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6 row">
-                        <label class="form-label col-md-12 mr-btm-15">Sampling Duration Final</label>
+                        <label class="form-label col-md-12  mr-btm-15">Sampling Duration Final</label>
                     </div>
                     <div class="col-md-6 row">
                         @Html.TextBoxFor(Model => Model.SamplingDurationFinals2, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
@@ -211,6 +209,7 @@
                     <div class="col-md-6 row">
                         <label class="form-label col-md-12 mr-btm-15">Sampling Duration Initial</label>
                     </div>
+
                     <div class="col-md-6 row">
                         @Html.TextBoxFor(Model => Model.SamplingDurationInitials2, new { @class = "form-control mr-btm-15", @placeholder = "(min)" })
                     </div>
@@ -255,20 +254,18 @@
                 <div class="form-group">
                     @if (Model.ShiftNos2 == 2)
                     {
-                        <div class="col-md-6">
-                            <button type="submit" id="btnSubmitSecondShift" class="btn btn-primary" name="Save" value="Submit" style="background-color:darkgrey" disabled="disabled">Submit</button>
-                        </div>
-                    }
+        <div class="col-md-6">
+            <button type="submit" id="btnSubmitSecondShift" class="btn btn-info btn-sm" name="Save" value="Submit" style="background-color:darkgrey;float:right" disabled="disabled">Submit</button>
+        </div> }
                     else
                     {
-                        <div class="col-md-6">
-                            <button type="submit" id="btnSubmitSecondShift" class="btn btn-primary" name="Save" value="Submit">Submit</button>
-                        </div>
-                    }
+        <div class="col-md-6">
+            <button type="submit" id="btnSubmitSecondShift" class="btn btn-info btn-sm" name="Save" value="Submit" style="margin-left:180px;">Submit</button>
+        </div>}
                 </div>
             </div>
 
-            <div class="col-md-4" style="border-left: 6px solid #17566b;">
+            <div class="col-md-4" style="border-left: 1px solid #17566b;">
                 <h4 class="font-weight-bold text-primary" style="text-align:center">Third Shift</h4>
                 <div class="form-group row">
                     <div class="col-md-6 row">
@@ -383,16 +380,14 @@
                 <div class="form-group">
                     @if (Model.ShiftNos3 == 3)
                     {
-                        <div class="col-md-6">
-                            <button type="submit" id="btnSubmitThirdShift" class="btn btn-primary" name="Save" value="Submit" style="background-color:darkgrey" disabled="disabled">Submit</button>
-                        </div>
-                    }
+        <div class="col-md-6">
+            <button type="submit" id="btnSubmitThirdShift" class="btn btn-info btn-sm" name="Save" value="Submit" style="background-color:darkgrey;float:right" disabled="disabled">Submit</button>
+        </div> }
                     else
                     {
-                        <div class="col-md-6">
-                            <button type="submit" id="btnSubmitThirdShift" class="btn btn-primary" name="Save" value="Submit">Submit</button>
-                        </div>
-                    }
+        <div class="col-md-6">
+            <button type="submit" id="btnSubmitThirdShift" class="btn btn-info btn-sm" name="Save" value="Submit" style="margin-left:180px;">Submit</button>
+        </div>}
                 </div>
             </div>
         </div>

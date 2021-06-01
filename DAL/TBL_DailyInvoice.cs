@@ -32,6 +32,5 @@ namespace LIMS_DEMO.DAL
         public Nullable<int> Count { get; set; }
         public Nullable<int> EnquirySampleID { get; set; }
         public Nullable<int> CostingId { get; set; }
-        public string RejectStatus { get; set; }
     }
 }

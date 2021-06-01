@@ -15,6 +15,7 @@ namespace LIMS_DEMO.BAL.Dashboard
         {
             CoreFactory.dashboard = new DashboardDAL();
         }
+       
         public List<DashboardEntity> GetTotalEnquiry(DashboardEntity dashboard)
         {
             return CoreFactory.dashboard.GetTotalEnquiry(dashboard);
@@ -99,6 +100,10 @@ namespace LIMS_DEMO.BAL.Dashboard
         public List<DashboardEntity> GetTotalSampleApproved(DashboardEntity dashboard)
         {
             return CoreFactory.dashboard.GetTotalSampleApproved(dashboard);
+        }
+        public void Initialize()
+        {
+            CoreFactory.login.Initialize();
         }
     }
 }
