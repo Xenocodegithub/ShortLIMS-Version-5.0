@@ -41,12 +41,12 @@
                     @Html.HiddenFor(model => model.CustomerMasterId)
 
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Registration Date:<span style="color:red">*</span></label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Registration Date:</label>
                         <div class="col-sm-4">
                             @Html.TextBoxFor(model => model.RegistrationDate, new { @class = "form-control date-picker", @autocomplete = "false" })
                             @Html.ValidationMessageFor(model => model.RegistrationDate, "", new { @class = "text-danger" })
                         </div>
-                        <label class="col-sm-12 col-md-2 col-form-label">Customer Group:<span style="color:red">*</span></label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Customer Group:</label>
                         <div class="col-sm-4">
                             @Html.DropDownListFor(model => model.CustomerGroupId, new SelectList(ViewBag.CustomerGroups, "CustomerGroupId", "CustomerGroupType"), "Please Select", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CustomerGroupId, "", new { @class = "text-danger" })
@@ -58,18 +58,18 @@
                             @Html.DropDownListFor(model => model.CustomerTypeId, new SelectList(ViewBag.CustomerTypes, "CustomerTypeId", "CustomerTypeName"), "Please Select", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CustomerTypeId, "", new { @class = "text-danger" })
                         </div>
-                        <label class="col-sm-12 col-md-2 col-form-label">Company Type:<span style="color:red">*</span></label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Company Type:</label>
                         <div class="col-sm-4">
                             @Html.DropDownListFor(model => model.CompanyTypeId, new SelectList(ViewBag.CompanyTypes, "CompanyTypeId", "CompanyType"), "Please Select", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CompanyTypeId, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Registration Name:<span style="color:red">*</span></label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Registration Name:</label>
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.RegistrationName, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                        <label class="col-sm-12 col-md-2 col-form-label">Contact Person Name:<span style="color:red">*</span></label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Contact Person Name:</label>
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
@@ -79,7 +79,7 @@
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.ContactDesignation, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                        <label class="col-sm-5 col-md-2 col-form-label">Contact Person Mobile No:<span style="color:red">*</span></label>
+                        <label class="col-sm-5 col-md-2 col-form-label">Contact Person Mobile No:</label>
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.ContactMobileNo, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
@@ -109,7 +109,7 @@
                             <div class="col-sm-4">
                                 @Html.EditorFor(model => model.Taluka, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Address:<span style="color:red">*</span></label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Address:</label>
                             <div class="col-sm-4">
                                 @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
@@ -131,7 +131,7 @@
                                 @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger col-md-10" })
                                 @*<input type="date" id="EnquiryOn" name="EnquiryOn" class="input-group date col-sm-12" placeholder="dd/MM/yyyy" />*@
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Mobile No.:<span style="color:red">*</span></label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Mobile No.:</label>
                             <div class="col-sm-4">
                                 @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control", @autocomplete = "false" })
                                 @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger col-md-10" })

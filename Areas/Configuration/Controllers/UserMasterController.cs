@@ -7,6 +7,7 @@ using LIMS_DEMO.BAL;
 using LIMS_DEMO.BAL.Configuration;
 using LIMS_DEMO.Core.Configuration;
 using LIMS_DEMO.Core;
+using LIMS_DEMO.Common;
 using LIMS_DEMO.Areas.Configuration.Models;
 
 namespace LIMS_DEMO.Areas.Configuration.Controllers
@@ -38,12 +39,13 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddUser(UserMasterModel model)
         {
             UserMasterEntity userMasterEntity = new UserMasterEntity();
             userMasterEntity.UserMasterID = model.UserMasterID;
             userMasterEntity.UserName = model.UserName;
-            userMasterEntity.Password = model.Password;
+            userMasterEntity.Password = Security.Encrypt(model.Password);
             userMasterEntity.DisciplineId = model.DisciplineId;
             userMasterEntity.IsActive = model.IsActive;
             //userMasterEntity.EnteredBy = LIMS.User.UserMasterID;

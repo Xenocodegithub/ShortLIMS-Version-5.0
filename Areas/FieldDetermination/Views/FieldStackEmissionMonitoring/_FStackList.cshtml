@@ -2,74 +2,72 @@
 
 
 <!-- Simple Datatable start -->
-
-        <div id="divList">
-            @if (Model.GridModel.Count() > 0)
-            {
-                //id = "dtHorizontalExample tblField"<!--<table id="dtHorizontalExample"--> @*class="table table stripe hover nowrap"*@ <!--class="table table-bordered">-->
-
-                <table class="table table-bordered">
-              
-                                    <thead>
-                                        <tr class="thead-dark">
-                                            <th >
-                                                SrNo.
-                                            </th>
-                                            <th>
-                                                Parameters
-                                            </th>
-                                            <th>
-                                                Test Method
-                                            </th>
-                                            <th>
-                                                Flow Rate
-                                            </th>
-                                            <th>
-                                                Sampling Time
-                                            </th>
-                                            <th >
-                                                Gas Temp
-                                            </th>
-                                            <th >
-                                                Barometric Pressure
-                                            </th>
-                                            <th >
-                                                Dry Gas Meter Reading Initial
-                                            </th>
-                                            <th>
-                                                Dry Gas Meter Reading Final
-                                            </th>
-                                            <th>
-                                                Dry Gas Meter Reading Total
-                                            </th>
-                                            <th>
-                                                Bottle No
-                                            </th>
-                                            <th>
-                                                Absorbing Solution Used Solution
-                                            </th>
-                                            <th>
-                                                Absorbing Solution Used Conc
-                                            </th>
-                                            <th>
-                                                Absorbing Solution Used Vol
-                                            </th>
-                                            <th>
-                                                Preservation Done
-                                            </th>
-                                            <th>
-                                                Vs
-                                            </th>
-                                            @if (Model.CurrentStatus != "SampleColl")
-                                            {
-                                        <th>
-                                            Action
-                                        </th>}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (int i = 0; i < Model.GridModel.Count; i++)
-                                        {
+<div class="card-box mb-30">
+    <div class="pb-20">
+        @if (Model.GridModel.Count() > 0)
+        {
+            <table id="tblField" class="data-table table stripe hover nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            SrNo.
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Parameters
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            TestMethod
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Flow Rate
+                        </th>
+                        <th class="width-5">
+                            Sampling Time
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Gas Temp
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Barometric Pressure
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Dry Gas Meter Reading Initial
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Dry Gas Meter Reading Final
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Dry Gas Meter Reading Total
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Bottle No
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Absorbing Solution Used Solution
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Absorbing Solution Used Conc
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Absorbing Solution Used Vol
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Preservation Done
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Vs
+                        </th>
+                        @if (Model.CurrentStatus != "SampleColl")
+                        {
+                            <th class="table-plus datatable-nosort">
+                                Action
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.GridModel.Count; i++)
+                    {
                         <tr>
                             <td>
                                 @Model.GridModel[i].SrNo
@@ -122,17 +120,18 @@
                             </td>
                             @if (Model.CurrentStatus != "SampleColl")
                             {
-        <td>
-            @*<a href="#" onclick="funEditField(@Model.GridModel[i].SrNo,@Model.GridModel[i].EnquirySampleID);">Edit</a> |*@
-            <a href="#" onclick="funDeleteField(@Model.GridModel[i].SrNo);">Delete</a>
-        </td>}
-                        </tr>}
-                                    </tbody>
-                                </table>
-                                }
-            </div>
-        
-
+                                <td>
+                                    @*<a href="#" onclick="funEditField(@Model.GridModel[i].SrNo,@Model.GridModel[i].EnquirySampleID);">Edit</a> |*@
+                                    <a href="#" onclick="funDeleteField(@Model.GridModel[i].SrNo);">Delete</a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
 
 <script>
 
@@ -163,12 +162,6 @@
    }
 </script>
 
-<script>
-    $(document).ready(function () {
-        $('#dtHorizontalExample').DataTable({
-            "scrollX": true
-        });
-        $('.dataTables_length').addClass('bs-select');
-    });
-</script>
+
+
 

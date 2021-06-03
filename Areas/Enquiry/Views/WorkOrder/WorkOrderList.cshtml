@@ -70,30 +70,28 @@
         <table id="dtHorizontalExample" class="table table stripe hover nowrap">
             <thead>
                 <tr class="thead-dark">
-                    <th class="table-plus datatable-nosort" style="width:120px">
+                    <th class="table-plus datatable-nosort">
                         Work Order No
                     </th>
-                    <th style="        width: 120px
-">
+                    <th>
                         Customer Name
                     </th>
-                    <th style="        width: 120px
-">
+                    <th>
                         Status
                     </th>
-                    <th style="width:120px">
+                    <th>
                         Remark
                     </th>
-                    <th style="width:120px">
+                    <th>
                         View File
                     </th>
-                    <th style="width:120px">
+                    <th>
                         Month
                     </th>
-                    <th style="width:120px">
+                    <th>
                         Year
                     </th>
-                    <th style="width:120px">
+                    <th>
                         Invoice Report
                     </th>
                 </tr>
@@ -104,23 +102,23 @@
                     if (Model[i].EnteredBy == LIMS_DEMO.LIMS.User.UserMasterID)
                     {
 <tr>
-    <td width="140px">
+    <td>
         @Html.DisplayFor(item => Model[i].WorkOrderNo)
         @Html.HiddenFor(item => Model[i].WorkOrderId)
         @Html.HiddenFor(item => Model[i].EnquiryId)
         @*//temp field*@
         <input type="hidden" name="@string.Concat("WOIDTemp", i)" value="@Model[i].WorkOrderId" />
     </td>
-    <td width="120px">
+    <td>
         @Html.DisplayFor(item => Model[i].RegistrationName)
     </td>
-    <td style="width:120px">
+    <td>
         @Html.DisplayFor(item => Model[i].CurrentStatus)
     </td>
-    <td style="width:120px">
+    <td>
         @Html.DisplayFor(item => Model[i].Remarks)
     </td>
-    <td style="width:120px">
+    <td>
         @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
             {
 <a href="#" type="submit" id="btnWorkOrder" class="btn btn-sm   btn-disabled" style="background-color:#797D7F" name="WorkOrder">View File </a> }
@@ -128,7 +126,7 @@ else
 {
 <a id="btnWorkOrder" target="_blank" href="/Enquiry/WorkOrder/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-warning btn-sm">View File</a> } }
     </td>
-    <td style="width:120px" >
+    <td>
         <select class="form-control" id="@string.Concat("SelMonth", i)" name="@string.Concat("SelMonth", i)">
             <option value="Select Month" disabled>Select Month</option>
             <option value="JAN">JAN</option>
@@ -146,7 +144,7 @@ else
             <option value="None">None</option>
         </select>
     </td>
-    <td style="width:120px">
+    <td>
         <select class="form-control" id="@string.Concat("Year", i)" name="@string.Concat("Year", i)">
             <option value="Select Year" disabled>Select Year</option>
             <option value="2020">2020</option>
@@ -167,7 +165,7 @@ else
             <option value="2021">2035</option>
         </select>
     </td>
-    <td style="width:120px">
+    <td>
         @if (@Model[i].IsIGST == true)
         {
 <a href="" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,1,@i);">Print</a> }

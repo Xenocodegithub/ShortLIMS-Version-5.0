@@ -133,7 +133,7 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
                     try
                     {
                         strStatus = BALFactory.parameterMasterBAL.AddParameterMaster(CoreFactory.parameterMasterEntity);
-                        //return Json(new { Status = strStatus, message = "ParameterMaster has been registered successfully." }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Status = strStatus, message = "ParameterMaster has been registered successfully." }, JsonRequestBehavior.AllowGet);
 
                     }
 
@@ -154,10 +154,10 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             else
             {
                 strStatus = BALFactory.parameterMasterBAL.Update(CoreFactory.parameterMasterEntity);
-                //return Json(new { Status = strStatus, message = "ParameterMaster has been updated successfully." }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = strStatus, message = "ParameterMaster has been updated successfully." }, JsonRequestBehavior.AllowGet);
 
             }
-            return RedirectToAction("ParameterMasterList");
+            //return RedirectToAction("ParameterMasterList");
         }
         public ActionResult ParameterMasterList()
         {

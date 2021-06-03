@@ -43,112 +43,102 @@
                 <strong> Approver Comment :@Model.ApproverComment </strong>
             </span>
         </div>}
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="blog-side-nest">
-                            <h4 class="text-left">Sample Details :</h4>
-                            <hr />
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td width="5%">Sample ID :</td>
-                                        @*<td width="5%"><b>:</b></td>*@
-                                        <td width="20%">
-                                            @Html.HiddenFor(model => Model.SampleCollectionId)
-                                            @Html.HiddenFor(model => Model.ParameterGroupId)
-                                            @Html.HiddenFor(model => Model.ParameterMasterId)
-                                            @Html.HiddenFor(model => Model.UnitId)
-                                            @Html.HiddenFor(model => Model.TestMethodId)
-                                            @Html.HiddenFor(model => Model.UnitName)
-                                            @Html.Hidden("AnalysisProcessScheduleDetailId")
-                                            @Model.SampleName
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sample Type :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td> @Model.SampleTypeProductName</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Product Group :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@Model.ProductGroupName</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sub Group :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@Model.SubGroupName</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Matrix :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@Model.MatrixName</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tester :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@Model.Analyst</td>
-                                    </tr>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="blog-side-nest">
+                                <h4 class="text-left">Sample Details :</h4>
+                                <hr />
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td width="5%">Sample ID :</td>
+                                            @*<td width="5%"><b>:</b></td>*@
+                                            <td width="20%">
+                                                @Html.HiddenFor(model => Model.SampleCollectionId)
+                                                @Html.HiddenFor(model => Model.ParameterGroupId)
+                                                @Html.HiddenFor(model => Model.ParameterMasterId)
+                                                @Html.HiddenFor(model => Model.UnitId)
+                                                @Html.HiddenFor(model => Model.TestMethodId)
+                                                @Html.HiddenFor(model => Model.UnitName)
+                                                @Html.Hidden("AnalysisProcessScheduleDetailId")
+                                                @Model.SampleName
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sample Type :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td> @Model.SampleTypeProductName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Product Group :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.ProductGroupName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sub Group :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.SubGroupName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Matrix :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.MatrixName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tester :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.Analyst</td>
+                                        </tr>
 
+                                        <tr>
+                                            <td>Approver :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.Approver</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parameters :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.ParameterName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Test Method :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@Model.TestMethodName</td>
+                                        </tr>
+                                        <tr>
+                                            <td> Sample Received Date :</td>
+                                            @*<td><b>:</b></td>*@
+                                            <td>@recieptDate</td>
+                                            @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-left">Upload Documents :</h4>
+                            <hr style="margin-bottom:20px;">
+                            <form id="uploader">
+                                <div class="upload">
+                                    <input class="col-md-8" id="fileInput" type="file" multiple> <br />
+                                    <input type="button" id="btnupload" class="btn btn-success btn-sm uploadButton col-md-3" value="Upload" style="margin-left: 30px; margin-top: 20px;" />
+                                </div>
+                                <br />
+                                <hr />
+                                <table class="table" id="FilesList" style="visibility:hidden">
                                     <tr>
-                                        <td>Approver :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@Model.Approver</td>
+                                        <th>
+                                            Attachment(s)
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
                                     </tr>
-                                    <tr>
-                                        <td>Parameters :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@Model.ParameterName</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Test Method :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@Model.TestMethodName</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Sample Received Date :</td>
-                                        @*<td><b>:</b></td>*@
-                                        <td>@recieptDate</td>
-                                        @*<td colspan="3"> Sample Received Date : @Convert.ToDateTime(recieptDate).ToString("dd/MM/yyyy")</td>*@
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <hr>
+                                </table>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <h4 class="text-left">Upload Documents :</h4>
-                        <hr style="margin-bottom:20px;">
-                        <form id="uploader">
-                            <div class="upload">
-                                <input class="col-md-8" id="fileInput" type="file" multiple> <br />
-                                <input type="button" id="btnupload" class="btn btn-success btn-sm uploadButton col-md-3" value="Upload" style="margin-left: 30px; margin-top: 20px;" />
-                            </div>
-                          
-                           
-                            <table class="table" id="FilesList" style="visibility:hidden">
-                                <tr>
-                                    <th>
-                                        Attachment(s)
-                                    </th>
-                                    <th>
-                                        Action
-                                    </th>
-                                </tr>
-                            </table>
-                            <table class="table">
-                                <tr>
-                                    <th>
-                                       
-                                            <img src="~/Content/images/@Model.QRCodePath" style="height:150px;width:150px;" />
-                                      
-                                    </th>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                    
-                </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="blog-side-nest">
@@ -202,9 +192,9 @@
                     <div>
                         @Html.ActionLink("FieldDetermination", "FieldDeterminationTester", "Tester", new { @ParameterMasterId = Model.ParameterMasterId, @SampleId = Model.SampleCollectionId, @Url = Model.MatrixName, @FieldId = Model.FieldId }, null)
                     </div>}
-                                @*<div class="col-sm-4">
+                                <div class="col-sm-4">
                                     <img src="~/Content/images/@Model.QRCodePath" style="height:100px;width:100px;" />
-                                </div>*@
+                                </div>
                                 <hr>
                             </div>
                         </div>

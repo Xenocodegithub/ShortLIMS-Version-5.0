@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-12 col-md-2 col-form-label">Work Order End Date: </label>
+        <label class="col-sm-12 col-md-2 col-form-label">WorkOrder End Date: </label>
         <div class="col-sm-4">
             @Html.DisplayFor(model => model.WorkOrderCustomer.WOEDate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderEndDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -141,7 +141,7 @@
                                 }
                             </td>
                             <td>
-                                @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.FinalWorkOrderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control col-md-8" })
+                                @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.FinalWorkOrderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control" })
                                 @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].Quantity)
                             </td>
                             <td>
@@ -263,11 +263,11 @@
         $('#LocationPopup').show();
     }
 
-
-    $('#btnAddNoOfDays').click(function () {
+   $('#btnAddNoOfDays').click( function () {
         debugger
-        $('#WorkOrderCustomer.NoOfDays').prop("disabled", false);
-    });
+         $('#NoOfDays').prop("disabled", false);
+   });
+
 
 
 </script>

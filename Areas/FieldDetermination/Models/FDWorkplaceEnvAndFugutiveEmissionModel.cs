@@ -14,8 +14,8 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Models
         public Nullable<int> AvgFlowRate { get; set; }
         public Nullable<int> TotalVolAirPassed_L { get; set; }
         public Nullable<int> TotalVolumeAirPassed_m3 { get; set; }
-        public Nullable<int> StartTime { get; set; }
-        public Nullable<int> EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public Nullable<int> FilterPaperNo2 { get; set; }
         public Nullable<bool> IsNABLAccredited { get; set; }
         public Nullable<bool> InField { get; set; }

@@ -23,7 +23,7 @@ namespace LIMS_DEMO.DAL.Configuration
                         join um in _dbContext.UserMasters on e.UserMasterID equals um.UserMasterID
                         select new EmployeeMasterEntity()
                         {
-                            UserMasterId = e.UserMasterID,
+                            UserMasterID = e.UserMasterID,
                             UserName = um.UserName,
                             UserDetailId = e.UserDetailID,
                             Salutation = e.Salutation,
@@ -66,7 +66,7 @@ namespace LIMS_DEMO.DAL.Configuration
                 FirstName = u.FirstName,
                 MiddleName = u.MiddleName,
                 LastName = u.LastName,
-                UserMasterId = u.UserMasterID,
+                UserMasterID = u.UserMasterID,
                 Gender = u.Gender,
                 DateOfBirth = u.DateOfBirth,
                 Email = u.Email,
@@ -99,7 +99,7 @@ namespace LIMS_DEMO.DAL.Configuration
                     FirstName = employeeMasterEntity.FirstName,
                     MiddleName = employeeMasterEntity.MiddleName,
                     LastName = employeeMasterEntity.LastName,
-                    UserMasterID = employeeMasterEntity.UserMasterId,
+                    UserMasterID = employeeMasterEntity.UserMasterID,
                     Gender = employeeMasterEntity.Gender,
                     DateOfBirth = employeeMasterEntity.DateOfBirth,
                     Email = employeeMasterEntity.Email,
@@ -138,10 +138,10 @@ namespace LIMS_DEMO.DAL.Configuration
             try
             {
                 var userMaster = _dbContext.UserDetails.Find(userEntity.UserDetailId);
+                userMaster.UserMasterID = userEntity.UserMasterID;
                 userMaster.FirstName = userEntity.FirstName;
                 userMaster.MiddleName = userEntity.MiddleName;
                 userMaster.LastName = userEntity.LastName;
-                userMaster.UserMasterID = userEntity.UserID;
                 userMaster.Gender = userEntity.Gender;
                 userMaster.DateOfBirth = userEntity.DateOfBirth;
                 userMaster.Email = userEntity.Email;

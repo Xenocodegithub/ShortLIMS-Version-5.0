@@ -587,6 +587,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBLIMS.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DeliverMaster.cs">
+      <DependentUpon>DBLIMS.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DisciplineMaster.cs">
       <DependentUpon>DBLIMS.tt</DependentUpon>
     </Compile>
@@ -969,6 +972,15 @@
       <DependentUpon>DBLIMS.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\TBL_DailyInvoice.cs">
+      <DependentUpon>DBLIMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TBL_InvoiceReceiptNoMaster.cs">
+      <DependentUpon>DBLIMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Tbl_RejectInvoice.cs">
+      <DependentUpon>DBLIMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\TBL_REJECTINVOICEDETAILS.cs">
       <DependentUpon>DBLIMS.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\TermsAndCondition.cs">

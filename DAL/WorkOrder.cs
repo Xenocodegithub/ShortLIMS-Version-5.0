@@ -45,6 +45,9 @@ namespace LIMS_DEMO.DAL
         public Nullable<long> Duration { get; set; }
         public Nullable<bool> IsIGST { get; set; }
         public string ContractAmendment { get; set; }
+        public string DeliverBy { get; set; }
+        public Nullable<int> DeliverId { get; set; }
+        public Nullable<bool> OVC { get; set; }
     
         public virtual Quotation Quotation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

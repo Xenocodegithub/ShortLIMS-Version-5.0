@@ -717,6 +717,92 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TBL_DailyInvoice">
+      <EntityTypeMapping TypeName="LIMSModel.TBL_DailyInvoice">
+        <MappingFragment StoreEntitySet="TBL_DailyInvoice">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
+          <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
+          <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
+          <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
+          <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+          <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+          <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+          <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+          <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+          <ScalarProperty Name="RejectStatus" ColumnName="RejectStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_InvoiceReceiptNoMaster">
+      <EntityTypeMapping TypeName="LIMSModel.TBL_InvoiceReceiptNoMaster">
+        <MappingFragment StoreEntitySet="TBL_InvoiceReceiptNoMaster">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+          <ScalarProperty Name="FinancialMonthID" ColumnName="FinancialMonthID" />
+          <ScalarProperty Name="NumberType" ColumnName="NumberType" />
+          <ScalarProperty Name="NumberValue" ColumnName="NumberValue" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_RejectInvoice">
+      <EntityTypeMapping TypeName="LIMSModel.Tbl_RejectInvoice">
+        <MappingFragment StoreEntitySet="Tbl_RejectInvoice">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
+          <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
+          <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
+          <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
+          <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+          <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+          <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+          <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+          <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+          <ScalarProperty Name="RejectStatus" ColumnName="RejectStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_REJECTINVOICEDETAILS">
+      <EntityTypeMapping TypeName="LIMSModel.TBL_REJECTINVOICEDETAILS">
+        <MappingFragment StoreEntitySet="TBL_REJECTINVOICEDETAILS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="Totalcharge" ColumnName="Totalcharge" />
+          <ScalarProperty Name="Discountamt" ColumnName="Discountamt" />
+          <ScalarProperty Name="SampleCollectioncharge" ColumnName="SampleCollectioncharge" />
+          <ScalarProperty Name="TransportationCharge" ColumnName="TransportationCharge" />
+          <ScalarProperty Name="TestingCharge" ColumnName="TestingCharge" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+          <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+          <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+          <ScalarProperty Name="Balanceamount" ColumnName="Balanceamount" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+          <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="UnitMasterInventories">
       <EntityTypeMapping TypeName="LIMSModel.UnitMasterInventory">
         <MappingFragment StoreEntitySet="UnitMasterInventory">
@@ -1405,6 +1491,18 @@
           <ScalarProperty Name="TotalVolAirPassed_L" ColumnName="TotalVolAirPassed_L" />
           <ScalarProperty Name="TotalVolumeAirPassed_m3" ColumnName="TotalVolumeAirPassed_m3" />
           <ScalarProperty Name="AvgFlowRate" ColumnName="AvgFlowRate" />
+          <ScalarProperty Name="CycloneCupNo" ColumnName="CycloneCupNo" />
+          <ScalarProperty Name="MatterSizeStartTime" ColumnName="MatterSizeStartTime" />
+          <ScalarProperty Name="MatterSizeEndTime" ColumnName="MatterSizeEndTime" />
+          <ScalarProperty Name="TimeTotalizerInitial" ColumnName="TimeTotalizerInitial" />
+          <ScalarProperty Name="TimeTotalizerFinal" ColumnName="TimeTotalizerFinal" />
+          <ScalarProperty Name="TimeTotalizerDiff" ColumnName="TimeTotalizerDiff" />
+          <ScalarProperty Name="SamplingDurationInitial" ColumnName="SamplingDurationInitial" />
+          <ScalarProperty Name="SamplingDurationFinal" ColumnName="SamplingDurationFinal" />
+          <ScalarProperty Name="SamplingDurationDiff" ColumnName="SamplingDurationDiff" />
+          <ScalarProperty Name="FlowRateInitialM" ColumnName="FlowRateInitialM" />
+          <ScalarProperty Name="FlowRateFinalM" ColumnName="FlowRateFinalM" />
+          <ScalarProperty Name="FlowRateDiffM" ColumnName="FlowRateDiffM" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1428,6 +1526,39 @@
           <ScalarProperty Name="IsNABLAccredited" ColumnName="IsNABLAccredited" />
           <ScalarProperty Name="Vs" ColumnName="Vs" />
           <ScalarProperty Name="PreservationDone" ColumnName="PreservationDone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceDetails">
+      <EntityTypeMapping TypeName="LIMSModel.InvoiceDetail">
+        <MappingFragment StoreEntitySet="InvoiceDetails">
+          <ScalarProperty Name="InvoiceDetailsId" ColumnName="InvoiceDetailsId" />
+          <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+          <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceRejectDetails">
+      <EntityTypeMapping TypeName="LIMSModel.InvoiceRejectDetail">
+        <MappingFragment StoreEntitySet="InvoiceRejectDetails">
+          <ScalarProperty Name="InvoiceRejectDetailsId" ColumnName="InvoiceRejectDetailsId" />
+          <ScalarProperty Name="InvoiceDetailsId" ColumnName="InvoiceDetailsId" />
+          <ScalarProperty Name="EnquirySampleID" ColumnName="EnquirySampleID" />
+          <ScalarProperty Name="CostingId" ColumnName="CostingId" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1543,7 +1674,6 @@
         <MappingFragment StoreEntitySet="ParameterGroupMaster">
           <ScalarProperty Name="ParameterGroupId" ColumnName="ParameterGroupId" />
           <ScalarProperty Name="ProductGroupId" ColumnName="ProductGroupId" />
-          <ScalarProperty Name="DisciplineId" ColumnName="DisciplineId" />
           <ScalarProperty Name="SubGroupId" ColumnName="SubGroupId" />
           <ScalarProperty Name="MatrixId" ColumnName="MatrixId" />
           <ScalarProperty Name="IsSetPCBLimit" ColumnName="IsSetPCBLimit" />
@@ -1587,6 +1717,31 @@
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="IsNABLAccredited" ColumnName="IsNABLAccredited" />
+          <ScalarProperty Name="DisciplineId" ColumnName="DisciplineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentDetails">
+      <EntityTypeMapping TypeName="LIMSModel.PaymentDetail">
+        <MappingFragment StoreEntitySet="PaymentDetails">
+          <ScalarProperty Name="PaymentDetailsId" ColumnName="PaymentDetailsId" />
+          <ScalarProperty Name="RecieptNo" ColumnName="RecieptNo" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="DD_ChequeNo_Neft" ColumnName="DD/ChequeNo/Neft" />
+          <ScalarProperty Name="DD_ChequeDate" ColumnName="DD/ChequeDate" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="RegistrationName" ColumnName="RegistrationName" />
+          <ScalarProperty Name="WorkOrderNo" ColumnName="WorkOrderNo" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="EnquirySampleId" ColumnName="EnquirySampleId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1846,6 +2001,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SampleNumber_ReceiptIncharge">
+      <EntityTypeMapping TypeName="LIMSModel.SampleNumber_ReceiptIncharge">
+        <MappingFragment StoreEntitySet="SampleNumber_ReceiptIncharge">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SampleCount" ColumnName="SampleCount" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SampleParameterFiles">
       <EntityTypeMapping TypeName="LIMSModel.SampleParameterFile">
         <MappingFragment StoreEntitySet="SampleParameterFiles">
@@ -2068,6 +2238,9 @@
           <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="IsIGST" ColumnName="IsIGST" />
           <ScalarProperty Name="ContractAmendment" ColumnName="ContractAmendment" />
+          <ScalarProperty Name="DeliverBy" ColumnName="DeliverBy" />
+          <ScalarProperty Name="DeliverId" ColumnName="DeliverId" />
+          <ScalarProperty Name="OVC" ColumnName="OVC" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2222,6 +2395,21 @@
           <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliverMasters">
+      <EntityTypeMapping TypeName="LIMSModel.DeliverMaster">
+        <MappingFragment StoreEntitySet="DeliverMaster">
+          <ScalarProperty Name="DeliverId" ColumnName="DeliverId" />
+          <ScalarProperty Name="DeliverName" ColumnName="DeliverName" />
+          <ScalarProperty Name="PrintDesc" ColumnName="PrintDesc" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="WorkOrderId" ColumnName="WorkOrderId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2402,6 +2590,7 @@
           <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="MenuHead" ColumnName="MenuHead" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2427,6 +2616,19 @@
           <ScalarProperty Name="PrintCode" ColumnName="PrintCode" />
           <ScalarProperty Name="Charges" ColumnName="Charges" />
           <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentModeMasters">
+      <EntityTypeMapping TypeName="LIMSModel.PaymentModeMaster">
+        <MappingFragment StoreEntitySet="PaymentModeMaster">
+          <ScalarProperty Name="PaymentModeMasterId" ColumnName="PaymentModeMasterId" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
           <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />

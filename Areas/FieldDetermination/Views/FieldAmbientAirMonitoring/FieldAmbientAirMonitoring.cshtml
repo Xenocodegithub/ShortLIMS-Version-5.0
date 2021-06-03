@@ -15,7 +15,7 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Field Determination</a></li>
+                                <li class="breadcrumb-item"><a href="index.html">Field Determination</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Field Determination</li>
                                 <li class="breadcrumb-item active" aria-current="page">Add Ambient Air Monitoring Values</li>
                             </ol>
@@ -87,12 +87,12 @@
                             @if (ViewBag.CurrentStatus == "SampleColl")
                             {
                                 @*<button type="submit" id="btnSave" class="btn btn-round btn-secondary" name="Save" value="FieldSave" style="background-color:darkgrey" disabled="disabled">Save </button>*@
-                                <button type="submit" id="btnSubmit" class="btn btn-info btn-sm" name="Save" value="FieldSubmit" style="background-color:darkgrey;float:right;" disabled="disabled" >Submit</button>
+                                <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary" name="Save" value="FieldSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
                             }
                             else
                             {
                                 @*<button type="submit" id="btnSave" class="btn btn-success" name="Save" value="FieldSave">Save </button>*@
-                                <button type="submit" id="btnSubmit" class="btn btn-info btn-sm" name="Save" value="FieldSubmit" style="float:right;">Save</button>
+                                <button type="submit" id="btnSubmit" class="btn btn-primary" name="Save" value="FieldSubmit">Submit</button>
                             }
                         </div>
                     </div>
@@ -109,14 +109,6 @@
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#dtHorizontalExample').DataTable({
-            "scrollX": true
-        });
-        $('.dataTables_length').addClass('bs-select');
-    });
-</script>
 
 <script>
 

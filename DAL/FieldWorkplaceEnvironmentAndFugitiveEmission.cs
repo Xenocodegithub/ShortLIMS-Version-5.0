@@ -42,11 +42,23 @@ namespace LIMS_DEMO.DAL
         public Nullable<int> ModifiedBy { get; set; }
         public byte[] ModifiedDate { get; set; }
         public Nullable<int> FilterPaperNo2 { get; set; }
-        public Nullable<int> StartTime { get; set; }
-        public Nullable<int> EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public Nullable<int> TotalVolAirPassed_L { get; set; }
         public Nullable<int> TotalVolumeAirPassed_m3 { get; set; }
         public Nullable<int> AvgFlowRate { get; set; }
+        public string CycloneCupNo { get; set; }
+        public string MatterSizeStartTime { get; set; }
+        public string MatterSizeEndTime { get; set; }
+        public string TimeTotalizerInitial { get; set; }
+        public string TimeTotalizerFinal { get; set; }
+        public string TimeTotalizerDiff { get; set; }
+        public string SamplingDurationInitial { get; set; }
+        public string SamplingDurationFinal { get; set; }
+        public string SamplingDurationDiff { get; set; }
+        public string FlowRateInitialM { get; set; }
+        public string FlowRateFinalM { get; set; }
+        public string FlowRateDiffM { get; set; }
     
         public virtual SampleCollection SampleCollection { get; set; }
         public virtual StatusMaster StatusMaster { get; set; }

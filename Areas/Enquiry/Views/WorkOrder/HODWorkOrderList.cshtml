@@ -72,36 +72,36 @@
             <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                 <thead>
                     <tr class="thead-dark">
-                        <th class="table-plus datatable-nosort" style="width:120px">
+                        <th class="table-plus datatable-nosort">
                             Work Order No
                         </th>
-                        <th style="width:120px">
+                        <th>
                             Customer Name
                         </th>
-                        <th style="width:120px">
+                        <th>
                             WORecieveDate
                         </th>
-                        <th style="width:120px">
+                        <th>
                             View File
                         </th>
-                        <th style="width:120px">View Details</th>
-                        <th style="width:120px">
+                        <th>View Details</th>
+                        <th>
                             Status
                         </th>
-                        <th style="width:120px">
+                        <th>
                             Approve  @*Visible to HOD Only*@
                         </th>
-                        <th style="width:120px">
+                        <th>
 
                             Surveying Team Lead @*Visible to HOD Only*@
                         </th>
-                        <th style="width:120px">
+                        <th>
                             AssignSTL  @*Visible to HOD Only*@
                         </th>
-                        <th style="width:120px" >
+                        <th>
                             Remark
                         </th>
-                        <th style="width:120px">
+                        <th>
                             Send To ADMIN/BDM @*Visible to HOD Only*@
                         </th>
                     </tr>
@@ -112,19 +112,19 @@
                         if (Model[i].CurrentStatus.ToLower() != "worejected")
                         {
                     <tr>
-                        <td style="width:120px">
+                        <td>
                             @Html.DisplayFor(item => Model[i].WorkOrderNo)
                             @Html.HiddenFor(item => Model[i].WorkOrderId)
                             @Html.HiddenFor(item => Model[i].EnquiryId)
                         </td>
-                        <td style="width:120px">
+                        <td>
                             @Html.DisplayFor(item => Model[i].RegistrationName)
                         </td>
-                        <td style="width:120px">
+                        <td>
                             @Html.HiddenFor(item => Model[i].WORecieveDate)
                             @Html.DisplayFor(item => Model[i].WORecvDate)
                         </td>
-                        <td style="width:120px">
+                        <td>
                             @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
                                 {
                     <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-disabled" style="background-color:#797D7F" name="WorkOrder">View File </a> }
@@ -132,13 +132,13 @@
                 {
                     <a id="btnWorkOrder" target="_blank" href="/Enquiry/WorkOrder/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-warning btn-sm">View File</a> } }
                         </td>
-                        <td style="width:120px">
+                        <td>
                             <a id="btnView" target="_blank" href="/Reporting/frmShowReport.aspx?path=QuotationReport.rdl&QuotationId=@Model[i].QuotationId&EnquiryId=@Model[i].EnquiryId&EnquirySampleID=@Model[i].EnquirySampleID" class="btn btn-primary btn-sm">View</a>
                         </td>
-                        <td style="width:120px">
+                        <td>
                             @Html.DisplayFor(item => Model[i].CurrentStatus)
                         </td>
-                        <td style="width:120px" >
+                        <td>
                             @{ if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
                                 {
                     <a href="#" onclick="funApprove(@Model[i].WorkOrderId, @Model[i].EnquiryId, 'AssignToId_@i.ToString()')" class="sampleName">Approve</a> }
@@ -146,10 +146,10 @@
                 {
                     <a href="#" class=" btn-disabled">Approved</a> } }
                         </td>
-                        <td style ="width:120px">
-                                 @Html.DropDownListFor(item => Model[i].AssignToId, new SelectList(ViewBag.SurveyingLead, "UserMasterID", "UserName", Model[i].AssignToId), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @id = "AssignToId_" + i.ToString() })
+                        <td>
+                            @Html.DropDownListFor(item => Model[i].AssignToId, new SelectList(ViewBag.SurveyingLead, "UserMasterID", "UserName", Model[i].AssignToId), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @id = "AssignToId_" + i.ToString() })
                         </td>
-                        <td style="width:120px">
+                        <td>
                             @{ if (Model[i].CurrentStatus.ToLower() == "woapproved" && Model[i].AssignToId == null)
                                 {
                     <a href="#" onclick="funAssign('AssignToId_@i.ToString()', @Model[i].WorkOrderId, @Model[i].EnquiryId)" class="sampleName">Assign STL</a> }
@@ -162,12 +162,12 @@
                 {
                     <a href="#" class=" btn-disabled">Assigned</a> } }
                         </td>
-                        <td style="width:120px">
+                        <td>
 
                             @Html.TextBoxFor(item => Model[i].Remarks, new { @class = "form-control", @id = "Remarks_" + i.ToString(), @style = "color:black" })
 
                         </td>
-                        <td style="width:120px">
+                        <td>
                             @{ if (Model[i].CurrentStatus.ToLower() != "worejected")
                                 {
                     <a href="#" onclick="funReject('Remarks_@i.ToString()', @Model[i].WorkOrderId, @Model[i].EnquiryId)" class="sampleName">Send To ADMIN/BDM</a> }

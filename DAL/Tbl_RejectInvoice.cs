@@ -12,7 +12,7 @@ namespace LIMS_DEMO.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TBL_DailyInvoice
+    public partial class Tbl_RejectInvoice
     {
         public int ID { get; set; }
         public string CustomerName { get; set; }

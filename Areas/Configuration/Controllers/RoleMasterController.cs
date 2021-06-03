@@ -14,6 +14,7 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
     public class RoleMasterController : Controller
     {
         string strStatus = "";
+        string popup = "";
         public RoleMasterController()
         {
             BALFactory.roleMasterBAL = new RoleMasterBAL();
@@ -57,7 +58,8 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
                 if (check != null)
                 {
                     //TempData["message"] = "Role Already Mapped";
-                    return Json(new { Status = check, message = "UserRole Already registered " }, JsonRequestBehavior.AllowGet);
+                    popup = "Already";
+                    return Json(new { Status = popup, message = "UserRole Already registered " }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {

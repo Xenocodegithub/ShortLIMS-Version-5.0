@@ -12,7 +12,7 @@ namespace LIMS_DEMO.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TBL_DailyInvoice
+    public partial class TBL_REJECTINVOICEDETAILS
     {
         public int ID { get; set; }
         public string CustomerName { get; set; }
@@ -32,6 +32,5 @@ namespace LIMS_DEMO.DAL
         public Nullable<int> Count { get; set; }
         public Nullable<int> EnquirySampleID { get; set; }
         public Nullable<int> CostingId { get; set; }
-        public string RejectStatus { get; set; }
     }
 }

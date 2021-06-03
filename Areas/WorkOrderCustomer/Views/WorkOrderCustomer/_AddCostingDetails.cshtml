@@ -108,17 +108,6 @@
         <div class="form-group col-md-12">
             <button id="btnAdd" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;margin-top:-30px">Add Cost</button>
         </div>
-
-        @*<div class="form-group" col-md-12">
-                @{ string btnText = "Add";
-                    if (CostingId != null && CostingId != 0)
-                    {
-                        btnText = "Update Cost";
-                        <input type="button" class="btn btn-danger btn-sm" onclick="CancelCostValues();" value="Cancel" id="btnCancelCost">
-                    }
-                }
-                <input type="submit" value="@btnText" id="btnAddCosting" class="btn btn-info btn-sm" style="float:right;margin-top:-15px" />
-            </div>*@
     }
 </div>
          <hr />
@@ -235,9 +224,8 @@
     function funCostEdit(EnquirySampleId, CostingId) {
       debugger
         $("#divCosting").css("display", "block");
-       // var costid = CostingId;
         $('#third').load('/WorkOrderCustomer/WorkOrderCustomer/_AddCostingDetails?WorkOrderId=' + @ViewBag.WorkOrderId + "&EnquirySampleID=" + EnquirySampleId + '&CostingId=' + CostingId);
-       // $("#btnAdd").inn = "Update";
+
     }
 
     function funCostDelete(CostingId) {

@@ -191,17 +191,17 @@
 @Scripts.Render("~/bundles/unobtrusive")
 
 <script>
-    //function AddParameterMasterSuccess(result) {
-    //    debugger
-    //    if (result.Status == "success") {
-    //        alert(result.message);
-    //        location.href = '/Configuration/ParameterMaster/ParameterMasterList';
-    //    }
-    //    else {
+    function AddParameterMasterSuccess(result) {
+        debugger
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/ParameterMaster/ParameterMasterList';
+        }
+        else {
 
-    //        alert("Something Went Wrong");
-    //    }
-    //}
+            alert("Something Went Wrong");
+        }
+    }
 
     $('#SampleTypeProductId').change(function () {
         debugger

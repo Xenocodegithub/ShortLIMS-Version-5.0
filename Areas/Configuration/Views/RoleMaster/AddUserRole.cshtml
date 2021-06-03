@@ -84,9 +84,13 @@
 @Scripts.Render("~/bundles/unobtrusive")
 <script>
     function AddUserRoleSuccess(result) {
+        debugger;
         if (result.Status == "success") {
             alert(result.message);
             location.href = '/Configuration/RoleMaster/UserRoleList';
+        }
+        else if (result.Status == "Already") {
+            alert(result.message);
         }
     }
 </script>
