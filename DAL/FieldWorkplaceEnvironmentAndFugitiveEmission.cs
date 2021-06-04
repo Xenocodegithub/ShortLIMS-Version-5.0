@@ -25,7 +25,7 @@ namespace LIMS_DEMO.DAL
         public Nullable<long> EnquiryId { get; set; }
         public Nullable<byte> StatusId { get; set; }
         public Nullable<System.DateTime> SurveyDate { get; set; }
-        public Nullable<int> InstrumentId { get; set; }
+        public string InstrumentId { get; set; }
         public Nullable<int> DurationOfSampling { get; set; }
         public string FilterPaperAnalyzed { get; set; }
         public Nullable<int> FilterPaperNo { get; set; }

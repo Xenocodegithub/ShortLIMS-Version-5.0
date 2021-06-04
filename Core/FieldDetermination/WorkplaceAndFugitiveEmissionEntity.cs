@@ -11,8 +11,23 @@ namespace LIMS_DEMO.Core.FieldDetermination
         public Nullable<int> Sampling_Duration { get; set; }
         public Nullable<int> AvgFlowRate { get; set; }
         public Nullable<int> FilterPaperNo2 { get; set; }
+        public string CycloneCupNo { get; set; }
+        public Nullable<int> FlowRateFinal { get; set; }
+        public Nullable<int> FlowRateInitial { get; set; }
+        public Nullable<int> FlowRateDiff { get; set; }
+        public string FlowRateFinalM { get; set; }
+        public string FlowRateInitialM { get; set; }
+        public string FlowRateDiffM { get; set; }
+        public string TimeTotalizerFinal { get; set; }
+        public string TimeTotalizerInitial { get; set; }
+        public string TimeTotalizerDiff { get; set; }
+        public string SamplingDurationFinal { get; set; }
+        public string SamplingDurationInitial { get; set; }
+        public string SamplingDurationDiff { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
+        public string MatterSizeStartTime { get; set; }
+        public string MatterSizeEndTime { get; set; }
         public Nullable<int> TotalVolAirPassed_L { get; set; }
         public Nullable<int> TotalVolumeAirPassed_m3 { get; set; }
         public Nullable<int> Vs { get; set; }
@@ -28,14 +43,14 @@ namespace LIMS_DEMO.Core.FieldDetermination
         public Nullable<long> EnquiryId { get; set; }
         public Nullable<byte> StatusId { get; set; }
         public Nullable<System.DateTime> SurveyDate { get; set; }
-        public Nullable<int> InstrumentId { get; set; }
+        public string InstrumentId { get; set; }
         public Nullable<int> DurationOfSampling { get; set; }
         public string FilterPaperAnalyzed { get; set; }
         public Nullable<int> FilterPaperNo { get; set; }
         public Nullable<int> FlowRate_Final { get; set; }
         public Nullable<int> FlowRate_Initial { get; set; }
         public Nullable<int> FlowRate_Avg { get; set; }
-       
+
         public string RelativeHumidity { get; set; }
         public string Temperature { get; set; }
         public string GasesSampled { get; set; }

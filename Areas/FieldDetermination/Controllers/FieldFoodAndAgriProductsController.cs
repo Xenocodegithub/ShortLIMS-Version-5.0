@@ -91,34 +91,62 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Controllers
         {
             CoreFactory.foodAndAgriProductsEntity = new FoodAndAgriProductsEntity();
             var foodProductsList = (List<FDFoodAndAgriProductsModel>)TempData.Peek("FoodProductsList");
-            if (foodProductsList.Count > 0)
+            if (foodProductsList != null)
             {
-                foreach (var foodAndAgriProducts in foodProductsList)
+                if (foodProductsList.Count > 0)
                 {
-                    CoreFactory.foodAndAgriProductsEntity.FieldFoodAndAgriCultureId = foodAndAgriProducts.FieldFoodAndAgriCultureId;
-                    CoreFactory.foodAndAgriProductsEntity.SampleCollectionId = (long)model.SampleCollectionId;
-                    CoreFactory.foodAndAgriProductsEntity.EnquiryId = model.EnquiryId;
-                    CoreFactory.foodAndAgriProductsEntity.AnyOtherObservation = model.AnyOtherObservation;
-                    CoreFactory.foodAndAgriProductsEntity.Parameters = foodAndAgriProducts.ParameterName;
-                    CoreFactory.foodAndAgriProductsEntity.TestMethodName = foodAndAgriProducts.TestMethodName;
-                    CoreFactory.foodAndAgriProductsEntity.InField = foodAndAgriProducts.InField;
-                    CoreFactory.foodAndAgriProductsEntity.IsNABLAccredited = foodAndAgriProducts.IsNABLAccredited;
-                    CoreFactory.foodAndAgriProductsEntity.TestResults = foodAndAgriProducts.TestResults;
-                    CoreFactory.foodAndAgriProductsEntity.IsActive = true;
-                    CoreFactory.foodAndAgriProductsEntity.EnteredBy = LIMS.User.UserMasterID;
-                    CoreFactory.foodAndAgriProductsEntity.EnteredDate = DateTime.UtcNow;
-                    if (Save == "FieldSave")
+                    foreach (var foodAndAgriProducts in foodProductsList)
                     {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
-                        CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.foodAndAgriProductsBAL.AddFoodProducts(CoreFactory.foodAndAgriProductsEntity);
+                        CoreFactory.foodAndAgriProductsEntity.FieldFoodAndAgriCultureId = foodAndAgriProducts.FieldFoodAndAgriCultureId;
+                        CoreFactory.foodAndAgriProductsEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                        CoreFactory.foodAndAgriProductsEntity.EnquiryId = model.EnquiryId;
+                        //CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
+                        CoreFactory.foodAndAgriProductsEntity.AnyOtherObservation = model.AnyOtherObservation;
+                        CoreFactory.foodAndAgriProductsEntity.Parameters = foodAndAgriProducts.ParameterName;
+                        CoreFactory.foodAndAgriProductsEntity.TestMethodName = foodAndAgriProducts.TestMethodName;
+                        CoreFactory.foodAndAgriProductsEntity.InField = foodAndAgriProducts.InField;
+                        CoreFactory.foodAndAgriProductsEntity.IsNABLAccredited = foodAndAgriProducts.IsNABLAccredited;
+                        CoreFactory.foodAndAgriProductsEntity.TestResults = foodAndAgriProducts.TestResults;
+                        CoreFactory.foodAndAgriProductsEntity.IsActive = true;
+                        CoreFactory.foodAndAgriProductsEntity.EnteredBy = LIMS.User.UserMasterID;
+                        CoreFactory.foodAndAgriProductsEntity.EnteredDate = DateTime.UtcNow;
+                        if (Save == "FieldSave")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                            CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.foodAndAgriProductsBAL.AddFoodProducts(CoreFactory.foodAndAgriProductsEntity);
+                        }
+                        else if (Save == "FieldSubmit")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                            CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.foodAndAgriProductsBAL.AddFoodProducts(CoreFactory.foodAndAgriProductsEntity);
+                        }
+                        //strStatus = BALFactory.foodAndAgriProductsBAL.AddFoodProducts(CoreFactory.foodAndAgriProductsEntity);
                     }
-                    else if (Save == "FieldSubmit")
-                    {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
-                        CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.foodAndAgriProductsBAL.AddFoodProducts(CoreFactory.foodAndAgriProductsEntity);
-                    }
+                }
+
+            }
+            else
+            {
+                CoreFactory.foodAndAgriProductsEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                CoreFactory.foodAndAgriProductsEntity.EnquiryId = model.EnquiryId;
+                //CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
+                CoreFactory.foodAndAgriProductsEntity.AnyOtherObservation = model.AnyOtherObservation;
+                CoreFactory.foodAndAgriProductsEntity.IsActive = true;
+                CoreFactory.foodAndAgriProductsEntity.EnteredBy = LIMS.User.UserMasterID;
+                CoreFactory.foodAndAgriProductsEntity.EnteredDate = DateTime.UtcNow;
+                if (Save == "FieldSave")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                    CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.foodAndAgriProductsBAL.AddFoodProducts(CoreFactory.foodAndAgriProductsEntity);
+                }
+                else if (Save == "FieldSubmit")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                    CoreFactory.foodAndAgriProductsEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.foodAndAgriProductsBAL.AddFoodProducts(CoreFactory.foodAndAgriProductsEntity);
                 }
             }
             return Json(new { Status = strStatus, message = "Values Entered successfully." }, JsonRequestBehavior.AllowGet);

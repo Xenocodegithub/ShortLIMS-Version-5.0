@@ -1425,7 +1425,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnquiryId" Type="bigint" />
           <Property Name="StatusId" Type="tinyint" />
           <Property Name="SurveyDate" Type="datetime" />
-          <Property Name="InstrumentId" Type="int" />
+          <Property Name="InstrumentId" Type="nvarchar" MaxLength="50" />
           <Property Name="DurationOfSampling" Type="int" />
           <Property Name="FilterPaperAnalyzed" Type="varchar" MaxLength="50" />
           <Property Name="FilterPaperNo" Type="int" />
@@ -2014,6 +2014,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnteredDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ActiveStatus" Type="bit" />
         </EntityType>
         <EntityType Name="SolutionPreparationData">
           <Key>
@@ -9839,7 +9840,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnquiryId" Type="Int64" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="SurveyDate" Type="DateTime" Precision="3" />
-          <Property Name="InstrumentId" Type="Int32" />
+          <Property Name="InstrumentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DurationOfSampling" Type="Int32" />
           <Property Name="FilterPaperAnalyzed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FilterPaperNo" Type="Int32" />
@@ -10507,6 +10508,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ActiveStatus" Type="Boolean" />
           <NavigationProperty Name="ParameterGroupMaster" Relationship="Self.FK_SampleParameterPlanning_ParameterGroupMaster" FromRole="SampleParameterPlanning" ToRole="ParameterGroupMaster" />
           <NavigationProperty Name="SampleCollection" Relationship="Self.FK_SampleParameterPlanning_SampleCollection" FromRole="SampleParameterPlanning" ToRole="SampleCollection" />
           <NavigationProperty Name="UserMaster" Relationship="Self.FK_SampleParameterPlanning_AnalystUserMaster" FromRole="SampleParameterPlanning" ToRole="UserMaster" />
@@ -19735,6 +19737,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
                 <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

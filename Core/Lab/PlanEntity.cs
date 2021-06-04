@@ -16,6 +16,7 @@ namespace LIMS_DEMO.Core.Lab
         public string SampleNameOriginal { get; set; }
         public string MatrixName { get; set; }
         public string StatusName { get; set; }
+        public int PlanActive { get; set; }
     }
     public class SampleInfoEntity
     {

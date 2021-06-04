@@ -53,7 +53,7 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Controllers
                     ViewBag.CurrentStatus = workplaceInfo.WorkplaceDetails.CurrentStatus;
                     model.SurveyDate = Convert.ToDateTime(workplaceInfo.WorkplaceDetails.SurveyDate).Date;
                     model.SurveyDateDisplay = Convert.ToDateTime(model.SurveyDate).ToString("dd/MM/yyyy");
-                    model.InstrumentId = (Int32)workplaceInfo.WorkplaceDetails.InstrumentId;
+                    model.InstrumentId = workplaceInfo.WorkplaceDetails.InstrumentId;
                     model.DurationOfSampling = (Int32)workplaceInfo.WorkplaceDetails.DurationOfSampling;
                     model.FilterPaperAnalyzed = workplaceInfo.WorkplaceDetails.FilterPaperAnalyzed;
                     model.FilterPaperNo = (Int32)workplaceInfo.WorkplaceDetails.FilterPaperNo;
@@ -112,64 +112,142 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Controllers
         {
             CoreFactory.workplaceAndFugitiveEmissionEntity = new WorkplaceAndFugitiveEmissionEntity();
             var workplaceList = (List<FDWorkplaceEnvAndFugutiveEmissionModel>)TempData.Peek("WorkplaceList");
-            if (workplaceList.Count > 0)
+            if (workplaceList != null)
             {
-                foreach (var workplace in workplaceList)
+                if (workplaceList.Count > 0)
                 {
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.WorkplaceID = Convert.ToByte(model.WorkplaceID);
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.SampleCollectionId = (long)model.SampleCollectionId;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.EnquiryId = model.EnquiryId;
-                    //CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.SurveyDate = model.SurveyDate;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.InstrumentId = model.InstrumentId;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.DurationOfSampling = model.DurationOfSampling;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperAnalyzed = model.FilterPaperAnalyzed;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo = model.FilterPaperNo;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Final = model.FlowRate_Final;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Initial = model.FlowRate_Initial;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Avg = model.FlowRate_Avg;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.RelativeHumidity = model.RelativeHumidity;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.Temperature = model.Temperature;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.AnyObservation = model.AnyObservation;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo2 = model.FilterPaperNo2;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.StartTime = model.StartTime;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.EndTime = model.EndTime;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.Sampling_Duration = model.Sampling_Duration;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.AvgFlowRate = model.AvgFlowRate;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.TotalVolAirPassed_L = model.TotalVolAirPassed_L;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.TotalVolumeAirPassed_m3 = model.TotalVolumeAirPassed_m3;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.IsActive = true;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredBy = LIMS.User.UserMasterID;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredDate = DateTime.UtcNow;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.WorkplaceID = Convert.ToByte(model.WorkplaceID);
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.WorkplaceGasID = workplace.WorkplaceGasID;
-                    //CoreFactory.workplaceAndFugitiveEmissionEntity.GasesSampled = workplace.GasesSampled;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.Parameters = workplace.ParameterName;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.TestMethodName = workplace.TestMethodName;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.InField = workplace.InField;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.IsNABLAccredited = workplace.IsNABLAccredited;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.RotameterFlow = workplace.RotameterFlow;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.VolImpingingSol = workplace.VolImpingingSol;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.BottleNo = workplace.BottleNo;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.Duration = workplace.Duration;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.Vs = workplace.Vs;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.PreservationDone = workplace.PreservationDone;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.SampleCollectionId = model.SampleCollectionId.Value;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.IsActive = true;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredBy = LIMS.User.UserMasterID;
-                    CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredDate = DateTime.UtcNow;
-                    if (Save == "FieldSave")
+                    foreach (var workplace in workplaceList)
                     {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
-                        CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
-                        model.WorkplaceID = (Int32)BALFactory.workplaceAndFugitiveEmissionBAL.AddWorkplace(CoreFactory.workplaceAndFugitiveEmissionEntity);
+                        //if (model.WorkplaceID == 0)
+                        //{
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.WorkplaceID = Convert.ToByte(model.WorkplaceID);
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.EnquiryId = model.EnquiryId;
+                        //CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.SurveyDate = model.SurveyDate;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.InstrumentId = model.InstrumentId;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.DurationOfSampling = model.DurationOfSampling;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperAnalyzed = model.FilterPaperAnalyzed;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo = model.FilterPaperNo;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Final = model.FlowRate_Final;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Initial = model.FlowRate_Initial;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Avg = model.FlowRate_Avg;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.RelativeHumidity = model.RelativeHumidity;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.Temperature = model.Temperature;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.AnyObservation = model.AnyObservation;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo2 = model.FilterPaperNo2;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.MatterSizeStartTime = model.MatterSizeStartTime;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.MatterSizeEndTime = model.MatterSizeEndTime;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.SamplingDurationDiff = model.SamplingDurationDiff;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.SamplingDurationFinal = model.SamplingDurationFinal;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.SamplingDurationInitial = model.SamplingDurationInitial;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRateDiffM = model.FlowRateDiffM;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRateInitialM = model.FlowRateInitialM;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRateFinalM = model.FlowRateFinalM;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.CycloneCupNo = model.CycloneCupNo;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.TimeTotalizerDiff = model.TimeTotalizerDiff;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.TimeTotalizerFinal = model.TimeTotalizerFinal;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.TimeTotalizerInitial = model.TimeTotalizerInitial;
+
+
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo2 = model.FilterPaperNo2;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.StartTime = model.StartTime;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.EndTime = model.EndTime;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.Sampling_Duration = model.Sampling_Duration;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.AvgFlowRate = model.AvgFlowRate;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.TotalVolAirPassed_L = model.TotalVolAirPassed_L;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.TotalVolumeAirPassed_m3 = model.TotalVolumeAirPassed_m3;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.IsActive = true;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredBy = LIMS.User.UserMasterID;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredDate = DateTime.UtcNow;
+                        //}
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.WorkplaceID = Convert.ToByte(model.WorkplaceID);
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.WorkplaceGasID = workplace.WorkplaceGasID;
+                        //CoreFactory.workplaceAndFugitiveEmissionEntity.GasesSampled = workplace.GasesSampled;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.Parameters = workplace.ParameterName;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.TestMethodName = workplace.TestMethodName;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.InField = workplace.InField;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.IsNABLAccredited = workplace.IsNABLAccredited;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.RotameterFlow = workplace.RotameterFlow;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.VolImpingingSol = workplace.VolImpingingSol;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.BottleNo = workplace.BottleNo;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.Duration = workplace.Duration;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.Vs = workplace.Vs;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.PreservationDone = workplace.PreservationDone;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.SampleCollectionId = model.SampleCollectionId.Value;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.IsActive = true;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredBy = LIMS.User.UserMasterID;
+                        CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredDate = DateTime.UtcNow;
+
+                        if (Save == "FieldSave")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                            CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
+                            model.WorkplaceID = (Int32)BALFactory.workplaceAndFugitiveEmissionBAL.AddWorkplace(CoreFactory.workplaceAndFugitiveEmissionEntity);
+                        }
+                        else if (Save == "FieldSubmit")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                            CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
+                            model.WorkplaceID = (Int32)BALFactory.workplaceAndFugitiveEmissionBAL.AddWorkplace(CoreFactory.workplaceAndFugitiveEmissionEntity);
+                        }
+                        //model.WorkplaceID = (Int32)BALFactory.workplaceAndFugitiveEmissionBAL.AddWorkplace(CoreFactory.workplaceAndFugitiveEmissionEntity);
                     }
-                    else if (Save == "FieldSubmit")
-                    {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
-                        CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
-                        model.WorkplaceID = (Int32)BALFactory.workplaceAndFugitiveEmissionBAL.AddWorkplace(CoreFactory.workplaceAndFugitiveEmissionEntity);
-                    }
+                }
+
+            }
+            else
+            {
+                CoreFactory.workplaceAndFugitiveEmissionEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.EnquiryId = model.EnquiryId;
+                //CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.SurveyDate = model.SurveyDate;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.InstrumentId = model.InstrumentId;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.DurationOfSampling = model.DurationOfSampling;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperAnalyzed = model.FilterPaperAnalyzed;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo = model.FilterPaperNo;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Final = model.FlowRate_Final;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Initial = model.FlowRate_Initial;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRate_Avg = model.FlowRate_Avg;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.RelativeHumidity = model.RelativeHumidity;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.Temperature = model.Temperature;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.AnyObservation = model.AnyObservation;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo2 = model.FilterPaperNo2;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.MatterSizeStartTime = model.MatterSizeStartTime;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.MatterSizeEndTime = model.MatterSizeEndTime;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.SamplingDurationDiff = model.SamplingDurationDiff;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.SamplingDurationFinal = model.SamplingDurationFinal;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.SamplingDurationInitial = model.SamplingDurationInitial;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRateDiffM = model.FlowRateDiffM;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRateInitialM = model.FlowRateInitialM;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FlowRateFinalM = model.FlowRateFinalM;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.CycloneCupNo = model.CycloneCupNo;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.TimeTotalizerDiff = model.TimeTotalizerDiff;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.TimeTotalizerFinal = model.TimeTotalizerFinal;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.TimeTotalizerInitial = model.TimeTotalizerInitial;
+
+
+                CoreFactory.workplaceAndFugitiveEmissionEntity.FilterPaperNo2 = model.FilterPaperNo2;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.StartTime = model.StartTime;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.EndTime = model.EndTime;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.Sampling_Duration = model.Sampling_Duration;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.AvgFlowRate = model.AvgFlowRate;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.TotalVolAirPassed_L = model.TotalVolAirPassed_L;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.TotalVolumeAirPassed_m3 = model.TotalVolumeAirPassed_m3;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.IsActive = true;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredBy = LIMS.User.UserMasterID;
+                CoreFactory.workplaceAndFugitiveEmissionEntity.EnteredDate = DateTime.UtcNow;
+                if (Save == "FieldSave")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                    CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
+                    model.WorkplaceID = (Int32)BALFactory.workplaceAndFugitiveEmissionBAL.AddWorkplace(CoreFactory.workplaceAndFugitiveEmissionEntity);
+                }
+                else if (Save == "FieldSubmit")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                    CoreFactory.workplaceAndFugitiveEmissionEntity.StatusId = (byte)iStatusId;
+                    model.WorkplaceID = (Int32)BALFactory.workplaceAndFugitiveEmissionBAL.AddWorkplace(CoreFactory.workplaceAndFugitiveEmissionEntity);
                 }
             }
             return Json(new { WorkplaceID = model.WorkplaceID, message = "Values Entered successfully." }, JsonRequestBehavior.AllowGet);

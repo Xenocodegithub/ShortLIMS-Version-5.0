@@ -56,13 +56,21 @@ namespace LIMS_DEMO.DAL.Lab
                                   pgm.ProductGroupName,
                                   sgm.SubGroupName,
                                   mm.MatrixName,
-                                  sm.StatusName
-
+                                  sm.StatusName,
+                                  epd.EnquirySampleID
                               }).OrderByDescending(sc => sc.SampleCollectionId).ToList().Distinct();
                 IList<PlanEntity> PlanEntities = new List<PlanEntity>();
 
                 foreach (var item in result)
                 {
+                    var count1 = 0; var count2 = 0;
+                    count1 = (from scp in _dbContext.SampleParameterPlannings
+                              where (scp.SampleCollectionId == item.SampleCollectionId) && scp.ActiveStatus == true
+                              select new { scp.SampleCollectionId }).Count();
+                    count2 = (from epd in _dbContext.EnquiryParameterDetails
+                              where epd.EnquirySampleID == item.EnquirySampleID
+                              select new { epd.EnquiryParameterDetailID }).Count();
+
                     PlanEntity PlanEntity = new PlanEntity();
                     PlanEntity.SampleCollectionId = item.SampleCollectionId;
                     PlanEntity.SampleNo = item.SampleNo;
@@ -74,6 +82,18 @@ namespace LIMS_DEMO.DAL.Lab
                     PlanEntity.MatrixName = item.MatrixName;
                     PlanEntity.StatusName = item.StatusName;
                     PlanEntities.Add(PlanEntity);
+                    if (count1 == 0)
+                    {
+                        PlanEntity.PlanActive = 1;
+                    }
+                    else if (count1 < count2)
+                    {
+                        PlanEntity.PlanActive = 1;
+                    }
+                    else
+                    {
+                        PlanEntity.PlanActive = 0;
+                    }
                 }
                 return PlanEntities;
             }
@@ -287,8 +307,9 @@ namespace LIMS_DEMO.DAL.Lab
                     AnalystComment = "",
                     //ReviewerComment = "",
                     ApproverComment = "",
+                    ActiveStatus = true,
                     EnteredDate = DateTime.Now
-                }); ;
+                }) ; ;
                 _dbContext.SaveChanges();
                 return true;
             }

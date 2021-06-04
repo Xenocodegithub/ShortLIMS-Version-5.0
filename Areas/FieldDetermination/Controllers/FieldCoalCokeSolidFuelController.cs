@@ -92,36 +92,64 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Controllers
         {
             CoreFactory.coalCokeSolidFuelEntity = new CoalCokeSolidFuelEntity();
             var coalCokeList = (List<FDCoalCokeSolidFuelModel>)TempData.Peek("CoalCokeList");
-            if (coalCokeList.Count > 0)
+            if (coalCokeList != null)
             {
-                foreach (var coalCoke in coalCokeList)
+                if (coalCokeList.Count > 0)
                 {
-                    CoreFactory.coalCokeSolidFuelEntity.FieldId = Convert.ToByte(coalCoke.CoalCokeId);
-                    CoreFactory.coalCokeSolidFuelEntity.SampleCollectionId = (long)model.SampleCollectionId;
-                    CoreFactory.coalCokeSolidFuelEntity.EnquiryId = model.EnquiryId;
-                    //CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
-                    CoreFactory.coalCokeSolidFuelEntity.AnyOtherObservations = model.AnyOtherObservation;
-                    CoreFactory.coalCokeSolidFuelEntity.Parameters = coalCoke.ParameterName;
-                    CoreFactory.coalCokeSolidFuelEntity.TestMethodName = coalCoke.TestMethodName;
-                    CoreFactory.coalCokeSolidFuelEntity.InField = coalCoke.InField;
-                    CoreFactory.coalCokeSolidFuelEntity.IsNABLAccredited = coalCoke.IsNABLAccredited;
-                    CoreFactory.coalCokeSolidFuelEntity.TestResults = coalCoke.TestResults;
-                    //CoreFactory.coalCokeSolidFuelEntity.ParameterMappingId = coalCoke.ParameterMappingId;
-                    CoreFactory.coalCokeSolidFuelEntity.IsActive = true;
-                    CoreFactory.coalCokeSolidFuelEntity.EnteredBy = LIMS.User.UserMasterID;
-                    CoreFactory.coalCokeSolidFuelEntity.EnteredDate = DateTime.UtcNow;
-                    if (Save == "FieldSave")
+                    foreach (var coalCoke in coalCokeList)
                     {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
-                        CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.coalCokeSolidFuelsBAL.AddCoal(CoreFactory.coalCokeSolidFuelEntity);
+                        CoreFactory.coalCokeSolidFuelEntity.FieldId = Convert.ToByte(coalCoke.CoalCokeId);
+                        CoreFactory.coalCokeSolidFuelEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                        CoreFactory.coalCokeSolidFuelEntity.EnquiryId = model.EnquiryId;
+                        //CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
+                        CoreFactory.coalCokeSolidFuelEntity.AnyOtherObservations = model.AnyOtherObservation;
+                        CoreFactory.coalCokeSolidFuelEntity.Parameters = coalCoke.ParameterName;
+                        CoreFactory.coalCokeSolidFuelEntity.TestMethodName = coalCoke.TestMethodName;
+                        CoreFactory.coalCokeSolidFuelEntity.InField = coalCoke.InField;
+                        CoreFactory.coalCokeSolidFuelEntity.IsNABLAccredited = coalCoke.IsNABLAccredited;
+                        CoreFactory.coalCokeSolidFuelEntity.TestResults = coalCoke.TestResults;
+                        //CoreFactory.coalCokeSolidFuelEntity.ParameterMappingId = coalCoke.ParameterMappingId;
+                        CoreFactory.coalCokeSolidFuelEntity.IsActive = true;
+                        CoreFactory.coalCokeSolidFuelEntity.EnteredBy = LIMS.User.UserMasterID;
+                        CoreFactory.coalCokeSolidFuelEntity.EnteredDate = DateTime.UtcNow;
+
+                        if (Save == "FieldSave")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                            CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.coalCokeSolidFuelsBAL.AddCoal(CoreFactory.coalCokeSolidFuelEntity);
+                        }
+                        else if (Save == "FieldSubmit")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                            CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.coalCokeSolidFuelsBAL.AddCoal(CoreFactory.coalCokeSolidFuelEntity);
+                        }
+                        //strStatus = BALFactory.coalCokeSolidFuelsBAL.AddCoal(CoreFactory.coalCokeSolidFuelEntity);
                     }
-                    else if (Save == "FieldSubmit")
-                    {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
-                        CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.coalCokeSolidFuelsBAL.AddCoal(CoreFactory.coalCokeSolidFuelEntity);
-                    }
+                }
+            }
+            else
+            {
+                CoreFactory.coalCokeSolidFuelEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                CoreFactory.coalCokeSolidFuelEntity.EnquiryId = model.EnquiryId;
+                //CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
+                CoreFactory.coalCokeSolidFuelEntity.AnyOtherObservations = model.AnyOtherObservation;
+                CoreFactory.coalCokeSolidFuelEntity.IsActive = true;
+                CoreFactory.coalCokeSolidFuelEntity.EnteredBy = LIMS.User.UserMasterID;
+                CoreFactory.coalCokeSolidFuelEntity.EnteredDate = DateTime.UtcNow;
+
+                if (Save == "FieldSave")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                    CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.coalCokeSolidFuelsBAL.AddCoal(CoreFactory.coalCokeSolidFuelEntity);
+                }
+                else if (Save == "FieldSubmit")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                    CoreFactory.coalCokeSolidFuelEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.coalCokeSolidFuelsBAL.AddCoal(CoreFactory.coalCokeSolidFuelEntity);
                 }
             }
             return Json(new { Status = strStatus, message = "Values Entered successfully." }, JsonRequestBehavior.AllowGet);

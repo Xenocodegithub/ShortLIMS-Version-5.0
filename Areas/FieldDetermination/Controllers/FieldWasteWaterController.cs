@@ -110,43 +110,68 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Controllers
             //if (Save == "FieldSubmit")
             //{
             // int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
-            if (wasteWaterList.Count > 0)
+            if (wasteWaterList != null)
             {
-                foreach (var wastewater in wasteWaterList)
+                if (wasteWaterList.Count > 0)
                 {
-                    //CoreFactory.wasteWaterEntity.WasteWaterID = Convert.ToInt32(model.WasteWaterID);
-                    CoreFactory.wasteWaterEntity.WasteWaterID = Convert.ToInt32(wastewater.WasteWaterID);
-                    CoreFactory.wasteWaterEntity.SampleCollectionId = (long)model.SampleCollectionId;
-                    CoreFactory.wasteWaterEntity.EnquiryId = model.EnquiryId;
-                    //CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
-                    CoreFactory.wasteWaterEntity.AnyOtherObservation = model.AnyOtherObservation;
-                    CoreFactory.wasteWaterEntity.WaterUse = model.WaterUse;
-                    //CoreFactory.wasteWaterEntity.Parameters = wastewater.Parameters;
-                    CoreFactory.wasteWaterEntity.Parameters = wastewater.ParameterName;
-                    CoreFactory.wasteWaterEntity.TestMethodName = wastewater.TestMethodName;
-                    CoreFactory.wasteWaterEntity.InField = wastewater.InField;
-                    CoreFactory.wasteWaterEntity.IsNABLAccredited = wastewater.IsNABLAccredited;
-                    CoreFactory.wasteWaterEntity.TestResults = wastewater.TestResults;
-                    CoreFactory.wasteWaterEntity.ParameterMappingId = wastewater.ParameterMappingId;
-                    CoreFactory.wasteWaterEntity.IsActive = true;
-                    CoreFactory.wasteWaterEntity.EnteredBy = LIMS.User.UserMasterID;
-                    CoreFactory.wasteWaterEntity.EnteredDate = DateTime.UtcNow;
-                    if (Save == "FieldSave")
+                    foreach (var wastewater in wasteWaterList)
                     {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
-                        CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
+                        //CoreFactory.wasteWaterEntity.WasteWaterID = Convert.ToInt32(model.WasteWaterID);
+                        CoreFactory.wasteWaterEntity.WasteWaterID = Convert.ToInt32(wastewater.WasteWaterID);
+                        CoreFactory.wasteWaterEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                        CoreFactory.wasteWaterEntity.EnquiryId = model.EnquiryId;
+                        //CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
+                        CoreFactory.wasteWaterEntity.AnyOtherObservation = model.AnyOtherObservation;
+                        CoreFactory.wasteWaterEntity.WaterUse = model.WaterUse;
+                        //CoreFactory.wasteWaterEntity.Parameters = wastewater.Parameters;
+                        CoreFactory.wasteWaterEntity.Parameters = wastewater.ParameterName;
+                        CoreFactory.wasteWaterEntity.TestMethodName = wastewater.TestMethodName;
+                        CoreFactory.wasteWaterEntity.InField = wastewater.InField;
+                        CoreFactory.wasteWaterEntity.IsNABLAccredited = wastewater.IsNABLAccredited;
+                        CoreFactory.wasteWaterEntity.TestResults = wastewater.TestResults;
+                        CoreFactory.wasteWaterEntity.ParameterMappingId = wastewater.ParameterMappingId;
+                        CoreFactory.wasteWaterEntity.IsActive = true;
+                        CoreFactory.wasteWaterEntity.EnteredBy = LIMS.User.UserMasterID;
+                        CoreFactory.wasteWaterEntity.EnteredDate = DateTime.UtcNow;
+                        if (Save == "FieldSave")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                            CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
+                        }
+                        else if (Save == "FieldSubmit")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                            CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
+                        }
+                        //strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
                     }
-                    else if (Save == "FieldSubmit")
-                    {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
-                        CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
-                    }
-                    //strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
                 }
             }
-            //}
+            else
+            {
+                CoreFactory.wasteWaterEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                CoreFactory.wasteWaterEntity.EnquiryId = model.EnquiryId;
+                //CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
+                CoreFactory.wasteWaterEntity.AnyOtherObservation = model.AnyOtherObservation;
+                CoreFactory.wasteWaterEntity.WaterUse = model.WaterUse;
+                CoreFactory.wasteWaterEntity.IsActive = true;
+                CoreFactory.wasteWaterEntity.EnteredBy = LIMS.User.UserMasterID;
+                CoreFactory.wasteWaterEntity.EnteredDate = DateTime.UtcNow;
+                if (Save == "FieldSave")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                    CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
+                }
+                else if (Save == "FieldSubmit")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                    CoreFactory.wasteWaterEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
+                }
+            }            //}
             //strStatus = BALFactory.wasteWaterBAL.AddWasteWater(CoreFactory.wasteWaterEntity);
             return Json(new { Status = strStatus, message = "Values Entered successfully." }, JsonRequestBehavior.AllowGet);
         }
