@@ -265,7 +265,7 @@ namespace LIMS_DEMO.DAL.Lab
             }
             catch (Exception ex)
             {
-               
+                
                 return sampleInfoEntity;
             }
         }

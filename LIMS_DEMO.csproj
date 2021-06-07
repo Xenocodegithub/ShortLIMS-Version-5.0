@@ -81,22 +81,11 @@
       <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -216,7 +205,6 @@
     <Compile Include="Areas\Configuration\Models\MatrixMasterModel.cs" />
     <Compile Include="Areas\Configuration\Models\MenuMasterModel.cs" />
     <Compile Include="Areas\Configuration\Models\ModeOfCommunicationMasterModel.cs" />
-    <Compile Include="Areas\Configuration\Models\ParameterInfoModel.cs" />
     <Compile Include="Areas\Configuration\Models\ParameterMasterModel.cs" />
     <Compile Include="Areas\Configuration\Models\ProcedureMasterModel.cs" />
     <Compile Include="Areas\Configuration\Models\ProductGroupMasterModel.cs" />
@@ -241,6 +229,8 @@
     <Compile Include="Areas\Enquiry\Controllers\EnquiryController.cs" />
     <Compile Include="Areas\Enquiry\Controllers\QuotationController.cs" />
     <Compile Include="Areas\Enquiry\Controllers\SampleAndParameterController.cs" />
+    <Compile Include="Areas\Enquiry\Controllers\SampleController.cs" />
+    <Compile Include="Areas\Enquiry\Controllers\TRFController.cs" />
     <Compile Include="Areas\Enquiry\Controllers\WorkOrderController.cs" />
     <Compile Include="Areas\Enquiry\EnquiryAreaRegistration.cs" />
     <Compile Include="Areas\Enquiry\Models\ContractModel.cs" />
@@ -254,6 +244,7 @@
     <Compile Include="Areas\Enquiry\Models\QuotationLogModel.cs" />
     <Compile Include="Areas\Enquiry\Models\QuotationModel.cs" />
     <Compile Include="Areas\Enquiry\Models\SampleAndParametersModel.cs" />
+    <Compile Include="Areas\Enquiry\Models\SampleRegistrationModel.cs" />
     <Compile Include="Areas\Enquiry\Models\TermsAndConditionsModel.cs" />
     <Compile Include="Areas\Enquiry\Models\WorkOrderHODModel.cs" />
     <Compile Include="Areas\Enquiry\Models\WorkOrderModel.cs" />
@@ -414,11 +405,13 @@
     <Compile Include="Core\DropDowns\CatagoryEntity.cs" />
     <Compile Include="Core\DropDowns\CollectorEntity.cs" />
     <Compile Include="Core\DropDowns\CommunicationEntity.cs" />
+    <Compile Include="Core\DropDowns\DeliverEntity.cs" />
     <Compile Include="Core\DropDowns\EnvironmentalConditionEntity.cs" />
     <Compile Include="Core\DropDowns\FrequencyEntity.cs" />
     <Compile Include="Core\DropDowns\InvAddItemEntity.cs" />
     <Compile Include="Core\DropDowns\InvCapacityEntity.cs" />
     <Compile Include="Core\DropDowns\InventoryType.cs" />
+    <Compile Include="Core\DropDowns\InvoiceEntity.cs" />
     <Compile Include="Core\DropDowns\InvUnitEntity.cs" />
     <Compile Include="Core\DropDowns\ItemEntity.cs" />
     <Compile Include="Core\DropDowns\ParentMenuEntity.cs" />
@@ -1130,19 +1123,23 @@
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="packages\Microsoft.SqlServer.Types.14.0.314.76\content\SqlServerTypes\Loader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reporting\FrmQuotationReport.aspx.cs">
-      <DependentUpon>FrmQuotationReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reporting\FrmQuotationReport.aspx.designer.cs">
-      <DependentUpon>FrmQuotationReport.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reporting\frmShowReport.aspx.cs">
       <DependentUpon>frmShowReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reporting\frmShowReport.aspx.designer.cs">
       <DependentUpon>frmShowReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\QuotationData.cs">
+      <DependentUpon>QuotationData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\QuotationData.Designer.cs">
+      <DependentUpon>QuotationData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\QuotationData1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuotationData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Scripts\RPT\Report.aspx.cs">
       <DependentUpon>Report.aspx</DependentUpon>
@@ -1173,19 +1170,13 @@
     <Content Include="Component\fonts\ionicons.svg" />
     <Content Include="Component\fonts\themify-icons\themify-icons.css" />
     <Content Include="Component\fonts\themify.svg" />
-    <Content Include="Component\Images\6997.jpg" />
     <Content Include="Component\Images\banner.png" />
     <Content Include="Component\Images\bg1.jpg" />
-    <Content Include="Component\Images\bg2.jpg" />
-    <Content Include="Component\Images\bg3.jpg" />
-    <Content Include="Component\Images\bg4.jpg" />
-    <Content Include="Component\Images\bg5.jpg" />
     <Content Include="Component\Images\bg6.jpg" />
-    <Content Include="Component\Images\ghjghjgh.jpg" />
+    <Content Include="Component\Images\DP.jpg" />
     <Content Include="Component\Images\img.jpg" />
     <Content Include="Component\Images\lab.jpg" />
     <Content Include="Component\Images\logo_lims.png" />
-    <Content Include="Component\Images\neon-light.jpg" />
     <Content Include="Component\Images\nty.png" />
     <Content Include="Component\Images\nty2.png" />
     <Content Include="Component\plugins\air-datepicker\dist\css\datepicker.css" />
@@ -1639,9 +1630,13 @@
     <Content Include="Areas\Collection\Views\web.config" />
     <Content Include="Areas\ManageSampleCollection\Views\ManageSampleCollection\SampleCollectionCalendar.cshtml" />
     <Content Include="Areas\ManageSampleCollection\Views\ManageSampleCollection\_AssignSampler.cshtml" />
-    <Content Include="Areas\ManageSampleCollection\Views\ManageSampleCollection\web.config" />
+    <Content Include="Areas\ManageSampleCollection\Views\web.config" />
+    <Content Include="Areas\Inventory\Views\Purchase\PurchaseRecordList.cshtml" />
     <Content Include="Areas\Inventory\Views\Purchase\PurchaseRecord.cshtml" />
     <Content Include="Areas\Inventory\Views\Purchase\PurchaseRecordSecondList.cshtml" />
+    <Content Include="Areas\Inventory\Views\Purchase\PurchaseSupplierList.cshtml" />
+    <Content Include="Areas\Inventory\Views\Purchase\PurchasSupplierForm.cshtml" />
+    <Content Include="Areas\Inventory\Views\Purchase\TermsMaster.cshtml" />
     <Content Include="Areas\FieldDetermination\Views\FieldWasteWater\FieldWasteWater.cshtml" />
     <Content Include="Areas\FieldDetermination\Views\FieldWasteWater\_FDWasteWaterList.cshtml" />
     <Content Include="Areas\FieldDetermination\Views\FieldWasteWater\_FieldParameterUnit.cshtml" />
@@ -1650,7 +1645,11 @@
     <Content Include="Areas\FieldDetermination\Views\web.config" />
     <Content Include="Areas\Inventory\Views\InventoryBreakDown\AddBreakDown.cshtml" />
     <Content Include="Areas\Inventory\Views\Purchase\PurchaseRecordList.cshtml" />
+    <Content Include="Areas\Inventory\Views\Purchase\PurchaseRecord.cshtml" />
+    <Content Include="Areas\Inventory\Views\Purchase\PurchaseRecordSecondList.cshtml" />
     <Content Include="Areas\Inventory\Views\Purchase\PurchaseSupplierList.cshtml" />
+    <Content Include="Areas\Inventory\Views\Purchase\PurchasSupplierForm.cshtml" />
+    <Content Include="Areas\Inventory\Views\Purchase\TermsMaster.cshtml" />
     <Content Include="Areas\Enquiry\Views\Costing\_Costing.cshtml" />
     <Content Include="Areas\Enquiry\Views\Costing\_CostingList.cshtml" />
     <Content Include="Areas\Enquiry\Views\Costing\_SampleList.cshtml" />
@@ -1824,12 +1823,23 @@
     <Content Include="Areas\Inventory\Views\InventoryBreakDown\PerformanceCheak.cshtml" />
     <Content Include="Areas\Inventory\Views\InventoryBreakDown\PerformanceList.cshtml" />
     <Content Include="Areas\Inventory\Views\InventoryBreakDown\PlanePerformance.cshtml" />
-    <Content Include="Areas\Configuration\Views\Formulabuilder\ParameterMapping.cshtml" />
-    <Content Include="Areas\Inventory\Views\Purchase\TermsMaster.cshtml" />
-    <Content Include="Areas\Inventory\Views\Purchase\PurchasSupplierForm.cshtml" />
+    <Content Include="Areas\Invoice\Views\web.config" />
     <Content Include="Areas\Invoice\Views\Invoice\Index.cshtml" />
     <Content Include="Areas\Invoice\Views\Invoice\_CostingDetails.cshtml" />
-    <Content Include="Areas\Invoice\Views\web.config" />
+    <Content Include="Areas\Invoice\Views\Invoice\DailyInvoiceList.cshtml" />
+    <Content Include="Areas\Invoice\Views\Invoice\Payment.cshtml" />
+    <Content Include="Areas\Invoice\Views\Invoice\_PaymentList.cshtml" />
+    <Content Include="Areas\Invoice\Views\Invoice\RejectInvoice.cshtml" />
+    <Content Include="Areas\Invoice\Views\Invoice\RejectInvoiceList.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\AddWorkOrderCustomer.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_AddCustomerDetails.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_AddSampleDetails.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_Parameters.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_AddCostingDetails.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_AddWorkOrderDetails.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_AddLocation.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\SampleRegistration.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_AddSampleArrival.cshtml" />
     <EntityDeploy Include="DAL\DBLIMS.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBLIMS.Designer.cs</LastGenOutput>
@@ -1837,6 +1847,11 @@
     <Content Include="DAL\DBLIMS.edmx.diagram">
       <DependentUpon>DBLIMS.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Enquiry\Views\Sample\TRFSampleArrivalList.cshtml" />
+    <Content Include="Areas\Enquiry\Views\Sample\_QuantityList.cshtml" />
+    <Content Include="Areas\Enquiry\Views\TRF\TRFList.cshtml" />
+    <Content Include="Areas\Enquiry\Views\TRF\TRFPlannerAssignList.cshtml" />
+    <Content Include="Areas\Enquiry\Views\TRF\_PlannerSelect.cshtml" />
     <None Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll" />
     <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll" />
@@ -1933,6 +1948,8 @@
     <Content Include="packages\log4net.2.0.12\lib\netstandard2.0\log4net.dll" />
     <Content Include="packages\log4net.2.0.12\lib\netstandard2.0\log4net.xml" />
     <Content Include="packages\log4net.2.0.12\package-icon.png" />
+    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll" />
+    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.xml" />
     <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll" />
     <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.xml" />
     <Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll" />
@@ -2186,6 +2203,7 @@
     <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net40+sl5+win8+wp8+wpa81\Newtonsoft.Json.xml" />
     <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll" />
     <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.xml" />
+    <Content Include="packages\ReportViewerForMvc14.140.1000.523\content\ReportViewerWebForm.aspx" />
     <Content Include="packages\ReportViewerForMvc14.140.1000.523\lib\net45\ReportViewerForMvc.dll" />
     <Content Include="packages\SweetAlert.1.0.0\content\Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="packages\SweetAlert.1.0.0\content\Content\sweetalert\docs.css" />
@@ -2316,15 +2334,15 @@
     <Content Include="packages\ZXing.Net.0.16.6\lib\windows8\zxing.XML" />
     <Content Include="packages\ZXing.Net.0.16.6\lib\wp8\zxing.wp8.0.dll" />
     <Content Include="packages\ZXing.Net.0.16.6\lib\wp8\zxing.wp8.0.XML" />
-    <Content Include="Reporting\FrmQuotationReport.aspx" />
     <Content Include="Reporting\frmShowReport.aspx" />
-    <Content Include="Scripts\Application\InventoryBasicDetail.js" />
+    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\RPT\Report.aspx" />
     <Content Include="Scripts\Application\ApplicationSystem.js" />
     <Content Include="Scripts\Application\CalibrationDetails.js" />
     <Content Include="Scripts\Application\CategoryMaster.js" />
     <Content Include="Scripts\Application\Home.js" />
     <Content Include="Scripts\Application\InventoryAssignment.js" />
+    <Content Include="Scripts\Application\InventoryBasicDetail.js" />
     <Content Include="Scripts\Application\InventoryCapacityMaster.js" />
     <Content Include="Scripts\Application\InventoryCommercialDetails.js" />
     <Content Include="Scripts\Application\InventoryIndent.js" />
@@ -2412,9 +2430,7 @@
     <Content Include="Areas\Inventory\Views\InventoryMaintainanceAndCalibration\CalibrationList.cshtml" />
     <Content Include="Areas\Inventory\Views\InventoryMaintainanceAndCalibration\Maintainance.cshtml" />
     <Content Include="Areas\Inventory\Views\InventoryMaintainanceAndCalibration\Calibration.cshtml" />
-    <Content Include="Reports\A_REPORTCoal.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Reports\A_REPORTCoal.rdl" />
     <Content Include="Areas\Configuration\Views\CountryMaster\AddCountry.cshtml" />
     <Content Include="Areas\Configuration\Views\DisciplineMaster\AddDiscipline.cshtml" />
     <Content Include="Areas\Configuration\Views\DisciplineMaster\DisciplineList.cshtml" />
@@ -2475,6 +2491,10 @@
     <Content Include="packages\jQuery.3.4.1\Tools\uninstall.ps1" />
     <Content Include="packages\jQuery.Validation.1.17.0\.signature.p7s" />
     <Content Include="packages\jQuery.Validation.1.17.0\jQuery.Validation.1.17.0.nupkg" />
+    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\.signature.p7s" />
+    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\Content\Web.config.install.xdt" />
+    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\Content\Web.config.uninstall.xdt" />
+    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\Microsoft.AspNet.Mvc.5.2.7.nupkg" />
     <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\.signature.p7s" />
     <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\Microsoft.AspNet.Razor.3.2.7.nupkg" />
     <Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\.signature.p7s" />
@@ -2531,92 +2551,37 @@
     <Content Include="packages\Newtonsoft.Json.12.0.2\Newtonsoft.Json.12.0.2.nupkg" />
     <Content Include="packages\WebGrease.1.6.0\.signature.p7s" />
     <Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
-    <Content Include="Reports\AAQReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AAQReport24hrs.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AAQReport8hrs.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AcknowledgementReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AmbientAirARCReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AmbientNoiseReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AmbientWorkplaceNoiseSampleID.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AmbientWorkplaceTestReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AnalysisReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\ApproverReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\AREPORTSoil.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\BreakdownmaintenanceRecordReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\BuildingMaterial.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\CalibrationScheduleReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Coal_Report.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\DisposalReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\EffluentsSingleReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\FDAmbientAir.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\FDMicrobiologicalAirMonitoring.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\FDNoiseLevelMonitoring.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\FDWorkPlaceAndFugutive.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\FoodReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Invoice.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\LaboratoryInstrumentReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\PlannerReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\POReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\POReportsecond.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\POReportThird.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\QF.SALE.02REPORTCoal.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Reports\AAQReport.rdl" />
+    <Content Include="Reports\AAQReport24hrs.rdl" />
+    <Content Include="Reports\AAQReport8hrs.rdl" />
+    <Content Include="Reports\AcknowledgementReport.rdl" />
+    <Content Include="Reports\AmbientAirARCReport.rdl" />
+    <Content Include="Reports\AmbientNoiseReport.rdl" />
+    <Content Include="Reports\AmbientWorkplaceNoiseSampleID.rdl" />
+    <Content Include="Reports\AmbientWorkplaceTestReport.rdl" />
+    <Content Include="Reports\AnalysisReport.rdl" />
+    <Content Include="Reports\ApproverReport.rdl" />
+    <Content Include="Reports\AREPORTSoil.rdl" />
+    <Content Include="Reports\BreakdownmaintenanceRecordReport.rdl" />
+    <Content Include="Reports\BuildingMaterial.rdl" />
+    <Content Include="Reports\CalibrationScheduleReport.rdl" />
+    <Content Include="Reports\Coal_Report.rdl" />
+    <Content Include="Reports\DisposalReport.rdl" />
+    <Content Include="Reports\EffluentsSingleReport.rdl" />
+    <Content Include="Reports\FDAmbientAir.rdl" />
+    <Content Include="Reports\FDMicrobiologicalAirMonitoring.rdl" />
+    <Content Include="Reports\FDNoiseLevelMonitoring.rdl" />
+    <Content Include="Reports\FDWorkPlaceAndFugutive.rdl" />
+    <Content Include="Reports\FoodReport.rdl" />
+    <Content Include="Reports\Invoice.rdl" />
+    <Content Include="Reports\LaboratoryInstrumentReport.rdl" />
+    <Content Include="Reports\PlannerReport.rdl" />
+    <Content Include="Reports\POReport.rdl" />
+    <Content Include="Reports\POReportsecond.rdl" />
+    <Content Include="Reports\POReportThird.rdl" />
+    <Content Include="Reports\QF.SALE.02REPORTCoal.rdl" />
+    <Content Include="Reports\QuotationData.xsc">
+      <DependentUpon>QuotationData.xsd</DependentUpon>
     </Content>
     <Content Include="packages\log4net.2.0.12\.signature.p7s" />
     <Content Include="packages\log4net.2.0.12\log4net.2.0.12.nupkg" />
@@ -2675,75 +2640,41 @@
     <Content Include="packages\ZXing.Net.0.16.6\lib\windows8\zxing.pri" />
     <Content Include="packages\ZXing.Net.0.16.6\lib\windows8\zxing.winmd" />
     <Content Include="packages\ZXing.Net.0.16.6\ZXing.Net.0.16.6.nupkg" />
-    <Content Include="Reports\ConsumableChemicalBiologicalMediaReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Reports\ConsumableChemicalBiologicalMediaReport.rdl" />
+    <Content Include="Reports\ConsumableFilterAid.rdl" />
+    <Content Include="Reports\ConsumableSafetyMaterial.rdl" />
+    <Content Include="Reports\ConsumableOtherConsumable.rdl" />
+    <Content Include="Reports\CRMReport.rdl" />
+    <Content Include="Reports\MaintenanceInstrumentHistoryCardReport.rdl" />
+    <Content Include="Reports\NonConsumableGlassware.rdl" />
+    <Content Include="Reports\NonConsumableGlasswareCalibrationSchedule.rdl" />
+    <Content Include="Reports\NonConsumableInstrument.rdl" />
+    <Content Include="Reports\NonConsumableInstrumentMaintainanceSchedule.rdl" />
+    <Content Include="Reports\PerformanceCheckReport.rdl" />
+    <Content Include="Reports\AcknowledgementRepor.pdf" />
+    <Content Include="Reports\AmbientAirARCReport24hrs.rdl" />
+    <Content Include="Reports\AmbientAirARCReport8hrs.rdl" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Reports\QuotationData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QuotationData1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\QuotationData.xss">
+      <DependentUpon>QuotationData.xsd</DependentUpon>
     </Content>
-    <Content Include="Reports\ConsumableFilterAid.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\ConsumableSafetyMaterial.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\ConsumableOtherConsumable.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\CRMReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\MaintenanceInstrumentHistoryCardReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\NonConsumableGlassware.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\NonConsumableGlasswareCalibrationSchedule.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\NonConsumableInstrument.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\NonConsumableInstrumentMaintainanceSchedule.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\PerformanceCheckReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\ReviewerReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\SampleReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\SampleReport.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\SampleReturnReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Solid_Hazardous_waste_foodReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\SourceNoiselevelSampleId.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\SourceNoiseTestReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\StackEmissionMonitoringReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\StackEmissionReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Water.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\WaterCombinedReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\WaterEffluents_singleReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Reports\ReviewerReport.rdl" />
+    <Content Include="Reports\SampleReport.rdl" />
+    <Content Include="Reports\SampleReport.rdlc" />
+    <Content Include="Reports\SampleReturnReport.rdl" />
+    <Content Include="Reports\Solid_Hazardous_waste_foodReport.rdl" />
+    <Content Include="Reports\SourceNoiselevelSampleId.rdl" />
+    <Content Include="Reports\SourceNoiseTestReport.rdl" />
+    <Content Include="Reports\StackEmissionMonitoringReport.rdl" />
+    <Content Include="Reports\StackEmissionReport.rdl" />
+    <Content Include="Reports\Water.rdl" />
+    <Content Include="Reports\WaterCombinedReport.rdl" />
+    <Content Include="Reports\WaterEffluents_singleReport.rdl" />
     <Content Include="Scripts\chartjs\Chart.js" />
     <Content Include="Scripts\chartjs\Chart.min.js" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
@@ -2757,12 +2688,7 @@
     <Content Include="Scripts\ckeditor\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
     <Content Include="Scripts\RPT\category.rdl" />
-    <Content Include="Reports\QuotationReport.rdl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
-    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <Content Include="Reports\QuotationReport.rdl" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -3208,6 +3134,7 @@
     <Content Include="Views\Home\_ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Arrival\Views\Shared\" />
     <Folder Include="Areas\Collection\Views\Shared\" />
     <Folder Include="Areas\Configuration\Data\" />
@@ -3219,16 +3146,14 @@
     <Folder Include="Areas\Inventory\Views\InventoryMaintainanceAndCalibrationBreakDown\" />
     <Folder Include="Areas\Inventory\Views\InventoryTypeMaster\" />
     <Folder Include="Areas\Inventory\Views\Shared\" />
+    <Folder Include="Areas\Invoice\Views\Shared\" />
     <Folder Include="Areas\Lab\Models\" />
     <Folder Include="Areas\Lab\Views\Shared\" />
     <Folder Include="Areas\ManageSampleCollection\Views\Shared\" />
     <Folder Include="Areas\WorkOrderCustomer\Views\Shared\" />
     <Folder Include="Content\Uploads\" />
-    <Folder Include="download\" />
     <Folder Include="packages\SweetAlert.1.0.0\content\Controllers\" />
     <Folder Include="Uploads\PurchaseOrders\" />
-    <Folder Include="Uploads\WorkOrders\" />
-    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

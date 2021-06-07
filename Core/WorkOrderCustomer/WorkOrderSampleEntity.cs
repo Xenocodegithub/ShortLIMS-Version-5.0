@@ -9,6 +9,7 @@ namespace LIMS_DEMO.Core.WorkOrderCustomer
     public class WorkOrderSampleEntity
     {
         public long EnquiryDetailId { get; set; }
+        public long EnquiryId { get; set; }
         public Nullable<int> WorkOrderID { get; set; }
         public Nullable<int> SampleTypeProductId { get; set; }
         public int ProductGroupId { get; set; }

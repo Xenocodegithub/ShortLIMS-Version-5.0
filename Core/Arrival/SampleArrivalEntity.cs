@@ -8,6 +8,8 @@ namespace LIMS_DEMO.Core.Arrival
 {
     public class SampleArrivalEntity
     {
+        //public string SampleCollectedBy { get; set; }
+        public Nullable<long> WorkOrderID { get; set; }
         public Nullable<long> No { get; set; }
         public Nullable<System.DateTime> ReturnedDate { get; set; }
         public string ReturnedRemark { get; set; }
@@ -15,6 +17,7 @@ namespace LIMS_DEMO.Core.Arrival
         public Nullable<bool> InField { get; set; }
         public int? TestMethodId { get; set; }
         public string TestMethodName { get; set; }
+        
         public string IsReturnedOrIsRetained { get; set; }
         public Nullable<bool> StatutoryLimits { get; set; }
         public string SubContractedParameters { get; set; }
@@ -48,10 +51,10 @@ namespace LIMS_DEMO.Core.Arrival
         /// </summary>
         public string SrNo { get; set; }
         public long SampleCollectionId { get; set; }//SampleCollection tbl
-        public long EnquirySampleID { get; set; }//EnquirySampleDetail tbl/SampleCollection
+        public Nullable<long> EnquirySampleID { get; set; }//EnquirySampleDetail tbl/SampleCollection
         public long EnquiryDetailId { get; set; }//EnquirySampleDetail tbl
         public long EnquiryId { get; set; }
-        public int WorkOrderID { get; set; }// SampleCollection tbl
+       // public int WorkOrderID { get; set; }// SampleCollection tbl
         public long QuotationId { get; set; }// WorkOrder tbl
         //public int FieldDeterminationId { get; set; }
         public int WorkOrderNo { get; set; }// WorkOrder tbl
@@ -62,7 +65,7 @@ namespace LIMS_DEMO.Core.Arrival
         public string SampleNo { get; set; }//SampleCollection tbl
         public string SampleName { get; set; }
         public string SampleNameOriginal { get; set; }
-        public string Date { get; set; }//Doubt
+        public Nullable<System.DateTime> Date { get; set; }//Doubt
         public Nullable<byte> StatusId { get; set; }//SampleCollection tbl
         public string CurrentStatus { get; set; }// EnquiryStatus and StatusMaster tbls
         public string StatusCode { get; set; }
@@ -83,7 +86,8 @@ namespace LIMS_DEMO.Core.Arrival
         public Nullable<System.TimeSpan> SampleCollectionTime { get; set; }//EnquirySampleDetail tbl
         public string SampleLocation { get; set; }//SampleCollection tbl
         public int SampleCollectionDevicesId { get; set; }//SampleCollectionDevice tbl
-        public Nullable<int> SampleDeviceId { get; set; }//SampleDeviceMaster tbl
+        public List<int> SampleDeviceId { get; set; }//SampleDeviceMaster tbl
+        public int SampleDeviceId1 { get; set; }
         public string SampleDevice { get; set; }//SampleDeviceMaster tbl
         public Nullable<int> SampleTypeId { get; set; }//SampleType same as <subgroup> SampleTypeMaster tbl
         public string SampleType { get; set; }//SampleType same as <subgroup> SampleTypeMaster tbl

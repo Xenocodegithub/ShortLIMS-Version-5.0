@@ -59,6 +59,7 @@ namespace LIMS_DEMO.Core.Enquiry
         public string Date { get; set; }
         public int? AssignToId { get; set; }
         public Nullable<bool> IsIGST { get; set; }
+        public long SampleCollectionId { get; set; }
     }
 
     public class ParameterPCBEntity

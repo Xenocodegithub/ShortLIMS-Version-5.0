@@ -10,6 +10,7 @@ namespace LIMS_DEMO.Areas.Collection.Models
     public class SampleCollectionModel
     {
         public bool IsFieldSelected { get; set; }
+        public string IsReturnedOrIsRetained { get; set; }
         public bool IsLabSelected { get; set; }
         public Nullable<long> No { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
@@ -166,6 +167,11 @@ namespace LIMS_DEMO.Areas.Collection.Models
         public string ProductGroupName { get; set; }//EnquiryDetail tbl
         public Nullable<int> MatrixId { get; set; }
         public string MatrixName { get; set; }//EnquiryDetail tbl
+        public string ReturnedRemarks { get; set; }
+        public string AckRemarks { get; set; }
+        public bool StatutoryLimits { get; set; }
+        public string SubContractedParameters { get; set; }
+        public int Quantity { get; set; }
 
     }
 

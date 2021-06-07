@@ -16,6 +16,7 @@ namespace LIMS_DEMO.BAL.WorkOrderCustomer
         {
             CoreFactory.workOrderCustomer = new WorkOrderCustomerDAL();
         }
+       
         public string AddCostPercentage(WorkOrderCustomerEntity workOrderCustomerEntity)
         {
             return CoreFactory.workOrderCustomer.AddCostPercentage(workOrderCustomerEntity);

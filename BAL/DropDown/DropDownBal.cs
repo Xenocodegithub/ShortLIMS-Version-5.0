@@ -21,11 +21,18 @@ namespace LIMS_DEMO.BAL.DropDown
         {
             CoreFactory.dropdowns = new DropdownsDAL();
         }
-
+        public IList<DeliverEntity> GetDeliver()
+        {
+            return CoreFactory.dropdowns.GetDeliver();
+        }
         //public List<Core.DropDowns.CatagoryEntity> GetRole()
         //{
         //    return CoreFactory.dropdowns.GetRole();
         //}
+        public List<InvoiceEntity> GetPaymentMode()
+        {
+            return CoreFactory.dropdowns.GetPaymentMode();
+        }
         public List<UserListEntity> GetPassChaReqUserList()
         {
             return CoreFactory.dropdowns.GetPassChaReqUserList();
@@ -62,9 +69,17 @@ namespace LIMS_DEMO.BAL.DropDown
         {
             return CoreFactory.dropdowns.GetSampleDevice(SampleTypeProductId);
         }
+        public List<SampleDeviceEntity> GetSampleDevice()
+        {
+            return CoreFactory.dropdowns.GetSampleDevice();
+        }
         public List<ProcedureEntity> GetProcedure(int SampleTypeProductId)
         {
             return CoreFactory.dropdowns.GetProcedure(SampleTypeProductId);
+        }
+        public List<ProcedureEntity> GetProcedure()
+        {
+            return CoreFactory.dropdowns.GetProcedure();
         }
         public List<SampleTypeEntity> GetSampleType()
         {
@@ -109,6 +124,10 @@ namespace LIMS_DEMO.BAL.DropDown
         public List<UserListEntity> GetUserList(string RoleName, int LabMasterId)
         {
             return CoreFactory.dropdowns.GetUserList(RoleName, LabMasterId);
+        }
+        public IList<UserListEntity> GetUser()
+        {
+            return CoreFactory.dropdowns.GetUser();
         }
         public List<BranchEntity> GetBranches(int ParentLabId)
         {
@@ -205,6 +224,10 @@ namespace LIMS_DEMO.BAL.DropDown
         public List<ItemEntity> GetSupplierName()
         {
             return CoreFactory.dropdowns.GetSupplierName();
+        }
+        public UserListEntity GetUserDetails(int UserMasterID)
+        {
+            return CoreFactory.dropdowns.GetUserDetails(UserMasterID);
         }
     }
 }

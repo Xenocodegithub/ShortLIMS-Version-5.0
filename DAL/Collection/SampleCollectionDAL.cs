@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LIMS_DEMO.Core.Arrival;
 using LIMS_DEMO.Core.Collection;
 using LIMS_DEMO.Core.Repository;
 namespace LIMS_DEMO.DAL.Collection
@@ -190,6 +191,37 @@ namespace LIMS_DEMO.DAL.Collection
                 return ex.InnerException.Message;
             }
         }
+        public string TRFEnv_Update(SampleArrivalEntity samplecollectionEntity)
+        {
+            var sampleCal = _dbContext.SampleCollections.Find(samplecollectionEntity.SampleCollectionId);
+
+            sampleCal.StatutoryLimits = samplecollectionEntity.StatutoryLimits;
+            sampleCal.AckRemarks = samplecollectionEntity.AckRemarks;
+            sampleCal.ReturnedRemark = samplecollectionEntity.ReturnedRemark;
+            sampleCal.IsSampleIntact = samplecollectionEntity.IsSampleIntact;
+            sampleCal.IsReturnedOrIsRetained = samplecollectionEntity.IsReturnedOrIsRetained;
+            sampleCal.SubContractedParameters = samplecollectionEntity.SubContractedParameters;
+            sampleCal.EnvCondtId = samplecollectionEntity.EnvCondtId;
+            sampleCal.EmployeeId = samplecollectionEntity.EmployeeId;
+            sampleCal.SampleTypeId = samplecollectionEntity.SampleTypeId;
+            sampleCal.SampleLocation = samplecollectionEntity.SampleLocation;
+            // UserRoleId=1,
+            //sampleCal.IsActive = true;
+            sampleCal.EnteredBy = samplecollectionEntity.EnteredBy;
+            //sampleCal.EnteredDate = DateTime.Now;
+            _dbContext.SaveChanges();
+            _dbContext.ARCs.Add(new ARC()
+            {
+                SampleCollectionId = samplecollectionEntity.SampleCollectionId,
+                //UserRoleId = 1,
+                IsActive = true,
+                EnteredBy = samplecollectionEntity.EnteredBy,
+                EnteredDate = DateTime.Now,
+            });
+            _dbContext.SaveChanges();
+            return "Upadated";
+        }
+        
 
         public string AddARC(int SampleCollectionId,int EnteredBy)
         {

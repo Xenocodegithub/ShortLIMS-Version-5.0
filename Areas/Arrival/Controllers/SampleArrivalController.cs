@@ -44,7 +44,7 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                         LocationSampleCollectionID = Item.LocationSampleCollectionID,
                         SampleTypeProductId = Item.SampleTypeProductId,
                         Url = Item.SampleTypeProductName,
-                        WorkOrderID = Item.WorkOrderID,
+                        WorkOrderID = (int)Item.WorkOrderID,
                         SerialNo = iSrNo,
                         ARCId = Item.ARCId,
                         SampleCollectionId = Item.SampleCollectionId,
@@ -90,7 +90,7 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
             if (SampleCollectionId != 0)
             {
                 CoreFactory.samplearrivalEntity = BALFactory.samplearrivalBAL.GetSampleArrivalDetails((Int32)SampleCollectionId);
-                model.WorkOrderID = CoreFactory.samplearrivalEntity.WorkOrderID;
+                model.WorkOrderID = (int)CoreFactory.samplearrivalEntity.WorkOrderID;
                 model.LocationSampleCollectionID = CoreFactory.samplearrivalEntity.LocationSampleCollectionID;
                 if (model.SampleTypeProductName == "Ambient Noise Level" || model.SampleTypeProductName == "Source Noise Level" || model.SampleTypeProductName == "Workplace Noise Level")
                 {
@@ -423,7 +423,6 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                         SampleQtyId = (Int32)item.SampleQtyId,
                         SampleQty = item.SampleQty,
                         Preservation = item.Preservation,
-
                     });
                     iSrNo++;
                 }
@@ -469,7 +468,7 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                     SerialNo = iSrNo,
                     SampleCollectionId = item.SampleCollectionId,
                     SampleCollectionDevicesId = item.SampleCollectionDevicesId,
-                    SampleDeviceId = item.SampleDeviceId,
+                    SampleDeviceId = item.SampleDeviceId1,
                     SampleDevice = item.SampleDevice,
 
                 });

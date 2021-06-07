@@ -417,7 +417,7 @@
         }
         else
         {
-        data.WorkOrderId =  @(ViewBag.WorkOrderId); //for int
+        data.WorkOrderId =  @(ViewBag.WorkOrderID); //for int
         data.SampleTypeProductId = $('#WorkOrderCustomer_SampleTypeProductId').val();
         $.ajax({
             type: "POST",
@@ -425,7 +425,7 @@
             data: data,
             dataType: "json",
             success: function (r) {
-                $('#second').load('/WorkOrderCustomer/WorkOrderCustomer/_AddSampleDetails?WorkOrderId=' + @ViewBag.WorkOrderId + "&EnquiryDetailId=" + r.EnquiryDetailId);
+                $('#second').load('/WorkOrderCustomer/WorkOrderCustomer/_AddSampleDetails?WorkOrderId=' + @ViewBag.WorkOrderID + "&EnquiryDetailId=" + r.EnquiryDetailId);
             }
         });
         }

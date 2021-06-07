@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LIMS_DEMO.Core;
+using LIMS_DEMO.Core.Arrival;
 using LIMS_DEMO.Core.Collection;
 using LIMS_DEMO.DAL.Collection;
 namespace LIMS_DEMO.BAL.Collection
@@ -42,6 +43,10 @@ namespace LIMS_DEMO.BAL.Collection
         public string AddSampleCollection(SampleCollectionEntity samplecollectionEntity)
         {
             return CoreFactory.samplecollection.AddSampleCollection(samplecollectionEntity);
+        }
+        public string TRFEnv_Update(SampleArrivalEntity samplecollectionEntity)
+        {
+            return CoreFactory.samplecollection.TRFEnv_Update(samplecollectionEntity);
         }
         public SampleCollectionEntity GetSampleCollectionDetails(int SampleCollectionId)
         {
