@@ -1,0 +1,124 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDFoodAndAgriProductsModel
+
+@using (Ajax.BeginForm("_FieldFoodAndAgriProducts", "FieldFoodAndAgriProducts", new { area = "FieldDetermination" }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FDAdd" }, new { id = "frmAddFoodProducts" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SrNo)
+    @Html.HiddenFor(model => model.FieldFoodAndAgriCultureId)
+    @Html.HiddenFor(model => model.EnquirySampleID)
+    <div class="form-horizontal align align-content-lg-center">
+        <div class="card shadow mb-4">
+            <div class="card-body align-content-center">
+                <div class="row" id="p">
+                    <div class="col-sm-6 form-group">
+                        @Html.LabelFor(model => model.Parameters, htmlAttributes: new { @class = "control-label col-sm-4 " })
+                        <div class="col-sm-8" id="Parameter">
+                            @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control" })
+                            @Html.HiddenFor(model => model.ParameterName)
+                            @Html.ValidationMessageFor(model => model.ParameterMasterId)
+                            @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        @Html.LabelFor(model => model.TestMethodName, htmlAttributes: new { @class = "control-label col-sm-4 " })
+                        <div class="col-sm-8" id="TestMethod">
+                            @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
+                            @Html.HiddenFor(model => model.TestMethodName)
+                            @Html.ValidationMessageFor(model => model.TestMethodId)
+                            @*@Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        @Html.LabelFor(model => model.TestResults, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8" id="TestResult">
+                            @Html.EditorFor(model => model.TestResults, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TestResults, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="col-md-12 col-sm-12">
+                            @{ string btnText = "Add";
+                                if (Model.SrNo != 0)
+                                {
+                                    btnText = "Update";
+                                    <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" />
+                                }
+                            }
+                            <input class="btn btn-success btn-sm alignright" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+        $("#frmAddFoodProducts").removeData("validator");
+        $("#frmAddFoodProducts").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmAddFoodProducts");
+    })
+
+    function FDAdd(result) {
+        debugger
+        $('#divList').load('/FieldDetermination/FieldFoodAndAgriProducts/_FieldFoodAndAgriProductsList');
+        $('#divAddBuildingMaterial').load('/FieldDetermination/FieldFoodAndAgriProducts/_FieldFoodAndAgriProducts');
+
+    }
+
+    function CancelNameValues() {
+        $('#ParameterMasterId').val(-1);
+        $('#TestMethodId').val(-1);
+        //$('#Parameters').val("");
+        $('#TestResults').val("");
+        $('#btnAdd').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#SrNo').val(0)
+    }
+
+    function SetNameValues() {
+        debugger;
+        $('#ParameterName').val($('#ParameterMasterId option:selected').text());
+        $('#TestMethodName').val($('#TestMethodId option:selected').text());
+    }
+
+    $('#ParameterMasterId').change(function () {
+        debugger
+        if ($('#ParameterMasterId').val() == '') {
+            $('#TestMethodId').html('');
+            $('#TestMethodId').append('<option value="">---Select---</option>');
+        }
+        else {
+
+            $('#TestMethodId').html('');
+            $('#TestMethodId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val() + "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    debugger
+                    $.each(result.result, function (i, item) {
+                        $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
+                    })
+
+                    $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+
+
+

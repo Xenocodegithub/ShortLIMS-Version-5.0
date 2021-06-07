@@ -393,7 +393,7 @@
     <Property Name="DeletedDate" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="InventoryPurchaseFileUpload">
     <Key>
       <PropertyRef Name="ID" />
@@ -697,6 +697,88 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="IsActive" Type="bit" />
     <Property Name="InsertedBy" Type="bigint" />
     <Property Name="InsertedTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TBL_DailyInvoice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+    <Property Name="InvoiceNo" Type="nvarchar(max)" />
+    <Property Name="Totalcharge" Type="money" />
+    <Property Name="Discountamt" Type="money" />
+    <Property Name="SampleCollectioncharge" Type="money" />
+    <Property Name="TransportationCharge" Type="money" />
+    <Property Name="TestingCharge" Type="money" />
+    <Property Name="TotalAmount" Type="money" />
+    <Property Name="NetAmount" Type="money" />
+    <Property Name="GSTAmt" Type="money" />
+    <Property Name="Paidamount" Type="money" />
+    <Property Name="Balanceamount" Type="money" />
+    <Property Name="InvoiceDate" Type="date" />
+    <Property Name="Count" Type="int" />
+    <Property Name="EnquirySampleID" Type="int" />
+    <Property Name="CostingId" Type="int" />
+    <Property Name="RejectStatus" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TBL_InvoiceReceiptNoMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FinancialYearID" Type="bigint" />
+    <Property Name="FinancialMonthID" Type="bigint" />
+    <Property Name="NumberType" Type="nvarchar" MaxLength="100" />
+    <Property Name="NumberValue" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tbl_RejectInvoice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+    <Property Name="InvoiceNo" Type="nvarchar(max)" />
+    <Property Name="Totalcharge" Type="money" />
+    <Property Name="Discountamt" Type="money" />
+    <Property Name="SampleCollectioncharge" Type="money" />
+    <Property Name="TransportationCharge" Type="money" />
+    <Property Name="TestingCharge" Type="money" />
+    <Property Name="TotalAmount" Type="money" />
+    <Property Name="NetAmount" Type="money" />
+    <Property Name="GSTAmt" Type="money" />
+    <Property Name="Paidamount" Type="money" />
+    <Property Name="Balanceamount" Type="money" />
+    <Property Name="InvoiceDate" Type="date" />
+    <Property Name="Count" Type="int" />
+    <Property Name="EnquirySampleID" Type="int" />
+    <Property Name="CostingId" Type="int" />
+    <Property Name="RejectStatus" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TBL_REJECTINVOICEDETAILS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" />
+    <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+    <Property Name="InvoiceNo" Type="nvarchar(max)" />
+    <Property Name="Totalcharge" Type="money" />
+    <Property Name="Discountamt" Type="money" />
+    <Property Name="SampleCollectioncharge" Type="money" />
+    <Property Name="TransportationCharge" Type="money" />
+    <Property Name="TestingCharge" Type="money" />
+    <Property Name="TotalAmount" Type="money" />
+    <Property Name="NetAmount" Type="money" />
+    <Property Name="GSTAmt" Type="money" />
+    <Property Name="Paidamount" Type="money" />
+    <Property Name="Balanceamount" Type="money" />
+    <Property Name="InvoiceDate" Type="date" />
+    <Property Name="Count" Type="int" />
+    <Property Name="EnquirySampleID" Type="int" />
+    <Property Name="CostingId" Type="int" />
   </EntityType>
   <EntityType Name="UnitMasterInventory">
     <Key>
@@ -1103,8 +1185,8 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="TotalVolAirPassed_L" Type="int" />
     <Property Name="AvgFlowRate" Type="int" />
     <Property Name="MatterSamplingDuration" Type="int" />
-    <Property Name="EndTime" Type="int" />
-    <Property Name="StartTime" Type="int" />
+    <Property Name="EndTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="StartTime" Type="nvarchar" MaxLength="50" />
     <Property Name="Sampling_Duration" Type="int" />
     <Property Name="FlowRate_Avg" Type="int" />
   </EntityType>
@@ -1355,11 +1437,23 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
     <Property Name="FilterPaperNo2" Type="int" />
-    <Property Name="StartTime" Type="int" />
-    <Property Name="EndTime" Type="int" />
+    <Property Name="StartTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="EndTime" Type="nvarchar" MaxLength="50" />
     <Property Name="TotalVolAirPassed_L" Type="int" />
     <Property Name="TotalVolumeAirPassed_m3" Type="int" />
     <Property Name="AvgFlowRate" Type="int" />
+    <Property Name="CycloneCupNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatterSizeStartTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatterSizeEndTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="TimeTotalizerInitial" Type="nvarchar" MaxLength="50" />
+    <Property Name="TimeTotalizerFinal" Type="nvarchar" MaxLength="50" />
+    <Property Name="TimeTotalizerDiff" Type="nvarchar" MaxLength="50" />
+    <Property Name="SamplingDurationInitial" Type="nvarchar" MaxLength="50" />
+    <Property Name="SamplingDurationFinal" Type="nvarchar" MaxLength="50" />
+    <Property Name="SamplingDurationDiff" Type="nvarchar" MaxLength="50" />
+    <Property Name="FlowRateInitialM" Type="nvarchar" MaxLength="50" />
+    <Property Name="FlowRateFinalM" Type="nvarchar" MaxLength="50" />
+    <Property Name="FlowRateDiffM" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="FieldWorkplaceGasSampling">
     <Key>
@@ -1367,7 +1461,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     </Key>
     <Property Name="WorkplaceGasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WorkplaceID" Type="int" />
-    <Property Name="Parameters" Type="nvarchar" MaxLength="50" />
+    <Property Name="Parameters" Type="nvarchar" MaxLength="150" />
     <Property Name="VolImpingingSol" Type="nvarchar" MaxLength="50" />
     <Property Name="BottleNo" Type="varchar" MaxLength="50" />
     <Property Name="RotameterFlow" Type="int" />
@@ -1377,11 +1471,42 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
-    <Property Name="TestMethodName" Type="nvarchar" MaxLength="100" />
+    <Property Name="TestMethodName" Type="nvarchar(max)" />
     <Property Name="InField" Type="bit" />
     <Property Name="IsNABLAccredited" Type="bit" />
     <Property Name="Vs" Type="int" />
     <Property Name="PreservationDone" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="InvoiceDetails">
+    <Key>
+      <PropertyRef Name="InvoiceDetailsId" />
+    </Key>
+    <Property Name="InvoiceDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EnquirySampleID" Type="bigint" />
+    <Property Name="CostingId" Type="bigint" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="EnteredBy" Type="int" Nullable="false" />
+    <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="InvoiceRejectDetails">
+    <Key>
+      <PropertyRef Name="InvoiceRejectDetailsId" />
+    </Key>
+    <Property Name="InvoiceRejectDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceDetailsId" Type="bigint" />
+    <Property Name="EnquirySampleID" Type="bigint" />
+    <Property Name="CostingId" Type="bigint" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="150" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="EnteredBy" Type="int" Nullable="false" />
+    <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="LabDisciplineMapping">
     <Key>
@@ -1490,7 +1615,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     </Key>
     <Property Name="ParameterGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductGroupId" Type="int" Nullable="false" />
-    <Property Name="DisciplineId" Type="tinyint" />
     <Property Name="SubGroupId" Type="int" Nullable="false" />
     <Property Name="MatrixId" Type="int" />
     <Property Name="IsSetPCBLimit" Type="bit" />
@@ -1533,6 +1657,30 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
     <Property Name="IsNABLAccredited" Type="bit" />
+    <Property Name="DisciplineId" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="PaymentDetails">
+    <Key>
+      <PropertyRef Name="PaymentDetailsId" />
+    </Key>
+    <Property Name="PaymentDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecieptNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PayDate" Type="datetime" Nullable="false" />
+    <Property Name="PaymentMode" Type="int" Nullable="false" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DD/ChequeNo/Neft" Type="nvarchar(max)" />
+    <Property Name="DD/ChequeDate" Type="datetime" Nullable="false" />
+    <Property Name="EnteredBy" Type="int" Nullable="false" />
+    <Property Name="EnteredDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+    <Property Name="RegistrationName" Type="nvarchar(max)" />
+    <Property Name="WorkOrderNo" Type="nvarchar(max)" />
+    <Property Name="InvoiceNumber" Type="nvarchar(max)" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="EnquirySampleId" Type="bigint" />
   </EntityType>
   <EntityType Name="PlannerByDiscipline">
     <Key>
@@ -1547,7 +1695,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
     <Property Name="DisciplineId" Type="int" />
-    <Property Name="ParameterName" Type="nvarchar" MaxLength="150" />
+    <Property Name="ParameterName" Type="nvarchar(max)" />
     <Property Name="ParameterGroupId" Type="int" />
     <Property Name="ParameterMasterId" Type="bigint" />
   </EntityType>
@@ -1776,6 +1924,20 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
   </EntityType>
+  <EntityType Name="SampleNumber_ReceiptIncharge">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SampleCount" Type="bigint" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Month" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="EnteredBy" Type="int" Nullable="false" />
+    <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
   <EntityType Name="SampleParameterFiles">
     <Key>
       <PropertyRef Name="SampleParameterFilesID" />
@@ -1989,6 +2151,9 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="Duration" Type="bigint" />
     <Property Name="IsIGST" Type="bit" />
     <Property Name="ContractAmendment" Type="nvarchar" MaxLength="200" />
+    <Property Name="DeliverBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeliverId" Type="int" />
+    <Property Name="OVC" Type="bit" />
   </EntityType>
   <EntityType Name="WorkOrderSampleCollectionDate">
     <Key>
@@ -2134,6 +2299,20 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="DeliverMaster">
+    <Key>
+      <PropertyRef Name="DeliverId" />
+    </Key>
+    <Property Name="DeliverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeliverName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="PrintDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="EnteredBy" Type="int" Nullable="false" />
+    <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="WorkOrderId" Type="int" />
   </EntityType>
   <EntityType Name="DisciplineMaster">
     <Key>
@@ -2304,6 +2483,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="MenuHead" Type="int" />
   </EntityType>
   <EntityType Name="ModeOfCommunication">
     <Key>
@@ -2327,6 +2507,18 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <Property Name="PrintCode" Type="nvarchar" MaxLength="10" />
     <Property Name="Charges" Type="money" />
     <Property Name="Currency" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="EnteredBy" Type="int" Nullable="false" />
+    <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="PaymentModeMaster">
+    <Key>
+      <PropertyRef Name="PaymentModeMasterId" />
+    </Key>
+    <Property Name="PaymentModeMasterId" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentMode" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="EnteredBy" Type="int" Nullable="false" />
     <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
@@ -2611,7 +2803,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__4C0144E4">
+  <Association Name="FK__UserMaste__Disci__004002F9">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2623,7 +2815,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__4CF5691D">
+  <Association Name="FK__UserMaste__Disci__00750D23">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2635,7 +2827,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__4DE98D56">
+  <Association Name="FK__UserMaste__Disci__01342732">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2647,7 +2839,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__4EDDB18F">
+  <Association Name="FK__UserMaste__Disci__0169315C">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2659,7 +2851,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__4FD1D5C8">
+  <Association Name="FK__UserMaste__Disci__02284B6B">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2671,7 +2863,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__50C5FA01">
+  <Association Name="FK__UserMaste__Disci__025D5595">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2683,7 +2875,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__51BA1E3A">
+  <Association Name="FK__UserMaste__Disci__031C6FA4">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2695,7 +2887,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__52AE4273">
+  <Association Name="FK__UserMaste__Disci__035179CE">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2707,7 +2899,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__53A266AC">
+  <Association Name="FK__UserMaste__Disci__041093DD">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2719,7 +2911,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__54968AE5">
+  <Association Name="FK__UserMaste__Disci__04459E07">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2731,7 +2923,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__558AAF1E">
+  <Association Name="FK__UserMaste__Disci__0504B816">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2743,7 +2935,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__567ED357">
+  <Association Name="FK__UserMaste__Disci__0539C240">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2755,7 +2947,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__5772F790">
+  <Association Name="FK__UserMaste__Disci__05F8DC4F">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2767,7 +2959,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__58671BC9">
+  <Association Name="FK__UserMaste__Disci__062DE679">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2779,7 +2971,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__595B4002">
+  <Association Name="FK__UserMaste__Disci__06ED0088">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2791,7 +2983,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__5A4F643B">
+  <Association Name="FK__UserMaste__Disci__07220AB2">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2803,7 +2995,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__5B438874">
+  <Association Name="FK__UserMaste__Disci__07E124C1">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2815,7 +3007,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__5C37ACAD">
+  <Association Name="FK__UserMaste__Disci__08162EEB">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2827,7 +3019,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__5D2BD0E6">
+  <Association Name="FK__UserMaste__Disci__08D548FA">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2839,7 +3031,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__5E1FF51F">
+  <Association Name="FK__UserMaste__Disci__090A5324">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2851,7 +3043,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__5F141958">
+  <Association Name="FK__UserMaste__Disci__09C96D33">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2863,7 +3055,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__60083D91">
+  <Association Name="FK__UserMaste__Disci__09FE775D">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2875,7 +3067,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__60FC61CA">
+  <Association Name="FK__UserMaste__Disci__0ABD916C">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2887,7 +3079,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__61F08603">
+  <Association Name="FK__UserMaste__Disci__0AF29B96">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2899,7 +3091,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__62E4AA3C">
+  <Association Name="FK__UserMaste__Disci__0BB1B5A5">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2911,7 +3103,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__63D8CE75">
+  <Association Name="FK__UserMaste__Disci__0BE6BFCF">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2923,7 +3115,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__64CCF2AE">
+  <Association Name="FK__UserMaste__Disci__0CA5D9DE">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2935,7 +3127,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__65C116E7">
+  <Association Name="FK__UserMaste__Disci__0CDAE408">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2947,7 +3139,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__66B53B20">
+  <Association Name="FK__UserMaste__Disci__0D99FE17">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2959,7 +3151,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__67A95F59">
+  <Association Name="FK__UserMaste__Disci__0DCF0841">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2971,7 +3163,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__689D8392">
+  <Association Name="FK__UserMaste__Disci__0E8E2250">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2983,7 +3175,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__6991A7CB">
+  <Association Name="FK__UserMaste__Disci__0EC32C7A">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2995,7 +3187,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__6A85CC04">
+  <Association Name="FK__UserMaste__Disci__0F824689">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3007,7 +3199,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__6B79F03D">
+  <Association Name="FK__UserMaste__Disci__0FB750B3">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3019,7 +3211,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__6C6E1476">
+  <Association Name="FK__UserMaste__Disci__10766AC2">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3031,7 +3223,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__6D6238AF">
+  <Association Name="FK__UserMaste__Disci__10AB74EC">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3043,7 +3235,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__6E565CE8">
+  <Association Name="FK__UserMaste__Disci__116A8EFB">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3055,7 +3247,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__6F4A8121">
+  <Association Name="FK__UserMaste__Disci__119F9925">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3067,7 +3259,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__703EA55A">
+  <Association Name="FK__UserMaste__Disci__125EB334">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3079,7 +3271,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__7132C993">
+  <Association Name="FK__UserMaste__Disci__1293BD5E">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3091,7 +3283,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__7226EDCC">
+  <Association Name="FK__UserMaste__Disci__1352D76D">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3103,7 +3295,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__731B1205">
+  <Association Name="FK__UserMaste__Disci__1387E197">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3115,7 +3307,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__740F363E">
+  <Association Name="FK__UserMaste__Disci__1446FBA6">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3127,7 +3319,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__75035A77">
+  <Association Name="FK__UserMaste__Disci__147C05D0">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3139,7 +3331,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__75F77EB0">
+  <Association Name="FK__UserMaste__Disci__153B1FDF">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3151,7 +3343,991 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserMaste__Disci__76EBA2E9">
+  <Association Name="FK__UserMaste__Disci__15702A09">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__162F4418">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__16644E42">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__17236851">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1758727B">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__18178C8A">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__184C96B4">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1940BAED">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1A34DF26">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1B29035F">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1C1D2798">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1D114BD1">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1E05700A">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1EF99443">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__1FEDB87C">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__20E1DCB5">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__21D600EE">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__22CA2527">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__23BE4960">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__24B26D99">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__25A691D2">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__2B2A60FE">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__2C1E8537">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__2D12A970">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__2E06CDA9">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__2EFAF1E2">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__2FEF161B">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__30E33A54">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__31D75E8D">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__32CB82C6">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__33BFA6FF">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__34B3CB38">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__35A7EF71">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__369C13AA">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__379037E3">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__38845C1C">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__39788055">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__3A6CA48E">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__3B60C8C7">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__3C54ED00">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__3D491139">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__3E3D3572">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__3F3159AB">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__40257DE4">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4119A21D">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__420DC656">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4301EA8F">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__43F60EC8">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__44EA3301">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__45DE573A">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__46D27B73">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__47C69FAC">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__48BAC3E5">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__49AEE81E">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4AA30C57">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4B973090">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4C8B54C9">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4D7F7902">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4E739D3B">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__4F67C174">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__505BE5AD">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__515009E6">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__52442E1F">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__53385258">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__542C7691">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__55209ACA">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__5614BF03">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__5708E33C">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__57FD0775">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__6B44E613">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__6C390A4C">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__6D2D2E85">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__6E2152BE">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__6F1576F7">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__70099B30">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__70FDBF69">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__71F1E3A2">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__72E607DB">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__73DA2C14">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__74CE504D">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__75C27486">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__76B698BF">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__77AABCF8">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3175,7 +4351,187 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__UserMaste__Disci__789EE131">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__UserMaste__Disci__78D3EB5B">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7993056A">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__79C80F94">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7A8729A3">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7ABC33CD">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7B7B4DDC">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7BB05806">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7C6F7215">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7CA47C3F">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7D63964E">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7D98A078">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7E57BA87">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7E8CC4B1">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7F4BDEC0">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserMaste__Disci__7F80E8EA">
     <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
     <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3268,6 +4624,18 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Principal>
       <Dependent Role="CustomerMaster">
         <PropertyRef Name="CustomerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DisciplineMaster_ParameterMapping">
+    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
+    <End Role="ParameterMapping" Type="Self.ParameterMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DisciplineMaster">
+        <PropertyRef Name="DisciplineId" />
+      </Principal>
+      <Dependent Role="ParameterMapping">
+        <PropertyRef Name="DisciplineId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4113,18 +5481,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ParameterGroupMaster_DisciplineMaster">
-    <End Role="DisciplineMaster" Type="Self.DisciplineMaster" Multiplicity="0..1" />
-    <End Role="ParameterGroupMaster" Type="Self.ParameterGroupMaster" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DisciplineMaster">
-        <PropertyRef Name="DisciplineId" />
-      </Principal>
-      <Dependent Role="ParameterGroupMaster">
-        <PropertyRef Name="DisciplineId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ParameterGroupMaster_MatrixMaster">
     <End Role="MatrixMaster" Type="Self.MatrixMaster" Multiplicity="0..1" />
     <End Role="ParameterGroupMaster" Type="Self.ParameterGroupMaster" Multiplicity="*" />
@@ -4641,18 +5997,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SampleParameterPlanning_ReviewerUserMaster">
-    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
-    <End Role="SampleParameterPlanning" Type="Self.SampleParameterPlanning" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserMaster">
-        <PropertyRef Name="UserMasterID" />
-      </Principal>
-      <Dependent Role="SampleParameterPlanning">
-        <PropertyRef Name="ReviewerUserMasterID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SampleParameterPlanning_SampleCollection">
     <End Role="SampleCollection" Type="Self.SampleCollection" Multiplicity="1" />
     <End Role="SampleParameterPlanning" Type="Self.SampleParameterPlanning" Multiplicity="*" />
@@ -5009,17 +6353,10 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="NumberFormatingForSerialNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="value" Type="bigint" Mode="In" />
-  </Function>
   <Function Name="Procedure_GetWOMasterData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ParameterGroupId" Type="int" Mode="In" />
     <Parameter Name="ParameterMasterId" Type="int" Mode="In" />
     <Parameter Name="analysisProcessScheduleDetailId" Type="bigint" Mode="In" />
-  </Function>
-  <Function Name="udf_CurrencyToWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="Input" Type="numeric" Mode="In" />
-    <Parameter Name="Currency" Type="tinyint" Mode="In" />
   </Function>
   <Function Name="USP_CategoryMaster_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="sCategoryName" Type="varchar(max)" Mode="In" />
@@ -5693,6 +7030,10 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <EntitySet Name="SerialNumberMaster" EntityType="Self.SerialNumberMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SpareStock" EntityType="Self.SpareStock" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockLogData" EntityType="Self.StockLogData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_DailyInvoice" EntityType="Self.TBL_DailyInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_InvoiceReceiptNoMaster" EntityType="Self.TBL_InvoiceReceiptNoMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_RejectInvoice" EntityType="Self.Tbl_RejectInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_REJECTINVOICEDETAILS" EntityType="Self.TBL_REJECTINVOICEDETAILS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UnitMasterInventory" EntityType="Self.UnitMasterInventory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AnalysisProcessScheduleDetail" EntityType="Self.AnalysisProcessScheduleDetail" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="ARC" EntityType="Self.ARC" Schema="Lims" store:Type="Tables" />
@@ -5722,6 +7063,8 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <EntitySet Name="FieldWasteWater" EntityType="Self.FieldWasteWater" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="FieldWorkplaceEnvironmentAndFugitiveEmission" EntityType="Self.FieldWorkplaceEnvironmentAndFugitiveEmission" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="FieldWorkplaceGasSampling" EntityType="Self.FieldWorkplaceGasSampling" Schema="Lims" store:Type="Tables" />
+    <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetails" Schema="Lims" store:Type="Tables" />
+    <EntitySet Name="InvoiceRejectDetails" EntityType="Self.InvoiceRejectDetails" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="LabDisciplineMapping" EntityType="Self.LabDisciplineMapping" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="LocationSampleCollection" EntityType="Self.LocationSampleCollection" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="MenuRoleBranchMapping" EntityType="Self.MenuRoleBranchMapping" Schema="Lims" store:Type="Tables" />
@@ -5730,6 +7073,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <EntitySet Name="ParameterFormula" EntityType="Self.ParameterFormula" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="ParameterGroupMaster" EntityType="Self.ParameterGroupMaster" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="ParameterMapping" EntityType="Self.ParameterMapping" Schema="Lims" store:Type="Tables" />
+    <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="PlannerByDiscipline" EntityType="Self.PlannerByDiscipline" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="PONumberCount" EntityType="Self.PONumberCount" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="PurchaseTNC" EntityType="Self.PurchaseTNC" Schema="Lims" store:Type="Tables" />
@@ -5744,6 +7088,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <EntitySet Name="SampleCollectionProcedure" EntityType="Self.SampleCollectionProcedure" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="SampleLocation" EntityType="Self.SampleLocation" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="SampleNumber" EntityType="Self.SampleNumber" Schema="Lims" store:Type="Tables" />
+    <EntitySet Name="SampleNumber_ReceiptIncharge" EntityType="Self.SampleNumber_ReceiptIncharge" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="SampleParameterFiles" EntityType="Self.SampleParameterFiles" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="SampleParameterFormulaValues" EntityType="Self.SampleParameterFormulaValues" Schema="Lims" store:Type="Tables" />
     <EntitySet Name="SampleParameterFormulaValuesTemp" EntityType="Self.SampleParameterFormulaValuesTemp" Schema="Lims" store:Type="Tables" />
@@ -5764,6 +7109,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <EntitySet Name="CustomerGroupMaster" EntityType="Self.CustomerGroupMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="CustomerMaster" EntityType="Self.CustomerMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="CustomerTypeMaster" EntityType="Self.CustomerTypeMaster" Schema="Master" store:Type="Tables" />
+    <EntitySet Name="DeliverMaster" EntityType="Self.DeliverMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="DisciplineMaster" EntityType="Self.DisciplineMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="EnquiryMaster" EntityType="Self.EnquiryMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="EnvironmentalCondition" EntityType="Self.EnvironmentalCondition" Schema="Master" store:Type="Tables" />
@@ -5776,6 +7122,7 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <EntitySet Name="MenuMaster" EntityType="Self.MenuMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="ModeOfCommunication" EntityType="Self.ModeOfCommunication" Schema="Master" store:Type="Tables" />
     <EntitySet Name="ParameterMaster" EntityType="Self.ParameterMaster" Schema="Master" store:Type="Tables" />
+    <EntitySet Name="PaymentModeMaster" EntityType="Self.PaymentModeMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="ProcedureMaster" EntityType="Self.ProcedureMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="ProductGroupMaster" EntityType="Self.ProductGroupMaster" Schema="Master" store:Type="Tables" />
     <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="Master" store:Type="Tables" />
@@ -5823,187 +7170,515 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       <End Role="SampleCollection" EntitySet="SampleCollection" />
       <End Role="FieldNoiseLevelMonitoring" EntitySet="FieldNoiseLevelMonitoring" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__4C0144E4" Association="Self.FK__UserMaste__Disci__4C0144E4">
+    <AssociationSet Name="FK__UserMaste__Disci__004002F9" Association="Self.FK__UserMaste__Disci__004002F9">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__4CF5691D" Association="Self.FK__UserMaste__Disci__4CF5691D">
+    <AssociationSet Name="FK__UserMaste__Disci__00750D23" Association="Self.FK__UserMaste__Disci__00750D23">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__4DE98D56" Association="Self.FK__UserMaste__Disci__4DE98D56">
+    <AssociationSet Name="FK__UserMaste__Disci__01342732" Association="Self.FK__UserMaste__Disci__01342732">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__4EDDB18F" Association="Self.FK__UserMaste__Disci__4EDDB18F">
+    <AssociationSet Name="FK__UserMaste__Disci__0169315C" Association="Self.FK__UserMaste__Disci__0169315C">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__4FD1D5C8" Association="Self.FK__UserMaste__Disci__4FD1D5C8">
+    <AssociationSet Name="FK__UserMaste__Disci__02284B6B" Association="Self.FK__UserMaste__Disci__02284B6B">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__50C5FA01" Association="Self.FK__UserMaste__Disci__50C5FA01">
+    <AssociationSet Name="FK__UserMaste__Disci__025D5595" Association="Self.FK__UserMaste__Disci__025D5595">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__51BA1E3A" Association="Self.FK__UserMaste__Disci__51BA1E3A">
+    <AssociationSet Name="FK__UserMaste__Disci__031C6FA4" Association="Self.FK__UserMaste__Disci__031C6FA4">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__52AE4273" Association="Self.FK__UserMaste__Disci__52AE4273">
+    <AssociationSet Name="FK__UserMaste__Disci__035179CE" Association="Self.FK__UserMaste__Disci__035179CE">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__53A266AC" Association="Self.FK__UserMaste__Disci__53A266AC">
+    <AssociationSet Name="FK__UserMaste__Disci__041093DD" Association="Self.FK__UserMaste__Disci__041093DD">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__54968AE5" Association="Self.FK__UserMaste__Disci__54968AE5">
+    <AssociationSet Name="FK__UserMaste__Disci__04459E07" Association="Self.FK__UserMaste__Disci__04459E07">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__558AAF1E" Association="Self.FK__UserMaste__Disci__558AAF1E">
+    <AssociationSet Name="FK__UserMaste__Disci__0504B816" Association="Self.FK__UserMaste__Disci__0504B816">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__567ED357" Association="Self.FK__UserMaste__Disci__567ED357">
+    <AssociationSet Name="FK__UserMaste__Disci__0539C240" Association="Self.FK__UserMaste__Disci__0539C240">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__5772F790" Association="Self.FK__UserMaste__Disci__5772F790">
+    <AssociationSet Name="FK__UserMaste__Disci__05F8DC4F" Association="Self.FK__UserMaste__Disci__05F8DC4F">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__58671BC9" Association="Self.FK__UserMaste__Disci__58671BC9">
+    <AssociationSet Name="FK__UserMaste__Disci__062DE679" Association="Self.FK__UserMaste__Disci__062DE679">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__595B4002" Association="Self.FK__UserMaste__Disci__595B4002">
+    <AssociationSet Name="FK__UserMaste__Disci__06ED0088" Association="Self.FK__UserMaste__Disci__06ED0088">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__5A4F643B" Association="Self.FK__UserMaste__Disci__5A4F643B">
+    <AssociationSet Name="FK__UserMaste__Disci__07220AB2" Association="Self.FK__UserMaste__Disci__07220AB2">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__5B438874" Association="Self.FK__UserMaste__Disci__5B438874">
+    <AssociationSet Name="FK__UserMaste__Disci__07E124C1" Association="Self.FK__UserMaste__Disci__07E124C1">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__5C37ACAD" Association="Self.FK__UserMaste__Disci__5C37ACAD">
+    <AssociationSet Name="FK__UserMaste__Disci__08162EEB" Association="Self.FK__UserMaste__Disci__08162EEB">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__5D2BD0E6" Association="Self.FK__UserMaste__Disci__5D2BD0E6">
+    <AssociationSet Name="FK__UserMaste__Disci__08D548FA" Association="Self.FK__UserMaste__Disci__08D548FA">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__5E1FF51F" Association="Self.FK__UserMaste__Disci__5E1FF51F">
+    <AssociationSet Name="FK__UserMaste__Disci__090A5324" Association="Self.FK__UserMaste__Disci__090A5324">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__5F141958" Association="Self.FK__UserMaste__Disci__5F141958">
+    <AssociationSet Name="FK__UserMaste__Disci__09C96D33" Association="Self.FK__UserMaste__Disci__09C96D33">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__60083D91" Association="Self.FK__UserMaste__Disci__60083D91">
+    <AssociationSet Name="FK__UserMaste__Disci__09FE775D" Association="Self.FK__UserMaste__Disci__09FE775D">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__60FC61CA" Association="Self.FK__UserMaste__Disci__60FC61CA">
+    <AssociationSet Name="FK__UserMaste__Disci__0ABD916C" Association="Self.FK__UserMaste__Disci__0ABD916C">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__61F08603" Association="Self.FK__UserMaste__Disci__61F08603">
+    <AssociationSet Name="FK__UserMaste__Disci__0AF29B96" Association="Self.FK__UserMaste__Disci__0AF29B96">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__62E4AA3C" Association="Self.FK__UserMaste__Disci__62E4AA3C">
+    <AssociationSet Name="FK__UserMaste__Disci__0BB1B5A5" Association="Self.FK__UserMaste__Disci__0BB1B5A5">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__63D8CE75" Association="Self.FK__UserMaste__Disci__63D8CE75">
+    <AssociationSet Name="FK__UserMaste__Disci__0BE6BFCF" Association="Self.FK__UserMaste__Disci__0BE6BFCF">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__64CCF2AE" Association="Self.FK__UserMaste__Disci__64CCF2AE">
+    <AssociationSet Name="FK__UserMaste__Disci__0CA5D9DE" Association="Self.FK__UserMaste__Disci__0CA5D9DE">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__65C116E7" Association="Self.FK__UserMaste__Disci__65C116E7">
+    <AssociationSet Name="FK__UserMaste__Disci__0CDAE408" Association="Self.FK__UserMaste__Disci__0CDAE408">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__66B53B20" Association="Self.FK__UserMaste__Disci__66B53B20">
+    <AssociationSet Name="FK__UserMaste__Disci__0D99FE17" Association="Self.FK__UserMaste__Disci__0D99FE17">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__67A95F59" Association="Self.FK__UserMaste__Disci__67A95F59">
+    <AssociationSet Name="FK__UserMaste__Disci__0DCF0841" Association="Self.FK__UserMaste__Disci__0DCF0841">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__689D8392" Association="Self.FK__UserMaste__Disci__689D8392">
+    <AssociationSet Name="FK__UserMaste__Disci__0E8E2250" Association="Self.FK__UserMaste__Disci__0E8E2250">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__6991A7CB" Association="Self.FK__UserMaste__Disci__6991A7CB">
+    <AssociationSet Name="FK__UserMaste__Disci__0EC32C7A" Association="Self.FK__UserMaste__Disci__0EC32C7A">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__6A85CC04" Association="Self.FK__UserMaste__Disci__6A85CC04">
+    <AssociationSet Name="FK__UserMaste__Disci__0F824689" Association="Self.FK__UserMaste__Disci__0F824689">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__6B79F03D" Association="Self.FK__UserMaste__Disci__6B79F03D">
+    <AssociationSet Name="FK__UserMaste__Disci__0FB750B3" Association="Self.FK__UserMaste__Disci__0FB750B3">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__6C6E1476" Association="Self.FK__UserMaste__Disci__6C6E1476">
+    <AssociationSet Name="FK__UserMaste__Disci__10766AC2" Association="Self.FK__UserMaste__Disci__10766AC2">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__6D6238AF" Association="Self.FK__UserMaste__Disci__6D6238AF">
+    <AssociationSet Name="FK__UserMaste__Disci__10AB74EC" Association="Self.FK__UserMaste__Disci__10AB74EC">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__6E565CE8" Association="Self.FK__UserMaste__Disci__6E565CE8">
+    <AssociationSet Name="FK__UserMaste__Disci__116A8EFB" Association="Self.FK__UserMaste__Disci__116A8EFB">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__6F4A8121" Association="Self.FK__UserMaste__Disci__6F4A8121">
+    <AssociationSet Name="FK__UserMaste__Disci__119F9925" Association="Self.FK__UserMaste__Disci__119F9925">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__703EA55A" Association="Self.FK__UserMaste__Disci__703EA55A">
+    <AssociationSet Name="FK__UserMaste__Disci__125EB334" Association="Self.FK__UserMaste__Disci__125EB334">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__7132C993" Association="Self.FK__UserMaste__Disci__7132C993">
+    <AssociationSet Name="FK__UserMaste__Disci__1293BD5E" Association="Self.FK__UserMaste__Disci__1293BD5E">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__7226EDCC" Association="Self.FK__UserMaste__Disci__7226EDCC">
+    <AssociationSet Name="FK__UserMaste__Disci__1352D76D" Association="Self.FK__UserMaste__Disci__1352D76D">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__731B1205" Association="Self.FK__UserMaste__Disci__731B1205">
+    <AssociationSet Name="FK__UserMaste__Disci__1387E197" Association="Self.FK__UserMaste__Disci__1387E197">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__740F363E" Association="Self.FK__UserMaste__Disci__740F363E">
+    <AssociationSet Name="FK__UserMaste__Disci__1446FBA6" Association="Self.FK__UserMaste__Disci__1446FBA6">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__75035A77" Association="Self.FK__UserMaste__Disci__75035A77">
+    <AssociationSet Name="FK__UserMaste__Disci__147C05D0" Association="Self.FK__UserMaste__Disci__147C05D0">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__75F77EB0" Association="Self.FK__UserMaste__Disci__75F77EB0">
+    <AssociationSet Name="FK__UserMaste__Disci__153B1FDF" Association="Self.FK__UserMaste__Disci__153B1FDF">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserMaste__Disci__76EBA2E9" Association="Self.FK__UserMaste__Disci__76EBA2E9">
+    <AssociationSet Name="FK__UserMaste__Disci__15702A09" Association="Self.FK__UserMaste__Disci__15702A09">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__162F4418" Association="Self.FK__UserMaste__Disci__162F4418">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__16644E42" Association="Self.FK__UserMaste__Disci__16644E42">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__17236851" Association="Self.FK__UserMaste__Disci__17236851">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1758727B" Association="Self.FK__UserMaste__Disci__1758727B">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__18178C8A" Association="Self.FK__UserMaste__Disci__18178C8A">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__184C96B4" Association="Self.FK__UserMaste__Disci__184C96B4">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1940BAED" Association="Self.FK__UserMaste__Disci__1940BAED">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1A34DF26" Association="Self.FK__UserMaste__Disci__1A34DF26">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1B29035F" Association="Self.FK__UserMaste__Disci__1B29035F">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1C1D2798" Association="Self.FK__UserMaste__Disci__1C1D2798">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1D114BD1" Association="Self.FK__UserMaste__Disci__1D114BD1">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1E05700A" Association="Self.FK__UserMaste__Disci__1E05700A">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1EF99443" Association="Self.FK__UserMaste__Disci__1EF99443">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__1FEDB87C" Association="Self.FK__UserMaste__Disci__1FEDB87C">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__20E1DCB5" Association="Self.FK__UserMaste__Disci__20E1DCB5">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__21D600EE" Association="Self.FK__UserMaste__Disci__21D600EE">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__22CA2527" Association="Self.FK__UserMaste__Disci__22CA2527">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__23BE4960" Association="Self.FK__UserMaste__Disci__23BE4960">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__24B26D99" Association="Self.FK__UserMaste__Disci__24B26D99">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__25A691D2" Association="Self.FK__UserMaste__Disci__25A691D2">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__2B2A60FE" Association="Self.FK__UserMaste__Disci__2B2A60FE">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__2C1E8537" Association="Self.FK__UserMaste__Disci__2C1E8537">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__2D12A970" Association="Self.FK__UserMaste__Disci__2D12A970">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__2E06CDA9" Association="Self.FK__UserMaste__Disci__2E06CDA9">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__2EFAF1E2" Association="Self.FK__UserMaste__Disci__2EFAF1E2">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__2FEF161B" Association="Self.FK__UserMaste__Disci__2FEF161B">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__30E33A54" Association="Self.FK__UserMaste__Disci__30E33A54">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__31D75E8D" Association="Self.FK__UserMaste__Disci__31D75E8D">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__32CB82C6" Association="Self.FK__UserMaste__Disci__32CB82C6">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__33BFA6FF" Association="Self.FK__UserMaste__Disci__33BFA6FF">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__34B3CB38" Association="Self.FK__UserMaste__Disci__34B3CB38">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__35A7EF71" Association="Self.FK__UserMaste__Disci__35A7EF71">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__369C13AA" Association="Self.FK__UserMaste__Disci__369C13AA">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__379037E3" Association="Self.FK__UserMaste__Disci__379037E3">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__38845C1C" Association="Self.FK__UserMaste__Disci__38845C1C">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__39788055" Association="Self.FK__UserMaste__Disci__39788055">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__3A6CA48E" Association="Self.FK__UserMaste__Disci__3A6CA48E">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__3B60C8C7" Association="Self.FK__UserMaste__Disci__3B60C8C7">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__3C54ED00" Association="Self.FK__UserMaste__Disci__3C54ED00">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__3D491139" Association="Self.FK__UserMaste__Disci__3D491139">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__3E3D3572" Association="Self.FK__UserMaste__Disci__3E3D3572">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__3F3159AB" Association="Self.FK__UserMaste__Disci__3F3159AB">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__40257DE4" Association="Self.FK__UserMaste__Disci__40257DE4">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4119A21D" Association="Self.FK__UserMaste__Disci__4119A21D">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__420DC656" Association="Self.FK__UserMaste__Disci__420DC656">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4301EA8F" Association="Self.FK__UserMaste__Disci__4301EA8F">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__43F60EC8" Association="Self.FK__UserMaste__Disci__43F60EC8">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__44EA3301" Association="Self.FK__UserMaste__Disci__44EA3301">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__45DE573A" Association="Self.FK__UserMaste__Disci__45DE573A">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__46D27B73" Association="Self.FK__UserMaste__Disci__46D27B73">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__47C69FAC" Association="Self.FK__UserMaste__Disci__47C69FAC">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__48BAC3E5" Association="Self.FK__UserMaste__Disci__48BAC3E5">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__49AEE81E" Association="Self.FK__UserMaste__Disci__49AEE81E">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4AA30C57" Association="Self.FK__UserMaste__Disci__4AA30C57">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4B973090" Association="Self.FK__UserMaste__Disci__4B973090">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4C8B54C9" Association="Self.FK__UserMaste__Disci__4C8B54C9">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4D7F7902" Association="Self.FK__UserMaste__Disci__4D7F7902">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4E739D3B" Association="Self.FK__UserMaste__Disci__4E739D3B">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__4F67C174" Association="Self.FK__UserMaste__Disci__4F67C174">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__505BE5AD" Association="Self.FK__UserMaste__Disci__505BE5AD">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__515009E6" Association="Self.FK__UserMaste__Disci__515009E6">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__52442E1F" Association="Self.FK__UserMaste__Disci__52442E1F">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__53385258" Association="Self.FK__UserMaste__Disci__53385258">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__542C7691" Association="Self.FK__UserMaste__Disci__542C7691">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__55209ACA" Association="Self.FK__UserMaste__Disci__55209ACA">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__5614BF03" Association="Self.FK__UserMaste__Disci__5614BF03">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__5708E33C" Association="Self.FK__UserMaste__Disci__5708E33C">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__57FD0775" Association="Self.FK__UserMaste__Disci__57FD0775">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__6B44E613" Association="Self.FK__UserMaste__Disci__6B44E613">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__6C390A4C" Association="Self.FK__UserMaste__Disci__6C390A4C">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__6D2D2E85" Association="Self.FK__UserMaste__Disci__6D2D2E85">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__6E2152BE" Association="Self.FK__UserMaste__Disci__6E2152BE">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__6F1576F7" Association="Self.FK__UserMaste__Disci__6F1576F7">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__70099B30" Association="Self.FK__UserMaste__Disci__70099B30">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__70FDBF69" Association="Self.FK__UserMaste__Disci__70FDBF69">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__71F1E3A2" Association="Self.FK__UserMaste__Disci__71F1E3A2">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__72E607DB" Association="Self.FK__UserMaste__Disci__72E607DB">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__73DA2C14" Association="Self.FK__UserMaste__Disci__73DA2C14">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__74CE504D" Association="Self.FK__UserMaste__Disci__74CE504D">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__75C27486" Association="Self.FK__UserMaste__Disci__75C27486">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__76B698BF" Association="Self.FK__UserMaste__Disci__76B698BF">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__77AABCF8" Association="Self.FK__UserMaste__Disci__77AABCF8">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
@@ -6011,7 +7686,67 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__789EE131" Association="Self.FK__UserMaste__Disci__789EE131">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
     <AssociationSet Name="FK__UserMaste__Disci__78D3EB5B" Association="Self.FK__UserMaste__Disci__78D3EB5B">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7993056A" Association="Self.FK__UserMaste__Disci__7993056A">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__79C80F94" Association="Self.FK__UserMaste__Disci__79C80F94">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7A8729A3" Association="Self.FK__UserMaste__Disci__7A8729A3">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7ABC33CD" Association="Self.FK__UserMaste__Disci__7ABC33CD">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7B7B4DDC" Association="Self.FK__UserMaste__Disci__7B7B4DDC">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7BB05806" Association="Self.FK__UserMaste__Disci__7BB05806">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7C6F7215" Association="Self.FK__UserMaste__Disci__7C6F7215">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7CA47C3F" Association="Self.FK__UserMaste__Disci__7CA47C3F">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7D63964E" Association="Self.FK__UserMaste__Disci__7D63964E">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7D98A078" Association="Self.FK__UserMaste__Disci__7D98A078">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7E57BA87" Association="Self.FK__UserMaste__Disci__7E57BA87">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7E8CC4B1" Association="Self.FK__UserMaste__Disci__7E8CC4B1">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7F4BDEC0" Association="Self.FK__UserMaste__Disci__7F4BDEC0">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserMaste__Disci__7F80E8EA" Association="Self.FK__UserMaste__Disci__7F80E8EA">
       <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
       <End Role="UserMaster" EntitySet="UserMaster" />
     </AssociationSet>
@@ -6042,6 +7777,10 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     <AssociationSet Name="FK_CustomerMaster_CustomerTypeMaster" Association="Self.FK_CustomerMaster_CustomerTypeMaster">
       <End Role="CustomerTypeMaster" EntitySet="CustomerTypeMaster" />
       <End Role="CustomerMaster" EntitySet="CustomerMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DisciplineMaster_ParameterMapping" Association="Self.FK_DisciplineMaster_ParameterMapping">
+      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
+      <End Role="ParameterMapping" EntitySet="ParameterMapping" />
     </AssociationSet>
     <AssociationSet Name="FK_EnquiryDetail_EnquiryMaster" Association="Self.FK_EnquiryDetail_EnquiryMaster">
       <End Role="EnquiryMaster" EntitySet="EnquiryMaster" />
@@ -6319,10 +8058,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
       <End Role="UnitMaster" EntitySet="UnitMaster" />
       <End Role="ParameterFormula" EntitySet="ParameterFormula" />
     </AssociationSet>
-    <AssociationSet Name="FK_ParameterGroupMaster_DisciplineMaster" Association="Self.FK_ParameterGroupMaster_DisciplineMaster">
-      <End Role="DisciplineMaster" EntitySet="DisciplineMaster" />
-      <End Role="ParameterGroupMaster" EntitySet="ParameterGroupMaster" />
-    </AssociationSet>
     <AssociationSet Name="FK_ParameterGroupMaster_MatrixMaster" Association="Self.FK_ParameterGroupMaster_MatrixMaster">
       <End Role="MatrixMaster" EntitySet="MatrixMaster" />
       <End Role="ParameterGroupMaster" EntitySet="ParameterGroupMaster" />
@@ -6489,10 +8224,6 @@ warning 6002: The table/view 'MotherLIMS.dbo.InventoryPurchaseFileUpload' does n
     </AssociationSet>
     <AssociationSet Name="FK_SampleParameterPlanning_ParameterMaster" Association="Self.FK_SampleParameterPlanning_ParameterMaster">
       <End Role="ParameterMaster" EntitySet="ParameterMaster" />
-      <End Role="SampleParameterPlanning" EntitySet="SampleParameterPlanning" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SampleParameterPlanning_ReviewerUserMaster" Association="Self.FK_SampleParameterPlanning_ReviewerUserMaster">
-      <End Role="UserMaster" EntitySet="UserMaster" />
       <End Role="SampleParameterPlanning" EntitySet="SampleParameterPlanning" />
     </AssociationSet>
     <AssociationSet Name="FK_SampleParameterPlanning_SampleCollection" Association="Self.FK_SampleParameterPlanning_SampleCollection">

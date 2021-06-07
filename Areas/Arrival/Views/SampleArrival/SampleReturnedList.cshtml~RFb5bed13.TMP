@@ -1,0 +1,164 @@
+﻿
+@model IList<LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel>
+@{
+    ViewBag.Title = "SampleReturnedList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Arrival</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Arrival</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Sample Returned</li>
+                                <li class="breadcrumb-item active" aria-current="page">Sample Returned List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Sample Returned List</h4>
+                    </div>
+                </div>
+              
+                <!--<div class="col-lg-12">
+    <div class="row">
+      <div class="form-inline">
+          <label>from date:</label>
+          <input class="form-control" id="FromDate" placeholder="Search..." type="date" />
+          </div>
+          <div class="form-inline">
+              <label>To date:</label>
+              <input class="form-control" id="ToDate" placeholder="Search..." type="date" />-->
+                @*<a target="_blank" href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" >Print List</a>*@
+                <!--</div>
+        <div class="col-sm-2">
+            <input type="button" value="Print" id="SaveParameters" class="btn btn-sm btn-info alignright" onclick="search();" />
+        </div>
+    </div>
+        </div>
+        <hr />-->
+                <div class="row" style="margin-left:0px">
+                    <div class="col-sm-4 form-group row">
+                        <label>From Date:</label>&nbsp&nbsp
+                        <input type="date" id="FromDate" name="FromDate" class="form-control date  col-md-8" data_format="dd/MM/yyyy" />
+                    </div>
+                    <div class="col-sm-4 form-group row">
+                        <label>To Date:</label>&nbsp&nbsp
+                        <input type="date" id="ToDate" name="ToDate" class="form-control date  col-md-8" data_format="dd/MM/yyyy" />
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <input type="button" value="Print" id="SaveParameters" class="btn btn-sm btn-info alignright" onclick="search();" />
+                    </div>
+                </div>
+                <div>
+                    <table class="data-table table nowrap">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">
+                                    Sr.No
+                                </th>
+                                <th>
+                                    Sample Type
+                                </th>
+                                <th>
+                                    Sample Code
+                                </th>
+                                <th>
+                                    Date Of Reciept Of Sample
+                                </th>
+                                <th>
+                                    Date Of Reporting
+                                </th>
+                                <th>
+                                    Date Of Completion of Analysis
+                                </th>
+                                <th>
+                                    Date of Sample Returned to Customer
+                                </th>
+                                <th>
+                                    Contact Person  Name
+                                </th>
+                                <th class="table-plus datatable-nosort">
+                                    Remarks
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].SerialNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].SampleTypeProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].SampleNameOriginal)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].DateofRecieptofSample)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].PDR)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].DateofRecieptofSample)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].returnDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(Item => Model[i].ReturnedRemarks)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function search() {
+        debugger
+        if ($("#ToDate").val() == null || $("#FromDate").val() == null) {
+            alert('Please enter Date');
+        } else {
+            debugger;
+            var x = "/Reporting/frmShowReport.aspx?path=SampleReturnReport.rdl&FromDate=" + $("#FromDate").val() + " &ToDate=" + $("#ToDate").val() + "";
+            window.location = x;
+        }
+
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+
+

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Configuration.Models.ProductGroupMasterModel>
+@{
+    ViewBag.Title = "SampleTypeProductList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mobile-menu-overlay"></div>
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>SampleType Product List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Product Sub Matrix</li>
+                                <li class="breadcrumb-item active" aria-current="page">Sample Type Product List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-info btn-sm" href="#" role="button">
+                                Add SampleType Product
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Simple Datatable start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4"> Sample Type Product List</h4>
+                    </div>
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrap">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">All</th>
+                                <th class="table-plus datatable-nosort">Sample Type Product Code</th>
+                                <th class="table-plus datatable-nosort">Sample Type Product Name</th>
+                                <th class="table-plus datatable-nosort">IsActive</th>
+                                <th class="table-plus datatable-nosort">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int rowNo = 0; }
+                            @if (Model.Count() > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="table-plus">@{rowNo++;}@rowNo</td>
+                                        <td>@item.SampleTypeProductCode</td>
+                                        <td>@item.SampleTypeProductName</td>
+                                        <td style="align-items:center">
+                                            @if (item.IsActive == true)
+                                            {
+                                                <i class="icon-copy fa fa-check" style="color:green" aria-hidden="true"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="icon-copy fa fa-close" style="color:red" aria-hidden="true"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                    <i class="dw dw-more"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                    <a class="dropdown-item" href="@Url.Action("AddSampleTypeProduct","ProductSubMatrix",new {SampleTypeProductId=item.SampleTypeProductId })"><i class="dw dw-edit2"></i> Edit</a>
+                                                    @*<a class="dropdown-item" href="#" onclick="Delete(@item.SampleTypeProductId);"><i class="dw dw-delete-3"></i>Delete</a>*@
+                                                    <a class="dropdown-item" href="/Configuration/ProductSubMatrix/DeleteSTP?SampleTypeProductId=@item.SampleTypeProductId" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <!-- Simple Datatable End -->
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

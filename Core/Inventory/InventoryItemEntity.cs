@@ -8,7 +8,7 @@ namespace LIMS_DEMO.Core.Inventory
     public class InventoryItemEntity
     {
         public int ItemMasterID { get; set; } // ItemMasterId =ID
-      
+
         public Nullable<int> CatagoryMasterID { get; set; } // CatagoryMasterId
         public Nullable<int> CatagoryID { get; set; } // CatagoryMasterId
         public string CategoryName { get; set; }
@@ -28,7 +28,7 @@ namespace LIMS_DEMO.Core.Inventory
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<short> DeletedBy { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
-        public string  AvailableStock { get; set; }
+        public string AvailableStock { get; set; }
         public Nullable<long> InventoryCapacityMasterId { get; set; }
         public string Capacity { get; set; }
         public int ItemID { get; set; }

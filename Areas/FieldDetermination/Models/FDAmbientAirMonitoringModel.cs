@@ -53,8 +53,8 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Models
         public Nullable<int> SamplingDurationFinal { get; set; }
         public Nullable<int> SamplingDurationInitial { get; set; }
         public Nullable<int> SamplingDurationDiff { get; set; }
-        public Nullable<int> StartTime { get; set; }
-        public Nullable<int> EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public Nullable<int> MatterSamplingDuration { get; set; }
         public Nullable<int> AvgFlowRate { get; set; }
         public Nullable<int> TotalVolAirPassed_L { get; set; }

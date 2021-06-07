@@ -26,14 +26,17 @@ namespace LIMS_DEMO.Common
             //format hash with extra information
             return string.Format("$SECURE${0}${1}", iterations, base64Hash);
         }
+
         public static string Encrypt(string password)
         {
             return Hash(password, 2000);
         }
+
         private static bool IsHashSupported(string hashString)
         {
             return hashString.Contains("$SECURE$");
         }
+
         public static bool Verify(string password, string hashedPassword)
         {
             //check hash

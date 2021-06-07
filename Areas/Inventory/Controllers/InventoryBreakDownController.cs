@@ -12,24 +12,27 @@ using LIMS_DEMO.Core.Inventory;
 
 namespace LIMS_DEMO.Areas.Inventory.Controllers
 {
+    
     [RouteArea("Inventory")]
+    [Authorize]
     public class InventoryBreakDownController : Controller
     {
         // GET: Inventory/InventoryMaintainanceAndCalibrationBreakDown
-
+        
         public InventoryBreakDownController()
         {
             BALFactory.InventoryBreakDownBAL = new InventoryBreakDownBAL();
             BALFactory.NewInventoryBAL = new NewInventoryBAL();
             BALFactory.dropdownsBAL = new BAL.DropDown.DropDownBal();
         }
+
         public ActionResult Index()
         {
             return View();
         }
 
         #region BREAKDOWN
-
+        
         public ActionResult AddBreakDown()
         {
             InventoryBreakDownModel model = new InventoryBreakDownModel();
@@ -41,8 +44,6 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                
              return View(model);
         }
-       
-        [HttpGet]
         public ActionResult EditBreakDown(int ID = 0)
         {
             InventoryBreakDownModel model = new InventoryBreakDownModel();  
@@ -74,6 +75,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(model);
         }
         [HttpPost]
+       
         public ActionResult AddBreakDown(int ItemMasterId, int InventoryBasicDetailID, int InventoryBasicItemDetailsID, string ProblemDescription, string ProblemReportedBy, DateTime? ProblemReportedDate, DateTime? DateOfStartRepair, DateTime? DateOfCompletionRepair, string MaintenanceInspectedBy, long? Expenses, string NameOfAgency, string Remark, int? Id, bool IsRepair)
         {
             CoreFactory.breakDownEntity = new BreakDownEntity();
@@ -95,7 +97,8 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return Json(new { status = result, message = "Added Breakdown" }, JsonRequestBehavior.AllowGet);
             //return RedirectToAction("BreackDownMaintainanceList");
         }
-        
+
+      
         public ActionResult BreackDownList(string search)
         {
             CoreFactory.breakDownEntityList = BALFactory.InventoryBreakDownBAL.GetBreakDowmDataList();
@@ -138,6 +141,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             //return Json(new { status = "success", message = "", SerialNumber = CoreFactory.ItemSerialNumber});
             return Json(CoreFactory.ItemSerialNumber, JsonRequestBehavior.AllowGet);
         }
+       
         [HttpGet]
         public JsonResult GetDataBySrNo(int InventoryBasicItemDetailsID = 0, int InventorybasicdetailsID = 0, int InventoryBasicDetailID = 0)
         {
@@ -150,8 +154,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
 
         #region Performance Check
-
-
+        
         [HttpGet]
         public ActionResult PlanePerformance()
         {
@@ -170,6 +173,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(model);
         }
         [HttpPost]
+       
         public ActionResult PlanePerformance(InventoryMaintainanceAndCalibrationModel model)
         {
            
@@ -200,6 +204,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         }
 
         [HttpGet]
+        
         public ActionResult PerformanceList()
         {
             var sActionType = "PerFormance-Check";
@@ -227,6 +232,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(MaintenanceList);
         }
         [HttpGet]
+       
         public ActionResult PerformanceCheak(string InventoryBasicItemDetailsNumber, string ItemName, int ItemID = 0, long BasicItemDetailsID = 0, long DateID = 0, long BasicDetailsID = 0)
         {
             List<ListItem> _MaintainanceStatus = new List<ListItem>();
@@ -301,6 +307,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return Json(Result, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
+       
         public JsonResult FatchListByBasicItemsDetailsAndItemsID(string Type, long InventoryBasicDetailsID = 0, int ItemID = 0, long InventoryBasicItemDetailsID = 0)
         {
 

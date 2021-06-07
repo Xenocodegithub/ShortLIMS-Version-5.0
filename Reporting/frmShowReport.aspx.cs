@@ -580,7 +580,7 @@ namespace Application.Web.UI.Reporting
 
             byte[] bytes = rep.Render(reportType, null, out mimeType, out encoding, out extension, out streamIds, out warnings);
 
-
+          
 
 
             // string localPath = System.Configuration.ConfigurationManager.AppSettings["TempFiles"].ToString();

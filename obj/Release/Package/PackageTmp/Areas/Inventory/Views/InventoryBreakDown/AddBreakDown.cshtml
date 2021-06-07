@@ -1,0 +1,300 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.InventoryBreakDownModel
+@{
+    ViewBag.Title = "AddBreakDown";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Break Down</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Break Down Form</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30" style="margin-top:-19px">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Break Down Form</h4>
+                    </div>
+                </div>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.isrepair)
+                @Html.HiddenFor(model => model.InventoryBasicDetailId)
+                @Html.HiddenFor(model => model.InventoryMaintAndCalibBreakDownId)
+
+                <fieldset>
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Name of Instrument:<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.ItemMasterId, new SelectList(ViewBag.InventoryItemList, "ItemMasterId", "Item"), "Please Select", new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.ItemMasterId, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Serial Number:<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @*@Html.LabelFor(model => model.InventoryBasicItemDetailsId, "Serial Number")@Html.Label("*", new { @style = "Color:red" })*@
+                            @Html.DropDownListFor(model => model.InventoryBasicItemDetailsId, new SelectList(ViewBag.ItemNumberList, "InventoryBasicItemDetailsID", "InventoryBasicItemDetailsNumber"), "Select Serial Number...", new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.InventoryBasicItemDetailsId, "", new { @class = "text-danger", type = "hidden" })
+                            @*<input type="hidden" id="InventoryBasicDetailId" name="custId" value="@Model.InventoryBasicDetailId">*@
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Problem Reported By:<span style="color:red">*</span></label>
+                        @*@Html.LabelFor(model => model.ProblemReportedBy, "Problem Reported By")@Html.Label("*", new { @style = "Color:red", placeholder = "Problem Reported By" })*@
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.ProblemReportedBy, new { @class = "form-control", placeholder = "Problem Reported By" })
+                            @Html.ValidationMessageFor(model => model.ProblemReportedBy)
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Problem Reported Date:</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.ProblemReportedDate, new { @class = "form-control ", type = "date" })
+                            @Html.ValidationMessageFor(model => model.ProblemReportedDate)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Problem Description:</label>
+                        @*@Html.LabelFor(model => model.ProblemDescription, "Problem Description")@Html.Label("*", new { @style = "Color:red", placeholder = "Problem Description" })*@
+                        <div class="col-sm-4">
+                            @Html.TextAreaFor(model => model.ProblemDescription, new { @class = "form-control", placeholder = "Problem Description", @style = "height:65px;" })
+                            @Html.ValidationMessageFor(model => model.ProblemDescription)
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group p-t-9" id="divDiscipline">
+                                <label></label>
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" class="switch-btn" data-color="#41ccba" id="myCheck" value="false" onclick="IsRepair()">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Is Repair</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="IsRepairs">
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Repair Start Date:</label>
+                            @*@Html.Label("Repair Start Date")*@
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.DateOfStartRepair, new { @class = "form-control ", type = "date" })
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Repair completion Date:</label>
+                            @*@Html.Label("Repair completion Date")*@
+                            <div id="" class=" col-sm-4">
+                                @Html.TextBoxFor(model => model.DateOfCompletionRepair, new { @class = "form-control ", type = "date" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Maintenance Inspected By:</label>
+                            @*@Html.LabelFor(model => model.MaintenanceInspectedBy, "Maintenance Inspected By")@Html.Label("*", new { @style = "Color:red", placeholder = "Maintenance Inspected By" })*@
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.MaintenanceInspectedBy, new { @class = "form-control", placeholder = "Maintenance Inspected By" })
+                                @Html.ValidationMessageFor(model => model.MaintenanceInspectedBy)
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Expences:</label>
+                            @*@Html.LabelFor(model => model.Expenses, "Expences")@Html.Label("*", new { @style = "Color:red" })*@
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.Expenses, new { @class = "form-control", placeholder = "Expences", onkeypress = "return isNumberKey(event)" })
+                                @Html.ValidationMessageFor(model => model.Expenses)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Name Of Agency:</label>
+                            @*@Html.LabelFor(model => model.MaintenanceInspectedBy, "Maintenance Inspected By")@Html.Label("*", new { @style = "Color:red", placeholder = "Maintenance Inspected By" })*@
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.NameOfAgency, new { @class = "form-control", placeholder = "Name Of Agency Attending Repair" })
+                            @Html.ValidationMessageFor(model => model.NameOfAgency)
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Remark:</label>
+                            @*@Html.LabelFor(model => model.Expenses, "Expences")@Html.Label("*", new { @style = "Color:red" })*@
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.Remark, new { @class = "form-control", placeholder = "Remark" })
+                            @Html.ValidationMessageFor(model => model.Remark)
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <input type="button" value="Save" style="float:right;" class="btn btn-info btn-sm" id="buttonSave" name="buttonSave" onclick="setDate()"  />
+                            </div>
+                        </div>
+                        <div class="pb-20">
+                            <table class="table table stripe hover nowrap" id="myTable" data-filter="#filter" data-filter-text-only="true">
+                                <thead>
+                                    <tr class="thead-dark">
+                                        <th style="width: 6%">#</th>
+                                        <th style="width: 15%">SERIAL NUMBER</th>
+                                        <th style="width: 20%">PROBLEM DESCRIPTION</th>
+                                        <th style="width: 19%">NAME OF AGENCY</th>
+                                        <th style="width: 20%" align="center">DATE OF REPAIRS</th>
+                                        <th style="width: 10%">EXPENCES</th>
+                                        <th style="width: 10%">ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mytableBody"></tbody>
+                            </table>
+                        </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+<script>
+    $(document).ready(function () {
+        $('#IsRepairs').hide();
+    });
+    function isNumberKey(evt) {
+        debugger;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+    function IsRepair() {
+        debugger;
+        var checkBox = document.getElementById("myCheck");
+        var text = document.getElementById("text");
+
+        if (checkBox.checked == true) {
+            $('#isrepair').val(true);
+            $('#IsRepairs').show();
+        } else {
+            $('#isrepair').val(false);
+            $('#IsRepairs').hide();
+        }
+    }
+    $('#ItemMasterId').change(function () {
+        debugger
+        if ($('#ItemMasterId').val() == '') {
+            $('#InventoryBasicItemDetailsId').html('');
+            $('#InventoryBasicItemDetailsId').append('<option value="">---Select---</option>');
+        }
+        else {
+            $('#InventoryBasicItemDetailsID').html('');
+            $('#InventoryBasicItemDetailsID').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/Inventory/InventoryBreakDown/GetSerialNumbers?ItemId=' + $('#ItemMasterId').val() + '&InventoryBasicDetailsId=' + $('#InventoryBasicDetailsId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    debugger
+                    var $cloneRow = "";
+                    $cloneRow = $cloneRow + "<option value=''>Select Serial Number...</option>";
+                    for (i = 0; i < result.length; ++i) {
+                        $cloneRow = $cloneRow + "<option value='" + result[i].ID + "'  InventoryBasicDetailsID = '" + result[i].InventoryBasicDetailsID + "'>" + result[i].InventoryBasicItemDetailsNumber + "</option>";
+                    }
+                    $("#InventoryBasicItemDetailsId").html($cloneRow);
+                    //$.each(result.result, function (i, item) {
+                    //    $('#InventoryBasicItemDetailsID').append('<option value="' + item.ID + ' InventoryBasicDetailsID = ' + item.InventoryBasicDetailsID + '>' + item.InventoryBasicItemDetailsNumber + '</option>');
+                    //})
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+    $('#InventoryBasicItemDetailsId').change(function () {
+        debugger
+        var InventorybasicdetailsID = $('#InventoryBasicItemDetailsId option:selected').attr("inventorybasicdetailsid");
+        var InventoryBasicItemDetailsID = $('#InventoryBasicItemDetailsId option:selected').val();
+        var InventoryBasicDetailID = $('#ItemMasterId option:selected').val();
+        $.ajax({
+            url: '/Inventory/InventoryBreakDown/GetDataBySrNo?InventoryBasicItemDetailsID=' + InventoryBasicItemDetailsID + '&InventorybasicdetailsID=' + InventorybasicdetailsID + '&InventoryBasicDetailID=' + InventoryBasicDetailID,
+            type: 'Get',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            dataType: 'json',
+            success: function (result) {
+                if (result != null) {
+                    var $cloneRow = "";
+                    for (i = 0; i < result.length; ++i) {
+                        //var a.toLocaleDateString()
+                        $cloneRow = $cloneRow + '<tr id="sample_' + i + '" datatableID = "' + result[i].NameOfInstrument + '" isdelete = "0" style="width:100%;">';
+                        $cloneRow = $cloneRow + '<td>' + (i + 1) + '</td>';
+                        //$cloneRow = $cloneRow + '<td>INV/' + MaintainanceAndCalibrationItems[i].InventoryBasicDetailsID + '</td>';
+                        $cloneRow = $cloneRow + '<td>' + result[i].NameOfInstrument + '</td>';
+                        $cloneRow = $cloneRow + '<td>' + result[i].ProblemDescription + '</td>';
+                        $cloneRow = $cloneRow + '<td>' + result[i].NameOfAgency + '</td>';
+                        $cloneRow = $cloneRow + '<td>' + result[i].dateOfRepair + '</td>';
+                        $cloneRow = $cloneRow + '<td>' + result[i].Expenses + '</td>';
+                        $cloneRow = $cloneRow + '<td> <a href="#" title="Edit" style="color:red" class="icon-copy dw dw-edit" id="rowEdit_' + i + '" name="rowEdit_' + i + '" operation="Edit"></a></td>';
+                    }
+                }
+                $('#mytableBody').html($cloneRow);
+            },
+            error: function (data) {
+                var $cloneRow = "<tr> No record Found </tr>";
+                $('#mytableBody').html($cloneRow);
+            }
+        });
+    });
+
+
+    function setDate() {
+        debugger;
+        var values = $('#InventoryBasicItemDetailsId option:selected').attr("inventorybasicdetailsid");
+        $('#InventoryBasicDetailId').val(values);
+
+        var NameOfInstrumentId = $('#ItemMasterId').val();
+        var InventoryBasicDetailId = $('#InventoryBasicDetailId').val();
+        var InventoryBasicItemDetailsId = $('#InventoryBasicItemDetailsId').val();
+        var ProblemDescription = $('#ProblemDescription').val();
+        var ProblemReportedBy = $('#ProblemReportedBy').val();
+        var ProblemReportedDate = $('#ProblemReportedDate').val();
+        var DateOfStartRepair = $('#DateOfStartRepair').val();
+        var DateOfCompletionRepair = $('#DateOfCompletionRepair').val();
+        var MaintenanceInspectedBy = $('#MaintenanceInspectedBy').val();
+        var Expenses = $('#Expenses').val();
+        var NameOfAgency = $('#NameOfAgency').val();
+        var Remark = $('#Remark').val();
+        var IsRepair = 0;
+        var checkBox = document.getElementById("myCheck")
+        if (checkBox.checked == true) {
+            var IsRepair = 1;
+        }
+        $.ajax({
+            type: 'Post',
+            url: "/Inventory/InventoryBreakDown/AddBreakDown",
+            data: JSON.stringify({ ItemMasterId: NameOfInstrumentId, InventoryBasicDetailID: InventoryBasicDetailId, InventoryBasicItemDetailsID: InventoryBasicItemDetailsId, ProblemDescription: ProblemDescription, ProblemReportedBy: ProblemReportedBy, ProblemReportedDate: ProblemReportedDate, DateOfStartRepair: DateOfStartRepair, DateOfCompletionRepair: DateOfCompletionRepair, MaintenanceInspectedBy: MaintenanceInspectedBy, Expenses: Expenses, NameOfAgency: NameOfAgency, Remark: Remark, IsRepair: IsRepair }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response != null) {
+                    alert("Success");
+                    var x = "/Inventory/InventoryBreakDown/AddBreakDown"
+                    window.location = x;
+                }
+            },
+            failure: function (response) {
+                alert("Failed");
+            },
+        });
+    }
+    function ContractSuccess(result) {
+        if (result.status == "success") {
+            location.href = '/Enquiry/SampleAndParameter?EnquiryId=' + result.EnquiryId;
+        }
+        else {
+            alert('Please Select ProductGroup,SubGroup,Matrix fields!')
+            $('#btnSubmit').html('Save & Next')
+            $('#btnSubmit').prop('disabled', false);
+        }
+    }
+</script>

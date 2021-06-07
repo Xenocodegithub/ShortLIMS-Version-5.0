@@ -1,0 +1,1376 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.ParameterInfoModel
+@{
+    ViewBag.Title = "ParameterMapping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Parameter with Formula</h4>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Parameter with Formula</h4>
+                    </div>
+                </div>
+                @Html.Hidden("ParamaterGroupID")
+                @Html.Hidden("ParamaterMasterID")
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Select Sample Type:</label>
+                    <div class="col-sm-4">
+                        <select id="ddlSampleType" class="form-control">
+                            <option> Sample Type</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Select Product Group:</label>
+                    <div class="col-sm-4">
+                        <select id="ddlProductGroup" class="form-control">
+                            <option> Product Group</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Select Sub Group:</label>
+                    <div class="col-sm-4">
+                        <select id="ddlSubGroup" class="form-control">
+                            <option> Sub Group</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Select Matrix:</label>
+                    <div class="col-sm-4">
+                        <select id="ddlMatrix" class="form-control">
+                            <option> Matrix</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Discipline:</label>
+                    <div class="col-sm-4">
+                        <input type="radio" name="reportType" value="1" onclick="showHideSearchCriteria()" autocomplete="off"> &nbsp;Chemical
+                        &nbsp;&nbsp;
+                        <input type="radio" name="reportType" value="2" onclick="showHideSearchCriteria()" autocomplete="off"> &nbsp;Biological
+                    </div>
+
+                    <div class="col-sm-4">
+                        <input type="checkbox" id="chkwithformula" value="" />&nbsp; <label class="control-label mr-btm-15" style="margin-top:10px;font-weight:bold;">With Formula</label>
+
+                    </div>
+                </div>
+            </div>
+
+            @*-------------------------------------------------------------------------------------------*@
+            <div class="col-sm-12">
+                <label class="label-sample"> Parameter&nbsp;: &nbsp;</label>
+                <input type="hidden" id="selectedRow" style="color:#000" />
+                <div class="form-horizontal" style="color:#000">
+                    <table id="tblParameterList" class="table table-bordered" style="color:Red">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div><hr />
+            <div class="row" id="#divFormula">
+                <div id='loadingmessage' style='display:none'>
+                    <img src='~/Content/Images/load.gif' alt="loading.." width="40" height="40" class="ajax-loader" />
+                </div>
+                <div class="col-sm-12 sampleHeight">
+                    <label class="label-sample"> Formula &nbsp;: &nbsp;</label>
+                    <span id="selectedParameter" class="textspan"> </span>
+                    <input type="hidden" id="hdnSelectedUnitId" />
+                </div>
+                <div class="col-sm-12">
+                    <div class="paraScroll scroll-record">
+                        <div class="card text-black bg-light card-box">
+
+                            <div class="form-horizontal">
+                                <table class="table table-bordered" id="tblFormula">
+                                    <tr class="thead-dark">
+                                        <th class="width-10">
+                                            Sr no.
+                                        </th>
+                                        <th class="width-15">
+                                            Notation
+                                        </th>
+                                        <th class="width-15">
+                                            Display Name
+                                        </th>
+                                        <th class="width-15">
+                                            Formula
+                                        </th>
+                                        <th class="width-10">
+                                            Is FDV
+                                        </th>
+                                        <th class="width-10">
+                                            Unit
+                                        </th>
+                                        <th class="width-10">
+                                            DataType
+                                        </th>
+                                        <th class="width-10">
+                                            precision
+                                        </th>
+                                        <th class="width-5">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            @*<p class="add-btn" style="margin-left:10px">
+                                    <button class="btn btn-info btn-sm" id="addNewFormula" disabled> <i class="fa fa-plus" aria-hidden="true"> </i> Add</button>
+                                </p>*@
+                        </div>
+                        @*<p class="add-btn" style="margin-top:10px">
+
+                                <input type="submit" id="btnSaveFormula" value="Save Formula" style="float:right" class="btn btn-info btn-sm alignright" disabled>
+                            </p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Select Sample Type:</label>
+                <div class="col-sm-4">
+                    <select id="ddlNewSampleType" class="form-control">
+                        <option> Sample Type</option>
+                    </select>
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label">Select Product Group:</label>
+                <div class="col-sm-4">
+                    <select id="ddlNewProductGroup" class="form-control">
+                        <option> Product Group</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Select Sub Group:</label>
+                <div class="col-sm-4">
+                    <select id="ddlNewSubGroup" class="form-control">
+                        <option> Sub Group</option>
+                    </select>
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label">Select Matrix:</label>
+                <div class="col-sm-4">
+                    <select id="ddlNewMatrix" class="form-control">
+                        <option> Matrix</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Discipline:</label>
+                <div class="col-sm-4">
+                    <input type="radio" name="reportType1" value="1" autocomplete="off"> &nbsp;Chemical
+                    &nbsp;&nbsp;
+                    <input type="radio" name="reportType1" value="2" autocomplete="off"> &nbsp;Biological
+                    &nbsp;&nbsp;
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label">Select Unit:</label>
+                <div class="col-sm-4">
+                    <select id="ddlNewUnit" class="form-control">
+                        <option> Select Unit</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label">Select Test Method:</label>
+                <div class="col-sm-4">
+                    <select id="ddlNewtestmethod" class="form-control">
+                        +B
+                        <option> Select Test Method</option>
+                    </select>
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label"> IsNABLAccredited:</label>
+                <div class="col-sm-4">
+                    <input type="radio" name="reportTypeisnabl" value="True" autocomplete="off" id="reportTypeisnabl1"> &nbsp;True
+                    &nbsp;&nbsp;
+                    <input type="radio" name="reportTypeisnabl" value="False" autocomplete="off" id="reportTypeisnabl2"> &nbsp;False
+                    &nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"> IsField:</label>
+                <div class="col-sm-4">
+                    <input type="radio" name="reportTypeIsField" value="True" autocomplete="off" id="reportTypeIsField1"> &nbsp;True
+                    &nbsp;&nbsp;
+                    <input type="radio" name="reportTypeIsField" value="False" autocomplete="off" id="reportTypeIsField2"> &nbsp;False
+                    &nbsp;&nbsp;
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label"> MaxRange:</label>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.MaxRange, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MaxRange, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"> PermissibleMax:</label>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.PermissibleMax, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PermissibleMax, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label"> PermissibleMin:</label>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.PermissibleMin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PermissibleMin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"> LOD:</label>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.LOD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LOD, "", new { @class = "text-danger" })
+                </div>
+
+                <label class="col-sm-12 col-md-2 col-form-label"> RegulatoryMax:</label>
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.RegulatoryMax, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegulatoryMax, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"> RegulatoryMin:</label><br />
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.RegulatoryMin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PermissibleMin, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-sm-12 col-md-2 col-form-label"> IsIndustrySpecified:</label><br />
+                <div class="col-sm-4">
+                    <input type="radio" name="reportTypeIsIndustry" value="True" autocomplete="off" id="reportTypeIsIndustry1"> &nbsp;True
+                    &nbsp;&nbsp;
+                    <input type="radio" name="reportTypeIsIndustry" value="False" autocomplete="off" id="reportTypeIsIndustry2"> &nbsp;False
+                    &nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12 col-md-2 col-form-label"> IsActive:</label><br />
+                <div class="col-sm-4">
+                    <input type="radio" name="reportTypeIsActive" value="True" autocomplete="off" id="reportTypeIsActive1"> &nbsp;True
+                    &nbsp;&nbsp;
+                    <input type="radio" name="reportTypeIsActive" value="False" autocomplete="off" id="reportTypeIsActive2"> &nbsp;False
+                    &nbsp;&nbsp;
+                </div>
+
+                <label class="col-sm-12 col-md-2 col-form-label"> IsSetPCBLimit:</label><br />
+                <div class="col-sm-4">
+                    <input type="radio" name="reportTypeIsSetPCB" value="True" autocomplete="off" id="reportTypeIsSetPCB1"> &nbsp;True
+                    &nbsp;&nbsp;
+                    <input type="radio" name="reportTypeIsSetPCB" value="False" autocomplete="off" id="reportTypeIsSetPCB2"> &nbsp;False
+                    &nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="col-sm-12 m-t-15">
+                <input type="submit" id="btnSaveParameterFormula" value="Save Formula" style="float:right" class="btn btn-sm btn-primary alignright">
+            </div>
+        </div>
+    </div>
+</div>
+@*-----------------------Script-------------------*@
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@Scripts.Render("~/bundles/unobtrusive")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divFormula').hide();
+    });
+    var unitMasterList = [];
+    var formulaList = [];
+    var parameterTable = null;
+    var formulaRowNo = 0;
+    var parameterData = [];
+
+    function BindSampleType() {
+        debugger
+        $.ajax({
+            url: "/FormulaBuilder/GetSampleTypeProduct",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                var ddlNewSampleType = $("#ddlNewSampleType");
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.SampleTypeProductName);
+                    option.val(this.SampleTypeProductId);
+                    ddlNewSampleType.append(option);
+                });
+                GetUnitMaster();
+                var ddlSampleType = $("#ddlSampleType"); // 1st
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.SampleTypeProductName);
+                    option.val(this.SampleTypeProductId);
+                    ddlSampleType.append(option);
+                });
+                GetUnitMaster();
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function BindProductGroup(sampleTypeProductId) {
+        $.ajax({
+            url: "/FormulaBuilder/GetProductGroups",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId },
+            success: function (data) {
+                var ddlProductGroup = $("#ddlProductGroup");
+                $('#ddlProductGroup').empty();
+                var selectoption = $("<option />");
+                selectoption.html("Select Product Group");
+                selectoption.val("0");
+                ddlProductGroup.append(selectoption);
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.ProductGroupName);
+                    option.val(this.ProductGroupId);
+                    ddlProductGroup.append(option);
+                });
+                GetUnitMaster();
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function GetUnitMaster() {
+        $.ajax({
+            url: "/FormulaBuilder/GetUnitMaster",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                unitMasterList = data;
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function BindSubGroup(sampleTypeProductId, productGroupId) {
+        $.ajax({
+            url: "/FormulaBuilder/GetSubGroups",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productGroupId },
+            success: function (data) {
+                var ddlsubGroup = $("#ddlSubGroup");
+                $('#ddlSubGroup').empty();
+                var selectoption = $("<option />");
+                selectoption.html("Select Sub Group");
+                selectoption.val("0");
+                ddlsubGroup.append(selectoption);
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.SubGroupName);
+                    option.val(this.SubGroupId);
+                    ddlsubGroup.append(option);
+                });
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+
+    }
+    function BindMatrix(sampleTypeProductId, productgroupId, subgroupId) {
+        $.ajax({
+            url: "/FormulaBuilder/GetMatrix",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId },
+            success: function (data) {
+                var ddlMatrix = $("#ddlMatrix");
+                $('#ddlMatrix').empty();
+                var selectoption = $("<option />");
+                selectoption.html("Select Matrix");
+                selectoption.val("0");
+                ddlMatrix.append(selectoption);
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.MatrixName);
+                    option.val(this.MatrixId);
+                    ddlMatrix.append(option);
+                });
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function createUnitDropDownList(list, id) {
+        var ddhtml = '';
+
+        ddhtml = "<select class='form-control cls" + id + "' id='" + id + "' >";
+        ddhtml = ddhtml + "<option value=-1 >Select</option>";
+        $.each(list, function (key, option) {
+            ddhtml = ddhtml + "<option value=" + option.UnitId + ">" + option.UnitName + "</option>";
+        });
+        ddhtml = ddhtml + "</select>";
+        return ddhtml;
+    }
+    function createTestMethodDropDownList(list, id) {
+        var ddhtml = '';
+
+        ddhtml = "<select class='form-control cls" + id + "' id='" + id + "' >";
+        ddhtml = ddhtml + "<option value=-1 >Select</option>";
+        $.each(list, function (key, option) {
+            ddhtml = ddhtml + "<option value=" + option.TestMethodId + ">" + option.TestMethodName + "</option>";
+        });
+        ddhtml = ddhtml + "</select>";
+        return ddhtml;
+    }
+    function getNameFromNumber(num) {
+        var numeric = num % 26;
+        var letter = String.fromCharCode(65 + numeric);
+        num2 = parseInt(num / 26);
+        if (num2 > 0) {
+            return getNameFromNumber(num2 - 1) + letter;
+        } else {
+            return letter;
+        }
+    }
+    function createUnitMasterDropDownList(umList, selectedUnitID) {
+        var ddhtml = '';
+        var list = umList;
+        var id = 'ddlUnitMaster';
+        ddhtml = "<select class='form-control cls " + id + "' id='" + id + "' >";
+        ddhtml = ddhtml + "<option value=-1 >Select</option>";
+        $.each(list, function (key, option) {
+            if (option.UnitId == selectedUnitID) {
+                ddhtml = ddhtml + "<option value=" + option.UnitId + " selected >" + option.UnitName + "</option>";
+            }
+
+            else {
+                ddhtml = ddhtml + "<option value=" + option.UnitId + ">" + option.UnitName + "</option>";
+            }
+        });
+        ddhtml = ddhtml + "</select>";
+        return ddhtml;
+
+    }
+    function createDataTypeDropDownList() {
+        var ddhtml = '';
+        var list = [];
+        var id = 'ddlDataType';
+        list.push({ DataTypeId: 1, DataTypeName: 'Integer' });
+        list.push({ DataTypeId: 2, DataTypeName: 'Float' });
+        list.push({ DataTypeId: 3, DataTypeName: 'Character' });
+
+        ddhtml = "<select class='form-control cls " + id + "' id='" + id + "' >";
+        ddhtml = ddhtml + "<option value=-1 >Select</option>";
+        $.each(list, function (key, option) {
+            ddhtml = ddhtml + "<option value=" + option.DataTypeId + ">" + option.DataTypeName + "</option>";
+        });
+        ddhtml = ddhtml + "</select>";
+        return ddhtml;
+    }
+    function createPrecisionDropDownList() {
+        var ddhtml = '';
+        var list = [];
+        var id = 'ddlPrecision';
+        list.push({ PrecisionId: 1, Precision: 1 });
+        list.push({ PrecisionId: 2, Precision: 2 });
+        list.push({ PrecisionId: 3, Precision: 3 });
+        list.push({ PrecisionId: 4, Precision: 4 });
+
+        ddhtml = "<select class='form-control cls " + id + "' id='" + id + "' >";
+        ddhtml = ddhtml + "<option value=-1 >Select</option>";
+        $.each(list, function (key, option) {
+            ddhtml = ddhtml + "<option value=" + option.PrecisionId + ">" + option.Precision + "</option>";
+        });
+        ddhtml = ddhtml + "</select>";
+        return ddhtml;
+    }
+    function getFormulaRowHtml(rowNumber) {
+        var selectedUnitID = $('#hdnSelectedUnitId').val();
+        var row = '<tr>';
+        row = row + '<td>' + (rowNumber) + '</td>';
+        row = row + '<td>' + getNameFromNumber(rowNumber - 1) + '</td>';
+        row = row + '<td style="color:black"><input type="text" style="color:black" class="form-control displayName" /></td>';
+        row = row + '<td style="color:black"><input type="text" style="color:black" class="form-control formula" /></td>';
+        row = row + '<td style="color:black"><input type="checkbox" class="form-control isFDV" /></td>';
+        row = row + '<td style="color:black">' + createUnitMasterDropDownList(unitMasterList, selectedUnitID) + '</td>';
+        row = row + '<td style="color:black">' + createDataTypeDropDownList() + '</td>';
+        row = row + '<td style="color:black">' + createPrecisionDropDownList() + '</td>';
+        row = row + '<td><img src="/Content/images/delete.png" alt="Delete" class="imgDelete"></td>';
+        row = row + '</tr>';
+        return row;
+    }
+    function CopyFormula() {
+        formulaList = [];
+        var trs = $('#tblFormula tr:gt(0)');
+        $.each(trs, function (key, value) {
+            var srNo = $($(value).find('td')[0]).html();
+            var notation = $($(value).find('td')[1]).html();
+            var displayName = $($(value).find('input.displayName')).val();
+            var formula = $($(value).find('input.formula')).val();
+            var unit = $($(value).find('select.ddlUnitMaster')[0]).val();
+            var dataType = $($(value).find('select.ddlDataType')[0]).val();
+            var precision = $($(value).find('select.ddlPrecision')[0]).val();
+            var isFDV = $($(value).find('input.isFDV')).prop('checked');
+            formulaList.push({ 'SrNo': srNo, 'Notation': notation, 'DisplayName': displayName, 'Formula': formula, 'IsFDV': isFDV, 'Unit': unit, 'DataType': dataType, 'Precision': precision });
+        });
+    }
+    function populateFormula(deletedSrNo) {
+        formulaList.splice(deletedSrNo - 1, 1);
+        var trs = $('#tblFormula tr:gt(0)');
+        var i = 0;
+        $.each(trs, function (key, tr) {
+            var record = formulaList[i];
+            console.log(record);
+            $($(tr).find('input.displayName')).val(record.DisplayName);
+            $($(tr).find('input.formula')).val(record.Formula);
+            $($(tr).find('select.ddlUnitMaster')[0]).prop('disabled', false)
+            $($(tr).find('select.ddlUnitMaster')[0]).val(record.Unit);
+            $($(tr).find('select.ddlDataType')[0]).val(record.DataType);
+            $($(tr).find('select.ddlPrecision')[0]).val(record.Precision);
+            $($(tr).find('input.isFDV')).prop('checked', record.IsFDV);
+            i = i + 1;
+        });
+    }
+    function getParameterListHeader() {
+        return '<tr class="thead-dark"><th class="width-10">SrNo.</th><th class="width-30">Parametername</th><th class="width-10">Unit</th><th class="width-20">Discipline</th><th class="width-10">TestMethod</th></tr>';
+    }
+    function collectSelectedParamData() {
+
+        debugger;
+        CopyFormula();
+        var selRow = $('#selectedRow').val();
+        debugger;
+        if ($('input[name=MapType]:checked').val() == "true") {
+            var unitId = $("#ddlUnit :selected").val();
+            var parameterId = $("#ddlParameter :selected").val();
+            var testMethodId = $("#ddlTestMethod :selected").val();
+            var parameterGroupId = $("#ParameterGroup").val()
+            var disciplineId = $('input[name=reportType]:checked').val()
+        }
+        else {
+            var unitId = $('#tblParameterList .row' + selRow).find('select.clsddlUnitList :selected').val();
+            var parameterId = $('#tblParameterList .row' + selRow).find('input[type=hidden]#parameterMasterId').val();
+            var testMethodId = $('#tblParameterList .row' + selRow).find('select.clsddlTestMethods :selected').val();
+            var parameterGroupId = $('#tblParameterList .row' + selRow).find('input[type=hidden]#hdnParameterGroupId').val()
+            var disciplineId = $('#tblParameterList .row' + selRow).find('input[type=hidden]#disciplineId').val()
+        }
+
+
+
+
+
+
+        var formulaObj = { UnitId: unitId, ParameterId: parameterId, ParameterGroupId: parameterGroupId, TestMethodId: testMethodId, DisciplineId: disciplineId, FormulaList: formulaList };
+        $.ajax({
+            type: "POST",
+            url: "/FormulaBuilder/SaveParameterFormula",
+            data: { FormulaList: JSON.stringify(formulaObj) },
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                alert(response);
+            },
+
+            error: function (xhr) {
+                console.log('error');
+            }
+        });
+
+    }
+    function AddNewRow() {
+        formulaRowNo = formulaRowNo + 1;
+        var formulaRow = getFormulaRowHtml(formulaRowNo);
+        $('#tblFormula tbody').append(formulaRow);
+    }
+    function GenerateFormulaIfExist(parameterMasterId, parameterGroupId, testMethodID, unitID, disciplineId) {
+        debugger;
+        $.ajax({
+            type: "GET",
+            url: "/FormulaBuilder/GetParameterFormula",
+            data: { ParameterMasterId: parameterMasterId, ParameterGroupId: parameterGroupId, TestMethodID: testMethodID, UnitID: unitID, DisciplineId: disciplineId },
+            dataType: "json",
+            success: function (response) {
+                debugger;
+                formulaRowNo = 0;
+                var rowCount = response.length;
+                formulaList = response;
+                $('#tblFormula').find("tr:gt(0)").remove();
+                if (rowCount == 0) {
+                    AddNewRow();
+                }
+                for (var i = 0; i < rowCount; i++) {
+                    AddNewRow();
+                }
+                var trs = $('#tblFormula tr:gt(0)');
+                var i = 0;
+                if (rowCount != 0) {
+                    $.each(trs, function (key, tr) {
+                        var record = formulaList[i];
+                        console.log(record);
+                        $($(tr).find('input.displayName')).val(record.DisplayName);
+                        $($(tr).find('input.formula')).val(record.Formula);
+                        $($(tr).find('select.ddlUnitMaster')[0]).val(record.Unit);
+                        $($(tr).find('select.ddlDataType')[0]).val(record.DataType);
+                        $($(tr).find('select.ddlPrecision')[0]).val(record.Precision);
+                        $($(tr).find('input.isFDV')).prop('checked', record.IsFDV);
+                        i = i + 1;
+                    });
+                }
+
+            },
+            error: function (xhr) {
+                console.log('error');
+            }
+        });
+
+    }
+    $(function () {
+        $('#divFormula').hide();
+        var selectedParameterId = 0;
+        BindSampleType();
+        $("#ddlSampleType").change(function () {
+            $('#divFormula').hide();
+            var sampleTypeProductId = $("#ddlSampleType :selected").val();
+            BindProductGroup(sampleTypeProductId);
+            $("#ddlSubGroup").find('option').not(':first').remove();
+            $("#ddlMatrix").find('option').not(':first').remove();
+        });
+        $("#ddlProductGroup").change(function () {
+            $('#divFormula').hide();
+            var sampleTypeProductId = $("#ddlSampleType :selected").val();
+            var productgroupId = $("#ddlProductGroup :selected").val();
+            BindSubGroup(sampleTypeProductId, productgroupId);
+            $("#ddlMatrix").find('option').not(':first').remove();
+        });
+        $("#ddlSubGroup").change(function () {
+            var sampleTypeProductId = $("#ddlSampleType :selected").val();
+            var productgroupId = $("#ddlProductGroup :selected").val();
+            var subgroupId = $("#ddlSubGroup :selected").val();
+            $('#divFormula').hide();
+            BindMatrix(sampleTypeProductId, productgroupId, subgroupId);
+        });
+        $("#ddlMatrix").change(function () {
+
+            $('#loadingmessage').show();
+            var sampleTypeProductId = $("#ddlSampleType :selected").val();
+            var productgroupId = $("#ddlProductGroup :selected").val();
+            var subgroupId = $("#ddlSubGroup :selected").val();
+            var matrixId = $("#ddlMatrix :selected").val();
+
+            $('#divFormula').hide();
+            $.ajax({
+                url: "/FormulaBuilder/GetParameterDetails",
+                type: 'GET',
+                dataType: 'json',
+                data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId },
+                success: function (data) {
+                    debugger;
+                    var tableContent = "";
+                    parameterData = data;
+                    var counter = 1;
+                    $.each(parameterData, function (key, value) {
+                        var currentData = value;
+
+                        var testMethodList = currentData.TestMethodList;
+                        var unitList = currentData.UnitList;
+                        var cls = "cls" + currentData.DisciplineName + " row" + currentData.ParameterMasterId
+                        console.log(cls);
+
+                        tableContent = tableContent + "<tr class='" + cls + "' >";
+                        tableContent = tableContent + "<td><input type='hidden' id='hdnParameterGroupId'  value='" + currentData.ParameterGroupId + "'>" + counter + "</td>";
+                        tableContent = tableContent + "<td><input type='hidden' id='parameterMasterId'  value='" + currentData.ParameterMasterId + "'>"
+                        tableContent = tableContent + "<a><span class='linkParameterName' style='cursor:pointer;' >" + currentData.ParameterName + "</span></a></td>";
+                        tableContent = tableContent + "<td style='color:black'>" + createUnitDropDownList(unitList, 'ddlUnitList') + "</td>";
+                        tableContent = tableContent + "<td><input type='hidden' id='disciplineId'  value='" + currentData.DisciplineId + "'>" + currentData.DisciplineName + "</td>";
+                        tableContent = tableContent + "<td style='color:black'>" + createTestMethodDropDownList(testMethodList, 'ddlTestMethods') + "</td>";
+                        tableContent = tableContent + "</tr>";
+                        counter = counter + 1;
+                    });
+                    debugger;
+
+                    if (parameterTable != null) {
+                        parameterTable.destroy();
+                        $('#tblParameterList').empty();
+                        $('#tblParameterList').append('<thead></thead><tbody></tbody>');
+                        var tableHeader = getParameterListHeader();
+                        $('#tblParameterList thead').append(tableHeader);
+                        $('#tblParameterList tbody').append(tableContent);
+                        parameterTable = $('#tblParameterList').DataTable();
+                    }
+                    else {
+
+                        var tableHeader = getParameterListHeader();
+                        $('#tblParameterList thead').append(tableHeader);
+                        $('#tblParameterList tbody').append(tableContent);
+                        parameterTable = $('#tblParameterList').DataTable();
+                    }
+                    $('#loadingmessage').hide();
+                    $('#MapWith').show();
+                },
+                error: function (response) {
+                    console.log("error");
+                    console.log(response);
+                }
+            });
+            //function BindParameter(sampleTypeProductId, productgroupId, subgroupId, matrixId)
+        });
+        $(document).on('click', '.linkParameterName', function (event) {
+
+            debugger;
+            $("#selectedParameter").html($(this).html());
+            var currentParamId = $(this).closest('tr').find('input[type=hidden]#parameterMasterId').val();
+            $('#ParamaterMasterID').val(currentParamId);
+            var parameterGroupId = $(this).closest('tr').find('input[type=hidden]#hdnParameterGroupId').val();
+            var unitID = $(this).closest('tr').find('select.clsddlUnitList :selected').val();
+            var testMethodID = $(this).closest('tr').find('select.clsddlTestMethods :selected').val();
+            var disciplineId = $(this).closest('tr').find('input[type=hidden]#disciplineId').val();
+            $('#hdnSelectedUnitId').val(unitID);
+            $('#divFormula').show();
+            $('#selectedRow').val(currentParamId);
+
+            $('#btnSaveFormula').prop('disabled', false);
+            $('#addNewFormula').prop('disabled', false);
+            //if (selectedParameterId != currentParamId) {
+            //    formulaRowNo = 0;
+            //    //$('#tblFormula').find("tr:gt(0)").remove();
+
+            //    // var firstRow = getFormulaRowHtml(formulaRowNo);
+            //    //$('#tblFormula tbody').append(firstRow);
+
+            //    selectedParameterId = currentParamId;
+            //}
+            GenerateFormulaIfExist(currentParamId, parameterGroupId, testMethodID, unitID, disciplineId);
+        });
+        $('#addNewFormula').click(function () {
+            AddNewRow();
+        });
+        $(document).on('click', '.imgDelete', function (event) {
+            CopyFormula();
+            var deletedSrNo = $(this).parent().parent().find('td').first().html();
+
+            $('#tblFormula').find("tr:gt(0)").remove();
+            formulaRowNo = formulaRowNo - 1;
+            var totalRows = formulaRowNo;
+            for (var i = 0; i < totalRows; i++) {
+                var row = getFormulaRowHtml(i + 1);
+                $('#tblFormula tbody').append(row);
+            }
+
+            populateFormula(parseInt(deletedSrNo));
+        });
+        $('#btnSaveFormula').click(function () {
+            collectSelectedParamData();
+        });
+        $('#divDiscipline input[type=radio]').change(function () {
+            debugger;
+            var disciplineId = ($(this).val());
+            var counter = 1;
+            var tableContent = "";
+            $.each(parameterData, function (key, value) {
+                var currentData = value;
+                if (currentData.DisciplineId == disciplineId) {
+                    var testMethodList = currentData.TestMethodList;
+                    var unitList = currentData.UnitList;
+                    var cls = "cls" + currentData.DisciplineName + " row" + currentData.ParameterMasterId
+                    console.log(cls);
+
+                    tableContent = tableContent + "<tr class='" + cls + "' >";
+                    tableContent = tableContent + "<td><input type='hidden' id='hdnParameterGroupId'  value='" + currentData.ParameterGroupId + "'>" + counter + "</td>";
+
+                    // tableContent = tableContent + "<td>" + counter + "</td>";
+                    tableContent = tableContent + "<td><input type='hidden' id='parameterMasterId'  value='" + currentData.ParameterMasterId + "'>"
+                    tableContent = tableContent + "<a><span class='linkParameterName' style='cursor:pointer' >" + currentData.ParameterName + "</span></a></td>";
+                    tableContent = tableContent + "<td>" + createUnitDropDownList(unitList, 'ddlUnitList') + "</td>";
+                    tableContent = tableContent + "<td><input type='hidden' id='disciplineId'  value='" + currentData.DisciplineId + "'>" + currentData.DisciplineName + "</td>";
+                    tableContent = tableContent + "<td>" + createTestMethodDropDownList(testMethodList, 'ddlTestMethods') + "</td>";
+                    tableContent = tableContent + "</tr>";
+                    counter = counter + 1;
+                }
+            });
+
+            if (parameterTable != null) {
+                parameterTable.destroy();
+                $('#tblParameterList').empty();
+                $('#tblParameterList').append('<thead></thead><tbody></tbody>');
+                var tableHeader = getParameterListHeader();
+                $('#tblParameterList thead').append(tableHeader);
+                $('#tblParameterList tbody').append(tableContent);
+                parameterTable = $('#tblParameterList').DataTable();
+            }
+            else {
+
+                var tableHeader = getParameterListHeader();
+                $('#tblParameterList thead').append(tableHeader);
+                $('#tblParameterList tbody').append(tableContent);
+                parameterTable = $('#tblParameterList').DataTable();
+            }
+        });
+    });
+    //-----------------------------------------------------------------------------------------------------------------------------------
+    function ddlParameterChange() {
+        debugger;
+        $('#divFormula').hide();
+        var ParameterMasterId = $("#ddlParameter :selected").val();
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        var subgroupId = $("#ddlNewSubGroup :selected").val();
+        var matrixId = $("#ddlNewMatrix :selected").val();
+
+        $('#ddlUnit').empty();
+        BindUnit(sampleTypeProductId, productgroupId, subgroupId, matrixId, ParameterMasterId);
+        $('#ddlTestMethod').empty();
+    }
+    $("#ddlUnit").change(function () {
+        debugger;
+        var ParameterMasterId = $("#ddlParameter :selected").val();
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        var subgroupId = $("#ddlNewSubGroup :selected").val();
+        var matrixId = $("#ddlNewMatrix :selected").val();
+        $('#ddlTestMethod').empty();
+        BindParameterMapping(sampleTypeProductId, productgroupId, subgroupId, matrixId, ParameterMasterId);
+    });
+    $("#ddlTestMethod").change(function () {
+        debugger;
+        var ParameterMasterId = $("#ddlParameter :selected").val();
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        var subgroupId = $("#ddlNewSubGroup :selected").val();
+        var matrixId = $("#ddlNewMatrix :selected").val();
+        BindParameter(sampleTypeProductId, productgroupId, subgroupId, matrixId);
+    });
+    function BindUnit(sampleTypeProductId, productgroupId, subgroupId, matrixId, ParameterMasterId) {
+
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetUnit",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId, ParameterMasterId: ParameterMasterId },
+            success: function (data) {
+                debugger
+                parameterData = data;
+                var ddlUnit = $("#ddlUnit");
+                var selectoption = $("<option />");
+                selectoption.html("Select Unit");
+                selectoption.val("0");
+                ddlUnit.append(selectoption);
+                $(parameterData).each(function () {
+                    var option = $("<option />");
+                    option.html(this.UnitName);
+                    option.val(this.UnitId);
+                    ddlUnit.append(option);
+                });
+
+            }
+        });
+
+    }
+    function BindParameterMapping(sampleTypeProductId, productgroupId, subgroupId, matrixId, ParameterMasterId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetTestMethod",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId, ParameterMasterId: ParameterMasterId },
+            success: function (data) {
+                debugger;
+                parameterData = data;
+                var ddlTestMethod = $("#ddlTestMethod");
+                $('#ddlTestMethod').empty();
+                var selectoption = $("<option />");
+                selectoption.html("Select Test Method");
+                selectoption.val("0");
+                ddlTestMethod.append(selectoption);
+                $(parameterData).each(function () {
+                    var option = $("<option />");
+                    option.html(this.TestMethodName);
+                    option.val(this.TestMethodId);
+                    ddlTestMethod.append(option);
+                });
+
+            }
+        });
+
+    }
+    function BindParameter(sampleTypeProductId, productgroupId, subgroupId, matrixId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetParameterGroupId",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId },
+            success: function (data) {
+                debugger;
+                parameterData = data;
+                $("#ParameterGroup").val(parameterData);
+
+            }
+        });
+
+    }
+    function Formation() {
+        $('#NewFormation').show();
+        BindSampleType()
+        //var matrixId = $("#ddlMatrix :selected").val();
+        debugger;
+        var selectedParameterId = 0;
+    }
+    // added code here by ASHWINI
+    $("#ddlNewSampleType").change(function () {
+
+        debugger;
+        $('#divFormula').hide();
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        BindNewProductGroup(sampleTypeProductId);
+        $("#ddlNewSubGroup").find('option').not(':first').remove();
+        $("#ddlNewMatrix").find('option').not(':first').remove();
+    });
+    $("#ddlNewProductGroup").change(function () {
+        debugger;
+        $('#divFormula').hide();
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        BindNewSubGroup(sampleTypeProductId, productgroupId);
+        $("#ddlMatrix").find('option').not(':first').remove();
+    });
+    $("#ddlNewSubGroup").change(function () {
+        debugger;
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        var subgroupId = $("#ddlNewSubGroup :selected").val();
+        $('#divFormula').hide();
+        BindNewMatrix(sampleTypeProductId, productgroupId, subgroupId);
+    });
+    $("#ddlNewMatrix").change(function () {
+        debugger;
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        var subgroupId = $("#ddlNewSubGroup :selected").val();
+        var matrixId = $("#ddlNewMatrix :selected").val();
+        $('#divFormula').hide();
+        GetUnitmaster(sampleTypeProductId, productgroupId, subgroupId, matrixId);
+        GenerateParamaterGroupId(sampleTypeProductId, productgroupId, subgroupId, matrixId);
+
+    });
+    $("#ddlNewUnit").change(function () {
+        debugger;
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        var subgroupId = $("#ddlNewSubGroup :selected").val();
+        var matrixId = $("#ddlNewMatrix :selected").val();
+        var unitid = $("#ddlnewunit :selected").val();
+        $('#divFormula').hide
+        GetTestMethod(sampleTypeProductId, productgroupId, subgroupId, matrixId, unitid);
+    });
+    $("#ddlNewtestmethod").change(function () {
+        debugger;
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        var productgroupId = $("#ddlNewProductGroup :selected").val();
+        var subgroupId = $("#ddlNewSubGroup :selected").val();
+        var matrixId = $("#ddlNewMatrix :selected").val();
+        var disciplineId = $('input[name=reportType1]:checked').val();
+        var testMethodId = $("#ddlNewtestmethod :selected").val();
+        var unitId = $("#ddlNewUnit :selected").val();
+        GetParamaterMappingList(sampleTypeProductId, productgroupId, subgroupId, matrixId, disciplineId, testMethodId, unitId);
+
+    });
+
+
+
+    function BindNewSampleType() {
+        debugger;
+        var sampleTypeProductId = $("#ddlNewSampleType :selected").val();
+        BindProductGroup(sampleTypeProductId);
+        $("#ddlNewSubGroup").find('option').not(':first').remove();
+        $("#ddlNewMatrix").find('option').not(':first').remove();
+    }
+    function BindNewProductGroup(sampleTypeProductId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetProductGroups",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId },
+            success: function (data) {
+                var ddlNewProductGroup = $("#ddlNewProductGroup");
+                $('#ddlNewProductGroup').empty();
+                var selectoption = $("<option />");
+                selectoption.html("Select Product Group");
+                selectoption.val("0");
+                ddlNewProductGroup.append(selectoption);
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.ProductGroupName);
+                    option.val(this.ProductGroupId);
+                    ddlNewProductGroup.append(option);
+                });
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function BindNewSubGroup(sampleTypeProductId, productGroupId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetSubGroups",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productGroupId },
+            success: function (data) {
+                var ddlNewSubGroup = $("#ddlNewSubGroup");
+                $('#ddlNewSubGroup').empty();
+                var selectoption = $("<option />");
+                selectoption.html("Select Sub Group");
+                selectoption.val("0");
+                ddlNewSubGroup.append(selectoption);
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.SubGroupName);
+                    option.val(this.SubGroupId);
+                    ddlNewSubGroup.append(option);
+                });
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function BindNewMatrix(sampleTypeProductId, productgroupId, subgroupId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetMatrix",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId },
+            success: function (data) {
+                var ddlNewMatrix = $("#ddlNewMatrix");
+                $('#ddlNewMatrix').empty();
+                var selectoption = $("<option />");
+                selectoption.html("Select Matrix");
+                selectoption.val("0");
+                ddlNewMatrix.append(selectoption);
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.MatrixName);
+                    option.val(this.MatrixId);
+                    ddlNewMatrix.append(option);
+                });
+
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function GetUnitmaster(sampleTypeProductId, productgroupId, subgroupId, matrixId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetUnitMaster1",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId },
+            success: function (data) {
+                var ddlNewUnit = $("#ddlNewUnit");
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.Unit);
+                    option.val(this.UnitId);
+                    ddlNewUnit.append(option);
+                });
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+    function GetTestMethod(sampleTypeProductId, productgroupId, subgroupId, matrixId, unitid) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetTestMethodMaster",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId, Unitid: unitid },
+            success: function (data) {
+                var ddlNewtestmethod = $("#ddlNewtestmethod");
+                $(data).each(function () {
+                    var option = $("<option />");
+                    option.html(this.TestMethod);
+                    option.val(this.TestMethodId);
+                    ddlNewtestmethod.append(option);
+                });
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+
+    }
+    function GenerateParamaterGroupId(sampleTypeProductId, productgroupId, subgroupId, matrixId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetParameterDetails1",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId },
+            success: function (data) {
+                debugger;
+                var tableContent = "";
+                var paramatergroupid = "";
+                parameterData = data;
+                paramatergroupid = parameterData.parameterGroupId;
+                $('#ParamaterGroupID').val(data.ParameterGroupId);
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+
+    }
+    $('#btnSaveParameterFormula').click(function () {
+        debugger;
+
+        var SampleTypeId = $("#ddlNewSampleType :selected").val();// parameter mapping
+        var ProductId = $("#ddlNewProductGroup :selected").val();// parameter mapping
+        var SubGroupId = $("#ddlNewSubGroup :selected").val();// parameter mapping
+        var MatrixId = $("#ddlNewMatrix :selected").val();// parameter mapping
+        var disciplineId = $('input[name=reportType1]:checked').val();
+        var testMethodId = $("#ddlNewtestmethod :selected").val();
+        var unitId = $("#ddlNewUnit :selected").val();
+        var parameterId = $("#ParamaterMasterID").val();
+        var parameterGroupId = $("#ParamaterGroupID").val();
+        
+        var isNABLAccredited = $('input[name=reportTypeisnabl]:checked').val();
+        
+        var lOD = $("#LOD").val();
+        var maxRange = $("#MaxRange").val();
+        
+        var isField = $('input[name=reportTypeIsField]:checked').val();
+      
+       
+        var permissibleMin = $("#PermissibleMin").val();
+        var permissibleMax = $("#PermissibleMax").val();
+        
+        var issetpcblimit = $('input[name=reportTypeIsSetPCB]:checked').val();
+      
+        
+        var isIndustrySpecified = $('input[name=reportTypeIsIndustry]:checked').val();
+    
+       
+        var regulatoryMin = $("#RegulatoryMin").val();
+        var regulatoryMax = $("#RegulatoryMax").val();
+
+      
+        var isActive = $('input[name=reportTypeIsActive]:checked').val();
+        
+
+        //var isActive = $("#IsActive").val();
+        //    GetParamaterMappingList(SampleTypeId, ProductId, SubGroupId, MatrixId, disciplineId, testMethodId, unitId);
+        var checkBox = document.getElementById("chkwithformula");
+        /* if (checkBox.checked == true)*/
+        if (checkBox.checked == true) {
+            debugger;
+            SaveParameterMapping(SampleTypeId, ProductId, SubGroupId, MatrixId, disciplineId, testMethodId, issetpcblimit);
+            SaveParameterGroup(unitId, parameterId, testMethodId, parameterGroupId, disciplineId, isNABLAccredited, lOD, maxRange, isField, permissibleMin, permissibleMax, isIndustrySpecified, regulatoryMin, regulatoryMax, isActive);
+            collectSelectedParamData1();
+            // add  parameter with formula mapping
+        }
+        else {
+            SaveParameterMapping(SampleTypeId, ProductId, SubGroupId, MatrixId, disciplineId, testMethodId, issetpcblimit);
+            SaveParameterGroup(unitId, parameterId, testMethodId, parameterGroupId, disciplineId, isNABLAccredited, lOD, maxRange, isField, permissibleMin, permissibleMax, isIndustrySpecified, regulatoryMin, regulatoryMax, isActive);
+
+        }
+    });
+    function collectSelectedParamData1() {
+        debugger;
+        CopyFormula();
+        var selRow = $('#selectedRow').val();
+        debugger;
+        if ($('input[name=MapType]:checked').val() == "true") {
+            var unitId = $("#ddlNewUnit :selected").val();
+            var parameterId = $("#ParamaterMasterID").val();
+            var testMethodId = $("#ddlNewtestmethod :selected").val();
+            var parameterGroupId = $("#ParamaterGroupID").val();
+            var disciplineId = $('input[name=reportType1]:checked').val()
+
+        }
+        else {
+            var unitId = $("#ddlNewUnit :selected").val();
+            var parameterId = $("#ParamaterMasterID").val(); //Parameter ID For Formula
+            var testMethodId = $("#ddlNewtestmethod :selected").val();
+            var parameterGroupId = $("#ParamaterGroupID").val(); // Parameter Group ID For Formula
+            var disciplineId = $('input[name=reportType1]:checked').val(); ///parameter mapping  and Parameter Formula
+
+        }
+        var formulaObj = { UnitId: unitId, ParameterId: parameterId, ParameterGroupId: parameterGroupId, TestMethodId: testMethodId, DisciplineId: disciplineId, FormulaList: formulaList };
+        $.ajax({
+            type: "POST",
+            url: "/FormulaBuilder/SaveParameterFormula1",
+            data: { FormulaList: JSON.stringify(formulaObj) },
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                alert(response);
+            },
+
+            error: function (xhr) {
+                console.log('error');
+            }
+        });
+    }
+    function SaveParameterMapping(SampleTypeId, ProductId, SubGroupId, MatrixId, disciplineId, testMethodId, issetpcblimit) {
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: "/FormulaBuilder/SaveParameterMapping",
+            dataType: 'json',
+            cache: false,
+            data: { SampleTypeProductId: SampleTypeId, ProductgroupId: ProductId, SubgroupId: SubGroupId, MatrixId: MatrixId, DisciplineId: disciplineId, TestMethodId: testMethodId, Issetpcblimit: issetpcblimit },
+            success: function (response) {
+
+            },
+            error: function (xhr) {
+                console.log('error');
+            }
+        });
+
+    }
+    function SaveParameterGroup(unitId, parameterId, testMethodId, parameterGroupId, disciplineId, isNABLAccredited, lOD, maxRange, isField, permissibleMin, permissibleMax, isIndustrySpecified, regulatoryMin, regulatoryMax, isActive) {
+        debugger;
+        $.ajax({
+            type: 'POST',
+            url: "/FormulaBuilder/SaveParameterGroup",
+            dataType: 'json',
+            data: { ParameterMasterId: parameterId, ParameterGroupId: parameterGroupId, TestMethodID: testMethodId, UnitID: unitId, DisciplineId: disciplineId, IsNABLAccredited: isNABLAccredited, LOD: lOD, MaxRange: maxRange, IsField: isField, PermissibleMin: permissibleMin, PermissibleMax: permissibleMax, IsIndustrySpecified: isIndustrySpecified, RegulatoryMin: regulatoryMin, RegulatoryMax: regulatoryMax, IsActive: isActive },
+            success: function (response) {
+                alert('Parameter Mapped Successfully');
+            },
+            error: function (xhr) {
+                alert('Error!!!!');
+            }
+        });
+    }
+    function GetParamaterMappingList(SampleTypeId, ProductId, SubGroupId, MatrixId, disciplineId, testMethodId, unitId) {
+        debugger;
+        $.ajax({
+            url: "/FormulaBuilder/GetParamaterMappingList",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: SampleTypeId, ProductgroupId: ProductId, SubgroupId: SubGroupId, MatrixId: MatrixId, DisciplineId: disciplineId, TestMethodId: testMethodId, UnitId: unitId },
+            success: function (result) {
+                if (result == "true") {
+
+                }
+                else if (result == "false") {
+
+                    alert('Parameter Record Already Available');
+                }
+            },
+            error: function (xhr) {
+                console.log('error');
+            }
+        });
+    }
+    function getcheck() {
+        if ($('#chkwithformula') == 'checked') {
+
+        }
+        else {
+
+        }
+    }
+    function showHideSearchCriteria() {
+        debugger;
+        var sampleTypeProductId = $("#ddlSampleType :selected").val();
+        var productgroupId = $("#ddlProductGroup :selected").val();
+        var subgroupId = $("#ddlSubGroup :selected").val();
+        var matrixId = $("#ddlMatrix :selected").val();
+        var disciplineId = $('input[name=reportType]:checked').val();
+        $.ajax({
+            url: "/FormulaBuilder/GetParameterDetailswithDisclipine",
+            type: 'GET',
+            dataType: 'json',
+            data: { SampleTypeProductId: sampleTypeProductId, ProductgroupId: productgroupId, SubgroupId: subgroupId, MatrixId: matrixId, DisciplineId: disciplineId },
+            success: function (data) {
+                debugger;
+                var tableContent = "";
+                parameterData = data;
+                var counter = 1;
+                $.each(parameterData, function (key, value) {
+                    var currentData = value;
+
+                    var testMethodList = currentData.TestMethodList;
+                    var unitList = currentData.UnitList;
+                    var cls = "cls" + currentData.DisciplineName + " row" + currentData.ParameterMasterId
+                    console.log(cls);
+
+                    tableContent = tableContent + "<tr class='" + cls + "' >";
+                    tableContent = tableContent + "<td><input type='hidden' id='hdnParameterGroupId'  value='" + currentData.ParameterGroupId + "'>" + counter + "</td>";
+                    tableContent = tableContent + "<td><input type='hidden' id='parameterMasterId'  value='" + currentData.ParameterMasterId + "'>"
+                    tableContent = tableContent + "<a><span class='linkParameterName' style='cursor:pointer;' >" + currentData.ParameterName + "</span></a></td>";
+                    tableContent = tableContent + "<td style='color:black'>" + createUnitDropDownList(unitList, 'ddlUnitList') + "</td>";
+                    tableContent = tableContent + "<td><input type='hidden' id='disciplineId'  value='" + currentData.DisciplineId + "'>" + currentData.DisciplineName + "</td>";
+                    tableContent = tableContent + "<td style='color:black'>" + createTestMethodDropDownList(testMethodList, 'ddlTestMethods') + "</td>";
+                    tableContent = tableContent + "</tr>";
+                    counter = counter + 1;
+                });
+                debugger;
+
+                if (parameterTable != null) {
+                    parameterTable.destroy();
+                    $('#tblParameterList').empty();
+                    $('#tblParameterList').append('<thead></thead><tbody></tbody>');
+                    var tableHeader = getParameterListHeader();
+                    $('#tblParameterList thead').append(tableHeader);
+                    $('#tblParameterList tbody').append(tableContent);
+                    parameterTable = $('#tblParameterList').DataTable();
+                }
+                else {
+
+                    var tableHeader = getParameterListHeader();
+                    $('#tblParameterList thead').append(tableHeader);
+                    $('#tblParameterList tbody').append(tableContent);
+                    parameterTable = $('#tblParameterList').DataTable();
+                }
+                $('#loadingmessage').hide();
+                $('#MapWith').show();
+            },
+            error: function (response) {
+                console.log("error");
+                console.log(response);
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+

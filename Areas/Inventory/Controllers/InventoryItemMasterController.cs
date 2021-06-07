@@ -25,6 +25,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             BALFactory.NewInventoryBAL = new NewInventoryBAL();
             BALFactory.dropdownsBAL = new BAL.DropDown.DropDownBal();
         }
+       
         public ActionResult Index()
         {
             return View();
@@ -60,9 +61,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     CategoryName = item.CategoryName,
                     InventoryTypeName = item.InventoryTypeName,
                     Capacity = item.Capacity,
-                    InventoryCapacityMasterId = item.InventoryCapacityMasterId,
-                    ItemID = item.ItemID,
-
+                    ItemID = item.ItemID
                 });
             }
             ViewBag.InvCategoryList = BALFactory.dropdownsBAL.GetFilteredInvCatogaryList(InventoryTypeID);
@@ -99,6 +98,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     AvailableStock = item.AvailableStock,
                     CategoryName = item.CategoryName,
                     InventoryTypeName = item.InventoryTypeName,
+                  
                     Capacity = item.Capacity,
                     InventoryCapacityMasterId = item.InventoryCapacityMasterId,
                     ItemID = item.ItemID,
@@ -107,6 +107,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(modellist);
         }    
         [HttpGet]
+      
         public ActionResult AddStockIssueToUser(int ItemMasterId = 0)
         {
             InventoryItemMasterModel model = new InventoryItemMasterModel();
@@ -146,6 +147,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+   
         public ActionResult AddStockIssueToUser(InventoryItemMasterModel model)
         {
             if (model != null)
@@ -178,6 +180,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             }
         }
         [HttpGet]
+        
         public ActionResult Create()
         {
             // get list of Inventory Type
@@ -203,6 +206,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+     
         public ActionResult Create(InventoryItemMasterModel model)
         {
             InventoryItemEntity inventoryItemEntity = new InventoryItemEntity();
@@ -212,8 +216,15 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             inventoryItemEntity.UnitID = model.UnitID;
             inventoryItemEntity.Code = model.Code;
             inventoryItemEntity.Capacity = model.Capacity;
-            inventoryItemEntity.MinimumStock = model.MinimumStock;
-            if(model.AvailableStock == null || model.AvailableStock == "")
+            if (model.MinimumStock == null)
+            {
+                inventoryItemEntity.MinimumStock = 0;
+            }
+            else
+            {
+                inventoryItemEntity.MinimumStock = model.MinimumStock;
+            }
+            if (model.AvailableStock == null || model.AvailableStock == "")
             {
                 inventoryItemEntity.AvailableStock = "0";
 
@@ -238,6 +249,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             }
         }
         [HttpGet]
+       
         public ActionResult Edit(int? ItemMasterId = 0, int? ID = 0)
         {
             InventoryItemMasterModel model = new InventoryItemMasterModel();
@@ -261,12 +273,19 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     model.ItemID = CoreFactory.InventoryItemList[0].ItemID;
                     model.NameOfStock = CoreFactory.InventoryItemList[0].NameOfStock;
                     model.Code = CoreFactory.InventoryItemList[0].Code;
-                    model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
                     model.IsActive = CoreFactory.InventoryItemList[0].IsActive;
                     model.CatagoryMasterID = CoreFactory.InventoryItemList[0].CatagoryMasterID;
                     model.InventoryTypeID = CoreFactory.InventoryItemList[0].InventoryTypeID;
                     model.Capacity = CoreFactory.InventoryItemList[0].Capacity;
                     model.UnitID = CoreFactory.InventoryItemList[0].UnitID;
+                    if (CoreFactory.InventoryItemList[0].MinimumStock == null || CoreFactory.InventoryItemList[0].MinimumStock == 0)
+                    {
+                        model.MinimumStock = 0;
+                    }
+                    else if(CoreFactory.InventoryItemList[0].MinimumStock != null || CoreFactory.InventoryItemList[0].MinimumStock != 0)
+                    {
+                        model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
+                    }
                     if (CoreFactory.InventoryItemList[0].AvailableStock == null || CoreFactory.InventoryItemList[0].AvailableStock == "")
                     {
                         model.AvailableStock = "0";
@@ -297,13 +316,20 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     model.ItemMasterID = CoreFactory.InventoryItemList[0].ItemMasterID;
                     model.ItemID = CoreFactory.InventoryItemList[0].ItemID;
                     model.NameOfStock = CoreFactory.InventoryItemList[0].NameOfStock;
-                    model.Code = CoreFactory.InventoryItemList[0].Code;
-                    model.MinimumStock = (decimal)CoreFactory.InventoryItemList[0].MinimumStock;
+                    model.Code = CoreFactory.InventoryItemList[0].Code;           
                     model.IsActive = (bool)CoreFactory.InventoryItemList[0].IsActive;
                     model.CatagoryMasterID = (byte)CoreFactory.InventoryItemList[0].CatagoryMasterID;
                     model.InventoryTypeID = (byte)CoreFactory.InventoryItemList[0].InventoryTypeID;
                     model.Capacity = CoreFactory.InventoryItemList[0].Capacity;
                     model.UnitID = (byte)CoreFactory.InventoryItemList[0].UnitID;
+                    if (CoreFactory.InventoryItemList[0].MinimumStock == null || CoreFactory.InventoryItemList[0].MinimumStock == 0)
+                    {
+                        model.MinimumStock = 0;
+                    }
+                    else if (CoreFactory.InventoryItemList[0].MinimumStock != null || CoreFactory.InventoryItemList[0].MinimumStock != 0)
+                    {
+                        model.MinimumStock =CoreFactory.InventoryItemList[0].MinimumStock;
+                    }
                     if (CoreFactory.InventoryItemList[0].AvailableStock == null || CoreFactory.InventoryItemList[0].AvailableStock == "")
                     {
                         model.AvailableStock = "0";
@@ -340,8 +366,15 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             inventoryItemEntity.UnitID = model.UnitID;
             inventoryItemEntity.Code = model.Code;
             inventoryItemEntity.Capacity = model.Capacity;
-            inventoryItemEntity.MinimumStock = model.MinimumStock;
-            if(inventoryItemEntity.AvailableStock == null || model.AvailableStock == "")
+            if (model.MinimumStock == null)
+            {
+                inventoryItemEntity.MinimumStock = 0;
+            }
+            else
+            {
+                inventoryItemEntity.MinimumStock = model.MinimumStock;
+            }
+            if (inventoryItemEntity.AvailableStock == null || model.AvailableStock == "")
             {
                 inventoryItemEntity.AvailableStock = "0";
             }
@@ -368,17 +401,20 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         
         
         [HttpGet]
+        
         public ActionResult ConsumableListItems()
         {
 
             return View();
         }
         [HttpGet]
+       
         public ActionResult NonConsumableListItems()
         {
             return View();
         }
         [HttpGet]
+       
         public ActionResult StockLogDataList()
         {
 
@@ -414,6 +450,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(modellist);
         }
         [HttpGet]
+      
         public ActionResult View(int? ItemMasterId = 0, int? ID = 0)
         {
             InventoryItemMasterModel model = new InventoryItemMasterModel();
@@ -437,7 +474,14 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     model.ItemID = CoreFactory.InventoryItemList[0].ItemID;
                     model.NameOfStock = CoreFactory.InventoryItemList[0].NameOfStock;
                     model.Code = CoreFactory.InventoryItemList[0].Code;
-                    model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
+                    if (CoreFactory.InventoryItemList[0].MinimumStock == null || CoreFactory.InventoryItemList[0].MinimumStock == 0)
+                    {
+                        model.MinimumStock = 0;
+                    }
+                    else
+                    {
+                        model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
+                    }
                     model.IsActive = CoreFactory.InventoryItemList[0].IsActive;
                     model.CatagoryMasterID = CoreFactory.InventoryItemList[0].CatagoryMasterID;
                     model.InventoryTypeID = CoreFactory.InventoryItemList[0].InventoryTypeID;
@@ -475,7 +519,14 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     model.ItemID = CoreFactory.InventoryItemList[0].ItemID;
                     model.NameOfStock = CoreFactory.InventoryItemList[0].NameOfStock;
                     model.Code = CoreFactory.InventoryItemList[0].Code;
-                    model.MinimumStock = (decimal)CoreFactory.InventoryItemList[0].MinimumStock;
+                    if (CoreFactory.InventoryItemList[0].MinimumStock == null || CoreFactory.InventoryItemList[0].MinimumStock == 0)
+                    {
+                        model.MinimumStock = 0;
+                    }
+                    else
+                    {
+                        model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
+                    }
                     model.IsActive = (bool)CoreFactory.InventoryItemList[0].IsActive;
                     model.CatagoryMasterID = (byte)CoreFactory.InventoryItemList[0].CatagoryMasterID;
                     model.InventoryTypeID = (byte)CoreFactory.InventoryItemList[0].InventoryTypeID;
@@ -507,6 +558,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         }
 
         [HttpGet]
+     
         public ActionResult Delete(int? ItemMasterId = 0, int? ID = 0)
         {
             InventoryItemMasterModel model = new InventoryItemMasterModel();
@@ -530,7 +582,14 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     model.ItemID = CoreFactory.InventoryItemList[0].ItemID;
                     model.NameOfStock = CoreFactory.InventoryItemList[0].NameOfStock;
                     model.Code = CoreFactory.InventoryItemList[0].Code;
-                    model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
+                    if (CoreFactory.InventoryItemList[0].MinimumStock == null || CoreFactory.InventoryItemList[0].MinimumStock == 0)
+                    {
+                        model.MinimumStock = 0;
+                    }
+                    else
+                    {
+                        model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
+                    }
                     model.IsActive = CoreFactory.InventoryItemList[0].IsActive;
                     model.CatagoryMasterID = CoreFactory.InventoryItemList[0].CatagoryMasterID;
                     model.InventoryTypeID = CoreFactory.InventoryItemList[0].InventoryTypeID;
@@ -568,7 +627,14 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     model.ItemID = CoreFactory.InventoryItemList[0].ItemID;
                     model.NameOfStock = CoreFactory.InventoryItemList[0].NameOfStock;
                     model.Code = CoreFactory.InventoryItemList[0].Code;
-                    model.MinimumStock = (decimal)CoreFactory.InventoryItemList[0].MinimumStock;
+                    if (CoreFactory.InventoryItemList[0].MinimumStock == null || CoreFactory.InventoryItemList[0].MinimumStock == 0)
+                    {
+                        model.MinimumStock = 0;
+                    }
+                    else
+                    {
+                        model.MinimumStock = CoreFactory.InventoryItemList[0].MinimumStock;
+                    }
                     model.IsActive = (bool)CoreFactory.InventoryItemList[0].IsActive;
                     model.CatagoryMasterID = (byte)CoreFactory.InventoryItemList[0].CatagoryMasterID;
                     model.InventoryTypeID = (byte)CoreFactory.InventoryItemList[0].InventoryTypeID;
@@ -599,6 +665,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return View(model);
         }
         [HttpPost]
+        
         public ActionResult Delete(InventoryItemMasterModel model)
         {
             Core.Inventory.InventoryItemEntity inventoryItemEntity  = new InventoryItemEntity();
@@ -615,6 +682,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             }
         }
         [HttpPost]
+       
         public ActionResult fathcItemDetails(int ItemID)
         {
             bool InventoryTypeMasterIsActive = true;

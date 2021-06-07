@@ -7,7 +7,7 @@ namespace LIMS_DEMO.Core.Inventory
 {
     public class CategoryEntity
     {
-        public short CatagoryMasterID { get; set; } // CatagoryMasterId
+        public int CatagoryMasterID { get; set; } // CatagoryMasterId
         public string CategoryName { get; set; }
         public short InventoryTypeID { get; set; }
         public Nullable<bool> IsActive { get; set; }

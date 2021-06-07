@@ -15,7 +15,7 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item"><a href="#">Configuration</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Parameter Master</li>
                                 <li class="breadcrumb-item active" aria-current="page">Add Paramter Master </li>
                             </ol>
@@ -191,17 +191,17 @@
 @Scripts.Render("~/bundles/unobtrusive")
 
 <script>
-    //function AddParameterMasterSuccess(result) {
-    //    debugger
-    //    if (result.Status == "success") {
-    //        alert(result.message);
-    //        location.href = '/Configuration/ParameterMaster/ParameterMasterList';
-    //    }
-    //    else {
+    function AddParameterMasterSuccess(result) {
+        debugger
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/ParameterMaster/ParameterMasterList';
+        }
+        else {
 
-    //        alert("Something Went Wrong");
-    //    }
-    //}
+            alert("Something Went Wrong");
+        }
+    }
 
     $('#SampleTypeProductId').change(function () {
         debugger

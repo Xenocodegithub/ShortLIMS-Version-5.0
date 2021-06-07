@@ -12,6 +12,7 @@ using LIMS_DEMO.BAL;
 using LIMS_DEMO.BAL.WorkOrderCustomer;
 using LIMS_DEMO.BAL.DropDown;
 using System.Configuration;
+using System.Globalization;
 
 namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
 {
@@ -162,7 +163,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
             CoreFactory.WorkOrderCustomerEntity.ModeOfCommunicationId = model.ModeOfCommunicationId;
             CoreFactory.WorkOrderCustomerEntity.CustomerMasterId = (Int32)model.CustomerMasterId;
             CoreFactory.WorkOrderCustomerEntity.StatusId = (byte)BALFactory.dropdownsBAL.GetStatusIdByCode(Enum.GetName(typeof(ManageMessageId), ManageMessageId.WOGenerate));
-
+            CultureInfo provider = CultureInfo.InvariantCulture;
             CoreFactory.WorkOrderCustomerEntity.WORecieveDate = model.WorkOrderReceivedDate;
             CoreFactory.WorkOrderCustomerEntity.WOEndDate = model.WorkOrderEndDate;
             CoreFactory.WorkOrderCustomerEntity.ExpectSampleCollDate = model.SampleCollectionDate;

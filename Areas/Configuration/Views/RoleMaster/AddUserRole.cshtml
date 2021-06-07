@@ -15,28 +15,26 @@
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                               <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                               <li class="breadcrumb-item"><a href="#">Configuration</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Role Master</li>
                                     <li class="breadcrumb-item active" aria-current="page">Add User Role</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-md-6 col-sm-12 text-right">
-                        <div class="dropdown">
+                        
                             <a class="btn btn-info btn-sm" href="@Url.Action("UserRoleList","RoleMaster")" role="button" >
                                User Role List
-                            <a class="btn btn-primary" href="@Url.Action("UserRoleList","RoleMaster")" role="button">
-                                User Role List
-                            </a>
-                        </div>
-                    </div>
+                               </a>
+                     
+                    </div>       
                 </div>
             </div>
             <!-- Default Basic Forms Start -->
             <div class="pd-20 card-box mb-30">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <h4 class="text-blue h4">Add UserRole</h4>
+                        <h4 class="text-blue h4">Add User Role</h4>
                     </div>
                     @*<div class="pull-right">
                             <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
@@ -86,9 +84,13 @@
 @Scripts.Render("~/bundles/unobtrusive")
 <script>
     function AddUserRoleSuccess(result) {
+        debugger;
         if (result.Status == "success") {
             alert(result.message);
             location.href = '/Configuration/RoleMaster/UserRoleList';
+        }
+        else if (result.Status == "Already") {
+            alert(result.message);
         }
     }
 </script>

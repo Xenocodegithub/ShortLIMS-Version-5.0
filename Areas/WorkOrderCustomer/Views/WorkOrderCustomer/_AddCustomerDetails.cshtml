@@ -115,7 +115,7 @@
             var date = add_months(recieveDate, parseInt($('#Duration').val()))
             var x = ConvertDateFormat(date.toString());
             //var y = ConvertDateFormatMonthWise(date.toString());
-            $("#WorkOrderEndDate").val(x);
+            //$("#WorkOrderEndDate").val(x);
             $("#WOEDate").val(x);
         }
         return true
@@ -140,6 +140,8 @@
             mm = '0' + mm;
         }
         var date = dd + '/' + mm + '/' + yyyy;
+        var ISODate = yyyy + '-' + mm + '-' + dd;
+        $("#WorkOrderEndDate").val(ISODate);
         return date;
     }
 

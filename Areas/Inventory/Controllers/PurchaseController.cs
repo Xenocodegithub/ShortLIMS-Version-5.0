@@ -626,9 +626,6 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return Json(new { Status = "success", message = "Created successfully." }, JsonRequestBehavior.AllowGet);
 
         }
-
-
-        //for Purchase Requisition Form in grid
         [HttpPost]
         public JsonResult _PurchaseRequestFormList1(HttpPostedFileBase file, PurchaseModel model, TermsAndConditionPurchaseModel model1)
         {
@@ -677,16 +674,6 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 purchase.Remark = model.Remark;
                 purchase.Purpose = model.Purpose;
                 purchase.COA = model.COA;
-                purchase.TickIf = model.TickIf;
-                purchase.EstimatedLagTime = model.EstimatedLagTime;
-                purchase.Rate = model.Rate;
-                purchase.Amount = model.Amount;
-                purchase.AmountAfterDisc = model.AmountAfterDisc; 
-                purchase.DiscAmount = model.DiscAmount;
-                purchase.DiscPercent = model.DiscPercent;
-                purchase.GSTAmount = model.GSTAmount;
-                purchase.GSTPercent = model.GSTPercent;
-                purchase.IsGST = model.IsGST;
                 purchase.PackSize = model.PackSize;
                 purchase.Quantity = model.Quantity;
             }
@@ -718,7 +705,12 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             TempData["PurchaseTermsList"] = purchaseTermsList;
             return Json(new { status = "success", message = "Added" }, JsonRequestBehavior.AllowGet);
         }
-    
+
+
+
+
+        //for Purchase Requisition Form in grid
+        
         //Supplier Form
         [HttpPost]
         public JsonResult PurchasSupplierForm(PurchaseModel model)

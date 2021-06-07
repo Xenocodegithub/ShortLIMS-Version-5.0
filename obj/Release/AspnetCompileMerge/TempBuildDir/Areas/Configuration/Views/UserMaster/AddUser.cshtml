@@ -1,0 +1,107 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.UserMasterModel
+@{
+    ViewBag.Title = "AddUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>User</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                               <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">User Master</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add User</li>
+                            </ol>
+                        </nav>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add User</h4>
+                       
+                    </div>
+                    @*<div class="pull-right">
+                            <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                <div>
+                    <div>
+                        @using (Ajax.BeginForm("AddUser", "UserMaster", new AjaxOptions { HttpMethod = "Post", OnSuccess = "AddUserSuccess" }))
+                        {
+                            @Html.ValidationSummary(true);
+                            @Html.HiddenFor(model => model.UserMasterID);
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">User Name:</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholdder = "UserName" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                </div>
+                                <label class="col-sm-12 col-md-2 col-form-label">Password:</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholdder = "Password" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Confirm Password:</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholdder = "ConfirmPassword" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                                <label class="col-sm-12 col-md-2 col-form-label">Discipline Name:</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.DisciplineId, new SelectList(ViewBag.DisciplineList, "DisciplineId", "Discipline"), "Select Discipline ", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DisciplineId, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.DisciplineName)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
+                                <div class="col-sm-4">
+                                    <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                    <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="c0l-sm-12 col-md-12">
+                                <a class="btn btn-danger btn-sm" href="/Configuration/UserMasterList">Back</a>
+                                @*<a class="btn btn-warning" href="/Configuration/Add">Reset</a>*@
+                                <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
+                                    </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+
+<script>
+    function AddUserSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/UserMaster/UserMasterList';
+        }
+    }
+</script>
+
+
+
+
+
+
+

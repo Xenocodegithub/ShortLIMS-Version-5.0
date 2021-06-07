@@ -1,0 +1,78 @@
+﻿@model IEnumerable<LIMS_DEMO.Core.Inventory.PurchaseEntity>
+@{
+    ViewBag.Title = "PurchaseRequestList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Technical Manager List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Technical Manager List</h4>
+                    </div>
+                </div>
+                <div class="pb-20">
+                    <table class="data-table table stripe hover nowrapp">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">ITEM</th>
+                                <th>QUANTITY</th>
+                                <th>SUPPLIER NAME</th>
+                                <th>NET AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(modelItem => item.PurchaseRequestID)
+                                        @Html.HiddenFor(modelItem => item.InventoryTypeID)
+                                        @Html.HiddenFor(modelItem => item.CategoryName)
+                                        @Html.ActionLink(item.Item, "PurchaseForm", "Purchase", new { @PurchaseRequestID = item.PurchaseRequestID, @Category = item.CategoryName }, new { Style = "color:blue" })
+
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SupplierName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NetAmount)
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

@@ -1,0 +1,196 @@
+﻿
+@model LIMS_DEMO.Areas.Arrival.Models.DisposalModel
+@using LIMS_DEMO.Core.DropDowns;
+@{
+    ViewBag.Title = "AddDisposal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Ajax.BeginForm("AddDisposal", "Disposal", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "DisposalSuccess" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="title">
+                                <h4>Arrival</h4>
+                            </div>
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Arrival</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Disposal</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Disposal</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Default Basic Forms Start -->
+                <div class="pd-20 card-box mb-30" style="margin-top:-19px">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Add Disposal</h4>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label " for="inputEmail1">Sample Type: <span class="required" style="color:red;">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SampleType)
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Sample Code: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SampleCollectionId, new SelectList(ViewBag.SampleCodeList, "SampleCollectionId", "SampleName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.SampleCollectionId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SampleName)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Received Date: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.DateofRecieptofSample, new { @class = "form-control", @readonly = "readonly", @placeholder = "dd-MM-yyyy", @style = "font-size:13px;" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Date of Reporting: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.DateofReporting, new { @class = "form-control", @readonly = "readonly", @placeholder = "dd-MM-yyyy", @style = "font-size:13px;" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Date of Disposal: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input type="date" id="DateOfDisposal" name="DateOfDisposal" class="form-control" placeholder="dd/MM/yyyy" style="font-size:13px;" />
+                            @Html.ValidationMessageFor(model => model.DateofDisposal, "", new { @class = "text-danger col-md-10" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Disposal Method: <span class="required" style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.DisposalMethod, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                            @Html.ValidationMessageFor(model => model.DisposalMethod, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Disposed By:</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SuperwisedByID, new SelectList(ViewBag.SuperwisedByList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.SuperwisedByID, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SuperwisedBy)
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Supervised By:</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.DisposedByID, new SelectList(ViewBag.DisposedByList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control", @style = "font-size:13px;" })
+                            @Html.ValidationMessageFor(model => model.DisposedByID, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.DisposedBy)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Remark:</label>
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control", @style = "font-size:13px;" } })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-12">
+                            <a class="btn btn-danger btn-sm" href="/Arrival/Disposal/DisposalList">Back</a>
+                            <button type="submit" id="" class="btn btn-info btn-sm" onclick="SetNameValues();" style="float:right;">Save</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- Default Basic Forms End -->
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+
+<script>
+
+    $(function () {
+        $('#SampleCollectionId').prop("disabled", true);
+    });
+    function DisposalSuccess(result) {
+        if (result.Id != "0") {
+            alert("Disposal Added !!!");
+            location.href = '/Arrival/Disposal/DisposalList';
+        }
+        else {
+            alert('Error!!!');
+        }
+    }
+
+    function SetNameValues() {
+
+        $('#SampleType').val($('#SampleTypeProductId option:selected').text());
+        $('#SampleName').val($('#SampleCollectionId option:selected').text());
+        $('#SuperwisedBy').val($('#SuperwisedByID option:selected').text());
+        $('#DisposedBy').val($('#DisposedByID option:selected').text());
+    }
+
+    $('#SampleTypeProductId').change(function () {
+        debugger
+        $('#SampleCollectionId').prop("disabled", false);
+
+        if ($('#SampleTypeProductId').val() == '') {
+            $('#SampleCollectionId').html('');
+            $('#SampleCollectionId').append('<option value="">---Select---</option>');
+        }
+        else {
+            $('#SampleCollectionId').html('');
+            $('#SampleCollectionId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/Arrival/Disposal/GetCode?SampleTypeProductId=' + $('#SampleTypeProductId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    debugger
+                    $.each(result.result, function (i, item) {
+                        $('#SampleCollectionId').append('<option value="' + item.SampleCollectionId + '">' + item.SampleName + '</option>');
+                    })
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+
+    $('#SampleCollectionId').change(function () {
+        debugger
+        if ($('#SampleCollectionId').val() == '') {
+            $('#DateofRecieptofSample').val("");
+            $('#DateofReporting').val("");
+        }
+        else {
+            $('#DateofRecieptofSample').val("");
+            $('#DateofReporting').val("");
+            $.ajax({
+                url: '/Arrival/Disposal/GetDates?SampleCollectionId=' + $('#SampleCollectionId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('#DateofRecieptofSample').val(data.d1);
+                    $('#DateofReporting').val(data.d2);
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+
+</script>
+
+

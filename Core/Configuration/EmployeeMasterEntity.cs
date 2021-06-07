@@ -10,7 +10,7 @@ namespace LIMS_DEMO.Core.Configuration
         public int UserID { get; set; }
         public string dbo { get; set; }
         public int UserDetailId { get; set; }
-        public Nullable<int> UserMasterId { get; set; }
+        public Nullable<int> UserMasterID { get; set; }
         public string UserName { get; set; }
         public string Salutation { get; set; }
         public string FirstName { get; set; }

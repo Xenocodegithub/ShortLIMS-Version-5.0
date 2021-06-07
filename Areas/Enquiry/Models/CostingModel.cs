@@ -20,24 +20,24 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
         public string Particulars { get; set; }
         public long? CostingId { get; set; }
 
-        [Display(Name = "Total Charges")]
+        [Display(Name = "Total Charges:")]
         public decimal? TotalCharges { get; set; }
 
-        [Display(Name = "Sample Collection Charges")]
+        [Display(Name = "Sample Collection Charges:")]
         public decimal? SampleAmount { get; set; }
-        [Display(Name = "Testing Charges")]
+        [Display(Name = "Testing Charges:")]
         public decimal? TestingCharges { get; set; }
 
-        [Display(Name = "Transportation")]
+        [Display(Name = "Transportation Charge:")]
         public decimal? TransportationAmount { get; set; }
-
-        [Display(Name = "Discount Amount(%)")]
+        
+        [Display(Name = "Discount Amount(%):")]
         public decimal? DiscountAmount { get; set; }
 
-        [Display(Name = "Net Amount")]
+        [Display(Name = "Net Amount:")]
         public decimal? NetAmount { get; set; }
 
-        [Display(Name = "GST ")]
+        [Display(Name = "GST :")]
         public decimal? GSTCharges { get; set; }
 
         [Display(Name = "CGST ")]
@@ -49,7 +49,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
         [Display(Name = "IGST")]
         public decimal? IGSTCharges { get; set; }
 
-        [Display(Name = "Total Amount")]
+        [Display(Name = "Total Amount:")]
         public decimal? TotalAmount { get; set; }
 
         public decimal? Total { get; set; }

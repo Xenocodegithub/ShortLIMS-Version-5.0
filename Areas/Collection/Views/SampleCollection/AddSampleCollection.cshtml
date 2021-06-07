@@ -36,21 +36,20 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <h4 class="text-blue h4">Add Sample Collection</h4>
-                        <p class="mb-30">@*All bootstrap element classies*@</p>
                     </div>
                 </div>
                 @Html.Hidden("ListResult", (object)ViewBag.ListViewBag)
-                <div class="form-group row">
+                <div class="form-group row" style="margin-left:-34px">
                     <input type="hidden" id="SampleCollectionIdHidden" value="@ViewBag.SampleCollectionId" />
                     <div class="col-sm-3 form-group">
                         @Html.LabelFor(model => model.Collection.CustomerName, "Customer Name:", htmlAttributes: new { @class = "control-label col-sm-8" })
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             @Html.DisplayFor(model => model.Collection.CustomerName, "Customer Name", new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
                     <div class="col-sm-3 form-group">
                         @Html.LabelFor(model => model.Collection.Address, "Address:", htmlAttributes: new { @class = "control-label col-sm-8" })
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                             @Html.DisplayFor(model => model.Collection.Address, "Address", new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
@@ -310,7 +309,7 @@
                         }
 
                         <label class="col-sm-12 col-md-2 col-form-label">
-                            Source
+                            Source:
                             @if (Model.Collection.CollectedBy == "LAB")
                             {<span class="required" style="color:red">*</span>}
                         </label>
@@ -357,13 +356,13 @@
                         <div class="form-actions" style="float:right;margin-top:-25px">
                             @if (ViewBag.StatusCodeLab == "SampleColl" || ViewBag.StatusCodeLab == "SampleSub")
                             {
-                                <button type="submit" id="btnSave" class="btn btn-round btn-secondary btn-sm" name="Save" value="SampleSave" style="background-color:darkgrey" disabled="disabled">Save </button>
-                                <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary btn-sm" name="Save" value="SampleSubmit" style="background-color:darkgrey" disabled="disabled">Submit</button>
+                                @*<button type="submit" id="btnSave" class="btn btn-round btn-secondary btn-sm" name="Save" value="SampleSave" style="background-color:darkgrey" disabled="disabled">Save </button>*@
+                                <button type="submit" id="btnSubmit" class="btn btn-round btn-secondary btn-sm" name="Save" value="SampleSubmit" style="background-color:darkgrey" disabled="disabled">Save</button>
                             }
                             else
                             {
-                                <button type="submit" id="btnSave" class="btn btn-success btn-sm" name="Save" value="SampleSave">Save </button>
-                                <button type="submit" id="btnSubmit" class="btn btn-info btn-sm" name="Save" value="SampleSubmit">Submit</button>
+                                @*<button type="submit" id="btnSave" class="btn btn-success btn-sm" name="Save" value="SampleSave">Save </button>*@
+                                <button type="submit" id="btnSubmit" class="btn btn-info btn-sm" name="Save" value="SampleSubmit">Save</button>
                             }
                         </div>
                     </div>

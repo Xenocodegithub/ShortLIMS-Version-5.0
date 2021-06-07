@@ -1,0 +1,183 @@
+﻿
+@model LIMS_DEMO.Areas.FieldDetermination.Models.FDNoiseLevelMonitoringModel
+
+@using (Ajax.BeginForm("_FieldSourceNoiseLevelList", "FieldNoiseLevelMonitoring", new { area = "FieldDetermination" }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FDAddSource" }, new { id = "frmAddSourceNoiseLevel" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SrNo)
+    @Html.HiddenFor(model => model.FieldNoiseId)
+    @Html.HiddenFor(model => model.NoiseSourceParameterId)
+    
+    <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h4 class="m-0 font-weight-bold text-primary text-xl-center"> Enter Values for Source Noise Level :</h4>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-bordered" id="datatable" data-filter="#filter" data-filter-text-only="true" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Shift
+                                    </th>
+                                    <th>
+                                        Day/Night
+                                    </th>
+                                    <th>
+                                        TestMethod
+                                    </th>
+                                    <th>
+                                        Unit
+                                    </th>
+                                    <th>
+                                        Location
+                                    </th>
+                                    <th>
+                                        Time
+                                    </th>
+                                    <th>
+                                        Inside
+                                    </th>
+                                    <th>
+                                        Outside
+                                    </th>
+                                    <th>
+                                        Insertion Loss
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select class="form-control" id="ShiftName" name="ShiftName">
+                                            <option value="Select Shift" disabled>Select Shift</option>
+                                            <option value="1 Hour">1 Hour</option>
+                                            <option value="24 Hour">24 Hour</option>
+                                            <option value="Spot Noise">Spot Noise</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.DayNight, new { @class = "form-control ", @placeholder = "DayOrNight" })
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
+                                        @Html.HiddenFor(model => model.TestMethodName)
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.UnitId, new SelectList(ViewBag.TestMethod, "UnitId", "Unit"), "--- Select ---", new { @class = "form-control" })
+                                        @Html.HiddenFor(model => model.UnitName)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.LocationGrid, new { @class = "form-control ", @placeholder = "Location" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.TimeSource, new { @class = "form-control ", @placeholder = "Time" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Inside, new { @class = "form-control ", @placeholder = "Inside" })
+
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Outside, new { @class = "form-control ", @placeholder = "Outside" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.InsertionLoss, new { @class = "form-control ", @placeholder = "Insertion Loss" })
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        @{ string btnText = "Add";
+                            if (Model.SrNo != 0)
+                            {
+                                btnText = "Update";
+                                <input class="btn btn-primary btn-sm alignright" onclick="CancelSourceNameValues();" id="btnCancel" value="Cancel" />
+                            }
+                        }
+                        <input class="btn btn-success btn-sm alignright" onclick="SetSourceNameValues();" type="submit" id="btnAdd" value="@btnText" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+}
+
+<script>
+
+    $(function () {
+        $("#frmAddSourceNoiseLevel").removeData("validator");
+        $("#frmAddSourceNoiseLevel").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmAddSourceNoiseLevel");
+    })
+
+    function FDAddSource(result) {
+        $('#divListSource').load('/FieldDetermination/FieldNoiseLevelMonitoring/_FDSourceLevelGridList');
+        $('#divAddSourceNoiseLevel').load('/FieldDetermination/FieldNoiseLevelMonitoring/_FieldSourceNoiseLevelList');
+        $('#ShiftName').val("");
+    }
+
+    function CancelSourceNameValues() {
+        //$('#ParameterMasterId').val(-1);
+        $('#ShiftName').val("");
+        $('#TestMethodId').val(-1);
+        $('#UnitId').val(-1);
+        $('#TimeSource').val("");
+        $('#DayNight').val("");
+        $('#LocationGrid').val("");
+        $('#Inside').val("");
+        $('#Outside').val("");
+        $('#InsertionLoss').val("");
+        $('#btnAdd').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#SrNo').val(0)
+    }
+
+    function SetSourceNameValues() {
+        debugger;
+       //$('#ParameterName').val($('#ParameterMasterId option:selected').text());
+        $('#TestMethodName').val($('#TestMethodId option:selected').text());
+        $('#UnitName').val($('#UnitId option:selected').text());
+    }
+
+    //$('#ParameterMasterId').change(function () {
+    //    debugger
+    //    if ($('#ParameterMasterId').val() == '') {
+    //        $('#TestMethodId').html('');
+    //        $('#TestMethodId').append('<option value="">---Select---</option>');
+    //        $('#UnitId').html('');
+    //        $('#UnitId').append('<option value="">---Select---</option>');
+    //    }
+    //    else
+    //    {
+
+    //        $('#TestMethodId').html('');
+    //        $('#TestMethodId').append('<option value="">---Select---</option>');
+    //        $('#UnitId').html('');
+    //        $('#UnitId').append('<option value="">---Select---</option>');
+    //        $.ajax({
+    //            url: '/FieldDetermination/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val() + "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+    //            type: 'Get',
+    //            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    //            dataType: 'json',
+    //            success: function (result) {
+    //                debugger
+    //                $.each(result.result, function (i, item) {
+    //                    $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
+    //                    $('#UnitId').append('<option value="' + item.UnitId + '">' + item.Unit + '</option>');
+    //                })
+
+    //                $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+    //            },
+    //              error: function (data) {
+    //            }
+    //        });
+    //    }
+    //});
+
+</script>
+
+

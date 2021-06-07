@@ -47,8 +47,8 @@ namespace LIMS_DEMO.DAL
         public Nullable<int> TotalVolAirPassed_L { get; set; }
         public Nullable<int> AvgFlowRate { get; set; }
         public Nullable<int> MatterSamplingDuration { get; set; }
-        public Nullable<int> EndTime { get; set; }
-        public Nullable<int> StartTime { get; set; }
+        public string EndTime { get; set; }
+        public string StartTime { get; set; }
         public Nullable<int> Sampling_Duration { get; set; }
         public Nullable<int> FlowRate_Avg { get; set; }
     

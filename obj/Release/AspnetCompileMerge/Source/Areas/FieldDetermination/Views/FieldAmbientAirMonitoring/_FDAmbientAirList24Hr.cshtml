@@ -1,0 +1,126 @@
+﻿
+@model LIMS_DEMO.Areas.FieldDetermination.Models.FDAmbientAirMonitoringModel
+
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pb-20">
+        @if (Model.Grid24HrModel.Count() > 0)
+        {
+            <label class="col-lg-4 col-sm-4 control-label  mr-btm-15">For 24 Hr Testing</label>
+            <table id="tblField24Hr" class="data-table table stripe hover nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            SrNo.
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Shift No.
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            @*Gases Sampled*@ Parameter
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Vol Impinging Sol
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            BottleNo
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            RotameterFlow
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Duration
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Vs
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Preservation If Any
+                        </th>
+                        @if (Model.CurrentStatus != "SampleColl")
+                        {
+                            <th class="table-plus datatable-nosort">
+                                Action
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Grid24HrModel.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Model.Grid24HrModel[i].SrNo
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].ShiftNoAir24Hr
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].ParameterName
+                                @Model.Grid24HrModel[i].GasesSampled
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].VolImpingingSolution
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].BottleNo
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].RotaMeterFlow
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].Duration
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].Vs
+                            </td>
+                            <td>
+                                @Model.Grid24HrModel[i].PreservationDone
+                            </td>
+                            @if (Model.CurrentStatus != "SampleColl")
+                            {
+                                <td>
+                                    @*<a href="#" onclick="funEditField24Hr(@Model.Grid24HrModel[i].SrNo,@Model.Grid24HrModel[i].EnquirySampleID);">Edit</a> |*@
+                                    <a href="#" onclick="funDeleteField24Hr(@Model.Grid24HrModel[i].SrNo);">Delete</a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+<!-- Simple Datatable End -->
+
+<script>
+
+    function funEditField24Hr(Id, EnquirySampleID) {
+        debugger
+        $("#tblField24Hr").attr("disabled", true);
+        $('#divAddAmbientAir24Hr').load('/FieldDetermination/FieldAmbientAirMonitoring/_FDAmbientAirGasesList24Hr?Id=' + Id + '&EnquirySampleID=' + EnquirySampleID);
+        //$('#divList').hide();
+    }
+
+    function funDeleteField24Hr(Id) {
+        debugger
+        if (confirm('Are you sure you want to delete this record?')) {
+            $.ajax({
+                url: '/FieldDetermination/FieldAmbientAirMonitoring/_DeleteAmbientAirField24Hr?Id=' + Id,
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == "success") {
+                        $('#divGrid24hr').load('/FieldDetermination/FieldAmbientAirMonitoring/_FDAmbientAirList24Hr');
+                    }
+                },
+                error: function (data) {
+                }
+            });
+        }
+    }
+
+</script>
+
+

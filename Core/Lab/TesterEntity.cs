@@ -10,6 +10,7 @@ namespace LIMS_DEMO.Core.Lab
         public long SampleCollectionId { get; set; }
         public int? UserMasterId { get; set; }
         public string SampleNo { get; set; }
+        public string SampleName { get; set; }
         public string SampleNameOriginal { get; set; }
         public string SampleTypeProductName { get; set; }
         public string ProductGroupName { get; set; }
@@ -61,6 +62,7 @@ namespace LIMS_DEMO.Core.Lab
         public long FDStackEmissionId { get; set; }
         public string SampleNo { get; set; }
         public string SampleNameOriginal { get; set; }
+        public string SampleName { get; set; }
         public long EnquiryId { get; set; }
         public string Url { get; set; }
         public string SampleTypeProductName { get; set; }

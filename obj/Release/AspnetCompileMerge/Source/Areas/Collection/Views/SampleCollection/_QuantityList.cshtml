@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel>
+
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pb-20">
+       <table class="data-table table nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            SrNo
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            No
+                        </th>
+                        <th>
+                            Preservation
+                        </th>
+                        <th>
+                            IS Preservation Given
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="text-align:center;background-color:lavender;">
+                    @foreach (var item in Model)
+                    {
+                      <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SerialNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SampleQty)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.No)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Preservation)
+                            </td>
+                            <td>
+                                @Html.HiddenFor(modelItem => item.ISGivenPreservative)
+                                @Html.DisplayFor(modelItem => item.GivenPreservative)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
+</div>
+<!-- Simple Datatable End -->

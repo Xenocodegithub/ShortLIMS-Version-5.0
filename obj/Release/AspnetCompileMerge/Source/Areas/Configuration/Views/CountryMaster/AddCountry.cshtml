@@ -1,0 +1,78 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.CountryMaster
+@{
+    ViewBag.Title = "AddCountry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Country</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                @*<li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Discipline</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Discipline</li>*@
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                @*January 2018*@
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                @*<a class="dropdown-item" href="#">Export List</a>
+                                    <a class="dropdown-item" href="#">Policies</a>
+                                    <a class="dropdown-item" href="#">View Assets</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Country</h4>
+                        <!--<p class="mb-30">-->@*All bootstrap element classies*@<!--</p>-->
+                    </div>
+                    @*<div class="pull-right">
+                            <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                <div>
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Country Name</label>
+                            <div class="col-sm-12 col-md-10">
+                                @Html.DropDownListFor(model => model.CountryId, new SelectList(@*ViewBag.CountryList,*@"CountryId", "Country"), "---Select---", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CountryId)
+                                @Html.HiddenFor(model => model.CountryId)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <a class="btn btn-danger" href="/Configuration/UserMasterList">Cancel</a>
+                            <a class="btn btn-warning" href="/Configuration/Add">Reset</a>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

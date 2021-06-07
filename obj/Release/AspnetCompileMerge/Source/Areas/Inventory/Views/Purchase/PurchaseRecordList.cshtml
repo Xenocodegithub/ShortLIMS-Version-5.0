@@ -1,0 +1,165 @@
+﻿@model IEnumerable<LIMS_DEMO.Areas.Inventory.Models.PurchaseModel>
+@{
+    ViewBag.Title = "PurchaseRecordList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Inventory</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Purchase</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Purchase Record List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Purchase Record  List</h4>
+                    </div>
+                </div>
+                <div class="pb-20">
+                <table class="data-table table stripe hover nowrap">
+                    <thead>
+                        <tr>
+                            <th class="width-10">
+                                All
+                            </th>
+                            <th class="width-20">
+                                @Html.DisplayNameFor(model => model.PurchaseOrderNo)
+
+                            </th>
+                            <th class="width-20">
+                                @Html.DisplayNameFor(model => model.SupplierName)
+                            </th>
+
+                            <th class="width-20">
+                                @Html.DisplayNameFor(model => model.Item)
+                            </th>
+
+                            <th class="width-20">
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                            <th class="width-20">
+                                @Html.DisplayNameFor(model => model.QtyReceived)
+                            </th>
+
+                            <th class="width-20">
+                                @Html.DisplayNameFor(model => model.Brand)/
+                                @Html.DisplayNameFor(model => model.Grade)
+                            </th>
+                            <th class="width-20">
+                                @Html.DisplayNameFor(model => model.BrandReceived)/
+                                @Html.DisplayNameFor(model => model.GradeReceived)
+                            </th>
+                            <th class="width-10">
+                                @Html.DisplayNameFor(model => model.DeliveryTime)
+                            </th>
+                            <th class="width-10">
+                                @Html.DisplayNameFor(model => model.ReceivedDate)
+                            </th>
+                            <th class="width-10">
+                                @Html.DisplayNameFor(model => model.DeliveryChallanNo)&
+                                @Html.DisplayNameFor(model => model.DeliveryChallanDate)
+                            </th>
+                            <th class="width-10">
+                                @Html.DisplayNameFor(model => model.ConditionOfPackaging) &
+                                @Html.DisplayNameFor(model => model.IntegrityOfPackaging)
+                            </th>
+                            <th class="width-10">
+                                @Html.DisplayNameFor(model => model.BillNo) &
+                                @Html.DisplayNameFor(model => model.BillDate)
+                            </th>
+                            <th class="width-10">
+                                @Html.DisplayNameFor(model => model.RemarkRecord)
+                            </th>
+                            <th class="width-10">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.All)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.PurchaseOrderNo)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SupplierName)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.ItemMasterId)
+                                    @Html.DisplayFor(modelItem => item.Item)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.QtyReceived)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Brand)/
+                                    @Html.DisplayFor(modelItem => item.Grade)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BrandReceived)/
+                                    @Html.DisplayFor(modelItem => item.GradeReceived)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DeliveryTime)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReceivedDate)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DeliveryChallanNo) &
+                                    @Html.DisplayFor(modelItem => item.DeliveryChallanDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ConditionOfPackaging) &
+                                    @Html.DisplayFor(modelItem => item.IntegrityOfPackaging)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BillNo) &
+                                    @Html.DisplayFor(modelItem => item.BillDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RemarkRecord)
+
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "PurchaseRecord", new { PurchaseRecordID = item.PurchaseRecordID, PurchaseRequestID = item.PurchaseRequestID }) |
+
+                                    <a href="/Inventory/DeletePurchaseRecord?PurchaseRecordID=@item.PurchaseRecordID" onclick="return confirm('Are you sure you want to delete this record?');"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                   
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

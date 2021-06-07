@@ -1,0 +1,274 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDStackEmissionModel
+
+<div class="body-nest table-responsive col-sm-12" id="Filtering">
+    <table width="100%" id="footable-res2" class="demo table table-bordered">
+        <tbody>
+            <tr>
+                <td>Instrument ID</td>
+                <td colspan="2">
+                    @Html.EditorFor(model => model.InstrumentId, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>Barometric Pressure (Ba) mmHg: </td>
+                <td colspan="2">@Html.EditorFor(model => model.BarometricPressure, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>Fuel Gas composition:</td>
+                <td>CO<sub>2</sub>%:</td>
+                <td>    @Html.EditorFor(model => model.FlueGasComposition_CO2, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>O<sub>2</sub>%</td>
+                <td>    @Html.EditorFor(model => model.FlueGasComposition_O2, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>CO%:</td>
+                <td>    @Html.EditorFor(model => model.FlueGasComposition_CO, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>N<sub>2</sub>%:</td>
+                <td>    @Html.EditorFor(model => model.FlueGasComposition_N2, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="1">Moisture Content (M)% =</td>
+                <td colspan="2">    @Html.EditorFor(model => model.MoistureContent, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td colspan="1"> B<sub>wo</sub>: (M /100) =</td>
+                <td colspan="5"> @Html.EditorFor(model => model.Bwo, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="1">Ambient Temperature (Ta) =</td>
+                <td colspan="2">    @Html.EditorFor(model => model.AmbientTemperature, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td colspan="1"><sup>0</sup>C + 273 =</td>
+                <td colspan="5"> @Html.EditorFor(model => model.AmbientTempC, new { htmlAttributes = new { @class = "form-control" } }) <sup>0</sup>K</td>
+            </tr>
+            <tr>
+                <td colspan="1">Stack Temperature(Ts) =</td>
+                <td colspan="2">    @Html.EditorFor(model => model.StackTemperature, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td colspan="1"><sup>0</sup>C + 273 =</td>
+                <td colspan="5">  @Html.EditorFor(model => model.StackTempC, new { htmlAttributes = new { @class = "form-control" } }) <sup>0</sup>K</td>
+            </tr>
+            <tr>
+                <td colspan="2">Velocity of Stack Gas (V) =</td>
+                <td colspan="2">    @Html.EditorFor(model => model.VelocityofStackGas, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td colspan="5">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Pitot Tube factor (K)</td>
+                            <td>   @Html.EditorFor(model => model.PitotTubefactor, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        </tr>
+                        <tr>
+                            <td>C =K x 0.2295 =</td>
+                            <td>@Html.EditorFor(model => model.C, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th colspan="11">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="6"> Static Pressure (Ps) mmHg </td>
+                <td colspan="5"> @Html.EditorFor(model => model.StaticPressure, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="6"> Absolute Stack Pressure (PA) mmHg </td>
+                <td colspan="5"> @Html.EditorFor(model => model.AbsoluteStackPressure, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="6"> Fuel Gas Quantity (Dry) Nm<sup>3</sup>/h <br /> <br /> Q = A x V x 3600X(298/Ts) X(PA/760) X(1-B<sub>wo</sub>) </td>
+                <td colspan="5"> @Html.EditorFor(model => model.FlueGasQuantity, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    Velocity V in m/s
+                    V=C√AP x Ts.°K
+                </td>
+                <td colspan="5"> @Html.EditorFor(model => model.Velocity_V, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td> <b> Sampling Rate for Isokinetic conditions: </b> </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td colspan="5">Sampling Flow Rate (LPM): Velocity x Nozzle constant x Ta/Ts x PA/Ba-Pv</td>
+                <td colspan="4"> @Html.EditorFor(model => model.SamplingFlowRate, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td colspan="5"> Sampling duration in minutes</td>
+                <td colspan="3"> @Html.EditorFor(model => model.SamplingDuration, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="1">  Vacuum PV in mm Hg </td>
+                <td colspan="16">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Initial</td>
+                                <td> @Html.EditorFor(model => model.VacuumPv_Initial, new { htmlAttributes = new { @class = "form-control" } })</td>
+                                <td>Final</td>
+                                <td> @Html.EditorFor(model => model.VacuumPv_Final, new { htmlAttributes = new { @class = "form-control" } })</td>
+                                <td>Average</td>
+                                <td> @Html.EditorFor(model => model.VacuumPv_Average, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1"> Sampling Gas Temp (Tg) <sup>0</sup> K</td>
+                <td colspan="16">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Initial</td>
+                                <td> @Html.EditorFor(model => model.SamplingGasTemp_Initial, new { htmlAttributes = new { @class = "form-control" } })</td>
+                                <td>Final</td>
+                                <td> @Html.EditorFor(model => model.SamplingGasTemp_Final, new { htmlAttributes = new { @class = "form-control" } })</td>
+                                <td>Average</td>
+                                <td> @Html.EditorFor(model => model.SamplingGasTemp_Average, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">Thimble No:- </td>
+                <td colspan="6"> @Html.EditorFor(model => model.ThimbleNO, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td colspan="5">
+                    Nozzle Constant: Area of Nozzle(mz) X 60 X 1000 =
+                </td>
+                <td colspan="6"> @Html.EditorFor(model => model.NozzleConstantArea, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="5">Total gas passed: (Flow rate) x Duration =</td>
+                <td colspan="12"> @Html.EditorFor(model => model.TotalGasPassed, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td colspan="17" style="text-align:center;"><b>OR</b></td>
+            </tr>
+            <tr>
+                <td>Dry Gas Meter Reading: Final</td>
+                <td colspan="4"> @Html.EditorFor(model => model.DryGasMeterReading_Final1, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td colspan="4">Dry Gas Meter Reading: Initial</td>
+                <td colspan="4"> @Html.EditorFor(model => model.DryGasMeterReading_Initial1, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>Diff.</td>
+                <td colspan="5"> @Html.EditorFor(model => model.DryGasMeterReading_Total1, new { htmlAttributes = new { @class = "form-control" } }) m<sup>3</sup></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td> <b> Sampling Data For NO<sub>x</sub>: </b> </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>Vf(Volume of flask & valve in ml):</td>
+                <td> @Html.EditorFor(model => model.Vf, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>Va(Volume of absorbing solution,25 ml): </td>
+                <td> @Html.EditorFor(model => model.Va, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>                 Pf(Final absolute pressure of flask, mm Hg):             </td>
+                <td> @Html.EditorFor(model => model.Pf, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>  Pi(Initial absolute pressure of flask, mm Hg):  </td>
+                <td> @Html.EditorFor(model => model.Pi, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>  Pstd(Standard absolute pressure, 760 mm HgQ9.92 inch of Hg): </td>
+                <td> @Html.EditorFor(model => model.Pstd, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>
+                    Tf(Final absolute temperature of flask)<sup>0</sup> K :
+                </td>
+                <td> @Html.EditorFor(model => model.Tf, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>Ti(Initial absolute temperature of flask)<sup>0</sup> K</td>
+                <td> @Html.EditorFor(model => model.Ti, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>Tstd(Standard absolute temperature, 298.15) <sup>0</sup> K:</td>
+                <td> @Html.EditorFor(model => model.Tstd, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>Vsc(ml):</td>
+                <td>
+                    @Html.EditorFor(model => model.Vsc, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td> <b> Sampling Data By Customer: </b> </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+
+            <tr>
+                <td>Stack Identity</td>
+                <td> @Html.EditorFor(model => model.StackIdentity, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> Stack Attached To</td>
+                <td> @Html.EditorFor(model => model.StackAttachedTo, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>                  Material of Construction:            </td>
+                <td> @Html.EditorFor(model => model.MaterialOfConstruction, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>  Stack height (m):  </td>
+                <td> @Html.EditorFor(model => model.StackHeight, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>  Stack diameter/Duct Dimensions at sampling point (m):</td>
+                <td> @Html.EditorFor(model => model.StackDiameter, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>
+                    Height of port hole from ground level (m):
+                </td>
+                <td> @Html.EditorFor(model => model.HeightOfPorthole, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>Stack shape at top: </td>
+                <td> @Html.EditorFor(model => model.StackShapeTop, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>  Stack Area (A) (m<sup>2</sup>):                </td>
+                <td> @Html.EditorFor(model => model.StackArea, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>  Duration (h) / day of run of Boiler/ process:                </td>
+                <td> @Html.EditorFor(model => model.DurationOfBoiler, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>Fuel Used</td>
+                <td>Type</td>
+                <td colspan="2"> @Html.EditorFor(model => model.Fuelused_Type, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>Consumption</td>
+                <td colspan="2"> @Html.EditorFor(model => model.Fuelused_Consumption, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td>
+                    Load At the Time of Monitoring:
+                </td>
+                <td> @Html.EditorFor(model => model.LoadAtMonitoring, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+            <tr>
+                <td> Are 8D and 2D Criteria met:</td>
+                <td>
+                    <label> @Html.RadioButtonFor(model => model.Is8DAnd2D, true, new { id = "Is8DAnd2D-true", @checked = "checked" }) Yes </label><br />
+                    <label> @Html.RadioButtonFor(model => model.Is8DAnd2D, false, new { id = "Is8DAnd2Ds-false" }) No </label>
+                </td>
+                <td>  Whether Sampling port and platform exists?:</td>
+                <td>
+                    <label> @Html.RadioButtonFor(model => model.Samplingportandplatformexists, true, new { id = "Samplingportandplatformexists-true", @checked = "checked" }) Yes </label><br />
+                    <label> @Html.RadioButtonFor(model => model.Samplingportandplatformexists, false, new { id = "Samplingportandplatformexists-false" }) No </label>
+                </td>
+                <td>  Whether Air pollution control equipment exists?:</td>
+                <td>
+                    <label> @Html.RadioButtonFor(model => model.Airpollutioncontrolequipmentexists, true, new { id = "Airpollutioncontrolequipmentexists-true", @checked = "checked" }) Yes </label><br />
+                    <label> @Html.RadioButtonFor(model => model.Airpollutioncontrolequipmentexists, false, new { id = "Airpollutioncontrolequipmentexists-false" }) No </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

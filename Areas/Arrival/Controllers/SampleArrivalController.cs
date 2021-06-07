@@ -67,7 +67,7 @@ namespace LIMS_DEMO.Areas.Arrival.Controllers
                         Date = Convert.ToDateTime(Item.CollectionDate).ToString("dd/MM/yyyy"),
                         MatrixName = Item.MatrixName,
                         //Url = Item.MatrixName,//Url = "Air",//Url=ProductGrp+SubGrp+Matrix
-                    }); ;
+                    }); 
                     iSrNo++;
                 }
             }

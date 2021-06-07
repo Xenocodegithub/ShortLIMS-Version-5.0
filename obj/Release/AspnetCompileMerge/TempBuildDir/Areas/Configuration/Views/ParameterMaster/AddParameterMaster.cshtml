@@ -1,0 +1,292 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.ParameterMasterModel
+@{
+    ViewBag.Title = "AddParameter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Parameter</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Parameter Master</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Paramter Master </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-info btn-sm" href="/Configuration/ParameterMaster/AddParameter" role="button">
+                                Add Parameter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            @using (Ajax.BeginForm("AddParameterMaster", "ParameterMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddParameterMasterSuccess" }))
+            {
+                @Html.HiddenFor(model => model.ParameterMappingId)
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Add Parameter Master</h4>
+                        </div>
+                        @*<div class="pull-right">
+                        <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                    </div>*@
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Sample Type:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "-----Select------", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.SampleTypeProductName)
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Product Group Name:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.ProductGroupId, new SelectList(ViewBag.ProductGroupList, "ProductGroupId", "ProductGroupName"), "-----Select------", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ProductGroupId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.ProductGroupName)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Sub Group Name:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.SubGroupId, new SelectList(ViewBag.SubGroupList, "SubGroupId", "SubGroupName"), "-----Select------", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SubGroupId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.SubGroupName)
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Matrix Name:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.MatrixId, new SelectList(ViewBag.MatrixList, "MatrixId", "MatrixName"), "-----Select------", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MatrixId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.MatrixName)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Parameter:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.ParameterList, "ParameterMasterId", "Parameter"), "-----Select------", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ParameterMasterId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Parameter)
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Discipline Name:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.DisciplineId, new SelectList(ViewBag.DisciplineList, "DisciplineId", "Discipline"), "-----Select------", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DisciplineId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.DisciplineName)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Unit:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.UnitId, new SelectList(ViewBag.UnitList, "UnitId", "Unit"), "---Select---", new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.UnitId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Unit)
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Test Method:</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethodList, "TestMethodId", "TestMethod"), "---Select---", new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.TestMethodId, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.TestMethod)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">IsNABL Accredited:</label>
+                            <div class="col-sm-4">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsNABLAccredited, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsNABLAccredited, "False") No</label>
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">LOD:</label>
+                            <div class="col-sm-4">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.LOD, new { @class = "form-control", placeholdder = "LOD" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Max Range:</label>
+                            <div class="col-sm-4">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.MaxRange, new { @class = "form-control", placeholdder = "MaxRange" })
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Field:</label>
+                            <div class="col-sm-4">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsField, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsField, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Permissible Min:</label>
+                            <div class="col-sm-4">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.PermissibleMin, new { @class = "form-control", placeholdder = "PermissibleMin" })
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Permissible Max:</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.PermissibleMax, new { @class = "form-control", placeholdder = "PermissibleMax" })
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">IsIndustry Specified:</label>
+                            <div class="col-sm-4">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsIndustrySpecified, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsIndustrySpecified, "False") No</label>
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Regulatory Min:</label>
+                            <div class="col-sm-4">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.RegulatoryMin, new { @class = "form-control", placeholdder = "RegulatoryMin" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Regulatory Max:</label>
+                            <div class="col-sm-4">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.RegulatoryMax, new { @class = "form-control", placeholdder = "RegulatoryMax" })
+                            </div>
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
+                            <div class="col-sm-4">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                            <a class="btn btn-danger btn-sm" href="/Configuration/UserMasterList">Back</a>
+                            @*<a class="btn btn-warning" href="/Configuration/Add">Reset</a>*@
+                            <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
+                                </div>
+                        </div>
+                    </form>
+                    <div class="collapse collapse-box" id="basic-form1">
+                        <div class="code-box">
+                            <div class="clearfix">
+
+                                @*<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>*@
+                            </div>
+                            <pre>
+                            <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+
+<script>
+    //function AddParameterMasterSuccess(result) {
+    //    debugger
+    //    if (result.Status == "success") {
+    //        alert(result.message);
+    //        location.href = '/Configuration/ParameterMaster/ParameterMasterList';
+    //    }
+    //    else {
+
+    //        alert("Something Went Wrong");
+    //    }
+    //}
+
+    $('#SampleTypeProductId').change(function () {
+        debugger
+        if ($('#SampleTypeProductId').val() == '') {
+            $('#ProductGroupId').html('');
+            $('#ProductGroupId').append('<option value="">---Select---</option>');
+            $('#SubGroupId').html('');
+            $('#SubGroupId').append('<option value="">---Select---</option>');
+             $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+
+            $('#ProductGroupId').html('');
+            $('#ProductGroupId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/ParameterMaster/ProductGroups',
+                type: 'Get',
+                data: {SampleTypeProductId: $('#SampleTypeProductId').val()},
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#ProductGroupId').append('<option value="' + item.ProductGroupId + '">' + item.ProductGroupName + '</option>');
+                    })
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+    $('#ProductGroupId').change(function () {
+        if ($('#ProductGroupId').val() == '') {
+            $('#SubGroupId').html('');
+            $('#SubGroupId').append('<option value="">---Select---</option>');
+            $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+
+            $('#SubGroupId').html('');
+            $('#SubGroupId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/ParameterMaster/SubGroups',
+                type: 'Get',
+                data: { SampleTypeProductId: $('#SampleTypeProductId').val(), ProductGroupId: $('#ProductGroupId').val()},
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#SubGroupId').append('<option value="' + item.SubGroupId + '">' + item.SubGroupName + '</option>');
+                    })
+                },
+                error: function (data) {
+                }
+            });
+        }
+    });
+
+    $('#SubGroupId').change(function () {
+        if ($('#SubGroupId').val() == '') {
+            $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+        }
+        else {
+            $('#MatrixId').html('');
+            $('#MatrixId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/ParameterMaster/Matrix',
+                type: 'Get',
+                data: { SampleTypeProductId: $('#SampleTypeProductId').val(), ProductGroupId: $('#ProductGroupId').val(), SubGroupId: $('#SubGroupId').val() },
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    $.each(result.result, function (i, item) {
+                        $('#MatrixId').append('<option value="' + item.MatrixId + '">' + item.MatrixName + '</option>');
+                    })
+                },
+                error: function (data) {
+
+                }
+            });
+        }
+    });
+</script>
+
+
+

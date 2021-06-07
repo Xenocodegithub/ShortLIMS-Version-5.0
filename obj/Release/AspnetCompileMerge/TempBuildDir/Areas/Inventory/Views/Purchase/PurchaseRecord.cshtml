@@ -1,0 +1,197 @@
+﻿@model LIMS_DEMO.Areas.Inventory.Models.PurchaseModel
+@{
+    ViewBag.Title = "PurchaseRecord";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Purchase Record</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Purchase Record</h4>
+                    </div>
+                </div>
+
+                <form action="demo-form2" data-parsley-validate class="form-horizontal">
+                    <fieldset>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PurchaseOrderNo, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.PurchaseOrderNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PurchaseOrderNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.SupplierName, new { htmlAttributes = new { @class = "form-control  " } })
+                                @Html.ValidationMessageFor(model => model.SupplierName, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "form-control  " } })
+                                @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label  ">Quantity Received  <span class="required" style="color:red">*</span></label>
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.QtyReceived, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.QtyReceived, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label  ">Brand Received  <span class="required" style="color:red">*</span></label>
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.BrandReceived, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BrandReceived, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label  ">Grade Received  <span class="required" style="color:red">*</span></label>
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.GradeReceived, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.GradeReceived, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label  ">Delivery Time  <span class="required" style="color:red">*</span></label>
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.DeliveryTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DeliveryTime, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label  ">Delivery Challan No.  <span class="required" style="color:red">*</span></label>
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.DeliveryChallanNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DeliveryChallanNo, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label  " for="inputEmail1">Delivery Challan Date  <span class="required" style="color:red">*</span></label>
+                            <div class="col-sm-3 mr-btm-15">
+                                <div id="datetimepicker1" class="input-group date">
+                                    @Html.TextBoxFor(model => model.DeliveryChallanDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy" })
+
+                                    <span class="input-group-addon add-on">
+                                        <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.DeliveryChallanDate, "", new { @class = "text-danger col-md-10" })
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConditionOfPackaging, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.ConditionOfPackaging, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ConditionOfPackaging, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.IntegrityOfPackaging, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.IntegrityOfPackaging, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IntegrityOfPackaging, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label  ">Bill No.  <span class="required" style="color:red">*</span></label>
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BillNo, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label  ">Bill Date  <span class="required" style="color:red">*</span></label>
+                            <div class="col-sm-3 mr-btm-15">
+                                <div class="input-group datetimepicker1">
+                                    @Html.TextBoxFor(model => model.BillDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy" })
+
+                                    <span class="input-group-addon add-on">
+                                        <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger col-md-10" })
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label class=" col-sm-2 " for="inputEmail1">Received Date  <span class="required" style="color:red">*</span></label>
+                            <div class="col-sm-3 mr-btm-15">
+                                <div class="input-group datetimepicker1">
+                                    @Html.TextBoxFor(model => model.ReceivedDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy" })
+
+                                    <span class="input-group-addon add-on">
+                                        <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.ReceivedDate, "", new { @class = "text-danger col-md-10" })
+                            </div>
+                            @Html.LabelFor(model => model.RemarkRecord, htmlAttributes: new { @class = "col-form-label col-md-2 col-sm-2 label-align mr-btm-15" })
+                            <div class="col-md-3  mr-btm-15 ">
+                                @Html.EditorFor(model => model.RemarkRecord, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RemarkRecord, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="form-actions" style="margin:20px 0 0 0; text-align: center;">
+
+                                <button type="submit" id="btnSubmit" class="btn btn-primary" name="Save">Submit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+

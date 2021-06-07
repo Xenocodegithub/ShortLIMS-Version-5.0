@@ -1,0 +1,94 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.DisciplineMasterModel
+@{
+    ViewBag.Title = "AddDiscipline";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Discipline</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                @*<li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Discipline</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Discipline</li>*@
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-primary" href="@Url.Action("DisciplineList","DisciplineMaster")" role="button">
+                                Discipline List
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Discipline</h4>
+                        <!--<p class="mb-30">-->@*All bootstrap element classies*@<!--</p>-->
+                    </div>
+                    @*<div class="pull-right">
+                            <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                <div>
+                    @using (Ajax.BeginForm("AddDiscipline", "DisciplineMaster", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddDisciplineSuccess" }))
+                    {
+                        @Html.ValidationSummary(true)
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Discipline Name</label>
+                            <div class="col-sm-12 col-md-10">
+                                @*<input class="form-control" placeholder="Search Here" type="search">*@
+                                @Html.TextBoxFor(model => model.Discipline, new { @class = "form-control", placeholdder = "Discipline Name" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Is Active</label>
+                            <div class="col-sm-12 col-md-10">
+                                <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                                <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    }
+                </div>
+                <div class="collapse collapse-box" id="basic-form1">
+                    <div class="code-box">
+                        <div class="clearfix">
+
+                            <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left" data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
+                            <a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                        </div>
+                        <pre>
+                        <code class="xml copy-pre" id="copy-pre"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function AddDisciplineSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/DisciplineList';
+        }
+    }
+</script>
+
+

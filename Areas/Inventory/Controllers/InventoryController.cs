@@ -137,7 +137,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             if (ID > 0)
             {
                 ViewBag.BasicDetailsIdViewBag = ID;
-                ViewBag.InventoryTypeMasterIDViewBag = TypeID;        
+                ViewBag.InventoryTypeMasterIDViewBag = TypeID;
 
             }
             if (PurchaseRequestID > 0)
@@ -177,7 +177,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         {
             if (model.ID > 0)
             {
-             //   model.UpdatedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
+                //   model.UpdatedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
                 int pid = (int)model.PurchaseRequestID;
                 CoreFactory.inventoryBasicDetailEntity = new InventoryBasicDetailEntity();
                 CoreFactory.inventoryBasicDetailEntity.ID = model.ID; // InventoryBasicDetails- >ID 
@@ -201,7 +201,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 CoreFactory.inventoryBasicDetailEntity.DOM = model.DOM;
                 CoreFactory.inventoryBasicDetailEntity.CertifiedConcentration = model.CertifiedConcentration;
                 CoreFactory.inventoryBasicDetailEntity.Praceability = model.Praceability;
-                CoreFactory.inventoryBasicDetailEntity.DOE = model.DOExpiry;
+                CoreFactory.inventoryBasicDetailEntity.DOE = model.DOE;
                 CoreFactory.inventoryBasicDetailEntity.IsActive = true;
                 CoreFactory.inventoryBasicDetailEntity.Remark = model.Remark;
                 CoreFactory.inventoryBasicDetailEntity.StorageLocation = model.StorageLocation; // new field
@@ -233,7 +233,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                                     CoreFactory.inventoryBasicDetailEntity = new InventoryBasicDetailEntity();
                                     CoreFactory.inventoryBasicDetailEntity.ID = item.ID;
                                     CoreFactory.inventoryBasicDetailEntity.InventoryBasicDetailsID = item.InventoryBasicDetailsID;
-                                 //   item.UpdatedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
+                                    //   item.UpdatedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
                                     string status = BALFactory.NewInventoryBAL.DeleteInventoryBasicItemDetail(CoreFactory.inventoryBasicDetailEntity);
                                     if (status == "success")
                                     {
@@ -255,7 +255,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                                         CoreFactory.inventoryBasicDetailEntity.InventoryBasicItemDetailsNumber = (string)InventoryBasicItemDetailsNumber1;
                                         CoreFactory.inventoryBasicDetailEntity.Manufacturer = model.Manufacturer;
                                         CoreFactory.inventoryBasicDetailEntity.DOM = model.DOM;
-                                        CoreFactory.inventoryBasicDetailEntity.DOE = model.DOExpiry;
+                                        CoreFactory.inventoryBasicDetailEntity.DOE = model.DOE;
                                         CoreFactory.inventoryBasicDetailEntity.LOTNo = item.LOTNo;
                                         CoreFactory.inventoryBasicDetailEntity.SRNO = item.SRNO;
                                         var BasicItemDetailsID = BALFactory.NewInventoryBAL.AddInventoryBasicItemDetails(CoreFactory.inventoryBasicDetailEntity);
@@ -291,7 +291,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                                 CoreFactory.inventoryBasicDetailEntity.InventoryBasicItemDetailsNumber = (string)InventoryBasicItemDetailsNumber1;
                                 CoreFactory.inventoryBasicDetailEntity.Manufacturer = model.Manufacturer;
                                 CoreFactory.inventoryBasicDetailEntity.DOM = model.DOM;
-                                CoreFactory.inventoryBasicDetailEntity.DOE = model.DOExpiry;
+                                CoreFactory.inventoryBasicDetailEntity.DOE = model.DOE;
                                 CoreFactory.inventoryBasicDetailEntity.LOTNo = item.LOTNo;
                                 CoreFactory.inventoryBasicDetailEntity.SRNO = item.SRNO;
                                 var BasicItemDetailsID = BALFactory.NewInventoryBAL.AddInventoryBasicItemDetails(CoreFactory.inventoryBasicDetailEntity);
@@ -425,12 +425,13 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         [HttpPost]
         public ActionResult InventoryCommercialDetails(InventoryCommercialDetailModel model)
         {
+
             if (model != null)
             {
                 if (model.ID > 0)
                 {  // Update Here
                    // UPDATE HERE
-                  //  model.UpdatedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
+                   //  model.UpdatedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
                     CoreFactory.inventoryCommercialDetailEntity = new InventoryCommercialDetailEntity();
                     CoreFactory.inventoryCommercialDetailEntity.VendorName = model.VendorName;
                     CoreFactory.inventoryCommercialDetailEntity.InventoryBasicDetailsID = model.InventoryBasicDetailsID;
@@ -446,6 +447,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                     CoreFactory.inventoryCommercialDetailEntity.IsActive = true;
                     CoreFactory.inventoryCommercialDetailEntity.UpdatedBy = 0;
                     CoreFactory.inventoryCommercialDetailEntity.ID = model.ID;
+                    CoreFactory.inventoryCommercialDetailEntity.UpdatedDate = DateTime.Now.ToLocalTime();
                     long InvCommId = BALFactory.NewInventoryBAL.UpdateInventoryCommercialData(CoreFactory.inventoryCommercialDetailEntity);
                     ViewBag.CommercialDetailsIdViewBag = InvCommId;
                     Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
@@ -454,7 +456,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                 }
                 else
                 {
-                    if(model.ID == 0)    // insert code here
+                    if (model.ID == 0)    // insert code here
                     {
                         CoreFactory.inventoryCommercialDetailEntity = new InventoryCommercialDetailEntity();
                         CoreFactory.inventoryCommercialDetailEntity.VendorName = model.VendorName;
@@ -469,16 +471,27 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
                         CoreFactory.inventoryCommercialDetailEntity.InvoiceNumber = model.InvoiceNumber;
                         CoreFactory.inventoryCommercialDetailEntity.BillDate = model.BillDate;
                         CoreFactory.inventoryCommercialDetailEntity.IsActive = true;
+                        CoreFactory.inventoryCommercialDetailEntity.InsertedBy = 0;
+                        CoreFactory.inventoryCommercialDetailEntity.InsertedDate = DateTime.Now.ToLocalTime();
                         long InvCommId = BALFactory.NewInventoryBAL.InsertInventoryCommercialData(CoreFactory.inventoryCommercialDetailEntity);
-                        ViewBag.CommercialDetailsIdViewBag = InvCommId;
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        return Json(new { status = "success", message = "Record created successfully.", ID = model.ID });
+                        if (InvCommId > 0)
+                        {
+
+                            ViewBag.CommercialDetailsIdViewBag = InvCommId;
+                            Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                            return Json(new { status = "success", message = "Record created successfully.", ID = model.ID });
+                        }
+                        else
+                        {
+                            Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                            return Json(new { status = "failed", message = "Failed", ID = model.ID });
+                        }
                     }
                 }
-           }
-           return PartialView();
+            }
+            return PartialView();
         }
-      
+
         [HttpGet]
         public ActionResult _CalibrationDetails()
         {
@@ -491,68 +504,74 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult InventoryMaintainanceAndCalibrationDetails(InventoryMaintainanceAndCalibrationModel model)
+        [ValidateAntiForgeryToken]
+        public JsonResult InventoryMaintainanceAndCalibrationDetails(InventoryMaintainanceAndCalibrationModel model)
         {
 
 
-            if (model.ID == 0)
+
+            //   model.InsertedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity = new InventoryMaintainanceAndCalibrationEntity();
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCVendorName = model.AMCVendorName;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCNumber = model.AMCNumber;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCDate = model.AMCDate;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCValue = model.AMCValue;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCPeriod = model.AMCPeriod;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.Frequency = model.Frequency;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.Type = "Maintainance";
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.InsertedBy = 0;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.StartDate = model.AMCStartDate;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.InventoryBasicItemDetailsID = model.InventoryBasicItemDetailsID;
+            long MID = BALFactory.NewInventoryBAL.InsertInventoryMaintainanceDetail(CoreFactory.inventoryMaintainanceAndCalibrationEntity);
+
+            if (MID > 0)
             {
-                //   model.InsertedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity = new InventoryMaintainanceAndCalibrationEntity();
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCVendorName = model.AMCVendorName;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCNumber = model.AMCNumber;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCDate = model.AMCDate;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCValue = model.AMCValue;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCPeriod = model.AMCPeriod;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.Frequency = model.Frequency;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.Type = model.Type;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.InsertedBy = 0;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.StartDate = model.AMCStartDate;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.InventoryBasicItemDetailsID = model.InventoryBasicItemDetailsID;
-                long MID = BALFactory.NewInventoryBAL.InsertInventoryMaintainanceDetail(CoreFactory.inventoryMaintainanceAndCalibrationEntity);
-
-                if (MID > 0)
-                {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return Json(new { status = "success", message = "Record created successfully.", ID = MID });
-                }
-                else
-                {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return Json(new { status = "success", message = "Failed!!!!", ID = MID });
-
-                }
+                // Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                //  return Json(new { status = "success", message = "Record created successfully.", ID = MID });
+                return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
             }
-            else if(model.ID > 0)
+            else
             {
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity = new InventoryMaintainanceAndCalibrationEntity();
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.ID = model.ID;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCVendorName = model.AMCVendorName;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCNumber = model.AMCNumber;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCDate = model.AMCDate;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCValue = model.AMCValue;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCPeriod = model.AMCPeriod;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.Frequency = model.Frequency;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.Type = model.Type;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.InsertedBy = 0;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.StartDate = model.AMCStartDate;
-                CoreFactory.inventoryMaintainanceAndCalibrationEntity.InventoryBasicItemDetailsID = model.InventoryBasicItemDetailsID;
-                long MID = BALFactory.NewInventoryBAL.UpdateMaintainanceDetails(CoreFactory.inventoryMaintainanceAndCalibrationEntity);
+                //Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                //return Json(new { status = "success", message = "Failed!!!!", ID = MID });
+                return Json(new { status = "fail" }, JsonRequestBehavior.AllowGet);
 
-                if (MID > 0)
-                {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return Json(new { status = "success", message = "Record created successfully.", ID = MID });
-                }
-                else
-                {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return Json(new { status = "success", message = "Failed!!!!", ID = MID });
-
-                }
             }
-            return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult InventoryCalibrationDetails(InventoryMaintainanceAndCalibrationModel model)
+        {
+
+            //   model.InsertedBy = Convert.ToInt32(System.Web.HttpContext.Current.Session["LoggedInEmployeeId"]);
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity = new InventoryMaintainanceAndCalibrationEntity();
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCVendorName = model.CalibrationAMCVendorName;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCNumber = model.CalibrationAMCNumber;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCDate = model.CalibrationAMCDate;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCValue = model.CalibrationAMCValue;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.AMCPeriod = model.CalibrationAMCPeriod;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.Frequency = model.CalibrationFrequency;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.Type = "Calibration";
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.InsertedBy = 0;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.StartDate = model.CalibrationAMCStartDate;
+            CoreFactory.inventoryMaintainanceAndCalibrationEntity.InventoryBasicItemDetailsID = model.CalibrationInventoryBasicItemDetailsID;
+            long MID = BALFactory.NewInventoryBAL.InsertInventoryMaintainanceDetail(CoreFactory.inventoryMaintainanceAndCalibrationEntity);
+
+            if (MID > 0)
+            {
+                // Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                //  return Json(new { status = "success", message = "Record created successfully.", ID = MID });
+                return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                //Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                //return Json(new { status = "success", message = "Failed!!!!", ID = MID });
+                return Json(new { status = "fail" }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
 
         [HttpPost]
         public ActionResult FatchCommercialDetailsByID(int ID)
@@ -606,7 +625,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
         {
             int ID2 = ID;
             ViewBag.InventoryItemListViewBag = BALFactory.NewInventoryBAL.GetInventoryBasicItemDetails(ID2);
-            
+
             if (ViewBag.InventoryItemListViewBag != null)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
@@ -616,7 +635,7 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                 return Json(new { status = "info", message = "No record found." });
-            }         
+            }
         }
         public List<InventoryBasicDetailEntity> GetBasicDetails(int TotalRecords, int TypeID)
         {
@@ -786,10 +805,10 @@ namespace LIMS_DEMO.Areas.Inventory.Controllers
 
                             InventoryCommercialFileDetailModel _inventoryCommercialFileDetail = new InventoryCommercialFileDetailModel();
                             int InventoryBasicDetailID = Convert.ToInt32(id);
-                            string FileName= stringFileName;
-                            string  Strstatus = BALFactory.NewInventoryBAL.InsertInventoryCommercialFileDetail(InventoryBasicDetailID, FileName);
-                           // IBaseEntityResponse<InventoryCommercialFileDetail> responseInventoryCommercialFileDetail = _inventoryCommercialFileDetailDataProvider.InsertInventoryCommercialFileDetail(_inventoryCommercialFileDetail);
-                            if (Strstatus  == "success")
+                            string FileName = stringFileName;
+                            string Strstatus = BALFactory.NewInventoryBAL.InsertInventoryCommercialFileDetail(InventoryBasicDetailID, FileName);
+                            // IBaseEntityResponse<InventoryCommercialFileDetail> responseInventoryCommercialFileDetail = _inventoryCommercialFileDetailDataProvider.InsertInventoryCommercialFileDetail(_inventoryCommercialFileDetail);
+                            if (Strstatus == "success")
                             {
 
                             }

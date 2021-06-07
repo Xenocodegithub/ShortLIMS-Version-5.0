@@ -88,36 +88,63 @@ namespace LIMS_DEMO.Areas.FieldDetermination.Controllers
         {
             CoreFactory.buildingMaterialEntity = new BuildingMaterialEntity();
             var buildingMaterialList = (List<FDBuildingMaterialModel>)TempData.Peek("BuildingMaterialList");
-            if (buildingMaterialList.Count > 0)
+            if (buildingMaterialList != null)
             {
-                foreach (var buildingMaterial in buildingMaterialList)
+                if (buildingMaterialList.Count > 0)
                 {
-                    //CoreFactory.buildingMaterialEntity.FieldBuildingMaterialId = Convert.ToByte(buildingMaterial.FieldBuildingMaterialId);
-                    CoreFactory.buildingMaterialEntity.SampleCollectionId = (long)model.SampleCollectionId;
-                    CoreFactory.buildingMaterialEntity.EnquiryId = model.EnquiryId;
-                    //CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
-                    CoreFactory.buildingMaterialEntity.AnyOtherObservation = model.AnyOtherObservation;
-                    CoreFactory.buildingMaterialEntity.Parameters = buildingMaterial.ParameterName;
-                    CoreFactory.buildingMaterialEntity.TestMethodName = buildingMaterial.TestMethodName;
-                    CoreFactory.buildingMaterialEntity.InField = buildingMaterial.InField;
-                    CoreFactory.buildingMaterialEntity.IsNABLAccredited = buildingMaterial.IsNABLAccredited;
-                    CoreFactory.buildingMaterialEntity.TestResults = buildingMaterial.TestResults;
-                    CoreFactory.buildingMaterialEntity.IsActive = true;
-                    CoreFactory.buildingMaterialEntity.EnteredBy = LIMS.User.UserMasterID;
-                    CoreFactory.buildingMaterialEntity.EnteredDate = DateTime.UtcNow;
-                    CoreFactory.buildingMaterialEntity.EnteredDate = DateTime.UtcNow;
-                    if (Save == "FieldSave")
+                    foreach (var buildingMaterial in buildingMaterialList)
                     {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
-                        CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.buildingMaterialBAL.AddBuildingMaterial(CoreFactory.buildingMaterialEntity);
+                        // CoreFactory.buildingMaterialEntity.FieldBuildingMaterialId = Convert.ToByte(model.FieldBuildingMaterialId);
+                        CoreFactory.buildingMaterialEntity.FieldBuildingMaterialId = Convert.ToByte(buildingMaterial.FieldBuildingMaterialId);
+                        CoreFactory.buildingMaterialEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                        CoreFactory.buildingMaterialEntity.EnquiryId = model.EnquiryId;
+                        //CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
+                        CoreFactory.buildingMaterialEntity.AnyOtherObservation = model.AnyOtherObservation;
+                        CoreFactory.buildingMaterialEntity.Parameters = buildingMaterial.ParameterName;
+                        CoreFactory.buildingMaterialEntity.TestMethodName = buildingMaterial.TestMethodName;
+                        CoreFactory.buildingMaterialEntity.InField = buildingMaterial.InField;
+                        CoreFactory.buildingMaterialEntity.IsNABLAccredited = buildingMaterial.IsNABLAccredited;
+                        CoreFactory.buildingMaterialEntity.TestResults = buildingMaterial.TestResults;
+                        CoreFactory.buildingMaterialEntity.IsActive = true;
+                        CoreFactory.buildingMaterialEntity.EnteredBy = LIMS.User.UserMasterID;
+                        CoreFactory.buildingMaterialEntity.EnteredDate = DateTime.UtcNow;
+                        CoreFactory.buildingMaterialEntity.EnteredDate = DateTime.UtcNow;
+                        if (Save == "FieldSave")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                            CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.buildingMaterialBAL.AddBuildingMaterial(CoreFactory.buildingMaterialEntity);
+                        }
+                        else if (Save == "FieldSubmit")
+                        {
+                            int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                            CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
+                            strStatus = BALFactory.buildingMaterialBAL.AddBuildingMaterial(CoreFactory.buildingMaterialEntity);
+                        }
+                        //strStatus = BALFactory.buildingMaterialBAL.AddBuildingMaterial(CoreFactory.buildingMaterialEntity);
                     }
-                    else if (Save == "FieldSubmit")
-                    {
-                        int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
-                        CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
-                        strStatus = BALFactory.buildingMaterialBAL.AddBuildingMaterial(CoreFactory.buildingMaterialEntity);
-                    }
+                }
+            }
+            else
+            {
+                CoreFactory.buildingMaterialEntity.SampleCollectionId = (long)model.SampleCollectionId;
+                CoreFactory.buildingMaterialEntity.EnquiryId = model.EnquiryId;
+                CoreFactory.buildingMaterialEntity.AnyOtherObservation = model.AnyOtherObservation;
+                CoreFactory.buildingMaterialEntity.IsActive = true;
+                CoreFactory.buildingMaterialEntity.EnteredBy = LIMS.User.UserMasterID;
+                CoreFactory.buildingMaterialEntity.EnteredDate = DateTime.UtcNow;
+                CoreFactory.buildingMaterialEntity.EnteredDate = DateTime.UtcNow;
+                if (Save == "FieldSave")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("InProgress");
+                    CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.buildingMaterialBAL.AddBuildingMaterial(CoreFactory.buildingMaterialEntity);
+                }
+                else if (Save == "FieldSubmit")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleColl");
+                    CoreFactory.buildingMaterialEntity.StatusId = (byte)iStatusId;
+                    strStatus = BALFactory.buildingMaterialBAL.AddBuildingMaterial(CoreFactory.buildingMaterialEntity);
                 }
             }
             return Json(new { Status = strStatus, message = "Values Entered successfully." }, JsonRequestBehavior.AllowGet);

@@ -109,6 +109,19 @@ namespace LIMS_DEMO.DAL.FieldDetermination
                         fieldworkplace.FilterPaperNo2 = workplaceAndFugitiveEmissionEntity.FilterPaperNo2;
                         fieldworkplace.StartTime = workplaceAndFugitiveEmissionEntity.StartTime;
                         fieldworkplace.EndTime = workplaceAndFugitiveEmissionEntity.EndTime;
+                        fieldworkplace.CycloneCupNo = workplaceAndFugitiveEmissionEntity.CycloneCupNo;
+                        fieldworkplace.SamplingDurationDiff = workplaceAndFugitiveEmissionEntity.SamplingDurationDiff;
+                        fieldworkplace.SamplingDurationFinal = workplaceAndFugitiveEmissionEntity.SamplingDurationFinal;
+                        fieldworkplace.SamplingDurationInitial = workplaceAndFugitiveEmissionEntity.SamplingDurationInitial;
+                        fieldworkplace.FlowRateDiffM = workplaceAndFugitiveEmissionEntity.FlowRateDiffM;
+                        fieldworkplace.FlowRateFinalM = workplaceAndFugitiveEmissionEntity.FlowRateFinalM;
+                        fieldworkplace.FlowRateInitialM = workplaceAndFugitiveEmissionEntity.FlowRateInitialM;
+                        fieldworkplace.TimeTotalizerFinal = workplaceAndFugitiveEmissionEntity.TimeTotalizerFinal;
+                        fieldworkplace.TimeTotalizerInitial = workplaceAndFugitiveEmissionEntity.TimeTotalizerInitial;
+                        fieldworkplace.TimeTotalizerDiff = workplaceAndFugitiveEmissionEntity.TimeTotalizerDiff;
+                        fieldworkplace.MatterSizeEndTime = workplaceAndFugitiveEmissionEntity.MatterSizeEndTime;
+                        fieldworkplace.MatterSizeStartTime = workplaceAndFugitiveEmissionEntity.MatterSizeStartTime;
+
                         fieldworkplace.Sampling_Duration = workplaceAndFugitiveEmissionEntity.Sampling_Duration;
                         fieldworkplace.AvgFlowRate = workplaceAndFugitiveEmissionEntity.AvgFlowRate;
                         fieldworkplace.TotalVolAirPassed_L = workplaceAndFugitiveEmissionEntity.TotalVolAirPassed_L;
@@ -166,6 +179,19 @@ namespace LIMS_DEMO.DAL.FieldDetermination
                     workplace.FilterPaperNo2 = workplaceAndFugitiveEmissionEntity.FilterPaperNo2;
                     workplace.StartTime = workplaceAndFugitiveEmissionEntity.StartTime;
                     workplace.EndTime = workplaceAndFugitiveEmissionEntity.EndTime;
+                    workplace.CycloneCupNo = workplaceAndFugitiveEmissionEntity.CycloneCupNo;
+                    workplace.SamplingDurationDiff = workplaceAndFugitiveEmissionEntity.SamplingDurationDiff;
+                    workplace.SamplingDurationFinal = workplaceAndFugitiveEmissionEntity.SamplingDurationFinal;
+                    workplace.SamplingDurationInitial = workplaceAndFugitiveEmissionEntity.SamplingDurationInitial;
+                    workplace.FlowRateDiffM = workplaceAndFugitiveEmissionEntity.FlowRateDiffM;
+                    workplace.FlowRateFinalM = workplaceAndFugitiveEmissionEntity.FlowRateFinalM;
+                    workplace.FlowRateInitialM = workplaceAndFugitiveEmissionEntity.FlowRateInitialM;
+                    workplace.TimeTotalizerFinal = workplaceAndFugitiveEmissionEntity.TimeTotalizerFinal;
+                    workplace.TimeTotalizerInitial = workplaceAndFugitiveEmissionEntity.TimeTotalizerInitial;
+                    workplace.TimeTotalizerDiff = workplaceAndFugitiveEmissionEntity.TimeTotalizerDiff;
+                    workplace.MatterSizeEndTime = workplaceAndFugitiveEmissionEntity.MatterSizeEndTime;
+                    workplace.MatterSizeStartTime = workplaceAndFugitiveEmissionEntity.MatterSizeStartTime;
+
                     workplace.Sampling_Duration = workplaceAndFugitiveEmissionEntity.Sampling_Duration;
                     workplace.AvgFlowRate = workplaceAndFugitiveEmissionEntity.AvgFlowRate;
                     workplace.TotalVolAirPassed_L = workplaceAndFugitiveEmissionEntity.TotalVolAirPassed_L;

@@ -34,7 +34,7 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
                     model.FirstName = CoreFactory.employeeMasterEntity.FirstName;
                     model.MiddleName = CoreFactory.employeeMasterEntity.MiddleName;
                     model.LastName = CoreFactory.employeeMasterEntity.LastName;
-                    model.UserMasterId = CoreFactory.employeeMasterEntity.UserMasterId;
+                    model.UserMasterId = CoreFactory.employeeMasterEntity.UserMasterID;
                     model.MasterDesignationID = CoreFactory.employeeMasterEntity.MasterDesignationID;
                     model.Gender = CoreFactory.employeeMasterEntity.Gender;
                     model.DateOfBirth = CoreFactory.employeeMasterEntity.DateOfBirth;
@@ -69,10 +69,11 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
         {
             EmployeeMasterEntity employeeMasterEntity = new EmployeeMasterEntity();
             employeeMasterEntity.UserDetailId = model.UserDetailId;
+            employeeMasterEntity.UserMasterID = model.UserMasterId;
             employeeMasterEntity.FirstName = model.FirstName;
             employeeMasterEntity.MiddleName = model.MiddleName;
             employeeMasterEntity.LastName = model.LastName;
-            employeeMasterEntity.UserMasterId = model.UserMasterId;
+          
             employeeMasterEntity.Gender = model.Gender;
             employeeMasterEntity.DateOfBirth = model.DateOfBirth;
             employeeMasterEntity.Email = model.Email;

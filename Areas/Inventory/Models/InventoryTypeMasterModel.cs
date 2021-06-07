@@ -11,7 +11,7 @@ namespace LIMS_DEMO.Areas.Inventory.Models
         [Key]
         public short InventoryTypeID { get; set; } // ID
         public string InventoryTypeName { get; set; }
-        public short CatagoryMasterID { get; set; }
+        public int CatagoryMasterID { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public Nullable<bool> IsActive { get; set; }

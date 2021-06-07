@@ -1,0 +1,96 @@
+﻿@model LIMS_DEMO.Areas.Configuration.Models.ProcedureMasterModel
+@{
+    ViewBag.Title = "AddProductGroup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Add Product Group</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Configuration</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Product Sub Matrix</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Product Group</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-md-6 col-sm-12 text-right">
+
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Product Group</h4>
+                    </div>
+                    @*<div class="pull-right">
+                            <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+                        </div>*@
+                </div>
+                @using (Ajax.BeginForm("AddProductGroup", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddProductGroupSuccess" }))
+                {
+
+                    @Html.HiddenFor(Model => Model.ProductGroupId);
+
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Sample Type Product Name: </label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "---Select---", new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.SampleTypeProductId, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.SampleTypeProductName)
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Product Group Name:</label>
+                        <div class="col-sm-4">
+                            @*<input class="form-control" placeholder="Search Here" type="search">*@
+                            @Html.TextBoxFor(model => model.ProductGroupName, new { @class = "form-control ", placeholdder = "ProductGroupName" })
+                            @Html.ValidationMessageFor(model => model.ProductGroupName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Code:</label>
+                        <div class="col-sm-4">
+                            @*<input class="form-control" placeholder="Search Here" type="search">*@
+                            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", placeholdder = "Code" })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-sm-12 col-md-2 col-form-label">Is Active:</label>
+                        <div class="col-sm-4">
+                            <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "True", new { @checked = "checked" }) Yes </label>
+                            <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.IsActive, "False") No</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-12">
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("ProductGroupList", "ProductSubMatrix")">Back</a>
+                        <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
+                            </div>
+
+                    </div>
+                }
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/unobtrusive")
+<script>
+    function AddProductGroupSuccess(result) {
+        if (result.Status == "success") {
+            alert(result.message);
+            location.href = '/Configuration/ProductSubMatrix/ProductGroupList';
+        }
+    }
+</script>
+

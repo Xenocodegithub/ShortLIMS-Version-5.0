@@ -1190,8 +1190,8 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="TotalVolAirPassed_L" Type="int" />
           <Property Name="AvgFlowRate" Type="int" />
           <Property Name="MatterSamplingDuration" Type="int" />
-          <Property Name="EndTime" Type="int" />
-          <Property Name="StartTime" Type="int" />
+          <Property Name="EndTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartTime" Type="nvarchar" MaxLength="50" />
           <Property Name="Sampling_Duration" Type="int" />
           <Property Name="FlowRate_Avg" Type="int" />
         </EntityType>
@@ -1425,7 +1425,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnquiryId" Type="bigint" />
           <Property Name="StatusId" Type="tinyint" />
           <Property Name="SurveyDate" Type="datetime" />
-          <Property Name="InstrumentId" Type="int" />
+          <Property Name="InstrumentId" Type="nvarchar" MaxLength="50" />
           <Property Name="DurationOfSampling" Type="int" />
           <Property Name="FilterPaperAnalyzed" Type="varchar" MaxLength="50" />
           <Property Name="FilterPaperNo" Type="int" />
@@ -1442,11 +1442,23 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="FilterPaperNo2" Type="int" />
-          <Property Name="StartTime" Type="int" />
-          <Property Name="EndTime" Type="int" />
+          <Property Name="StartTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndTime" Type="nvarchar" MaxLength="50" />
           <Property Name="TotalVolAirPassed_L" Type="int" />
           <Property Name="TotalVolumeAirPassed_m3" Type="int" />
           <Property Name="AvgFlowRate" Type="int" />
+          <Property Name="CycloneCupNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatterSizeStartTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="MatterSizeEndTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeTotalizerInitial" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeTotalizerFinal" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeTotalizerDiff" Type="nvarchar" MaxLength="50" />
+          <Property Name="SamplingDurationInitial" Type="nvarchar" MaxLength="50" />
+          <Property Name="SamplingDurationFinal" Type="nvarchar" MaxLength="50" />
+          <Property Name="SamplingDurationDiff" Type="nvarchar" MaxLength="50" />
+          <Property Name="FlowRateInitialM" Type="nvarchar" MaxLength="50" />
+          <Property Name="FlowRateFinalM" Type="nvarchar" MaxLength="50" />
+          <Property Name="FlowRateDiffM" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="FieldWorkplaceGasSampling">
           <Key>
@@ -1454,7 +1466,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           </Key>
           <Property Name="WorkplaceGasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WorkplaceID" Type="int" />
-          <Property Name="Parameters" Type="nvarchar" MaxLength="50" />
+          <Property Name="Parameters" Type="nvarchar" MaxLength="150" />
           <Property Name="VolImpingingSol" Type="nvarchar" MaxLength="50" />
           <Property Name="BottleNo" Type="varchar" MaxLength="50" />
           <Property Name="RotameterFlow" Type="int" />
@@ -1464,7 +1476,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnteredDate" Type="smalldatetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
-          <Property Name="TestMethodName" Type="nvarchar" MaxLength="100" />
+          <Property Name="TestMethodName" Type="nvarchar(max)" />
           <Property Name="InField" Type="bit" />
           <Property Name="IsNABLAccredited" Type="bit" />
           <Property Name="Vs" Type="int" />
@@ -2002,6 +2014,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnteredDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ActiveStatus" Type="bit" />
         </EntityType>
         <EntityType Name="SolutionPreparationData">
           <Key>
@@ -9569,8 +9582,8 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="TotalVolAirPassed_L" Type="Int32" />
           <Property Name="AvgFlowRate" Type="Int32" />
           <Property Name="MatterSamplingDuration" Type="Int32" />
-          <Property Name="EndTime" Type="Int32" />
-          <Property Name="StartTime" Type="Int32" />
+          <Property Name="EndTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sampling_Duration" Type="Int32" />
           <Property Name="FlowRate_Avg" Type="Int32" />
           <NavigationProperty Name="FieldAmbientAirGasesSamplings" Relationship="Self.FK_FieldAmbientAirGasesSampling_FieldAmbientAirMonitoring" FromRole="FieldAmbientAirMonitoring" ToRole="FieldAmbientAirGasesSampling" />
@@ -9827,7 +9840,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnquiryId" Type="Int64" />
           <Property Name="StatusId" Type="Byte" />
           <Property Name="SurveyDate" Type="DateTime" Precision="3" />
-          <Property Name="InstrumentId" Type="Int32" />
+          <Property Name="InstrumentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DurationOfSampling" Type="Int32" />
           <Property Name="FilterPaperAnalyzed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FilterPaperNo" Type="Int32" />
@@ -9844,11 +9857,23 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="FilterPaperNo2" Type="Int32" />
-          <Property Name="StartTime" Type="Int32" />
-          <Property Name="EndTime" Type="Int32" />
+          <Property Name="StartTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TotalVolAirPassed_L" Type="Int32" />
           <Property Name="TotalVolumeAirPassed_m3" Type="Int32" />
           <Property Name="AvgFlowRate" Type="Int32" />
+          <Property Name="CycloneCupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MatterSizeStartTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MatterSizeEndTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeTotalizerInitial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeTotalizerFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeTotalizerDiff" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SamplingDurationInitial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SamplingDurationFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SamplingDurationDiff" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FlowRateInitialM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FlowRateFinalM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FlowRateDiffM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SampleCollection" Relationship="Self.FK_FieldWorkplaceEnvironmentAndFugitiveEmission_SampleCollection" FromRole="FieldWorkplaceEnvironmentAndFugitiveEmission" ToRole="SampleCollection" />
           <NavigationProperty Name="StatusMaster" Relationship="Self.FK_FieldWorkplaceEnvironmentAndFugitiveEmission_StatusMaster" FromRole="FieldWorkplaceEnvironmentAndFugitiveEmission" ToRole="StatusMaster" />
           <NavigationProperty Name="FieldWorkplaceGasSamplings" Relationship="Self.FK_FieldWorkplaceGasSampling_FieldWorkplaceEnvironmentAndFugitiveEmission" FromRole="FieldWorkplaceEnvironmentAndFugitiveEmission" ToRole="FieldWorkplaceGasSampling" />
@@ -9859,7 +9884,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           </Key>
           <Property Name="WorkplaceGasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WorkplaceID" Type="Int32" />
-          <Property Name="Parameters" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Parameters" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="VolImpingingSol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BottleNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RotameterFlow" Type="Int32" />
@@ -9869,7 +9894,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="TestMethodName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TestMethodName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InField" Type="Boolean" />
           <Property Name="IsNABLAccredited" Type="Boolean" />
           <Property Name="Vs" Type="Int32" />
@@ -10483,6 +10508,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
           <Property Name="EnteredDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ActiveStatus" Type="Boolean" />
           <NavigationProperty Name="ParameterGroupMaster" Relationship="Self.FK_SampleParameterPlanning_ParameterGroupMaster" FromRole="SampleParameterPlanning" ToRole="ParameterGroupMaster" />
           <NavigationProperty Name="SampleCollection" Relationship="Self.FK_SampleParameterPlanning_SampleCollection" FromRole="SampleParameterPlanning" ToRole="SampleCollection" />
           <NavigationProperty Name="UserMaster" Relationship="Self.FK_SampleParameterPlanning_AnalystUserMaster" FromRole="SampleParameterPlanning" ToRole="UserMaster" />
@@ -19113,6 +19139,18 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
                 <ScalarProperty Name="TotalVolAirPassed_L" ColumnName="TotalVolAirPassed_L" />
                 <ScalarProperty Name="TotalVolumeAirPassed_m3" ColumnName="TotalVolumeAirPassed_m3" />
                 <ScalarProperty Name="AvgFlowRate" ColumnName="AvgFlowRate" />
+                <ScalarProperty Name="CycloneCupNo" ColumnName="CycloneCupNo" />
+                <ScalarProperty Name="MatterSizeStartTime" ColumnName="MatterSizeStartTime" />
+                <ScalarProperty Name="MatterSizeEndTime" ColumnName="MatterSizeEndTime" />
+                <ScalarProperty Name="TimeTotalizerInitial" ColumnName="TimeTotalizerInitial" />
+                <ScalarProperty Name="TimeTotalizerFinal" ColumnName="TimeTotalizerFinal" />
+                <ScalarProperty Name="TimeTotalizerDiff" ColumnName="TimeTotalizerDiff" />
+                <ScalarProperty Name="SamplingDurationInitial" ColumnName="SamplingDurationInitial" />
+                <ScalarProperty Name="SamplingDurationFinal" ColumnName="SamplingDurationFinal" />
+                <ScalarProperty Name="SamplingDurationDiff" ColumnName="SamplingDurationDiff" />
+                <ScalarProperty Name="FlowRateInitialM" ColumnName="FlowRateInitialM" />
+                <ScalarProperty Name="FlowRateFinalM" ColumnName="FlowRateFinalM" />
+                <ScalarProperty Name="FlowRateDiffM" ColumnName="FlowRateDiffM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -19699,6 +19737,7 @@ warning 6002: The table/view 'ShortLIMS.dbo.InventoryPurchaseFileUpload' does no
                 <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

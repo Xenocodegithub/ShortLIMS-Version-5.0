@@ -1,0 +1,172 @@
+﻿@model LIMS_DEMO.Areas.FieldDetermination.Models.FDStackEmissionModel
+
+@using (Ajax.BeginForm("_FieldStackEmission", "FieldStackEmissionMonitoring", new { area = "FieldDetermination" }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FDAdd" }, new { id = "frmAddStack" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SrNo)
+    @Html.HiddenFor(model => model.FDStackEmissionId)
+    @Html.HiddenFor(model => model.FDStackEmission_IsoKineticId)
+    @Html.HiddenFor(model => model.FDStackEmission_GaseousDataId)
+    @Html.HiddenFor(model => model.EnquirySampleID)
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th rowspan="2">Parameter</th>
+                <th rowspan="2">TestMethod</th>
+                <th rowspan="2">Flow Rate (LPM) (R)</th>
+                <th rowspan="2">Sampling time in minutes (T)</th>
+                <th rowspan="2"> Gas Temp <sup>0</sup>K (Tg) </th>
+                <th rowspan="2"> Barometric Pressure mm Hg (Ba) </th>
+                <th colspan="3"> Dry gas meter Reading (m<sup>3</sup>)  </th>
+                <th rowspan="2">Bottle No.</th>
+                <th colspan="3">Absorbing solution used </th>
+                <th rowspan="2">Preservation Done (If Any)</th>
+                <th rowspan="2">
+                    Vs (intiters at STP) -:R x T x (Ba/760) x (298/Tg)
+                </th>
+            </tr>
+            <tr>
+                <th>Initial </th>
+                <th>Final </th>
+                <th>Total </th>
+                <th> Solution  </th>
+                <th>Conc. </th>
+                <th>Vol. (ml) </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @*<td> @Html.EditorFor(model => model.Parameters, new { htmlAttributes = new { @class = "form-control" } })</td>*@
+                <td>
+                    @Html.DropDownListFor(model => model.ParameterMasterId, new SelectList(ViewBag.Parameter, "ParameterMasterId", "ParameterName"), "--- Select ---", new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.ParameterName)
+                    @*@Html.DropDownListFor(model => model.ParameterName, new SelectList(ViewBag.Parameter, "ParameterName", "ParameterName"), "--- Select ---", new { htmlAttributes = new { @class = "form-control" } })*@
+                    @*@Html.ValidationMessageFor(model => model.ParameterMasterId, "", new { @class = "text-danger" })*@
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.TestMethodId, new SelectList(ViewBag.TestMethod, "TestMethodId", "TestMethodName"), "--- Select ---", new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.TestMethodName)
+                </td>
+                <td> @Html.EditorFor(model => model.FlowRate, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.SamplingTime, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.GasTemp, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.BarometricPressure, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.DryGasMeterReading_Initial, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.DryGasMeterReading_Final, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.DryGasMeterReading_Total, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.BottleNo, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.AbsorbingSolutionUsed_solution, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.AbsorbingSolutionUsed_Conc, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.AbsorbingSolutionUsed_Vol, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.PreservationDone, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td> @Html.EditorFor(model => model.Vs, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        @{ string btnText = "Add";
+            if (Model.SrNo != 0)
+            {
+                btnText = "Update";
+                <input class="btn btn-primary btn-sm alignright" onclick="CancelNameValues();" id="btnCancel" value="Cancel" />
+            }
+        }
+        <input class="btn btn-success btn-sm alignright" onclick="SetNameValues();" type="submit" id="btnAdd" value="@btnText" />
+    </div>
+}
+
+
+<script>
+
+    $(function () {
+        $("#frmAddStack").removeData("validator");
+        $("#frmAddStack").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#frmAddStack");
+    })
+
+     function FDAdd(result) {
+        $('#divList').load('/FieldDetermination/FieldStackEmissionMonitoring/_FStackList');
+        $('#divAddStack').load('/FieldDetermination/FieldStackEmissionMonitoring/_FieldStackEmission');
+        $('#btnAdd').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#ParameterName').val("");
+        $('#FlowRate').val("");
+        $('#SamplingTime').val("");
+        $('#GasTemp').val("");
+        $('#BarometricPressure').val("");
+        $('#DryGasMeterReading_Initial').val("");
+        $('#DryGasMeterReading_Final').val("");
+        $('#DryGasMeterReading_Total').val("");
+        $('#BottleNo').val("");
+        $('#AbsorbingSolutionUsed_solution').val("");
+        $('#AbsorbingSolutionUsed_Conc').val("");
+        $('#DryGasMeterReading_Total').val("");
+        $('#AbsorbingSolutionUsed_Vol').val("");
+        $('#PreservationDone').val("");
+        $('#Vs').val("");
+    }
+
+    function CancelNameValues() {
+
+        $('#ParameterMasterId').val(-1);
+        $('#TestMethodId').val(-1);
+        //$('#ParameterName').val("");
+        $('#FlowRate').val("");
+        $('#SamplingTime').val("");
+        $('#GasTemp').val("");
+        $('#BarometricPressure').val("");
+        $('#DryGasMeterReading_Initial').val("");
+        $('#DryGasMeterReading_Final').val("");
+        $('#DryGasMeterReading_Total').val("");
+        $('#BottleNo').val("");
+        $('#AbsorbingSolutionUsed_solution').val("");
+        $('#AbsorbingSolutionUsed_Conc').val("");
+        $('#DryGasMeterReading_Total').val("");
+        $('#AbsorbingSolutionUsed_Vol').val("");
+        $('#PreservationDone').val("");
+        $('#Vs').val("");
+        $('#btnAdd').val("Add")
+        $('#btnCancel').css('display', 'none')
+        $('#SrNo').val(0)
+    }
+
+     function SetNameValues() {
+        debugger;
+        $('#ParameterName').val($('#ParameterMasterId option:selected').text());
+        $('#TestMethodName').val($('#TestMethodId option:selected').text());
+    }
+
+     $('#ParameterMasterId').change(function () {
+        debugger
+        if ($('#ParameterMasterId').val() == '') {
+            $('#TestMethodId').html('');
+            $('#TestMethodId').append('<option value="">---Select---</option>');
+        }
+        else {
+
+            $('#TestMethodId').html('');
+            $('#TestMethodId').append('<option value="">---Select---</option>');
+            $.ajax({
+                url: '/FieldDetermination/FieldWasteWater/GetTestMethod?EnquirySampleID=' + $('#EnquirySampleID').val()+ "&ParameterMasterId=" + $('#ParameterMasterId').val(),
+                type: 'Get',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                dataType: 'json',
+                success: function (result) {
+                    debugger
+                    $.each(result.result, function (i, item) {
+                        $('#TestMethodId').append('<option value="' + item.TestMethodId + '">' + item.TestMethodName + '</option>');
+                    })
+
+                     $('#TestMethodId').append('<option value="' + 0 + '">' + "Not Required" + '</option>');
+                },
+                error: function (data) {
+                }
+            });
+        }
+     });
+
+</script>
+

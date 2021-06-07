@@ -1,0 +1,177 @@
+﻿@model IList<LIMS_DEMO.Areas.Collection.Models.SurveyingTeamLeadModel>
+
+@{
+    ViewBag.Title = "SurveyingTeamLeadList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Surveying Team Lead</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Surveying Team Lead</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Surveying Team Lead</li>
+                                <li class="breadcrumb-item active" aria-current="page">Surveying Team Lead List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="pd-20 card-box mb-30" style="margin-top:-19px">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Surveying Team Lead List</h4>
+                    </div>
+                </div>
+                <table class="data-table table nowrap ">
+                    <thead>
+                        <tr class="thead-dark">
+                            <th class="table-plus datatable-nosort">
+                                Sr No.
+                            </th>
+                            <th>
+                                Sample No.
+                            </th>
+                            <th>
+                                Sample Type
+                            </th>
+                            <th>
+                                Sample Location
+                            </th>
+                            <th>
+                                WorkOrderNo.
+                            </th>
+                            <th>
+                                Frequency
+                            </th>
+                            <th>
+                                Customer Name
+                            </th>
+                            @*<th class="width-10">
+                                 Sample to be collected on
+                                </th>*@
+                            @*<th class="width-15">
+                                 Collected By
+                                </th>
+                                <th class="width-10">
+                                Select Collector
+                                </th>*@
+                            <th>
+                                Action
+                            </th>
+                            <th>
+                                Iteration
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @{ int SrNo = i + 1;}
+                                    @SrNo
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].DisplaySampleName)
+                                    @Html.HiddenFor(item => Model[i].SampleCollectionId)
+                                    @Html.HiddenFor(item => Model[i].EnquirySampleID)
+                                    @Html.HiddenFor(item => Model[i].SampleName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].SampleTypeProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].Location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].WorkOrderNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].Frequency)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].CustomerName)
+
+                                </td>
+                                @*<td>
+                                    @Html.HiddenFor(item => Model[i].ExpectSampleCollDate)
+                                    @Html.DisplayFor(item => Model[i].CollectedOn)
+                                    </td>*@
+                                @*<td>
+                                    <label> @Html.RadioButtonFor(item => Model[i].SampleCollectedBy, 1, new { @id = "SampleCollectedBy_" + i.ToString(), @checked = "checked" }) Lab </label><br />
+                                    <label> @Html.RadioButtonFor(item => Model[i].SampleCollectedBy, 2, new { @id = "SampleCollectedBy_" + i.ToString() }) Customer</label>
+                                     &nbsp; &nbsp; <a href="#" onclick="funCollectedBy('SampleCollectedBy_@i.ToString()',@Model[i].EnquirySampleID)">Change </a>
+                                    </td>*@
+                                @*<td>
+                                     Collector Name:
+                                     @Html.DisplayFor(item => Model[i].EmployeeId)<br />
+                                     @Html.DropDownListFor(item => Model[i].EmployeeId, new SelectList(ViewBag.CollectorName, "UserName", "UserName", Model[i].EmployeeId), "Select Collector", new { @id = "EmployeeId_" + i.ToString() })
+                                    </td>*@
+                                <td>
+                                    @*<a href="#" onclick="funAssign('EmployeeId_@i.ToString()',@Model[i].SampleCollectionId)">Assign Collector</a>*@
+                                    @if (Model[i].CurrentStatus == "WOApproved")
+                                    {<a href="#" onclick="funAssignSampler(@Model[i].SampleCollectionId)" class="sampleName">Assign</a> }
+                                    else
+                                    { <a href="#" class=" btn-disabled">Assigned</a>}
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].Iteration)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => Model[i].CurrentStatus)
+                                    @Html.DisplayFor(item => Model[i].SampleCollectedBy)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- Default Basic Forms End -->
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="divAssignSampler" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: steelblue;height: 42px;">
+                <button type="button" onclick="$('#divAssignSampler').hide();" class="close" data-dismiss="modal"  style="color:white;">&times;</button>
+                <h4 style="text-align:center;color:white;font-weight:bold;">Assign Sampler</h4>
+            </div>
+            <div class="modal-body">
+                <div id="divAssignPopUp" style="border:none">
+
+                </div>
+            </div>
+
+            <div class="modal-footer" style="border:none">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+
+    function funAssignSampler(SampleCollectionId) {
+        //   alert(SampleCollectionId)
+        $('#divAssignPopUp').load('/Collection/SurveyingTeam/_AssignSampler?&SampleCollectionId=' + SampleCollectionId);
+        $('#divAssignSampler').show();
+    }
+
+</script>

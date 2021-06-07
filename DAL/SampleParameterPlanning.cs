@@ -35,6 +35,7 @@ namespace LIMS_DEMO.DAL
         public System.DateTime EnteredDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<bool> ActiveStatus { get; set; }
     
         public virtual ParameterGroupMaster ParameterGroupMaster { get; set; }
         public virtual SampleCollection SampleCollection { get; set; }
