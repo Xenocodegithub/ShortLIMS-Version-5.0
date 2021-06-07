@@ -11,5 +11,6 @@ namespace LIMS_DEMO.Core.DropDowns
         public Nullable<int> UserMasterID { get; set; }
         public string UserName { get; set; }
         public bool ResetActive { get; set; }
+        public string PhoneNo { get; set; }
     }
 }

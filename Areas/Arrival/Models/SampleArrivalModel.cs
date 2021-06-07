@@ -76,7 +76,7 @@ namespace LIMS_DEMO.Areas.Arrival.Models
         /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
         public long SampleCollectionId { get; set; }//SampleCollection tbl
-        public long EnquirySampleID { get; set; }//EnquirySampleDetail tbl/SampleCollection
+        public Nullable<long> EnquirySampleID { get; set; }//EnquirySampleDetail tbl/SampleCollection
         public long EnquiryDetailId { get; set; }//EnquirySampleDetail tbl
         public long EnquiryId { get; set; }
         public int WorkOrderID { get; set; }// SampleCollection tbl

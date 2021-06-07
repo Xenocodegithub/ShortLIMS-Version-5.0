@@ -684,6 +684,35 @@ namespace LIMS_DEMO.DAL.Enquiry
                 throw ex;
             }
         }
+        
+        public List<WorkOrderHODEntity> GetTRF_WOList(int LabMasterId, DateTime? FromDate, DateTime? ToDate)
+        {
+            return (from sc in _dbContext.SampleCollections
+                        //join mdc in _dbContext.ModeOfCommunications on w.ModeOfCommunicationId equals mdc.ModeOfCommunicationId
+                    join w in _dbContext.WorkOrders on sc.WorkOrderID equals w.WorkOrderId
+                    join ctm in _dbContext.CustomerMasters on w.CustomerMasterId equals ctm.CustomerMasterId
+                    join es in _dbContext.StatusMasters on sc.StatusId equals es.StatusId
+                    
+                    where w.LabMasterId == LabMasterId && w.OVC == true
+
+                    //where w.LabMasterId == LabMasterId && w.IsActive && w.QuotationId == null && ((FromDate == null && ToDate == null) || (w.WORecieveDate >= FromDate && w.WORecieveDate <= ToDate)) || w.OVC == true
+            select new WorkOrderHODEntity()
+                    {
+                        RegistrationName = ctm.RegistrationName,
+                        WorkOrderNo = w.WorkOrderNo,
+                        SampleCollectionId = sc.SampleCollectionId,
+                        WorkOrderId = w.WorkOrderId,
+                        CurrentStatus = es.StatusName,
+                        AssignToId = w.AssignedToId,
+                        Remarks = w.Remark,
+                        WORecieveDate = w.WORecieveDate,
+                        WOUpload = w.WOUpload,
+                        FileName = w.FileName,
+                        EnteredBy = w.EnteredBy,
+                        IsIGST = w.IsIGST
+                    }).Distinct().OrderByDescending(w => w.WorkOrderId).ToList();
+        }
+    
 
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)

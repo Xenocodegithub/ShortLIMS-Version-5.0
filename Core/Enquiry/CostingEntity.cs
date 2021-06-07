@@ -33,5 +33,8 @@ namespace LIMS_DEMO.Core.Enquiry
         public string MatrixName { get; set; }
         public bool? IsSetPCBLimit { get; set; }
         public int? NoOfSample { get; set; }
+        public string RegistrationName { get; set; }
+        public string WorkOrderNumber { get; set; }
+        public string InvoiceNumber { get; set; }
     }
 }

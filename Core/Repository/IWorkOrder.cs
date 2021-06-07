@@ -9,6 +9,7 @@ namespace LIMS_DEMO.Core.Repository
 {
     public interface IWorkOrder : IDisposable
     {
+        List<WorkOrderHODEntity> GetTRF_WOList(int LabMasterId, DateTime? FromDate, DateTime? ToDate);
         WorkOrderEntity GetLastDay(string monthName);
         List<WorkOrderEntity> GetSampleLocationCount(int EnquirySampleID);
         List<WorkOrderEntity> GetLocation(int EnquirySampleID);

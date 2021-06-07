@@ -8,6 +8,7 @@ namespace LIMS_DEMO.Core.Repository
 {
     public interface IEnquiry:IDisposable
     {
+        string UpdateTRFStatus(long WorkOrderId, int StatusId);
         long Add(EnquiryEntity enquiryEntity);
         string Update(EnquiryEntity enquiryEntity);
         EnquiryEntity GetDetails(int EnquiryId);

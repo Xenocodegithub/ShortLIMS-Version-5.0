@@ -1,0 +1,97 @@
+﻿
+@model LIMS_DEMO.Areas.Enquiry.Models.WorkOrderCustomerListModel
+@Html.AntiForgeryToken()
+
+<div class="col-md-12">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.location.EnquirySampleID)
+    @Html.HiddenFor(model => model.location.EnquiryId)
+    @Html.HiddenFor(model => model.location.count)
+    <table style="border-collapse:collapse" border="1" align="center" class="data-table table nowrap" id="tblParameter">
+        <tr class="thead-dark">
+            <th class="table-plus datatable-nosort">
+                SrNo
+            </th>
+            <th>
+                Location
+            </th>
+        </tr>
+        <tbody id="tblParameterBody">
+            @for (int i = 0; i < Model.locationList.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.locationList[i].SrNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.locationList[i].Location)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <div>
+        @if (Model.location.count != 0)
+        {
+            <div>
+                <br />
+                Location:
+                @Html.EditorFor(model => model.location.Location, new { })
+                <br />
+                <br />
+                <button type="button" class="btn btn-primary" id="btnSubmitPopUp">Create</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+
+    function LocationUpdated(result) {
+        debugger
+        alert('Location Updated');
+        $('#LocationPopup').show();
+    }
+</script>
+
+<script>
+
+    $("#btnSubmitPopUp").click(function () {
+
+        var data1 = {
+            "location.Location": $('#location_Location').val(),
+            "location.EnquirySampleID": $('#location_EnquirySampleID').val(),
+             "location.count": $('#location_count').val(),
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Sample/_AddLocation",
+            data: data1,
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                //console.log(data.list)
+                var $cloneRow = "";
+                for (var i = 0; i < data.list.length; i++) {
+
+                    $cloneRow = $cloneRow + "<tr>";
+                    $cloneRow = $cloneRow + "<td>" + (parseInt(i) + 1) + "</td>";
+                    $cloneRow = $cloneRow + "<td>" + data.list[i].Location + "</td>";
+                    $cloneRow = $cloneRow + "</tr>";
+                }
+
+                $('#tblParameterBody').html($cloneRow);
+
+                if (data.status == "Fail") {
+                    alert("Number of Location should not be greater or less than Number of Sample !!!");
+                }
+            }
+        });
+
+    });
+
+</script>
+
+

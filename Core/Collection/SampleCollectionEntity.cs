@@ -8,7 +8,13 @@ namespace LIMS_DEMO.Core.Collection
 {
     public class SampleCollectionEntity
     {
-        public string mode { get; set; } 
+        public bool StatutoryLimits { get; set; }
+        
+        public string AckRemarks { get; set; }
+        public string mode { get; set; }
+        public string ReturnedRemark { get; set; }
+        public string IsReturnedOrIsRetained { get; set; }
+        public string SubContractedParameters { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public long FDId { get; set; }

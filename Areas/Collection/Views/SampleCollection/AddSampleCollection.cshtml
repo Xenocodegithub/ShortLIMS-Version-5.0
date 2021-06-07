@@ -383,6 +383,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        debugger;
         var model = @Html.Raw(Json.Encode(Model.DeviceList));
         if (model != null) {
             for (var i = 0; i < model.length; i++) {

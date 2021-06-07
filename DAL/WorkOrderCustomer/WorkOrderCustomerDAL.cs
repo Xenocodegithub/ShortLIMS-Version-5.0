@@ -94,20 +94,24 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
                 {
                     //WorkOrderId= workOrderCustomerEntity.WorkOrderId,
                     //Remark = workOrderCustomerEntity.Remark,
-                    ModeOfCommunicationId = workOrderCustomerEntity.ModeOfCommunicationId,
+                    //ModeOfCommunicationId = workOrderCustomerEntity.ModeOfCommunicationId,
+                    //QuotationId = workOrderCustomerEntity.QuotationId,
+                    OVC = workOrderCustomerEntity.OVC,
                     CustomerMasterId = workOrderCustomerEntity.CustomerMasterId,
+                    DeliverId = workOrderCustomerEntity.DeliverId,
                     StatusId = workOrderCustomerEntity.StatusId,
                     LabMasterId = workOrderCustomerEntity.LabMasterId,
                     WORecieveDate = (DateTime)workOrderCustomerEntity.WORecieveDate,
                     WOEndDate = (DateTime)workOrderCustomerEntity.WOEndDate,
-                    ExpectSampleCollDate = (DateTime)workOrderCustomerEntity.ExpectSampleCollDate,
+                   // ExpectSampleCollDate = (DateTime)workOrderCustomerEntity.ExpectSampleCollDate,
                     Duration = workOrderCustomerEntity.Duration,
                     WOUpload = workOrderCustomerEntity.WOUpload,
                     FileName = workOrderCustomerEntity.FileName,
                     WorkOrderNo = workOrderCustomerEntity.WorkOrderNo,
                     IsActive = workOrderCustomerEntity.IsActive,
                     EnteredBy = workOrderCustomerEntity.EnteredBy,
-                    EnteredDate = DateTime.Now
+                    EnteredDate = DateTime.Now,
+                    ExpectSampleCollDate = workOrderCustomerEntity.ExpectSampleCollDate
                 };
                 _dbContext.WorkOrders.Add(workOrderCustomer);
                 _dbContext.SaveChanges();
@@ -143,6 +147,7 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
                 workOrderCustomer.WorkOrderNo = workOrderCustomerEntity.WorkOrderNo;
                 workOrderCustomer.ModeOfCommunicationId = workOrderCustomerEntity.ModeOfCommunicationId;
                 workOrderCustomer.CustomerMasterId = workOrderCustomerEntity.CustomerMasterId;
+                workOrderCustomer.DeliverId = workOrderCustomerEntity.DeliverId;
                 workOrderCustomer.WORecieveDate = (DateTime)workOrderCustomerEntity.WORecieveDate;
                 workOrderCustomer.WOEndDate = (DateTime)workOrderCustomerEntity.WOEndDate;
                 workOrderCustomer.ExpectSampleCollDate = (DateTime)workOrderCustomerEntity.ExpectSampleCollDate;
@@ -166,9 +171,10 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
             //{
                 EnquiryDetail Detail = new EnquiryDetail();
                 Detail.SampleTypeProductId = entity.SampleTypeProductId;
-                //Detail.ProductGroupId = entity.ProductGroupId;
-                //Detail.SubGroupId = entity.SubGroupId;
-                //Detail.MatrixId = entity.MatrixId;
+            //Detail.ProductGroupId = entity.ProductGroupId;
+            //Detail.SubGroupId = entity.SubGroupId;
+            //Detail.MatrixId = entity.MatrixId;
+            //Detail.EnquiryId = entity.EnquiryId;
                 Detail.WorkOrderID = entity.WorkOrderID;
                 Detail.EnquiryDetailId = entity.EnquiryDetailId;
                 Detail.IsActive = true;
@@ -370,13 +376,13 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
             try
             {
                 return (from w in _dbContext.WorkOrders
-                        join mdc in _dbContext.ModeOfCommunications on w.ModeOfCommunicationId equals mdc.ModeOfCommunicationId
+                        //join mdc in _dbContext.ModeOfCommunications on w.ModeOfCommunicationId equals mdc.ModeOfCommunicationId
                         join ctm in _dbContext.CustomerMasters on w.CustomerMasterId equals ctm.CustomerMasterId
                         join es in _dbContext.StatusMasters on w.StatusId equals es.StatusId
                         into workOrder
                         from wo in workOrder.DefaultIfEmpty()
                
-                        where w.LabMasterId == LabMasterId && w.IsActive && w.QuotationId == null && ((FromDate == null && ToDate == null) || (w.WORecieveDate >= FromDate && w.WORecieveDate <= ToDate))
+                        where w.LabMasterId == LabMasterId && w.IsActive && w.QuotationId == null && ((FromDate == null && ToDate == null) || (w.WORecieveDate >= FromDate && w.WORecieveDate <= ToDate)) || w.OVC==true
                         select new WorkOrderCustomerEntity()
                         {  
                             WorkOrderId = w.WorkOrderId,
@@ -385,7 +391,7 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
                             WOEndDate = w.WOEndDate,
                             CustomerMasterId =w.CustomerMasterId,
                             IsActive =w.IsActive,
-                            CommunicationMode = mdc.CommunicationMode,
+                            //CommunicationMode = mdc.CommunicationMode,
                             CustomerName = ctm.RegistrationName,
                             CurrentStatus = wo.StatusName ,
                             AssignToId = w.AssignedToId,
@@ -501,7 +507,9 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
             _dbContext.SaveChanges();
             return true;
         }
+
        
+
 
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)

@@ -1,0 +1,91 @@
+﻿@model LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel
+@using (Ajax.BeginForm("_PlannerSelect", "TRF", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "PlannerSelectionSuccess" }))
+{
+    @Html.HiddenFor(model => model.SampleCollectionId)
+    @Html.Hidden("SampleTypeProductId", (object)ViewBag.SampleTypeProductId)
+    @Html.Hidden("EnquirySampleID", (object)ViewBag.EnquirySampleID)
+    @Html.Hidden("WorkOrderID", (object)ViewBag.WorkOrderID)
+    @Html.HiddenFor(model => model.CityName)
+    @Html.HiddenFor(model => model.CustomerName)
+    <div class="col-sm-12">
+        <table id="tblParaDiscipline" class="table table-borderd stripe hover nowrap">
+            <thead>
+                <tr class="thead-dark">
+
+                    <th class="table-plus datatable-nosort">
+                        SrNo.
+                    </th>
+                    <th>
+                        Parameters
+                    </th>
+                    @*<th class="width-5">
+                         Units
+                        </th>*@
+                    <th>
+                        Discipline
+                    </th>
+                    <th>
+                        Select Sample Planner Name:
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center;">
+                @for (int i = 0; i < Model.ParaDisciplineList.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(item => Model.ParaDisciplineList[i].SerialNo, new { @style = "font-size:13px;" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(item => Model.ParaDisciplineList[i].Parameters, new { @class = "form-control", @readonly = "readonly", @autocomplete = "false", @style = "font-size:13px;" })
+                        </td>
+                        @*<td>
+                             @Html.HiddenFor(item => Model.ParaDisciplineList[i].ParameterMasterId)
+                             @Html.HiddenFor(item => Model.ParaDisciplineList[i].ParameterGroupId)
+                             @Html.HiddenFor(item => Model.ParaDisciplineList[i].ParameterName)
+                            @Html.DisplayFor(item => Model.ParaDisciplineList[i].ParameterName)
+                            </td>*@
+                        @*<td>
+                               @Html.HiddenFor(item => Model.ParaDisciplineList[i].UnitId)
+                               @Html.DisplayFor(item => Model.ParaDisciplineList[i].Unit)
+                            </td>*@
+                        <td>
+                            @Html.HiddenFor(item => Model.ParaDisciplineList[i].DisciplineId)
+                            @Html.DisplayFor(item => Model.ParaDisciplineList[i].Discipline)
+                        </td>
+                        <td>
+                            @if (Model.ParaDisciplineList[i].Parameters == null || Model.ParaDisciplineList[i].Parameters == "")
+                            {
+                                <a href="#" class="btn-disabled" style="font-size:13px;">NA</a>
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(item => Model.ParaDisciplineList[i].PlannerId, new SelectList(Model.ParaDisciplineList[i].Planner, "UserMasterID", "UserName", Model.ParaDisciplineList[i].PlannerId), "Select Planner", new { @class = "form-control", @style = "font-size:13px;" })
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+    </div>
+}
+
+<script>
+    function PlannerSelectionSuccess(result) {
+
+        if (result.Status == "success") {
+            alert(result.message);
+            $('#btnsubmit').prop('disabled', false);
+            $('#btnsubmit').html('Please Wait..')
+            location.href = '/Enquiry/TRF/TRFPlannerAssignList';
+        } else {
+            alert(result.message);
+            $('#btnsubmit').prop('disabled', false);
+            $('#btnsubmit').html('Submit')
+            location.href = '/Enquiry/TRF/TRFPlannerAssignList';
+        }
+</script>

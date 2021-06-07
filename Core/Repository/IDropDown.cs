@@ -15,6 +15,12 @@ namespace LIMS_DEMO.Core.Repository
 {
    public  interface IDropDown
     {
+         List<ProcedureEntity> GetProcedure();
+         List<SampleDeviceEntity> GetSampleDevice();
+        UserListEntity GetUserDetails(int UserMasterID);
+        IList<UserListEntity> GetUser();
+        IList<DeliverEntity> GetDeliver();
+        List<InvoiceEntity> GetPaymentMode();
         IList<InventoryType> GetInventoryCategoryType();
         List<UserListEntity> GetPassChaReqUserList();
         List<SPSMEntity> GetSampleCode();

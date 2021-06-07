@@ -1,0 +1,271 @@
+﻿@model LIMS_DEMO.Areas.Invoice.Models.InvoiceModel
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Invoice</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Payment</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Payment</li>
+                                <li class="breadcrumb-item active" aria-current="page">Payment</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-20 card-box mb-30">
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 class="text-blue h4">Add Payment</h4>
+                    </div>
+
+                </div>
+                @using (Ajax.BeginForm("Payment", "Invoice", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddPaymentSuccess" }))
+                    {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.CostingId)
+                @Html.HiddenFor(model => model.EnquirySampleID)
+                @Html.HiddenFor(model => model.EnquiryMasterSampleTypeId)
+                @Html.HiddenFor(model => model.PaymentDetailsId)
+
+                <input id="gstRate" type="hidden" value="@ViewBag.GSTRate" />
+                <input id="Id" type="hidden" value="@ViewBag.EnquiryId" />
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Registration Name:</label>
+                    @*<span class="text-span" id="RegName"></span>*@
+                    @*@Html.LabelFor(model => model.RegistrationName, htmlAttributes: new { @class = "control-label col-md-6" })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.RegistrationName, new { @class = "form-control" })
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Invoice Number:</label>
+                    @*<span class="text-span" id="InvNumber"></span>*@
+                    @*@Html.LabelFor(model => model.InvoiceNumber, htmlAttributes: new { @class = "control-label col-md-6" })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.InvoiceNumber, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Work Order No:</label>
+                   
+                    @*@Html.LabelFor(model => model.WorkOrderNo, htmlAttributes: new { @class = "control-label col-md-6" })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control" })
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label"> Total Amount:</label>
+                   
+                    @*@Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label col-md-6" })*@
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.TotalAmount, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label"> Paid Amount:</label>
+                     <div class="col-sm-4">
+                    @Html.TextBoxFor(model => model.PaidAmount, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
+                </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Balance:</label>
+                   
+                
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.Balance, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Payment Mode:</label>
+                   
+                   <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.PaymentModeMasterId, new SelectList(ViewBag.paymentMode, "PaymentModeMasterId", "PaymentMode"), "---Select Payment---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PaymentModeMasterId, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.PaymentModeMasterId)
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">Bank Name:</label>
+                   
+                     <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.BankName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Cheque No:</label>
+                  
+                    @*@Html.LabelFor(model => model.ChequeNo, htmlAttributes: new { @class = "control-label col-md-6" })*@
+                    <div class="col-sm-4">
+                        @*@Html.TextBoxFor(model => model.ChequeNo, new { @class = "form-control"})*@
+                        @Html.TextBoxFor(model=>model.ChequeNo,new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ChequeNo, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label">DD_Cheque Date:</label>
+                 
+                    @*@Html.LabelFor(model => model.DD_ChequeDate, htmlAttributes: new { @class = "control-label col-md-3" })*@
+                <div class="col-sm-4">
+                    @*@Html.TextBoxFor(model => model.DD_ChequeDate, new { @class = "form-control date-picker" })*@
+                    <input type="date" id="DD_ChequeDate" name="DD_ChequeDate" value="" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.DD_ChequeDate, "", new { @class = "text-danger" })
+                </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label"> Actual Amount:</label>
+                   
+                  
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.ActualAmount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ActualAmount, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label"> Payment Date:</label>
+                    <div class="col-sm-4">
+                        @*@Html.TextBoxFor(model => model.PaymentDate, new { @class = "form-control date-picker" })*@
+                        <input type="date" id="PaymentDate" name="PaymentDate" value="" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label"> Amount:</label>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                    </div>
+                    <label class="col-sm-12 col-md-2 col-form-label"> Branch:</label>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(model => model.BranchName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BranchName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <button type="submit" id="" class="btn btn-info btn-sm" onclick="" style="float:right;">Reset</button>
+                        <button type="submit" id="btnsubmit" class="btn btn-success btn-sm" style="float:right;">Save</button>
+                    </div>
+                </div>
+                }
+            </div>
+
+
+            @*<div id="Payment_List">
+                    @{
+                        Html.RenderAction("_PaymentList", "Invoice");
+                    }
+                </div>*@
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+
+    function AddPaymentSuccess() {
+        debugger;
+        $("#Payment_List").html('');
+        $("#Payment_List").load('~/Invoice/Invoice/_PaymentList');
+    }
+    function OnClick() {
+        $('#btnAddCosting').val('Please Wait..');
+        $('#btnAddCosting').prop('disabled', true);
+    }
+    function CancelCostValues() {
+        $('#TotalCharges').val(0);
+        $('#TransportationAmount').val(0);
+        $('#TestingCharges').val(0)
+         $('#SampleCollectionCharges').val(0);
+         $('#btnAdd').val("Add")
+         $('#btnCancelCost').css('display', 'none')
+         $('#divCosting').load('/Enquiry/Costing/_Costing?EnquirySampleId=0');
+       // $('#Frequency').val(-1);
+    }
+    function funCalNetAmount(IsDisc) {
+        var TotalCharges = $('#TotalCharges').val() == '' ? parseFloat(0.0).toFixed(2) : $('#TotalCharges').val();
+
+        var SampleAmount = $('#SampleAmount').val() == '' ? 0 : $('#SampleAmount').val();
+        var TestingCharges = $('#TestingCharges').val() == '' ? 0 : $('#TestingCharges').val();
+        var TransportationAmount = $('#TransportationAmount').val() == '' ? 0 : $('#TransportationAmount').val();
+        var TotalAmount = Number(TotalCharges) + Number(SampleAmount) + Number(TestingCharges) + Number(TransportationAmount);
+        $('#TotalAmount').val((TotalAmount).toFixed(1));
+
+        var gstRate = $('#gstRate').val() == '' ? 0 : $('#gstRate').val();
+        var GSTCharges = Number(TotalAmount) * Number(gstRate) / 100;
+        $('#GSTCharges').val((GSTCharges).toFixed(1));
+
+       // var NetAmount = Number(TotalAmount) + Number(GSTCharges);
+        var NetAmount = Number(TotalAmount);//New NetAmount Change without GST
+        //$('#NetAmount').val((NetAmount).toFixed(1));
+
+        if (IsDisc) {
+            var DiscPer = $('#txtDiscountPercent').val() == '' ? 0 : $('#txtDiscountPercent').val();
+            var DiscAmount = Number(NetAmount) * Number(DiscPer) / 100;
+            $('#DiscountAmount').val((DiscAmount).toFixed(1));
+        } else {
+            var DiscAmount = $('#DiscountAmount').val() == '' ? parseFloat(0.0).toFixed(2) : $('#DiscountAmount').val();
+        }
+
+        //var NetAmount = Number(TotalAmount) + Number(GSTCharges);
+        $('#NetAmount').val((NetAmount).toFixed(1) - Number(DiscAmount));
+
+    }
+    $('#btnsubmit').click(function () {
+        debugger;
+        var RegistrationName = $("#RegistrationName").val()
+        var InvoiceNumber = $("#InvoiceNumber").val();
+        var WorkOrderNo = $("#WorkOrderNo").val();
+        var TotalCharges = $("#TotalAmount").val();
+        var PaidAmount = $("#PaidAmount").val();
+        var Balance = $("#Balance").val();
+        var PaymentMode = $("#PaymentModeMasterId option:selected").val();
+        var BankName = $("#BankName").val();
+        var BranchName = $("#BranchName").val();
+        var ChequeNo = $("#ChequeNo").val();
+        var DD_ChequeDate = $("#DD_ChequeDate").val();
+        var ActualAmount = $("#ActualAmount").val();
+        var PaymentDate = $("#PaymentDate").val();
+        var Amount = $("#Amount").val();
+        var jsonObject = { "RegistrationName": RegistrationName, "WorkOrderNo": WorkOrderNo, "InvoiceNumber": InvoiceNumber, "TotalCharges": TotalCharges, "PaidAmount": PaidAmount, "Balance": Balance, "PaymentMode": PaymentMode, "BankName": BankName, "ChequeNo": ChequeNo, "DD_ChequeDate": DD_ChequeDate, "ActualAmount": ActualAmount, "PaymentDate": PaymentDate, "Amount": Amount, "BranchName": BranchName };
+        $.ajax({
+            url: "/Invoice/Invoice/Payment",
+            //dataType: 'text',
+            type: 'POST',
+            cache: false,
+           // data: JSON.stringify(jsonObject),
+            data: "model=" + JSON.stringify(jsonObject),
+            dataType: 'text',
+            success: function (response) {
+                if (response != null) {
+                   // AddPaymentSuccess();
+                    //$(event.target).parent().parent().find('select').prop('disabled', true);
+                    //$(event.target).prop('disabled', true);
+                    //$($(event.target).parent().parent().find('img')).attr('src', '/Content/images/unactive.png');
+                    alert("Data is Saved successfully");
+                    // Invoice/Invoice/GetInvoiceData
+                    location.href = '/Invoice/Invoice/_PaymentList';
+
+                } else {
+                    console.log("Something went wrong");
+                }
+            },
+
+        });
+    });
+
+</script>
+
+
+
+

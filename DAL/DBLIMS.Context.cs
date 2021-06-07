@@ -63,6 +63,10 @@ namespace LIMS_DEMO.DAL
         public virtual DbSet<SerialNumberMaster> SerialNumberMasters { get; set; }
         public virtual DbSet<SpareStock> SpareStocks { get; set; }
         public virtual DbSet<StockLogData> StockLogDatas { get; set; }
+        public virtual DbSet<TBL_DailyInvoice> TBL_DailyInvoice { get; set; }
+        public virtual DbSet<TBL_InvoiceReceiptNoMaster> TBL_InvoiceReceiptNoMaster { get; set; }
+        public virtual DbSet<Tbl_RejectInvoice> Tbl_RejectInvoice { get; set; }
+        public virtual DbSet<TBL_REJECTINVOICEDETAILS> TBL_REJECTINVOICEDETAILS { get; set; }
         public virtual DbSet<UnitMasterInventory> UnitMasterInventories { get; set; }
         public virtual DbSet<AnalysisProcessScheduleDetail> AnalysisProcessScheduleDetails { get; set; }
         public virtual DbSet<ARC> ARCs { get; set; }
@@ -92,6 +96,8 @@ namespace LIMS_DEMO.DAL
         public virtual DbSet<FieldWasteWater> FieldWasteWaters { get; set; }
         public virtual DbSet<FieldWorkplaceEnvironmentAndFugitiveEmission> FieldWorkplaceEnvironmentAndFugitiveEmissions { get; set; }
         public virtual DbSet<FieldWorkplaceGasSampling> FieldWorkplaceGasSamplings { get; set; }
+        public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual DbSet<InvoiceRejectDetail> InvoiceRejectDetails { get; set; }
         public virtual DbSet<LabDisciplineMapping> LabDisciplineMappings { get; set; }
         public virtual DbSet<LocationSampleCollection> LocationSampleCollections { get; set; }
         public virtual DbSet<MenuRoleBranchMapping> MenuRoleBranchMappings { get; set; }
@@ -100,6 +106,7 @@ namespace LIMS_DEMO.DAL
         public virtual DbSet<ParameterFormula> ParameterFormulas { get; set; }
         public virtual DbSet<ParameterGroupMaster> ParameterGroupMasters { get; set; }
         public virtual DbSet<ParameterMapping> ParameterMappings { get; set; }
+        public virtual DbSet<PaymentDetail> PaymentDetails { get; set; }
         public virtual DbSet<PlannerByDiscipline> PlannerByDisciplines { get; set; }
         public virtual DbSet<PONumberCount> PONumberCounts { get; set; }
         public virtual DbSet<PurchaseTNC> PurchaseTNCs { get; set; }
@@ -135,6 +142,7 @@ namespace LIMS_DEMO.DAL
         public virtual DbSet<CustomerGroupMaster> CustomerGroupMasters { get; set; }
         public virtual DbSet<CustomerMaster> CustomerMasters { get; set; }
         public virtual DbSet<CustomerTypeMaster> CustomerTypeMasters { get; set; }
+        public virtual DbSet<DeliverMaster> DeliverMasters { get; set; }
         public virtual DbSet<DisciplineMaster> DisciplineMasters { get; set; }
         public virtual DbSet<EnquiryMaster> EnquiryMasters { get; set; }
         public virtual DbSet<EnvironmentalCondition> EnvironmentalConditions { get; set; }
@@ -147,6 +155,7 @@ namespace LIMS_DEMO.DAL
         public virtual DbSet<MenuMaster> MenuMasters { get; set; }
         public virtual DbSet<ModeOfCommunication> ModeOfCommunications { get; set; }
         public virtual DbSet<ParameterMaster> ParameterMasters { get; set; }
+        public virtual DbSet<PaymentModeMaster> PaymentModeMasters { get; set; }
         public virtual DbSet<ProcedureMaster> ProcedureMasters { get; set; }
         public virtual DbSet<ProductGroupMaster> ProductGroupMasters { get; set; }
         public virtual DbSet<RoleMaster> RoleMasters { get; set; }

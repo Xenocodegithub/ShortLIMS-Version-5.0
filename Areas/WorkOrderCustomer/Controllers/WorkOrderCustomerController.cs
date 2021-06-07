@@ -200,8 +200,6 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
                 strStatus = BALFactory.workordercustomerBAL.Update(CoreFactory.WorkOrderCustomerEntity);
                 return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
             }
-
-
         }
         public PartialViewResult _AddSampleDetails(int? WorkOrderId = 0, int? EnquiryDetailId = 0, int? EnquirySampleID = 0, int? SampleTypeProductId = 0, string SubroupCode = "")
         {

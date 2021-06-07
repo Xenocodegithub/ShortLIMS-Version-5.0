@@ -1,0 +1,193 @@
+﻿@model LIMS_DEMO.Areas.Invoice.Models.InvoiceModel
+<div class="card-box mb-30">
+    <div class="pb-20">
+        @if (Model.GridModel.Count() > 0)
+        {
+            <table id="tblField" class="data-table table stripe hover nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            Sr No.
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Reciept No
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Paid Amount
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Date
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Payment Mode
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            DD/Cheque No/Neft
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            DD/Cheque Date
+                        </th>
+                        <th class="table-plus datatable-nosort">
+                            Print
+                        </th>
+                        @*@if (Model.CurrentStatus != "SampleColl")
+                        {
+                            <th class="table-plus datatable-nosort">
+                                Action
+                            </th>
+                        }*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.GridModel.Count; i++)
+                    {
+                    <tr>
+                        <td>
+                            @Model.GridModel[i].SrNo
+                        </td>
+                        <td>
+                            @Model.GridModel[i].ReceiptNo
+                        </td>
+                        <td>
+                            @Model.GridModel[i].PaidAmount
+                        </td>
+                        <td>
+                            @Model.GridModel[i].Date
+                        </td>
+                        <td>
+                            @Model.GridModel[i].PaymentMode
+                        </td>
+                        <td>
+                            @Model.GridModel[i].DD_ChequeNo_Neft
+                        </td>
+                        <td>
+                            @Model.GridModel[i].DD_ChequeDate
+                        </td>
+                        <td>
+                            @Model.GridModel[i].Print
+                        </td>
+                        @*@if (Model.CurrentStatus != "SampleColl")
+                        {
+                            <td>
+                                <a href="#" onclick="funEditField(@Model.GridModel[i].SrNo);">Edit</a> |
+                                <a href="#" onclick="funDeleteField(@Model.GridModel[i].SrNo);">Delete</a>
+                            </td>
+                        }*@
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+<!-- Simple Datatable End -->
+
+<script>
+
+    //function funEditField(Id) {
+    //    debugger
+    //    $("#tblField").attr("disabled", true);
+    //    $('#divAddWasteWater').load('/FieldDetermination/FieldWasteWater/_FieldWasteWater?Id=' + Id);
+    //    //$('#divList').hide();
+    //}
+
+    //function funDeleteField(Id) {
+    //    debugger
+    //    if (confirm('Are you sure you want to delete this record?')) {
+    //        $.ajax({
+    //            url: '/FieldDetermination/FieldWasteWater/_DeleteField?Id=' + Id,
+    //            type: 'Get',
+    //            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    //            dataType: 'json',
+    //            success: function (result) {
+    //                if (result.status == "success") {
+    //                    $('#divList').load('/FieldDetermination/FieldWasteWater/_FDWasteWaterList');
+    //                }
+    //            },
+    //            error: function (data) {
+    //            }
+    //        });
+    //    }
+    //}
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+
+
+
+@*<table id="dtHorizontalExample" class="table table stripe hover nowrap">
+    <thead>
+        <tr class="thead-dark">
+            <th>
+                Sr. No.
+            </th>
+            <th>
+                Reciept No
+            </th>
+            <th>
+                Paid Amount
+            </th>
+            <th class="table-plus datatable-nosort">
+                Date
+            </th>
+            <th>
+                Payment Mode
+            </th>
+            <th>DD/Cheque No/Neft</th>
+            <th>
+                DD/Cheque Date
+            </th>
+            <th>
+                Print
+        </tr>
+    </thead>
+    <tbody>*@
+
+
+@*@{ int rowNo = 0; }
+    @if (Model.GridModel.Count() > 0)
+    {
+        for (int i = 0; i < Model.GridModel.Count; i++)
+        //foreach (var item in Model.GridModel.Count)
+        {
+            <tr>
+                <td class="table-plus">@{rowNo++;}@rowNo</td>
+
+                <td>@Model.GridModel[i].ReceiptNo</td>
+                <td>@Model.GridModel[i].PaidAmount</td>
+                <td>@Model.GridModel[i].Date</td>
+                <td>@Model.GridModel[i].PaymentMode</td>
+                <td>@Model.GridModel[i].BankName</td>
+                <td>@Model.GridModel[i].ChequeNo</td>
+                <td>@Model.GridModel[i].ChequeDate</td>
+                @*<td>
+                        @if (item.IsIGST == false)
+                        {
+                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=0" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span class="fa fa-download"></span></a>
+
+
+                        }
+                        else
+                        {
+                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=1" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span></span></a>
+
+                        }
+                    </td>
+                    <td>
+                        <a href="#" id="myBtn" class="clickSmaple" data-toggle="modal" data-target="#myModal1" style="color:blue"><span class="fa fa-list"></span></a>
+                    </td>*@
+
+@*@ </tr>
+        }
+    }
+        </tbody>
+
+    </table>*@
+

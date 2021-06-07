@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LIMS_DEMO.Core.Lab;
 using LIMS_DEMO.Core.Arrival;
 using LIMS_DEMO.Core.Repository;
 
@@ -15,7 +16,106 @@ namespace LIMS_DEMO.DAL.Arrival
         {
             _dbContext = new LIMSEntities();
         }
+        public SampleArrivalEntity GetTRFArrivalDetails(int SampleCollectionId)
+        {
+            return (from loc in _dbContext.LocationSampleCollections
+                    join scoll in _dbContext.SampleCollections on loc.LocationSampleCollectionID equals scoll.LocationSampleCollectionID
+                    join es in _dbContext.EnquirySampleDetails on scoll.EnquirySampleID equals es.EnquirySampleID
+                    join wo in _dbContext.WorkOrders on scoll.WorkOrderID equals wo.WorkOrderId
+                    join ed in _dbContext.EnquiryDetails on es.EnquiryDetailId equals ed.EnquiryDetailId
+                    join cm in _dbContext.CustomerMasters on wo.CustomerMasterId equals cm.CustomerMasterId
+                    //join sts in _dbContext.StatusMasters on scoll.StatusId equals sts.StatusId
 
+                    //into scollArrival
+                    //from scollArr in scollArrival.DefaultIfEmpty()
+                    where scoll.SampleCollectionId == SampleCollectionId
+                    select new SampleArrivalEntity()
+                    {
+                        SampleCollectionId = scoll.SampleCollectionId,
+                        EnquirySampleID = scoll.EnquirySampleDetail.EnquirySampleID,
+                        SampleName = es.SampleName,
+                        SampleCollectedBy = es.SampleCollectedBy,
+                        CustomerName = cm.RegistrationName,
+                        ////CustomerName = a.RegistrationName == "" || a.RegistrationName == null ? last.RegistrationName : a.RegistrationName,
+                        CityName = cm.CityName,
+                       // CityName = a.CityName == "" || a.CityName == null ? last.CityName : a.CityName,
+                        RequestNo = scoll.RequestNo,
+                        ULRNo = scoll.ULRNo,
+                        SampleLocation =scoll.SampleLocation,
+                        EnvCondtId = scoll.EnvCondtId,
+                        SampleTypeId = scoll.SampleTypeId
+                    }
+                   ).FirstOrDefault();
+        }
+        public List<SampleArrivalEntity> GetTRFReceiverList(int UserMasterID)
+        {
+            try
+            {
+                return (from scoll in _dbContext.SampleCollections
+                            //return (from arc in _dbContext.ARCs
+                            //join userrole in _dbContext.UserRoles on arc.UserRoleId equals userrole.UserRoleId
+                        //join scoll in _dbContext.SampleCollections on arc.SampleCollectionId equals scoll.SampleCollectionId
+                        join loc in _dbContext.LocationSampleCollections on scoll.LocationSampleCollectionID equals loc.LocationSampleCollectionID
+                        join sc in _dbContext.SampleLocations on loc.SampleLocationId equals sc.SampleLocationId
+                        join es in _dbContext.EnquirySampleDetails on scoll.EnquirySampleID equals es.EnquirySampleID
+                       
+                        join wo in _dbContext.WorkOrders on scoll.WorkOrderID equals wo.WorkOrderId
+                        join sts in _dbContext.StatusMasters on scoll.StatusId equals sts.StatusId
+                        join ed in _dbContext.EnquiryDetails on es.EnquiryDetailId equals ed.EnquiryDetailId
+                        join stp in _dbContext.SampleTypeProductMasters on ed.SampleTypeProductId equals stp.SampleTypeProductId
+                        //join em in _dbContext.EnquiryMasters on ed.EnquiryId equals em.EnquiryId
+                        join cm in _dbContext.CustomerMasters on wo.CustomerMasterId equals cm.CustomerMasterId
+
+                        //join em in _dbContext.EnquiryMasters on ed.EnquiryId equals em.EnquiryId into em
+                        //from emt in em.DefaultIfEmpty()
+
+                        //    //join ctm in _dbContext.CustomerMasters on em.CustomerMasterId equals ctm.CustomerMasterId
+                        //join ctm in _dbContext.CustomerMasters on emt.CustomerMasterId equals ctm.CustomerMasterId into ctm
+                        //from a in ctm.DefaultIfEmpty()
+
+                        //join ctmwo in _dbContext.CustomerMasters on wo.CustomerMasterId equals ctmwo.CustomerMasterId into temp
+                        //from last in temp.DefaultIfEmpty()
+
+                           // where userrole.UserMasterId == UserMasterID
+
+                        select new SampleArrivalEntity()
+                        {
+                           // ARCId = arc.ARCId,
+                            SampleCollectionId = scoll.SampleCollectionId,
+                            LocationSampleCollectionID = (Int32)scoll.LocationSampleCollectionID,
+                            SampleTypeProductId = (Int32)ed.SampleTypeProductId,
+                            SampleTypeProductName = stp.SampleTypeProductName,
+                            SampleNameOriginal = loc.SampleNameOriginal,
+                            EnquirySampleID = scoll.EnquirySampleDetail.EnquirySampleID,
+                            EnquiryDetailId = es.EnquiryDetailId,
+                            SampleNo = scoll.SampleNo,//to be Changed to SampleName wrt Iteration Number,
+                            SampleName = es.SampleName,
+                            ULRNo = scoll.ULRNo,//doubt for backend storage only
+                            //FieldDeterminationId = scoll.FieldDeterminationId,//Doubt
+                            RequestNo = scoll.RequestNo,
+                            SampleLocation = sc.Location,
+                            CollectionDate = wo.ExpectSampleCollDate,
+                            //CustomerName = cm.RegistrationName,
+                            //EnquiryId = em.EnquiryId,
+                            //EnquiryId = emt.EnquiryId == null ? 0 : emt.EnquiryId,
+                            //ContactNO = ctm.ContactMobileNo,
+                            //ContactNO = a.ContactMobileNo == "" || a.ContactMobileNo == null ? last.ContactMobileNo : a.ContactMobileNo,
+                            CustomerName = cm.RegistrationName == "" || cm.RegistrationName == null ? cm.RegistrationName : cm.RegistrationName,
+                            CityName = cm.CityName,
+                            StatusId = scoll.StatusMaster.StatusId,
+                            CurrentStatus = sts.StatusName,
+                            StatusCode = sts.StatusCode,
+                            //MatrixId = ed.MatrixId,
+                            //MatrixName = ed.MatrixMaster.MatrixName,
+                            WorkOrderID = wo.WorkOrderId,
+                            //WorkOrderNo = wo.WorkOrderNo,
+                        }).OrderByDescending(wo => wo.WorkOrderID).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         //disposal Save 
         public long SaveDisposalData(DisposalEntity disposalEntity)
         {
@@ -392,6 +492,40 @@ namespace LIMS_DEMO.DAL.Arrival
                 return null;
             }
         }
+
+        public string GetTRFReportULRNumber(int SampleTypeProductId, int EnquirySampleID, int WorkOrderID)
+        {
+            try
+            {
+                var ulr = _dbContext.SampleCollections.Where(e => e.EnquirySampleID == EnquirySampleID && e.ULRNo != null).Select(e => e.ULRNo).ToList();
+                //return (from scoll in _dbContext.SampleCollections
+                //            //join es in _dbContext.EnquirySampleDetails on scoll.EnquirySampleID equals es.EnquirySampleID
+                //            //join ed in _dbContext.EnquiryDetails on es.EnquiryDetailId equals ed.EnquiryDetailId
+                //        where /*ed.EnquiryId == EnquiryId && ed.SampleTypeProductId == SampleTypeProductId &&*/ scoll.EnquirySampleID == EnquirySampleID && scoll.WorkOrderID == WorkOrderID
+                //        select new SampleArrivalEntity()
+                //        {
+                //            ULRNo = scoll.ULRNo,
+                //            RequestNo = scoll.RequestNo,
+                //        }).FirstOrDefault();
+
+
+                string strULRNo = string.Empty;
+                if (ulr != null)
+                {
+                    if (ulr.Count > 0)
+                    {
+                        strULRNo = ulr[0];
+                    }
+                }
+                return strULRNo;
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public List<SampleArrivalEntity> GetReceiverList(int UserMasterID)
         {
             try
@@ -518,6 +652,59 @@ namespace LIMS_DEMO.DAL.Arrival
                 return null;
             }
         }
+        public List<SampleArrivalEntity> GetERFArrivalList(int WorkOrderID)
+        {
+            try
+            {
+                return (from scoll in _dbContext.SampleCollections
+                        join loc in _dbContext.LocationSampleCollections on scoll.LocationSampleCollectionID equals loc.LocationSampleCollectionID
+                        join sc in _dbContext.SampleLocations on loc.SampleLocationId equals sc.SampleLocationId
+                        join es in _dbContext.EnquirySampleDetails on scoll.EnquirySampleID equals es.EnquirySampleID
+                        join sts in _dbContext.StatusMasters on scoll.StatusId equals sts.StatusId
+                        join wo in _dbContext.WorkOrders on scoll.WorkOrderID equals wo.WorkOrderId
+
+                        join ed in _dbContext.EnquiryDetails on es.EnquiryDetailId equals ed.EnquiryDetailId
+                        join stp in _dbContext.SampleTypeProductMasters on ed.SampleTypeProductId equals stp.SampleTypeProductId
+                        join cm in _dbContext.CustomerMasters on wo.CustomerMasterId equals cm.CustomerMasterId
+
+                        join em in _dbContext.EnquiryMasters on ed.EnquiryId equals em.EnquiryId into em
+                        from emt in em.DefaultIfEmpty()
+
+                        where scoll.WorkOrderID== WorkOrderID 
+                        select new SampleArrivalEntity()
+                        {
+                            LocationSampleCollectionID = (Int32)scoll.LocationSampleCollectionID,
+                            SampleTypeProductId = (Int32)ed.SampleTypeProductId,
+                            SampleTypeProductName = stp.SampleTypeProductName,
+                            SampleLocation = sc.Location,
+                            SampleNameOriginal = loc.SampleNameOriginal,
+                            SampleCollectionId = scoll.SampleCollectionId,
+                            EnquirySampleID = scoll.EnquirySampleID,
+                            EnquiryDetailId = es.EnquiryDetailId,
+                            SampleNo = scoll.SampleNo,//to be Changed to SampleName wrt Iteration Number,
+                            SampleName = es.SampleName,
+                            WorkOrderID = scoll.WorkOrderID,
+                            ULRNo = scoll.ULRNo,//doubt for backend storage only
+                            //FieldDeterminationId = scoll.FieldDeterminationId,//Doubt
+                            RequestNo = scoll.RequestNo,
+                            CollectionDate = wo.ExpectSampleCollDate,
+                            //EnquiryId = em.EnquiryId,
+                            //EnquiryId = emt.EnquiryId == null ? 0 : emt.EnquiryId,
+                            StatusId = scoll.StatusMaster.StatusId,
+                            CurrentStatus = sts.StatusName,
+                            StatusCode = sts.StatusCode,
+                            //MatrixId = ed.MatrixId,
+                            CustomerName = cm.RegistrationName,
+                            MatrixName = ed.MatrixMaster.MatrixName,
+                           
+
+                        }).OrderByDescending(scoll => scoll.SampleCollectionId).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public List<FinalReportEntity> GetFinalReportsList()
         {
             try
@@ -603,6 +790,7 @@ namespace LIMS_DEMO.DAL.Arrival
                             SampleQty = sqm.SampleQty,
                             Preservation = sqm.Preservation,
                             No = qp.No,
+                            
                         }).ToList();
             }
             catch (Exception ex)
@@ -621,7 +809,26 @@ namespace LIMS_DEMO.DAL.Arrival
                         {
                             SampleCollectionDevicesId = scd.SampleCollectionDevicesId,
                             SampleCollectionId = scd.SampleCollectionId,
-                            SampleDeviceId = scd.SampleDeviceId,
+                            SampleDeviceId1 = scd.SampleDeviceId,
+                            SampleDevice = sdm.SampleDevice,
+                        }).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public List<SampleArrivalEntity> GetCollectionDevicesList1()
+        {
+            try
+            {
+                return (from scd in _dbContext.SampleCollectionDevices
+                        join sdm in _dbContext.SampleDeviceMasters on scd.SampleDeviceId equals sdm.SampleDeviceId
+                        select new SampleArrivalEntity()
+                        {
+                            SampleCollectionDevicesId = scd.SampleCollectionDevicesId,
+                            SampleCollectionId = scd.SampleCollectionId,
+                            SampleDeviceId1 = scd.SampleDeviceId,
                             SampleDevice = sdm.SampleDevice,
                         }).ToList();
             }
@@ -739,6 +946,81 @@ namespace LIMS_DEMO.DAL.Arrival
                 return ex.InnerException.Message;
             }
         }
+        public string UpdateTRFSampleArrival(SampleArrivalEntity samplearrivalEntity)
+        {
+            try
+            {
+
+                //var arc = _dbContext.ARCs.Find(samplearrivalEntity.ARCId);
+                //arc.ARCId = samplearrivalEntity.ARCId;
+                //arc.SampleCollectionId = samplearrivalEntity.SampleCollectionId;
+                ////arc.UserRoleId = samplearrivalEntity.UserRoleId;
+                //arc.ActionDate = samplearrivalEntity.ActionDate;
+                //arc.IsActive = samplearrivalEntity.IsActive;
+                //arc.EnteredBy = samplearrivalEntity.EnteredBy;
+                //arc.EnteredDate = DateTime.Now;
+                //_dbContext.SaveChanges();
+
+                var sampleCollection = _dbContext.SampleCollections.Find(samplearrivalEntity.SampleCollectionId);
+                if (samplearrivalEntity.IsReturnedOrIsRetained == "Retained")
+                {
+                    sampleCollection.SampleCollectionId = samplearrivalEntity.SampleCollectionId;
+                    sampleCollection.RequestNo = samplearrivalEntity.RequestNo;
+                    sampleCollection.ULRNo = samplearrivalEntity.ULRNo;
+                    sampleCollection.IsSampleIntact = samplearrivalEntity.IsSampleIntact;
+                    sampleCollection.ProbableDateOfReport = samplearrivalEntity.ProbableDateOfReport;
+                    sampleCollection.PlannerId = samplearrivalEntity.PlannerId;//to be removed later
+                    _dbContext.SaveChanges();
+                }
+                else
+                {
+                    sampleCollection.SampleCollectionId = samplearrivalEntity.SampleCollectionId;
+                    sampleCollection.RequestNo = samplearrivalEntity.RequestNo;
+                    sampleCollection.ULRNo = samplearrivalEntity.ULRNo;
+                    sampleCollection.ReturnedDate = DateTime.UtcNow;
+                    sampleCollection.ReturnedRemark = samplearrivalEntity.ReturnedRemark;
+                    sampleCollection.IsDisposed = false;
+                    sampleCollection.IsSampleIntact = samplearrivalEntity.IsSampleIntact;
+                    sampleCollection.ProbableDateOfReport = samplearrivalEntity.ProbableDateOfReport;
+                    sampleCollection.PlannerId = samplearrivalEntity.PlannerId;//to be removed later
+                    _dbContext.SaveChanges();
+                }
+
+                var scol = _dbContext.SampleCollections.Find(samplearrivalEntity.SampleCollectionId);
+                if (scol.IsReturnedOrIsRetained == "" || scol.IsReturnedOrIsRetained == null || scol.SubContractedParameters == "" || scol.SubContractedParameters == null || scol.AckRemarks == "" || scol.AckRemarks == null)
+                {
+                    var scolldetails = (from sc in _dbContext.SampleCollections
+                                        where sc.WorkOrderID == samplearrivalEntity.WorkOrderID && sc.EnquirySampleID == samplearrivalEntity.EnquirySampleID
+                                        select new
+                                        {
+                                            sc.SampleCollectionId,
+                                            sc.EnquirySampleID,
+                                            sc.WorkOrderID,
+                                        }
+
+                               ).ToList();
+
+                    List<SampleCollection> samples = new List<SampleCollection>();
+                    SampleCollection s1 = new SampleCollection();
+                    foreach (var samp in scolldetails)
+                    {
+                        s1 = _dbContext.SampleCollections.Find(samp.SampleCollectionId);
+                        s1.IsReturnedOrIsRetained = samplearrivalEntity.IsReturnedOrIsRetained;
+                        s1.StatutoryLimits = samplearrivalEntity.StatutoryLimits;
+                        s1.SubContractedParameters = samplearrivalEntity.SubContractedParameters;
+                        s1.AckRemarks = samplearrivalEntity.AckRemarks;
+                        _dbContext.SaveChanges();
+                    }
+                }
+
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return ex.InnerException.Message;
+            }
+        }
+
         public SampleArrivalEntity GetSampleArrivalDetails(int SampleCollectionId)
         {
             return (
@@ -859,7 +1141,7 @@ namespace LIMS_DEMO.DAL.Arrival
                      }).FirstOrDefault();
 
         }
-        public string AddApprover(List<PlannerByDisciplineEntity> approvers,long EnquirySampleID,long SampleCollectionId)
+        public string AddApprover(List<PlannerByDisciplineEntity> approvers,long? EnquirySampleID,long SampleCollectionId)
         {
             try
             {
@@ -956,6 +1238,7 @@ namespace LIMS_DEMO.DAL.Arrival
         {
             try
             {
+
                 foreach (var item in planners)
                 {
                     _dbContext.PlannerByDisciplines.Add(new PlannerByDiscipline()
@@ -967,7 +1250,8 @@ namespace LIMS_DEMO.DAL.Arrival
                         IsActive = item.IsActive,
                         EnteredBy = item.EnteredBy,
                         EnteredDate = item.EnteredDate,
-                    }); ;
+                       
+                    }); 
 
                     _dbContext.SaveChanges();
                 }
@@ -978,6 +1262,39 @@ namespace LIMS_DEMO.DAL.Arrival
                 return ex.InnerException.Message;
             }
         }
+        public string AddTRFPlannerByDiscipline(List<PlannerByDisciplineEntity> planners,int SampleCollectionId)
+        {
+            try
+            {
+                int iStatusId = _dbContext.StatusMasters.Where(s => s.StatusCode.ToLower() == "ReqCreated" && s.IsActive == true).Select(s => new { s.StatusId }).FirstOrDefault().StatusId;
+                var scoll = _dbContext.SampleCollections.Find(SampleCollectionId);
+                scoll.StatusId = (byte)iStatusId;
+
+                _dbContext.SaveChanges();
+                foreach (var item in planners)
+                {
+                    _dbContext.PlannerByDisciplines.Add(new PlannerByDiscipline()
+                    {
+                        SampleCollectionId = item.SampleCollectionId,
+                        PlannerId = item.PlannerId,
+                        DisciplineId = item.DisciplineId,
+                        ParameterName = item.Parameters,
+                        IsActive = item.IsActive,
+                        EnteredBy = item.EnteredBy,
+                        EnteredDate = item.EnteredDate,
+
+                    });
+                    _dbContext.SaveChanges();
+                }
+                
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return ex.InnerException.Message;
+            }
+        }
+
 
         ///////////////////SampleNo////////////////////Not in Used here////////////////////////////////////////
         public string GenerateSampleNo(int SampleCollectionId, string SampleNo)

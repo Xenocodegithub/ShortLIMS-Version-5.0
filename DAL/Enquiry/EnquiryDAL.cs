@@ -100,6 +100,21 @@ namespace LIMS_DEMO.DAL.Enquiry
                 return ex.InnerException.Message;
             }
         }
+        public string UpdateTRFStatus(long WorkOrderId, int StatusId)
+        {
+            try
+            {
+                var enquiryMaster = _dbContext.WorkOrders.Find(WorkOrderId);
+                enquiryMaster.StatusId = (byte)StatusId;
+                _dbContext.SaveChanges();
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return ex.InnerException.Message;
+            }
+        }
+
 
         ///////////////////QuotationNo////////////////////////////////////////
         public string GenerateQuotationNo(long QuotationId)

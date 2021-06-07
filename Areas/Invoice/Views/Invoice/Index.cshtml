@@ -1,5 +1,4 @@
-﻿
-@model IList<LIMS_DEMO.Areas.Invoice.Models.InvoiceModel>
+﻿@model IList<LIMS_DEMO.Areas.Invoice.Models.InvoiceModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -100,13 +99,13 @@
                         <td>
                             @if (item.IsIGST == false)
                             {
-                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=0" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span class="fa fa-download"></span></a>
+                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=0" class="btn btn-primary alignleft btn-sm" data-toggle="tooltip" data-placement="top" title=""><span class="fa fa-download"></span></a>
 
 
                             }
                             else
                             {
-                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=1" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title=""><span></span></a>
+                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Invoice.rdl&WorkOrderId=@item.WorkOrderId&IGST=1" class="btn btn-primary alignleft btn-sm" data-toggle="tooltip" data-placement="top" title=""><span class="fa fa-download"></span></a>
 
                             }
                         </td>
@@ -141,53 +140,76 @@
             <div class="modal-header" style="background-color:steelblue;height:42px;">
                 @*<p class="Closeup"><span class="close CPopup">&times;</span></p>*@
                 <h4 style="text-align:center;color:white;font-weight:bold">Are you sure you want to convert this to Invoice  ?</h4>
-                <a class="Closeup" href="/Invoice/Invoice/Index"><span class="close CPopup">&times;</span></a>
+                <a class="Closeup" href="/Invoice/Invoice/Index"><span class="close CPopup" style="color:white;">&times;</span></a>
             </div>
             <div class="modal-body">
                 <div class="clear" id="LoadPopup"></div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">Customer Name &nbsp;:</label>
+                        <span class="text-span" id="RegistrationName"></span>
+                        @*<input type="text" id="RegistrationName" class="fom-control" />*@
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">WorkOrder No &nbsp;:</label>
+                        <span class="text-span" id="WorkOrderNumber"></span>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="labeltext">Invoice No &nbsp;:</label>
+                        <span class="text-span" id="InvoiceNumber"></span>
+                    </div>
+
+                </div>
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="labeltext">Total Charges &nbsp;:</label>
                         <span class="text-span" id="TotalCharges"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="labeltext">DiscountAmount &nbsp;:</label>
-                        <span class="text-span" id="DiscountAmount"></span>
-                       
+                        <label class="labeltext">Discount Amount &nbsp;:</label>
+                        <span class="text-span" id="Discount"></span>
+
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="labeltext">SampleAmount &nbsp;:</label>
-                        <span class="text-span" id="SampleAmount"></span>
-                      
+                        <label class="labeltext">Sample Amount &nbsp;:</label>
+                        <span class="text-span" id="CollectionCharges"></span>
+
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label class="labeltext">TransportationAmount &nbsp;:</label>
-                        <span class="text-span" id="TransportationAmount"></span>
-                       
+                        <label class="labeltext">Transportation Amount &nbsp;:</label>
+                        <span class="text-span" id="TransportCharges"></span>
+
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="labeltext">TestingCharges &nbsp;:</label>
+                        <label class="labeltext">Testing Charges &nbsp;:</label>
                         <span class="text-span" id="TestingCharges"></span>
-                       
+
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="labeltext">TotalAmount &nbsp;:</label>
-                        <span class="text-span" id="TotalAmount"></span>
-                       
+                        <label class="labeltext">GST  Amount &nbsp;:</label>
+                        <span class="text-span" id="GST"></span>
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="labeltext">NetAmount &nbsp;:</label>
-                        <span class="text-span" id="NetAmount"></span>
-                      
+                        <span class="text-span" id="UnitPrice"></span>
+
                     </div>
                 </div>
+                <div class="row">
+                    @*<div class="form-group col-md-4">
+                <label class="labeltext">NetAmount &nbsp;:</label>
+                <span class="text-span" id="NetAmount"></span>
+
+            </div>*@
+                </div>
                 <div class="form-group">
-                   
                     <input type="submit" class="btn btn-info btn-sm SubmitDetails" style="float:right;margin-top:-15px" />
                 </div>
                 @*@{
@@ -231,12 +253,15 @@
                     debugger
                     var x = response;
                     $('#TotalCharges').text(response.TotalCharges);
-                    $('#DiscountAmount').text(response.DiscountAmount);
-                    $('#SampleAmount').text(response.SampleAmount);
-                    $('#TransportationAmount').text(response.TransportationAmount);
+                    $('#Discount').text(response.Discount);
+                    $('#CollectionCharges').text(response.CollectionCharges);
+                    $('#TransportCharges').text(response.TransportCharges);
                     $('#TestingCharges').text(response.TestingCharges);
-                    $('#TotalAmount').text(response.TotalAmount);
-                    $('#NetAmount').text(response.NetAmount);
+                    $('#GST').text(response.GST);
+                    $('#UnitPrice').text(response.UnitPrice);
+                    $('#RegistrationName').text(response.RegistrationName);
+                    $('#WorkOrderNumber').text(response.WorkOrderNumber);
+                    $('#InvoiceNumber').text(response.InvoiceNumber);
 
                 },
                 error: function (xhr) {
@@ -252,9 +277,19 @@
         $(document).on('click', '.SubmitDetails', function (event) {
             debugger
             var current = $(this);
-           
-           
-            var jsonObject = { "EnquirySampleID": EnquirySampleID, "CostingId": CostingId };
+
+            var RegistrationName = $("#RegistrationName").text();
+            var WorkOrderNumber = $("#WorkOrderNumber").text();
+            var InvoiceNumber = $("#InvoiceNumber").text();
+            var TotalCharges = $("#TotalCharges").text();
+            var Discount = $("#Discount").text();
+            var CollectionCharges = $("#CollectionCharges").text();
+            var TransportCharges = $("#TransportCharges").text();
+            var TestingCharges = $("#TestingCharges").text();
+            var GST = $("#GST").text();
+            var UnitPrice = $("#UnitPrice").text();
+
+            var jsonObject = { "EnquirySampleID": EnquirySampleID, "CostingId": CostingId,"RegistrationName":RegistrationName,"WorkOrderNumber":WorkOrderNumber,"InvoiceNumber":InvoiceNumber,"TotalCharges":TotalCharges,"Discount":Discount,"CollectionCharges":CollectionCharges,"TransportCharges":TransportCharges,"TestingCharges":TestingCharges,"GST":GST,"UnitPrice":UnitPrice };
 
                 $.ajax({
                     type: "POST",
@@ -267,6 +302,9 @@
                             $(event.target).parent().parent().find('select').prop('disabled', true);
                             $(event.target).prop('disabled', true);
                             $($(event.target).parent().parent().find('img')).attr('src', '/Content/images/unactive.png');
+                            alert("Data is Saved successfully");
+                           // Invoice/Invoice/GetInvoiceData
+                            location.href = '/Invoice/Invoice/DailyInvoiceList';
 
                         } else {
                             console.log("Something went wrong");

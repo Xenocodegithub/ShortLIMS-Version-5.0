@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LIMS_DEMO.Core.Arrival;
 using LIMS_DEMO.Core.Collection;
 
 namespace LIMS_DEMO.Core.Repository
 {
     public interface ISampleCollection : IDisposable
     {
+        string TRFEnv_Update(SampleArrivalEntity samplecollectionEntity);
         string AddARC(int SampleCollectionId, int EnteredBy);
         long AddNotification(string Msg, string RoleName, SampleCollectionEntity samplecollectionEntity);
         string GetExpectedCollDate(int WorkOrderSampleCollectionDateId);

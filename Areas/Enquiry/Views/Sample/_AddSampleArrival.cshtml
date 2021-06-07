@@ -1,0 +1,106 @@
+﻿@model IList<LIMS_DEMO.Areas.Enquiry.Models.SampleRegistrationModel>
+
+
+<!-- Default Basic Forms Start -->
+<br />
+    <table id="dtHorizontalExample" class="table table stripe hover nowrap">
+        <thead>
+            <tr class="thead-dark">
+                <th class="table-plus datatable-nosort">
+                    SrNo.
+                </th>
+                <th>
+                    Sample Type
+                </th>
+                <th>
+                    Sample Location
+                </th>
+                <th>
+                    Customer Name
+                </th>
+                <th>
+                    Sample ID
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(item => Model[i].SerialNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model[i].SampleTypeProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model[i].SampleLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model[i].CustomerName)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("View Details", "AddSampleArrival", new { SampleCollectionId = item.SampleCollectionId, SampleNo = item.SampleNo, ARCId = item.ARCId }, new { @class = "btn btn-sm btn-App fa fa-pencil" })
+                        *@
+                        <a href="#" onclick="funView('@Model[i].SampleLocation',@Model[i].SampleCollectionId,@Model[i].SampleTypeProductId,@Model[i].EnquirySampleID,@Model[i].WorkOrderID);" class="sampleName" style="color:blue;"data-toggle="modal" data-target=".bd-example-modal-lg">
+                            @Html.DisplayFor(item => Model[i].SampleNameOriginal)
+                            @*@Html.DisplayFor(modelItem => item.SampleNo)*@
+                        </a>
+                    </td>
+                    @*<td>d
+                            @Html.DisplayFor(modelItem => item.SampleName)
+                        </td>*@
+                    <td>
+                        @Html.HiddenFor(item => Model[i].expSampleDate)
+                        @Html.DisplayFor(item => Model[i].Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model[i].CurrentStatus)
+                    </td>
+
+                    @*<td>
+                        @Html.DisplayFor(item => Model[i].RequestNo)
+                    </td>*@
+                    @*<td>
+                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AcknowledgementReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&WorkOrderId=@Model[i].WorkOrderID" class="btn btn-info alignleft btn-sm" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+@*//----------------------------------model------------------------------------------------//*@
+
+<div class="modal fade bd-example-modal-lg" id="exampleModalLAB" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">LAB DATA</h5>
+                <button type="button" onclick="$('#modelclose').hide();" class="close" data-dismiss="modal" style="color:white;">&times;</button>
+
+                @*<button type="button" onclick="$('#modelclose').hide();" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>*@
+            </div>
+            <div class="modal-body" id="LAB_Data">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function funView(SampleLocation,SampleCollectionId,SampleTypeProductId,EnquirySampleID,WorkOrderId) {
+        debugger;
+        $("#LAB_Data").empty();
+        $("#LAB_Data").load(`/Enquiry/Sample/TRFSampleArrivalList?SampleCollectionId=${SampleCollectionId}&SampleTypeProductId=${SampleTypeProductId}&EnquirySampleID=${EnquirySampleID}&WorkOrderId=${WorkOrderId}&SampleLocation=${SampleLocation}`);
+    
+    }
+    
+</script>

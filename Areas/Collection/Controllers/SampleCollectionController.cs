@@ -297,7 +297,7 @@ namespace LIMS_DEMO.Areas.Collection.Controllers
                         SerialNo2 = iSrNo2,
                         SampleCollectionId = item.SampleCollectionId,
                         SampleCollectionDevicesId = item.SampleCollectionDevicesId,
-                        SampleDeviceId2 = (Int32)item.SampleDeviceId,
+                        SampleDeviceId2 = (Int32)item.SampleDeviceId1,
                         SampleDevice = item.SampleDevice,
                     });
                     iSrNo2++;

@@ -1,0 +1,25 @@
+USE [Student]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SPtblEmployee]    Script Date: 1/16/2020 2:52:22 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[SPtblEmployee]
+@ID int out,
+@Name nvarchar(50)=null,
+@State nvarchar(50)=null,
+@City nvarchar(50)=null,
+@Salary bigint=null
+
+as
+begin
+insert into tblEmployee values(@Name,@State,@City,@Salary) 
+select @ID=SCOPE_IDENTITY()
+end
+GO
+
+

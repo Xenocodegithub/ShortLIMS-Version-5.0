@@ -11,6 +11,7 @@ namespace LIMS_DEMO.Core.Repository
 {
     public interface IWorkOrderCustomer : IDisposable
     {
+       
         string AddCostPercentage(WorkOrderCustomerEntity workOrderCustomerEntity);
         long AddNotification(string Msg, string RoleName, WorkOrderCustomerEntity workOrderCustomerEntity);
         bool DeleteCosting(int CostingId);

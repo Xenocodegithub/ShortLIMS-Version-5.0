@@ -46,11 +46,8 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Work Order Received On:  <span class="required" style="color:red">*</span></label>
                 <div class="col-sm-4">
-                    <input type="date" id="WorkOrderReceivedDate" class="form-control" name="WorkOrderReceivedDate" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
-                    @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control col-sm-4", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", onfocus = "this.value=''"})*@
-                    @*<span class="input-group-addon add-on">
-                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-                    </span>*@
+                    <input type="date" id="WorkOrderReceivedDate" class="form-control" name="WorkOrderReceivedDate" placeholder="dd/MM/yyyy" onblur="ValidateDate100();" />
+                
                     @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger col-md-10" })
 
                 </div>
@@ -59,11 +56,7 @@
 
                     @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly" })
                     @Html.HiddenFor(model => model.WorkOrderEndDate)
-                    @*<input type="date" id="WorkOrderEndDate" name="WorkOrderEndDate" class="input-group col-sm-12" placeholder="dd/MM/yyyy" onblur="ValidateDate();" />*@
-                    @*@Html.TextBoxFor(model => model.WorkOrderEndDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", @readonly = "readonly", onfocus = "this.value=''" })*@
-                    @*<span class="input-group-addon add-on">
-                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-                    </span>*@
+                  
 
                     @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger col-md-10" })
                 </div>
@@ -115,7 +108,7 @@
         }
     });
 
-    function ValidateDate() {
+    function ValidateDate100() {
      
         if ($('#WorkOrderReceivedDate').val() != "" && $('#Duration').val() != "") {
             var recieveDate = new Date($('#WorkOrderReceivedDate').val());

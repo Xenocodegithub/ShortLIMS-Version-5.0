@@ -16,6 +16,11 @@ namespace LIMS_DEMO.BAL.Enquiry
         {
             CoreFactory.workOrder = new WorkOrderDAL();
         }
+
+        public List<WorkOrderHODEntity> GetTRF_WOList(int LabMasterId, DateTime? FromDate, DateTime? ToDate)
+        {
+            return CoreFactory.workOrder.GetTRF_WOList(LabMasterId, FromDate, ToDate);
+        }
         public WorkOrderEntity GetLastDay(string monthName)
         {
             return CoreFactory.workOrder.GetLastDay(monthName);

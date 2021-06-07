@@ -3138,159 +3138,10 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
             </Paragraphs>
             <rd:DefaultName>Textbox22</rd:DefaultName>
             <Top>4.65597in</Top>
-            <Left>0.13235in</Left>
+            <Left>0.53235in</Left>
             <Height>0.25in</Height>
             <Width>2.92721in</Width>
             <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox25">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>V. Gaidhane</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>BRANCH MANAGER</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Verdana</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox25</rd:DefaultName>
-            <Top>5.30973in</Top>
-            <Left>0.13235in</Left>
-            <Height>0.36458in</Height>
-            <Width>2.66679in</Width>
-            <ZIndex>4</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Line Name="Line1">
-            <Top>5.78959in</Top>
-            <Left>0.13in</Left>
-            <Height>0in</Height>
-            <Width>6.99918in</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>Dashed</Style>
-              </Border>
-              <TopBorder>
-                <Style>Dashed</Style>
-              </TopBorder>
-              <BottomBorder>
-                <Style>Dashed</Style>
-              </BottomBorder>
-              <LeftBorder>
-                <Style>Dashed</Style>
-              </LeftBorder>
-              <RightBorder>
-                <Style>Dashed</Style>
-              </RightBorder>
-            </Style>
-          </Line>
-          <Textbox Name="Textbox27">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Note:</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Verdana</FontFamily>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>1.  The result listed refers only to the tested sample(s) and applicable parameter(s).</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Verdana</FontFamily>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>2.  This report is not to be reproduced except in full, without written approval of the laboratory.</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>Verdana</FontFamily>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox27</rd:DefaultName>
-            <Top>5.86598in</Top>
-            <Left>0.12791in</Left>
-            <Height>0.45833in</Height>
-            <Width>6.32304in</Width>
-            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3323,7 +3174,7 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
             <Top>4.43333in</Top>
             <Height>0.19625in</Height>
             <Width>7.16225in</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3398,7 +3249,7 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
             <Left>0.53032in</Left>
             <Height>0.41153in</Height>
             <Width>6.61137in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -3450,7 +3301,7 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
             <Left>0.13235in</Left>
             <Height>2.78083in</Height>
             <Width>0.32851in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=Parameters!IsNablSave.Value=0</Hidden>
             </Visibility>
@@ -4494,7 +4345,7 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
             <Left>0.53032in</Left>
             <Height>0.70139in</Height>
             <Width>4.81196in</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>7</ZIndex>
             <Visibility>
               <Hidden>=Iif(CountRows()&gt;0,false,true)</Hidden>
             </Visibility>
@@ -4525,14 +4376,14 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>6.39723in</Height>
+        <Height>4.97015in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>7.18127in</Width>
+      <Width>7.20794in</Width>
       <Page>
         <PageHeader>
           <Height>1.06489in</Height>
@@ -4743,7 +4594,7 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.46875in</Height>
+          <Height>1.61458in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -4787,10 +4638,159 @@ WHERE FWW.SampleCollectionId=@SampleCollectionId
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox44</rd:DefaultName>
-              <Top>0.04167in</Top>
+              <Top>1.12917in</Top>
               <Left>0.13235in</Left>
               <Height>0.3506in</Height>
+              <Width>6.94642in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox25">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>V. Gaidhane</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>BRANCH MANAGER</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox25</rd:DefaultName>
+              <Top>0.05834in</Top>
+              <Left>0.49444in</Left>
+              <Height>0.36458in</Height>
+              <Width>2.66679in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Line Name="Line1">
+              <Top>0.5382in</Top>
+              <Left>0.07959in</Left>
+              <Height>0in</Height>
+              <Width>6.99918in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Dashed</Style>
+                </Border>
+                <TopBorder>
+                  <Style>Dashed</Style>
+                </TopBorder>
+                <BottomBorder>
+                  <Style>Dashed</Style>
+                </BottomBorder>
+                <LeftBorder>
+                  <Style>Dashed</Style>
+                </LeftBorder>
+                <RightBorder>
+                  <Style>Dashed</Style>
+                </RightBorder>
+              </Style>
+            </Line>
+            <Textbox Name="Textbox27">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Note:</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>1.  The result listed refers only to the tested sample(s) and applicable parameter(s).</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>2.  This report is not to be reproduced except in full, without written approval of the laboratory.</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox27</rd:DefaultName>
+              <Top>0.61459in</Top>
+              <Left>0.465in</Left>
+              <Height>0.45833in</Height>
               <Width>6.32304in</Width>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>

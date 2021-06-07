@@ -8,6 +8,9 @@ namespace LIMS_DEMO.Core.WorkOrderCustomer
 {
     public class WorkOrderCustomerEntity
     {
+        public Nullable<bool> OVC { get; set; }
+        public Nullable<int> QuotationId { get; set; }
+        public Nullable<int> DeliverId { get; set; }
         public string ContractAmendment { get; set; }
         public Nullable<bool> IsIGST { get; set; }
         public Nullable<long> Duration { get; set; }

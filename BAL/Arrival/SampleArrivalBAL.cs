@@ -15,6 +15,18 @@ namespace LIMS_DEMO.BAL.Arrival
         {
             CoreFactory.samplearrival = new SampleArrivalDAL();
         }
+        public SampleArrivalEntity GetTRFArrivalDetails(int SampleCollectionId)
+        {
+            return CoreFactory.samplearrival.GetTRFArrivalDetails(SampleCollectionId);
+        }
+        public List<SampleArrivalEntity> GetTRFReceiverList(int UserMasterID)
+        {
+            return CoreFactory.samplearrival.GetTRFReceiverList(UserMasterID);
+        }
+        public List<SampleArrivalEntity> GetERFArrivalList(int WorkOrderID)
+        {
+            return CoreFactory.samplearrival.GetERFArrivalList(WorkOrderID);
+        }
         public DisposalEntity GetDates(long SampleCollectionId)
         {
             return CoreFactory.samplearrival.GetDates(SampleCollectionId);
@@ -54,7 +66,10 @@ namespace LIMS_DEMO.BAL.Arrival
         {
             return CoreFactory.samplearrival.GetReportULRNumber(EnquiryId, SampleTypeProductId, EnquirySampleID,WorkOrderID);
         }
-      
+        public string GetTRFReportULRNumber(int SampleTypeProductId, int EnquirySampleID, int WorkOrderID)
+        {
+            return CoreFactory.samplearrival.GetTRFReportULRNumber(SampleTypeProductId, EnquirySampleID, WorkOrderID);
+        }
         public List<SampleArrivalEntity> GetArrivalList()
         {
             return CoreFactory.samplearrival.GetArrivalList();
@@ -85,6 +100,11 @@ namespace LIMS_DEMO.BAL.Arrival
             return CoreFactory.samplearrival.GetCollectionDevicesList(SampleCollectionId);
 
         }
+        public List<SampleArrivalEntity> GetCollectionDevicesList1()
+        {
+            return CoreFactory.samplearrival.GetCollectionDevicesList1();
+
+        }
         public string AddSampleArrival(SampleArrivalEntity samplearrivalEntity)
         {
             return CoreFactory.samplearrival.AddSampleArrival(samplearrivalEntity);
@@ -92,6 +112,10 @@ namespace LIMS_DEMO.BAL.Arrival
         public string UpdateSampleArrival(SampleArrivalEntity samplearrivalEntity)
         {
             return CoreFactory.samplearrival.UpdateSampleArrival(samplearrivalEntity);
+        }
+        public string UpdateTRFSampleArrival(SampleArrivalEntity samplearrivalEntity)
+        {
+            return CoreFactory.samplearrival.UpdateTRFSampleArrival(samplearrivalEntity);
         }
         public SampleArrivalEntity GetSampleArrivalDetails(int SampleCollectionId)
         {
@@ -124,7 +148,7 @@ namespace LIMS_DEMO.BAL.Arrival
         {
             return CoreFactory.samplearrival.UpdateSampleReceived(samplearrivalEntity);
         }
-        public string AddApprover(List<PlannerByDisciplineEntity> approvers,long EnquirySampleId,long SampleCollectionId)
+        public string AddApprover(List<PlannerByDisciplineEntity> approvers,long? EnquirySampleId,long SampleCollectionId)
         {
             return CoreFactory.samplearrival.AddApprover(approvers, EnquirySampleId, SampleCollectionId);
 
@@ -133,6 +157,10 @@ namespace LIMS_DEMO.BAL.Arrival
         {
             return CoreFactory.samplearrival.AddPlannerByDiscipline(planners);
 
+        }
+        public string AddTRFPlannerByDiscipline(List<PlannerByDisciplineEntity> planners,int SampleCollectionId)
+        {
+            return CoreFactory.samplearrival.AddTRFPlannerByDiscipline(planners,SampleCollectionId);
         }
         public List<SampleArrivalEntity> GetReceiverList(int UserMasterID)
         {

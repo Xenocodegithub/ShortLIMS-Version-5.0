@@ -38,6 +38,10 @@ namespace LIMS_DEMO.BAL.Enquiry
         {
             return CoreFactory.enquiry.UpdateEnquiryStatus(EnquiryId, StatusId);
         }
+        public string UpdateTRFStatus(long WorkOrderId, int StatusId)
+        {
+            return CoreFactory.enquiry.UpdateTRFStatus(WorkOrderId, StatusId);
+        }
 
         public string GenerateQuotationNo(long EnquiryId)
         {

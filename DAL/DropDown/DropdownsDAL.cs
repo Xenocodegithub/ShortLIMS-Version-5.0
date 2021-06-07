@@ -23,6 +23,27 @@ namespace LIMS_DEMO.DAL.DropDown
         {
             _dbContext = new LIMSEntities();
         }
+        //payment
+        public List<InvoiceEntity> GetPaymentMode()
+        {
+
+            try
+            {
+                return (from pm in _dbContext.PaymentModeMasters
+
+                        select new InvoiceEntity()
+                        {
+                            PaymentModeMasterId = pm.PaymentModeMasterId,
+                            PaymentMode = pm.PaymentMode,
+
+                        }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public List<UserListEntity> GetPassChaReqUserList()
         {
             LIMSEntities _dbContext = new LIMSEntities();
@@ -221,6 +242,25 @@ namespace LIMS_DEMO.DAL.DropDown
                 return null;
             }
         }
+        public List<ProcedureEntity> GetProcedure()
+        {
+            try
+            {
+                return (from p in _dbContext.ProcedureMasters
+                        
+                        select new ProcedureEntity()
+                        {
+                            ProcedureId = p.ProcedureId,
+                            SampleTypeProductId = (Int32)p.SampleTypeProductId,
+                            ProcedureName = p.ProcedureName,
+
+                        }).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public List<SampleTypeEntity> GetSampleType()
         {
             try
@@ -246,6 +286,25 @@ namespace LIMS_DEMO.DAL.DropDown
             {
                 return (from sd in _dbContext.SampleDeviceMasters
                         where sd.SampleTypeProductId == SampleTypeProductId
+                        select new SampleDeviceEntity()
+                        {
+                            SampleDeviceId = sd.SampleDeviceId,
+                            SampleTypeProductId = (Int32)sd.SampleTypeProductId,
+                            SampleDevice = sd.SampleDevice,
+
+                        }).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public List<SampleDeviceEntity> GetSampleDevice()
+        {
+            try
+            {
+                return (from sd in _dbContext.SampleDeviceMasters
+                        
                         select new SampleDeviceEntity()
                         {
                             SampleDeviceId = sd.SampleDeviceId,
@@ -378,6 +437,32 @@ namespace LIMS_DEMO.DAL.DropDown
                 CustomerMasterId = c.CustomerMasterId,
                 RegistrationName = c.RegistrationName
             }).OrderBy(c => c.RegistrationName).ToList();
+        }
+        public IList<DeliverEntity> GetDeliver()
+        {
+            return _dbContext.DeliverMasters.Where(c => c.IsActive == true).Select(c => new DeliverEntity()
+            {
+                DeliverId = c.DeliverId,
+                DeliverName = c.DeliverName
+            }).OrderBy(c => c.DeliverName).ToList();
+        }
+        public IList<UserListEntity> GetUser()
+        {
+            return _dbContext.UserMasters.Where(c => c.IsActive == true).Select(c => new UserListEntity()
+            {
+                UserMasterID = c.UserMasterID,
+                UserName = c.UserName
+            }).OrderBy(c => c.UserName).ToList();
+        }
+        public UserListEntity GetUserDetails(int UserMasterID)
+        {
+            return _dbContext.UserDetails.Where(c => c.UserMasterID == UserMasterID).Select(c => new UserListEntity()
+            {
+                UserMasterID = c.UserMasterID,
+                UserName = c.FirstName+""+c.LastName,
+                PhoneNo=c.Mobile
+                
+            }).FirstOrDefault();
         }
 
         //Get Inventory Type List
@@ -688,5 +773,7 @@ namespace LIMS_DEMO.DAL.DropDown
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        
     }
 }
