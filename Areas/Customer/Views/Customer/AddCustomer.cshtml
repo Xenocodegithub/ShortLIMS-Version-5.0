@@ -41,12 +41,12 @@
                     @Html.HiddenFor(model => model.CustomerMasterId)
 
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Registration Date:</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Registration Date: <span style="color:red;">*</span></label>
                         <div class="col-sm-4">
                             @Html.TextBoxFor(model => model.RegistrationDate, new { @class = "form-control date-picker", @autocomplete = "false" })
                             @Html.ValidationMessageFor(model => model.RegistrationDate, "", new { @class = "text-danger" })
                         </div>
-                        <label class="col-sm-12 col-md-2 col-form-label">Customer Group:</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Customer Group: <span style="color:red;">*</span></label>
                         <div class="col-sm-4">
                             @Html.DropDownListFor(model => model.CustomerGroupId, new SelectList(ViewBag.CustomerGroups, "CustomerGroupId", "CustomerGroupType"), "Please Select", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CustomerGroupId, "", new { @class = "text-danger" })
@@ -58,20 +58,23 @@
                             @Html.DropDownListFor(model => model.CustomerTypeId, new SelectList(ViewBag.CustomerTypes, "CustomerTypeId", "CustomerTypeName"), "Please Select", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CustomerTypeId, "", new { @class = "text-danger" })
                         </div>
-                        <label class="col-sm-12 col-md-2 col-form-label">Company Type:</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Company Type: <span style="color:red;">*</span></label>
                         <div class="col-sm-4">
                             @Html.DropDownListFor(model => model.CompanyTypeId, new SelectList(ViewBag.CompanyTypes, "CompanyTypeId", "CompanyType"), "Please Select", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.CompanyTypeId, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Registration Name:</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Registration Name: <span style="color:red;">*</span></label>
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.RegistrationName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.RegistrationName, "", new { @class = "text-danger" })
+
                         </div>
-                        <label class="col-sm-12 col-md-2 col-form-label">Contact Person Name:</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Contact Person Name: <span style="color:red;">*</span></label>
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.ContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group row">
@@ -89,19 +92,22 @@
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                        <label class="col-sm-12 col-md-2 col-form-label">Country:</label>
+                        <label class="col-sm-12 col-md-2 col-form-label">Country: <span style="color:red;">*</span></label>
                         <div class="col-sm-4">
                             @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
                         </div>
                      </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">State: </label>
+                            <label class="col-sm-12 col-md-2 col-form-label">State: <span style="color:red;">*</span></label>
                             <div class="col-sm-4 ">
                                 @Html.EditorFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">City:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">City: <span style="color:red;">*</span></label>
                             <div class="col-sm-4">
                                 @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
@@ -109,9 +115,10 @@
                             <div class="col-sm-4">
                                 @Html.EditorFor(model => model.Taluka, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Address:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Address: <span style="color:red;">*</span></label>
                             <div class="col-sm-4">
                                 @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">
@@ -119,9 +126,10 @@
                             <div class="col-sm-4">
                                 @Html.EditorFor(model => model.LandMark, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Pin Code:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Pin Code: <span style="color:red;">*</span></label>
                             <div class="col-sm-4">
                                 @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group row">

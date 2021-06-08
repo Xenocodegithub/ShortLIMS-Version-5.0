@@ -605,7 +605,7 @@ namespace LIMS_DEMO.Areas.Collection.Controllers
                     TempData["message"] = "Collection  Submitted.";
 
                 }
-                else
+                else if(StatusCodeField == null && StatusCodeLab == "CollAssign")
                 {
                     int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleSub");
                     BALFactory.samplecollectionBAL.UpdateCollectionStatus((Int32)SampleCollectionId, (byte)iStatusId);
@@ -619,6 +619,21 @@ namespace LIMS_DEMO.Areas.Collection.Controllers
                     //TempData.Keep("message");
                     //TempData["message"] = "Collection can not be Submitted.";
                 }
+                else if (StatusCodeField == null && StatusCodeLab == "SampleColl")
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleSub");
+                    BALFactory.samplecollectionBAL.UpdateCollectionStatus((Int32)SampleCollectionId, (byte)iStatusId);
+                    //BALFactory.samplecollectionBAL.AddARC((Int32)SampleCollectionId, LIMS.User.UserMasterID);
+                    string Msg = "Sample Submitted";
+                    model.Collection.SampleNo = CoreFactory.samplecollectionEntity.SampleNo;
+                    long NotificationDetailId2 = BALFactory.samplecollectionBAL.AddNotification(Msg, "Sampling Incharge", CoreFactory.samplecollectionEntity);
+
+                    TempData.Keep("message");
+                    TempData["message"] = "Collection  Submitted.";
+                    //TempData.Keep("message");
+                    //TempData["message"] = "Collection can not be Submitted.";
+                }
+
 
             }
             else
@@ -636,19 +651,24 @@ namespace LIMS_DEMO.Areas.Collection.Controllers
                     TempData["message"] = "Collection Submitted.";
 
                 }
-                //else if (StatusCodeLab == "SampleColl" && StatusCodeField == null)//Only for Lab
-                //{
-                //    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleSub");
-                //    BALFactory.samplecollectionBAL.UpdateCollectionStatus(SampleCollectionId, (byte)iStatusId);
-                //    TempData.Keep("message");
-                //    TempData["message"] = "Collection  Submitted.";
-
-                //}
-                else if (StatusCodeLab == "InProgress" || StatusCodeField == null)
+                else if (StatusCodeLab == "CollAssign" && StatusCodeField == null)//Only for Lab
                 {
                     int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleSub");
                     BALFactory.samplecollectionBAL.UpdateCollectionStatus((Int32)SampleCollectionId, (byte)iStatusId);
                     BALFactory.samplecollectionBAL.AddARC((Int32)SampleCollectionId, LIMS.User.UserMasterID);
+                    string Msg = "Sample Submitted";
+                    model.Collection.SampleNo = CoreFactory.samplecollectionEntity.SampleNo;
+                    long NotificationDetailId2 = BALFactory.samplecollectionBAL.AddNotification(Msg, "Sampling Incharge", CoreFactory.samplecollectionEntity);
+
+                    TempData.Keep("message");
+                    TempData["message"] = "Collection Submitted.";
+
+                }
+                else if (StatusCodeLab == "InProgress" && StatusCodeField == null)
+                {
+                    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleSub");
+                    BALFactory.samplecollectionBAL.UpdateCollectionStatus((Int32)SampleCollectionId, (byte)iStatusId);
+                    //BALFactory.samplecollectionBAL.AddARC((Int32)SampleCollectionId, LIMS.User.UserMasterID);
                     string Msg = "Sample Submitted";
                     model.Collection.SampleNo = CoreFactory.samplecollectionEntity.SampleNo;
                     long NotificationDetailId2 = BALFactory.samplecollectionBAL.AddNotification(Msg, "Sampling Incharge", CoreFactory.samplecollectionEntity);
@@ -658,11 +678,11 @@ namespace LIMS_DEMO.Areas.Collection.Controllers
                     //TempData.Keep("message");
                     //TempData["message"] = "Collection is not Submitted Properly";
                 }
-                else
+                else if (StatusCodeLab == "SampleColl" && StatusCodeField == null)
                 {
                     int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleSub");
                     BALFactory.samplecollectionBAL.UpdateCollectionStatus((Int32)SampleCollectionId, (byte)iStatusId);
-                    BALFactory.samplecollectionBAL.AddARC((Int32)SampleCollectionId, LIMS.User.UserMasterID);
+                    //BALFactory.samplecollectionBAL.AddARC((Int32)SampleCollectionId, LIMS.User.UserMasterID);
                     string Msg = "Sample Submitted";
                     model.Collection.SampleNo = CoreFactory.samplecollectionEntity.SampleNo;
                     long NotificationDetailId2 = BALFactory.samplecollectionBAL.AddNotification(Msg, "Sampling Incharge", CoreFactory.samplecollectionEntity);
@@ -670,8 +690,22 @@ namespace LIMS_DEMO.Areas.Collection.Controllers
                     TempData.Keep("message");
                     TempData["message"] = "Collection Submitted.";
                     //TempData.Keep("message");
-                    //TempData["message"] = "Collection can not be Submitted.";
+                    //TempData["message"] = "Collection is not Submitted Properly";
                 }
+                //else
+                //{
+                //    int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("SampleSub");
+                //    BALFactory.samplecollectionBAL.UpdateCollectionStatus((Int32)SampleCollectionId, (byte)iStatusId);
+                //    BALFactory.samplecollectionBAL.AddARC((Int32)SampleCollectionId, LIMS.User.UserMasterID);
+                //    string Msg = "Sample Submitted";
+                //    model.Collection.SampleNo = CoreFactory.samplecollectionEntity.SampleNo;
+                //    long NotificationDetailId2 = BALFactory.samplecollectionBAL.AddNotification(Msg, "Sampling Incharge", CoreFactory.samplecollectionEntity);
+
+                //    TempData.Keep("message");
+                //    TempData["message"] = "Collection Submitted.";
+                //    //TempData.Keep("message");
+                //    //TempData["message"] = "Collection can not be Submitted.";
+                //}
             }
 
             if (CollBy == 2)

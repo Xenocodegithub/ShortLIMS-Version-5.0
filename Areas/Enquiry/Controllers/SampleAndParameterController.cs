@@ -51,7 +51,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             }
             return PartialView(model);
         }
-        public ActionResult _Parameters(int EnquiryDetailId, int? EnquirySampleID = 0, int? EnquiryId = 0, string SubroupCode = "", string SampleTypeProductCode = "", int? SampleTypeProductId = 0)
+        public ActionResult _Parameters(int EnquiryDetailId, int? EnquirySampleID = 0, int? EnquiryId = 0, string SubroupCode = "", string SampleTypeProductCode = "", int? SampleTypeProductId = 0,int? EnquiryParameterDetailID = 0)
         {
             SampleAndParametersModel model = new SampleAndParametersModel();
             model.ParameterList = new List<EnquiryParameterModel>();
@@ -146,6 +146,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
         public JsonResult _Parameters(SampleAndParametersModel model)
         {
             CoreFactory.enquiryParameterList = new List<EnquiryParameterEntity>();
+           
             foreach (var par in model.ParameterList)
             {
                 if (par.IsSelected)
@@ -167,7 +168,15 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                     });
                 }
             }
-          
+            //if ()
+            //{
+            //    BALFactory.sampleParameterBAL.AddEnquiryParameterDetail(CoreFactory.enquiryParameterList);
+
+            //}
+            //else
+            //{
+
+            //}
             BALFactory.sampleParameterBAL.AddEnquiryParameterDetail(CoreFactory.enquiryParameterList);
             BALFactory.sampleParameterBAL.UpdateEnquirySampleCharges(model.EnquirySampleID, model.TotalCharges);
             return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);

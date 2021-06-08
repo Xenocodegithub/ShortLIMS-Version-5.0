@@ -106,7 +106,15 @@
             </div>
         </div>
         <div class="form-group col-md-12">
-            <button id="btnAdd" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;margin-top:-30px">Add Cost</button>
+
+            @if (Model.WorkOrderCustomer.CostingId == 0 || Model.WorkOrderCustomer.CostingId == null)
+            {
+        <button id="btnAdd" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;margin-top:-30px">Add Cost</button> }
+                        else
+                        {
+                            <button id="btnAdd" class="btn btn-sm btn-info text-nowrap btnChoose" style="float:right;margin-top:-30px">Update Cost</button>
+                                            }
+
         </div>
     }
 </div>
@@ -225,7 +233,7 @@
       debugger
         $("#divCosting").css("display", "block");
         $('#third').load('/WorkOrderCustomer/WorkOrderCustomer/_AddCostingDetails?WorkOrderId=' + @ViewBag.WorkOrderId + "&EnquirySampleID=" + EnquirySampleId + '&CostingId=' + CostingId);
-
+        $('#btnAdd').val("Update");
     }
 
     function funCostDelete(CostingId) {
