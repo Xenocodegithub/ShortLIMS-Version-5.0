@@ -115,10 +115,12 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Models
         public long? CostingId { get; set; }
         public int getID { get; set; }
         public string ContractAmendment { get; set; }
+        public string CollectedBy { get; set; }
     }
     public class WorkOrderCustomerListModel
     {
         public string ContractAmendment { get; set; }
+        
         public bool IsIGST { get; set; }
         public int NoOfDays { get; set; }
         public int CountNoOfSample { get; set; }

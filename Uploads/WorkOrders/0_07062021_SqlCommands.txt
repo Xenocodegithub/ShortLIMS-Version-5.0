@@ -1,0 +1,86 @@
+SqlCommand class is used to prepare an SQL statement or StoredProcedure that we want to execute on a SQL Server Database.
+
+The most commonly used methods of th SqlCommand class
+
+1. ExecuteReader - Use when the T-SQL statement returns more than a single value.
+For Example - ifvthe query returns rows of data.
+
+2. ExecuteNonQuery - Use when you want to perform an Insert,Update or Delete Operation.
+
+3. ExecuteScalar - Use when the query returns a single (scalar) value.
+For Example - Queries that return the total number of rows in a table.
+
+
+
+// CODE FOR SQL COMMANDS
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+namespace SqlCommands
+{
+    public partial class GridView1 : System.Web.UI.Page
+    {
+
+        String CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            // Code for ExecuteReader() command for Select Statement
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from tblCust_Info", con);
+                con.Open();
+                GridView2.DataSource = cmd.ExecuteReader();
+                GridView2.DataBind();
+
+            }
+
+
+            // Code for ExecuteScalar() command for Select  COUNT Statement
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = " select count(EmpId) from tblCust_Info";
+                cmd.Connection = con;
+                con.Open();
+               int totalRows=(int) cmd.ExecuteScalar();
+                Response.Write("Total Rows =  " + totalRows.ToString() + "\n");
+            }
+
+
+            // Code for ExecuteNonQuery() command for Insert, Update, Delete Statement
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                con.Open();
+
+                //Code for DELETE Query
+                cmd.CommandText = "delete from tblCust_Info  where CustId=9";
+                int totalRowsdeleted= cmd.ExecuteNonQuery();
+                Response.Write("\n Total Rows Updated = " + totalRowsdeleted.ToString());
+
+                //Code for INSERT Query
+                cmd.CommandText = "insert into tblCust_Info(CustId,EmpId,CustName,Address,MobileNo,EmailID) values(10,2,'Girish Kharkar','Kharbi road,Nagpur',9807654325,'girish@gmail.com')";
+                int totalRowsAffected = cmd.ExecuteNonQuery();
+                Response.Write("\n Total Rows Affected = " + totalRowsAffected.ToString());
+
+                //Code for UPDATE Query
+                cmd.CommandText = "update tblCust_Info set Address='Kharbi,Nagpur' where CustId=9";
+                int totalRowsUpdated = cmd.ExecuteNonQuery();
+                Response.Write("\n Total Rows Updated = " + totalRowsUpdated.ToString());
+            }
+
+
+        }
+    }
+}
+

@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+namespace DBUsingCSinWEb.Config
+{
+    public partial class GridView : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+             //String CS = ConfigurationManager.ConnectionStrings[0].ConnectionString; OR
+            String CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("Select * from tblCust_Info",con);
+                con.Open();
+                GridView1.DataSource = cmd.ExecuteReader();
+                GridView1.DataBind();
+
+            }
+               
+
+        }
+    }
+}

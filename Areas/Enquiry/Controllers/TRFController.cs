@@ -71,7 +71,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                     //IsIGST = (bool)wo.IsIGST,
                 });
             }
-
+            
             ViewBag.FromDate = FromDate;
             ViewBag.ToDate = ToDate;
             string UserName = LIMS.User.UserName;
@@ -84,7 +84,60 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             ViewBag.Planner = BALFactory.dropdownsBAL.GetUserList("Planner", LIMS.User.LabId);//For STL 
             return View(model);
         }
+        public PartialViewResult PreviewWorkOrder(int? WorkOrderId=0,int? EnquirySampleId=0 )
+        {
+            ViewBag.WorkOrderId = WorkOrderId;
+            WorkOrderCustomerListModel model = new WorkOrderCustomerListModel();
+            model.WorkOrderCustomer = new SampleRegistrationModel();
+            model.FinalWorkOrderList = new List<FinalWorkOrderModel>();
+            model.WorkOrderCustomer.WorkOrderID = (Int32)WorkOrderId;
 
+            if (WorkOrderId != 0)//Changes by Nivedita for Major change may be removed later
+            {
+                CoreFactory.workOrderEntity = BALFactory.workordercustomerBAL.GetWorkOrderCustomerDetail((Int32)WorkOrderId);
+                if (CoreFactory.workOrderEntity != null)
+                {
+                    model.WorkOrderCustomer.WorkOrderID = (Int32)CoreFactory.workOrderEntity.WorkOrderId;
+                    model.WorkOrderCustomer.CustomerName = CoreFactory.workOrderEntity.RegistrationName;
+                    model.WorkOrderCustomer.expSampleDate = (System.DateTime)CoreFactory.workOrderEntity.ExpectSampleCollDate;
+                    model.WorkOrderCustomer.WorkOrderNo = CoreFactory.workOrderEntity.WorkOrderNo;
+                    //model.WorkOrderCustomer.CollectedBy = CoreFactory.workOrderEntity.CollectedBy;
+                    if (CoreFactory.workOrderEntity.IsIGST == null)
+                    {
+                        model.WorkOrderCustomer.IsIGST = false;
+                    }
+                    else
+                    {
+                        model.WorkOrderCustomer.IsIGST = (bool)CoreFactory.workOrderEntity.IsIGST;
+                    }
+                }
+
+                CoreFactory.costingList = BALFactory.workordercustomerBAL.GetWorkOrderCustomerCostingList((Int32)WorkOrderId);
+                int i = 1;
+                foreach (var cost in CoreFactory.costingList)
+                {
+                    model.FinalWorkOrderList.Add(new FinalWorkOrderModel()
+                    {
+                        SerialNo = i,
+                        EnquirySampleID = cost.EnquirySampleID,
+                        CostingId = cost.CostingId,
+                        SampleName = cost.SampleName,
+                        DisplaySampleName = cost.DisplaySampleName,
+                        SampleTypeProductName = cost.SampleTypeProductName,
+                        SampleTypeProductCode = cost.SampleTypeProductCode,
+                        //ProductGroupName = cost.ProductGroupName,
+                        //SubGroupName = cost.SubGroupName,
+                        //MatrixName = cost.MatrixName,
+                        ParameterName = BALFactory.sampleParameterBAL.GetSampleParameters((Int32)cost.EnquirySampleID), //sample.Parameters,
+                        UnitPrice = cost.UnitPrice,
+                        Total=cost.TotalCharges
+                    }); 
+                    i++;
+                }
+            }
+            return PartialView(model);
+        }
+       
         public ActionResult AssignPlanner(int WorkOrderId, int AssignToId)
         {
             BALFactory.workOrderBAL.AssignSTL(WorkOrderId, AssignToId, LIMS.User.UserMasterID);
@@ -101,7 +154,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
         public ActionResult TRF_WoReject(int WorkOrderId, int EnquiryId, string Remark)
         {
             int iStatusId = BALFactory.dropdownsBAL.GetStatusIdByCode("WORejected");
-            BALFactory.enquiryBAL.UpdateEnquiryStatus(EnquiryId, (byte)iStatusId);
+            BALFactory.enquiryBAL.UpdateTRFStatus(WorkOrderId, (byte)iStatusId);
             BALFactory.workOrderBAL.WorkOrderReject(WorkOrderId, Remark, LIMS.User.UserMasterID);
             if (LIMS.User.RoleName == "Admin" || LIMS.User.RoleName == "BDM")
             {

@@ -92,7 +92,7 @@ namespace LIMS_DEMO.Core.Lab
         public string LOD { get; set; }
         public string ReviewerComment { get; set; }
         public string ApproverComment { get; set; }
-
+        public DateTime? SampleRecievedDate { get; internal set; }
     }
     public class SampleParameterInfo
     {

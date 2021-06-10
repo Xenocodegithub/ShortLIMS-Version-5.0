@@ -691,7 +691,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                         //join mdc in _dbContext.ModeOfCommunications on w.ModeOfCommunicationId equals mdc.ModeOfCommunicationId
                     join w in _dbContext.WorkOrders on sc.WorkOrderID equals w.WorkOrderId
                     join ctm in _dbContext.CustomerMasters on w.CustomerMasterId equals ctm.CustomerMasterId
-                    join es in _dbContext.StatusMasters on sc.StatusId equals es.StatusId
+                    join es in _dbContext.StatusMasters on w.StatusId equals es.StatusId
                     
                     where w.LabMasterId == LabMasterId && w.OVC == true
 

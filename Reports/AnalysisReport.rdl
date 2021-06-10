@@ -3,10 +3,10 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="LIMSConnection">
+      <Transaction>true</Transaction>
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=Merge9FebDB</ConnectString>
-        <Prompt>Specify a user name and password for data source LIMSConnection:</Prompt>
+        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=ShortLIMS</ConnectString>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>2c7e5781-873c-436b-865c-ebd12dec758a</rd:DataSourceID>
@@ -644,7 +644,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Date of Analysis</Value>
+                                  <Value>Duration of Analysis</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1105,7 +1105,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="AnalysisStartAt1">
+                        <Textbox Name="AnalysisStartAt">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1124,7 +1124,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>AnalysisStartAt1</rd:DefaultName>
+                          <rd:DefaultName>AnalysisStartAt</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1275,7 +1275,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>AnalysisParameterDetailsDS</DataSetName>
-            <Top>1.78243in</Top>
+            <Top>1.75743in</Top>
             <Left>0.15292in</Left>
             <Height>0.70833in</Height>
             <Width>6.73333in</Width>

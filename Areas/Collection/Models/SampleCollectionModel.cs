@@ -10,6 +10,8 @@ namespace LIMS_DEMO.Areas.Collection.Models
     public class SampleCollectionModel
     {
         public bool IsFieldSelected { get; set; }
+       
+        
         public string IsReturnedOrIsRetained { get; set; }
         public bool IsLabSelected { get; set; }
         public Nullable<long> No { get; set; }
@@ -177,6 +179,7 @@ namespace LIMS_DEMO.Areas.Collection.Models
 
     public class CollectionListModel
     {
+        public Nullable<System.DateTime> ProbableDateOfReport { get; set; }
         public Nullable<System.DateTime> CollDate { get; set; }//EnquirySampleDetail tbl
         public Nullable<System.DateTime> CollectionDate { get; set; }//EnquirySampleDetail tbl
         public List<SampleCollectionModel> CollectionList { get; set; }

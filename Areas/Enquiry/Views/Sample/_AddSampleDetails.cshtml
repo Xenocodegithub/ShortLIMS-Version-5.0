@@ -4,36 +4,36 @@
     ViewBag.Title = "_AddSampleDetails";
 }
 
-    <div>
-        @*<input type="hidden" id="WorkOrderId" value="@ViewBag.workid" />
+<div>
+    @*<input type="hidden" id="WorkOrderId" value="@ViewBag.workid" />
         <input type="text" id="wo" name="wo" value="@ViewBag.workid" />*@
-        <br />
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.Hidden("#WorkRoder_ID", (object)ViewBag.WorkOrderId)
-        <fieldset>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Sample Type: <span class="required" style="color:red">*</span></label>
-                <div class="col-sm-4">
-                    @Html.DropDownListFor(model => model.WorkOrderCustomer.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
-                    @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleTypeProductId, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.WorkOrderCustomer.SampleTypeProductName)
-                </div>
+    <br />
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.Hidden("#WorkRoder_ID", (object)ViewBag.WorkOrderId)
+    <fieldset>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Sample Type: <span class="required" style="color:red">*</span></label>
+            <div class="col-sm-4">
+                @Html.DropDownListFor(model => model.WorkOrderCustomer.SampleTypeProductId, new SelectList(ViewBag.SampleTypeProductList, "SampleTypeProductId", "SampleTypeProductName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
+                @Html.ValidationMessageFor(model => model.WorkOrderCustomer.SampleTypeProductId, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.WorkOrderCustomer.SampleTypeProductName)
             </div>
-            <div hidden>
-                <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Sample Type: <span class="required" style="color:red">*</span></label>
+        </div>
+        <div hidden>
+            <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Sample Type: <span class="required" style="color:red">*</span></label>
 
-                <input type="text" id="txtwoid" name="txtwoid" value="" hidden />
-            </div>
-            <div class="form-group row col-sm-12 col-md-12">
-                <button type="button" id="btnAdd" class="btn btn-info btn-sm" style="float:right">Add</button>
-            </div>
-            @*<div class="form-group row">
+            <input type="text" id="txtwoid" name="txtwoid" value="" hidden />
+        </div>
+        <div class="form-group row col-sm-12 col-md-12">
+            <button type="button" id="btnAdd" class="btn btn-info btn-sm" style="float:right">Add</button>
+        </div>
+        @*<div class="form-group row">
                 <input type="button" id="btnAdd" value="Add" class="btn btn-sm btn-info text-nowrap" style="margin-right:-40%;margin-top:-11%;float:right;" />
 
             </div>*@
 
-            @*<table border="0" cellpadding="2" cellspacing="4">
+        @*<table border="0" cellpadding="2" cellspacing="4">
                 <tr>
                     <td align="center">
                         <div class="form-group row">
@@ -86,30 +86,30 @@
                     </td>
                 </tr>
             </table>*@
-            @*<div id="second"></div>*@
-            <hr />
-            <table id="tblContract" class="data-table table nowrap">
-                <tr class="thead-dark">
-                    <th class="table-plus datatable-nosort">SerialNo.</th>
-                    <th>Sample Type</th>
-                    @*<th style="width:150px">Product Group</th>
+        @*<div id="second"></div>*@
+        <hr />
+        <table id="tblContract" class="data-table table nowrap">
+            <tr class="thead-dark">
+                <th class="table-plus datatable-nosort">SerialNo.</th>
+                <th>Sample Type</th>
+                @*<th style="width:150px">Product Group</th>
                     <th style="width:150px">Sub Group</th>
                     <th style="width:150px">Matrix</th>*@
-                    <th>Choose Parameters</th>
-                    <th>Action</th>
-                </tr>
-                <tbody>
-                    @for (int i = 0; i < Model.WorkOrderCustomerList.Count; i++)
-                    {
-                        <tr>
-                            <td>
-                                <span>@Model.WorkOrderCustomerList[i].SerialNo</span>
-                            </td>
-                            <td>
-                                <span>@Model.WorkOrderCustomerList[i].SampleTypeProductName</span>
-                                @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].SampleTypeProductId)
-                            </td>
-                            @*<td>
+                <th>Choose Parameters</th>
+                <th>Action</th>
+            </tr>
+            <tbody>
+                @for (int i = 0; i < Model.WorkOrderCustomerList.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <span>@Model.WorkOrderCustomerList[i].SerialNo</span>
+                        </td>
+                        <td>
+                            <span>@Model.WorkOrderCustomerList[i].SampleTypeProductName</span>
+                            @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].SampleTypeProductId)
+                        </td>
+                        @*<td>
                                 <span>@Model.WorkOrderCustomerList[i].ProductGroupName</span>
                                 @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].ProductGroupId)
                             </td>
@@ -121,37 +121,37 @@
                                 <span>@Model.WorkOrderCustomerList[i].MatrixName</span>
                                 @Html.HiddenFor(item => Model.WorkOrderCustomerList[i].MatrixId)
                             </td>*@
-                            <td>
-                                <button onclick="funContractSelected(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@Model.WorkOrderCustomerList[i].SampleTypeProductId,'@Model.WorkOrderCustomerList[i].SampleTypeProductCode', '@Model.WorkOrderCustomerList[i].SubGroupCode')" class="btn btn-sm btn-info text-nowrap btnChoose">Choose Parameters</button>
-                            </td>
-                            <td>
-                                <a href="#" onclick="funDeleteContract(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@ViewBag.WorkOrderId);">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <hr />
-            <div id="divParameters" class="row " style="display: none;">
-                @{
-                    Html.RenderAction("_Parameters", "Sample", new { EnquiryDetailId = 0 });
+                        <td>
+                            <button onclick="funContractSelected(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@Model.WorkOrderCustomerList[i].SampleTypeProductId,'@Model.WorkOrderCustomerList[i].SampleTypeProductCode', '@Model.WorkOrderCustomerList[i].SubGroupCode')" class="btn btn-sm btn-info text-nowrap btnChoose">Choose Parameters</button>
+                        </td>
+                        <td>
+                            <a href="#" onclick="funDeleteContract(@Model.WorkOrderCustomerList[i].EnquiryDetailId,@ViewBag.WorkOrderId);">Delete</a>
+                        </td>
+                    </tr>
                 }
-            </div>
-            <hr />
-            <div class="row">
-                <table id="tblPara" class="data-table table nowrap">
-                    <thead>
-                        <tr class="thead-dark">
-                            <th class="table-plus datatable-nosort">
-                                Sr.No.
-                            </th>
-                            <th>
-                                Sample No.
-                            </th>
-                            <th>
-                                Sample Type
-                            </th>
-                            @*<th class="width-12">
+            </tbody>
+        </table>
+        <hr />
+        <div id="divParameters" class="row " style="display: none;">
+            @{
+                Html.RenderAction("_Parameters", "Sample", new { EnquiryDetailId = 0 });
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <table id="tblPara" class="data-table table nowrap">
+                <thead>
+                    <tr class="thead-dark">
+                        <th class="table-plus datatable-nosort">
+                            Sr.No.
+                        </th>
+                        <th>
+                            Sample No.
+                        </th>
+                        <th>
+                            Sample Type
+                        </th>
+                        @*<th class="width-12">
                                 Product Group
                             </th>
                             <th class="width-10">
@@ -160,37 +160,37 @@
                             <th class="width-5">
                                 Matrix
                             </th>*@
-                            <th class="table-plus datatable-nosort">
-                                Parameters
-                            </th>
-                            @*<th class="width-5">
+                        <th class="table-plus datatable-nosort">
+                            Parameters
+                        </th>
+                        @*<th class="width-5">
                                 Cost
                             </th>*@
-                            <th>
-                                Remarks
-                            </th>
-                            <th>
-                                Edit
-                            </th>
-                            <th>
-                                Delete
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int i = 0; i < Model.ParaList.Count; i++)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(model => model.ParaList[i].SerialNo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => model.ParaList[i].DisplaySampleName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => model.ParaList[i].SampleTypeProductName)
-                                </td>
-                                @*<td>
+                        <th>
+                            Remarks
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.ParaList.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].SerialNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].DisplaySampleName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].SampleTypeProductName)
+                            </td>
+                            @*<td>
                                        @Html.DisplayFor(model => model.ParaList[i].ProductGroupName)
                                  </td>
                                  <td>
@@ -199,38 +199,37 @@
                                 <td>
                                        @Html.DisplayFor(model => model.ParaList[i].MatrixName)
                                 </td>*@
-                                <td>
-                                    @Html.DisplayFor(model => model.ParaList[i].Parameters)
-                                </td>
-                                @*<td>
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].Parameters)
+                            </td>
+                            @*<td>
                                     @Html.DisplayFor(model => model.ParaList[i].Cost)
                                 </td>*@
-                                <td>
-                                    @Html.DisplayFor(model => model.ParaList[i].Remarks)
-                                </td>
-                                <td>
-                                    <a href="#divParameters" onclick="funEditSampleDetail(@Model.ParaList[i].EnquiryDetailId,@Model.ParaList[i].EnquirySampleID,@Model.ParaList[i].SampleTypeProductId);">Edit</a>
-                                </td>
-                                <td>
-                                    <a href="#divSampleDetails" onclick="funDeleteSampleDetail(@Model.ParaList[i].EnquirySampleID,@Model.ParaList[i].EnquiryDetailId,@ViewBag.WorkOrderId);">Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                @if (Model.ParaList.Count >= 1)
-                {
+                            <td>
+                                @Html.DisplayFor(model => model.ParaList[i].Remarks)
+                            </td>
+                            <td>
+                                <a href="#divParameters" onclick="funEditSampleDetail(@Model.ParaList[i].EnquiryDetailId,@Model.ParaList[i].EnquirySampleID,@Model.ParaList[i].SampleTypeProductId);">Edit</a>
+                            </td>
+                            <td>
+                                <a href="#divSampleDetails" onclick="funDeleteSampleDetail(@Model.ParaList[i].EnquirySampleID,@Model.ParaList[i].EnquiryDetailId,@ViewBag.WorkOrderId);">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (Model.ParaList.Count >= 1)
+            {
 
-                    <div class="col-sm-12 col-md-12">
-                        <input type="button" id="btnSave" value="Save" class="btn btn-info btn-sm" style="float:right" />
-                    </div>
+                <div class="col-sm-12 col-md-12">
+                    <input type="button" id="btnSave" value="Save" class="btn btn-info btn-sm" style="float:right" />
+                </div>
 
-                }
-            </div>
-            <hr />
-        </fieldset>
-    </div>
-
+            }
+        </div>
+        <hr />
+    </fieldset>
+</div>
 
 <script>
 
@@ -452,7 +451,7 @@
         }
         else
         {
-            
+
             data.WorkOrderId = @ViewBag.WorkOrderId; //for int
             let wo = $("#WorkRoder_ID").val();
             data.SampleTypeProductId = $('#WorkOrderCustomer_SampleTypeProductId').val();
@@ -463,7 +462,7 @@
             dataType: "json",
             success: function (r) {
                 $('#second').load('/Enquiry/Sample/_AddSampleDetails?WorkOrderId=' + r.WorkOrderID + "&EnquiryDetailId=" + r.EnquiryDetailId);
-               
+
             }
         });
         }

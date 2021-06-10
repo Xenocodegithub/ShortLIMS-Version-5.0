@@ -1,7 +1,7 @@
 ﻿@model LIMS_DEMO.Core.Lab.SampleParameterAnalysis
 @{ ViewBag.Title = "Tester";
                 Layout = "~/Views/Shared/_Layout.cshtml";
-                var recieptDate = Model.DateReceiptOfSampling == null ? "" : @Convert.ToDateTime(Model.DateReceiptOfSampling).ToString("dd/MM/yyyy"); }
+                var recieptDate = Model.SampleRecievedDate == null ? "" : @Convert.ToDateTime(Model.SampleRecievedDate).ToString("dd/MM/yyyy"); }
 @*@Html.Hidden("SampleRecievedDateHidden1", (object)@Model.DateReceiptOfSampling))*@
 @Html.Hidden("SampleRecievedDateHidden", (object)@Convert.ToDateTime(Model.DateReceiptOfSampling).ToString("yyyy-MM-dd"))
 <div class="main-container">

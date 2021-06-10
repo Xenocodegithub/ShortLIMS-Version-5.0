@@ -696,7 +696,8 @@ namespace LIMS_DEMO.DAL.Arrival
                             //MatrixId = ed.MatrixId,
                             CustomerName = cm.RegistrationName,
                             MatrixName = ed.MatrixMaster.MatrixName,
-                           
+                           ProbableDateOfReport = scoll.ProbableDateOfReport,
+                            
 
                         }).OrderByDescending(scoll => scoll.SampleCollectionId).ToList();
             }
@@ -1591,7 +1592,7 @@ namespace LIMS_DEMO.DAL.Arrival
             try
             {
                // var scoll = _dbContext.SampleCollections.Find(SampleCollectionId);
-                string CompanyCode = "ME";
+                string CompanyCode = "INFO";
                 string CityCode = "NG";
                 //string Year = DateTime.Now.Year.ToString();
                 long reportCount = GetReportCount(Convert.ToInt32(DateTime.Now.Year));

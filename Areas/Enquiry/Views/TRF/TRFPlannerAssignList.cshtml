@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel>
+﻿@model IList<LIMS_DEMO.Areas.Arrival.Models.SampleArrivalModel>
 
 @{
     ViewBag.Title = "SampleReceiverList";
@@ -65,64 +65,65 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SerialNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SampleTypeProductName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SampleLocation)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CustomerName)
-                            </td>
-                            @*<td>
-         @Html.DisplayFor(modelItem => item.SampleName)
-        </td>*@
-                            <td>
-                                @*@Html.ActionLink("View Details", "AddSampleArrival", new { SampleCollectionId = item.SampleCollectionId, SampleNo = item.SampleNo, ARCId = item.ARCId }, new { @class = "btn btn-sm btn-App fa fa-pencil" })
-                                *@
-                                <a href="#" onclick="funView(@item.SampleCollectionId, '@item.SampleNo',@item.WorkOrderID,@item.SampleTypeProductId,@item.EnquirySampleID);" class="sampleName" style="color:blue" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                    @Html.DisplayFor(modelItem => item.SampleName)
-                                    @*@Html.DisplayFor(modelItem => item.SampleNo)*@
-                                </a>
-                            </td>
-                            <td>
-                                @if (item.Url.ToString().Trim() == "Ambient Air")
-                                {
-                                    <select class="form-control" id="@string.Concat("SelectShift",item)" name="@string.Concat("SelectShift",item)">
-                                        <option value="Select Shift" disabled>Select Shift</option>
-                                        <option value="Shift1">24 Hours</option>
-                                        <option value="Shift2">8 Hours</option>
-                                    </select>
-                                    <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetShiftDataArc(@item,@item.SampleCollectionId,'@item.Url');">Print</a>
-                                    //<a target="_blank" href="/Reporting/frmShowReport.aspx?path=AmbientAirARCReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                }
-                                else if (item.Url.ToString().Trim() == "Ambient Noise Level" || item.Url.ToString().Trim() == "Workplace Noise Level" || item.Url.ToString().Trim() == "Source Noise Level")
-                                {
-                                    <a>NA</a>
-                                }
-                                else
-                                {
-                                    <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AnalysisReport.rdl&SampleCollectionId=@item.SampleCollectionId" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                }
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.RequestNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CurrentStatus)
-                            </td>
-                            <td>
-                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AcknowledgementReport.rdl&SampleCollectionId=@item.SampleCollectionId&WorkOrderId=@item.WorkOrderID" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
+                        
+                        @for (int i = 0; i < Model.Count; i++)
+                        { 
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].SerialNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].SampleTypeProductName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].SampleLocation)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].CustomerName)
+                                    </td>
+                                    @*<td>
+                     @Html.DisplayFor(modelItem => item.SampleName)
+                    </td>*@
+                                    <td>
+                                        @*@Html.ActionLink("View Details", "AddSampleArrival", new { SampleCollectionId = item.SampleCollectionId, SampleNo = item.SampleNo, ARCId = item.ARCId }, new { @class = "btn btn-sm btn-App fa fa-pencil" })
+                                        *@
+                                        <a href="#" onclick="funView(@Model[i].SampleCollectionId, '@Model[i].SampleNo',@Model[i].WorkOrderID,@Model[i].SampleTypeProductId,@Model[i].EnquirySampleID);" class="sampleName" style="color:blue" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            @Html.DisplayFor(modelItem => Model[i].SampleName)
+                                            @*@Html.DisplayFor(modelItem => item.SampleNo)*@
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @if (Model[i].Url.ToString().Trim() == "Ambient Air")
+                                        {
+                                            <select class="form-control" id="@string.Concat("SelectShift",Model[i])" name="@string.Concat("SelectShift",Model[i])">
+                                                <option value="Select Shift" disabled>Select Shift</option>
+                                                <option value="Shift1">24 Hours</option>
+                                                <option value="Shift2">8 Hours</option>
+                                            </select>
+                                            <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetShiftDataArc(@Model[i],@Model[i].SampleCollectionId,'@Model[i].Url');">Print</a>
+                                            //<a target="_blank" href="/Reporting/frmShowReport.aspx?path=AmbientAirARCReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        }
+                                        else if (Model[i].Url.ToString().Trim() == "Ambient Noise Level" || Model[i].Url.ToString().Trim() == "Workplace Noise Level" || Model[i].Url.ToString().Trim() == "Source Noise Level")
+                                        {
+                                            <a>NA</a>
+                                        }
+                                        else
+                                        {
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AnalysisReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].RequestNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model[i].CurrentStatus)
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AcknowledgementReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&WorkOrderId=@Model[i].WorkOrderID" class="btn btn-info alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
                 </table>
             </div>
             <!-- Default Basic Forms End -->

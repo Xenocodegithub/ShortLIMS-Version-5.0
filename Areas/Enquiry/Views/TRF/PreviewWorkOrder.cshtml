@@ -1,0 +1,101 @@
+﻿@model LIMS_DEMO.Areas.Enquiry.Models.WorkOrderCustomerListModel
+@{
+    ViewBag.Title = "_AddWorkOrderDetails";
+}
+@Html.HiddenFor(model => model.WorkOrderCustomer.EnquirySampleID, new { @class = "form-control", @autocomplete = "false" })
+@*@Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderId, new { @class = "form-control", @autocomplete = "false" })*@
+@Html.HiddenFor(model => model.WorkOrderCustomer.SampleTypeProductId, new { @class = "form-control", @autocomplete = "false" })
+
+<div>
+
+    <div class="form-group row">
+        <label class="col-sm-12 col-md-2 col-form-label">Customer Name:</label>
+        <div class="col-sm-4">
+            @Html.DisplayFor(model => model.WorkOrderCustomer.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <label class="col-sm-12 col-md-2 col-form-label">Work Order Received On: </label>
+        <div class="col-sm-4">
+            @Html.DisplayFor(model => model.WorkOrderCustomer.expSampleDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.WorkOrderCustomer.expSampleDate, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-12 col-md-2 col-form-label">Work Order No: </label>
+        <div class="col-sm-4">
+            @Html.DisplayFor(model => model.WorkOrderCustomer.WorkOrderNo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderNo, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        @*<label class="col-sm-12 col-md-2 col-form-label">Sample Collected By: </label>
+        <div class="col-sm-4">
+            @Html.DisplayFor(model => model.WorkOrderCustomer.CollectedBy, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.WorkOrderCustomer.CollectedBy, new { htmlAttributes = new { @class = "form-control" } })
+        </div>*@
+    </div>
+</div>
+<div class="col-sm-12">
+    <table id="dtHorizontalExample" class="table table stripe hover nowrap">
+        <thead>
+            <tr class="thead-dark">
+                <th class="table-plus datatable-nosort">
+                    SrNo.
+                </th>
+                <th>
+                    SampleType
+                </th>
+                <th>
+                    ParameterName
+                </th>
+                <th>
+                    Unit Price
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.FinalWorkOrderList.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model.FinalWorkOrderList[i].SerialNo
+                        @Html.HiddenFor(x => Model.FinalWorkOrderList[i].EnquirySampleID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => Model.FinalWorkOrderList[i].SampleTypeProductName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].SampleTypeProductName)
+                        @Html.HiddenFor(x => Model.FinalWorkOrderList[i].DisplaySampleName, new { @class = "form-control" })
+                        @Html.HiddenFor(x => Model.FinalWorkOrderList[i].SampleName, new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => Model.FinalWorkOrderList[i].ParameterName, new { @class = "form-control" })
+                        @*@Html.EditorFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })*@
+                        @*@Html.ValidationMessageFor(x => Model.workorderList[i].ParameterName)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => Model.FinalWorkOrderList[i].UnitPrice, new { @class = "form-control" })
+                        @Html.HiddenFor(x => Model.FinalWorkOrderList[i].UnitPrice)
+                        @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].UnitPrice)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
+                        @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].Total)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<button type="button" onclick="Close();" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+<script>
+    function Close() {
+        $('#exampleModalLAB').modal('close');
+    }
+     $(document).ready(function () {
+        debugger;
+        $("#Collection_EnquirySampleID").val(@ViewBag.EnquirySampleID)
+         $("#Collection_WorkOrderID").val(@ViewBag.WorkOrderId)
+         $("#Collection_SampleTypeProductId").val(@ViewBag.SampleTypeProductId)
+
+    });
+</script>

@@ -135,7 +135,7 @@
                                             </td>
                                             <td>
                                                 @{
-                                                    if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
+                                                    if (Model[i].CurrentStatus.ToLower() == "trfgenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "trfgenerated")
                                                     {
                                                         <a href="#" onclick="funApprove(@Model[i].WorkOrderID,'AssignToId_@i.ToString()')" class="sampleName" style="color: cornflowerblue;font-weight:200">Approve</a>
                                                     }

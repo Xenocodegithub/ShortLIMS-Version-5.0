@@ -1547,6 +1547,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                     CurrentStatus = Item.CurrentStatus,//SampleReceived
                     CollectionDate = Item.CollectionDate,
                     Date = Convert.ToDateTime(Item.CollectionDate),
+                    ProbableDateOfReport = Item.ProbableDateOfReport,
                    
                     MatrixName = Item.MatrixName,
                     //Url = Item.MatrixName,//Url = "Air",//Url=ProductGrp+SubGrp+Matrix
@@ -1560,6 +1561,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
         public ActionResult TRFSampleArrivalList(int SampleCollectionId,int SampleTypeProductId,int EnquirySampleID,int WorkOrderId,string SampleLocation)
         {
             CollectionListModel model = new CollectionListModel();
+            //model.CollectionDate = CoreFactory.samplearrivalEntity.CollectionDate;
             ViewBag.SampleCollectionId = SampleCollectionId;
             ViewBag.EnquirySampleID = (long)EnquirySampleID;
             ViewBag.SampleLocation = SampleLocation;
@@ -1631,6 +1633,8 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             CoreFactory.samplearrivalEntity.SampleTypeId = model.Collection.SampleTypeId;
             CoreFactory.samplearrivalEntity.SampleLocation = model.Collection.SampleLocation;
             CoreFactory.samplearrivalEntity.EnteredBy = LIMS.User.UserMasterID;
+            CoreFactory.samplearrivalEntity.ProbableDateOfReport = model.ProbableDateOfReport;
+            CoreFactory.samplearrivalEntity.CollectionDate = model.CollectionDate;
             List<int> DeviceCount = model.Collection.SampleDeviceId;
             if (DeviceCount != null)
             {

@@ -11,14 +11,15 @@
     @Html.HiddenFor(model => model.WorkOrderID)
     @Html.HiddenFor(model => model.OVC)
     <input id="OVC" name="" type="text" style="margin-left:5px;" value="true" hidden placeholder="Lab Person Name" />
+    <br/>
     <div class="form-group row">
         <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Customer Name: <span class="required" style="color:red">*</span></label>
         <div class="col-sm-4">
             @Html.DropDownListFor(model => model.CustomerMasterId, new SelectList(ViewBag.Customers, "CustomerMasterId", "RegistrationName"), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border" })
             @Html.ValidationMessageFor(model => model.CustomerMasterId, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group row">
+    @*</div>
+    <div class="form-group row">*@
         <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Sample Received Date:  <span class="required" style="color:red">*</span></label>
         <div class="col-sm-4">
             <input type="date" id="expSampleDate" class="form-control" name="WorkOrderReceivedDate" placeholder="dd/MM/yyyy" @*onblur="ValidateDate();*@" required />
@@ -78,13 +79,18 @@
                 <input id="Number" name="" type="text" style="margin-left:5px;" placeholder="Contact Number" />
             </div>
         </div>*@
-    <div class="form-group row">
-        <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Duration(in months):  <span class="required" style="color:red">*</span></label>
-        <div class="col-sm-4">
-            @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", @autocomplete = "false" })
-            @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger col-md-10" })
-        </div>
+<div class="form-group row">
+    <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Duration(in months):  <span class="required" style="color:red">*</span></label>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", @autocomplete = "false" })
+        @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger col-md-10" })
     </div>
+    <label class="col-sm-12 col-md-2 col-form-label">WorkOrder No: <span class="required" style="color:red">*</span></label>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control", @autocomplete = "false" })
+        @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
+    </div>
+</div>
     <div class="form-group row">
         <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Work Order Received On:  <span class="required" style="color:red">*</span></label>
         <div class="col-sm-4">
@@ -110,26 +116,6 @@
             @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger col-md-10" })
         </div>
     </div>
-
-    <div class="form-group row">
-        @*<label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Expected Sample Collection Date: <span class="required" style="color:red">*</span></label>
-            <div class="col-sm-4">
-
-                <input type="date" class="form-control" id="SampleCollectionDate" name="SampleCollectionDate" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />*@
-        @*@Html.TextBoxFor(model => model.SampleCollectionDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy" })*@
-        @*<span class="input-group-addon add-on">
-            <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-             </span>*@
-        @*@Html.ValidationMessageFor(model => model.SampleCollectionDate, "", new { @class = "text-danger col-md-10" })
-
-            </div>*@
-        <label class="col-sm-12 col-md-2 col-form-label">WorkOrder No: <span class="required" style="color:red">*</span></label>
-        <div class="col-sm-4">
-            @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control", @autocomplete = "false" })
-            @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
     <div class="form-group row">
         <label class="col-sm-12 col-md-3 col-form-label">Upload Work Order:</label>
         <div class="col-sm-3">

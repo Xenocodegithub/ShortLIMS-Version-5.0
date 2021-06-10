@@ -195,7 +195,6 @@ namespace LIMS_DEMO.DAL.Lab
                                   SubGroupName = sgm.SubGroupName,
                                   MatrixName = mm.MatrixName,
                                   StatusName = sm.StatusName
-
                               }).FirstOrDefault();
 
                 SampleParameterInfo parameterInfo = new SampleParameterInfo();
@@ -354,7 +353,8 @@ namespace LIMS_DEMO.DAL.Lab
                                                PermissibleMax = pma.PermissibleMax,
                                                RegulatoryMax = pma.RegulatoryMax,
                                                RegulatoryMin = pma.RegulatoryMin,
-                                               ReviewerComment = spp.ReviewerComment
+                                               ReviewerComment = spp.ReviewerComment,
+                                               SampleRecievedDate = sc.CollectionDate,
                                            }).FirstOrDefault();
                 return sampleParameterAnalysis;
             }

@@ -1852,6 +1852,7 @@
     <Content Include="Areas\Enquiry\Views\TRF\TRFList.cshtml" />
     <Content Include="Areas\Enquiry\Views\TRF\TRFPlannerAssignList.cshtml" />
     <Content Include="Areas\Enquiry\Views\TRF\_PlannerSelect.cshtml" />
+    <Content Include="Areas\Enquiry\Views\TRF\PreviewWorkOrder.cshtml" />
     <None Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll" />
     <Content Include="packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll" />

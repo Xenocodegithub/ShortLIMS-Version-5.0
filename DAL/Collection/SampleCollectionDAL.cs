@@ -205,6 +205,8 @@ namespace LIMS_DEMO.DAL.Collection
             sampleCal.EmployeeId = samplecollectionEntity.EmployeeId;
             sampleCal.SampleTypeId = samplecollectionEntity.SampleTypeId;
             sampleCal.SampleLocation = samplecollectionEntity.SampleLocation;
+            sampleCal.ProbableDateOfReport = samplecollectionEntity.ProbableDateOfReport;
+            sampleCal.CollectionDate = samplecollectionEntity.CollectionDate;
             // UserRoleId=1,
             //sampleCal.IsActive = true;
             sampleCal.EnteredBy = samplecollectionEntity.EnteredBy;

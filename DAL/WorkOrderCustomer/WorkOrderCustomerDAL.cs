@@ -360,9 +360,10 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
                     {
                         WorkOrderId = w.WorkOrderId,
                         RegistrationName = o.RegistrationName,
+                        ExpectSampleCollDate = w.ExpectSampleCollDate,
                         WORecieveDate = w.WORecieveDate,
                         WOEndDate = w.WOEndDate,
-                        ExpectSampleCollDate = w.ExpectSampleCollDate,
+                        
                         Duration=w.Duration,
                         WOUpload = w.WOUpload,
                         FileName = w.FileName,
