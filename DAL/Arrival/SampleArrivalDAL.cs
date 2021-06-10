@@ -645,7 +645,7 @@ namespace LIMS_DEMO.DAL.Arrival
                             //MatrixId = ed.MatrixId,
                             MatrixName = ed.MatrixMaster.MatrixName,
 
-                        }).OrderByDescending(scoll => scoll.SampleCollectionId).ToList();
+                        }).OrderByDescending(scoll => scoll.SampleCollectionId).Distinct().ToList();
             }
             catch (Exception ex)
             {
@@ -699,7 +699,7 @@ namespace LIMS_DEMO.DAL.Arrival
                            ProbableDateOfReport = scoll.ProbableDateOfReport,
                             
 
-                        }).OrderByDescending(scoll => scoll.SampleCollectionId).ToList();
+                        }).OrderByDescending(scoll => scoll.SampleCollectionId).Distinct().ToList();
             }
             catch (Exception ex)
             {

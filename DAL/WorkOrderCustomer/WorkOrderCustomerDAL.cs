@@ -394,7 +394,7 @@ namespace LIMS_DEMO.DAL.WorkOrderCustomer
                             IsActive =w.IsActive,
                             //CommunicationMode = mdc.CommunicationMode,
                             CustomerName = ctm.RegistrationName,
-                            CurrentStatus = wo.StatusName ,
+                            CurrentStatus = wo.StatusName == null ? "" : wo.StatusName,
                             AssignToId = w.AssignedToId,
                             Remark = w.Remark,
                             IsIGST = w.IsIGST,

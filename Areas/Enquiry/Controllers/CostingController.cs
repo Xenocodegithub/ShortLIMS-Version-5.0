@@ -118,6 +118,8 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
         {
             ViewBag.GSTRate = GSTRate;
             CostingModel model = new CostingModel();
+            model.EnquirySampleID = (Int32)EnquirySampleID;
+            model.CostingId = (Int32)CostingId;
             CoreFactory.costingEntity = BALFactory.costingBAL.GetCosting((Int32)EnquirySampleID, (Int32)CostingId);
             if (CoreFactory.costingEntity != null)
             {

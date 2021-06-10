@@ -449,7 +449,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
             ViewBag.WorkOrderId = WorkOrderId;
             model.WorkOrderCustomer.WorkOrderId = (Int32)WorkOrderId;
             model.WorkOrderCustomer.CostingId = CostingId;
-
+            model.WorkOrderCustomer.EnquirySampleID = (Int32)EnquirySampleId;
             CoreFactory.enquirySampleList = BALFactory.workordercustomerBAL.GetWorkOrderCustomerSampleList((Int32)WorkOrderId);
             int i = 1;
             foreach (var sample in CoreFactory.enquirySampleList)
@@ -561,7 +561,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
         public JsonResult _Costing(WorkOrderCustomerListModel model)
         {
             CoreFactory.workcostingEntity = new Core.WorkOrderCustomer.WorkOderCostingEntity();
-            CoreFactory.workcostingEntity.EnquirySampleID = model.WorkOrderCustomer.getID;
+            
             CoreFactory.workcostingEntity.TotalCharges = model.WorkOrderCustomer.TotalCharges;
             CoreFactory.workcostingEntity.CollectionCharges = model.WorkOrderCustomer.SampleAmount;
             CoreFactory.workcostingEntity.TransportCharges = model.WorkOrderCustomer.TransportationAmount;
@@ -572,6 +572,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Controllers
             CoreFactory.workcostingEntity.EnteredBy = LIMS.User.UserMasterID;
             if (model.WorkOrderCustomer.CostingId == null || model.WorkOrderCustomer.CostingId == 0)
             {
+                CoreFactory.workcostingEntity.EnquirySampleID = model.WorkOrderCustomer.getID;
                 BALFactory.workordercustomerBAL.AddWorkOrderCosting(CoreFactory.workcostingEntity);
                 return Json(new { status = "added" }, JsonRequestBehavior.AllowGet);
             }

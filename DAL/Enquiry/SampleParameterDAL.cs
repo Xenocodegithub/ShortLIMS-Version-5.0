@@ -520,6 +520,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                            where e.EnquirySampleID == EnquirySampleID
                            select new
                            {
+                               e.EnquiryParameterDetailID,
                                pr.ParameterName,
                                pr.ParameterMasterId,
                                e.ParameterMappingId,

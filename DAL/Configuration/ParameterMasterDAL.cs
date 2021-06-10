@@ -110,6 +110,7 @@ namespace LIMS_DEMO.DAL.Configuration
                     UnitId = parametermasterEntity.UnitId,
                     InField = parametermasterEntity.IsField,
                     LOD = parametermasterEntity.LOD,
+                    DisciplineId = parametermasterEntity.DisciplineId,
                     MaxTestingRange = parametermasterEntity.MaxRange,
                     PermissibleMin = parametermasterEntity.PermissibleMin,
                     PermissibleMax = parametermasterEntity.PermissibleMax,
