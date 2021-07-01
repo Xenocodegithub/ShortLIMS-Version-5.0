@@ -71,6 +71,9 @@
                         <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
+                                    <th hidden class="table table stripe hover nowrap">
+
+                                    </th>
                                     <th class="table-plus datatable-nosort">
                                         Work Order No
                                     </th>
@@ -114,118 +117,121 @@
                                 {
                                     if (Model[i].EnteredBy == LIMS_DEMO.LIMS.User.UserMasterID)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WorkOrderNo)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderId)
-                                                <input type="hidden" name="@string.Concat("WOIDTemp",i)" value="@Model[i].WorkOrderId" />
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CustomerName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CurrentStatus)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WORecvDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WOEDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
-                                            </td>
-                                            <td>
-                                                @{
-                                                    if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
-                                                    {
-                                                        <a href="#" onclick="funApprove(@Model[i].WorkOrderId,'AssignToId_@i.ToString()')" class="sampleName" style="color: cornflowerblue;font-weight:200">Approve</a>
-                                                    }
-                                                    else if (Model[i].CurrentStatus.ToLower() == "worejected")
-                                                    { }
-                                                    else
-                                                    {
-                                                        <a href="#" class=" btn-disabled">Approved</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].CurrentStatus.ToLower() != "worejected")
-                                                    {
+                                <tr>
+                                    <td hidden>
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WorkOrderNo)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                        <input type="hidden" name="@string.Concat("WOIDTemp",i)" value="@Model[i].WorkOrderId" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CurrentStatus)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WORecvDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WOEDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
+                                            {
+                                                <a href="#" onclick="funApprove(@Model[i].WorkOrderId,'AssignToId_@i.ToString()')" class="sampleName" style="color: cornflowerblue;font-weight:200">Approve</a>
+                                            }
+                                            else if (Model[i].CurrentStatus.ToLower() == "worejected")
+                                            { }
+                                            else
+                                            {
+                                                <a href="#" class=" btn-disabled">Approved</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].CurrentStatus.ToLower() != "worejected")
+                                            {
 
-                                                        @Html.TextBoxFor(item => Model[i].Remarks, new { @class = "form-control", @id = "Remarks_" + i.ToString(), @style = "color:black" })
-                                                        <span>&nbsp;</span> <a href="#" onclick="funReject('Remarks_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName" style="color:red;font-weight:200;"> Reject</a>
+                                                @Html.TextBoxFor(item => Model[i].Remarks, new { @class = "form-control", @id = "Remarks_" + i.ToString(), @style = "color:black" })
+                                                <span>&nbsp;</span> <a href="#" onclick="funReject('Remarks_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName" style="color:red;font-weight:200;"> Reject</a>
 
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="#" class=" btn-disabled">WORK Order Rejected</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].Remarks)
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
-                                                    {
-                                                        <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a id="btnWorkOrder" target="_blank" href="/Enquiry/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                <select class="form-control" id="@string.Concat("SelMonth",i)" name="@string.Concat("SelMonth",i)" style="width:100px;">
-                                                    <option value="Select Month" disabled>Select Month</option>
-                                                    <option value="JAN">JAN</option>
-                                                    <option value="FEB">FEB</option>
-                                                    <option value="MAR">MAR</option>
-                                                    <option value="APR">APR</option>
-                                                    <option value="MAY">MAY</option>
-                                                    <option value="JUN">JUN</option>
-                                                    <option value="JUL">JUL</option>
-                                                    <option value="AUG">AUG</option>
-                                                    <option value="SEP">SEP</option>
-                                                    <option value="OCT">OCT</option>
-                                                    <option value="NOV">NOV</option>
-                                                    <option value="DEC">DEC</option>
-                                                    <option value="None">None</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-control" id="@string.Concat("Year",i)" name="@string.Concat("Year",i)" style="width:100px; ">
-                                                    <option value="Select Year" disabled>Select Year</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2020">2022</option>
-                                                    <option value="2021">2023</option>
-                                                    <option value="2020">2024</option>
-                                                    <option value="2021">2025</option>
-                                                    <option value="2020">2026</option>
-                                                    <option value="2021">2027</option>
-                                                    <option value="2020">2028</option>
-                                                    <option value="2021">2029</option>
-                                                    <option value="2020">2030</option>
-                                                    <option value="2021">2031</option>
-                                                    <option value="2020">2032</option>
-                                                    <option value="2021">2033</option>
-                                                    <option value="2020">2034</option>
-                                                    <option value="2021">2035</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                @if (@Model[i].IsIGST == true)
-                                                {
-                                                    <a href="" class="btn btn-primary alignleft btn-sm" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,1,@i);">Print</a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="" class="btn btn-primary alignleft btn-sm" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,0,@i);">Print</a>
-                                                }
-                                            </td>
-                                        </tr>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class=" btn-disabled">WORK Order Rejected</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].Remarks)
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
+                                            {
+                                                <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
+                                            }
+                                            else
+                                            {
+                                                <a id="btnWorkOrder" target="_blank" href="/WorkOrderCustomer/WorkOrderCustomer/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="@string.Concat("SelMonth",i)" name="@string.Concat("SelMonth",i)" style="width:100px;">
+                                            <option value="Select Month" disabled>Select Month</option>
+                                            <option value="JAN">JAN</option>
+                                            <option value="FEB">FEB</option>
+                                            <option value="MAR">MAR</option>
+                                            <option value="APR">APR</option>
+                                            <option value="MAY">MAY</option>
+                                            <option value="JUN">JUN</option>
+                                            <option value="JUL">JUL</option>
+                                            <option value="AUG">AUG</option>
+                                            <option value="SEP">SEP</option>
+                                            <option value="OCT">OCT</option>
+                                            <option value="NOV">NOV</option>
+                                            <option value="DEC">DEC</option>
+                                            <option value="None">None</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="@string.Concat("Year",i)" name="@string.Concat("Year",i)" style="width:100px; ">
+                                            <option value="Select Year" disabled>Select Year</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2022</option>
+                                            <option value="2021">2023</option>
+                                            <option value="2020">2024</option>
+                                            <option value="2021">2025</option>
+                                            <option value="2020">2026</option>
+                                            <option value="2021">2027</option>
+                                            <option value="2020">2028</option>
+                                            <option value="2021">2029</option>
+                                            <option value="2020">2030</option>
+                                            <option value="2021">2031</option>
+                                            <option value="2020">2032</option>
+                                            <option value="2021">2033</option>
+                                            <option value="2020">2034</option>
+                                            <option value="2021">2035</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @if (@Model[i].IsIGST == true)
+                                        {
+                                            <a href="" class="btn btn-primary alignleft btn-sm" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,1,@i);">Print</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="" class="btn btn-primary alignleft btn-sm" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,0,@i);">Print</a>
+                                        }
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
@@ -237,6 +243,9 @@
                         <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
+                                    <th hidden class="table table stripe hover nowrap">
+
+                                    </th>
                                     <th class="table-plus datatable-nosort">
                                         Work Order No
                                     </th>
@@ -274,89 +283,92 @@
                                 {
                                     if (Model[i].EnteredBy == LIMS_DEMO.LIMS.User.UserMasterID)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WorkOrderNo)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderId)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CustomerName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CurrentStatus)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WORecvDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WOEDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].Remarks)
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
-                                                    {
-                                                        <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a id="btnWorkOrder" target="_blank" href="/Enquiry/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                <select class="form-control" id="@string.Concat("SelMonth",i)" name="@string.Concat("SelMonth",i)">
-                                                    <option value="Select Month" disabled>Select Month</option>
-                                                    <option value="JAN">JAN</option>
-                                                    <option value="FEB">FEB</option>
-                                                    <option value="MAR">MAR</option>
-                                                    <option value="APR">APR</option>
-                                                    <option value="MAY">MAY</option>
-                                                    <option value="JUN">JUN</option>
-                                                    <option value="JUL">JUL</option>
-                                                    <option value="AUG">AUG</option>
-                                                    <option value="SEP">SEP</option>
-                                                    <option value="OCT">OCT</option>
-                                                    <option value="NOV">NOV</option>
-                                                    <option value="DEC">DEC</option>
-                                                    <option value="None">None</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="form-control" id="@string.Concat("Year",i)" name="@string.Concat("Year",i)">
-                                                    <option value="Select Year" disabled>Select Year</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2020">2022</option>
-                                                    <option value="2021">2023</option>
-                                                    <option value="2020">2024</option>
-                                                    <option value="2021">2025</option>
-                                                    <option value="2020">2026</option>
-                                                    <option value="2021">2027</option>
-                                                    <option value="2020">2028</option>
-                                                    <option value="2021">2029</option>
-                                                    <option value="2020">2030</option>
-                                                    <option value="2021">2031</option>
-                                                    <option value="2020">2032</option>
-                                                    <option value="2021">2033</option>
-                                                    <option value="2020">2034</option>
-                                                    <option value="2021">2035</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                @if (@Model[i].IsIGST == true)
-                                                {
-                                                    <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,1,@i);">Print</a>
-                                                }
-                                                else
-                                                {
-                                                    <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,0,@i);">Print</a>
-                                                }
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td hidden>
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WorkOrderNo)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CurrentStatus)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WORecvDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WOEDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].Remarks)
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
+                                            {
+                                                <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
+                                            }
+                                            else
+                                            {
+                                                <a id="btnWorkOrder" target="_blank" href="/WorkOrderCustomer/WorkOrderCustomer/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="@string.Concat("SelMonth",i)" name="@string.Concat("SelMonth",i)">
+                                            <option value="Select Month" disabled>Select Month</option>
+                                            <option value="JAN">JAN</option>
+                                            <option value="FEB">FEB</option>
+                                            <option value="MAR">MAR</option>
+                                            <option value="APR">APR</option>
+                                            <option value="MAY">MAY</option>
+                                            <option value="JUN">JUN</option>
+                                            <option value="JUL">JUL</option>
+                                            <option value="AUG">AUG</option>
+                                            <option value="SEP">SEP</option>
+                                            <option value="OCT">OCT</option>
+                                            <option value="NOV">NOV</option>
+                                            <option value="DEC">DEC</option>
+                                            <option value="None">None</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="@string.Concat("Year",i)" name="@string.Concat("Year",i)">
+                                            <option value="Select Year" disabled>Select Year</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2022</option>
+                                            <option value="2021">2023</option>
+                                            <option value="2020">2024</option>
+                                            <option value="2021">2025</option>
+                                            <option value="2020">2026</option>
+                                            <option value="2021">2027</option>
+                                            <option value="2020">2028</option>
+                                            <option value="2021">2029</option>
+                                            <option value="2020">2030</option>
+                                            <option value="2021">2031</option>
+                                            <option value="2020">2032</option>
+                                            <option value="2021">2033</option>
+                                            <option value="2020">2034</option>
+                                            <option value="2021">2035</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        @if (@Model[i].IsIGST == true)
+                                        {
+                                            <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,1,@i);">Print</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetParameterForInvoice(@Model[i].WorkOrderId,0,@i);">Print</a>
+                                        }
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
@@ -365,9 +377,12 @@
                     }
                     @if (ViewBag.RoleName == "HOD")
                     {
-                        <table  class="table table stripe hover nowrap">
+                        <table id="dtHorizontalExample"  class="table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
+                                    <th hidden class="table table stripe hover nowrap">
+
+                                    </th>
                                     <th class="table-plus datatable-nosort">
                                         Work Order No
                                     </th>
@@ -382,6 +397,9 @@
                                     </th>
                                     <th>
                                         View Details
+                                    </th>
+                                    <th>
+                                        WOPreview
                                     </th>
                                     <th>
                                         Status
@@ -408,80 +426,88 @@
                                 {
                                     if (Model[i].CurrentStatus.ToLower() != "worejected")
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WorkOrderNo)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderId)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CustomerName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WORecvDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WOEDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
-                                                    {
-                                                        <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a id="btnWorkOrder" target="_blank" href="/Enquiry/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CurrentStatus)
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
-                                                    {
-                                                        <a href="#" onclick="funApprove(@Model[i].WorkOrderId,'AssignToId_@i.ToString()')" class="sampleName">Approve</a>
-                                                    }
-                                                    else
-                                                    { <a href="#" class=" btn-disabled">Approved</a>}
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.DropDownListFor(item => Model[i].AssignToId, new SelectList(ViewBag.SurveyingLead, "UserMasterID", "UserName", Model[i].AssignToId), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @id = "AssignToId_" + i.ToString() })
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].CurrentStatus.ToLower() == "woapproved" && Model[i].AssignToId == null)
-                                                    {
-                                                        <a href="#" onclick="funAssign('AssignToId_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Assign STL</a>
-                                                    }
-                                                    else if (Model[i].CurrentStatus.ToLower() == "wogenerated")
-                                                    {
-                                                        <a>
-                                                            First Approve Work Order
-                                                        </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="#" class=" btn-disabled">Assigned</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.TextBoxFor(item => Model[i].Remarks, new { @class = "form-control", @id = "Remarks_" + i.ToString(), @style = "color:black" })
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].CurrentStatus.ToLower() != "worejected")
-                                                    {
-                                                        <a href="#" onclick="funReject('Remarks_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Send To BDM</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="#" class=" btn-disabled">WORK Order Rejected</a>
-                                                    }
-                                                }
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td hidden>
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WorkOrderNo)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WORecvDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WOEDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
+                                            {
+                                                <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
+                                            }
+                                            else
+                                            {
+                                                <a id="btnWorkOrder" target="_blank" href="/WorkOrderCustomer/WorkOrderCustomer/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="funView(@Model[i].EnquirySampleID,@Model[i].WorkOrderId);" class="btn btn-success btn-sm" style="color: white;background-color:green;width: 90px;" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            WOPreview
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CurrentStatus)
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
+                                            {
+                                                <a href="#" onclick="funApprove(@Model[i].WorkOrderId,'AssignToId_@i.ToString()')" class="sampleName">Approve</a>
+                                            }
+                                            else
+                                            { <a href="#" class=" btn-disabled">Approved</a>}
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(item => Model[i].AssignToId, new SelectList(ViewBag.SurveyingLead, "UserMasterID", "UserName", Model[i].AssignToId), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @id = "AssignToId_" + i.ToString() })
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].CurrentStatus.ToLower() == "woapproved" && Model[i].AssignToId == null)
+                                            {
+                                                <a href="#" onclick="funAssign('AssignToId_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Assign STL</a>
+                                            }
+                                            else if (Model[i].CurrentStatus.ToLower() == "wogenerated")
+                                            {
+                                                <a>
+                                                    First Approve Work Order
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class=" btn-disabled">Assigned</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(item => Model[i].Remarks, new { @class = "form-control", @id = "Remarks_" + i.ToString(), @style = "color:black" })
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].CurrentStatus.ToLower() != "worejected")
+                                            {
+                                                <a href="#" onclick="funReject('Remarks_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Send To BDM</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class=" btn-disabled">WORK Order Rejected</a>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
@@ -495,9 +521,35 @@
         </div>
     </div>
 </div>
+<div class="modal fade bd-example-modal-lg" id="exampleModalLAB" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:navy">
+                <h5 class="modal-title" style="color: #FBF8BE;">Preview WorkOrder</h5>
+                <button type="button" onclick="$('#modelclose').hide();" class="close" data-dismiss="modal" style="color:white;float:right">&times;</button>
 
+                @*<button type="button" onclick="$('#modelclose').hide();" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body" id="Preview_Data" style="margin:10px 10px 10px 20px; overflow:auto">
+
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-
+    function funView(EnquirySampleID, WorkOrderId) {
+        debugger;
+        $("#Preview_Data").empty();
+        $("#Preview_Data").load(`/WorkOrderCustomer/WorkOrderCustomer/WOPreview?EnquirySampleID=${EnquirySampleID}&WorkOrderId=${WorkOrderId}`);
+    }
+    //$(document).ready(function () {
+    //    $('#dtHorizontalExample').Table({
+    //        "scrollX": true
+    //    });
+    //    $('.dataTables_length').addClass('bs-select');
+    //});
     function GetParameterForInvoice(WOID, igst, i) {
         var m = "#SelMonth" + i;
         var monthName = $(m).val();

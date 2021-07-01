@@ -472,7 +472,7 @@
             $('#btnSave').html('Submit');
             $('#btnSave').prop('disabled', false);
 
-            location.href = '/Collection/SampleCollection/AddSampleCollection?SampleCollectionId=' + $('#SampleCollectionIdHidden').val() + "&EnquirySampleID=" + $("#Collection_EnquirySampleID").val();
+            location.href = '/Collection/SampleCollection/CollectorList?CollectedBy=' + 1;
         } else {
             $('#btnSubmit').html('Submit');
             $('#btnSubmit').prop('disabled', false);

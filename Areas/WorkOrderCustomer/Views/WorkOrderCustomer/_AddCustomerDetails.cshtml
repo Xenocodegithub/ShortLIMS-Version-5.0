@@ -47,7 +47,6 @@
                 <label class="col-sm-12 col-md-2 col-form-label" for="inputEmail1">Work Order Received On:  <span class="required" style="color:red">*</span></label>
                 <div class="col-sm-4">
                     <input type="date" id="WorkOrderReceivedDate" class="form-control" name="WorkOrderReceivedDate" placeholder="dd/MM/yyyy" onblur="ValidateDate100();" />
-                
                     @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger col-md-10" })
 
                 </div>
@@ -56,8 +55,6 @@
 
                     @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly" })
                     @Html.HiddenFor(model => model.WorkOrderEndDate)
-                  
-
                     @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger col-md-10" })
                 </div>
             </div>

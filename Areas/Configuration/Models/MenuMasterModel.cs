@@ -12,7 +12,7 @@ namespace LIMS_DEMO.Areas.Configuration.Models
         public int MenuMasterId { get; set; }
 
         [Display(Name = "Menu Name")]
-        [Required(ErrorMessage = "Menu field is Required")]
+        //[Required(ErrorMessage = "Menu field is Required")]
         public string Menu { get; set; }
         [Display(Name = "Role Name")]
         public string RoleName { get; set; }

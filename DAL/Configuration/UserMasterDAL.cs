@@ -75,7 +75,7 @@ namespace LIMS_DEMO.DAL.Configuration
                 UserName = u.UserName,
                 UserMasterID = u.UserMasterID,
                 IsActive = u.IsActive
-            }).ToList();
+            }).OrderByDescending(u => u.UserMasterID).ToList();
         }
     }
 }

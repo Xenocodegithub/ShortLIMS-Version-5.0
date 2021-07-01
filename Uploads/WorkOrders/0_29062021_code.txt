@@ -1,0 +1,58 @@
+[HttpPost]
+        public ActionResult fathcItemDetails(int ItemID)
+        {
+            bool InventoryTypeMasterIsActive = true;
+            bool InventoryTypeMasterIsDeleted = false;
+            bool InventoryCategoryMasterIsActive = true;
+            bool InventoryCategoryMasterIsDeleted = false;
+            bool IsActive = true;
+            bool IsDeleted = false;
+            bool InventoryItemMasterIsActive = true;
+            bool InventoryItemMasterIsDeleted = false;
+            int ID = ItemID;
+            int InventoryCategoryMasterID = 0;
+            int InventoryTypeMasterID = 0;
+            string Mode = "SELECT BY ITEM ID, CATEGORY ID AND INVENTORY ID AND ACTIVE AND DELETED PARAMETER";
+
+            CoreFactory.InventoryItemList = BALFactory.NewInventoryBAL.GetInventoryItemMasterBySearch12(ID, InventoryCategoryMasterID, InventoryTypeMasterID,InventoryItemMasterIsActive,InventoryItemMasterIsDeleted,InventoryCategoryMasterIsActive,InventoryCategoryMasterIsDeleted,InventoryTypeMasterIsActive,InventoryTypeMasterIsDeleted,IsActive,Mode);
+
+            if (CoreFactory.InventoryItemList.Count == 0)
+            {
+                if (CoreFactory.InventoryItemList != null)
+                {
+                    InventoryItemMasterModel  model = new InventoryItemMasterModel();
+                    List<InventoryItemMasterModel> ItemDataList = new List<InventoryItemMasterModel>();
+                    foreach (var item in CoreFactory.InventoryItemList)
+                    {
+                        ItemDataList.Add(new InventoryItemMasterModel()
+                        { 
+                         ItemID=item.ID,
+                         CatagoryMasterID=item.CatagoryMasterID,
+                         InventoryTypeID=item.InventoryTypeID,
+                         UnitID=item.UnitID,
+                         CategoryName=item.CategoryName,
+                         NameOfStock=item.Name,
+                         Code=item.Code,
+                         MinimumStock=item.MinimumStock,
+                         AvailableStock=item.AvailableStock,
+                         IsActive=item.IsActive,
+                         Capacity=item.Capacity,
+                         InventoryTypeName=item.InventoryTypeName
+                        } );
+                    }
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return Json(new { status = "success", message = "Record created successfully.", ItemDetails = ItemDataList });
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return Json(new { status = "info", message = "Internal Server Error Occured" });
+                }
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return Json(new { status = "fail", message = "Internal Server Error Occured" });
+            }
+            return View();
+        }

@@ -135,7 +135,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             UserName = u.UserName,
                             IsActive = e.IsActive,
 
-                        }).ToList();
+                        }).OrderByDescending(e => e.UserRoleId).ToList();
             }
             catch (Exception ex)
             {

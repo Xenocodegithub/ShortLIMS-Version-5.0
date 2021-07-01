@@ -70,6 +70,9 @@
                         <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                             <thead>
                                 <tr class="thead-dark">
+                                    <th hidden>
+
+                                    </th>
                                     <th class="table-plus datatable-nosort">
                                         Work Order No
                                     </th>
@@ -111,6 +114,9 @@
                                     if (Model[i].CurrentStatus.ToLower() != "worejected")
                                     {
                                         <tr>
+                                            <td hidden>
+                                                @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                            </td>
                                             <td>
                                                 @Html.DisplayFor(item => Model[i].WorkOrderNo)
                                                 @Html.HiddenFor(item => Model[i].WorkOrderId)
@@ -133,7 +139,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <a id="btnWorkOrder" target="_blank" href="/Enquiry/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
+                                                        <a id="btnWorkOrder" target="_blank" href="/WorkOrderCustomer/WorkOrderCustomer/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
                                                     }
                                                 }
                                             </td>

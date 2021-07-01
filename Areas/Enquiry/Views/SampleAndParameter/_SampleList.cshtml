@@ -1,87 +1,117 @@
-﻿
-@model IEnumerable<LIMS_DEMO.Areas.Enquiry.Models.SampleAndParametersModel>
-
+﻿@model LIMS_DEMO.Areas.Enquiry.Models.SampleAndParametersModel
+@Html.AntiForgeryToken()
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
-    <input type="hidden" id="EnquiryId" value="@ViewBag.EnquiryId" />
-    @if (Model.Count() > 0)
-    {
-        <div class="pb-20">
-            <table class="data-table table nowrap">
-                <thead class="thead-dark">
+    <div class="pb-20">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.location.EnquirySampleID)
+        @Html.HiddenFor(model => model.location.EnquiryId)
+        @Html.HiddenFor(model => model.location.count)
+        @Html.HiddenFor(model => model.location.SampleLocationId)
+        <table style="border-collapse:collapse" border="1" align="center" class="data-table table nowrap" id="tblParameter">
+            <tr class="thead-dark">
+                <th class="table-plus datatable-nosort">
+                    SrNo
+                </th>
+                <th>
+                    Location
+                </th>
+                @if (ViewBag.state != "view")
+                {
+                    <th>
+                        Action
+                    </th>
+                }
+            </tr>
+            <tbody id="tblParameterBody">
+                @for (int i = 0; i < Model.locationList.Count; i++)
+                {
                     <tr>
-                        <th class="table-plus datatable-nosort">Sr.No.</th>
-                        <th>Sample No.</th>
-                        <th>SampleType</th>
-                        @*<th>Product Group</th>
-                            <th>Sub Group</th>*@
-                        <th>Parameters</th>
-                        <th>Remarks</th>
-                        <th>Action</th>
+                        <td>
+                            @Html.DisplayFor(model => model.locationList[i].SrNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.locationList[i].Location)
+                        </td>
+                        @if (ViewBag.state != "view")
+                        {
+                            <td>
+                                <a class="fa fa-pencil-square-o" onclick="editLOC(@Model.locationList[i].SampleLocationId,'@Model.locationList[i].Location');"></a>
+                            </td>
+                        }
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SrNo)
-                            </td>
-                            <td>
-                                @Html.HiddenFor(modelItem => item.SampleName)
-                                @Html.DisplayFor(modelItem => item.DisplaySampleName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SampleTypeProductName)
-                            </td>
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.ProductGroupName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SubGroupName)
-                                </td>
-                            *@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Parameters)
-                            </td>
-                            @*<td>
-                                   @Html.DisplayFor(modelItem => item.Cost)
-                                </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Remarks)
-                            </td>
-                            <td>
-                                <a href="#divParameters" onclick="funEditSampleDetail(@item.EnquiryDetailId, @item.EnquirySampleID);">Edit</a>
-                                <a href="#divSampleDetails" onclick="funDeleteSampleDetail(@item.EnquirySampleID,'@item.CurrentStatus');">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                }
+            </tbody>
+        </table>
+        <br />
+        <div>
+            @if (Model.location.count != 0)
+            {
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Location: </label>
+                    <div class="col-sm-5">
+                        @Html.TextBoxFor(model => model.location.Location, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-9" style="text-align:center;margin-top:-52px;">
+                    @*<input id="btnSubmit" value="Create"  class="btn btn-primary alignright" />*@
+                    <button type="button" class="btn btn-info btn-sm" id="btnSubmitPopUp" style="float:right">Create</button>
+                </div>}
         </div>
-        <div class="row align-items-end item form-group">
-            <div class="col-md-12 col-sm-12" style="margin-top:20px">
-                <input type="button" id="btnSave" value="Save" class="btn btn-info alignright btn-sm" style="float:right" />
-            </div>
-        </div>
-    }
+    </div>
 </div>
 <!-- Simple Datatable End -->
-
-<script type="text/javascript">
-
-    $(function () {
-        var EnquiryId =  parseInt(@ViewBag.EnquiryId);
-        $("#btnSave").click(function () {
+<script>
+    $(document).ready(function () {
+        $('#btnSubmitPopUp').clearForm();
+    }
+    //function LocationUpdated(result) {
+    //    debugger
+    //    alert('Location Updated');
+    //    //window.location.href = '/Enquiry/AddWorkOrder?EnquiryId=' + $("#location_EnquiryId").val();
+    //    $('#LocationPopup').show();
+    //    //window.location.href = '/Enquiry/_AddLocation?EnquirySampleID=' + $("#location_EnquirySampleID").val() +'&EnquiryId=' + $("#location_EnquiryId").val();
+    //})
+</script>
+<script>
+        $("#btnSubmitPopUp").click(function () {
             debugger
-            if ($(this).val() == "Save") {
-                $(this).val("Next");
-                alert('Save & Next!')
+            var data1 = {
+                "location.Location": $('#location_Location').val(),
+                "location.EnquirySampleID": $('#location_EnquirySampleID').val(),
+                "location.count": $('#location_count').val(),
+                "LocationId": $('#location_SampleLocationId').val(),
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Enquiry/WorkOrder/_AddLocation",
+                data: data1,
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    var $cloneRow = "";
+                    for (var i = 0; i < data.list.length; i++) {
+                        $cloneRow = $cloneRow + "<tr>";
+                        $cloneRow = $cloneRow + "<td>" + (parseInt(i) + 1) + "</td>";
+                        $cloneRow = $cloneRow + "<td>" + data.list[i].Location + "</td>";
+                        //$cloneRow = $cloneRow + "<td> <a class='fa fa-pencil-square-o' onclick='editLOC(" + data.list[i].SampleLocationId + ",'" + data.list[i].Location + "');'></a> </td>";
+                        $cloneRow = $cloneRow + `<td> <a class="fa fa-pencil-square-o" onclick="editLOC(${data.list[i].SampleLocationId},'${data.list[i].Location}');"></a> </td>`;
+                        $cloneRow = $cloneRow + "</tr>";
+                    }
+                    $('#tblParameterBody').html("");
+                    $('#tblParameterBody').html($cloneRow);
+                    $('#location_Location').val("");
+                    $("#btnSubmitPopUp").text("Create");
+                    if (data.status == "Fail") {
+                        alert("Number of Location should not be greater or less than Number of Sample !!!");
+                    }
+                }
+            });
+        });
+        function editLOC(ID, loc) {
+            debugger;
+            $("#location_Location").val(loc);
+            $('#location_SampleLocationId').val(ID);
+            $("#btnSubmitPopUp").text("Update");
         }
-        else {
-               alert('Go to Add Costing Page!')
-               window.location.href = '/Enquiry/Costing/AddCosting?EnquiryId='+ EnquiryId;
-        }
-    });
-});
 </script>

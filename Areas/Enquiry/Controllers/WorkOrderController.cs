@@ -710,7 +710,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
 
             return RedirectToAction("WorkOrderList");
         }
-        public ActionResult _AddLocation(long? EnquirySampleID = 0, int? EnquiryId = 0, int? count = 0)
+        public ActionResult _AddLocation(long? EnquirySampleID = 0, int? EnquiryId = 0, int? count = 0, string state = null)
         {
             SampleAndParametersModel model = new SampleAndParametersModel();
             model.location = new SampleLocationModel();
@@ -718,7 +718,10 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             model.location.EnquiryId = (long)EnquiryId;
             model.location.EnquirySampleID = (long)EnquirySampleID;
             model.location.count = (Int32)count;
-
+            if (state == "view")
+            {
+                ViewBag.state = state;
+            }
             CoreFactory.sampleLocationList = BALFactory.sampleParameterBAL.GetSampleLocationList((Int32)EnquirySampleID);
             int i = 1;
             foreach (var loc in CoreFactory.sampleLocationList)
@@ -741,11 +744,15 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             CoreFactory.enquiryParameterEntity = new EnquiryParameterEntity();
             CoreFactory.enquiryParameterEntity.Location = model.location.Location;
             CoreFactory.enquiryParameterEntity.EnquirySampleID = model.location.EnquirySampleID;
-             CoreFactory.enquiryParameterEntity.IsActive = true;
+            if (model.LocationId != 0)
+            {
+                CoreFactory.enquiryParameterEntity.SampleLocationId = model.LocationId;
+            }
+            CoreFactory.enquiryParameterEntity.IsActive = true;
             CoreFactory.enquiryParameterEntity.EnteredBy = LIMS.User.UserMasterID;
             CoreFactory.sampleLocationList = BALFactory.sampleParameterBAL.GetSampleLocationList((Int32)model.location.EnquirySampleID);
 
-            if (CoreFactory.sampleLocationList.Count < model.location.count)
+            if (CoreFactory.sampleLocationList.Count < model.location.count || model.LocationId != 0)
             {
                 long SampleLocationId = BALFactory.workOrderBAL.AddLocation(CoreFactory.enquiryParameterEntity);
                 CoreFactory.sampleLocationList = BALFactory.sampleParameterBAL.GetSampleLocationList((Int32)model.location.EnquirySampleID);
@@ -756,6 +763,24 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                 CoreFactory.sampleLocationList = BALFactory.sampleParameterBAL.GetSampleLocationList((Int32)model.location.EnquirySampleID);
                 return Json(new { status = "Fail", list = CoreFactory.sampleLocationList }, JsonRequestBehavior.AllowGet);
             }
+            //CoreFactory.enquiryParameterEntity = new EnquiryParameterEntity();
+            //CoreFactory.enquiryParameterEntity.Location = model.location.Location;
+            //CoreFactory.enquiryParameterEntity.EnquirySampleID = model.location.EnquirySampleID;
+            // CoreFactory.enquiryParameterEntity.IsActive = true;
+            //CoreFactory.enquiryParameterEntity.EnteredBy = LIMS.User.UserMasterID;
+            //CoreFactory.sampleLocationList = BALFactory.sampleParameterBAL.GetSampleLocationList((Int32)model.location.EnquirySampleID);
+
+            //if (CoreFactory.sampleLocationList.Count < model.location.count)
+            //{
+            //    long SampleLocationId = BALFactory.workOrderBAL.AddLocation(CoreFactory.enquiryParameterEntity);
+            //    CoreFactory.sampleLocationList = BALFactory.sampleParameterBAL.GetSampleLocationList((Int32)model.location.EnquirySampleID);
+            //    return Json(new { SampleLocationId = SampleLocationId, status = "success", list = CoreFactory.sampleLocationList }, JsonRequestBehavior.AllowGet);
+            //}
+            //else
+            //{
+            //    CoreFactory.sampleLocationList = BALFactory.sampleParameterBAL.GetSampleLocationList((Int32)model.location.EnquirySampleID);
+            //    return Json(new { status = "Fail", list = CoreFactory.sampleLocationList }, JsonRequestBehavior.AllowGet);
+            //}
 
         }
         public ActionResult AssignSTL(int WorkOrderId, int AssignToId)

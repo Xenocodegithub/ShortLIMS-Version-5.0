@@ -40,7 +40,7 @@
                 <div class="pb-20">
                     <table class="data-table table stripe hover nowrap">
                         <thead>
-                            <tr>
+                            <tr class="thead-dark">
                                 <th class="table-plus datatable-nosort">Sr.No.</th>
                                 <th class="table-plus datatable-nosort">Test Method Name</th>
                                 <th class="table-plus datatable-nosort">IsActive</th>
@@ -73,7 +73,8 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                     <a class="dropdown-item" href="@Url.Action("AddTestMethod","TestMethodMaster",new {TestMethodId=item.TestMethodId })"><i class="dw dw-edit2"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" onclick="Delete(@item.TestMethodId);"><i class="dw dw-delete-3"></i>Delete</a>
+                                                    <a class="dropdown-item" href="@Url.Action("DeleteTestMethod","TestMethodMaster",new {TestMethodId=item.TestMethodId })"><i class="dw dw-delete-2"></i> Delete</a>
+                                                   @* <a class="dropdown-item" href="#" onclick="Delete(@item.TestMethodId);"><i class="dw dw-delete-3"></i>Delete</a>*@
                                                 </div>
                                             </div>
                                         </td>
@@ -81,14 +82,6 @@
                                 }
                             }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="pagination pagination-centered"></div>
-                                </td>
-                            </tr>
-
-                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -102,6 +95,12 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
     function Delete(id) {
 
         swal({

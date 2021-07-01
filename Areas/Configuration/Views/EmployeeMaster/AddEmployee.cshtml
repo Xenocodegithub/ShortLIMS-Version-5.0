@@ -41,7 +41,7 @@
                         @Html.HiddenFor(model => model.UserDetailId);
                         @*@Html.HiddenFor(model => model.UserMasterId);*@
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">First Name:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">First Name:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholdder = "First Name" })
@@ -54,13 +54,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Last Name:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Last Name:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholdder = "Last Name" })
                                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">User Name:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">User Name:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.UserMasterId, new SelectList(ViewBag.UserMasterList, "UserMasterId", "UserName"), "---Select---", new { @class = "form-control has-feedback-right" })
                                 @Html.ValidationMessageFor(model => model.UserMasterId, "", new { @class = "text-danger" })
@@ -68,13 +68,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Gender:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Gender:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 <label for="square-radio-1" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.Gender, "Male", new { @checked = "checked" }) Male </label>
                                 <label for="square-radio-2" class="radio-btn-pd"> @Html.RadioButtonFor(model => model.Gender, "Female") Female</label>
                                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">DOB:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">DOB:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control date-picker", placeholdder = "DOB" })
@@ -101,7 +101,7 @@
                                 @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", placeholdder = "Mobile" })
                                 @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Employee Code:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Employee Code:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.EmployeeCode, new { @class = "form-control", placeholdder = "Employee Code" })
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Master Designation:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Master Designation:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @Html.DropDownListFor(model => model.MasterDesignationID, new SelectList(ViewBag.DesignationList, "RoleId", "RoleName"), "---Select---", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.MasterDesignationID, "", new { @class = "text-danger" })
@@ -134,7 +134,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Address1:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Address1:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.Address1, new { @class = "form-control", placeholdder = "Address1" })
@@ -151,26 +151,26 @@
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.Area, new { @class = "form-control", placeholdder = "Area" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">City Name:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">City Name:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.CityName, new { @class = "form-control", placeholdder = "CityName" })
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">State Name:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">State Name:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.StateName, new { @class = "form-control", placeholdder = "StateName" })
                             </div>
-                            <label class="col-sm-12 col-md-2 col-form-label">Country Name:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Country Name:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.CountryName, new { @class = "form-control", placeholdder = "CountryName" })
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Pincode:</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Pincode:<span style="color:red">*</span></label>
                             <div class="col-sm-4">
                                 @*<input class="form-control" placeholder="Search Here" type="search">*@
                                 @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control", placeholdder = "Pincode" })
@@ -206,8 +206,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                            <a class="btn btn-danger btn-sm" href="/Configuration/UserMasterList">Back</a>
-                            @*<a class="btn btn-warning" href="/Configuration/Add">Reset</a>*@
+                            <a class="btn btn-danger btn-sm" href="/Configuration/EmployeeMaster/EmployeeMasterList">Back</a>
                             <button type="submit" class="btn btn-info btn-sm" style="float:right">Save</button>
                                 </div>
                         </div>

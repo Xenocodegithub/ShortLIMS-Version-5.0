@@ -78,7 +78,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             ParameterMasterId = e.ParameterMasterId,
                             IsActive = e.IsActive,
 
-                        }).ToList();
+                        }).OrderByDescending(e => e.ParameterMasterId).ToList();
             }
             catch (Exception ex)
             {
@@ -202,6 +202,7 @@ namespace LIMS_DEMO.DAL.Configuration
                 ParameterMasterId = u.ParameterMasterId,
                 ParameterGroupId = u.ParameterGroupId,
                 TestMethodId = u.TestMethodId,
+                DisciplineId = u.DisciplineId,
                 UnitId = u.UnitId,
                 IsField = u.InField,
                 IsNABLAccredited = u.IsNABLAccredited,
@@ -312,7 +313,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             IsIndustrySpecified = pgm.IsSetPCBLimit,
                             IsActive = pm.IsActive,
 
-                        }).ToList();
+                        }).OrderByDescending(p => p.ParameterMasterId).ToList();
             }
             catch (Exception ex)
             {

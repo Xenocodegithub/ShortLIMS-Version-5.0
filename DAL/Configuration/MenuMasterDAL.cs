@@ -49,7 +49,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             MenuName = e.Menu,
                             MenuMasterId = e.MenuMasterId,
                             IsActive = e.IsActive,
-                        }).ToList();
+                        }).OrderByDescending(e => e.MenuMasterId).ToList();
             }
             catch (Exception ex)
             {
@@ -77,7 +77,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             SubMenuName = p.Menu,
                             TargetURL = p.TargetUrl,
                             IsActive = p.IsActive,
-                        }).ToList();
+                        }).OrderByDescending(s => s.MenuMasterId).ToList();
             }
             catch (Exception ex)
             {
@@ -309,7 +309,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             RoleId = r.RoleId,
                             RoleName = r.RoleName,
                             IsActive = mrp.IsActive
-                        }).ToList();
+                        }).OrderByDescending(m => m.MenuMasterId).ToList();
             }
             catch (Exception ex)
             {

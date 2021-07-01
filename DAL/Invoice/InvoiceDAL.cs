@@ -28,8 +28,8 @@ namespace LIMS_DEMO.DAL.Invoice
                              // Date = fww.Date,
                               PaymentMode = fww.PaymentMode.ToString(),
                               BankName = fww.BankName,
-                              DD_ChequeNo_Neft = fww.DD_ChequeNo_Neft,
-                              DD_ChequeDate = fww.DD_ChequeDate
+                              DD_ChequeNo_Neft = fww.DDChequeNoNeft,
+                              DD_ChequeDate = fww.DDChequeDate
                              
                           }
                    ).FirstOrDefault();
@@ -46,8 +46,8 @@ namespace LIMS_DEMO.DAL.Invoice
                                PaymentDetailsId = fww.PaymentDetailsId,
                                 PaymentMode = fww.PaymentMode.ToString(),
                                 BankName = fww.BankName,
-                                DD_ChequeNo_Neft = fww.DD_ChequeNo_Neft,
-                                DD_ChequeDate = fww.DD_ChequeDate
+                                DD_ChequeNo_Neft = fww.DDChequeNoNeft,
+                                DD_ChequeDate = fww.DDChequeDate
                                                            
                             }).ToList();
             invoice_List.invoiceDetailsList = Inv_List;
@@ -201,8 +201,8 @@ namespace LIMS_DEMO.DAL.Invoice
                   PaidAmount=invoiceEntity.PaidAmount,
                   PaymentMode=Convert.ToInt32(invoiceEntity.PaymentMode),
                   BankName=invoiceEntity.BankName,
-                  DD_ChequeNo_Neft=invoiceEntity.DD_ChequeNo_Neft,
-                  DD_ChequeDate=invoiceEntity.DD_ChequeDate,
+                  DDChequeNoNeft=invoiceEntity.DD_ChequeNo_Neft,
+                  DDChequeDate=invoiceEntity.DD_ChequeDate,
                   BranchName=invoiceEntity.BranchName,
                   PayDate=DateTime.Now.ToLocalTime(),
                   EnteredBy=0,

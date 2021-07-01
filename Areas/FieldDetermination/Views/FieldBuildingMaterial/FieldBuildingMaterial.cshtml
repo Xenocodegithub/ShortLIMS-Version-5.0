@@ -33,6 +33,7 @@
                 </div>
 
                 @Html.HiddenFor(model => model.EnquirySampleID)
+
                 <div Id="divParameterList">
                     @{
                         Html.RenderAction("_FieldParameterUnit", "FieldWasteWater", Model.EnquirySampleID);
@@ -106,7 +107,7 @@
     function BuildingMaterialSuccess(result) {
         if (result.Status == "success") {
             alert(result.message);
-            // window.location.href = '/Collection/CollectorList';
+            window.location.href = '/Collection/SampleCollection/CollectorList?CollectedBy=' + 1;
         }
     }
 </script>

@@ -8,6 +8,7 @@
         @Html.HiddenFor(model => model.location.EnquirySampleID)
         @Html.HiddenFor(model => model.location.EnquiryId)
         @Html.HiddenFor(model => model.location.count)
+        @Html.HiddenFor(model => model.location.SampleLocationId)
         <table style="border-collapse:collapse" border="1" align="center" class="data-table table nowrap" id="tblParameter">
             <tr class="thead-dark">
                 <th class="table-plus datatable-nosort">
@@ -16,6 +17,12 @@
                 <th>
                     Location
                 </th>
+                @if (ViewBag.state != "view")
+                {
+                    <th>
+                        Action
+                    </th>
+                }
             </tr>
             <tbody id="tblParameterBody">
                 @for (int i = 0; i < Model.locationList.Count; i++)
@@ -27,6 +34,13 @@
                         <td>
                             @Html.DisplayFor(model => model.locationList[i].Location)
                         </td>
+                        @if (ViewBag.state != "view")
+                        {
+                            <td>
+                                <a class="fa fa-pencil-square-o" onclick="editLOC(@Model.locationList[i].SampleLocationId,'@Model.locationList[i].Location');"></a>
+                            </td>
+                        }
+
                     </tr>
                 }
             </tbody>
@@ -35,69 +49,80 @@
         <div>
             @if (Model.location.count != 0)
             {
-            <div class="form-group row">
-               
-                <label class="col-sm-12 col-md-2 col-form-label">Location: </label>
-                <div class="col-sm-5">
-                @Html.TextBoxFor(model => model.location.Location, new {@class="form-control" })
+                <div class="form-group row">
+
+                    <label class="col-sm-12 col-md-2 col-form-label">Location: </label>
+                    <div class="col-sm-5">
+                        @Html.TextBoxFor(model => model.location.Location, new { @class = "form-control" })
+                    </div>
                 </div>
-                </div>
-            <div class="col-md-9" style="text-align:center;margin-top:-52px;">
+                <div class="col-md-9" style="text-align:center;margin-top:-52px;">
                     @*<input id="btnSubmit" value="Create"  class="btn btn-primary alignright" />*@
-                    <button type="button" class="btn btn-info btn-sm" id="btnSubmitPopUp"style="float:right" >Save</button>
-             </div>
-            }
+                    <button type="button" class="btn btn-info btn-sm" id="btnSubmitPopUp" style="float:right">Create</button>
+                </div>}
         </div>
     </div>
 </div>
 <!-- Simple Datatable End -->
 
 <script>
-
-    function LocationUpdated(result) {
-        debugger
-        alert('Location Updated');
-        //window.location.href = '/Enquiry/AddWorkOrder?EnquiryId=' + $("#location_EnquiryId").val();
-        $('#LocationPopup').show();
-        //window.location.href = '/Enquiry/_AddLocation?EnquirySampleID=' + $("#location_EnquirySampleID").val() +'&EnquiryId=' + $("#location_EnquiryId").val();
+    $(document).ready(function () {
+        $('#btnSubmitPopUp').clearForm();
     }
+    //function LocationUpdated(result) {
+    //    debugger
+    //    alert('Location Updated');
+    //    //window.location.href = '/Enquiry/AddWorkOrder?EnquiryId=' + $("#location_EnquiryId").val();
+    //    $('#LocationPopup').show();
+    //    //window.location.href = '/Enquiry/_AddLocation?EnquirySampleID=' + $("#location_EnquirySampleID").val() +'&EnquiryId=' + $("#location_EnquiryId").val();
+    //})
 
 </script>
 
 <script>
-   
-    $("#btnSubmitPopUp").click(function () {
 
-        var data1 = {
-            "location.Location": $('#location_Location').val(),
-            "location.EnquirySampleID": $('#location_EnquirySampleID').val(),
-            "location.count": $('#location_count').val(),
-        }
-      
-        $.ajax({
-            type: "POST",
-            url: "/Enquiry/WorkOrder/_AddLocation",
-            data: data1,
-            dataType: "json",
-            success: function (data) {
-                debugger;
-                var $cloneRow = "";
-                for (var i = 0; i < data.list.length; i++) {
-                    $cloneRow = $cloneRow + "<tr>";
-                    $cloneRow = $cloneRow + "<td>" + (parseInt(i) + 1) + "</td>";
-                    $cloneRow = $cloneRow + "<td>" + data.list[i].Location + "</td>";
-                    $cloneRow = $cloneRow + "</tr>";
-                }
+        $("#btnSubmitPopUp").click(function () {
 
-                $('#tblParameterBody').html($cloneRow);
-
-                if (data.status == "Fail") {
-                    alert("Number of Location should not be greater or less than Number of Sample !!!");
-                }
-               
+            debugger
+            var data1 = {
+                "location.Location": $('#location_Location').val(),
+                "location.EnquirySampleID": $('#location_EnquirySampleID').val(),
+                "location.count": $('#location_count').val(),
+                "LocationId": $('#location_SampleLocationId').val(),
             }
+
+            $.ajax({
+                type: "POST",
+                url: "/Enquiry/WorkOrder/_AddLocation",
+                data: data1,
+                dataType: "json",
+                success: function (data) {
+                    debugger;
+                    var $cloneRow = "";
+                    for (var i = 0; i < data.list.length; i++) {
+                        $cloneRow = $cloneRow + "<tr>";
+                        $cloneRow = $cloneRow + "<td>" + (parseInt(i) + 1) + "</td>";
+                        $cloneRow = $cloneRow + "<td>" + data.list[i].Location + "</td>";
+                        //$cloneRow = $cloneRow + "<td> <a class='fa fa-pencil-square-o' onclick='editLOC(" + data.list[i].SampleLocationId + ",'" + data.list[i].Location + "');'></a> </td>";
+                        $cloneRow = $cloneRow + `<td> <a class="fa fa-pencil-square-o" onclick="editLOC(${data.list[i].SampleLocationId},'${data.list[i].Location}');"></a> </td>`;
+                        $cloneRow = $cloneRow + "</tr>";
+                    }
+                    $('#tblParameterBody').html("");
+                    $('#tblParameterBody').html($cloneRow);
+                    $('#location_Location').val("");
+                    $("#btnSubmitPopUp").text("Create");
+                    if (data.status == "Fail") {
+                        alert("Number of Location should not be greater or less than Number of Sample !!!");
+                    }
+
+                }
+            });
         });
-    });
-        
+        function editLOC(ID, loc) {
+            debugger;
+            $("#location_Location").val(loc);
+            $('#location_SampleLocationId').val(ID);
+            $("#btnSubmitPopUp").text("Update");
+        }
 </script>
 

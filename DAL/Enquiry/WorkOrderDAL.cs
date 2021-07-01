@@ -66,6 +66,18 @@ namespace LIMS_DEMO.DAL.Enquiry
 
             try
             {
+                if(enquiryParameterEntity.SampleLocationId != 0)
+                {
+                    var loc = _dbContext.SampleLocations.Find(enquiryParameterEntity.SampleLocationId);
+                    loc.SampleLocationId = enquiryParameterEntity.SampleLocationId;
+                    loc.EnquirySampleID = enquiryParameterEntity.EnquirySampleID;
+                    loc.Location = enquiryParameterEntity.Location;
+                    loc.IsActive = enquiryParameterEntity.IsActive;
+                    loc.EnteredBy = enquiryParameterEntity.EnteredBy;
+                    loc.EnteredDate = DateTime.Now;
+                    _dbContext.SaveChanges();
+                    return loc.SampleLocationId;
+                }
                 var addLoc = new SampleLocation()
                 {
                     SampleLocationId = enquiryParameterEntity.SampleLocationId,

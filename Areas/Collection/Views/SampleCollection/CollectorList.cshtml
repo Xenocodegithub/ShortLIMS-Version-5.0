@@ -34,10 +34,13 @@
                 <table id="dtHorizontalExample" class="table table stripe hover nowrap">
                     <thead>
                         <tr class="thead-dark">
+                            <th hidden>
+
+                            </th>
                             <th class="table-plus datatable-nosort">
                                 SampleNo.
                             </th>
-                            <th>
+                            <th style="width:100px">
                                 Sample Type
                             </th>
                             <th>
@@ -50,8 +53,8 @@
                                 Contact Number
                             </th>
                             @*<th class="width-5">
-                                Sample Collected On
-                             </th>*@
+                   Sample Collected On
+                </th>*@
                             <th>
                                 Field Determination
                             </th>
@@ -75,29 +78,32 @@
                     <tbody>
                         @for (int i = 0; i < Model.Count; i++)
                         {
-                          
-                            <tr rowCount="@i">
-                                <td>
-                                    @Html.HiddenFor(item => Model[i].SampleCollectionId)
-                                    @Html.HiddenFor(item => Model[i].SampleName)
-                                    @Html.DisplayFor(item => Model[i].DisplaySampleName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(item => Model[i].SampleTypeProductName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(item => Model[i].Location)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(item => Model[i].CustomerName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(item => Model[i].ContactNO)
-                                </td>
-                                @*<td>
-                                @Html.HiddenFor(modelItem => item.ExpectSampleCollDate)
-                                @Html.DisplayFor(modelItem => item.CollectedOn)
-                                </td>*@
+                        <tr>
+                            <td hidden>
+                            @Html.HiddenFor(item => Model[i].SampleCollectionId)
+                            </td>
+
+                            <td>
+                                @Html.HiddenFor(item => Model[i].SampleCollectionId)
+                                @Html.HiddenFor(item => Model[i].SampleName)
+                                @Html.DisplayFor(item => Model[i].DisplaySampleName)
+                            </td>
+                            <td style="width:100px">
+                                @Html.DisplayFor(item => Model[i].SampleTypeProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(item => Model[i].Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(item => Model[i].CustomerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(item => Model[i].ContactNO)
+                            </td>
+                            @*<td>
+                @Html.HiddenFor(modelItem => item.ExpectSampleCollDate)
+                @Html.DisplayFor(modelItem => item.CollectedOn)
+                </td>*@
                             <td>
                                 @if (Model[i].StatusCodeField == "SampleColl" || Model[i].StatusCodeLab == "SampleSub")
                                 {
@@ -108,7 +114,7 @@
                                 {
                                     @Html.ActionLink("Field", "FieldDetermination", new { SampleCollectionId = Model[i].SampleCollectionId, Url = Model[i].Url, EnquiryId = Model[i].EnquiryId, EnquirySampleID = Model[i].EnquirySampleID }, new { id = i + "_Field", @class = "btn btn-sm btn-success disabled" });
                                     <input type="checkbox" id="@i+F" value="@Model[i].IsFieldSelected" onchange="SelectCheckBoxField(@i,this)" />
-                              
+
                                 }
                             </td>
                             <td>
@@ -140,77 +146,77 @@
 
                                 }
                             </td>
-                                <td class="width-5">
-                                    @Html.DisplayFor(item => Model[i].CurrentStatus)
-                                </td>
-                                @if (Model[i].Url.ToString().Trim() == "Ambient Air")
-                                {
-                                    <td>
-                                        <select class="form-control" id="@string.Concat("SelShift",i)" name="@string.Concat("SelShift",i)">
-                                            <option value="Select Year" disabled>Select Shift</option>
-                                            <option value="Shift1">Shift 1</option>
-                                            <option value="Shift2">Shift 2</option>
-                                            <option value="Shift3">Shift 3</option>
-                                        </select>
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
+                            <td class="width-5">
+                                @Html.DisplayFor(item => Model[i].CurrentStatus)
+                            </td>
+                            @if (Model[i].Url.ToString().Trim() == "Ambient Air")
+                            {
                                 <td>
-                                    @{
-                                        if (Model[i].Url != null && ((Model[i].StatusCodeLab == "SampleSub")||(Model[i].StatusCodeField == "SampleSub" || (Model[i].StatusCodeLab == "SampleSub" && Model[i].StatusCodeField == "SampleColl"))))
+                                    <select class="form-control" id="@string.Concat("SelShift",i)" name="@string.Concat("SelShift",i)">
+                                        <option value="Select Year" disabled>Select Shift</option>
+                                        <option value="Shift1">Shift 1</option>
+                                        <option value="Shift2">Shift 2</option>
+                                        <option value="Shift3">Shift 3</option>
+                                    </select>
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            <td>
+                                @{
+                                    if (Model[i].Url != null && ((Model[i].StatusCodeLab == "SampleSub") || (Model[i].StatusCodeField == "SampleSub" || (Model[i].StatusCodeLab == "SampleSub" && Model[i].StatusCodeField == "SampleColl"))))
+                                    {
+                                        if (Model[i].Url.ToString().Trim() == "Admixture" || Model[i].Url.ToString().Trim() == "Cement" || Model[i].Url.ToString().Trim() == "Fly Ash" ||
+                                          Model[i].Url.ToString().Trim() == "Coal" || Model[i].Url.ToString().Trim() == "Coke" || Model[i].Url.ToString().Trim() == "Charcoal" || Model[i].Url.ToString().Trim() == "Briquettes" || Model[i].Url.ToString().Trim() == "Other Solid fuel" || Model[i].Url.ToString().Trim() == "Food" ||
+                                          Model[i].Url.ToString().Trim() == "Used Oil" || Model[i].Url.ToString().Trim() == "Waste Oil" || Model[i].Url.ToString().Trim() == "Sediment" || Model[i].Url.ToString().Trim() == "Soil" || Model[i].Url.ToString().Trim() == "Hazardous Waste" || Model[i].Url.ToString().Trim() == "Solid Waste")
                                         {
-                                            if (Model[i].Url.ToString().Trim() == "Admixture" || Model[i].Url.ToString().Trim() == "Cement" || Model[i].Url.ToString().Trim() == "Fly Ash" ||
-                                              Model[i].Url.ToString().Trim() == "Coal" || Model[i].Url.ToString().Trim() == "Coke" || Model[i].Url.ToString().Trim() == "Charcoal" || Model[i].Url.ToString().Trim() == "Briquettes" || Model[i].Url.ToString().Trim() == "Other Solid fuel" || Model[i].Url.ToString().Trim() == "Food" ||
-                                              Model[i].Url.ToString().Trim() == "Used Oil" || Model[i].Url.ToString().Trim() == "Waste Oil" || Model[i].Url.ToString().Trim() == "Sediment" || Model[i].Url.ToString().Trim() == "Soil" || Model[i].Url.ToString().Trim() == "Hazardous Waste" || Model[i].Url.ToString().Trim() == "Solid Waste")
-                                            {
-                                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=BuildingMaterial.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                            }
-                                            else if (Model[i].Url.ToString().Trim() == "Drinking Water/Potable Water /Domestic Water" || Model[i].Url.ToString().Trim() == "Ground Water" || Model[i].Url.ToString().Trim() == "Construction Water" || Model[i].Url.ToString().Trim() == "Industrial Water" || Model[i].Url.ToString().Trim() == "Irrigation Water" || Model[i].Url.ToString().Trim() == "Packaged Drinking Water" || Model[i].Url.ToString().Trim() == "Wastewater"
-                                                || Model[i].Url.ToString().Trim() == "Surface Water" || Model[i].Url.ToString().Trim() == "Swimming Pool Water" || Model[i].Url.ToString().Trim() == "Water from Purifiers" || Model[i].Url.ToString().Trim() == "Water for Medicinal Purpose" || Model[i].Url.ToString().Trim() == "Disilled/Deminarilized Water" || Model[i].Url.ToString().Trim() == "Other Water" || Model[i].Url.ToString().Trim() == "Domestic Effluent" || Model[i].Url.ToString().Trim() == "Industrial Effluent")
-                                            {
-                                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Water.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                            }
-                                            else if (Model[i].Url.ToString().Trim() == "Ambient Air")
-                                            {
-                                                <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetShiftData(@i,@Model[i].SampleCollectionId,'@Model[i].Url');">Print</a>
-
-                                                @*<a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDAmbientAir.rdl&SampleCollectionId=@item.SampleCollectionId&MatrixName=@item.Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>*@
-                                            }
-                                            else if (Model[i].Url.ToString().Trim() == "Surface Swabs" || Model[i].Url.ToString().Trim() == "Air Monitoring")
-                                            {
-                                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDMicrobiologicalAirMonitoring.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                            }
-                                            else if (Model[i].Url.ToString().Trim() == "Ambient Noise Level" || Model[i].Url.ToString().Trim() == "Workplace Noise Level")
-                                            {
-                                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AmbientWorkplaceNoiseSampleID.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                            }
-                                            else if (Model[i].Url.ToString().Trim() == "Source Noise Level")
-                                            {
-                                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=SourceNoiselevelSampleId.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                            }
-                                            else if (Model[i].Url.ToString().Trim() == "Workplace Air" || Model[i].Url.ToString().Trim() == "Fugitive Emission" || Model[i].Url.ToString().Trim() == "Workplace Air/Indoor Air Quality")
-                                            {
-                                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDWorkPlaceAndFugutive.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                            }
-                                            else if (Model[i].Url.ToString().Trim() == "Stack Emission")
-                                            {
-                                                <a target="_blank" href="/Reporting/frmShowReport.aspx?path=StackEmissionMonitoringReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
-                                            }
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=BuildingMaterial.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                         }
-                                        else
+                                        else if (Model[i].Url.ToString().Trim() == "Drinking Water/Potable Water /Domestic Water" || Model[i].Url.ToString().Trim() == "Ground Water" || Model[i].Url.ToString().Trim() == "Construction Water" || Model[i].Url.ToString().Trim() == "Industrial Water" || Model[i].Url.ToString().Trim() == "Irrigation Water" || Model[i].Url.ToString().Trim() == "Packaged Drinking Water" || Model[i].Url.ToString().Trim() == "Wastewater"
+                                            || Model[i].Url.ToString().Trim() == "Surface Water" || Model[i].Url.ToString().Trim() == "Swimming Pool Water" || Model[i].Url.ToString().Trim() == "Water from Purifiers" || Model[i].Url.ToString().Trim() == "Water for Medicinal Purpose" || Model[i].Url.ToString().Trim() == "Disilled/Deminarilized Water" || Model[i].Url.ToString().Trim() == "Other Water" || Model[i].Url.ToString().Trim() == "Domestic Effluent" || Model[i].Url.ToString().Trim() == "Industrial Effluent")
                                         {
-                                            <a href="#" type="submit" id="btnSave" class="btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="Submit">Print </a>
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=Water.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        }
+                                        else if (Model[i].Url.ToString().Trim() == "Ambient Air")
+                                        {
+                                            <a href="" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" onclick="GetShiftData(@i,@Model[i].SampleCollectionId,'@Model[i].Url');">Print</a>
+
+                                            @*<a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDAmbientAir.rdl&SampleCollectionId=@item.SampleCollectionId&MatrixName=@item.Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>*@
+                                        }
+                                        else if (Model[i].Url.ToString().Trim() == "Surface Swabs" || Model[i].Url.ToString().Trim() == "Air Monitoring")
+                                        {
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDMicrobiologicalAirMonitoring.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        }
+                                        else if (Model[i].Url.ToString().Trim() == "Ambient Noise Level" || Model[i].Url.ToString().Trim() == "Workplace Noise Level")
+                                        {
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=AmbientWorkplaceNoiseSampleID.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        }
+                                        else if (Model[i].Url.ToString().Trim() == "Source Noise Level")
+                                        {
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=SourceNoiselevelSampleId.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        }
+                                        else if (Model[i].Url.ToString().Trim() == "Workplace Air" || Model[i].Url.ToString().Trim() == "Fugitive Emission" || Model[i].Url.ToString().Trim() == "Workplace Air/Indoor Air Quality")
+                                        {
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=FDWorkPlaceAndFugutive.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
+                                        }
+                                        else if (Model[i].Url.ToString().Trim() == "Stack Emission")
+                                        {
+                                            <a target="_blank" href="/Reporting/frmShowReport.aspx?path=StackEmissionMonitoringReport.rdl&SampleCollectionId=@Model[i].SampleCollectionId&MatrixName=@Model[i].Url" class="btn btn-primary alignleft" data-toggle="tooltip" data-placement="top" title="">Print</a>
                                         }
                                     }
-                                </td>
-                            </tr>
-                        
-                        }
-                    </tbody>
-                </table>
+                                    else
+                                    {
+                                        <a href="#" type="submit" id="btnSave" class="btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="Submit">Print </a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                        </tbody>
+                    </table>
             </div>
             <!-- Default Basic Forms End -->
         </div>

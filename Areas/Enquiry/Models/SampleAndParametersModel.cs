@@ -9,7 +9,7 @@ namespace LIMS_DEMO.Areas.Enquiry.Models
 {
     public class SampleAndParametersModel
     {
-
+        public int LocationId { get; set; }
         public bool Infield { get; set; }
         public long EnquiryMasterSampleTypeId { get; set; }
         public string DisplaySampleName { get; set; }

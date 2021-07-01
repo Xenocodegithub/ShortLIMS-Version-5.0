@@ -30,9 +30,6 @@
                     <div class="pull-left">
                         <h4 class="text-blue h4">Add Sample type Product</h4>
                     </div>
-                    @*<div class="pull-right">
-                <a href="#basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-            </div>*@
                 </div>
                 @using (Ajax.BeginForm("AddSampleTypeProduct", "ProductSubMatrix", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "AddSampleSuccess" }))
                 {

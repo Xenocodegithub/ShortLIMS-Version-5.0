@@ -14,6 +14,7 @@
     <div class="card-box mb-30">
         <div class="pb-20">
           <input class="searchbox111" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by parameters.." title="Type Keywords">
+            <div style="height:250px; overflow-y:auto;">
           <table id="tblParameters" class="data-table table stripe hover nowrap">
                     <thead>
                         <tr class="thead-dark">
@@ -75,6 +76,7 @@
                     </tbody>
                 </table>
            </div>
+            </div>
         <div>
            <div>
              <input type="submit" value="Save Parameters" id="SaveParameters" class="btn btn-info btn-sm  alignright" style="float:right;" />
@@ -85,7 +87,7 @@
 }
 
 <script type="text/javascript">
-
+    
     $(function () {
         $("#SaveParameters").click(function () {
             debugger

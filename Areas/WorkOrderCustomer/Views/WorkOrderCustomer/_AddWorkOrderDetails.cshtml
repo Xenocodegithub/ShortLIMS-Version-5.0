@@ -6,49 +6,45 @@
 <div>
     <div class="form-group row">
         <label class="col-sm-12 col-md-2 col-form-label">Customer Name:</label>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-top: 8px;">
             @Html.DisplayFor(model => model.WorkOrderCustomer.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
         </div>
-        <label class="col-sm-12 col-md-2 col-form-label">Work Order Received On: </label>
-        <div class="col-sm-4">
+        <label class="col-sm-12 col-md-3 col-form-label">Work Order Received On: </label>
+        <div class="col-sm-3" style="margin-top: 8px;">
             @Html.DisplayFor(model => model.WorkOrderCustomer.WORecvDate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderReceivedDate, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-12 col-md-2 col-form-label">WorkOrder End Date: </label>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-top: 8px;">
             @Html.DisplayFor(model => model.WorkOrderCustomer.WOEDate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderEndDate, new { htmlAttributes = new { @class = "form-control" } })
         </div>
         <label class="col-sm-12 col-md-2 col-form-label">Upload Work Order:</label>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-top: 8px;">
             @Html.DisplayFor(model => model.WorkOrderCustomer.FileName, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-12 col-md-2 col-form-label">Duration(in months): </label>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="margin-top: 8px;">
             @Html.DisplayFor(model => model.WorkOrderCustomer.Duration, new { htmlAttributes = new { @class = "form-control" } })
         </div>
 
-        <label class="col-sm-12 col-md-2 col-form-label">Expected Sample Collection Date: </label>
-        <div class="col-sm-4">
+        <label class="col-sm-12 col-md-3 col-form-label">Expected Sample Collection Date: </label>
+        <div class="col-sm-3" style="margin-top: 8px;">
             @Html.DisplayFor(model => model.WorkOrderCustomer.expSampleDate, new { htmlAttributes = new { @class = "form-control" } })
             @Html.HiddenFor(model => model.WorkOrderCustomer.SampleCollectionDate, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
     <div class="form-group row">
-
-        <label class="col-sm-12 col-md-4 col-form-label">Number of Days(Only for Hourly And Six times a Day Frequency):</label>
-
-        @Html.TextBoxFor(model => model.WorkOrderCustomer.NoOfDays, new { @class = "form-control col-sm-3", @autocomplete = "false", disabled = "disabled" })
-
-        <div class="col-sm-12" style="margin-top:10px;">
+        <label class="col-sm-12 col-md-3 col-form-label">Number of Days(Only for Hourly And Six times a Day Frequency):</label>
+        @Html.TextBoxFor(model => model.WorkOrderCustomer.NoOfDays, new { @class = "form-control col-sm-2", @autocomplete = "false", disabled = "disabled" })
+        <div class="col-md-7 col-sm-12">
             <input type="button" id="btnAddNoOfDays" value="Add No Of Days" class="btn btn-sm btn-info text-nowrap" style="float:right" />
         </div>
-
-    </div><hr />
+    </div>
     @using (Ajax.BeginForm("_AddWorkOrderDetails", "WorkOrderCustomer", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "FinalSuccess" }))
     {
         @Html.AntiForgeryToken()
@@ -60,7 +56,7 @@
         @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderReceivedDate)
         @Html.HiddenFor(model => model.WorkOrderCustomer.WorkOrderEndDate)
         @Html.HiddenFor(model => model.WorkOrderCustomer.Duration)
-
+        <hr/>
         <div class=" form-group row">
             <label class="col-sm-12 col-md-3 col-form-label">Any amendment to contract: <span class="required" style="color:red">*</span></label>
             <label class="col-sm-3">
@@ -70,12 +66,12 @@
 
             <label class="col-sm-12 col-md-2 col-form-label"> @Html.RadioButtonFor(item => Model.IsIGST, true, new { id = "IsIGST-true" }) IGST(18%)</label>
         </div>
-
+        <hr/>
         <div class="col-sm-12">
-            <table id="dtHorizontalExample" class="table table stripe hover nowrap">
+            <table id="dtHorizontalExample" class="table table stripe hover" style="position:initial">
                 <thead>
                     <tr class="thead-dark">
-                        <th class="table-plus datatable-nosort">
+                        <th class="table-plus">
                             SrNo.
                         </th>
                         <th>
@@ -102,7 +98,7 @@
                         <th>
                             Unit Price
                         </th>
-                        <th>
+                        <th width="125px">
                             Total
                         </th>
                     </tr>
@@ -158,7 +154,7 @@
                                 @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].UnitPrice)
                             </td>
                             <td>
-                                @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
+                                @Html.TextBoxFor(x => Model.FinalWorkOrderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black;width:100px;" })
                                 @Html.ValidationMessageFor(x => Model.FinalWorkOrderList[i].Total)
                             </td>
                         </tr>
@@ -267,8 +263,6 @@
         debugger
          $('#NoOfDays').prop("disabled", false);
    });
-
-
 
 </script>
 <script>

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using LIMS_DEMO.Areas.Configuration.Models;
+﻿using LIMS_DEMO.Areas.Configuration.Models;
 using LIMS_DEMO.BAL;
 using LIMS_DEMO.BAL.Configuration;
 using LIMS_DEMO.Core;
 using LIMS_DEMO.Core.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace LIMS_DEMO.Areas.Configuration.Controllers
 {
@@ -290,7 +288,5 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
             }
         }
         #endregion
-       
-       
     }
 }

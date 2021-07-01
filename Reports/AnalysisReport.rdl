@@ -3,10 +3,10 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="LIMSConnection">
-      <Transaction>true</Transaction>
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=ShortLIMS</ConnectString>
+        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=Merge9FebDB</ConnectString>
+        <Prompt>Specify a user name and password for data source LIMSConnection:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>2c7e5781-873c-436b-865c-ebd12dec758a</rd:DataSourceID>
@@ -21,8 +21,9 @@
             <Value>=Parameters!SampleCollectionId.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT  Distinct  Lims.LocationSampleCollection.SampleNameOriginal AS SampleNo, 
-
+        <CommandText>SELECT  Distinct  
+--Lims.LocationSampleCollection.SampleNameOriginal AS SampleNo, 
+ESD.SampleName,
 SampleLocation, 
 --UD.FirstName + ' '+ UD.LastName AS SampleCollectedBy, 
 --ProcedureName,
@@ -60,8 +61,8 @@ LEFT JOIN Lims.QuantityPreservative ON SC.SampleCollectionId = Lims.QuantityPres
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="SampleNo">
-          <DataField>SampleNo</DataField>
+        <Field Name="SampleName">
+          <DataField>SampleName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="SampleLocation">
@@ -143,8 +144,8 @@ LEFT JOIN Lims.QuantityPreservative ON SC.SampleCollectionId = Lims.QuantityPres
           </QueryParameter>
         </QueryParameters>
         <CommandText>SELECT  Distinct ParameterName,
-CASE WHEN SPP.CurrentStatus=6  THEN CAST(ISNULL(FinalResult ,0) AS VARCHAR) ELSE '' END AS FinalResult,
-
+--CASE WHEN SPP.CurrentStatus=6  THEN CAST(ISNULL(FinalResult ,0) AS VARCHAR) ELSE '' END AS FinalResult,
+CASE when SPP.CurrentStatus=6 and APSD.FinalResult&lt;PMM.LOD  THEN '&lt; '+ PMM.LOD ELSE APSD.FinalResult END AS FinalResult,
 CASE WHEN PMM.InField=1  THEN 'OnSite Testing' ELSE UD.FirstName + ' '+ UD.LastName END AS AnalystName,
 
  Unit, TestMethod,QualityControl,
@@ -1105,7 +1106,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="AnalysisStartAt">
+                        <Textbox Name="AnalysisStartAt1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1124,7 +1125,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>AnalysisStartAt</rd:DefaultName>
+                          <rd:DefaultName>AnalysisStartAt1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1275,7 +1276,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>AnalysisParameterDetailsDS</DataSetName>
-            <Top>1.75743in</Top>
+            <Top>1.78243in</Top>
             <Left>0.15292in</Left>
             <Height>0.70833in</Height>
             <Width>6.73333in</Width>
@@ -1388,7 +1389,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=First(Fields!SampleNo.Value, "LabCollectionDS")</Value>
+                                  <Value>=First(Fields!SampleName.Value, "LabCollectionDS")</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -2626,7 +2627,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
       <Width>7.01043in</Width>
       <Page>
         <PageHeader>
-          <Height>1.06489in</Height>
+          <Height>1.00934in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2786,7 +2787,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
               <Left>0.90562in</Left>
-              <Height>1.05101in</Height>
+              <Height>0.99545in</Height>
               <Width>5.89211in</Width>
               <Style>
                 <Border>
@@ -2805,7 +2806,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
               <Sizing>FitProportional</Sizing>
               <Top>0.01255in</Top>
               <Left>0.2127in</Left>
-              <Height>1.03845in</Height>
+              <Height>0.9829in</Height>
               <Width>0.90165in</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -2834,7 +2835,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>1.91086in</Height>
+          <Height>1.95253in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -3219,7 +3220,7 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox44</rd:DefaultName>
-              <Top>1.50264in</Top>
+              <Top>1.53742in</Top>
               <Left>0.3437in</Left>
               <Height>0.3506in</Height>
               <Width>6.32304in</Width>

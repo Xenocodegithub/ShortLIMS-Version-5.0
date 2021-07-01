@@ -768,7 +768,7 @@ namespace LIMS_DEMO.DAL.Arrival
                             //MatrixId = ed.MatrixId,
                             //MatrixName = ed.MatrixMaster.MatrixName,
 
-                        }).OrderByDescending(scoll => scoll.LocationSampleCollectionID).Distinct().ToList();
+                        }).OrderByDescending(scoll => scoll.SampleApprovedDate).Distinct().ToList();
             }
             catch (Exception ex)
             {

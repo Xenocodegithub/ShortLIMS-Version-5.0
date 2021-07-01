@@ -20,8 +20,8 @@ namespace LIMS_DEMO.DAL
         public System.DateTime PayDate { get; set; }
         public int PaymentMode { get; set; }
         public string BankName { get; set; }
-        public string DD_ChequeNo_Neft { get; set; }
-        public System.DateTime DD_ChequeDate { get; set; }
+        public string DDChequeNoNeft { get; set; }
+        public System.DateTime DDChequeDate { get; set; }
         public int EnteredBy { get; set; }
         public System.DateTime EnteredDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }

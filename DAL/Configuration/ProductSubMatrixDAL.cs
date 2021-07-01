@@ -82,7 +82,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             SampleTypeProductCode = stp.SampleTypeProductCode,
 
                             IsActive = stp.IsActive,
-                        }).ToList();
+                        }).OrderByDescending(stp => stp.SampleTypeProductId).ToList();
             }
             catch (Exception ex)
             {
@@ -166,7 +166,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             SampleTypeProductName = stp.SampleTypeProductName,
                             SampleTypeProductId = e.SampleTypeProductId,
                             IsActive = e.IsActive,
-                        }).ToList();
+                        }).OrderByDescending(e => e.ProductGroupId).ToList();
                 return a;
             }
             catch (Exception ex)
@@ -269,7 +269,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             SubGroupName = e.SubGroupName,
                             SubGroupCode = e.SubGroupCode,
                             IsActive = e.IsActive,
-                        }).ToList();
+                        }).OrderByDescending(e => e.SubGroupId).ToList();
             }
             catch (Exception ex)
             {
@@ -390,7 +390,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             MatrixId = e.MatrixId,
                             MatrixCode = e.MatrixCode,
                             IsActive = e.IsActive,
-                        }).ToList();
+                        }).OrderByDescending(e => e.MatrixId).ToList();
             }
             catch (Exception ex)
             {

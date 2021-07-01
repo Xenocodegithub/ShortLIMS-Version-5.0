@@ -38,7 +38,7 @@ namespace LIMS_DEMO.Areas.Configuration.Controllers
                 model.SubGroupId = CoreFactory.parameterMasterEntity1.SubGroupId;
                 model.SampleTypeProductId = (Int32)CoreFactory.parameterMasterEntity1.SampleTypeProductId;
                 model.MatrixId = (Int32)CoreFactory.parameterMasterEntity1.MatrixId;
-                model.DisciplineId = (Byte)CoreFactory.parameterMasterEntity1.DisciplineId;
+                model.DisciplineId = (Byte)CoreFactory.parameterMasterEntity.DisciplineId;
                 if (CoreFactory.parameterMasterEntity1.IsIndustrySpecified != null)
                     model.IsIndustrySpecified = CoreFactory.parameterMasterEntity1.IsIndustrySpecified;
                 else

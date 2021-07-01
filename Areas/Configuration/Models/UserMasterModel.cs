@@ -13,6 +13,7 @@ namespace LIMS_DEMO.Areas.Configuration.Models
         public string UserName { get; set; }
         [Required(ErrorMessage ="Please Enter Password")]
         public string Password { get; set; }
+        [Compare("Password")]
         [Required(ErrorMessage ="Please Enter Confirm Password")]
         public string ConfirmPassword { get; set; }
         public string VerificationCode { get; set; }

@@ -18,6 +18,7 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Models
         public int NoOfDays { get; set; }
         public int CountNoOfSample { get; set; }
         public int EnteredBy { get; set; }
+        [Required(ErrorMessage ="Please Enter Duration")]
         public Nullable<long> Duration { get; set; }
         public Nullable<System.DateTime> SampleCollectionDate { get; set; }
         public string CurrentStatus { get; set; }//EnquiryStatus and StatusMaster tbls
@@ -39,9 +40,8 @@ namespace LIMS_DEMO.Areas.WorkOrderCustomer.Models
         [Display(Name = "Customer Name")]
         [Required(ErrorMessage = "The Customer name field is required")]
         public int? CustomerMasterId { get; set; }
-
+        [Required(ErrorMessage = "Please Select Date")]
         [Display(Name = "WorkOrder Received On")]
-        [Required(ErrorMessage = "Please select date")]
         public Nullable<System.DateTime> WorkOrderReceivedDate { get; set; }
 
         [Display(Name = "Workorder No")]

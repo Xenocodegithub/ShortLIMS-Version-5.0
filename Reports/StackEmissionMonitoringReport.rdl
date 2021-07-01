@@ -5,7 +5,7 @@
     <DataSource Name="LIMSConnection">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=LIMSMergeDB09</ConnectString>
+        <ConnectString>Data Source=DESKTOP5\SQLEXPRESS;Initial Catalog=NewShortLims</ConnectString>
         <Prompt>Specify a user name and password for data source LIMSConnection:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -621,7 +621,9 @@ WHERE Lims.FDStackEmission.SampleCollectionId=@SampleCollectionId</CommandText>
           </QueryParameter>
         </QueryParameters>
         <CommandText>--DECLARE @SampleCollectionId AS BIGINT =10154
-SELECT   Distinct  Lims.LocationSampleCollection.SampleNameOriginal AS SampleId, 
+SELECT   Distinct  
+--Lims.LocationSampleCollection.SampleNameOriginal AS SampleId, 
+ESD.SampleName,
            --   Lims.SampleCollection.CollectionDate, 
 		    CONVERT(VARCHAR(8), Lims.SampleCollection.CollectionDate,3) CollectionDate,
 			  Lims.SampleCollection.SampleCollectionTime, 
@@ -672,8 +674,8 @@ WHERE LIMS.SampleCollection.SampleCollectionId=@SampleCollectionId</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="SampleId">
-          <DataField>SampleId</DataField>
+        <Field Name="SampleName">
+          <DataField>SampleName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="CollectionDate">
@@ -1038,7 +1040,7 @@ WHERE Lims.FDStackEmission.SampleCollectionId=@SampleCollectionId</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=First(Fields!SampleId.Value, "StackEmmissionDS")</Value>
+                                  <Value>=First(Fields!SampleName.Value, "StackEmmissionDS")</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -14127,7 +14129,7 @@ WHERE Lims.FDStackEmission.SampleCollectionId=@SampleCollectionId</CommandText>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!SampleId.Value, "StackEmmissionDS")</Value>
+                    <Value>=First(Fields!SampleName.Value, "StackEmmissionDS")</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>

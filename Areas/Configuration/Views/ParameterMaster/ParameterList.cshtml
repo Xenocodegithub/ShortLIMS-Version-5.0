@@ -36,13 +36,10 @@
                     <p class="mb-0"> <a class="text-primary" href="https://datatables.net/" target="_blank"></a></p>
                 </div>
                 <div class="pb-20">
-                    <div class="col-sm-12 col-md-2 col-form-label">
-                        <input class="form-control" id="filter" placeholder="Search..." type="text">
-                    </div>
                     <table class="data-table table stripe hover nowrap">
                         <thead>
-                            <tr>
-                                <th class="table-plus datatable-nosort">All</th>
+                            <tr class="thead-dark">
+                                <th class="table-plus datatable-nosort">Sr.No.</th>
                                 <th class="table-plus datatable-nosort">Parameter</th>
                                 <th class="table-plus datatable-nosort">IsActive</th>
                                 <th class="table-plus datatable-nosort">Action</th>
@@ -82,15 +79,6 @@
                                 }
                             }
                         </tbody>
-
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="pagination pagination-centered"></div>
-                                </td>
-                            </tr>
-
-                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -99,6 +87,14 @@
 </div>
 
 @Scripts.Render("~/bundles/unobtrusive")
+<script>
+    $(document).ready(function () {
+        $('#dtHorizontalExample').DataTable({
+            "scrollX": true
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 <script>
     function Delete(id) {
 
@@ -112,10 +108,11 @@
             confirmButtonClass: 'btn btn-success margin-5',
             cancelButtonClass: 'btn btn-danger margin-5',
             buttonsStyling: false
+            
         }).then(function () {
             debugger;
             Deleted(id);
-
+            location.reload();
         })
     }
     function Deleted(Id) {
@@ -143,7 +140,6 @@
             }
         });
     }
-
 </script>
 
 

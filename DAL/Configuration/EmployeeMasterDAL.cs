@@ -51,7 +51,7 @@ namespace LIMS_DEMO.DAL.Configuration
                             PANNo = e.PANNo,
                             AdharNo = e.AdharNo,
                             IsActive = e.IsActive,
-                        }).ToList();
+                        }).OrderByDescending(e => e.UserDetailId).ToList();
             }
             catch (Exception ex)
             {
