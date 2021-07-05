@@ -168,15 +168,6 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                     });
                 }
             }
-            //if ()
-            //{
-            //    BALFactory.sampleParameterBAL.AddEnquiryParameterDetail(CoreFactory.enquiryParameterList);
-
-            //}
-            //else
-            //{
-
-            //}
             BALFactory.sampleParameterBAL.AddEnquiryParameterDetail(CoreFactory.enquiryParameterList);
             BALFactory.sampleParameterBAL.UpdateEnquirySampleCharges(model.EnquirySampleID, model.TotalCharges);
             return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);

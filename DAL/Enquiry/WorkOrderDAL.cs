@@ -530,7 +530,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                         FileName = w.FileName,
                         EnteredBy = w.EnteredBy,
                         IsIGST=w.IsIGST
-                    }).OrderByDescending(e => e.EnquiryId).ToList();
+                    }).OrderByDescending(w => w.WorkOrderId).ToList();
         }
 
         public void WorkOrderApprove(int WorkOrderId, long EnquiryId, int iStatusId, int UserId)

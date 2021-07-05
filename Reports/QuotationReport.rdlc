@@ -420,23 +420,33 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!ProductGroupName.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Unicode MS</FontFamily>
+                                  </Style>
                                 </TextRun>
                                 <TextRun>
                                   <Value>/</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Unicode MS</FontFamily>
+                                  </Style>
                                 </TextRun>
                                 <TextRun>
                                   <Value>=Fields!SubGroupName.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Unicode MS</FontFamily>
+                                  </Style>
                                 </TextRun>
                                 <TextRun>
                                   <Value>/</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Unicode MS</FontFamily>
+                                  </Style>
                                 </TextRun>
                                 <TextRun>
                                   <Value>=Fields!MatrixName.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Unicode MS</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -445,7 +455,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Unicode MS</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -454,7 +466,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Particulars.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontFamily>Arial Unicode MS</FontFamily>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -532,8 +546,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>QuotationCosting</DataSetName>
-            <Top>5.56181in</Top>
-            <Left>0.81598in</Left>
+            <Top>4.97431in</Top>
+            <Left>0.62848in</Left>
             <Height>0.67708in</Height>
             <Width>6.73834in</Width>
             <Style>
@@ -563,8 +577,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.41737in</Top>
-            <Left>0.79653in</Left>
+            <Top>5.74237in</Top>
+            <Left>0.63403in</Left>
             <Height>0.25in</Height>
             <Width>5.62765in</Width>
             <ZIndex>1</ZIndex>
@@ -658,8 +672,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>7.66806in</Top>
-            <Left>0.79653in</Left>
+            <Top>6.85556in</Top>
+            <Left>0.60903in</Left>
             <Height>0.76042in</Height>
             <Width>6.71334in</Width>
             <ZIndex>2</ZIndex>
@@ -690,8 +704,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox36</rd:DefaultName>
-            <Top>2.9625in</Top>
-            <Left>0.81598in</Left>
+            <Top>2.575in</Top>
+            <Left>0.65348in</Left>
             <Height>0.25in</Height>
             <Width>0.51042in</Width>
             <ZIndex>3</ZIndex>
@@ -722,8 +736,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox36</rd:DefaultName>
-            <Top>3.28194in</Top>
-            <Left>0.81598in</Left>
+            <Top>2.89444in</Top>
+            <Left>0.65348in</Left>
             <Height>0.25in</Height>
             <Width>0.51042in</Width>
             <ZIndex>4</ZIndex>
@@ -756,9 +770,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>RefName</rd:DefaultName>
-            <Top>3.28194in</Top>
-            <Left>1.3264in</Left>
-            <Height>0.38542in</Height>
+            <Top>2.89444in</Top>
+            <Left>1.1639in</Left>
+            <Height>0.25in</Height>
             <Width>6.22792in</Width>
             <ZIndex>5</ZIndex>
             <Style>
@@ -794,8 +808,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>2.9625in</Top>
-            <Left>1.3264in</Left>
+            <Top>2.575in</Top>
+            <Left>1.1639in</Left>
             <Height>0.25in</Height>
             <Width>6.22792in</Width>
             <ZIndex>6</ZIndex>
@@ -877,8 +891,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox39</rd:DefaultName>
-            <Top>3.7368in</Top>
-            <Left>0.81598in</Left>
+            <Top>3.2243in</Top>
+            <Left>0.64098in</Left>
             <Height>1.21875in</Height>
             <Width>6.73834in</Width>
             <ZIndex>7</ZIndex>
@@ -933,8 +947,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox42</rd:DefaultName>
-            <Top>4.96944in</Top>
-            <Left>0.81598in</Left>
+            <Top>4.45694in</Top>
+            <Left>0.64098in</Left>
             <Height>0.4375in</Height>
             <Width>6.73834in</Width>
             <ZIndex>8</ZIndex>
@@ -963,8 +977,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>0.90348in</Top>
-            <Left>0.81598in</Left>
+            <Top>0.69098in</Top>
+            <Left>0.67848in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>9</ZIndex>
@@ -993,8 +1007,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyName</rd:DefaultName>
-            <Top>1.22292in</Top>
-            <Left>0.95833in</Left>
+            <Top>1.01042in</Top>
+            <Left>0.82083in</Left>
             <Height>1.45833in</Height>
             <Width>3.42278in</Width>
             <ZIndex>10</ZIndex>
@@ -1023,8 +1037,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>1.22292in</Top>
-            <Left>4.46181in</Left>
+            <Top>1.01042in</Top>
+            <Left>4.32431in</Left>
             <Height>0.25in</Height>
             <Width>0.85417in</Width>
             <ZIndex>11</ZIndex>
@@ -1053,8 +1067,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>1.72292in</Top>
-            <Left>4.46181in</Left>
+            <Top>1.51042in</Top>
+            <Left>4.32431in</Left>
             <Height>0.23612in</Height>
             <Width>0.85417in</Width>
             <ZIndex>12</ZIndex>
@@ -1083,8 +1097,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>2.43125in</Top>
-            <Left>4.4618in</Left>
+            <Top>2.21875in</Top>
+            <Left>4.3243in</Left>
             <Height>0.25in</Height>
             <Width>0.85418in</Width>
             <ZIndex>13</ZIndex>
@@ -1113,8 +1127,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ContactPerson</rd:DefaultName>
-            <Top>1.22292in</Top>
-            <Left>5.31598in</Left>
+            <Top>1.01042in</Top>
+            <Left>5.17848in</Left>
             <Height>0.25in</Height>
             <Width>2.23833in</Width>
             <ZIndex>14</ZIndex>
@@ -1143,8 +1157,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ContactPerson</rd:DefaultName>
-            <Top>1.72292in</Top>
-            <Left>5.31598in</Left>
+            <Top>1.51042in</Top>
+            <Left>5.17848in</Left>
             <Height>0.23612in</Height>
             <Width>2.23833in</Width>
             <ZIndex>15</ZIndex>
@@ -1173,8 +1187,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ContactPerson</rd:DefaultName>
-            <Top>2.43125in</Top>
-            <Left>5.31598in</Left>
+            <Top>2.21875in</Top>
+            <Left>5.17848in</Left>
             <Height>0.25in</Height>
             <Width>2.23833in</Width>
             <ZIndex>16</ZIndex>
@@ -1250,7 +1264,6 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>TermAndCondt</rd:DefaultName>
-                              <Top>0.01389in</Top>
                               <Left>0.44098in</Left>
                               <Height>0.25in</Height>
                               <Width>6.16124in</Width>
@@ -1295,8 +1308,8 @@
             <PageBreak>
               <BreakLocation>End</BreakLocation>
             </PageBreak>
-            <Top>6.66737in</Top>
-            <Left>0.78681in</Left>
+            <Top>6.00487in</Top>
+            <Left>0.62431in</Left>
             <Height>0.34375in</Height>
             <Width>6.71333in</Width>
             <ZIndex>17</ZIndex>
@@ -1411,8 +1424,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>8.72015in</Top>
-            <Left>0.79653in</Left>
+            <Top>7.69515in</Top>
+            <Left>0.59653in</Left>
             <Height>0.60417in</Height>
             <Width>6.71333in</Width>
             <ZIndex>18</ZIndex>
@@ -1804,8 +1817,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>QuotationDetails</DataSetName>
-            <Top>9.44932in</Top>
-            <Left>4.56623in</Left>
+            <Top>8.38682in</Top>
+            <Left>4.39123in</Left>
             <Height>1.35416in</Height>
             <Width>2.94362in</Width>
             <ZIndex>19</ZIndex>
@@ -1834,8 +1847,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox32</rd:DefaultName>
-            <Top>0.36528in</Top>
-            <Left>0.80626in</Left>
+            <Top>0.35278in</Top>
+            <Left>0.69376in</Left>
             <Height>0.25in</Height>
             <Width>6.74806in</Width>
             <ZIndex>20</ZIndex>
@@ -1864,8 +1877,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>1.47292in</Top>
-            <Left>4.46181in</Left>
+            <Top>1.26042in</Top>
+            <Left>4.32431in</Left>
             <Height>0.25in</Height>
             <Width>0.96875in</Width>
             <ZIndex>21</ZIndex>
@@ -1894,8 +1907,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ContactPerson</rd:DefaultName>
-            <Top>1.47292in</Top>
-            <Left>5.43056in</Left>
+            <Top>1.26042in</Top>
+            <Left>5.29306in</Left>
             <Height>0.25in</Height>
             <Width>2.12376in</Width>
             <ZIndex>22</ZIndex>
@@ -1924,8 +1937,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>1.95904in</Top>
-            <Left>4.46181in</Left>
+            <Top>1.74654in</Top>
+            <Left>4.32431in</Left>
             <Height>0.23612in</Height>
             <Width>0.85417in</Width>
             <ZIndex>23</ZIndex>
@@ -1954,8 +1967,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox38</rd:DefaultName>
-            <Top>1.95904in</Top>
-            <Left>5.31598in</Left>
+            <Top>1.74654in</Top>
+            <Left>5.17848in</Left>
             <Height>0.23612in</Height>
             <Width>2.23834in</Width>
             <ZIndex>24</ZIndex>
@@ -1984,8 +1997,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>2.19513in</Top>
-            <Left>4.46181in</Left>
+            <Top>1.98263in</Top>
+            <Left>4.32431in</Left>
             <Height>0.23612in</Height>
             <Width>0.85417in</Width>
             <ZIndex>25</ZIndex>
@@ -2014,8 +2027,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
-            <Top>2.19516in</Top>
-            <Left>5.31598in</Left>
+            <Top>1.98266in</Top>
+            <Left>5.17848in</Left>
             <Height>0.23609in</Height>
             <Width>2.23834in</Width>
             <ZIndex>26</ZIndex>
@@ -2055,8 +2068,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>7.15in</Top>
-            <Left>0.79653in</Left>
+            <Top>6.425in</Top>
+            <Left>0.60903in</Left>
             <Height>0.375in</Height>
             <Width>6.70361in</Width>
             <ZIndex>27</ZIndex>
@@ -2094,7 +2107,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox30</rd:DefaultName>
             <Top>0.04757in</Top>
-            <Left>0.81598in</Left>
+            <Left>0.70348in</Left>
             <Height>0.25in</Height>
             <Width>4.77153in</Width>
             <ZIndex>28</ZIndex>
@@ -2133,7 +2146,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox31</rd:DefaultName>
             <Top>0.04757in</Top>
-            <Left>5.58751in</Left>
+            <Left>5.47501in</Left>
             <Height>0.25in</Height>
             <Width>1.96681in</Width>
             <ZIndex>29</ZIndex>
@@ -2149,17 +2162,17 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>10.85765in</Height>
+        <Height>9.9625in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>7.8463in</Width>
+      <Width>7.66089in</Width>
       <Page>
         <PageHeader>
-          <Height>1.4514in</Height>
+          <Height>1.30708in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2205,9 +2218,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>LabName</rd:DefaultName>
-              <Top>0.0625in</Top>
-              <Left>1.65514in</Left>
-              <Height>0.64237in</Height>
+              <Top>0.0375in</Top>
+              <Left>1.40514in</Left>
+              <Height>0.58682in</Height>
               <Width>5.92821in</Width>
               <Style>
                 <Border>
@@ -2226,8 +2239,8 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Plot Nos. 13,14,17,18, Grampanchayat Bokhara, 8 km from Nagpur City,
-Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
+                      <Value>             Plot Nos. 13,14,17,18, Grampanchayat Bokhara, 8 km from Nagpur City,
+           Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Verdana</FontFamily>
@@ -2243,9 +2256,9 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox26</rd:DefaultName>
-              <Top>0.71876in</Top>
-              <Left>0.82557in</Left>
-              <Height>0.42708in</Height>
+              <Top>0.61876in</Top>
+              <Left>0.57557in</Left>
+              <Height>0.37153in</Height>
               <Width>6.75779in</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -2287,8 +2300,8 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox27</rd:DefaultName>
-              <Top>1.15973in</Top>
-              <Left>0.82557in</Left>
+              <Top>1.00973in</Top>
+              <Left>0.57557in</Left>
               <Height>0.25in</Height>
               <Width>1.97848in</Width>
               <ZIndex>2</ZIndex>
@@ -2331,8 +2344,8 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox27</rd:DefaultName>
-              <Top>1.15973in</Top>
-              <Left>2.80405in</Left>
+              <Top>1.00973in</Top>
+              <Left>2.55405in</Left>
               <Height>0.25in</Height>
               <Width>2.22917in</Width>
               <ZIndex>3</ZIndex>
@@ -2376,8 +2389,8 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox27</rd:DefaultName>
-              <Top>1.15973in</Top>
-              <Left>5.03322in</Left>
+              <Top>1.00973in</Top>
+              <Left>4.78322in</Left>
               <Height>0.25in</Height>
               <Width>2.55014in</Width>
               <ZIndex>4</ZIndex>
@@ -2395,9 +2408,9 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
               <Source>Embedded</Source>
               <Value>Logo</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>0.0625in</Top>
-              <Left>0.82557in</Left>
-              <Height>0.65626in</Height>
+              <Top>0.0375in</Top>
+              <Left>0.57557in</Left>
+              <Height>0.58682in</Height>
               <Width>0.81152in</Width>
               <ZIndex>5</ZIndex>
               <Style>
@@ -2406,6 +2419,18 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Border>
               </Style>
             </Image>
+            <Line Name="Line1">
+              <Top>1.28417in</Top>
+              <Left>0.57557in</Left>
+              <Height>0in</Height>
+              <Width>6.75778in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
           </ReportItems>
           <Style>
             <Border>
@@ -2414,7 +2439,7 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>1.01042in</Height>
+          <Height>0.73959in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2452,8 +2477,6 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <LeftIndent>0cm</LeftIndent>
-                  <RightIndent>0cm</RightIndent>
                   <Style>
                     <TextAlign>Center</TextAlign>
                   </Style>
@@ -2461,9 +2484,9 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox43</rd:DefaultName>
               <Top>0.03124in</Top>
-              <Left>0.31724in</Left>
-              <Height>0.51737in</Height>
-              <Width>7.45614in</Width>
+              <Left>0.2375in</Left>
+              <Height>0.33543in</Height>
+              <Width>7.33114in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2500,10 +2523,10 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox27</rd:DefaultName>
-              <Top>0.54861in</Top>
-              <Left>0.31724in</Left>
-              <Height>0.42014in</Height>
-              <Width>2.94652in</Width>
+              <Top>0.38611in</Top>
+              <Left>0.2375in</Left>
+              <Height>0.29514in</Height>
+              <Width>3.05822in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -2543,10 +2566,10 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox27</rd:DefaultName>
-              <Top>0.54862in</Top>
-              <Left>3.27766in</Left>
-              <Height>0.40625in</Height>
-              <Width>2.17362in</Width>
+              <Top>0.38612in</Top>
+              <Left>3.29572in</Left>
+              <Height>0.28125in</Height>
+              <Width>1.99306in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -2586,10 +2609,10 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox27</rd:DefaultName>
-              <Top>0.54862in</Top>
-              <Left>5.45128in</Left>
-              <Height>0.40625in</Height>
-              <Width>2.32211in</Width>
+              <Top>0.38612in</Top>
+              <Left>5.28878in</Left>
+              <Height>0.28125in</Height>
+              <Width>2.27986in</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -2601,6 +2624,18 @@ Opp. Patel Petrol Pump, Chhindwara Road, Koradi, Dist.Nagapur-441111</Value>
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Line Name="Line2">
+              <Top>0.03958in</Top>
+              <Left>7.61333in</Left>
+              <Height>0in</Height>
+              <Width>-7.45306in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
           </ReportItems>
           <Style>
             <Border>

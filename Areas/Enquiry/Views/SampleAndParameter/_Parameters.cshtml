@@ -1,5 +1,4 @@
-﻿
-@model LIMS_DEMO.Areas.Enquiry.Models.SampleAndParametersModel
+﻿@model LIMS_DEMO.Areas.Enquiry.Models.SampleAndParametersModel
 
 @using (Ajax.BeginForm("_Parameters", "SampleAndParameter", new AjaxOptions() { HttpMethod = "Post", OnBegin = "onLoad", OnSuccess = "ParameterSuccess" }))
 {
@@ -11,72 +10,69 @@
     <!-- Simple Datatable start -->
     if (Model.ParameterList.Count != 0)
     {
-    
-            <div>
-                <label style="font-weight: 600; background-color: #208b96 !important; font-size: 14px; padding: 10px;" class="label col-md-12">Sample Name :<i class="text-capitalize">@Model.DisplaySampleName</i></label>
-            </div>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by parameters.." title="Type Keywords">
-            <table id="tblParameters" class="data-table table nowrap">
-                <thead>
-                    <tr class="thead-dark">
-                        <th class="table-plus datatable-nosort"><input type="checkbox" id="chkAllParameter" /></th>
-                        <th> Parameter</th>
-                        <th>Discipline</th>
-                        <th hidden>Test Method</th>
-                        <th>Unit</th>
-                        <th hidden>Charge</th>
-                        <th hidden>Branch</th>
-                        <th>Remarks</th>
+        <div>
+            <label style="font-weight: 600; background-color: #208b96 !important; font-size: 14px; padding: 10px;" class="label col-md-12">Sample Name :<i class="text-capitalize">@Model.DisplaySampleName</i></label>
+        </div>
+        @*<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by parameters.." title="Type Keywords">*@
+        <table id="tblParameters" class="data-table table nowrap">
+            <thead>
+                <tr class="thead-dark">
+                    <th class="table-plus datatable-nosort"><input type="checkbox" id="chkAllParameter" /></th>
+                    <th> Parameter</th>
+                    <th>Discipline</th>
+                    <th hidden>Test Method</th>
+                    <th>Unit</th>
+                    <th hidden>Charge</th>
+                    <th hidden>Branch</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.ParameterList.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBoxFor(model => model.ParameterList[i].IsSelected, new { onchange = "CalculateParameterCharges()" })
+                            @Html.HiddenFor(model => model.ParameterList[i].EnquiryParameterDetailID)
+                        </td>
+                        <td>
+                            @Model.ParameterList[i].ParameterName
+                            @Html.HiddenFor(model => model.ParameterList[i].ParameterMasterId)
+                            @Html.HiddenFor(model => model.ParameterList[i].ParameterMappingId)
+                            @Html.HiddenFor(model => model.ParameterList[i].ParameterGroupId)
+                            @Html.HiddenFor(model => model.ParameterList[i].Infield)
+                        </td>
+                        <td>
+                            @Model.ParameterList[i].Discipline
+                            @Html.HiddenFor(model => model.ParameterList[i].DisciplineId)
+                            @Html.HiddenFor(model => model.ParameterList[i].ProductGroupId)
+                            @Html.HiddenFor(model => model.ParameterList[i].SubGroupId)
+                            @Html.HiddenFor(model => model.ParameterList[i].MatrixId)
+                        </td>
+                        <td hidden>
+                            @Html.DropDownListFor(model => model.ParameterList[i].TestMethodId, new SelectList(Model.ParameterList[i].TestMethods, "TestMethodId", "TestMethod", Model.ParameterList[i].TestMethodId), new { @class = "form-control btn-sm dropdown-toggle border" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(model => model.ParameterList[i].UnitId, new SelectList(Model.ParameterList[i].Units, "UnitId", "Unit", Model.ParameterList[i].UnitId), new { @class = "form-control btn-sm dropdown-toggle border" })
+                        </td>
+                        <td hidden>
+                            @Html.TextBoxFor(model => model.ParameterList[i].Charges, new { @onkeypress = "javascript: return isDecimalNumberKey(event,value,2)", onchange = "CalculateParameterCharges()", onfocus = "this.value=''", @style = "color:black", @class = "form-control" })
+                        </td>
+                        <td hidden>
+                            @Html.DropDownListFor(model => model.ParameterList[i].LabMasterId, new SelectList(ViewBag.Branch, "LabMasterId", "LabBranchName", Model.ParameterList[i].LabMasterId), new { @class = "form-control btn-sm dropdown-toggle border" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.ParameterList[i].Remarks, new { @style = "color:black", @class = "form-control" })
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.ParameterList.Count; i++)
-                    {
-                        <tr>
-                            <td>
-                                @Html.CheckBoxFor(model => model.ParameterList[i].IsSelected, new { onchange = "CalculateParameterCharges()" })
-                                @Html.HiddenFor(model => model.ParameterList[i].EnquiryParameterDetailID)
-                            </td>
-                            <td>
-                                @Model.ParameterList[i].ParameterName
-                                @Html.HiddenFor(model => model.ParameterList[i].ParameterMasterId)
-                                @Html.HiddenFor(model => model.ParameterList[i].ParameterMappingId)
-                                @Html.HiddenFor(model => model.ParameterList[i].ParameterGroupId)
-                                @Html.HiddenFor(model => model.ParameterList[i].Infield)
-                            </td>
-                            <td>
-                                @Model.ParameterList[i].Discipline
-                                @Html.HiddenFor(model => model.ParameterList[i].DisciplineId)
-                                @Html.HiddenFor(model => model.ParameterList[i].ProductGroupId)
-                                @Html.HiddenFor(model => model.ParameterList[i].SubGroupId)
-                                @Html.HiddenFor(model => model.ParameterList[i].MatrixId)
-                            </td>
-                            <td hidden>
-                                @Html.DropDownListFor(model => model.ParameterList[i].TestMethodId, new SelectList(Model.ParameterList[i].TestMethods, "TestMethodId", "TestMethod", Model.ParameterList[i].TestMethodId), new { @class = "form-control btn-sm dropdown-toggle border" })
-                            </td>
-                            <td>
-                                @Html.DropDownListFor(model => model.ParameterList[i].UnitId, new SelectList(Model.ParameterList[i].Units, "UnitId", "Unit", Model.ParameterList[i].UnitId), new { @class = "form-control btn-sm dropdown-toggle border" })
-                            </td>
-                            <td hidden>
-                                @Html.TextBoxFor(model => model.ParameterList[i].Charges, new { @onkeypress = "javascript: return isDecimalNumberKey(event,value,2)", onchange = "CalculateParameterCharges()", onfocus = "this.value=''", @style = "color:black", @class = "form-control" })
-                            </td>
-                            <td hidden>
-                                @Html.DropDownListFor(model => model.ParameterList[i].LabMasterId, new SelectList(ViewBag.Branch, "LabMasterId", "LabBranchName", Model.ParameterList[i].LabMasterId), new { @class = "form-control btn-sm dropdown-toggle border" })
-                            </td>
-                            <td>
-                                @Html.TextBoxFor(model => model.ParameterList[i].Remarks, new { @style = "color:black", @class = "form-control" })
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-       
+                }
+            </tbody>
+        </table>
         <div>
             <div>
                 <input type="submit" value="Save Parameters" id="SaveParameters" class="btn btn-sm btn-info " style="float:right" />
             </div>
         </div>
-    
     }
     <!-- Simple Datatable End -->
 }
@@ -90,30 +86,45 @@
                 alert('Please Select Parameters.');
                 return false;
             }
+            $(".custom-select").val(-1).change();
             return true;
         });
 
     });
-</script>
-<script>
+    $('document').ready(function () {
+        $('#tblParameters').DataTable({
+            scrollCollapse: true,
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [{
+                targets: "datatable-nosort",
+                orderable: false,
+            }],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "info": "_START_-_END_ of _TOTAL_ entries",
+                searchPlaceholder: "Search",
+                paginate: {
+                    next: '<i class="ion-chevron-right"></i>',
+                    previous: '<i class="ion-chevron-left"></i>'
+                }
+            },
+        });
 
+    });
     function onLoad() {
         $('#SaveParameters').prop('disabled', true);
         $('#SaveParameters').val('Please Wait..')
     }
-
     function ParameterSuccess(result) {
         debugger
         // alert('asd')
         if (result.status == "success") {
-
             $('#divSampleDetails').load('/Enquiry/SampleAndParameter/_SampleList?EnquiryId=' + $('#EnquiryId').val(), '', function (data, status) {
                 $('#SaveParameters').prop('disabled', false);
                 $('#SaveParameters').val('Save Parameters')
             });
-
             $('#divParameters').hide();
-
             $('#divSampleContract').load('/Enquiry/_SampleContract?EnquiryId=' + EnquiryId, '',    // data
                 function (data, status) {  // callback function
 
@@ -129,12 +140,10 @@
             $('#SaveParameters').val('Save Parameters')
         }
     }
-
     $('#chkAllParameter').change(function () {
         debugger
         $('#tblParameters tbody input[type=checkbox]').prop('checked', $(this).prop('checked'));
     })
-
     function CalculateParameterCharges() {
         var vCharges = 0.0;
         var vTotalCharges = parseFloat(0.0).toFixed(2);
@@ -185,7 +194,6 @@
             }
         }
     }
-
     function isDecimalNumberKey(evt, thisObj, pres) {
 
         var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -198,6 +206,7 @@
         if (parts[0].length >= 14) return false;
         if (parts.length == 2 && parts[1].length >= pres) return false;
     }
-
 </script>
+
+
 

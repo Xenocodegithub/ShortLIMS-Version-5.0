@@ -22,6 +22,9 @@
                             </ol>
                         </nav>
                     </div>
+                    <div class="col-md-6 col-sm-12">
+                        <a class="btn btn-sm btn-info pull-right" href="/Customer/Customer/AddCustomer" style="color: #fff; padding: 5px 15px !important; margin: 7px 15px; float:right">Add Customer</a>
+                    </div>
                 </div>
             </div>
             <!-- Default Basic Forms Start -->
@@ -32,9 +35,7 @@
                     <div class="pull-left">
                         <h4 class="text-blue h4">Add Enquiry</h4>
                     </div>
-                    <div class="title-alt">
-                        <a class="btn btn-sm btn-info pull-right" href="/Customer/Customer/AddCustomer">Add Customer</a>
-                    </div>
+                   
                 </div>
                 <div style="margin-left:40px;">
                     @using (Ajax.BeginForm("AddEnquiry", "Enquiry", new AjaxOptions() { HttpMethod = "Post", OnBegin = "EnquiryStart", OnSuccess = "EnquirySuccess" }))

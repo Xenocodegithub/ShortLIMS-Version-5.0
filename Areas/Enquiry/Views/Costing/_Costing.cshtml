@@ -82,12 +82,13 @@
             </div>
         }
     </div>
-            }
-            <script>
-
+  }
+<script>
     function OnClick() {
         $('#btnAddCosting').val('Please Wait..');
         $('#btnAddCosting').prop('disabled', true);
+        $('#divCosting').hide();
+        location.reload();
     }
 
     function CancelCostValues() {

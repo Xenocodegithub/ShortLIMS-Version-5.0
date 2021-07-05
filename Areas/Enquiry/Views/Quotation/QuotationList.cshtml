@@ -97,8 +97,8 @@
                                         @Html.DisplayFor(modelItem => item.Status)
                                     </td>
                                     <td>
-                                        <a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=QuotationReport.rdl&QuotationId=@item.QuotationId&EnquiryId=@item.EnquiryId&EnquirySampleID=@item.EnquirySampleID" class="btn btn-success btn-sm">View</a>
-                                        @*<a id="btnApprove" target="_blank" href="/Enquiry/QuotationReport?Format=PDF&EnquiryId=@item.EnquiryId" class="btn btn-success btn-sm">View</a>*@
+                                        @*<a id="btnApprove" target="_blank" href="/Reporting/frmShowReport.aspx?path=QuotationReport.rdl&QuotationId=@item.QuotationId&EnquiryId=@item.EnquiryId&EnquirySampleID=@item.EnquirySampleID" class="btn btn-success btn-sm">View</a>*@
+                                        <a id="btnApprove" target="_blank" href="/Enquiry/Quotation/QuotationReport?Format=PDF&EnquiryId=@item.EnquiryId" class="btn btn-success btn-sm">View</a>
                                     </td>
                                     @{ string tdLinkId = "tdLink" + SrNo.ToString();}
                                     <td id="@tdLinkId">

@@ -38,11 +38,11 @@
                             <label>Enquiry ID: &nbsp </label>
                             @Html.DisplayFor(model => model.EnquiryId, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-6 form-group">
                             <label>Customer Name:&nbsp</label>
                             @Html.DisplayFor(model => model.CustomerName, "Customer Name", new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-3 form-group">
                             <label>Enquiry On:&nbsp</label>
                             @Model.EnquiryOn.ToString("dd/MM/yyyy")
                         </div>

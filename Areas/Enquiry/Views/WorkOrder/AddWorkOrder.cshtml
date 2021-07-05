@@ -1,7 +1,9 @@
-﻿
+
 @model LIMS_DEMO.Areas.Enquiry.Models.WorkOrderListModel
-@{ ViewBag.Title = "Add WorkOrder";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+@{
+    ViewBag.Title = "Add WorkOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <div class="main-container">
     <div class="pd-ltr-20 xs-pd-20-10">
@@ -10,13 +12,13 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="title">
-                            <h4>Work Order</h4>
+                            <h4>WorkOrder</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Enquiry</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Work Order</li>
-                                <li class="breadcrumb-item active" aria-current="page">Add Work Order</li>
+                                <li class="breadcrumb-item active" aria-current="page">Quotation</li>
+                                <li class="breadcrumb-item active" aria-current="page">Quotation List</li>
                             </ol>
                         </nav>
                     </div>
@@ -26,256 +28,263 @@
             @*@using (Html.BeginForm("AddWorkOrder", "WorkOrder", FormMethod.Post, new { enctype = "multipart/form-data", Id = "frmAddWorkOrder" }))*@
             @using (Ajax.BeginForm("AddWorkOrder", "WorkOrder", new AjaxOptions { HttpMethod = "POST", OnSuccess = "WorkOrderSuccess" }, new { enctype = "multipart/form-data", id = "frmAddWorkOrder" }))
             {
-@Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.CustomerMasterId)
-                                @Html.HiddenFor(model => model.EnquiryId)
-                                                @Html.HiddenFor(model => model.QuotationId)
-                                                                @Html.HiddenFor(model => model.WorkOrderId)
-                                                                                @Html.HiddenFor(model => model.WorkOrderSampleCollectionDateId)
-                                                                                                @Html.HiddenFor(model => model.WorkOrderUpload)
-                                                                                                                @Html.HiddenFor(model => model.CustomerMasterId)
-                                                                                                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" }) <!-- Default Basic Forms Start -->
-                                                                                                                                                                <div class="pd-20 card-box mb-30" style="margin-top:-19px;">
-                                                                                                                                                                    <div class="clearfix">
-                                                                                                                                                                        <div class="pull-left">
-                                                                                                                                                                            <h4 class="text-blue h4">Add Work Order</h4>
+                @Html.HiddenFor(model => model.EnquiryId)
+                @Html.HiddenFor(model => model.QuotationId)
+                @Html.HiddenFor(model => model.WorkOrderId)
+                @Html.HiddenFor(model => model.WorkOrderSampleCollectionDateId)
+                @Html.HiddenFor(model => model.WorkOrderUpload)
+                @Html.HiddenFor(model => model.CustomerMasterId)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                                                                                                                                                        </div>
-                                                                                                                                                                    </div>
-                                                                                                                                                                    <div class="form-group">
-                                                                                                                                                                        <div class="row">
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label>Customer Name :<span style="color:red">*</span> </label>
-                                                                                                                                                                                <div class="col-md-12" style="padding-left:0px">
-                                                                                                                                                                                    @Html.DisplayFor(model => model.RegistrationName, new { htmlAttributes = new { @class = "form-control" } })
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label>Quotation Amount:</label>
-                                                                                                                                                                                <div class="col-md-4">
-                                                                                                                                                                                    @Html.DisplayFor(model => model.QuotationAmount, new { htmlAttributes = new { @class = "form-control col-md-4" } })
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label>Work order No: <span style="color:red">*</span></label>
-                                                                                                                                                                                @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control col-md-9", @autocomplete = "false" })
-                                                                                                                                                                                @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label>Upload Work Order:</label>
-                                                                                                                                                                                <div class="col-sm-7" style="padding:0px">
-                                                                                                                                                                                    <input id="fileInput" name="file" type="file" />
-                                                                                                                                                                                    @Html.DisplayFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </div>
+                <!-- Default Basic Forms Start -->
+                <div class="pd-20 card-box mb-30" style="margin-top:-19px;">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Quotation List</h4>
 
-
-
-                                                                                                                                                                        <br /><div class="row">
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label> Duration(in months) : <span style="color:red">*</span></label>
-                                                                                                                                                                                @Html.TextBoxFor(model => model.Duration, new { @class = "form-control col-md-9", @autocomplete = "false" })
-                                                                                                                                                                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label> Work Order Received On:<span style="color:red">*</span></label>
-                                                                                                                                                                                <input type="date" id="WorkOrderReceivedDate" name="WorkOrderReceivedDate" class="form-control col-sm-9" placeholder="dd-MM-yyyy" onblur="ValidateDate();" required />
-                                                                                                                                                                                @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", @onblur = "ValidateDate();", onfocus = "this.value=''" })*@
-                                                                                                                                                                                @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @onchange = "ValidateDate();" })*@
-                                                                                                                                                                                @*<span class="input-group-addon add-on">
-                                                                                                                                                                                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-                                                                                                                                                                                    </span>*@
-                                                                                                                                                                                @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger" })
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label> Work Order End Date : <span style="color:red">*</span></label>
-                                                                                                                                                                                @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control col-md-9", @placeholder = "dd-MM-yyyy", @readonly = "readonly" })
-                                                                                                                                                                                @Html.HiddenFor(model => model.WorkOrderEndDate)
-                                                                                                                                                                                @*<input type="date" id="WorkOrderEndDate" name="WorkOrderEndDate" class="input-group col-sm-12" placeholder="dd/MM/yyyy" onblur="ValidateDate();" />*@
-                                                                                                                                                                                @*<div class="">
-                                                                                                                                                                                    @Html.TextBoxFor(model => model.WorkOrderEndDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly"})
-                                                                                                                                                                                    <span class="input-group-addon add-on">
-                                                                                                                                                                                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-                                                                                                                                                                                    </span>
-                                                                                                                                                                                    </div>*@
-                                                                                                                                                                                @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger" })
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col-md-3 form-group">
-                                                                                                                                                                                <label> Expected Sample Collection Date:<span style="color:red">*</span></label>
-                                                                                                                                                                                <input type="date" id="SampleCollectionDate" name="SampleCollectionDate" class="form-control date col-md-9" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
-                                                                                                                                                                                @*@Html.TextBoxFor(model => model.SampleCollectionDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy" })*@
-                                                                                                                                                                                @*<span class="input-group-addon add-on">
-                                                                                                                                                                                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
-                                                                                                                                                                                    </span>*@
-                                                                                                                                                                                @Html.ValidationMessageFor(model => model.SampleCollectionDate, "", new { @class = "text-danger" })
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </div>
-
-                                                                                                                                                                        <div class="row">
-                                                                                                                                                                            <div class="col-md-6 form-group">
-                                                                                                                                                                                <label>Number of Days(Only for Hourly And Six times a Day Frequency):</label>
-                                                                                                                                                                                @Html.TextBoxFor(model => model.NoOfDays, new { @class = "form-control col-md-4", @autocomplete = "false", disabled = "disabled" })
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="clearfix"></div>
-                                                                                                                                                                            <div class="col-sm-11">
-                                                                                                                                                                                <input type="button" id="btnAddNoOfDays" value="Add No Of Days" class="btn btn-sm btn-info text-nowrap" style="float:right" />
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </div>
-                                                                                                                                                                        <hr />
-                                                                                                                                                                        <div class="row">
-                                                                                                                                                                            <div class="col-md-6 form-group">
-                                                                                                                                                                                <label>
-                                                                                                                                                                                    Any amendment to contract:
-                                                                                                                                                                                </label>
-                                                                                                                                                                                <span class="required" style="color:red">*</span>
-                                                                                                                                                                                @Html.TextAreaFor(model => model.ContractAmendment, new { @class = "form-control col-md-5", @autocomplete = "false", @style = "height:65px" })
-                                                                                                                                                                            </div>
-                                                                                                                                                                            <div class="col-sm-6 form-group">
-                                                                                                                                                                                <label>@Html.RadioButtonFor(item => Model.IsIGST, false, new { id = "IsIGST-false", @checked = "checked" }) CGST(9 %) + SGST(9 %) </label>
-                                                                                                                                                                                <label> @Html.RadioButtonFor(item => Model.IsIGST, true, new { id = "IsIGST-true" }) IGST(18%)</label>
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row" style="margin-left:0px">
+                            <div class="col-md-3 form-group">
+                                <label>Customer Name :<span style="color:red">*</span> </label>
+                                <div class="col-md-12" style="padding-left:0px">
+                                    @Html.DisplayFor(model => model.RegistrationName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label>Quotation Amount:</label>
+                                <div class="col-md-4">
+                                    @Html.DisplayFor(model => model.QuotationAmount, new { htmlAttributes = new { @class = "form-control col-md-4" } })
+                                </div>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label>Work order No: <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(model => model.WorkOrderNo, new { @class = "form-control col-md-9", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.WorkOrderNo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label>Upload Work Order:</label>
+                                <div class="col-sm-7" style="padding:0px">
+                                    <input id="fileInput" name="file" type="file" />
+                                    @Html.DisplayFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
 
 
-                                                                                                                                                                        <div class="row">
-                                                                                                                                                                            <div class="col-md-11">
-                                                                                                                                                                                @*<a target="_blank" href="/Enquiry/QuotationReport?Format=PDF&EnquiryId=@Model.EnquiryId" class="btn btn-primary btn-sm">More Details</a>*@
-                                                                                                                                                                                @*<a href="/Enquiry/AddContract?EnquiryId=@Model.EnquiryId" class="btn btn-App btn-sm">Edit Contract</a>*@
-                                                                                                                                                                                <a href="#" onclick="funUpdateRemark(@Model.EnquiryId)" id="Remark" class="btn btn-warning btn-sm" style="float:right">Edit Contract</a>
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </div>
-                                                                                                                                                                    </div><hr />
-                                                                                                                                                                    <div>
-                                                                                                                                                                        <!-- Simple Datatable start -->
-                                                                                                                                                                        <table id="dtHorizontalExample" class="table table stripe hover nowrap">
-                                                                                                                                                                            <thead>
-                                                                                                                                                                                <tr class="thead-dark">
-                                                                                                                                                                                    <th class="table-plus datatable-nosort">
-                                                                                                                                                                                        SrNo.
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        SampleType
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        ParameterName
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    @*<th>
-                                                                                                                                                                                          Product Group
-                                                                                                                                                                                        </th>
-                                                                                                                                                                                        <th>
-                                                                                                                                                                                         Sub Group
-                                                                                                                                                                                        </th>
-                                                                                                                                                                                        <th>
-                                                                                                                                                                                         Matrix
-                                                                                                                                                                                        </th>*@
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        Limit
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    @*<th>
-                                                                                                                                                                                         PCB Limit Values
-                                                                                                                                                                                        </th>*@
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        No Of Sample And Location<span class="required" style="color:red">*</span>
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        View Location <span class="required" style="color:red">*</span>
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        Frequency @*<span class="required" style="color:red">*</span>*@
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        Unit Price
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                    <th>
-                                                                                                                                                                                        Total
-                                                                                                                                                                                    </th>
-                                                                                                                                                                                </tr>
-                                                                                                                                                                            </thead>
-                                                                                                                                                                            <tbody>
-                                                                                                                                                                                @for (int i = 0; i < Model.workorderList.Count; i++)
-                                                                                                                                                                                {
-                                                                                                                                                                <tr>
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @Model.workorderList[i].SrNo
-                                                                                                                                                                        @Html.HiddenFor(x => Model.workorderList[i].EnquirySampleID)
-                                                                                                                                                                    </td>
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @Html.DisplayFor(x => Model.workorderList[i].SampleTypeProductName, new { @class = "form-control" })
-                                                                                                                                                                        @Html.HiddenFor(x => Model.workorderList[i].DisplaySampleName, new { @class = "form-control" })
-                                                                                                                                                                        @Html.HiddenFor(x => Model.workorderList[i].SampleName, new { @class = "form-control" })
-                                                                                                                                                                    </td>
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
-                                                                                                                                                                        @*@Html.EditorFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })*@
-                                                                                                                                                                        @*@Html.ValidationMessageFor(x => Model.workorderList[i].ParameterName)*@
-                                                                                                                                                                    </td>
-                                                                                                                                                                    @*<td>
-                                                                                                                                                                            @Html.DisplayFor(x => Model.workorderList[i].ProductGroupName, new { @class = "form-control" })
-                                                                                                                                                                            @Html.ValidationMessageFor(x => Model.workorderList[i].ProductGroupName)
-                                                                                                                                                                        </td>
-                                                                                                                                                                        <td>
-                                                                                                                                                                            @Html.DisplayFor(x => Model.workorderList[i].SubGroupName, new { @class = "form-control" })
-                                                                                                                                                                            @Html.ValidationMessageFor(x => Model.workorderList[i].SubGroupName)
-                                                                                                                                                                        </td>
-                                                                                                                                                                        <td>
-                                                                                                                                                                            @Html.DisplayFor(x => Model.workorderList[i].MatrixName, new { @class = "form-control" })
-                                                                                                                                                                            @Html.ValidationMessageFor(x => Model.workorderList[i].MatrixName)
-                                                                                                                                                                        </td>*@
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @if (Model.workorderList[i].IsSetPCBLimit)
-                                                                                                                                                                        {
-                                                                                                                                                    <a href="#" onclick="funLoadPCBParam(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId)"> Limit</a> }
-                                                                                                                                                                        else
-                                                                                                                                                                        {
-                                                                                                                                                    <a class=" btn-disabled">NA</a>}
-                                                                                                                                                                    </td>
-                                                                                                                                                                    @*<td>
-                                                                                                                                                                            @if (Model.workorderList[i].PCBLimit != " " && Model.workorderList[i].IsSetPCBLimit)
-                                                                                                                                                                            {
-                                                                                                                                                                                @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
-                                                                                                                                                                                @Html.DisplayFor(x => Model.workorderList[i].PCBLimit, new { @class = "form-control" })
-                                                                                                                                                                            }
-                                                                                                                                                                            else
-                                                                                                                                                                            {
-                                                                                                                                                                               <a class=" btn-disabled">NA</a>
-                                                                                                                                                                            }
-                                                                                                                                                                        </td>*@
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @Html.TextBoxFor(x => Model.workorderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.workorderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control col-md-7", @onchange = "ValidateDate();" })
-                                                                                                                                                                        @Html.ValidationMessageFor(x => Model.workorderList[i].Quantity)
-                                                                                                                                                                    </td>
-                                                                                                                                                                    <td>
-                                                                                                                                                                        <a href="#" onclick="funAddLocation(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId);" class="btn btn-warning btn-sm">View Location</a>
-                                                                                                                                                                        @*@Html.TextBoxFor(x => Model.workorderList[i].Location, new { @class = "form-control", @style = "color:black" })
-                                                                                                                                                                            @Html.ValidationMessageFor(x => Model.workorderList[i].Location)*@
-                                                                                                                                                                    </td>
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @Html.DropDownListFor(x => Model.workorderList[i].FrequencyMasterId, new SelectList(ViewBag.Frequency, "FrequencyMasterId", "Frequency"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
-                                                                                                                                                                        @*@Html.ValidationMessageFor(x => Model.workorderList[i].FrequencyMasterId)*@
-                                                                                                                                                                    </td>
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @Html.DisplayFor(x => Model.workorderList[i].UnitPrice, new { @class = "form-control" })
-                                                                                                                                                                        @Html.HiddenFor(x => Model.workorderList[i].UnitPrice)
-                                                                                                                                                                        @Html.ValidationMessageFor(x => Model.workorderList[i].UnitPrice)
-                                                                                                                                                                    </td>
-                                                                                                                                                                    <td>
-                                                                                                                                                                        @Html.TextBoxFor(x => Model.workorderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
-                                                                                                                                                                        @Html.ValidationMessageFor(x => Model.workorderList[i].Total)
-                                                                                                                                                                    </td>
-                                                                                                                                                                </tr>}
-                                                                                                                                                                            </tbody>
-                                                                                                                                                                        </table>
-                                                                                                                                                                        <!-- Simple Datatable End -->
-                                                                                                                                                                    </div>
-                                                                                                                                                                    <hr />
-                                                                                                                                                                    <div class="row">
-                                                                                                                                                                        <div class="col-md-12" style="text-align:center;">
-                                                                                                                                                                            @*<button type="submit" class="btn btn-success">Back</button>*@
-                                                                                                                                                                            <button type="submit" class="btn btn-info btn-sm" id="btnsubmit" style="float:right;">Save</button>
-                                                                                                                                                                        </div>
-                                                                                                                                                                    </div>
-                                                                                                                                                                </div> <!-- Default Basic Forms End -->            }
+
+                        <br /><div class="row">
+                            <div class="col-md-3 form-group">
+                                <label> Duration(in months) : <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(model => model.Duration, new { @class = "form-control col-md-9", @autocomplete = "false" })
+                                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label> Work Order Received On:<span style="color:red">*</span></label>
+                                <input type="date" id="WorkOrderReceivedDate" name="WorkOrderReceivedDate" class="form-control col-sm-9" placeholder="dd-MM-yyyy" onblur="ValidateDate();" required />
+                                @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @placeholder = "MM/dd/yyyy", @onblur = "ValidateDate();", onfocus = "this.value=''" })*@
+                                @*@Html.TextBoxFor(model => model.WorkOrderReceivedDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy", @onchange = "ValidateDate();" })*@
+                                @*<span class="input-group-addon add-on">
+                                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                    </span>*@
+                                @Html.ValidationMessageFor(model => model.WorkOrderReceivedDate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label> WorkOrder End Date : <span style="color:red">*</span></label>
+                                @Html.TextBoxFor(model => model.WOEDate, new { @class = "form-control col-md-9", @placeholder = "dd-MM-yyyy", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.WorkOrderEndDate)
+                                @*<input type="date" id="WorkOrderEndDate" name="WorkOrderEndDate" class="input-group col-sm-12" placeholder="dd/MM/yyyy" onblur="ValidateDate();" />*@
+                                @*<div class="">
+                                    @Html.TextBoxFor(model => model.WorkOrderEndDate, new { @class = "form-control", @placeholder = "dd/MM/yyyy", @readonly = "readonly"})
+                                    <span class="input-group-addon add-on">
+                                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                    </span>
+                                    </div>*@
+                                @Html.ValidationMessageFor(model => model.WorkOrderEndDate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label> Expected Sample Collection Date:<span style="color:red">*</span></label>
+                                <input type="date" id="SampleCollectionDate" name="SampleCollectionDate" class="form-control date col-md-9" placeholder="dd/MM/yyyy" onblur="ValidateDate();" required />
+                                @*@Html.TextBoxFor(model => model.SampleCollectionDate, new { @class = "form-control", @autocomplete = "false", data_format = "MM/dd/yyyy" })*@
+                                @*<span class="input-group-addon add-on">
+                                    <i style="font-style:normal;" data-time-icon="entypo-clock" data-date-icon="entypo-calendar"></i>
+                                    </span>*@
+                                @Html.ValidationMessageFor(model => model.SampleCollectionDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Number of Days(Only for Hourly And Six times a Day Frequency):</label>
+                                @Html.TextBoxFor(model => model.NoOfDays, new { @class = "form-control col-md-4", @autocomplete = "false", disabled = "disabled" })
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-11">
+                                <input type="button" id="btnAddNoOfDays" value="Add No Of Days" class="btn btn-sm btn-info text-nowrap" style="float:right" />
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>
+                                    Any amendment to contract:
+                                </label>
+                                <span class="required" style="color:red">*</span>
+                                @Html.TextAreaFor(model => model.ContractAmendment, new { @class = "form-control col-md-5", @autocomplete = "false", @style = "height:65px" })
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label>@Html.RadioButtonFor(item => Model.IsIGST, false, new { id = "IsIGST-false", @checked = "checked" }) CGST(9 %) + SGST(9 %) </label>
+                                <label> @Html.RadioButtonFor(item => Model.IsIGST, true, new { id = "IsIGST-true" }) IGST(18%)</label>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-11">
+                                @*<a target="_blank" href="/Enquiry/QuotationReport?Format=PDF&EnquiryId=@Model.EnquiryId" class="btn btn-primary btn-sm">More Details</a>*@
+                                @*<a href="/Enquiry/AddContract?EnquiryId=@Model.EnquiryId" class="btn btn-App btn-sm">Edit Contract</a>*@
+                                <a href="#" onclick="funUpdateRemark(@Model.EnquiryId)" id="Remark" class="btn btn-warning btn-sm" style="float:right">Edit Contract</a>
+                            </div>
+                        </div>
+                    </div><hr />
+                    <div>
+                        <!-- Simple Datatable start -->
+                        <table id="dtHorizontalExample" class="table table stripe hover initial">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th class="table-plus datatable-nosort">
+                                        SrNo.
+                                    </th>
+                                    <th>
+                                        SampleType
+                                    </th>
+                                    <th>
+                                        ParameterName
+                                    </th>
+                                    @*<th>
+                                          Product Group
+                                        </th>
+                                        <th>
+                                         Sub Group
+                                        </th>
+                                        <th>
+                                         Matrix
+                                        </th>*@
+                                    <th>
+                                        Limit
+                                    </th>
+                                    @*<th>
+                                         PCB Limit Values
+                                        </th>*@
+                                    <th>
+                                        No Of Sample And Location<span class="required" style="color:red">*</span>
+                                    </th>
+                                    <th>
+                                        View Location <span class="required" style="color:red">*</span>
+                                    </th>
+                                    <th>
+                                        Frequency @*<span class="required" style="color:red">*</span>*@
+                                    </th>
+                                    <th>
+                                        Unit Price
+                                    </th>
+                                    <th width="125px">
+                                        Total
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.workorderList.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Model.workorderList[i].SrNo
+                                            @Html.HiddenFor(x => Model.workorderList[i].EnquirySampleID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(x => Model.workorderList[i].SampleTypeProductName, new { @class = "form-control" })
+                                            @Html.HiddenFor(x => Model.workorderList[i].DisplaySampleName, new { @class = "form-control" })
+                                            @Html.HiddenFor(x => Model.workorderList[i].SampleName, new { @class = "form-control" })
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
+                                            @*@Html.EditorFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })*@
+                                            @*@Html.ValidationMessageFor(x => Model.workorderList[i].ParameterName)*@
+                                        </td>
+                                        @*<td>
+                                                @Html.DisplayFor(x => Model.workorderList[i].ProductGroupName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => Model.workorderList[i].ProductGroupName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(x => Model.workorderList[i].SubGroupName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => Model.workorderList[i].SubGroupName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(x => Model.workorderList[i].MatrixName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => Model.workorderList[i].MatrixName)
+                                            </td>*@
+                                        <td>
+                                            @if (Model.workorderList[i].IsSetPCBLimit)
+                                            {
+                                                <a href="#" onclick="funLoadPCBParam(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId)"> Limit</a>
+                                            }
+                                            else
+                                            {
+                                                <a class=" btn-disabled">NA</a>
+                                            }
+                                        </td>
+                                        @*<td>
+                                                @if (Model.workorderList[i].PCBLimit != " " && Model.workorderList[i].IsSetPCBLimit)
+                                                {
+                                                    @Html.DisplayFor(x => Model.workorderList[i].ParameterName, new { @class = "form-control" })
+                                                    @Html.DisplayFor(x => Model.workorderList[i].PCBLimit, new { @class = "form-control" })
+                                                }
+                                                else
+                                                {
+                                                   <a class=" btn-disabled">NA</a>
+                                                }
+                                            </td>*@
+                                        <td>
+                                            @Html.TextBoxFor(x => Model.workorderList[i].Quantity, new { @onkeyup = "funCalTotal(this," + @Model.workorderList[i].EnquirySampleID + ")", @style = "color:black", @class = "form-control col-md-7", @onchange = "ValidateDate();" })
+                                            @Html.ValidationMessageFor(x => Model.workorderList[i].Quantity)
+                                        </td>
+                                        <td>
+                                            <a href="#" onclick="funAddLocation(@Model.workorderList[i].EnquirySampleID,@Model.EnquiryId,'view');" class="btn btn-warning btn-sm">View Location</a>
+                                            @*@Html.TextBoxFor(x => Model.workorderList[i].Location, new { @class = "form-control", @style = "color:black" })
+                                                @Html.ValidationMessageFor(x => Model.workorderList[i].Location)*@
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(x => Model.workorderList[i].FrequencyMasterId, new SelectList(ViewBag.Frequency, "FrequencyMasterId", "Frequency"), "---Select---", new { @class = "form-control btn-sm dropdown-toggle border" })
+                                            @*@Html.ValidationMessageFor(x => Model.workorderList[i].FrequencyMasterId)*@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(x => Model.workorderList[i].UnitPrice, new { @class = "form-control" })
+                                            @Html.HiddenFor(x => Model.workorderList[i].UnitPrice)
+                                            @Html.ValidationMessageFor(x => Model.workorderList[i].UnitPrice)
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(x => Model.workorderList[i].Total, new { @readonly = "readonly", @class = "form-control", @style = "color:black" })
+                                            @Html.ValidationMessageFor(x => Model.workorderList[i].Total)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- Simple Datatable End -->
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center;">
+                            @*<button type="submit" class="btn btn-success">Back</button>*@
+                            <button type="submit" class="btn btn-info btn-sm" id="btnsubmit" style="float:right;">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Default Basic Forms End -->
+            }
 
         </div>
     </div>
@@ -318,7 +327,7 @@
 <div class="modal" id="LocationPopup" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: steelblue;height: 42px;">
+            <div class="modal-header" style="background-color: #234E70;height: 42px;">
                 <h4 style="text-align:center;color:white;font-weight:bold;">Add Location </h4>
                 <button type="button" onclick="$('#LocationPopup').hide();" class="close" data-dismiss="modal" style="color:white;">&times;</button>
 
@@ -350,8 +359,9 @@
             var date = add_months(recieveDate, parseInt($('#Duration').val()))
             var x = ConvertDateFormat(date.toString());
            //var y = ConvertDateFormatMonthWise(date.toString());
-            //$("#WorkOrderEndDate").val(x);
+
             $("#WOEDate").val(x);
+            $("#WorkOrderEndDate").val(x);
         }
         return true
     }
@@ -374,9 +384,7 @@
         if (mm < 10) {
             mm = '0' + mm;
         }
-        var date = dd + '/' + mm + '/' + yyyy;
-        var ISODate = yyyy + '-' + mm + '-' + dd;
-        $("#WorkOrderEndDate").val(ISODate);
+        var date = dd + '-' + mm + '-' + yyyy;
         return date;
     }
 
@@ -393,7 +401,7 @@
         if (mm < 10) {
             mm = '0' + mm;
         }
-        var date = mm + '/' + dd + '/' + yyyy;
+        var date = dd + '-' + mm + '-' + yyyy;
         return date;
     }
 
@@ -478,17 +486,20 @@
         }
          else {
                     //alert(result.message);
-                    if (result.status == "Fail Date") {
-                        alert('Expected Sample Collection Date should be Between WorkOrderReceivedDate & WorkOrderEndDate !!!');
-                    }
-                    else if (result.status == "Fail NoOfLocation")
-                    {
-                        alert('Number of Location should not be Less than No. of Samples !!!');
-                    }
-                    else{
-                        debugger
-                        alert('Please Select All Mandatory fields!');
-                    }
+            if (result.status == "Fail Date") {
+                alert('Expected Sample Collection Date should be Between WorkOrderReceivedDate & WorkOrderEndDate !!!');
+            }
+            else if (result.status == "Fail NoOfLocation") {
+                alert('Number of Location should not be Less than No. of Samples !!!');
+            }
+            else if (result.status == "fail") {
+                alert('Error in Work Order Saving');
+            }
+            else
+               {
+                 debugger
+                 alert('Please Select All Mandatory fields!');
+               }
                     $('#btnSubmit').prop('disabled', false);
                     $('#btnSubmit').html('Submit')
              }
@@ -504,6 +515,7 @@
             $('#' + TotalId).val('0');
         } else {
             var Total = Number(NoOfSample) * Number(UnitPrice);
+            Total = Total.toFixed(2);
             $('#' + TotalId).val(Total);
         }
 
@@ -523,9 +535,9 @@
         $('#divRemark').show();
     }
 
-    function funAddLocation(EnquirySampleID, EnquiryId) {
+    function funAddLocation(EnquirySampleID, EnquiryId ,state) {
         debugger
-        $('#divLocation').load('/Enquiry/WorkOrder/_AddLocation?EnquirySampleID=' + EnquirySampleID + '&EnquiryId=' + EnquiryId + '&count=' + 0);
+        $('#divLocation').load('/Enquiry/WorkOrder/_AddLocation?EnquirySampleID=' + EnquirySampleID + '&EnquiryId=' + EnquiryId + '&count=' + 0 + '&state=' + state);
         $('#LocationPopup').show();
     }
 

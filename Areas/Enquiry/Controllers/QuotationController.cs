@@ -10,6 +10,8 @@ using LIMS_DEMO.BAL;
 using LIMS_DEMO.BAL.Enquiry;
 using LIMS_DEMO.BAL.DropDown;
 using System.IO;
+using Microsoft.Reporting.WebForms;
+
 namespace LIMS_DEMO.Areas.Enquiry.Controllers
 {
     [RouteArea("Enquiry")]
@@ -230,6 +232,101 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
                 }
             }
             return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult QuotationReport(string Format, int EnquiryId)
+        {
+            LocalReport lr = new LocalReport();
+            string path = Path.Combine(Server.MapPath("~/Reports"), "QuotationReport.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                lr.ReportPath = path;
+            }
+            else
+            {
+                return RedirectToAction("Quotation", new { EnquiryId = EnquiryId });
+            }
+
+            var QuotDetail = BALFactory.quotationBAL.GetQuotationPreview(EnquiryId);
+            QuotDetail.RevisedDates = BALFactory.quotationBAL.GetQuotationRevisedDates(EnquiryId);
+            Reports.QuotationData quotData = new Reports.QuotationData();
+            quotData.QuotationDetails.AddQuotationDetailsRow(QuotDetail.EnquiryId, QuotDetail.LabName, QuotDetail.RefName, QuotDetail.CompanyName, QuotDetail.ContactPerson
+                , QuotDetail.Designation, QuotDetail.ClientMobileNo, QuotDetail.ContactEmail, QuotDetail.PAN, QuotDetail.GSTNO, QuotDetail.SACNO, QuotDetail.BANKERS,
+                QuotDetail.PFNO, QuotDetail.ESICNO, QuotDetail.PTNO, QuotDetail.TDSNO, QuotDetail.MSMEDA, QuotDetail.IECNO, QuotDetail.LABAddress, QuotDetail.LABPhone,
+                QuotDetail.LABMobileFax, QuotDetail.LABEmail, QuotDetail.RevisedDates, QuotDetail.ContactMobile, QuotDetail.LABCity, QuotDetail.ClientFax);
+            quotData.QuotationDetails.AcceptChanges();
+
+            CoreFactory.costingList = BALFactory.costingBAL.GetCostingList(EnquiryId);
+            int i = 1;
+            foreach (var cost in CoreFactory.costingList)
+            {
+                string Particulars = /*cost.SampleTypeProductName + " / " + cost.SubGroupName + " / " + cost.MatrixName +*/ " \n " + BALFactory.quotationBAL.GetParamters(cost.EnquirySampleID);
+                quotData.QuotationCosting.AddQuotationCostingRow(i, (Int64)cost.CostingId, cost.EnquirySampleID, (decimal)cost.UnitPrice, cost.SampleName,
+                    cost.SampleTypeProductName, cost.SubGroupName, cost.MatrixName, Particulars);
+                quotData.QuotationCosting.AcceptChanges();
+                i++;
+            }
+
+            var TermsCond = BALFactory.costingBAL.GetTermsAndCondition(EnquiryId);
+            foreach (var t in TermsCond)
+            {
+                if (t.IsSelected)
+                {
+                    quotData.QuotationTMC.AddQuotationTMCRow(t.TermAndCondtId, t.TermAndCondt, t.Remark);
+                    quotData.QuotationTMC.AcceptChanges();
+                }
+            }
+
+            var HODetails = BALFactory.quotationBAL.GetHeadOfficeDetails(LIMS.User.LabId);
+            if (HODetails != null)
+            {
+                quotData.HeadOfficeDetail.AddHeadOfficeDetailRow(HODetails.HOAddress, HODetails.HOPhone, HODetails.HOMobileFax, HODetails.HOEmail,
+                    HODetails.ManagerName, HODetails.ManagerPhone);
+                quotData.HeadOfficeDetail.AcceptChanges();
+            }
+
+            ReportDataSource rd = new ReportDataSource("QuotationDetails", (System.Data.DataTable)quotData.QuotationDetails);
+            lr.DataSources.Add(rd);
+
+            ReportDataSource rd1 = new ReportDataSource("QuotationCosting", (System.Data.DataTable)quotData.QuotationCosting);
+            lr.DataSources.Add(rd1);
+
+            ReportDataSource rd2 = new ReportDataSource("QuotationTMC", (System.Data.DataTable)quotData.QuotationTMC);
+            lr.DataSources.Add(rd2);
+
+            ReportDataSource rd3 = new ReportDataSource("HeadOfficeDetail", (System.Data.DataTable)quotData.HeadOfficeDetail);
+            lr.DataSources.Add(rd3);
+
+            string reportType = Format;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+            string deviceInfo =
+
+            "<DeviceInfo>" +
+            "  <OutputFormat>" + Format + "</OutputFormat>" +
+            "  <PageWidth>8.5in</PageWidth>" +
+            "  <PageHeight>11.0in</PageHeight>" +
+            "  <MarginTop>0.5in</MarginTop>" +
+            "  <MarginLeft>0.0in</MarginLeft>" +
+            "  <MarginRight>0.0in</MarginRight>" +
+            "  <MarginBottom>0.5in</MarginBottom>" +
+            "  <EmbedFonts>None</EmbedFonts>" +
+            "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = lr.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+            return File(renderedBytes, mimeType);
         }
 
     }

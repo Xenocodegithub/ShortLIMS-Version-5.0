@@ -493,7 +493,7 @@ namespace LIMS_DEMO.DAL.Enquiry
                         paramDetail.TestMethodId = par.TestMethodId;
                         paramDetail.LabMasterId = par.LabMasterId;
                         paramDetail.Remarks = par.Remarks;
-                        paramDetail.IsActive = par.IsActive;
+                        paramDetail.IsActive = true;
                         paramDetail.ModifiedBy = par.EnteredBy;
                         _dbContext.SaveChanges();
                     }

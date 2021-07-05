@@ -1,10 +1,8 @@
 ﻿@model LIMS_DEMO.Areas.Enquiry.Models.CostingListModel
-
 @{
     ViewBag.Title = "Add Costing";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="main-container">
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
@@ -33,19 +31,19 @@
                 </div>
                 <div class="body-content">
                     <div class="row">
-                        <div class="col-sm-4 form-group">
+                        <div class="col-sm-3 form-group">
                             @Html.LabelFor(model => model.EnquiryId, "Enquiry Id:", htmlAttributes: new { @class = "col-form-label" })
                             @*<div class="col-sm-4"style="padding-left:10px">*@
                             &emsp; @Model.EnquiryId
                             @*</div>*@
                         </div>
-                        <div class="col-sm-4 form-group">
-                            @Html.LabelFor(model => model.CustomerTypeName, "Customer Type Name:", htmlAttributes: new { @class = "col-form-label" })
+                        <div class="col-sm-6 form-group">
+                            @Html.LabelFor(model => model.CustomerTypeName, "Customer Name:", htmlAttributes: new { @class = "col-form-label" })
                             @*<div class="col-sm-4" style="padding-left:15px">*@
                             &emsp; @Model.CustomerTypeName
                             @*</div>*@
                         </div>
-                        <div class="col-sm-4 form-group">
+                        <div class="col-sm-3 form-group">
                             @Html.LabelFor(model => model.EnquiryOn, "Enquiry On:", htmlAttributes: new { @class = "col-form-label" })
                             @*<div class="col-sm-5" style="padding-left:15px">*@
                             &emsp;  @Model.EnquiryOn.ToString("dd/MM/yyyy")
@@ -53,7 +51,6 @@
                         </div>
                     </div>
                     <hr />
-
                     <div id="divSampleList">
                         <!--This call to Partial View should be removed and the _SampleList in SampleAndParameters should be used .Please make necessary changes.Remove Partial View also from Costing Folder-->
                         @{
@@ -67,7 +64,6 @@
                             Html.RenderAction("_Costing", "Costing");
                         }
                     </div>
-                    <hr />
                     <div class="class-md-6">
                         @using (Ajax.BeginForm("AddCosting", "Costing", new AjaxOptions() { HttpMethod = "Post", OnBegin = "NextPage", OnSuccess = "CostingSuccess" }))
                         {
@@ -84,8 +80,6 @@
                                     @Model.TermsList[i].TermAndCondt
                                 </div>
                             }
-
-                            <hr />
                             <div class="form-group row">
                                 <label class="col-sm-12 col-md-1 col-form-label">Remark:</label>
                                 @*@Html.LabelFor(model => model.Remarks,"Remark:", htmlAttributes: new { @class = "control-label" })*@
@@ -102,7 +96,6 @@
                             </div>
                         }
                     </div>
-
                     <div id="divCostingList">
                         <!--This call to Partial View should be removed and the _SampleList in SampleAndParameters should be used .Please make necessary changes.Remove Partial View also from Costing Folder-->
                         @{
@@ -120,11 +113,14 @@
 <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
 <script>
-
+    $(document).ready(function () {
+        $('#btnNext').prop('disabled', true);
+    });
+</script>
+<script>
+    
     function NextPage() {
-
         $('#btnNext').prop('disabled', true);
         $('#btnNext').html('Please Wait..')
         $('#btnSave').prop('disabled', true);
@@ -174,6 +170,5 @@
             })
         }
     }
-
 </script>
 

@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace InfoLIMS.Reports {
+namespace LIMS_DEMO.Reports {
     
     
     /// <summary>

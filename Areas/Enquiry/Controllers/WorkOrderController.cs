@@ -26,6 +26,59 @@ namespace LIMS_DEMO.Areas.Enquiry.Controllers
             BALFactory.quotationBAL = new QuotationBAL();
             BALFactory.workordercustomerBAL = new WorkOrderCustomerBAL();
         }
+        public PartialViewResult PreviewWorkOrder(int? WorkOrderId = 0, int? EnquiryId = 0)
+        {
+            ViewBag.WorkOrderId = WorkOrderId;
+            WorkOrderListModel model = new WorkOrderListModel();
+            // WorkOrderModel model = new WorkOrderModel();
+            // model.WorkOrderCustomer = new SampleRegistrationModel();
+            //model.FinalWorkOrderList = new List<WorkOrderCustomer.Models.FinalWorkOrderModel>();
+            model.WorkOrderId = (Int32)WorkOrderId;
+            model.EnquiryId = (Int32)EnquiryId;
+            if (WorkOrderId != 0)//Changes by Nivedita for Major change may be removed later
+            {
+                CoreFactory.workOrderEntity = BALFactory.workordercustomerBAL.GetWorkOrderCustomerDetail((Int32)WorkOrderId);
+                if (CoreFactory.workOrderEntity != null)
+                {
+                    model.WorkOrderId = (Int32)CoreFactory.workOrderEntity.WorkOrderId;
+                    // model.EnquiryId = (Int32)CoreFactory.workOrderEntity.EnquirySampleId;
+                    model.RegistrationName = CoreFactory.workOrderEntity.RegistrationName;
+                    model.WorkOrderReceivedDate = (System.DateTime)CoreFactory.workOrderEntity.WORecieveDate;
+                    model.WorkOrderNo = CoreFactory.workOrderEntity.WorkOrderNo;
+                    //model.WorkOrderCustomer.CollectedBy = CoreFactory.workOrderEntity.CollectedBy;
+                    if (CoreFactory.workOrderEntity.IsIGST == null)
+                    {
+                        model.IsIGST = false;
+                    }
+                    else
+                    {
+                        model.IsIGST = (bool)CoreFactory.workOrderEntity.IsIGST;
+                    }
+                }
+                model.workorderList = new List<WorkOrderModel>();
+                CoreFactory.costingList = BALFactory.costingBAL.GetCostingList((Int32)EnquiryId);
+                int i = 1;
+                foreach (var cost in CoreFactory.costingList)
+                {
+                    model.workorderList.Add(new WorkOrderModel()
+                    {
+                        SrNo = i,
+                        EnquirySampleID = cost.EnquirySampleID,
+                        CostingId = cost.CostingId,
+                        SampleName = cost.SampleName,
+                        DisplaySampleName = cost.DisplaySampleName,
+                        SampleTypeProductName = cost.SampleTypeProductName,
+                        SampleTypeProductCode = cost.SampleTypeProductCode,
+                        ParameterName = BALFactory.sampleParameterBAL.GetSampleParameters((Int32)cost.EnquirySampleID), //sample.Parameters,
+                        UnitPrice = cost.UnitPrice,
+                        Total = (cost.NoOfSample == null ? 0 : (Int32)cost.NoOfSample) * (cost.UnitPrice == null ? 0 : (decimal)cost.UnitPrice),
+
+                    });
+                    i++;
+                }
+            }
+            return PartialView(model);
+        }
 
         //GET: Enquiry/WorkOrder
         public ActionResult WorkOrderList(DateTime? FromDate, DateTime? ToDate)

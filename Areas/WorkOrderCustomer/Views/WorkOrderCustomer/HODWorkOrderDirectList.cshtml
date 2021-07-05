@@ -89,6 +89,9 @@
                                         View Details
                                     </th>
                                     <th>
+                                        WOPreview
+                                    </th>
+                                    <th>
                                         Status
                                     </th>
                                     <th>
@@ -113,83 +116,88 @@
                                 {
                                     if (Model[i].CurrentStatus.ToLower() != "worejected")
                                     {
-                                        <tr>
-                                            <td hidden>
-                                                @Html.HiddenFor(item => Model[i].WorkOrderId)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WorkOrderNo)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderId)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CustomerName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WORecvDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].WOEDate)
-                                                @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
-                                                    {
-                                                        <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a id="btnWorkOrder" target="_blank" href="/WorkOrderCustomer/WorkOrderCustomer/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(item => Model[i].CurrentStatus)
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
-                                                    {
-                                                        <a href="#" onclick="funApprove(@Model[i].WorkOrderId,'AssignToId_@i.ToString()')" class="sampleName">Approve</a>
-                                                    }
-                                                    else
-                                                    { <a href="#" class=" btn-disabled">Approved</a>}
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.DropDownListFor(item => Model[i].AssignToId, new SelectList(ViewBag.SurveyingLead, "UserMasterID", "UserName", Model[i].AssignToId), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @id = "AssignToId_" + i.ToString() })
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].CurrentStatus.ToLower() == "woapproved" && Model[i].AssignToId == null)
-                                                    {
-                                                        <a href="#" onclick="funAssign('AssignToId_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Assign STL</a>
-                                                    }
-                                                    else if (Model[i].CurrentStatus.ToLower() == "wogenerated")
-                                                    {
-                                                        <a>
-                                                            First Approve Work Order
-                                                        </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="#" class=" btn-disabled">Assigned</a>
-                                                    }
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.TextBoxFor(item => Model[i].Remarks, new { @class = "form-control", @id = "Remarks_" + i.ToString(), @style = "color:black" })
-                                            </td>
-                                            <td>
-                                                @{ if (Model[i].CurrentStatus.ToLower() != "worejected")
-                                                    {
-                                                        <a href="#" onclick="funReject('Remarks_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Send To ADMIN/BDM</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="#" class=" btn-disabled">WORK Order Rejected</a>
-                                                    }
-                                                }
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td hidden>
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WorkOrderNo)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CustomerName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WORecvDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderReceivedDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].WOEDate)
+                                        @Html.HiddenFor(item => Model[i].WorkOrderEndDate)
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].FileName == null || Model[i].FileName == String.Empty)
+                                            {
+                                                <a href="#" type="submit" id="btnWorkOrder" class=" btn btn-sm btn-primary btn-disabled" style="background-color:darkgrey" name="WorkOrder">View File </a>
+                                            }
+                                            else
+                                            {
+                                                <a id="btnWorkOrder" target="_blank" href="/WorkOrderCustomer/WorkOrderCustomer/DownloadWorkOrder?FilePath=@Model[i].WOUpload&FileName=@Model[i].FileName" class="btn btn-success btn-sm">View File</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="funView(@Model[i].EnquirySampleID,@Model[i].WorkOrderId);" class="btn btn-success btn-sm" style="color: white;background-color:green;width: 90px;" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                            WOPreview
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(item => Model[i].CurrentStatus)
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].CurrentStatus.ToLower() == "wogenerated" && Model[i].CurrentStatus.ToLower() != "worejected" && Model[i].CurrentStatus.ToLower() != "woapproved")
+                                            {
+                                                <a href="#" onclick="funApprove(@Model[i].WorkOrderId,'AssignToId_@i.ToString()')" class="sampleName">Approve</a>
+                                            }
+                                            else
+                                            { <a href="#" class=" btn-disabled">Approved</a>}
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(item => Model[i].AssignToId, new SelectList(ViewBag.SurveyingLead, "UserMasterID", "UserName", Model[i].AssignToId), "Please Select", new { @class = "form-control btn-sm dropdown-toggle border", @id = "AssignToId_" + i.ToString() })
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].CurrentStatus.ToLower() == "woapproved" && Model[i].AssignToId == null)
+                                            {
+                                                <a href="#" onclick="funAssign('AssignToId_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Assign STL</a>
+                                            }
+                                            else if (Model[i].CurrentStatus.ToLower() == "wogenerated")
+                                            {
+                                                <a>
+                                                    First Approve Work Order
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class=" btn-disabled">Assigned</a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(item => Model[i].Remarks, new { @class = "form-control", @id = "Remarks_" + i.ToString(), @style = "color:black" })
+                                    </td>
+                                    <td>
+                                        @{ if (Model[i].CurrentStatus.ToLower() != "worejected")
+                                            {
+                                                <a href="#" onclick="funReject('Remarks_@i.ToString()', @Model[i].WorkOrderId)" class="sampleName">Send To ADMIN/BDM</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class=" btn-disabled">WORK Order Rejected</a>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
@@ -202,9 +210,28 @@
         </div>
     </div>
 </div>
+<div class="modal fade bd-example-modal-lg" id="exampleModalLAB" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:navy">
+                <h5 class="modal-title" style="color: #FBF8BE;">Preview WorkOrder</h5>
+                <button type="button" onclick="$('#modelclose').hide();" class="close" data-dismiss="modal" style="color:white;float:right">&times;</button>
 
+            </div>
+            <div class="modal-body" style="margin:10px 10px 10px 20px; overflow:auto">
+                <div id="Preview_Data">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-
+    function funView(EnquirySampleID, WorkOrderId) {
+        debugger;
+        $("#Preview_Data").empty();
+        $("#Preview_Data").load(`/WorkOrderCustomer/WorkOrderCustomer/WOPreview?EnquirySampleID=${EnquirySampleID}&WorkOrderId=${WorkOrderId}`);
+    }
     function GetParameterForInvoice(WOID, igst, i) {
         var m = "#SelMonth" + i;
         var monthName = $(m).val();

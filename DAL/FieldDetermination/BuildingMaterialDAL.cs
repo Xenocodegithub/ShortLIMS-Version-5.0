@@ -160,9 +160,10 @@ namespace LIMS_DEMO.DAL.FieldDetermination
         }
         public string DeleteBuildingMaterialField(long FieldBuildingMaterialId)
         {
+            var FieldId = FieldBuildingMaterialId;
             try
             {
-                _dbContext.FieldBuildingMaterials.Remove(_dbContext.FieldBuildingMaterials.Find(FieldBuildingMaterialId));//Complete Deleted from DB
+                _dbContext.FieldBuildingMaterials.Remove(_dbContext.FieldBuildingMaterials.Find(FieldId));//Complete Deleted from DB
                 _dbContext.SaveChanges();
                 return "success";
             }
