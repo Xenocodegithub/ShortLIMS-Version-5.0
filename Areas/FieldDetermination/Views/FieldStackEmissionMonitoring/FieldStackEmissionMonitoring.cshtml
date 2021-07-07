@@ -42,7 +42,7 @@
                     @*@if (Model.FDStackEmissionId == 0)*@
                     @if (ViewBag.CurrentStatus != "SampleColl")
                     {
-                        <div id="divAddStack">
+                        <div id="divAddStack" style="overflow-x:scroll">
                             @{ Html.RenderAction("_FieldStackEmission", "FieldStackEmissionMonitoring");}
                         </div>
                     }

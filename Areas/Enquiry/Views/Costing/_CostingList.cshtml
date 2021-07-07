@@ -16,15 +16,6 @@
                     <th>
                         Sample Type
                     </th>
-                    @*<th>
-                        Product Group
-                    </th>
-                    <th>
-                        Sub Group
-                    </th>
-                    <th>
-                        Matrix
-                    </th>*@
                     <th>
                         Amount
                     </th>
@@ -44,15 +35,6 @@
                             @Html.HiddenFor(modelItem => item.SampleName)
                             @Html.DisplayFor(modelItem => item.DisplaySampleName)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.ProductGroupName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SubGroupName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MatrixName)
-                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.SampleTypeProductName)
                         </td>
@@ -85,7 +67,6 @@
         </div>
     }
 </div>
-
 
 <script type="text/javascript">
 $(function () {

@@ -60,8 +60,9 @@
                                 <tr>
                                     <td class="table-plus">@{rowNo++;}@rowNo</td>
                                     <td>
+                                        @*<a href="#"  style="color:blue">@item.SampleName</a>*@
                                         @Html.HiddenFor(modelitem => item.SampleCollectionId)
-                                        @Html.ActionLink(item.SampleName, "ParameterList", "Tester", new { @SampleId = item.SampleCollectionId }, null)
+                                        @Html.ActionLink(item.SampleName, "ParameterList", "Tester", new { @SampleId = item.SampleCollectionId, style = "color:blue" }, null)
                                     </td>
                                     <td>@item.SampleTypeProductName</td>
                                     <td>@item.ProductGroupName</td>

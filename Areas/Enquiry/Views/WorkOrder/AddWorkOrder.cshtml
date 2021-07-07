@@ -73,9 +73,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <br /><div class="row">
                             <div class="col-md-3 form-group">
                                 <label> Duration(in months) : <span style="color:red">*</span></label>
@@ -115,14 +112,13 @@
                                 @Html.ValidationMessageFor(model => model.SampleCollectionDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label>Number of Days(Only for Hourly And Six times a Day Frequency):</label>
                                 @Html.TextBoxFor(model => model.NoOfDays, new { @class = "form-control col-md-4", @autocomplete = "false", disabled = "disabled" })
                             </div>
-                            <div class="clearfix"></div>
-                            <div class="col-sm-11">
+                            @*<div class="clearfix"></div>*@
+                            <div class="col-md-12">
                                 <input type="button" id="btnAddNoOfDays" value="Add No Of Days" class="btn btn-sm btn-info text-nowrap" style="float:right" />
                             </div>
                         </div>
@@ -133,17 +129,15 @@
                                     Any amendment to contract:
                                 </label>
                                 <span class="required" style="color:red">*</span>
-                                @Html.TextAreaFor(model => model.ContractAmendment, new { @class = "form-control col-md-5", @autocomplete = "false", @style = "height:65px" })
+                                @Html.TextAreaFor(model => model.ContractAmendment, new { @class = "form-control col-md-5", @autocomplete = "false", @style = "height:50px" })
                             </div>
                             <div class="col-sm-6 form-group">
-                                <label>@Html.RadioButtonFor(item => Model.IsIGST, false, new { id = "IsIGST-false", @checked = "checked" }) CGST(9 %) + SGST(9 %) </label>
+                                <label>@Html.RadioButtonFor(item => Model.IsIGST, false, new { id = "IsIGST-false", @checked = "checked" }) CGST(9 %) + SGST(9 %) </label>&nbsp;&nbsp;
                                 <label> @Html.RadioButtonFor(item => Model.IsIGST, true, new { id = "IsIGST-true" }) IGST(18%)</label>
                             </div>
                         </div>
-
-
                         <div class="row">
-                            <div class="col-md-11">
+                            <div class="col-md-12">
                                 @*<a target="_blank" href="/Enquiry/QuotationReport?Format=PDF&EnquiryId=@Model.EnquiryId" class="btn btn-primary btn-sm">More Details</a>*@
                                 @*<a href="/Enquiry/AddContract?EnquiryId=@Model.EnquiryId" class="btn btn-App btn-sm">Edit Contract</a>*@
                                 <a href="#" onclick="funUpdateRemark(@Model.EnquiryId)" id="Remark" class="btn btn-warning btn-sm" style="float:right">Edit Contract</a>
